@@ -1,0 +1,258 @@
+/**
+ * @file icon.css
+ */
+
+@font-face {
+    font-family: "biolife";
+    src: url("biolife.eot"); /* IE9 */
+    src: url("biolife.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+    url("biolife.woff2") format("woff2"), /* chrome、firefox、opera、Safari, Android, iOS */
+    url("biolife.woff") format("woff"), /* chrome、firefox */
+    url("biolife.ttf") format("truetype"), /* chrome、firefox、opera、Safari, Android, iOS 4.2+ */
+    url("biolife.svg#uxfonteditor") format("svg"); /* iOS 4.1- */
+}
+
+
+.icon {
+    font-family: "biolife" !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+
+.icon-space:before {
+  content: "\20";
+}
+
+.icon-arrow-right:before {
+  content: "\e900";
+}
+
+.icon-arteries-about:before {
+  content: "\e901";
+}
+
+.icon-capacity-about:before {
+  content: "\e902";
+}
+
+.icon-cart:before {
+  content: "\e903";
+}
+
+.icon-cart-mini:before {
+  content: "\e904";
+}
+
+.icon-close-menu:before {
+  content: "\e905";
+}
+
+.icon-comment:before {
+  content: "\e906";
+}
+
+.icon-clock:before {
+  content: "\e907";
+}
+
+.icon-location:before {
+  content: "\e908";
+}
+
+.icon-letter:before {
+  content: "\e909";
+}
+
+.icon-phone:before {
+  content: "\e90a";
+}
+
+.icon-fresh-drink:before {
+  content: "\e90b";
+}
+
+.icon-green-safety:before {
+  content: "\e90c";
+}
+
+.icon-grid:before {
+  content: "\e90d";
+}
+
+.icon-healthy-about:before {
+  content: "\e90e";
+}
+
+.icon-heart-bold:before {
+  content: "\e90f";
+}
+
+.icon-left-arrow:before {
+  content: "\e910";
+}
+
+.icon-like:before {
+  content: "\e911";
+}
+
+.icon-list:before {
+  content: "\e912";
+}
+
+.icon-login:before {
+  content: "\e913";
+}
+
+.icon-location2:before {
+  content: "\e914";
+}
+
+.icon-fruits:before {
+  content: "\e915";
+}
+
+.icon-broccoli-1:before {
+  content: "\e916";
+}
+
+.icon-beef:before {
+  content: "\e917";
+}
+
+.icon-fish:before {
+  content: "\e918";
+}
+
+.icon-fast-food:before {
+  content: "\e919";
+}
+
+.icon-soy:before {
+  content: "\e934";
+}
+
+.icon-coconut:before {
+  content: "\e933";
+}
+
+.icon-honey:before {
+  content: "\e91a";
+}
+
+.icon-grape:before {
+  content: "\e91b";
+}
+
+.icon-onions:before {
+  content: "\e91c";
+}
+
+.icon-avocado:before {
+  content: "\e91d";
+}
+
+.icon-contain:before {
+  content: "\e91e";
+}
+
+.icon-fresh-juice:before {
+  content: "\e91f";
+}
+
+.icon-newsletter:before {
+  content: "\e920";
+}
+
+.icon-organic:before {
+  content: "\e921";
+}
+
+.icon-beer:before {
+  content: "\e922";
+}
+
+.icon-car:before {
+  content: "\e923";
+}
+
+.icon-schedule:before {
+  content: "\e924";
+}
+
+.icon-coversation:before {
+  content: "\e925";
+}
+
+.icon-heart-1:before {
+  content: "\e926";
+}
+
+.icon-title:before {
+  content: "\e927";
+}
+
+.icon-head-phone:before {
+  content: "\e928";
+}
+
+.icon-report:before {
+  content: "\e929";
+}
+
+.icon-search:before {
+  content: "\e92a";
+}
+
+.icon-suporter:before {
+  content: "\e92b";
+}
+
+.icon-grape2:before {
+  content: "\e92c";
+}
+
+.icon-broccoli:before {
+  content: "\e92d";
+}
+
+.icon-lemon:before {
+  content: "\e92e";
+}
+
+.icon-orange:before {
+  content: "\e92f";
+}
+
+.icon-blueberry:before {
+  content: "\e930";
+}
+
+.icon-matcha:before {
+  content: "\e932";
+}
+
+.icon-heathly:before {
+  content: "\e937";
+}
+
+.icon-shield:before {
+  content: "\e936";
+}
+
+.icon-leaf2:before {
+  content: "\e935";
+}
+
+.icon-ginger:before {
+  content: "\e931";
+}
+
+
+

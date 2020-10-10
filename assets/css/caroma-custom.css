@@ -1,0 +1,178 @@
+/* Mobile Respons */
+@media (max-width: 767px){
+	.biolife-banner__style-15 .text-content, .biolife-banner__style-01 .text-content{
+	background-color : rgba(0,0,0,0.5) ;
+}
+	.biolife-banner__promotion6 .banner-contain .text-content{
+	background-color : rgba(0,0,0,0.7) ;
+}
+	.mob-res-ytb{
+		width : 100% ;
+	}
+	.mobile-revers{
+		flex-direction: column-reverse;
+		display: flex;
+	}
+}
+
+.biolife-icon-types{
+	margin-left : 0px !important;
+	font-size : 70px !important;
+	width: 100%;
+    text-align: center;
+}
+
+.srv-details{
+	display: inline-block;
+    font-size: 14px;
+    color: #222222;
+    text-align: center;
+    margin: 9px 0 0;
+    width: 100%;
+    line-height: 1.4;
+    font-weight: 500;
+	padding : 0% 7%;
+}
+
+.biolife-banner__promotion2 .media{
+	background-image: url(../images/coffe_man.png);
+	background-position: bottom center;
+}
+
+.fresh-content{
+	margin-top : 5% ;
+}
+
+.biolife-banner__promotion6 .media .img-moving.position-1{
+	margin-right : -12% !important;
+}
+
+.xs-margin-bottom-90px {
+	margin-bottom : 90px ;
+}
+
+.biolife-banner__style-01{
+	    background-image: url(../images/custom/caroma-banner-style.jpg);
+}
+
+.section-title {
+    font-size: 24px;
+    line-height: 1;
+    color: #222222;
+    font-weight: 700;
+    display: block;
+    margin: 0 0 24px;
+}
+
+.footer-midle-pstx{
+	border-top : none ;
+}
+
+.color-whites{
+	color : white !important;
+}
+
+.hero-section{
+	margin-top : 0px ;
+	position: initial;
+	display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-background{
+	height: 400px;
+    background-position: bottom;
+}
+
+.hero-section .page-title{
+	font-size: 75px;
+    color: black ;
+	top: inherit;
+	line-height: 8vh;
+	
+}
+
+.welcome-us-block .text-info{
+	margin : 50px 0px 0px;
+}
+
+.at-text2{
+	padding : 0px 15px ;
+}
+
+.welcome-us-block{
+	background-image : none ;
+}
+
+.ytbrs{
+	margin : 80px 0px 0px ;
+}
+
+.content-margin{
+	margin-top : 3% ;
+}
+
+.text-infos{
+	font-size: 15px;
+    line-height: 24px;
+    color: #555555;
+}
+
+.label-width{
+	width : 100% ;
+}
+
+.no-padding-left {
+	padding-left : 0px ;
+	padding-top : 2%;
+	padding-bottom : 2% ;
+}
+
+.input-width{
+	width : 100%;
+}
+
+.custombtn{
+	background-color: #90bf2a;
+	font-size: 14px;
+    color: #ffffff;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 9999px;
+    text-align: center;
+    font-weight: 700;
+    padding: 13px 25px;
+	margin-top : 2% ;
+}
+
+.custombtn:hover {
+    background-color: #444444;
+	color : white ;
+}
+
+.title-product-content{
+	color: #222222; 
+	font-weight : bold
+}
+
+.wide-half{
+    width: calc( 50% - 15px );
+}
+
+.reg-button{
+	text-align : center ;
+	margin-bottom : 12% !important;
+}
+.reg-but{
+	min-width : 200px !important;
+}
+
+.reg-style{
+	margin-top : 5% ;
+}
+
+.flag-imgs{
+	width : 24px !important ;
+	height : 16px !important ; 
+}

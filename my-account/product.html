@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<title>Kenny I Fast build Admin dashboard for any platform</title>
+	<meta name="description" content="Kenny is a Dashboard & Admin Site Responsive Template by hencework." />
+	<meta name="keywords" content="admin, admin dashboard, admin template, cms, crm, Kenny Admin, kennyadmin, premium admin templates, responsive admin, sass, panel, software, ui, visualization, web app, application" />
+	<meta name="author" content="hencework"/>
+	
+	<!-- Favicon -->
+	<link rel="shortcut icon" href="favicon.ico">
+	<link rel="icon" href="favicon.ico" type="image/x-icon">
+
+	<!-- Morris Charts CSS -->
+    <link href="vendors/bower_components/morris.js/morris.css" rel="stylesheet" type="text/css"/>
+    
+	<!-- Chartist CSS -->
+	<link href="vendors/bower_components/chartist/dist/chartist.min.css" rel="stylesheet" type="text/css"/>
+
+	<!-- Chartist CSS -->
+	<link href="vendors/bower_components/chartist/dist/chartist.min.css" rel="stylesheet" type="text/css"/>
+	
+    <!-- vector map CSS -->
+	<link href="vendors/vectormap/jquery-jvectormap-2.0.2.css" rel="stylesheet" type="text/css"/>
+	
+	<!-- Custom Fonts -->
+    <link href="dist/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    
+	<!-- Calendar CSS -->
+	<link href="vendors/bower_components/fullcalendar/dist/fullcalendar.css" rel="stylesheet" type="text/css"/>
+	
+	<!-- Custom CSS -->
+	<link href="dist/css/style.css" rel="stylesheet" type="text/css">
+	
+</head>
+
+<body>
+	<!--Preloader-->
+	<div class="preloader-it">
+		<div class="la-anim-1"></div>
+	</div>
+	<!--/Preloader-->
+    <div class="wrapper">
+
+        <!-- Top Menu Items -->
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+			<a id="toggle_nav_btn" class="toggle-left-nav-btn inline-block mr-20 pull-left" href="javascript:void(0);"><i class="fa fa-bars"></i></a>
+			<a href="index.html"><img width="100px" class="brand-img pull-left" src="dist/img/caroma-logo.png" alt="brand"/></a>
+			<ul class="nav navbar-right top-nav pull-right">
+					<li>
+					</li>
+					<li class="dropdown">
+					</li>
+					<li class="dropdown">
+					</li>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle pr-0" data-toggle="dropdown"><img src="dist/img/user1.png" alt="user_auth" class="user-auth-img img-circle"/><span class="user-online-status"></span></a>
+						<ul class="dropdown-menu user-auth-dropdown" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
+							<li>
+								<a href="profile.html"><i class="fa fa-fw fa-gear"></i> Settings</a>
+							</li>
+							<li class="divider"></li>
+							<li>
+								<a href="#"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			<div class="collapse navbar-search-overlap" id="site_navbar_search">
+				<form role="search">
+					<div class="form-group mb-0">
+						<div class="input-search">
+							<div class="input-group">	
+								<input type="text" id="overlay_search" name="overlay-search" class="form-control pl-30" placeholder="Search">
+								<span class="input-group-addon pr-30">
+								<a  href="javascript:void(0)" class="close-input-overlay" data-target="#site_navbar_search" data-toggle="collapse" aria-label="Close" aria-expanded="true"><i class="fa fa-times"></i></a>
+								</span> 
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</nav>
+		<!-- /Top Menu Items -->
+		
+		<!-- Left Sidebar Menu -->
+		<div class="fixed-sidebar-left">
+			<ul class="nav navbar-nav side-nav nicescroll-bar">
+					<li>
+						<a href="javascript:void(0);" data-toggle="collapse" data-target="#dashboard_dr"><i class="icon-home mr-10"></i>Dashboard <span class="pull-right"><span class="label label-success mr-10">4</span><i class="fa fa-fw fa-angle-down"></i></span></a>
+						<ul id="dashboard_dr" class="collapse collapse-level-1">
+							<li>
+								<a href="index.html">My Purchase</a>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<a href="profile.html"><i class="fa fa-user mr-10"></i>Profile <span class="pull-right"></span></a>
+					</li>
+					<li>
+						<a href="../shop.html" target="_blank" ><i class="fa fa-gift mr-10"></i>Shopping <span class="pull-right"></span></a>
+					</li>
+					<li>
+						<a href="../shopping-cart.html" target="_blank" ><i class="icon-basket-loaded mr-10"></i>Your Cart <span class="pull-right"></span></a>
+					</li>
+					<li>
+						<a class="active" href="javascript:void(0);" data-toggle="collapse" data-target="#ecom_dr"><i class="fa fa-shopping-basket mr-10"></i>My Store<span class="pull-right"><span class="label label-success mr-10">4</span><i class="fa fa-fw fa-angle-down"></i></span></a>
+						<ul id="ecom_dr" class="collapse collapse-level-1">
+							<li>
+								<a class="active" href="e-commerce.html">Dashboard</a>
+							</li>
+							<li>
+								<a href="order-list.html">Order Management</a>
+							</li>
+							<li>
+								<a class="active" href="product.html">Products Management</a>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<a href="../index.html" target="_blank" ><i class="fa fa-leaf mr-10"></i>Caroma Home <span class="pull-right"></span></a>
+					</li>
+					<li>
+						<a href="../index.html" ><i class="fa fa-sign-out mr-10"></i>Logout <span class="pull-right"></span></a>
+					</li>
+				</ul>
+		</div>
+		<!-- /Left Sidebar Menu -->
+
+        <!-- Main Content -->
+		<div class="page-wrapper">
+            <div class="container-fluid">
+				<!-- Title -->
+				<div class="row heading-bg bg-pink">
+					<div class="col-lg-10 col-md-4 col-sm-4 col-xs-6">
+					  <h5 class="txt-light">products List</h5>
+					</div>
+					<!-- Breadcrumb -->
+					<div class="col-lg-2 col-sm-8 col-md-8 col-xs-6">
+						<div class="row">
+							<a href="product-management.html"><button class="btn btn-success btn-anim"><i class="fa fa-pencil-square-o"></i><span class="btn-text">Add New Products</span></button></a>
+						</div>
+					</div>
+					<!-- /Breadcrumb -->
+				</div>
+				<!-- /Title -->
+				
+				<!-- Product Row One -->
+				<div class="row">
+       				<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+						<div class="panel panel-default card-view pa-0">
+							<div class="panel-wrapper collapse in">
+								<div class="panel-body pa-0">
+									<article class="col-item">
+										<div class="photo">
+											<div class="options">
+												<button class="btn btn-default btn-icon-anim btn-circle mr-5" type="submit"><a href="product-management.html"><i class="icon-pencil"></i></a></button>
+											</div>
+											<a href="product-management.html"> <img src="dist/img/chair.jpg" class="img-responsive" alt="Product Image" /> </a>
+										</div>
+										<div class="info text-center">
+											<h6>National Fresh Fruit</h6>
+											<span class="product-spec capitalize-font block mt-5 mb-5">Ginger Series</span>
+											<span class="product-spec capitalize-font block mt-5 mb-5">Published</span>
+											<span class="head-font block text-warning">RM188</span>
+										</div>
+									</article>
+								</div>
+							</div>	
+						</div>	
+					</div>
+					
+					<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+						<div class="panel panel-default card-view pa-0">
+							<div class="panel-wrapper collapse in">
+								<div class="panel-body pa-0">
+									<article class="col-item">
+										<div class="photo">
+											<div class="options">
+												<button class="btn btn-default btn-icon-anim btn-circle mr-5" type="submit"><a href="product-management.html"><i class="icon-pencil"></i></a></button>
+											</div>
+											<a href="product-management.html"> <img src="dist/img/chair.jpg" class="img-responsive" alt="Product Image" /> </a>
+										</div>
+										<div class="info text-center">
+											<h6>National Fresh Fruit</h6>
+											<span class="product-spec capitalize-font block mt-5 mb-5">Ginger Series</span>
+											<span class="product-spec capitalize-font block mt-5 mb-5">Published</span>
+											<span class="head-font block text-warning">RM188</span>
+										</div>
+									</article>
+								</div>
+							</div>	
+						</div>	
+					</div>
+					
+					<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+						<div class="panel panel-default card-view pa-0">
+							<div class="panel-wrapper collapse in">
+								<div class="panel-body pa-0">
+									<article class="col-item">
+										<div class="photo">
+											<div class="options">
+												<button class="btn btn-default btn-icon-anim btn-circle mr-5" type="submit"><a href="product-management.html"><i class="icon-pencil"></i></a></button>
+											</div>
+											<a href="product-management.html"> <img src="dist/img/chair.jpg" class="img-responsive" alt="Product Image" /> </a>
+										</div>
+										<div class="info text-center">
+											<h6>National Fresh Fruit</h6>
+											<span class="product-spec capitalize-font block mt-5 mb-5">Ginger Series</span>
+											<span class="product-spec capitalize-font block mt-5 mb-5">Published</span>
+											<span class="head-font block text-warning">RM188</span>
+										</div>
+									</article>
+								</div>
+							</div>	
+						</div>	
+					</div>
+					
+					<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+						<div class="panel panel-default card-view pa-0">
+							<div class="panel-wrapper collapse in">
+								<div class="panel-body pa-0">
+									<article class="col-item">
+										<div class="photo">
+											<div class="options">
+												<button class="btn btn-default btn-icon-anim btn-circle mr-5" type="submit"><a href="product-management.html"><i class="icon-pencil"></i></a></button>
+											</div>
+											<a href="product-management.html"> <img src="dist/img/chair.jpg" class="img-responsive" alt="Product Image" /> </a>
+										</div>
+										<div class="info text-center">
+											<h6>National Fresh Fruit</h6>
+											<span class="product-spec capitalize-font block mt-5 mb-5">Ginger Series</span>
+											<span class="product-spec capitalize-font block mt-5 mb-5">Published</span>
+											<span class="head-font block text-warning">RM188</span>
+										</div>
+									</article>
+								</div>
+							</div>	
+						</div>	
+					</div>
+				</div>
+
+			</div>
+				<!-- Footer -->
+			<footer class="footer container-fluid pl-30 pr-30">
+				<div class="row">
+					<div class="col-sm-12 text-right">
+						<p>Copyright © 2020 Caroma Malaysia All Rights Reserved. Powered by NK Web House.</p>
+					</div>
+				</div>
+			</footer>
+			<!-- /Footer -->
+        </div>
+        <!-- /Main Content -->
+
+    </div>
+    <!-- /#wrapper -->
+	
+	<!-- JavaScript -->
+	
+    <!-- jQuery -->
+    <script src="vendors/bower_components/jquery/dist/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="vendors/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+	
+	<!-- Slimscroll JavaScript -->
+	<script src="dist/js/jquery.slimscroll.js"></script>
+	
+	<!-- Fancy Dropdown JS -->
+	<script src="dist/js/dropdown-bootstrap-extended.js"></script>
+		
+	<!-- Init JavaScript -->
+	<script src="dist/js/init.js"></script>
+	
+</body>
+
+</html>
