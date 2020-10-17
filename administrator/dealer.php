@@ -168,7 +168,7 @@ $PageName = "dealer";
                                         }
                                         ?>
                                     </tbody>
-                                    
+
                                 </table>
                             </div>
                         </div>
@@ -251,8 +251,12 @@ $PageName = "dealer";
 
             });
 
-            $("#form_distributor").validate({
+            $("#form_dealer").validate({
                 rules: {
+                    distributor_code: {
+                        required: true,
+
+                    },
                     name: {
                         required: true,
 

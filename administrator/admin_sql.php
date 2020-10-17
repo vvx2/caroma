@@ -503,10 +503,7 @@ if (!empty($postedToken)) {
             }
           }
         }
-      }
-
-
-      else if ($type == "distributor_edit") {
+      } else if ($type == "distributor_edit") {
         if (isset($_POST['btnAction'])) {
 
           $distributor_id = $_POST['btnAction'];
@@ -544,13 +541,125 @@ if (!empty($postedToken)) {
               echo "<script>alert(\" Edit Distributor Fail, PLease Try Again. \");
               window.location.href='distributor.php';</script>";
             }
-            }
-          
+          }
         }
       }
 
       //--------------------------------------------------
       //                    DISTRIBUTOR
+      //--------------------------------------------------
+
+      //--------------------------------------------------
+      //                    DEALER 
+      //--------------------------------------------------
+
+      else if ($type == "dealer_edit") {
+        if (isset($_POST['btnAction'])) {
+
+          $dealer_id = $_POST['btnAction'];
+          $status = $_POST['status'];
+          $distributor_code = $_POST['distributor_code'];
+          $name = $_POST['name'];
+          $name = $_POST['name'];
+          $email = $_POST['email'];
+          $contact = $_POST['contact'];
+          $password = $_POST['password'];
+          $password = encrypt_decrypt('encrypt', $password);
+          $address = $_POST['address'];
+          $state = $_POST['state'];
+          $postcode = $_POST['postcode'];
+          $city = $_POST['city'];
+          $address_name = "-";
+
+          // check Distributor is it isset in database
+          $table = "users left join user_distributor on users.id = user_distributor.user_id";
+          $col = "users.id as distributor_id, user_distributor.distributor_code as distributor_code";
+          $opt = 'user_distributor.distributor_code =?';
+          $arr = array($distributor_code);
+          $check_distributor_isset = $db->advwhere($col, $table, $opt, $arr);
+
+          if (count($check_distributor_isset) <= 0) {
+            echo "<script>alert(\" Distributor Do not Existed!\");
+                      window.location.href='dealer.php';</script>";
+          } else {
+
+            $table = "users";
+            $data = "name = ?, email = ?, password = ?, status = ?, date_modified = ? WHERE id = ?";
+            $array = array($name, $email, $password, $status, $time, $dealer_id);
+            $result_dealer = $db->update($table, $data, $array);
+
+            if ($result_dealer) {
+
+
+              $table = "user_address";
+              $data = "name = ?, contact = ?, address = ?, postcode = ?, city = ?, state = ?, date_modified = ? WHERE user_id = ?";
+              $array = array($address_name, $contact, $address, $postcode, $city, $state, $time, $dealer_id);
+              $result_dealer_address = $db->update($table, $data, $array);
+
+
+              if ($result_dealer_address) {
+                echo "<script>alert(\" Edit Dealer Successful\");
+              window.location.href='dealer.php';</script>";
+              } else {
+                echo "<script>alert(\" Edit Dealer Fail, PLease Try Again. \");
+              window.location.href='dealer.php';</script>";
+              }
+            }
+          }
+        }
+      }
+
+      //--------------------------------------------------
+      //                    DEALER
+      //--------------------------------------------------
+
+      //--------------------------------------------------
+      //                    USER 
+      //--------------------------------------------------
+
+      else if ($type == "user_edit") {
+        if (isset($_POST['btnAction'])) {
+
+          $user_id = $_POST['btnAction'];
+          $status = $_POST['status'];
+          $name = $_POST['name'];
+          $name = $_POST['name'];
+          $email = $_POST['email'];
+          $contact = $_POST['contact'];
+          $password = $_POST['password'];
+          $password = encrypt_decrypt('encrypt', $password);
+          $address = $_POST['address'];
+          $state = $_POST['state'];
+          $postcode = $_POST['postcode'];
+          $city = $_POST['city'];
+          $address_name = "-";
+
+          $table = "users";
+          $data = "name = ?, email = ?, password = ?, status = ?, date_modified = ? WHERE id = ?";
+          $array = array($name, $email, $password, $status, $time, $user_id);
+          $result_user = $db->update($table, $data, $array);
+
+          if ($result_user) {
+
+            $table = "user_address";
+            $data = "name = ?, contact = ?, address = ?, postcode = ?, city = ?, state = ?, date_modified = ? WHERE user_id = ?";
+            $array = array($address_name, $contact, $address, $postcode, $city, $state, $time, $user_id);
+            $result_user_address = $db->update($table, $data, $array);
+
+
+            if ($result_user_address) {
+              echo "<script>alert(\" Edit User Successful\");
+              window.location.href='user.php';</script>";
+            } else {
+              echo "<script>alert(\" Edit User Fail, PLease Try Again. \");
+              window.location.href='user.php';</script>";
+            }
+          }
+        }
+      }
+
+      //--------------------------------------------------
+      //                    USER
       //--------------------------------------------------
 
     } // table admin
