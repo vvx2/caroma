@@ -50,13 +50,21 @@ if ($onpage == "1") {
 			<li class="<?php echo ($PageName == 'category') ? 'active' : ''; ?>">
 				<a href="category.php"><i class="fa fa-th-large"></i> <span class="nav-label">Category</span></a>
 			</li>
-
+			<li class="<?php echo ($PageName == 'coupon') ? 'active' : ''; ?>">
+				<a href="coupon.php"><i class="fa fa-th-large"></i> <span class="nav-label">Coupon</span></a>
+			</li>
 			<li class="<?php echo ($PageName == 'user' || $PageName == 'distributor' || $PageName == 'dealer') ? 'active' : ''; ?>">
 				<a href=""><i class="fa fa-th-large"></i> <span class="nav-label">Users</span> <span class="fa arrow"></span></a>
 				<ul class="nav nav-second-level"> 
 					<li class="<?php echo ($PageName == 'user') ? 'active' : ''; ?>"><a href="user.php">Normal User</a></li>
 					<li class="<?php echo ($PageName == 'distributor') ? 'active' : ''; ?>"><a href="distributor.php">Distributor</a></li>
 					<li class="<?php echo ($PageName == 'dealer') ? 'active' : ''; ?>"><a href="dealer.php">Dealer</a></li>
+				</ul>
+			</li>
+			<li class="<?php echo ($PageName == 'order' || $PageName == 'order' || $PageName == 'order') ? 'active' : ''; ?>">
+				<a href=""><i class="fa fa-th-large"></i> <span class="nav-label">Order</span> <span class="fa arrow"></span></a>
+				<ul class="nav nav-second-level"> 
+					<li class="<?php echo ($PageName == 'order') ? 'active' : ''; ?>"><a href="order.php">Order</a></li>
 				</ul>
 			</li>
 

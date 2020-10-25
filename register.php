@@ -47,7 +47,7 @@
     <div class="container">
         <nav class="biolife-nav">
             <ul>
-                <li class="nav-item"><a href="index-2.html" class="permal-link">Home</a></li>
+                <li class="nav-item"><a href="index.php" class="permal-link">Home</a></li>
                 <li class="nav-item"><span class="current-page">Registration</span></li>
             </ul>
         </nav>
@@ -65,7 +65,7 @@
                     <div class="col-sm-12 col-xs-12">
                         <div class="signin-container">
                             <form role="form" id="form_user" action="administrator/user_register.php?type=user_register&tb=user" method="post" enctype="multipart/form-data">
-                                <input type="hidden" name="token" value="<?php echo $token; ?>" />
+                                <input type="hidden" name="token" id="form_token" value="<?php echo $token; ?>" />
                                 <p class="form-row">
                                     <div class="col-sm-6 col-12 no-padding-left">
                                         <label class="label-width" for="name">Full Name</label>
@@ -155,6 +155,12 @@
     <script src="assets/js/slick.min.js"></script>
     <script src="assets/js/biolife.framework.js"></script>
     <script src="assets/js/functions.js"></script>
+    <script src="cart.js"></script>
+    <script>
+        $(document).ready(function() {
+            LoadCart();
+        });
+    </script>
 </body>
 
 </html>

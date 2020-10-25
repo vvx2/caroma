@@ -229,6 +229,7 @@ $PageName = "product";
                                                     </tr>
                                                 <?php $i++;
                                                 } ?>
+                                            </tbody>
                                         </table>
                                     </div>
 
