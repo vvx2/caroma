@@ -3,8 +3,9 @@
 
 <head>
     <?php
-    require_once('administrator/connection/PDO_db_function.php');
-    $db = new DB_FUNCTIONS();
+    // require_once('administrator/connection/PDO_db_function.php');
+    // $db = new DB_FUNCTIONS();
+    require_once('inc/init.php');
     require_once('inc/head.php');
     ?>
 </head>
@@ -64,17 +65,20 @@
                     <!--Form Sign In-->
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                         <div class="signin-container">
-                            <form action="#" name="frm-login" method="post">
+                            <form action="login.php" name="frm-login" method="post">
                                 <p class="form-row">
-                                    <label for="fid-name">Email Address:<span class="requite">*</span></label>
-                                    <input type="text" id="fid-name" name="name" value="" class="txt-input">
+                                    <label for="uname">Email Address:<span class="requite">*</span></label>
+                                    <input type="email" id="uname" name="email" value="" class="txt-input" required>
                                 </p>
                                 <p class="form-row">
-                                    <label for="fid-pass">Password:<span class="requite">*</span></label>
-                                    <input type="email" id="fid-pass" name="email" value="" class="txt-input">
+                                    <label for="pword">Password:<span class="requite">*</span></label>
+                                    <input type="password" id="pword" name="password" value="" class="txt-input" required>
                                 </p>
+                                <div class="form-group">
+                                    <span class="text-danger" id="error_msg"></span>
+                                </div>
                                 <p class="form-row wrap-btn">
-                                    <button class="btn btn-submit btn-bold" type="submit">sign in</button>
+                                    <button class="btn btn-submit btn-bold" type="submit" id="btnsubmit">sign in</button>
                                     <a href="#" class="link-to-help">Forgot your password</a>
                                 </p>
                             </form>
@@ -95,6 +99,7 @@
                                     <li>Save items to your Wishlist</li>
                                 </ul>
                                 <a href="register.php" class="btn btn-bold">Create an account</a>
+                                <a href="register.php" class="btn btn-bold">Join with Dealer</a>
                             </div>
                         </div>
                     </div>
@@ -130,6 +135,30 @@
         $(document).ready(function() {
             LoadCart();
         });
+
+        $('#btnsubmit').click(function(e) {
+            var uname = $('#uname').val();
+            var pword = $('#pword').val();
+
+            if (uname != "" && pword != "") {
+                e.preventDefault();
+
+                $.post('api/login.php', {
+                    Uname: uname,
+                    Pword: pword
+                }, function(data) {
+                    console.info(data);
+                    data = JSON.parse(data);
+                    if (data[0]) {
+                        window.location.replace('api/routing.php?login_key=' + data[1]);
+                    } else {
+                        $('#error_msg').html('<b>Wrong Username Or Password</b>');
+                    }
+                });
+
+            }
+
+        })
     </script>
 </body>
 

@@ -176,3 +176,45 @@
 	width : 24px !important ;
 	height : 16px !important ; 
 }
+
+#fname_error_message{
+	color: red;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+#email_error_message{
+	color: red;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+#password_error_message{
+	color: red;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+#retype_password_error_message{
+	color: red;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+#phone_error_message{
+	color: red;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+#address_error_message{
+	color: red;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+#zip_error_message{
+	color: red;
+    font-size: 14px;
+    font-weight: 700;
+}

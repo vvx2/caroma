@@ -20,10 +20,11 @@
             </div>
             <div class="login-item">
                 <?php
-                $login = 1;
                 if ($login == 1) {
+                    $user_name = $db->where("name", "users", "id", $user_id);
+                    $user_name = $user_name[0]['name'];
                 ?>
-                    <a href="login.php" class="login-link"><i class="biolife-icon icon-login"></i>User's Name</a>
+                    <a href="my-account/index.php" class="login-link"><i class="biolife-icon icon-login"></i><?php echo $user_name ?></a>
                 <?php
                 } else {
                 ?>

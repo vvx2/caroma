@@ -3,8 +3,9 @@
 
 <head>
     <?php
-    require_once('administrator/connection/PDO_db_function.php');
-    $db = new DB_FUNCTIONS();
+    // require_once('administrator/connection/PDO_db_function.php');
+    // $db = new DB_FUNCTIONS();
+    require_once('inc/init.php');
     require_once('inc/head.php');
     ?>
 </head>
@@ -98,7 +99,7 @@
                                     <tbody>
                                         <?php
 
-                                        $user_id = 1;
+                                        $user_id = 6;
                                         $user_type = 3;
                                         $language = "en";
                                         $item = array();

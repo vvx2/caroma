@@ -3,9 +3,14 @@
 
 <head>
     <?php
-    require_once('administrator/connection/PDO_db_function.php');
-    $db = new DB_FUNCTIONS();
+    // require_once('administrator/connection/PDO_db_function.php');
+    // $db = new DB_FUNCTIONS();
+    require_once('inc/init.php');
     require_once('inc/head.php');
+    if ($login != 1) {
+        echo "<script>window.location.replace('login.php')</script>";
+        exit();
+    }
     ?>
     <link rel="stylesheet" href="assets/css/rewards.css">
 </head>

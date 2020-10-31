@@ -151,11 +151,6 @@ input[type="tel"]::placeholder,
 input[type="search"]::placeholder{
     color: #888888;
 }
-select{
-    background: transparent;
-    border: none;
-    color: #ffffff;
-}
 select option{
     color: #333333;
 }
@@ -164,12 +159,9 @@ select option{
     -webkit-border-radius: 0;
     -moz-border-radius: 0;
     border-radius: 0;
-    border: none;
-    padding: 0 14px;
     font-size: 14px;
     line-height: 1;
     min-height: auto;
-    height: auto;
 }
 .nice-select:after{
     content: "\f0d7";
@@ -202,7 +194,6 @@ select option{
     transform: rotate( -180deg );
 }
 .nice-select .current{
-    color: #ffffff;
     display: inline-block;
     padding: 14px 0;
 }

@@ -20,5 +20,15 @@
                 </select>
             </li>
         </ul>
+        <?php
+        if ($login == 1) {
+        ?>
+            <ul class="social-list">
+                <li><a href="api/logout.php"><i class="" aria-hidden="true">Logout</i></a></li>
+
+            </ul>
+        <?php
+        }
+        ?>
     </div>
 </div>

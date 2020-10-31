@@ -14,7 +14,7 @@
             </a>
         </div>
         <div class="mobile-block block-minicart">
-            <a class="link-to-cart" href="shopping-cart.html">
+            <a class="link-to-cart" href="shopping-cart.php">
                 <span class="fa fa-shopping-bag" aria-hidden="true"></span>
                 <span class="text">Cart</span>
             </a>
@@ -37,9 +37,25 @@
         <div class="glb-item my-account">
             <b class="title">My Account</b>
             <ul class="list">
-                <li class="list-item"><a href="login.html">Login/register</a></li>
-                <li class="list-item"><a href="checkout.html">Checkout</a></li>
-                <li class="list-item"><a href="rewards.html">Rewards</a></li>
+                <?php
+                if ($login == 1) {
+                ?>
+                    <li class="list-item"><a href="login.php">User's Name</a></li>
+                <?php
+                } else {
+                ?>
+                    <li class="list-item"><a href="login.php">Login/register</a></li>
+                <?php
+                }
+                ?>
+                <li class="list-item"><a href="checkout.php">Checkout</a></li>
+                <li class="list-item"><a href="rewards.php">Rewards</a></li>
+                <?php
+                if ($login == 1) {
+                ?>
+                    <li class="list-item"><a href="api/logout.php">Logout</a></li>
+                <?php } ?>
+
             </ul>
         </div>
         <div class="glb-item languages">

@@ -214,7 +214,7 @@ if (!empty($postedToken)) {
           // $desc_cn = "";
           // $desc_my = "";
 
-          // check category is it isset in database
+          // check product is it isset in database
           $table = "product_translation";
           $col = "id, name";
           $opt = 'name = ? || name = ? || name = ?';
@@ -571,7 +571,7 @@ if (!empty($postedToken)) {
           $city = $_POST['city'];
           $address_name = "-";
 
-          // check Distributor is it isset in database
+          // check dealer is it isset in database
           $table = "users left join user_distributor on users.id = user_distributor.user_id";
           $col = "users.id as distributor_id, user_distributor.distributor_code as distributor_code";
           $opt = 'user_distributor.distributor_code =?';

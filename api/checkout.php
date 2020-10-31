@@ -8,10 +8,18 @@ if (isset($_REQUEST['type'])) {
         if (isTokenValid($postedToken)) {
             $time = date('Y-m-d H:i:s');
 
-            $login = 1;
-            $user_id = 1;
+            $login = $_SESSION['login'];
+            if ($login != 1) {
+                echo "<script>window.location.replace('login.php')</script>";
+                exit();
+            }
+            $user_id = 6;
             $user_type = 3;
             $language = "en";
+
+            //--------------------------------------------------
+            //                CREATE ORDEDR 
+            //--------------------------------------------------
 
             if ($type == 'checkout') {
 
@@ -28,10 +36,10 @@ if (isset($_REQUEST['type'])) {
                     $customer_email = $_POST['email'];
                 }
 
-                if ($_POST['contact'] == "" || $_POST['contact'] == null) {
+                if ($_POST['phone'] == "" || $_POST['phone'] == null) {
                     $empty_input + 1;
                 } else {
-                    $customer_contact = $_POST['contact'];
+                    $customer_contact = $_POST['phone'];
                 }
 
                 if ($_POST['address'] == "" || $_POST['address'] == null) {
@@ -80,6 +88,7 @@ if (isset($_REQUEST['type'])) {
                     }
                     //------------------------------------------
 
+                    $order_id = $_POST['order_id'];
                     $total_price = 0;
                     $total_payment = 0;
                     $coupon_code = "";
@@ -94,7 +103,7 @@ if (isset($_REQUEST['type'])) {
                     if ($result_cart) {
                         //count item sub total price for get total payment amount
                         foreach ($result_cart as $cart) {
-                            $total_price = $total_payment + ($cart['qty'] * $cart['price']);
+                            $total_price = $total_price + ($cart['qty'] * $cart['price']);
                         }
                         $total_payment = $total_price;
                         //------------------------------------------
@@ -116,15 +125,15 @@ if (isset($_REQUEST['type'])) {
 
 
                         $table = "orders";
-                        $colname = array("status", "customer_name", "customer_email", "customer_address", "customer_postcode", "customer_city", "customer_state", "customer_contact", "total_price", "coupon_code", "discount_percent", "discount_amount", "total_payment", "track_code", "users_id", "date_created", "date_modified");
-                        $array = array(1, $customer_name, $customer_email, $customer_address, $customer_postcode, $customer_city, $customer_state, $customer_contact, $total_price, $coupon_code, $discount_percent, $discount_amount, $total_payment, $track_code, $user_id, $time, $time);
+                        $colname = array("status", "customer_name", "customer_email", "customer_address", "customer_postcode", "customer_city", "customer_state", "customer_contact", "total_price", "coupon_code", "discount_percent", "discount_amount", "total_payment", "track_code", "gateway_order_id", "users_id", "date_created", "date_modified");
+                        $array = array(1, $customer_name, $customer_email, $customer_address, $customer_postcode, $customer_city, $customer_state, $customer_contact, $total_price, $coupon_code, $discount_percent, $discount_amount, $total_payment, $track_code, $order_id, $user_id, $time, $time);
                         $result_order = $db->insert($table, $colname, $array);
 
                         if ($result_order) {
 
 
                             //--------------------------
-                            //  get category id inserted
+                            //  get order id inserted
                             //--------------------------
                             $table = "orders";
                             $col = "id";
@@ -136,7 +145,7 @@ if (isset($_REQUEST['type'])) {
 
 
                             //------------------------------------------
-                            // move cart record to order_items table and clear cart
+                            // move cart record to order_items table
                             //------------------------------------------
                             foreach ($result_cart as $cart) {
 
@@ -146,18 +155,33 @@ if (isset($_REQUEST['type'])) {
                                 $result_order_item = $db->insert($table, $colname, $array);
                             }
 
-                            $table = "cart";
-                            $opt = 'customer_id = ?';
-                            $arr = array($user_id);
-                            $remove_from_cart = $db->advdel($table, $opt, $arr);
-
                             //------------------------------------------
-                            if ($remove_from_cart && $result_order_item) {
-                                echo "<script>alert(\" Checkout Successful.\");
-                                window.location.href='../shop.php';</script>";
-                            } else {
-                                echo "<script>alert(\" Checkout Successful, But record cart fail.\");
-                                window.location.href='../shop.php';</script>";
+                            if ($result_order_item) {
+?>
+                                <html>
+
+                                <head>
+                                    <title>Send data back to order</title>
+                                </head>
+
+                                <body onload="document.order.submit()">
+                                    <form name="order" method="post" action="../checkout.php">
+                                        <input type="hidden" name="detail" value="<?php echo $_POST['detail']; ?>">
+                                        <input type="hidden" name="amount" value="<?php echo $_POST['amount']; ?>">
+                                        <input type="hidden" name="order_id" value="<?php echo $_POST['order_id']; ?>">
+                                        <input type="hidden" name="name" value="<?php echo $_POST['name']; ?>">
+                                        <input type="hidden" name="email" value="<?php echo $_POST['email']; ?>">
+                                        <input type="hidden" name="phone" value="<?php echo $_POST['phone']; ?>">
+                                        <input type="hidden" name="address" value="<?php echo $_POST['address']; ?>">
+                                        <input type="hidden" name="state" value="<?php echo $_POST['state']; ?>">
+                                        <input type="hidden" name="city" value="<?php echo $_POST['city']; ?>">
+                                        <input type="hidden" name="postcode" value="<?php echo $_POST['postcode']; ?>">
+
+                                    </form>
+                                </body>
+
+                                </html>
+<?php
                             }
                         } else {
                             echo "<script>alert(\" Checkout Fail. Please try again.\");
@@ -171,10 +195,99 @@ if (isset($_REQUEST['type'])) {
                     echo "<script>alert(\" Your Input cannot be empty\");
                     window.location.href='../checkout.php';</script>";
                 }
-            } else {
-                echo "<script>alert(\" no type\");
-                    window.location.href='../checkout.php';</script>";
             }
+            //--------------------------------------------------
+            //                CREATE ORDEDR 
+            //--------------------------------------------------
+
+
+            //--------------------------------------------------
+            //                PAYMENT SUCCESS 
+            //--------------------------------------------------
+            else if ($type == 'payment_success') {
+                $success = $_REQUEST['success'];
+                if ($success == "1") {
+
+                    $gateway_order_id = $_POST['order_id'];
+
+                    //get order id
+                    $col = "*";
+                    $table = "orders";
+                    $opt = 'gateway_order_id = ?';
+                    $arr = array($gateway_order_id);
+                    $order = $db->advwhere($col, $table, $opt, $arr);
+
+                    $order_id = $order[0]['id'];
+                    $email = $order[0]['customer_email'];
+
+                    $tablename = "orders";
+                    $data = "status = ?, date_modified = ? WHERE id = ?";
+                    $array = array(2, $time, $order_id);
+                    $result = $db->update($tablename, $data, $array);
+
+                    if ($result) {
+                        //------------------------------
+                        // reduce product stock
+                        //------------------------------
+                        $table = "cart c left join product_role_price pp on c.product_id = pp.product_id";
+                        $col = "c.product_id as product_id, c.qty as qty, pp.price as price";
+                        $opt = 'c.customer_id = ? && pp.type = ?';
+                        $arr = array($user_id, $user_type);
+                        $result_cart = $db->advwhere($col, $table, $opt, $arr);
+
+                        // loop all product in cart
+                        foreach ($result_cart as $cart) {
+
+                            // get product detail.
+                            $col = "id, stock";
+                            $table = "product";
+                            $opt = 'id = ?';
+                            $arr = array($cart['product_id']);
+                            $product = $db->advwhere($col, $table, $opt, $arr);
+
+                            //if product exists then execute
+                            if ($product) {
+
+                                $product_id = $product[0]["id"];
+                                $product_stock = $product[0]["stock"];
+                                $reduced_prodcut_stock = $product_stock - $cart['qty'];
+
+                                $tablename = "product";
+                                $data = "stock = ?, date_modified = ? WHERE id = ?";
+                                $array = array($reduced_prodcut_stock, $time, $product_id);
+                                $result_reduce_stock = $db->update($tablename, $data, $array);
+                            } else {
+                                continue;
+                            }
+                        }
+
+                        //------------------------------
+                        // reduce product stock
+                        //------------------------------
+
+                        //------------------------------
+                        // Clear Cart Table
+                        //------------------------------
+                        $table = "cart";
+                        $opt = 'customer_id = ?';
+                        $arr = array($user_id);
+                        $remove_from_cart = $db->advdel($table, $opt, $arr);
+
+                        //------------------------------
+                        // Clear Cart Table
+                        //------------------------------
+
+                        // if something done, run this
+                        echo "<script> window.location.href='../shop.php';</script>";
+                    } else { //end result
+                        echo "Update Status Fail. Please Contact admin. Your order number: $gateway_order_id";
+                    }
+                } //end $success==1
+            } // end else if
+
+            //--------------------------------------------------
+            //                PAYMENT SUCCESS 
+            //--------------------------------------------------
         } else {
             echo "Token Expired. Please Try Again";
         }

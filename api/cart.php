@@ -8,8 +8,8 @@ if (isset($_REQUEST['type'])) {
         if (isTokenValid($postedToken)) {
             $time = date('Y-m-d H:i:s');
 
-            $login = 1;
-            $user_id = 1;
+            $login = $_SESSION['login'];
+            $user_id = 6;
             $user_type = 3;
             $language = "en";
 
