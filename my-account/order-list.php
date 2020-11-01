@@ -189,7 +189,7 @@ if (isset($_REQUEST['p'])) { // order status
 									<p class="text-muted">Please check your<code> STORE ORDERS </code> in this list.</p>
 									<div class="pills-struct mt-40">
 										<ul role="tablist" class="nav nav-pills nav-pills-rounded" id="myTabs_11">
-											<li role="presentation" class="<?php echo ($order_page == "2") ? "active" : "" ?>"><a href="order-list.php?p=2">To Ship</a></li>
+											<li role="presentation" class="<?php echo ($order_page == "2") ? "active" : "" ?>"><a href="order-list.php?p=2">Pending</a></li>
 											<li role="presentation" class="<?php echo ($order_page == "3") ? "active" : "" ?>"><a href="order-list.php?p=3">Shipping</a></li>
 											<li role="presentation" class="<?php echo ($order_page == "4") ? "active" : "" ?>"><a href="order-list.php?p=4">Completed</a></li>
 											<li role="presentation" class="<?php echo ($order_page == "1") ? "active" : "" ?>"><a href="order-list.php?p=1">Rejected / Failed</a></li>
@@ -246,7 +246,7 @@ if (isset($_REQUEST['p'])) { // order status
 																						<td><?php echo $order['customer_name']; ?></td>
 																						<td><?php echo $order['date_created']; ?></td>
 																						<td><?php echo $order['total_payment']; ?></td>
-																						<td><i data-remote="ajax/user_order_detail.php?p=<?php echo $order['id']; ?>" data-toggle="modal" data-target=".bs-example-modal-lg" class="fa fa-cogs toolsx"></i></td>
+																						<td><i data-remote="ajax/distributor_order.php?p=<?php echo $order['id']; ?>" data-toggle="modal" data-target=".bs-example-modal-lg" class="fa fa-cogs toolsx"></i></td>
 																					</tr>
 																				<?php } ?>
 																			</tbody>

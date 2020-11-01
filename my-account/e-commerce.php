@@ -1,6 +1,6 @@
 <?php
 require_once('inc/init.php');
-$PageName = "index";
+$PageName = "e-commerce";
 if ($login != 1) {
 	echo "<script>window.location.replace('../login.php')</script>";
 	exit();
@@ -162,7 +162,7 @@ if ($login != 1) {
 						<div class="panel panel-default card-view">
 							<div class="panel-heading">
 								<div class="pull-left">
-									<h6 class="panel-title txt-dark">Order History Exporter</h6>
+									<h6 class="panel-title txt-dark">Pending Order </h6>
 								</div>
 								<div class="clearfix"></div>
 							</div>
@@ -183,6 +183,7 @@ if ($login != 1) {
 														<th>Total Amount</th>
 														<th>Status</th>
 														<th>More Detail</th>
+														<th>Action</th>
 													</tr>
 												</thead>
 												<tfoot>
@@ -197,6 +198,7 @@ if ($login != 1) {
 														<th>Total Amount</th>
 														<th>Status</th>
 														<th>More Detail</th>
+														<th>Action</th>
 													</tr>
 												</tfoot>
 												<tbody>
@@ -218,8 +220,9 @@ if ($login != 1) {
 															<td><?php echo $order['customer_address']; ?></td>
 															<td>FPX</td>
 															<td><?php echo $order['total_payment']; ?></td>
-															<td>Completed</td>
-															<td><i data-remote="ajax/user_order_detail.php?p=<?php echo $order['id']; ?>" data-toggle="modal" data-target=".bs-example-modal-lg" class="fa fa-cogs toolsx"></i></td>
+															<td>Pending</td>
+															<td><i data-remote="ajax/distributor_order.php?p=<?php echo $order['id']; ?>" data-toggle="modal" data-target=".bs-example-modal-lg" class="fa fa-cogs toolsx"></i></td>
+															<td><i data-remote="ajax/distributor_order_assign.php?p=<?php echo $order['id']; ?>" data-toggle="modal" data-target=".bs-example-modal-lg" class="btn btn-success">Confirm</i></td>
 														</tr>
 													<?php } ?>
 												</tbody>
