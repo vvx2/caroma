@@ -214,7 +214,7 @@ $PageName = "product";
                                                         <td><?php echo $row['date_modified']; ?></td>
                                                         <td>
                                                             <a href="../img/product/<?php echo $row['image']; ?>" target="_blank">
-                                                                <span hidden><?php echo $path . "/img/product/" . $row["image"]; ?></span>
+                                                                <span hidden></span>
                                                                 <i style="color:blue" class="fa fa-chevron-circle-right fa-lg"></i>
                                                             </a>
                                                         </td>
