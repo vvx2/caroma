@@ -13,9 +13,6 @@ if (isset($_REQUEST['type'])) {
                 echo "<script>window.location.replace('login.php')</script>";
                 exit();
             }
-            $user_id = 6;
-            $user_type = 3;
-            $language = "en";
 
             //--------------------------------------------------
             //                CREATE ORDEDR 

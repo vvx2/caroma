@@ -8,7 +8,6 @@ if (isset($_REQUEST['type']) && isset($_REQUEST['tb'])) {
     $tb = $_REQUEST['tb'];
 }
 
-$user_id = 1;
 $postedToken = filter_input(INPUT_POST, 'token');
 if (!empty($postedToken)) {
 

@@ -9,7 +9,6 @@ if (isset($_REQUEST['type'])) {
             $time = date('Y-m-d H:i:s');
 
             $login = $_SESSION['login'];
-            $user_id = 6;
             $user_type = 3;
             $language = "en";
 

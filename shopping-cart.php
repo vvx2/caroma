@@ -99,9 +99,6 @@
                                     <tbody>
                                         <?php
 
-                                        $user_id = 6;
-                                        $user_type = 3;
-                                        $language = "en";
                                         $item = array();
                                         $total_cart_price = 0;
                                         $number_cart = 0;
