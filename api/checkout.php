@@ -305,9 +305,7 @@ if (isset($_REQUEST['type'])) {
                         // Clear Cart Table
                         //------------------------------
                         $table = "cart";
-                        $opt = 'customer_id = ?';
-                        $arr = array($user_id);
-                        $remove_from_cart = $db->advdel($table, $opt, $arr);
+                        $remove_from_cart = $db->del($table, 'customer_id', $user_id);
 
                         //------------------------------
                         // Clear Cart Table
