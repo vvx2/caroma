@@ -235,6 +235,7 @@ if (isset($_REQUEST['type'])) {
 
                     $order_id = $order[0]['id'];
                     $email = $order[0]['customer_email'];
+                    $coupon_code = $order[0]['coupon_code'];
 
                     $tablename = "orders";
                     $data = "status = ?, date_modified = ? WHERE id = ?";
@@ -242,6 +243,25 @@ if (isset($_REQUEST['type'])) {
                     $result = $db->update($tablename, $data, $array);
 
                     if ($result) {
+
+                        //------------------------------
+                        // Add coupon times used
+                        //------------------------------ 
+                        $col = "*";
+                        $table = "coupon";
+                        $opt = 'code = ?';
+                        $arr = array($coupon_code);
+                        $coupon = $db->advwhere($col, $table, $opt, $arr);
+
+                        if (count($coupon) != 0) {
+                            $total_times_used = $coupon[0]["total_times_used"];
+                            $added_total_times_used = $total_times_used + 1;
+                            $tablename = "coupon";
+                            $data = "total_times_used = ? WHERE code = ?";
+                            $array = array($added_total_times_used, $coupon_code);
+                            $db->update($tablename, $data, $array);
+                        }
+
                         //------------------------------
                         // reduce product stock
                         //------------------------------
