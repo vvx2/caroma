@@ -1,18 +1,18 @@
 <?php
 
-$server = 1; //1= local, 2 = staging, 3 = live;
+$server = 2; //1= local, 2 = staging, 3 = live;
 if ($server == 1) {
     define('host', 'mysql:host=localhost;port=3306;dbname=caromanew;charset=utf8;');
     define('username', 'root');
     define('pass', '');
 } else if ($server == 2) {
-    define('host', 'mysql:host=localhost;port=3306;dbname=lenovore_staging_lenovo;charset=utf8;');
-    define('username', 'lenovore_staging');
-    define('pass', 'z,G^A0dDPnyn');
+    define('host', 'mysql:host=localhost;port=3306;dbname=caromaca_shop;charset=utf8;');
+    define('username', 'caromaca_shop');
+    define('pass', ';irmNFv*C~^c');
 } else if ($server == 3) {
-    define('host', 'mysql:host=localhost;port=3306;dbname=lenovore_lenovo;charset=utf8;');
-    define('username', 'lenovore_lenovore');
-    define('pass', 'Ao928b9FCxN;:u');
+    define('host', 'mysql:host=localhost;port=3306;dbname=caromaca_shop;charset=utf8;');
+    define('username', 'caromaca_shop');
+    define('pass', ';irmNFv*C~^c');
 }
 
 
