@@ -210,6 +210,11 @@ if (!empty($postedToken)) {
           $distributor_price = $_POST['distributor_price'];
           $dealer_price = $_POST['dealer_price'];
 
+          $length = $_POST['length'];
+          $width = $_POST['width'];
+          $weight = $_POST['weight'];
+          $height = $_POST['height'];
+
           // $desc_en = "";
           // $desc_cn = "";
           // $desc_my = "";
@@ -247,8 +252,8 @@ if (!empty($postedToken)) {
             //------------------------------------------
 
             $table = "product";
-            $colname = array("point", "stock", "category", "image", "status", "date_created", "date_modified");
-            $array = array($point, $stock, $category, $newfilename, 1, $time, $time);
+            $colname = array("point", "stock", "category", "length",  "width",  "height",  "weight",  "image", "status", "date_created", "date_modified");
+            $array = array($point, $stock, $category, $length, $width, $height, $weight, $newfilename, 1, $time, $time);
             $result_product = $db->insert($table, $colname, $array);
 
             if ($result_product) {
@@ -324,6 +329,11 @@ if (!empty($postedToken)) {
           $stock = $_POST['stock'];
           $point = $_POST['point'];
 
+          $length = $_POST['length'];
+          $width = $_POST['width'];
+          $weight = $_POST['weight'];
+          $height = $_POST['height'];
+
           $user_price = $_POST['user_price'];
           $distributor_price = $_POST['distributor_price'];
           $dealer_price = $_POST['dealer_price'];
@@ -333,8 +343,8 @@ if (!empty($postedToken)) {
           //------------------------------------------------------------------------------------
           if (!file_exists($_FILES['img']['tmp_name']) || !is_uploaded_file($_FILES['img']['tmp_name'])) { // no upload file will not update img name
             $table = "product";
-            $data = "point =?, stock =?, category =?, status =?, date_modified = ? WHERE id = ?";
-            $array = array($point, $stock, $category, $status, $time, $product_id);
+            $data = "point =?, stock =?, category =?, length =?, width =?, height =?, weight =?, status =?, date_modified = ? WHERE id = ?";
+            $array = array($point, $stock, $category, $length, $width, $height, $weight, $status, $time, $product_id);
             $result_product = $db->update($table, $data, $array);
           } else {
             //------------------------------------------
@@ -356,8 +366,8 @@ if (!empty($postedToken)) {
             //------------------------------------------
 
             $table = "product";
-            $data = "point =?, stock =?, category =?, image =?, status =?, date_modified = ? WHERE id = ?";
-            $array = array($point, $stock, $category, $newfilename, $status, $time, $product_id);
+            $data = "point =?, stock =?, category =?, length =?, width =?, height =?, weight =?, image =?, status =?, date_modified = ? WHERE id = ?";
+            $array = array($point, $stock, $category, $length, $width, $height, $weight, $newfilename, $status, $time, $product_id);
             $result_product = $db->update($table, $data, $array);
           }
           //------------------------------------------------------------------------------------
@@ -660,6 +670,79 @@ if (!empty($postedToken)) {
 
       //--------------------------------------------------
       //                    USER
+      //--------------------------------------------------
+
+      //--------------------------------------------------
+      //                    ORDER 
+      //--------------------------------------------------
+
+      // approve order from status failed / canceled
+      else if ($type == "order_approve") {
+        if (isset($_POST['btnAction'])) {
+
+          $order_id = $_POST['btnAction'];
+
+          $tablename = "orders";
+          $data = "status = ?, date_modified = ? WHERE id = ?";
+          $array = array(2, $time, $order_id);
+          $result = $db->update($tablename, $data, $array);
+
+          if ($result) {
+            echo "<script>alert(\" Update Status Successful\");
+              window.location.href='order.php?page=2';</script>";
+          } else {
+            echo "<script>alert(\" Update Status Fail, PLease Try Again. \");
+              window.location.href='order.php?page=2';</script>";
+          }
+        }
+      }
+
+      // order assign consigment number
+      else if ($type == "order_assign") {
+        if (isset($_POST['btnAction'])) {
+
+          $order_id = $_POST['btnAction'];
+          $consignment_number = $_POST['consignment_number'];
+
+          $tablename = "orders";
+          $data = "status = ?, consignment_number =?, date_modified = ? WHERE id = ?";
+          $array = array(3, $consignment_number, $time, $order_id);
+          $result = $db->update($tablename, $data, $array);
+
+          if ($result) {
+            echo "<script>alert(\" Update Status Successful\");
+              window.location.href='order.php?page=3';</script>";
+          } else {
+            echo "<script>alert(\" Update Status Fail, PLease Try Again. \");
+              window.location.href='order.php?page=3';</script>";
+          }
+        }
+      }
+
+
+      // to complete order after delivered
+      else if ($type == "order_complete") {
+        if (isset($_POST['btnAction'])) {
+
+          $order_id = $_POST['btnAction'];
+
+          $tablename = "orders";
+          $data = "status = ?, date_modified = ? WHERE id = ?";
+          $array = array(4, $time, $order_id);
+          $result = $db->update($tablename, $data, $array);
+
+          if ($result) {
+            echo "<script>alert(\" Update Status Successful\");
+                    window.location.href='order.php?page=4';</script>";
+          } else {
+            echo "<script>alert(\" Update Status Fail, PLease Try Again. \");
+                    window.location.href='order.php?page=4';</script>";
+          }
+        }
+      }
+
+      //--------------------------------------------------
+      //                    ORDER
       //--------------------------------------------------
 
     } // table admin

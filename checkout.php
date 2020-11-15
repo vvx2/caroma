@@ -12,8 +12,8 @@ $total_cart_price = 0;
 $number_cart = 0;
 $cart_display = "";
 $sub_total = 0;
-$discount = 10;
-$shipping = 10;
+$discount = 0;
+$shipping = 0;
 $total_pay = 0;
 
 $table = "cart c left join product p on c.product_id = p.id left join product_translation pt on c.product_id = pt.product_id left join product_role_price pp on c.product_id = pp.product_id";
@@ -35,8 +35,8 @@ if (count($get_cart) != 0) {
     }
 
     # please fill in the required info as below
-    $merchant_id = '851159591685814';
-    $secretkey = '2720-845';
+    $merchant_id = '859160498101260';
+    $secretkey = '3037-583';
 
 
     # this part is to process data from the form that user key in, make sure that all of the info is passed so that we can process the payment
@@ -330,36 +330,37 @@ if (count($get_cart) != 0) {
                                                 <li>
                                                     <div class="subtotal-line">
                                                         <b class="stt-name">Subtotal</b>
-                                                        <span class="stt-price">RM <?php echo number_format($sub_total, 2, '.', ''); ?></span>
+                                                        <span class="stt-price" id="get_subtotal">RM <?php echo number_format($sub_total, 2, '.', ''); ?></span>
                                                     </div>
                                                 </li>
                                                 <li>
                                                     <div class="subtotal-line">
                                                         <b class="stt-name">Shipping</b>
-                                                        <span class="stt-price">+ RM <?php echo number_format($shipping, 2, '.', ''); ?></span>
+                                                        <span class="stt-price" id="get_shipping">+ RM <?php echo number_format($shipping, 2, '.', ''); ?></span>
                                                     </div>
                                                 </li>
                                                 <li>
                                                     <div class="subtotal-line">
                                                         <b class="stt-name">Discount</b>
-                                                        <span class="stt-price">- RM <?php echo number_format($discount, 2, '.', ''); ?></span>
+                                                        <span class="stt-price" id="get_discount">- RM <?php echo number_format($discount, 2, '.', ''); ?></span>
                                                     </div>
                                                 </li>
                                                 <li>
-                                                    <div class="subtotal-line">
-                                                        <a href="#" class="link-forward">Promo/Gift Certificate</a>
+                                                    <div class="col-sm-12 col-12 no-padding-left">
+                                                        <label class="label-width" for="coupon">Coupon Code <span class="text-danger" id="get_coupon_msg"> </span></label>
+                                                        <input class="input-width" type="text" name="coupon" id="coupon" value="" placeholder="Enter Coupon Code">
                                                     </div>
                                                 </li>
                                                 <li>
                                                     <div class="subtotal-line">
                                                         <b class="stt-name">total:</b>
-                                                        <span class="stt-price">RM <?php echo number_format($total_pay, 2, '.', ''); ?></span>
+                                                        <span class="stt-price" id="get_totalpay">RM <?php echo number_format($total_pay, 2, '.', ''); ?></span>
                                                     </div>
                                                 </li>
                                             </ul>
                                             <div hidden>
                                                 <input type="text" name="detail" value="<?php echo $order_detail; ?>" placeholder="Description of the transaction" size="30" required>
-                                                <input type="text" name="amount" value="<?php echo $total_pay; ?>" placeholder="Amount to pay, for example 12.20" size="30" required>
+                                                <input type="text" name="amount" id="total_payment" value="<?php echo $total_pay; ?>" placeholder="Amount to pay, for example 12.20" size="30" required>
                                                 <input type="text" name="order_id" value="<?php echo time(); ?>" placeholder="Unique id to reference the transaction or order" size="30" required>
                                             </div>
                                         </div>
@@ -372,7 +373,7 @@ if (count($get_cart) != 0) {
                     </div>
                 </div>
             </div>
-
+            <div id='loadDiv' style='position: fixed; width: 100%; height: 100%; left: 0; top: 0; background: rgba(51,51,51,0.2); z-index: 9999; display:none;'><i class="fa fa-spin fa-spinner fa-5x text-success" style='position: fixed; left: 50%; top: 50%;'></i></div>
             <?php
             require_once('inc/footer.php');
             require_once('inc/mobile_footer.php');
@@ -436,6 +437,45 @@ if (count($get_cart) != 0) {
                         }
                     });
 
+                });
+
+                //for check coupon
+                $('[name="coupon"]').blur(function() {
+                    var coupon_code = $(this).val()
+                    $('#loadDiv').show();
+                    $.post('api/validate_coupon.php', {
+                        sub_total: <?php echo $sub_total; ?>,
+                        shipping: <?php echo $shipping; ?>,
+                        coupon_code: coupon_code
+                    }, function(data) {
+                        setTimeout(function() {
+                            console.log(data);
+                            data = JSON.parse(data);
+                            if (coupon_code != "") {
+                                if (data["Status"]) {
+                                    $("#get_coupon_msg").html("");
+                                    $("#get_discount").html('- RM ' + parseFloat(data["Amount"]).toFixed(2));
+                                    $("#get_shippig").html('- RM ' + parseFloat(data["Shipping"]).toFixed(2));
+                                    $("#get_totalpay").html('RM ' + parseFloat(data["Total_pay"]).toFixed(2));
+                                    $("#total_payment").val(data["Total_pay"]);
+                                } else {
+                                    $("#get_coupon_msg").html(data["Msg"]);
+                                    $("#get_discount").html('- RM ' + "<?php echo number_format($discount, 2, '.', '');; ?>");
+                                    $("#get_shippig").html('+ RM ' + "<?php echo number_format($shipping, 2, '.', '');; ?>");
+                                    $("#get_totalpay").html('RM ' + "<?php echo number_format($total_pay, 2, '.', '');; ?>");
+                                    $("#total_payment").val(<?php echo number_format($total_pay, 2, '.', '');; ?>);
+                                }
+                            } else {
+                                $("#get_coupon_msg").html("");
+                                $("#get_discount").html('- RM ' + "<?php echo number_format($discount, 2, '.', '');; ?>");
+                                $("#get_shippig").html('+ RM ' + "<?php echo number_format($shipping, 2, '.', '');; ?>");
+                                $("#get_totalpay").html('RM ' + "<?php echo number_format($total_pay, 2, '.', '');; ?>");
+                                $("#total_payment").val(<?php echo number_format($total_pay, 2, '.', '');; ?>);
+                            }
+                            $('#loadDiv').hide();
+                        }, 500);
+
+                    });
                 });
             </script>
         </body>

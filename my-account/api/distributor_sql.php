@@ -8,7 +8,27 @@ if (isset($_REQUEST['type']) && isset($_REQUEST['tb'])) {
     $tb = $_REQUEST['tb'];
 }
 
-$user_id = 1;
+if(isset($_SESSION['user_id']) && isset($_SESSION['type']))
+{	
+    $user_id = $_SESSION['user_id'];
+	$user_type = $_SESSION['type'];
+	$login = 1;
+	$_SESSION['login'] = $login;
+}
+else
+{
+	$login = 0;
+    $_SESSION['login'] = $login;
+    $user_type = 1;
+}
+if (isset($_SESSION['language'])) {
+
+    $language = $_SESSION['language'];
+} else {
+    $_SESSION['language'] = "en";
+    $language = $_SESSION['language'];
+}
+
 $postedToken = filter_input(INPUT_POST, 'token');
 if (!empty($postedToken)) {
 

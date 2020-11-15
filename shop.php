@@ -532,7 +532,7 @@
                             </div>
                         </div>
 
-                        <div class="widget biolife-filter">
+                        <!-- <div class="widget biolife-filter">
                             <h4 class="wgt-title">Product Tags</h4>
                             <div class="wgt-content">
                                 <ul class="check-list multiple">
@@ -545,7 +545,7 @@
                                     <li class="check-list-item"><a href="#" class="check-link">September Promotion</a></li>
                                 </ul>
                             </div>
-                        </div>
+                        </div> -->
 
 
                         <div class="widget biolife-filter">

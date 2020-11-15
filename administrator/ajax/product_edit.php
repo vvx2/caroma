@@ -66,6 +66,11 @@ $product_stock = $product[0]['stock'];
 $product_point = $product[0]['point'];
 $product_category = $product[0]['category'];
 
+$length = $product[0]['length'];
+$width = $product[0]['width'];
+$weight = $product[0]['weight'];
+$height = $product[0]['height'];
+
 
 
 ?>
@@ -134,6 +139,23 @@ $product_category = $product[0]['category'];
         <div class="form-group"><label>Price (Normal User)</label> <input type="number" placeholder="Enter User Price" class="form-control" name="user_price" value='<?php echo $user_price; ?>' min="0"></div>
         <div class="form-group"><label>Price (Distributor)</label> <input type="number" placeholder="Enter Distributor Price" class="form-control" name="distributor_price" value='<?php echo $distributor_price; ?>' min="0"></div>
         <div class="form-group"><label>Price (Dealer)</label> <input type="number" placeholder="Enter Dealer Price" class="form-control" name="dealer_price" value='<?php echo $dealer_price; ?>' min="0"></div>
+        <hr>
+        <div class="form-group">
+            <label class="font-normal">Length</label>
+            <input class="length" type="text" value="<?php echo $length; ?>" name="length">
+        </div>
+        <div class="form-group">
+            <label class="font-normal">Width</label>
+            <input class="width" type="text" value="<?php echo $width; ?>" name="width">
+        </div>
+        <div class="form-group">
+            <label class="font-normal">Height</label>
+            <input class="height" type="text" value="<?php echo $height; ?>" name="height">
+        </div>
+        <div class="form-group">
+            <label class="font-normal">Weight</label>
+            <input class="weight" type="text" value="<?php echo $weight; ?>" name="weight">
+        </div>
         <hr>
         <div class="form-group">
             <label>Product Image</label>
@@ -212,11 +234,59 @@ $product_category = $product[0]['category'];
                 category: {
                     required: true,
 
+                },
+                length: {
+                    required: true,
+
+                },
+                width: {
+                    required: true,
+
+                },
+                height: {
+                    required: true,
+
+                },
+                weight: {
+                    required: true,
+
                 }
 
             }
         });
 
+        $(".length").TouchSpin({
+            min: 0.0001,
+            max: 9999999,
+            decimals: 3,
+            postfix: 'CM',
+            buttondown_class: 'btn btn-white',
+            buttonup_class: 'btn btn-white'
+        });
+        $(".width").TouchSpin({
+            min: 0.0001,
+            max: 9999999,
+            decimals: 3,
+            postfix: 'CM',
+            buttondown_class: 'btn btn-white',
+            buttonup_class: 'btn btn-white'
+        });
+        $(".height").TouchSpin({
+            min: 0.0001,
+            max: 9999999,
+            decimals: 3,
+            postfix: 'CM',
+            buttondown_class: 'btn btn-white',
+            buttonup_class: 'btn btn-white'
+        });
+        $(".weight").TouchSpin({
+            min: 0.0001,
+            max: 9999999,
+            decimals: 3,
+            postfix: 'KG',
+            buttondown_class: 'btn btn-white',
+            buttonup_class: 'btn btn-white'
+        });
 
     });
 </script>

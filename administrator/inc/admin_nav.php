@@ -61,10 +61,13 @@ if ($onpage == "1") {
 					<li class="<?php echo ($PageName == 'dealer') ? 'active' : ''; ?>"><a href="dealer.php">Dealer</a></li>
 				</ul>
 			</li>
-			<li class="<?php echo ($PageName == 'order' || $PageName == 'order' || $PageName == 'order') ? 'active' : ''; ?>">
+			<li class="<?php echo ($PageName == 'order') ? 'active' : ''; ?>">
 				<a href=""><i class="fa fa-th-large"></i> <span class="nav-label">Order</span> <span class="fa arrow"></span></a>
 				<ul class="nav nav-second-level"> 
-					<li class="<?php echo ($PageName == 'order') ? 'active' : ''; ?>"><a href="order.php">Order</a></li>
+					<li class="<?php echo ($pagetype == '2') ? 'active' : ''; ?>"><a href="order.php?page=2">Pending Order</a></li>
+					<li class="<?php echo ($pagetype == '3') ? 'active' : ''; ?>"><a href="order.php?page=3">Shipping Order</a></li>
+					<li class="<?php echo ($pagetype == '4') ? 'active' : ''; ?>"><a href="order.php?page=4">Completed Order</a></li>
+					<li class="<?php echo ($pagetype == '1') ? 'active' : ''; ?>"><a href="order.php?page=1">Reject/Failed Order</a></li>
 				</ul>
 			</li>
 

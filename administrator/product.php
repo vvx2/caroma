@@ -9,6 +9,7 @@ $PageName = "product";
     <?php include_once('inc/header.php'); ?>
     <link href="css/plugins/chosen/bootstrap-chosen.css" rel="stylesheet">
     <link href="css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="css/plugins/touchspin/jquery.bootstrap-touchspin.min.css" rel="stylesheet">
     <link href="css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet">
 </head>
 
@@ -96,6 +97,23 @@ $PageName = "product";
                                     <div class="form-group"><label>Price (Normal User)</label> <input type="number" placeholder="Enter User Price" class="form-control" name="user_price" value='' min="0"></div>
                                     <div class="form-group"><label>Price (Distributor)</label> <input type="number" placeholder="Enter Distributor Price" class="form-control" name="distributor_price" value='' min="0"></div>
                                     <div class="form-group"><label>Price (Dealer)</label> <input type="number" placeholder="Enter Dealer Price" class="form-control" name="dealer_price" value='' min="0"></div>
+                                    <hr>
+                                    <div class="form-group">
+                                        <label class="font-normal">Length</label>
+                                        <input class="length" type="text" value="0" name="length">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="font-normal">Width</label>
+                                        <input class="width" type="text" value="0" name="width">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="font-normal">Height</label>
+                                        <input class="height" type="text" value="0" name="height">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="font-normal">Weight</label>
+                                        <input class="weight" type="text" value="0" name="weight">
+                                    </div>
                                     <hr>
                                     <div class="form-group">
                                         <label>Product Image</label>
@@ -278,6 +296,8 @@ $PageName = "product";
     <script src="js/plugins/chosen/chosen.jquery.js"></script>
     <!-- iCheck -->
     <script src="js/plugins/iCheck/icheck.min.js"></script>
+    <!-- TouchSpin -->
+    <script src="js/plugins/touchspin/jquery.bootstrap-touchspin.min.js"></script>
 
     <!-- Page-Level Scripts -->
     <script>
@@ -370,12 +390,63 @@ $PageName = "product";
                     category: {
                         required: true,
 
+                    },
+                    length: {
+                        required: true,
+
+                    },
+                    width: {
+                        required: true,
+
+                    },
+                    height: {
+                        required: true,
+
+                    },
+                    weight: {
+                        required: true,
+
                     }
 
                 }
             });
 
-
+            $(".length").TouchSpin({
+                min: 0,
+                max: 9999999,
+                step: 0.001,
+                decimals: 3,
+                postfix: 'CM',
+                buttondown_class: 'btn btn-white',
+                buttonup_class: 'btn btn-white'
+            });
+            $(".width").TouchSpin({
+                min: 0,
+                max: 9999999,
+                step: 0.001,
+                decimals: 3,
+                postfix: 'CM',
+                buttondown_class: 'btn btn-white',
+                buttonup_class: 'btn btn-white'
+            });
+            $(".height").TouchSpin({
+                min: 0,
+                max: 9999999,
+                step: 0.001,
+                decimals: 3,
+                postfix: 'CM',
+                buttondown_class: 'btn btn-white',
+                buttonup_class: 'btn btn-white'
+            });
+            $(".weight").TouchSpin({
+                min: 0,
+                max: 9999999,
+                step: 0.001,
+                decimals: 3,
+                postfix: 'KG',
+                buttondown_class: 'btn btn-white',
+                buttonup_class: 'btn btn-white'
+            });
 
         });
     </script>

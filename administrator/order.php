@@ -1,6 +1,18 @@
 <?php
 require_once('inc/init.php');
 $PageName = "order";
+
+if (isset($_REQUEST['page'])) {
+    $pagetype = $_REQUEST['page'];
+} else {
+    $pagetype = 2;
+}
+
+if ($pagetype == 2) {
+    $hide_cosignment = "hidden";
+} else {
+    $hide_cosignment = "";
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -60,8 +72,9 @@ $PageName = "order";
                                                     <th>Coupon</th>
                                                     <th>Discount Percentage</th>
                                                     <th>Discount Amount</th>
+                                                    <th>Shipping Fee</th>
                                                     <th>Total Payment</th>
-                                                    <th>Track Code</th>
+                                                    <th <?php echo $hide_cosignment; ?>>Consignment Number</th>
                                                     <th>Order Id</th>
                                                     <th>User</th>
                                                     <th>Date Create</th>
@@ -73,28 +86,52 @@ $PageName = "order";
                                                 <?php
 
                                                 $i = 1;
-                                                $tb = "orders o left join users u on o.users_id = u.id";
-                                                $col = "o.*, u.name as user_name";
-                                                $opt = 'o.status != ? ORDER BY o.date_modified DESC';
-                                                $arr = array(0);
+                                                $col = "o.*, st.name as state_name, u.name as user_name";
+                                                $tb = "orders o left join state st on o.customer_state = st.id left join users u on u.id = o.users_id";
+                                                $opt = 'o.status = ? ORDER BY o.date_modified DESC';
+                                                $arr = array($pagetype);
                                                 $product = $db->advwhere($col, $tb, $opt, $arr);
                                                 foreach ($product as $row) {
 
                                                     $id = $row['id'];
                                                     $status = $row['status'];
-                                                    if ($status == 1) {
-                                                        $status_display = "Activate";
-                                                        $status_color = "text-success";
-                                                    } else {
-                                                        $status_display = "Deactivate";
-                                                        $status_color = "text-danger";
+
+                                                    //approve order when order is status "Failed / Canceled", maybe some reason cause order failed, can approve again with this button
+                                                    $btn_approve = '<a data-remote="ajax/order_approve.php?p=' . $id . '" class="btn btn-white btn-xs" data-toggle="modal" data-target="#myModal">Approve</a>';
+                                                    //to assign consignment number, status -> shipping
+                                                    $btn_assign_cosignment = '<a data-remote="ajax/order_assign.php?p=' . $id . '" class="btn btn-white btn-xs" data-toggle="modal" data-target="#myModal">Assign Consignment number</a>';
+                                                    //to reject order, status -> failed/rejected
+                                                    $btn_cancel = '<a data-remote="ajax/order_cancel.php?p=' . $id . '" class="btn btn-white btn-xs" data-toggle="modal" data-target="#myModal">Cancel</a>';
+                                                    //order deliverd, status -> completed
+                                                    $btn_complete = '<a data-remote="ajax/order_complete.php?p=' . $id . '" class="btn btn-white btn-xs" data-toggle="modal" data-target="#myModal">To Complete</a>';
+                                                    //view order
+                                                    $btn_view = '<a data-remote="ajax/order_view.php?p=' . $id . '" class="btn btn-white btn-xs" data-toggle="modal" data-target="#myModal">View</a>';
+
+                                                    switch ($status) {
+                                                        case "1":
+                                                            $status_color = "text-danger";
+                                                            $status_display = "Failed / Canceled";
+                                                            $status_desc = "This order was rejected, or your order payment was failed.";
+                                                            $btn_action = $btn_view . $btn_approve;
+                                                            break;
+                                                        case "2":
+                                                            $status_color = "text-warning";
+                                                            $status_display = "To Ship";
+                                                            $status_desc = "Waiting for the Caroma Malaysia to ship out the products.";
+                                                            $btn_action = $btn_view . $btn_assign_cosignment . $btn_cancel;
+                                                            break;
+                                                        case "3":
+                                                            $status_color = "text-success";
+                                                            $status_display = "Shipping";
+                                                            $status_desc = "This order had been shipped.";
+                                                            $btn_action = $btn_view . $btn_complete;
+                                                            break;
+                                                        case "4":
+                                                            $status_color = "text-info";
+                                                            $status_display = "Completed";
+                                                            $status_desc = "The order was delivered.";
+                                                            $btn_action = $btn_view;
                                                     }
-
-                                                    $btn_edit = '<a data-remote="ajax/product_edit.php?p=' . $id . '" class="btn btn-white btn-xs" data-toggle="modal" data-target="#myModal">Edit</a>';
-                                                    $btn_delete = '<a data-remote="ajax/delete_data.php?p=' . $id . '&table=product&page=product" class="btn btn-white btn-xs" data-toggle="modal" data-target="#myModal">Delete</a>';
-
-                                                    $btn_action = $btn_edit . $btn_delete;
-
 
                                                 ?>
                                                     <tr>
@@ -105,14 +142,15 @@ $PageName = "order";
                                                         <td><?php echo $row['customer_address']; ?></td>
                                                         <td><?php echo $row['customer_postcode']; ?></td>
                                                         <td><?php echo $row['customer_city']; ?></td>
-                                                        <td><?php echo $row['customer_state']; ?></td>
+                                                        <td><?php echo $row['state_name']; ?></td>
                                                         <td><?php echo $row['customer_contact']; ?></td>
                                                         <td><?php echo number_format($row['total_price'], 2); ?></td>
-                                                        <td><?php echo $row['coupon_code']; ?></td>
-                                                        <td><?php echo $row['discount_percent']; ?></td>
+                                                        <td><?php echo ($row['coupon_code'] != "") ? $row['coupon_code'] : "-"; ?></td>
+                                                        <td><?php echo intval($row['discount_percent']); ?>%</td>
                                                         <td><?php echo number_format($row['discount_amount'], 2); ?></td>
+                                                        <td><?php echo number_format($row['shipping_fee'], 2); ?></td>
                                                         <td><?php echo number_format($row['total_payment'], 2); ?></td>
-                                                        <td><?php echo $row['track_code']; ?></td>
+                                                        <td <?php echo $hide_cosignment; ?>><?php echo $row['consignment_number']; ?></td>
                                                         <td><?php echo $row['gateway_order_id']; ?></td>
                                                         <td><?php echo $row['user_name']; ?></td>
                                                         <td><?php echo $row['date_created']; ?></td>

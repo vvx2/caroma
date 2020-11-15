@@ -1,6 +1,27 @@
 <?php
 require_once('../administrator/connection/PDO_db_function.php');
 $db = new DB_FUNCTIONS();
+if(isset($_SESSION['user_id']) && isset($_SESSION['type']))
+{	
+    $user_id = $_SESSION['user_id'];
+	$user_type = $_SESSION['type'];
+	$login = 1;
+	$_SESSION['login'] = $login;
+}
+else
+{
+	$login = 0;
+    $_SESSION['login'] = $login;
+    $user_type = 1;
+}
+if (isset($_SESSION['language'])) {
+
+    $language = $_SESSION['language'];
+} else {
+    $_SESSION['language'] = "en";
+    $language = $_SESSION['language'];
+}
+
 if (isset($_REQUEST['type'])) {
     $type = $_REQUEST['type'];
     $postedToken = filter_input(INPUT_POST, 'token');
@@ -8,13 +29,7 @@ if (isset($_REQUEST['type'])) {
         if (isTokenValid($postedToken)) {
             $time = date('Y-m-d H:i:s');
 
-            $login = $_SESSION['login'];
-            $user_id = 6;
-            $user_type = 3;
-            $language = "en";
-
             if ($type == 'addtocart') {
-
 
                 $product_id = $_POST['product_id'];
                 $product_qty = $_POST['product_qty'];

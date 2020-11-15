@@ -16,7 +16,7 @@ $status = $order['status'];
 switch ($status) {
     case "1":
         $status_color = "bg-red";
-        $status_show = "Failed / Rejected";
+        $status_show = "Failed / Canceled";
         $status_desc = "This order was rejected, or your order payment was failed.";
         break;
     case "2":

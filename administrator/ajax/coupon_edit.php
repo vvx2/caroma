@@ -28,7 +28,7 @@ $user_per_coupon = $coupon['user_per_coupon'];
 $usage_limit = $coupon['usage_limit'];
 $total_usage_limit = $coupon['total_usage_limit'];
 $status = $coupon['status'];
-
+$coupon_code = $coupon['code'];
 
 $col = "*";
 $table = "coupon_translation";
@@ -71,6 +71,10 @@ $coupon_description_my = $coupon_name[0]['description'];
             </div>
         </div>
         <hr>
+        <div class="form-group">
+            <label>Coupon Code</label>
+            <input type="text" placeholder="Enter Coupon Code" class="form-control" name="coupon_code" value='<?php echo $coupon_code ?>'>
+        </div>
         <div class="form-group"><label>Name(English)</label> <input type="text" placeholder="Enter Coupon Name (English)" class="form-control" name="name_en" value='<?php echo $coupon_name_en ?>'></div>
         <div class="form-group text-left"><label>Description</label>
             <textarea type="text" placeholder="Enter Description" class="form-control" name="desc_en" rows="4"><?php echo $coupon_description_en ?></textarea>
@@ -132,12 +136,12 @@ $coupon_description_my = $coupon_name[0]['description'];
 
         </div>
         <hr>
-        <div class="form-group">
+        <div class="form-group" hidden>
             <label class="font-normal">User per coupon - <span class="text-danger">How many coupons users can hold</span></label>
             <input class="user_per_coupon" type="text" value="<?php echo $user_per_coupon ?>" name="user_per_coupon">
         </div>
         <div class="form-group">
-            <label class="font-normal">Usage limit per coupon code use - <span class="text-danger">How many times can the coupon be used</span></label>
+            <label class="font-normal">Usage limit per coupon code use - <span class="text-danger">How many times can the coupon be used per user</span></label>
             <input class="usage_limit" type="text" value="<?php echo $usage_limit ?>" name="usage_limit">
         </div>
         <div class="form-group">
@@ -194,8 +198,17 @@ $coupon_description_my = $coupon_name[0]['description'];
 
     $(document).ready(function() {
 
+
+        jQuery.validator.addMethod("noSpace", function(value, element) {
+            return value.indexOf(" ") < 0 && value != "";
+        }, "No space please and don't leave it empty");
+
         $("#form_coupon_edit").validate({
             rules: {
+                coupon_code: {
+                    required: true,
+                    noSpace: true
+                },
                 name_en: {
                     required: true,
 

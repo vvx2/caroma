@@ -52,7 +52,10 @@ $PageName = "coupon";
                                 </div>
                                 <div class="modal-body">
 
-
+                                    <div class="form-group">
+                                        <label>Coupon Code</label>
+                                        <input type="text" placeholder="Enter Coupon Code" class="form-control" name="coupon_code" value=''>
+                                    </div>
                                     <div class="form-group"><label>Name(English)</label> <input type="text" placeholder="Enter Coupon Name (English)" class="form-control" name="name_en" value=''></div>
                                     <div class="form-group text-left"><label>Description</label>
                                         <textarea type="text" placeholder="Enter Description" class="form-control" name="desc_en" rows="4"></textarea>
@@ -106,7 +109,6 @@ $PageName = "coupon";
                                     <div class="form-group">
                                         <label class="font-normal">Minimum Spend</label>
                                         <input class="min_spend" type="text" value="0" name="min_spend">
-
                                     </div>
                                     <div class="form-group">
                                         <label class="font-normal">Discount Capped - <span class="text-success">Maximum amount to discount (When type is percentage, leave it 0 if type = Amount)</span></label>
@@ -114,12 +116,12 @@ $PageName = "coupon";
 
                                     </div>
                                     <hr>
-                                    <div class="form-group">
+                                    <div class="form-group" hidden>
                                         <label class="font-normal">User per coupon - <span class="text-danger">How many coupons users can hold</span></label>
                                         <input class="user_per_coupon" type="text" value="0" name="user_per_coupon">
                                     </div>
                                     <div class="form-group">
-                                        <label class="font-normal">Usage limit per coupon code use - <span class="text-danger">How many times can the coupon be used</span></label>
+                                        <label class="font-normal">Usage limit per coupon code use - <span class="text-danger">How many times can the coupon be used per user</span></label>
                                         <input class="usage_limit" type="text" value="0" name="usage_limit">
                                     </div>
                                     <div class="form-group">
@@ -127,11 +129,6 @@ $PageName = "coupon";
                                         <input class="total_usage_limit" type="text" value="0" name="total_usage_limit">
                                     </div>
                                     <hr>
-                                    <div class="form-group">
-                                        <label class="font-normal">Number of coupon to generate</label>
-                                        <input class="coupon_generate" type="text" value="0" name="coupon_generate">
-
-                                    </div>
                                     <div class="form-group">
                                         <label class="font-normal">Product Available for this coupon - <span class="text-success">Only available when the product in cart</span></label>
                                         <select class="form-control dual_select " name="product[]" multiple required>
@@ -189,7 +186,7 @@ $PageName = "coupon";
                                         <th>Name</th>
                                         <th>Total usage limit</th>
                                         <th>Total times used</th>
-                                        <th>Coupon Generated</th>
+                                        <th>Coupon Code</th>
                                         <th>Status</th>
                                         <th width=20%></th>
                                     </tr>
@@ -218,7 +215,7 @@ $PageName = "coupon";
                                         $btn_delete = '<a data-remote="ajax/delete_data.php?p=' . $coupon["id"] . '&table=coupon&page=coupon" class="btn btn-white btn-xs" data-toggle="modal" data-target="#myModal">Delete</a>';
                                         $btn_view_code = '<a href="coupon_code.php?coupon=' . $coupon["id"] . '" target="blank" class="btn btn-white btn-xs">View Code</a>';
 
-                                        $btn_action = $btn_edit . $btn_delete . $btn_generate . $btn_view_code;
+                                        $btn_action = $btn_edit . $btn_delete;
                                         //-------------------------------
                                         //  get coupon details
                                         //-------------------------------
@@ -235,7 +232,7 @@ $PageName = "coupon";
                                             <td><?php echo $result_coupon_detail["name"]; ?></td>
                                             <td><?php echo $coupon["total_usage_limit"]; ?></td>
                                             <td><?php echo $coupon["total_times_used"]; ?></td>
-                                            <td><?php echo $coupon["coupon_qty"]; ?></td>
+                                            <td><?php echo $coupon["code"]; ?></td>
                                             <td class="<?php echo $status_color; ?>"><?php echo $status_display; ?></td>
                                             <td>
                                                 <div class="btn-group">
@@ -336,8 +333,16 @@ $PageName = "coupon";
 
             });
 
+            jQuery.validator.addMethod("noSpace", function(value, element) {
+                return value.indexOf(" ") < 0 && value != "";
+            }, "No space please and don't leave it empty");
+
             $("#form_coupon").validate({
                 rules: {
+                    coupon_code: {
+                        required: true,
+                        noSpace: true
+                    },
                     name_en: {
                         required: true,
 
@@ -395,10 +400,6 @@ $PageName = "coupon";
                         required: true,
                         min: 0
                     },
-                    coupon_generate: {
-                        required: true,
-                        min: 1
-                    },
                     user_per_coupon: {
                         required: true,
                         min: 1
@@ -417,6 +418,7 @@ $PageName = "coupon";
             $(".amount").TouchSpin({
                 min: 0,
                 max: 9999999,
+                step: 0.01,
                 decimals: 2,
                 postfix: 'RM',
                 buttondown_class: 'btn btn-white',
@@ -434,6 +436,7 @@ $PageName = "coupon";
             $(".min_spend").TouchSpin({
                 min: 0,
                 max: 9999999,
+                step: 0.01,
                 decimals: 2,
                 postfix: 'RM',
                 buttondown_class: 'btn btn-white',
@@ -443,6 +446,7 @@ $PageName = "coupon";
             $(".dis_capped").TouchSpin({
                 min: 0,
                 max: 9999999,
+                step: 0.01,
                 decimals: 2,
                 postfix: 'RM',
                 buttondown_class: 'btn btn-white',
@@ -472,15 +476,6 @@ $PageName = "coupon";
                 buttondown_class: 'btn btn-white',
                 buttonup_class: 'btn btn-white'
             });
-
-            $(".coupon_generate").TouchSpin({
-                min: 1,
-                max: 9999999,
-                postfix: 'Coupon Generate',
-                buttondown_class: 'btn btn-white',
-                buttonup_class: 'btn btn-white'
-            });
-
 
             $('.dual_select').bootstrapDualListbox({
                 selectorMinimalHeight: 160

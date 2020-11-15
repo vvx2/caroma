@@ -27,8 +27,8 @@ function LoadCart() {
                     '           <div class="left-info">\n' +
                     '               <div class="product-title"><a href="products-detail.php?p=' + key + '" class="product-name">' + product.name + '</a></div>\n' +
                     '               <div class="price">\n' +
-                    '                   <ins><span class="price-amount"><span class="currencySymbol">RM </span>' + product.price.toFixed(2) + '</span></ins>\n' +
-                    '                   <del><span class="price-amount"><span class="currencySymbol">RM </span>' + product.price.toFixed(2) + '</span></del>\n' +
+                    '                   <ins><span class="price-amount"><span class="currencySymbol">RM </span>' + parseFloat(product.price).toFixed(2) + '</span></ins>\n' +
+                    '                   <del><span class="price-amount"><span class="currencySymbol">RM </span>' + parseFloat(product.price).toFixed(2) + '</span></del>\n' +
                     '               </div>\n' +
                     '               <div class="qty">\n' +
                     '                   <label for="cart[id123]">Qty:</label>\n' +

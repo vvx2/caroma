@@ -12,6 +12,12 @@ if (isset($_REQUEST['p'])) { // order status
 } else {
 	$order_page = 2;
 }
+
+if ($user_type == "2") {
+	$url = "order-list";
+} else {
+	$url = "index";
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -53,7 +59,7 @@ if (isset($_REQUEST['p'])) { // order status
 						<div class="panel panel-default card-view pa-0">
 							<div class="panel-wrapper collapse in">
 								<div class="panel-body pa-0">
-									<a href="order-list.php?p=2">
+									<a href="<?php echo $url; ?>.php?p=2">
 										<div class="sm-data-box bg-yellow">
 											<div class="row ma-0">
 												<div class="col-xs-5 text-center pa-0 icon-wrap-left">
@@ -83,7 +89,7 @@ if (isset($_REQUEST['p'])) { // order status
 						<div class="panel panel-default card-view pa-0">
 							<div class="panel-wrapper collapse in">
 								<div class="panel-body pa-0">
-									<a href="order-list.php?p=3">
+									<a href="<?php echo $url; ?>.php?p=3">
 										<div class="sm-data-box bg-blue">
 											<div class="row ma-0">
 												<div class="col-xs-5 text-center pa-0 icon-wrap-left">
@@ -113,7 +119,7 @@ if (isset($_REQUEST['p'])) { // order status
 						<div class="panel panel-default card-view pa-0">
 							<div class="panel-wrapper collapse in">
 								<div class="panel-body pa-0">
-									<a href="order-list.php?p=4">
+									<a href="<?php echo $url; ?>.php?p=4">
 										<div class="sm-data-box bg-red">
 											<div class="row ma-0">
 												<div class="col-xs-5 text-center pa-0 icon-wrap-left">
@@ -143,7 +149,7 @@ if (isset($_REQUEST['p'])) { // order status
 						<div class="panel panel-default card-view pa-0">
 							<div class="panel-wrapper collapse in">
 								<div class="panel-body pa-0">
-									<a href="order-list.php?p=1">
+									<a href="<?php echo $url; ?>.php?p=1">
 										<div class="sm-data-box bg-green">
 											<div class="row ma-0">
 												<div class="col-xs-5 text-center pa-0 icon-wrap-left">

@@ -48,128 +48,147 @@ if (!empty($postedToken)) {
                     $user_per_coupon = $_POST['user_per_coupon'];
                     $usage_limit = $_POST['usage_limit'];
                     $total_usage_limit = $_POST['total_usage_limit'];
-                    $coupon_generate = $_POST['coupon_generate'];
+                    $coupon_code = $_POST['coupon_code'];
 
                     $product = $_POST['product'];
 
+                    $check_coupon_code = $db->where('code', 'coupon_code', 'code', $coupon_code);
+                    if (count($check_coupon_code) <= 0) {
 
-                    // check coupon is it isset in database
-                    $table = "coupon_translation";
-                    $col = "id, name";
-                    $opt = 'name = ? || name = ? || name = ?';
-                    $arr = array($name_en, $name_cn, $name_my);
-                    $check_coupon_isset = $db->advwhere($col, $table, $opt, $arr);
+                        // check coupon is it isset in database
+                        $table = "coupon_translation";
+                        $col = "id, name";
+                        $opt = 'name = ? || name = ? || name = ?';
+                        $arr = array($name_en, $name_cn, $name_my);
+                        $check_coupon_isset = $db->advwhere($col, $table, $opt, $arr);
 
-                    if (count($check_coupon_isset) != 0) {
-                        echo "<script>alert(\" Coupon Existed\");
+                        if (count($check_coupon_isset) != 0) {
+                            echo "<script>alert(\" Coupon Existed\");
                         window.location.href='coupon.php';</script>";
-                    } else {
+                        } else {
 
-                        $table = "coupon";
-                        $colname = array("start", "end", "type", "amt", "percentage", "min_spend", "capped", "user_per_coupon", "usage_limit", "total_usage_limit", "total_times_used", "coupon_qty", "status", "date_created", "date_modified");
-                        $array = array($start, $end, $coupon_type, $amount, $percentage, $min_spend, $dis_capped, $user_per_coupon, $usage_limit, $total_usage_limit, 0, $coupon_generate, 1, $time, $time);
-                        $result_coupon = $db->insert($table, $colname, $array);
-
-                        if ($result_coupon) {
-
-                            //--------------------------
-                            //  get coupon id inserted
-                            //--------------------------
                             $table = "coupon";
-                            $col = "id";
-                            $opt = 'date_created = ?';
-                            $arr = array($time);
-                            $coupon = $db->advwhere($col, $table, $opt, $arr);
-                            $coupon_id = $coupon[0]['id'];
-                            //--------------------------
+                            $colname = array("start", "end", "type", "amt", "percentage", "min_spend", "capped", "user_per_coupon", "usage_limit", "total_usage_limit", "total_times_used", "code", "status", "date_created", "date_modified");
+                            $array = array($start, $end, $coupon_type, $amount, $percentage, $min_spend, $dis_capped, $user_per_coupon, $usage_limit, $total_usage_limit, 0, $coupon_code, 1, $time, $time);
+                            $result_coupon = $db->insert($table, $colname, $array);
+
+                            if ($result_coupon) {
+
+                                //--------------------------
+                                //  get coupon id inserted
+                                //--------------------------
+                                $table = "coupon";
+                                $col = "id";
+                                $opt = 'date_created = ?';
+                                $arr = array($time);
+                                $coupon = $db->advwhere($col, $table, $opt, $arr);
+                                $coupon_id = $coupon[0]['id'];
+                                //--------------------------
 
 
-                            //--------------------------
-                            //  insert coupon detail
-                            //--------------------------
-                            $table = "coupon_translation";
-                            $colname = array("name", "description", "language", "coupon_id");
-                            $array = array($name_en, $desc_en, "en", $coupon_id);
-                            $result_coupon_traslation = $db->insert($table, $colname, $array);
+                                //--------------------------
+                                //  insert coupon detail
+                                //--------------------------
+                                $table = "coupon_translation";
+                                $colname = array("name", "description", "language", "coupon_id");
+                                $array = array($name_en, $desc_en, "en", $coupon_id);
+                                $result_coupon_traslation = $db->insert($table, $colname, $array);
 
-                            $array = array($name_cn, $desc_cn, "cn", $coupon_id);
-                            $result_coupon_traslation = $db->insert($table, $colname, $array);
+                                $array = array($name_cn, $desc_cn, "cn", $coupon_id);
+                                $result_coupon_traslation = $db->insert($table, $colname, $array);
 
-                            $array = array($name_my, $desc_my, "my", $coupon_id);
-                            $result_coupon_traslation = $db->insert($table, $colname, $array);
-                            //--------------------------
+                                $array = array($name_my, $desc_my, "my", $coupon_id);
+                                $result_coupon_traslation = $db->insert($table, $colname, $array);
+                                //--------------------------
 
-                            if ($result_coupon_traslation) {
+                                if ($result_coupon_traslation) {
 
-                                // insert coupon product
-                                foreach ($product as $product) {
+                                    // insert coupon product
+                                    foreach ($product as $product) {
 
-                                    $table = "coupon_product";
-                                    $colname = array("product_id", "coupon_id");
-                                    $array = array($product, $coupon_id);
-                                    $result_coupon_product = $db->insert($table, $colname, $array);
-                                }
-
-                                if ($result_coupon_product) {
-
-
-                                    $inserted_code = 0;
-                                    for ($i = 0; $i < $coupon_generate; $i++) {
-
-                                        //------------------------------------------
-                                        //		To get coupon code with no repeat
-                                        //------------------------------------------
-
-                                        $check_code = 0;
-                                        $coupon_code = 'CP' . random_string(7);
-                                        $check_coupon_code = $db->where('code', 'coupon_code', 'code', $coupon_code);
-
-                                        if (count($check_coupon_code) > 0) { //if count distributor code more than 1
-                                            do {
-
-                                                $coupon_code = 'CP' . random_string(7);
-                                                $check_coupon_code = $db->where('code', 'coupon_code', 'code', $coupon_code);
-
-                                                if (count($check_coupon_code) == 0) {
-                                                    $check_code = 1;
-                                                }
-                                            } while ($check_code != 1);
-                                        }
-                                        //------------------------------------------
-
-                                        //--------------------------
-                                        //  insert coupon code
-                                        //--------------------------
-                                        $table = "coupon_code";
-                                        $colname = array("code", "times_used", "coupon_id", "status", "date_created", "date_modified");
-                                        $array = array($coupon_code, 0, $coupon_id, 1, $time, $time);
-                                        $result_coupon_code = $db->insert($table, $colname, $array);
-                                        //--------------------------
-
-                                        if ($result_coupon_code) {
-                                            $inserted_code += 1;
-                                        }
+                                        $table = "coupon_product";
+                                        $colname = array("product_id", "coupon_id");
+                                        $array = array($product, $coupon_id);
+                                        $result_coupon_product = $db->insert($table, $colname, $array);
                                     }
 
-                                    if ($inserted_code == $coupon_generate) {
-                                        echo "<script>alert(\" Coupon code generate Successful. Generated $inserted_code coupon code.  \");
+                                    if ($result_coupon_product) {
+
+                                        // //------------------------------------------------------------------
+                                        // //		This is auto generate coupon code -- currently no use
+                                        // //------------------------------------------------------------------
+                                        // $inserted_code = 0;
+                                        // for ($i = 0; $i < $coupon_generate; $i++) {
+
+                                        //     //------------------------------------------
+                                        //     //		To get coupon code with no repeat
+                                        //     //------------------------------------------
+
+                                        //     $check_code = 0;
+                                        //     $coupon_code = 'CP' . random_string(7);
+                                        //     $check_coupon_code = $db->where('code', 'coupon_code', 'code', $coupon_code);
+
+                                        //     if (count($check_coupon_code) > 0) { 
+                                        //         do {
+
+                                        //             $coupon_code = 'CP' . random_string(7);
+                                        //             $check_coupon_code = $db->where('code', 'coupon_code', 'code', $coupon_code);
+
+                                        //             if (count($check_coupon_code) == 0) {
+                                        //                 $check_code = 1;
+                                        //             }
+                                        //         } while ($check_code != 1);
+                                        //     }
+                                        //     //------------------------------------------
+
+                                        //     //--------------------------
+                                        //     //  insert coupon code
+                                        //     //--------------------------
+                                        //     $table = "coupon_code";
+                                        //     $colname = array("code", "times_used", "coupon_id", "status", "date_created", "date_modified");
+                                        //     $array = array($coupon_code, 0, $coupon_id, 1, $time, $time);
+                                        //     $result_coupon_code = $db->insert($table, $colname, $array);
+                                        //     //--------------------------
+
+                                        //     if ($result_coupon_code) {
+                                        //         $inserted_code += 1;
+                                        //     }
+                                        // }
+
+                                        // if ($inserted_code == $coupon_generate) {
+                                        //     echo "<script>alert(\" Coupon code generate Successful. Generated $inserted_code coupon code.  \");
+                                        //       window.location.href='coupon.php';</script>";
+                                        // } else {
+                                        //     echo "<script>alert(\" Generated $inserted_code coupon code. Some code was missed \");
+                                        //       window.location.href='coupon.php';</script>";
+                                        // }
+
+                                        // //------------------------------------------------------------------
+                                        // //		This is auto generate coupon code -- currently no use
+                                        // //------------------------------------------------------------------
+
+                                        echo "<script>alert(\" Coupon code generate Successful.  \");
                                           window.location.href='coupon.php';</script>";
                                     } else {
-                                        echo "<script>alert(\" Generated $inserted_code coupon code. Some code was missed \");
+                                        echo "<script>alert(\" Coupon code generate Fail. Please Try Again  \");
                                           window.location.href='coupon.php';</script>";
-                                    }
-                                } //end result_coupon_product
-                            } //end result_coupon_traslation
-                            else {
-                                echo "<script>alert(\" Add Coupon Fail (name part), PLease Try Again. \");
+                                    } //end result_coupon_product
+
+                                } //end result_coupon_traslation
+                                else {
+                                    echo "<script>alert(\" Add Coupon Fail (name part), PLease Try Again. \");
                                 window.location.href='coupon.php';</script>";
-                            }
-                        } // end result coupon
-                        else {
-                            echo "<script>alert(\" Add Coupon Fail, PLease Try Again. \");
+                                }
+                            } // end result coupon
+                            else {
+                                echo "<script>alert(\" Add Coupon Fail, PLease Try Again. \");
                             window.location.href='coupon.php';</script>";
-                        }
-                    } // end check coupon name exists
+                            }
+                        } // end check coupon name exists
+                    } else {
+                        echo "<script>alert(\" Coupon code Exists. Please Try Again  \");
+                              window.location.href='coupon.php';</script>";
+                    } // end check coupon exists
                 }
             } else if ($type == "coupon_edit") {
                 if (isset($_POST['btnAction'])) {
@@ -200,75 +219,89 @@ if (!empty($postedToken)) {
                     $total_usage_limit = $_POST['total_usage_limit'];
 
                     $product = $_POST['product'];
+                    $coupon_code = $_POST['coupon_code'];
 
 
-                    // check coupon is it isset in database
-                    $table = "coupon_translation";
-                    $col = "id, name";
-                    $opt = '(name = ? || name = ? || name = ?) && coupon_id != ?';
-                    $arr = array($name_en, $name_cn, $name_my, $coupon_id);
-                    $check_coupon_isset = $db->advwhere($col, $table, $opt, $arr);
-
-                    if (count($check_coupon_isset) != 0) {
-                        echo "<script>alert(\" Coupon Existed\");
+                    // check coupon code is it isset in database
+                    $table = "coupon";
+                    $col = "code";
+                    $opt = 'code = ? && id != ?';
+                    $arr = array($coupon_code, $coupon_id);
+                    $check_coupon_code_isset = $db->advwhere($col, $table, $opt, $arr);
+                    if (count($check_coupon_code_isset) != 0) {
+                        echo "<script>alert(\" Coupon Code Existed\");
                         window.location.href='coupon.php';</script>";
                     } else {
 
-                        $table = "coupon";
-                        $data = "start=?, end=?, type=?, amt=?, percentage=?, min_spend=?, capped=?, user_per_coupon=?, usage_limit=?, total_usage_limit=?, status =?, date_modified = ? WHERE id = ?";
-                        $array = array($start, $end, $coupon_type, $amount, $percentage, $min_spend, $dis_capped, $user_per_coupon, $usage_limit, $total_usage_limit, $status, $time, $coupon_id);
-                        $result_coupon = $db->update($table, $data, $array);
 
-                        if ($result_coupon) {
+                        // check coupon name is it isset in database
+                        $table = "coupon_translation";
+                        $col = "id, name";
+                        $opt = '(name = ? || name = ? || name = ?) && coupon_id != ?';
+                        $arr = array($name_en, $name_cn, $name_my, $coupon_id);
+                        $check_coupon_isset = $db->advwhere($col, $table, $opt, $arr);
 
-                            //--------------------------
-                            //  Edit coupon detail
-                            //--------------------------
-                            $table = "coupon_translation";
-                            $data = "name = ?, description = ? WHERE coupon_id = ? && language = ?";
-                            $array = array($name_en, $desc_en, $coupon_id, "en");
-                            $result_coupon_traslation = $db->update($table, $data, $array);
+                        if (count($check_coupon_isset) != 0) {
+                            echo "<script>alert(\" Coupon Name Existed\");
+                        window.location.href='coupon.php';</script>";
+                        } else {
 
-                            $array = array($name_cn, $desc_cn, $coupon_id, "cn");
-                            $result_coupon_traslation = $db->update($table, $data, $array);
+                            $table = "coupon";
+                            $data = "code =?, start=?, end=?, type=?, amt=?, percentage=?, min_spend=?, capped=?, user_per_coupon=?, usage_limit=?, total_usage_limit=?, status =?, date_modified = ? WHERE id = ?";
+                            $array = array($coupon_code, $start, $end, $coupon_type, $amount, $percentage, $min_spend, $dis_capped, $user_per_coupon, $usage_limit, $total_usage_limit, $status, $time, $coupon_id);
+                            $result_coupon = $db->update($table, $data, $array);
 
-                            $array = array($name_my, $desc_my, $coupon_id, "my");
-                            $result_coupon_traslation = $db->update($table, $data, $array);
-                            //--------------------------
+                            if ($result_coupon) {
 
-                            if ($result_coupon_traslation) {
+                                //--------------------------
+                                //  Edit coupon detail
+                                //--------------------------
+                                $table = "coupon_translation";
+                                $data = "name = ?, description = ? WHERE coupon_id = ? && language = ?";
+                                $array = array($name_en, $desc_en, $coupon_id, "en");
+                                $result_coupon_traslation = $db->update($table, $data, $array);
+
+                                $array = array($name_cn, $desc_cn, $coupon_id, "cn");
+                                $result_coupon_traslation = $db->update($table, $data, $array);
+
+                                $array = array($name_my, $desc_my, $coupon_id, "my");
+                                $result_coupon_traslation = $db->update($table, $data, $array);
+                                //--------------------------
+
+                                if ($result_coupon_traslation) {
 
 
-                                // delete prodcut for insert again
-                                $delete_product = $db->del("coupon_product", 'coupon_id', $coupon_id);
+                                    // delete prodcut for insert again
+                                    $delete_product = $db->del("coupon_product", 'coupon_id', $coupon_id);
 
-                                // insert coupon product
-                                foreach ($product as $product) {
+                                    // insert coupon product
+                                    foreach ($product as $product) {
 
-                                    $table = "coupon_product";
-                                    $colname = array("product_id", "coupon_id");
-                                    $array = array($product, $coupon_id);
-                                    $result_coupon_product = $db->insert($table, $colname, $array);
-                                }
+                                        $table = "coupon_product";
+                                        $colname = array("product_id", "coupon_id");
+                                        $array = array($product, $coupon_id);
+                                        $result_coupon_product = $db->insert($table, $colname, $array);
+                                    }
 
-                                if ($result_coupon_product) {
-                                    echo "<script>alert(\" Edit Coupon Successful\");
+                                    if ($result_coupon_product) {
+                                        echo "<script>alert(\" Edit Coupon Successful\");
                                       window.location.href='coupon.php';</script>";
-                                } else {
-                                    echo "<script>alert(\" Edit Coupon Fail, PLease Try Again. \");
+                                    } else {
+                                        echo "<script>alert(\" Edit Coupon Fail, PLease Try Again. \");
                                       window.location.href='coupon.php';</script>";
-                                }
-                            } //end result_coupon_traslation
-                            else {
-                                echo "<script>alert(\" Edit Coupon Fail (name part), PLease Try Again. \");
+                                    }
+                                } //end result_coupon_traslation
+                                else {
+                                    echo "<script>alert(\" Edit Coupon Fail (name part), PLease Try Again. \");
                                 window.location.href='coupon.php';</script>";
-                            }
-                        } // end result coupon
-                        else {
-                            echo "<script>alert(\" Edit Coupon Fail, PLease Try Again. \");
+                                }
+                            } // end result coupon
+                            else {
+                                echo "<script>alert(\" Edit Coupon Fail, PLease Try Again. \");
                             window.location.href='coupon.php';</script>";
-                        }
-                    } // end check coupon name exists
+                            }
+                        } // end check coupon name exists
+                    } // end check coupon code exists
                 }
             } else if ($type == "coupon_generate_new") {
                 if (isset($_POST['btnAction'])) {
