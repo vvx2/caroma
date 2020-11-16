@@ -252,23 +252,23 @@ if (!empty($postedToken)) {
                               window.location.href='order-list.php';</script>";
                     }
                 }
-            } else if ($type == "order_delivery") {
+            } else if ($type == "order_assign") {
                 if (isset($_POST['btnAction'])) {
 
                     $order_id = $_POST['btnAction'];
                     $consignment_number = $_POST['consignment_number'];
 
-                    $tablename = "order";
+                    $tablename = "orders";
                     $data = "status = ? , consignment_number =?, date_modified = ? WHERE id = ?";
-                    $array = array(3, $consignment_number, $time, $pwp_id);
+                    $array = array(3, $consignment_number, $time, $order_id);
                     $result_delivery = $db->update($tablename, $data, $array);
 
                     if ($result_delivery) {
                         echo "<script>alert(\" Update Status Successful\");
-                              window.location.href='order-list.php';</script>";
+                              window.location.href='../order-list.php?p=3';</script>";
                     } else {
                         echo "<script>alert(\" Update Status Fail. Please Try Again\");
-                              window.location.href='order-list.php';</script>";
+                              window.location.href='../order-list.php?p=3';</script>";
                     }
                 }
             }

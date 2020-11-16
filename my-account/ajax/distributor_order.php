@@ -164,22 +164,25 @@ switch ($status) {
                     </table>
                 </div>
             </blockquote>
+            <?php if ($status == 2) { ?>
 
-            <blockquote>
-                <form data-toggle="validator" action="" role="form">
-                    <div class="form-group">
-                        <div class="form-group col-sm-12 no-padding">
-                            <label for="consignment_number" class="control-label mb-10">Consignment Number</label>
-                            <input data-match-error="consignment_number Is Required" type="text" class="form-control" id="consignment_number" name="consignment_number" value="" placeholder="Consignment Number" required>
-                        </div>
-                    </div>
+                <blockquote>
+                        <form data-toggle="validator" role="form" id="form_approve" action="api/distributor_sql.php?type=order_assign&tb=distributor" method="post" enctype="multipart/form-data">
+                            <input type="hidden" name="token" value="<?php echo $token; ?>" />
+                            <div class="form-group">
+                                <div class="form-group col-sm-12 no-padding">
+                                    <label for="consignment_number" class="control-label mb-10">Consignment Number</label>
+                                    <input data-match-error="consignment_number Is Required" type="text" class="form-control" id="consignment_number" name="consignment_number" value="" placeholder="Consignment Number" required>
+                                </div>
+                            </div>
 
-                    <div class="form-group mb-0">
-                        <button type="submit" class="btn btn-success btn-anim"><i class="icon-rocket"></i><span class="btn-text">Submit</span></button>
-                    </div>
-                </form>
-            </blockquote>
+                            <div class="form-group mb-0">
+                                <button type="submit" name="btnAction" value="<?php echo $id ?>" class="btn btn-success btn-anim"><i class="icon-rocket"></i><span class="btn-text">Submit</span></button>
+                            </div>
+                        </form>
+                </blockquote>
 
+            <?php } ?>
         </div>
     </div>
     <p class="disclaration">THE SERVICES ARE PROVIDED "AS IS" AND WITHOUT ANY WARRANTIES, CLAIMS OR REPRESENTATIONS MADE BY CAROMA MALAYSIA OF ANY KIND EITHER EXPRESSED, IMPLIED OR STATUTORY WITH RESPECT TO THE SERVICES, INCLUDING, WITHOUT LIMITATION, WARRANTIES OF QUALITY, PERFORMANCE, NON-INFRINGEMENT, MERCHANTABILITY, OR FITNESS FOR A PARTICULAR PURPOSE, NOR ARE THERE ANY WARRANTIES CREATED BY COURSE OF DEALING, COURSE OF PERFORMANCE OR TRADE USAGE.</p>
