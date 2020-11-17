@@ -1,7 +1,7 @@
 <?php
 include_once('../../administrator/connection/PDO_db_function.php');
 $db = new DB_Functions();
-
+ 
 $id = $_REQUEST['p'];
 
 $col = "o.*, o.id as order_id, st.name as state_name";
