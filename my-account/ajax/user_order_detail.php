@@ -21,7 +21,7 @@ switch ($status) {
         break;
     case "2":
         $status_color = "bg-yellow";
-        $status_show = "To Ship";
+        $status_show = "Pending";
         $status_desc = "Waiting for the Caroma Malaysia to ship out the products.";
         break;
     case "3":
