@@ -217,6 +217,7 @@ if (isset($_REQUEST['p'])) { // order status
 																					<th>DateTime</th>
 																					<th>Total Amount</th>
 																					<th>More Detail</th>
+																					<th>Action</th>
 																				</tr>
 																			</thead>
 																			<tfoot>
@@ -227,17 +228,59 @@ if (isset($_REQUEST['p'])) { // order status
 																					<th>DateTime</th>
 																					<th>Total Amount</th>
 																					<th>More Detail</th>
+																					<th>Action</th>
 																				</tr>
 																			</tfoot>
 																			<tbody>
 																				<?php
+
 																				$i = 1;
-																				$col = "id, customer_name, gateway_order_id, date_created, total_payment";
+																				$col = "id, status, customer_name, gateway_order_id, date_created, total_payment";
 																				$tb = "orders";
 																				$opt = 'admin_id = ? && status =? ORDER BY date_modified DESC';
 																				$arr = array($user_id, $order_page);
 																				$result_orders = $db->advwhere($col, $tb, $opt, $arr);
 																				foreach ($result_orders as $order) {
+
+																					$id = $order['id'];
+																					$status = $order['status'];
+
+																					//approve order when order is status "Failed / Canceled", maybe some reason cause order failed, can approve again with this button
+																					$btn_approve = '<i data-remote="ajax/distributor_order_assign.php?p=' . $id . '" data-toggle="modal" data-target=".bs-example-modal-lg" class="btn btn-success">Approve</i>';
+																					//to assign consignment number, status -> shipping
+																					$btn_assign_cosignment = '<i data-remote="ajax/distributor_order_assign.php?p=' . $id . '" data-toggle="modal" data-target=".bs-example-modal-lg" class="btn btn-success">Assign Consignment</i>';
+																					//to reject order, status -> failed/rejected
+																					$btn_cancel = '<i data-remote="ajax/distributor_order_assign.php?p=' . $id . '" data-toggle="modal" data-target=".bs-example-modal-lg" class="btn btn-success">Cancel</i>';
+																					//order deliverd, status -> completed
+																					$btn_complete = '<i data-remote="ajax/distributor_order_assign.php?p=' . $id . '" data-toggle="modal" data-target=".bs-example-modal-lg" class="btn btn-success">To Complete</i>';
+																					//view order
+																					$btn_view = '<i data-remote="ajax/distributor_order.php?p=' . $id . '" data-toggle="modal" data-target=".bs-example-modal-lg" class="fa fa-cogs toolsx"></i>';
+																					
+																					switch ($status) {
+																						case "1":
+																							$status_color = "text-danger";
+																							$status_display = "Failed / Canceled";
+																							$status_desc = "This order was rejected, or your order payment was failed.";
+																							$btn_action = $btn_approve;
+																							break;
+																						case "2":
+																							$status_color = "text-warning";
+																							$status_display = "To Ship";
+																							$status_desc = "Waiting for the Caroma Malaysia to ship out the products.";
+																							$btn_action = $btn_assign_cosignment ." ". $btn_cancel;
+																							break;
+																						case "3":
+																							$status_color = "text-success";
+																							$status_display = "Shipping";
+																							$status_desc = "This order had been shipped.";
+																							$btn_action =  $btn_complete;
+																							break;
+																						case "4":
+																							$status_color = "text-info";
+																							$status_display = "Completed";
+																							$status_desc = "The order was delivered.";
+																							$btn_action = "";
+																					}
 																				?>
 
 																					<tr>
@@ -247,6 +290,7 @@ if (isset($_REQUEST['p'])) { // order status
 																						<td><?php echo $order['date_created']; ?></td>
 																						<td><?php echo $order['total_payment']; ?></td>
 																						<td><i data-remote="ajax/distributor_order.php?p=<?php echo $order['id']; ?>" data-toggle="modal" data-target=".bs-example-modal-lg" class="fa fa-cogs toolsx"></i></td>
+																						<td><?php echo $btn_action; ?></td>
 																					</tr>
 																				<?php } ?>
 																			</tbody>
