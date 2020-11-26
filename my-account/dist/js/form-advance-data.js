@@ -43,7 +43,9 @@ $("input[name='tch2']").TouchSpin({
 	maxboostedstep: 10000000,
 	prefix: '$'
 });
-$("input[name='tch3']").TouchSpin();
+$("input[id='tch3']").TouchSpin({
+	min: 1,
+});
 
 $("input[name='tch3_22']").TouchSpin({
 	initval: 40
