@@ -460,17 +460,17 @@ if (count($get_cart) != 0) {
                                     $("#total_payment").val(data["Total_pay"]);
                                 } else {
                                     $("#get_coupon_msg").html(data["Msg"]);
-                                    $("#get_discount").html('- RM ' + "<?php echo number_format($discount, 2, '.', '');; ?>");
-                                    $("#get_shippig").html('+ RM ' + "<?php echo number_format($shipping, 2, '.', '');; ?>");
-                                    $("#get_totalpay").html('RM ' + "<?php echo number_format($total_pay, 2, '.', '');; ?>");
-                                    $("#total_payment").val(<?php echo number_format($total_pay, 2, '.', '');; ?>);
+                                    $("#get_discount").html('- RM ' + "<?php echo number_format($discount, 2, '.', ''); ?>");
+                                    $("#get_shippig").html('+ RM ' + "<?php echo number_format($shipping, 2, '.', ''); ?>");
+                                    $("#get_totalpay").html('RM ' + "<?php echo number_format($total_pay, 2, '.', ''); ?>");
+                                    $("#total_payment").val(<?php echo number_format($total_pay, 2, '.', ''); ?>);
                                 }
                             } else {
                                 $("#get_coupon_msg").html("");
-                                $("#get_discount").html('- RM ' + "<?php echo number_format($discount, 2, '.', '');; ?>");
-                                $("#get_shippig").html('+ RM ' + "<?php echo number_format($shipping, 2, '.', '');; ?>");
-                                $("#get_totalpay").html('RM ' + "<?php echo number_format($total_pay, 2, '.', '');; ?>");
-                                $("#total_payment").val(<?php echo number_format($total_pay, 2, '.', '');; ?>);
+                                $("#get_discount").html('- RM ' + "<?php echo number_format($discount, 2, '.', ''); ?>");
+                                $("#get_shippig").html('+ RM ' + "<?php echo number_format($shipping, 2, '.', ''); ?>");
+                                $("#get_totalpay").html('RM ' + "<?php echo number_format($total_pay, 2, '.', ''); ?>");
+                                $("#total_payment").val(<?php echo number_format($total_pay, 2, '.', ''); ?>);
                             }
                             $('#loadDiv').hide();
                         }, 500);
