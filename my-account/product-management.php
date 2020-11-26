@@ -90,26 +90,49 @@ if ($login != 1) {
 							<div class="panel-wrapper collapse in">
 								<div class="panel-body">
 									<div class="form-wrap">
-										<form action="#">
+										<form data-toggle="validator" role="form" id="form_approve" action="api/distributor_sql.php?type=product_add&tb=distributor" method="post" enctype="multipart/form-data">
+											<input type="hidden" name="token" value="<?php echo $token; ?>" />
 											<h6 class="txt-dark capitalize-font"><i class="icon-list mr-10"></i>Product Stock Availability</h6>
 											<hr>
 											<div class="row">
 												<div class="col-md-6">
 													<div class="form-group">
 														<label class="control-label mb-10">Product Name</label>
-														<select class="form-control" data-placeholder="Choose a Category" tabindex="1">
-															<option value="Product 1">Product 1</option>
-															<option value="Product 2">Product 2</option>
-															<option value="Product 3">Product 3</option>
-															<option value="Product 4">Product 4</option>
+														<select class="form-control" data-placeholder="Choose a Product" tabindex="1" name="product">
+															<?php
+
+
+															$col = "*, p.id as p_id, pt.name as pt_name, pt.description as pt_description, ct.name as ct_name";
+															$tb = "product p left join product_translation pt on p.id = pt.product_id left join product_role_price pp on p.id = pp.product_id left join category_translation ct on p.category = ct.category_id ";
+															$opt = 'pt.language = ? && pp.type =? && ct.language =? && p.status =? ORDER BY p.date_modified DESC';
+															$arr = array($language, 3, $language, 1);
+															$result = $db->advwhere($col, $tb, $opt, $arr);
+															if (count($result) != 0) {
+																$product_category = $result[0]['ct_name'];
+																$product_price = $result[0]['price'];
+																$product_image = $result[0]['image'];
+																$product_length = $result[0]['length'];
+																$product_width = $result[0]['width'];
+																$product_height = $result[0]['height'];
+																$product_weight = $result[0]['weight'];
+
+															}
+															foreach ($result as $product) {
+															?>
+																<option value="<?php echo $product['p_id']; ?>"><?php echo $product['pt_name']; ?></option>
+
+															<?php
+															} ?>
 														</select>
+
+
 													</div>
 												</div>
 												<!--/span-->
 												<div class="col-md-6">
 													<div class="form-group">
-														<label class="control-label mb-10">Quantity </label> <span>[Stock Available : 38]</span>
-														<input id="tch3" type="text" value="1" name="tch3" data-bts-button-down-class="btn btn-default" data-bts-button-up-class="btn btn-default">
+														<label class="control-label mb-10">Stock </label><!-- <span>[Stock Available : 38]</span> -->
+														<input id="tch3" type="text" value="1" name="stock" data-bts-button-down-class="btn btn-default" data-bts-button-up-class="btn btn-default">
 													</div>
 												</div>
 												<!--/span-->
@@ -119,53 +142,62 @@ if ($login != 1) {
 												<div class="col-md-6">
 													<div class="form-group">
 														<label class="control-label mb-10">Product Categories</label>
-														<input type="text" disabled value="Ginger Series" class="form-control">
+														<input type="text" id="get_category" disabled value="<?php echo $product_category; ?>" class="form-control">
 													</div>
 												</div>
-												<!--/span-->
-												<div class="col-md-6">
-													<div class="form-group mb-0">
-														<label class="control-label mb-10">Product Tag</label>
-														<select disabled class="select2 select2-multiple" multiple="multiple" data-placeholder="Choose">
-															<optgroup label="Product Tag">
-																<option selected value="CA">Ginger</option>
-																<option selected value="NV">Pulm Organic</option>
-																<option selected value="OR">Drinks</option>
-																<option value="WA">Coffee</option>
-																<option value="WA">Matcha</option>
-															</optgroup>
-
-														</select>
-													</div>
-												</div>
-												<!--/span-->
-											</div>
-											<!--/row-->
-											<div class="row">
 												<div class="col-md-6">
 													<div class="form-group">
-														<label class="control-label mb-10">Price before Discount</label>
+														<label class="control-label mb-10">Product Price (Dealer View)</label>
 														<div class="input-group">
-															<div class="input-group-addon"><i class="ti-cut"></i></div>
 															<div class="input-group-addon">RM</div>
-															<input type="text" class="form-control" id="exampleInputuname" placeholder="188">
+															<input type="text" class="form-control" id="get_price" disabled value="<?php echo number_format($product_price, 2); ?>" placeholder="188">
 														</div>
 													</div>
 												</div>
-												<!--/span-->
+											</div>
+											<!-- Row -->
+											<div class="row">
 												<div class="col-md-6">
 													<div class="form-group">
-														<label class="control-label mb-10">Final Price</label>
+														<label class="control-label mb-10">Product Length</label>
 														<div class="input-group">
-															<div class="input-group-addon"><i class="ti-money"></i></div>
-															<div class="input-group-addon">RM</div>
-															<input type="text" class="form-control" id="exampleInputuname_1" placeholder="150">
+															<div class="input-group-addon">CM</div>
+															<input type="text" class="form-control" id="get_length" disabled value="<?php echo number_format($product_length, 3); ?>" placeholder="188">
 														</div>
 													</div>
 												</div>
-												<!--/span-->
+												<div class="col-md-6">
+													<div class="form-group">
+														<label class="control-label mb-10">Product Width</label>
+														<div class="input-group">
+															<div class="input-group-addon">CM</div>
+															<input type="text" class="form-control" id="get_width" disabled value="<?php echo number_format($product_width, 3); ?>" placeholder="188">
+														</div>
+													</div>
+												</div>
 											</div>
+											<!-- Row -->
 											<div class="row">
+												<div class="col-md-6">
+													<div class="form-group">
+														<label class="control-label mb-10">Product Height</label>
+														<div class="input-group">
+															<div class="input-group-addon">CM</div>
+															<input type="text" class="form-control" id="get_height" disabled value="<?php echo number_format($product_height, 3); ?>" placeholder="188">
+														</div>
+													</div>
+												</div>
+												<div class="col-md-6">
+													<div class="form-group">
+														<label class="control-label mb-10">Product Weight</label>
+														<div class="input-group">
+															<div class="input-group-addon">KG</div>
+															<input type="text" class="form-control" id="get_weight" disabled value="<?php echo number_format($product_weight, 3); ?>" placeholder="188">
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="row" hidden>
 												<div class="col-md-6">
 													<div class="form-group">
 														<label class="control-label mb-10">Logistic Company</label>
@@ -198,14 +230,14 @@ if ($login != 1) {
 														<div class="radio-list">
 															<div class="radio-inline pl-0">
 																<div class="radio radio-info">
-																	<input checked type="radio" name="radio" id="radio1" value="option1">
-																	<label for="radio1">Published</label>
+																	<input checked type="radio" name="status" id="radio1" value="1">
+																	<label for="radio1">Activate</label>
 																</div>
 															</div>
 															<div class="radio-inline">
 																<div class="radio radio-info">
-																	<input type="radio" name="radio" id="radio2" value="option2">
-																	<label for="radio2">Draft</label>
+																	<input type="radio" name="status" id="radio2" value="0">
+																	<label for="radio2">Deactivate</label>
 																</div>
 															</div>
 														</div>
@@ -219,29 +251,13 @@ if ($login != 1) {
 											<div class="row">
 												<div class="col-lg-3">
 													<div class="img-upload-wrap padding-15-t-b">
-														<img class="img-responsive" src="dist/img/chair.jpg" alt="upload_img">
-													</div>
-												</div>
-												<div class="col-lg-3">
-													<div class="img-upload-wrap padding-15-t-b">
-														<img class="img-responsive" src="dist/img/chair.jpg" alt="upload_img">
-													</div>
-												</div>
-												<div class="col-lg-3">
-													<div class="img-upload-wrap padding-15-t-b">
-														<img class="img-responsive" src="dist/img/chair.jpg" alt="upload_img">
-													</div>
-												</div>
-												<div class="col-lg-3">
-													<div class="img-upload-wrap padding-15-t-b">
-														<img class="img-responsive" src="dist/img/chair.jpg" alt="upload_img">
+														<img id="get_img" class="img-responsive" src="../img/product/<?php echo $product_image; ?>" alt="upload_img">
 													</div>
 												</div>
 											</div>
 											<div class="seprator-block"></div>
 											<div class="form-actions">
-												<button class="btn btn-success btn-icon left-icon mr-10"> <i class="fa fa-check"></i> <span>save</span></button>
-												<button type="button" class="btn btn-warning">Cancel</button>
+												<button class="btn btn-success btn-icon left-icon mr-10" name="btnAction"> <i class="fa fa-check"></i> <span>save</span></button>
 											</div>
 										</form>
 									</div>
@@ -253,6 +269,7 @@ if ($login != 1) {
 				<!-- /Row -->
 
 			</div>
+			<div id='loadDiv' style='position: fixed; width: 100%; height: 100%; left: 0; top: 0; background: rgba(51,51,51,0.2); z-index: 9999; display:none;'><i class="fa fa-spin fa-spinner fa-5x text-success" style='position: fixed; left: 50%; top: 50%;'></i></div>
 
 			<!-- Footer -->
 			<footer class="footer container-fluid pl-30 pr-30">
@@ -327,6 +344,34 @@ if ($login != 1) {
 
 	<!-- Init JavaScript -->
 	<script src="dist/js/init.js"></script>
+
+	<script>
+		//for check coupon
+		$('[name="product"]').blur(function() {
+			var product_id = $(this).val()
+			$('#loadDiv').show();
+			$.post('api/get_product_details.php', {
+				product_id: product_id
+			}, function(data) {
+				setTimeout(function() {
+					console.log(data);
+					data = JSON.parse(data);
+					if (data["Status"]) {
+						$("#get_coupon_msg").html("");
+						$("#get_img").attr("src", "../img/product/" + data["image"]);
+						$("#get_price").val(parseFloat(data["price"]).toFixed(2));
+						$("#get_category").val(data["category"]);
+						$("#get_length").val(parseFloat(data["length"]).toFixed(3));
+						$("#get_width").val(parseFloat(data["width"]).toFixed(3));
+						$("#get_height").val(parseFloat(data["height"]).toFixed(3));
+						$("#get_weight").val(parseFloat(data["weight"]).toFixed(3));
+					} 
+					$('#loadDiv').hide();
+				}, 500);
+
+			});
+		});
+	</script>
 
 </body>
 

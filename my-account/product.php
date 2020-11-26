@@ -80,97 +80,45 @@ if ($login != 1) {
 
 				<!-- Product Row One -->
 				<div class="row">
-					<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-						<div class="panel panel-default card-view pa-0">
-							<div class="panel-wrapper collapse in">
-								<div class="panel-body pa-0">
-									<article class="col-item">
-										<div class="photo">
-											<div class="options">
-												<button class="btn btn-default btn-icon-anim btn-circle mr-5" type="submit"><a href="product-management.php"><i class="icon-pencil"></i></a></button>
-											</div>
-											<a href="product-management.php"> <img src="dist/img/chair.jpg" class="img-responsive" alt="Product Image" /> </a>
-										</div>
-										<div class="info text-center">
-											<h6>National Fresh Fruit</h6>
-											<span class="product-spec capitalize-font block mt-5 mb-5">Ginger Series</span>
-											<span class="product-spec capitalize-font block mt-5 mb-5">Published</span>
-											<span class="head-font block text-warning">RM188</span>
-										</div>
-									</article>
-								</div>
-							</div>
-						</div>
-					</div>
+					<?php
+					$col = "*,dp.id as dp_id, dp.stock as dp_stock,dp.status as dp_status, p.id as p_id, pt.name as pt_name, pt.description as pt_description, ct.name as ct_name";
+					$tb = "distributor_product dp left join product p on dp.product_id = p.id left join product_translation pt on p.id = pt.product_id left join product_role_price pp on p.id = pp.product_id left join category_translation ct on p.category = ct.category_id";
+					$opt = 'dp.user_id =? && pt.language = ? && pp.type =? && ct.language =? ORDER BY p.date_modified DESC';
+					$arr = array($user_id, $language, 3, $language);
+					$distributor_product = $db->advwhere($col, $tb, $opt, $arr);
 
-					<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-						<div class="panel panel-default card-view pa-0">
-							<div class="panel-wrapper collapse in">
-								<div class="panel-body pa-0">
-									<article class="col-item">
-										<div class="photo">
-											<div class="options">
-												<button class="btn btn-default btn-icon-anim btn-circle mr-5" type="submit"><a href="product-management.php"><i class="icon-pencil"></i></a></button>
-											</div>
-											<a href="product-management.php"> <img src="dist/img/chair.jpg" class="img-responsive" alt="Product Image" /> </a>
-										</div>
-										<div class="info text-center">
-											<h6>National Fresh Fruit</h6>
-											<span class="product-spec capitalize-font block mt-5 mb-5">Ginger Series</span>
-											<span class="product-spec capitalize-font block mt-5 mb-5">Published</span>
-											<span class="head-font block text-warning">RM188</span>
-										</div>
-									</article>
-								</div>
-							</div>
-						</div>
-					</div>
+					if (count($distributor_product) == 0) {
+						echo "No Product. Please Add product";
+					}
 
-					<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-						<div class="panel panel-default card-view pa-0">
-							<div class="panel-wrapper collapse in">
-								<div class="panel-body pa-0">
-									<article class="col-item">
-										<div class="photo">
-											<div class="options">
-												<button class="btn btn-default btn-icon-anim btn-circle mr-5" type="submit"><a href="product-management.php"><i class="icon-pencil"></i></a></button>
-											</div>
-											<a href="product-management.php"> <img src="dist/img/chair.jpg" class="img-responsive" alt="Product Image" /> </a>
-										</div>
-										<div class="info text-center">
-											<h6>National Fresh Fruit</h6>
-											<span class="product-spec capitalize-font block mt-5 mb-5">Ginger Series</span>
-											<span class="product-spec capitalize-font block mt-5 mb-5">Published</span>
-											<span class="head-font block text-warning">RM188</span>
-										</div>
-									</article>
-								</div>
-							</div>
-						</div>
-					</div>
+					foreach ($distributor_product as $product) {
 
-					<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-						<div class="panel panel-default card-view pa-0">
-							<div class="panel-wrapper collapse in">
-								<div class="panel-body pa-0">
-									<article class="col-item">
-										<div class="photo">
-											<div class="options">
-												<button class="btn btn-default btn-icon-anim btn-circle mr-5" type="submit"><a href="product-management.php"><i class="icon-pencil"></i></a></button>
+					?>
+						<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+							<div class="panel panel-default card-view pa-0">
+								<div class="panel-wrapper collapse in">
+									<div class="panel-body pa-0">
+										<article class="col-item">
+											<div class="photo">
+												<div class="options">
+													<button class="btn btn-default btn-icon-anim btn-circle mr-5" type="submit"><a href="product-management.php"><i class="icon-pencil"></i></a></button>
+												</div>
+												<a href="product-edit.php?p=<?php echo $product['p_id']; ?>"> <img src="../img/product/<?php echo $product['image']; ?>" class="img-responsive" alt="Product Image" /> </a>
 											</div>
-											<a href="product-management.php"> <img src="dist/img/chair.jpg" class="img-responsive" alt="Product Image" /> </a>
-										</div>
-										<div class="info text-center">
-											<h6>National Fresh Fruit</h6>
-											<span class="product-spec capitalize-font block mt-5 mb-5">Ginger Series</span>
-											<span class="product-spec capitalize-font block mt-5 mb-5">Published</span>
-											<span class="head-font block text-warning">RM188</span>
-										</div>
-									</article>
+											<div class="info text-center">
+												<h5>National Fresh Fruit</h5>
+												<span class="product-spec capitalize-font block mt-5 mb-5"><?php echo $product['ct_name']; ?></span>
+												<span class="product-spec capitalize-font block mt-5 mb-5 <?php echo ($product['dp_status'] == 1) ? "text-success" : "text-danger"; ?>"><strong><?php echo ($product['dp_status'] == 1) ? "Activate" : "Deactivate"; ?></strong></span>
+												<span class="head-font block text-warning "><strong>RM<?php echo number_format($product['price'], 2); ?></strong></span>
+												<span class="head-font block text-dark "><strong>Stock: <?php echo $product['dp_stock']; ?></strong></span>
+											</div>
+										</article>
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
+
+					<?php } ?>
 				</div>
 
 			</div>

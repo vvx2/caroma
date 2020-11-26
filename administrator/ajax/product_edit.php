@@ -256,32 +256,36 @@ $height = $product[0]['height'];
         });
 
         $(".length").TouchSpin({
-            min: 0.0001,
+            min: 0.001,
             max: 9999999,
+            step: 0.001,
             decimals: 3,
             postfix: 'CM',
             buttondown_class: 'btn btn-white',
             buttonup_class: 'btn btn-white'
         });
         $(".width").TouchSpin({
-            min: 0.0001,
+            min: 0.001,
             max: 9999999,
+            step: 0.001,
             decimals: 3,
             postfix: 'CM',
             buttondown_class: 'btn btn-white',
             buttonup_class: 'btn btn-white'
         });
         $(".height").TouchSpin({
-            min: 0.0001,
+            min: 0.001,
             max: 9999999,
+            step: 0.001,
             decimals: 3,
             postfix: 'CM',
             buttondown_class: 'btn btn-white',
             buttonup_class: 'btn btn-white'
         });
         $(".weight").TouchSpin({
-            min: 0.0001,
+            min: 0.001,
             max: 9999999,
+            step: 0.001,
             decimals: 3,
             postfix: 'KG',
             buttondown_class: 'btn btn-white',

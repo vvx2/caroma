@@ -8,16 +8,13 @@ if (isset($_REQUEST['type']) && isset($_REQUEST['tb'])) {
     $tb = $_REQUEST['tb'];
 }
 
-if(isset($_SESSION['user_id']) && isset($_SESSION['type']))
-{	
+if (isset($_SESSION['user_id']) && isset($_SESSION['type'])) {
     $user_id = $_SESSION['user_id'];
-	$user_type = $_SESSION['type'];
-	$login = 1;
-	$_SESSION['login'] = $login;
-}
-else
-{
-	$login = 0;
+    $user_type = $_SESSION['type'];
+    $login = 1;
+    $_SESSION['login'] = $login;
+} else {
+    $login = 0;
     $_SESSION['login'] = $login;
     $user_type = 1;
 }
@@ -78,11 +75,12 @@ if (!empty($postedToken)) {
 
                     $product_id = $_POST['product']; //product id, not table id
                     $stock = $_POST['stock'];
+                    $status = $_POST['status'];
 
 
                     // check product is it isset in database
                     $table = "distributor_product";
-                    $col = "id, name";
+                    $col = "id";
                     $opt = 'product_id = ? && user_id  = ?';
                     $arr = array($product_id, $user_id);
                     $check_product_isset = $db->advwhere($col, $table, $opt, $arr);
@@ -91,19 +89,19 @@ if (!empty($postedToken)) {
 
                         $table = "distributor_product";
                         $colname = array("user_id", "product_id", "stock", "status", "date_created", "date_modified");
-                        $array = array($user_id, $product_id, $stock, 1, $time, $time);
+                        $array = array($user_id, $product_id, $stock, $status, $time, $time);
                         $result_product = $db->insert($table, $colname, $array);
 
                         if ($result_product) {
                             echo "<script>alert(\" Add Product Successful\");
-                        window.location.href='product.php';</script>";
+                            window.location.href='../product.php';</script>";
                         } else {
                             echo "<script>alert(\" Add Product Fail. Please try again.\");
-                        window.location.href='product.php';</script>";
+                        window.location.href='../product.php';</script>";
                         }
                     } else {
                         echo "<script>alert(\" Product Exists, Please use edit function to edit your product.\");
-                        window.location.href='product.php';</script>";
+                        window.location.href='../product.php';</script>";
                     }
                 }
             } else if ($type == "product_edit") {
@@ -116,7 +114,7 @@ if (!empty($postedToken)) {
 
                     // check product is it isset in database
                     $table = "distributor_product";
-                    $col = "id, name";
+                    $col = "id";
                     $opt = 'product_id = ? && user_id  = ? && id != ?';
                     $arr = array($product_id, $user_id, $distributor_product_id);
                     $check_product_isset = $db->advwhere($col, $table, $opt, $arr);
@@ -124,20 +122,32 @@ if (!empty($postedToken)) {
                     if (count($check_product_isset) == 0) {
 
                         $table = "distributor_product";
-                        $data = "product_id =?, stock =?, status =?, date_modified = ? WHERE id = ?";
-                        $array = array($product_id, $stock, $status, $time, $distributor_product_id);
+                        $data = "stock =?, status =?, date_modified = ? WHERE id = ?";
+                        $array = array($stock, $status, $time, $distributor_product_id);
                         $result_product = $db->update($table, $data, $array);
 
                         if ($result_product) {
                             echo "<script>alert(\" Edit Product Successful\");
-                              window.location.href='product.php';</script>";
+                              window.location.href='../product.php';</script>";
                         } else {
                             echo "<script>alert(\" Edit Product Fail, PLease Try Again. \");
-                            window.location.href='product.php';</script>";
+                            window.location.href='../product.php';</script>";
                         }
                     } else {
                         echo "<script>alert(\" Product Exists, Please use add function to add your product.\");
-                        window.location.href='product.php';</script>";
+                        window.location.href='../product.php';</script>";
+                    }
+                }
+
+                if (isset($_POST['btnDelete'])) {
+
+                    $distributor_product_id = $_POST['btnDelete']; //table id.not product id.
+
+                    $result = $db->del("distributor_product", 'id', $distributor_product_id);
+
+                    if ($result) {
+                        echo "<script>alert(\" Delete Item Successful\");
+                            window.location.href='../product.php';</script>";
                     }
                 }
             }
