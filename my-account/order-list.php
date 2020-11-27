@@ -182,6 +182,11 @@ if (isset($_REQUEST['p'])) { // order status
 								<div class="pull-left">
 									<h6 class="panel-title txt-dark">STORE ORDERS</h6>
 								</div>
+								<div class="pull-right">
+									<h6 class="panel-title txt-light">
+										<i data-remote="ajax/distributor_self_order.php" data-toggle="modal" data-target=".bs-example-modal-lg" class="btn btn-success"><strong>Add Self Order</strong></i>
+									</h6>
+								</div>
 								<div class="clearfix"></div>
 							</div>
 							<div class="panel-wrapper collapse in">
@@ -255,7 +260,7 @@ if (isset($_REQUEST['p'])) { // order status
 																					$btn_complete = '<i data-remote="ajax/distributor_order_assign.php?p=' . $id . '" data-toggle="modal" data-target=".bs-example-modal-lg" class="btn btn-success">To Complete</i>';
 																					//view order
 																					$btn_view = '<i data-remote="ajax/distributor_order.php?p=' . $id . '" data-toggle="modal" data-target=".bs-example-modal-lg" class="fa fa-cogs toolsx"></i>';
-																					
+
 																					switch ($status) {
 																						case "1":
 																							$status_color = "text-danger";
@@ -267,7 +272,7 @@ if (isset($_REQUEST['p'])) { // order status
 																							$status_color = "text-warning";
 																							$status_display = "To Ship";
 																							$status_desc = "Waiting for the Caroma Malaysia to ship out the products.";
-																							$btn_action = $btn_assign_cosignment ." ". $btn_cancel;
+																							$btn_action = $btn_assign_cosignment . " " . $btn_cancel;
 																							break;
 																						case "3":
 																							$status_color = "text-success";
@@ -373,8 +378,52 @@ if (isset($_REQUEST['p'])) { // order status
 		$('body').on('click', '[data-toggle="modal"]', function() {
 			$($(this).data("target") + ' .modal-content').load($(this).data("remote"));
 		});
-	</script>
+		<?php
+		$col = "*, p.product_id as p_id, pt.name as pt_name, pt.description as pt_description";
+		$tb = "distributor_product p left join product_translation pt on p.product_id = pt.product_id";
+		$opt = 'p.user_id =? && pt.language = ? ORDER BY p.date_modified DESC';
+		$arr = array($user_id, $language);
+		$result = $db->advwhere($col, $tb, $opt, $arr);
+		?>
+		$(document).on('click', '.btn-add-more-product', function() {
+			let product_clone =
+				'<div class="product col-12"><div class="pull-right text-danger btn-remove-product">**Remove**</div>' +
+				'   <blockquote>' +
+				'       <table class="table-widths">' +
+				'           <div class="row">' +
+				'               <div class="col-sm-4 col-12">' +
+				'                   <label  class="control-label mb-10">Product</label>' +
+				'                   <select class="input-width state_select form-control" name="product_id[]" tabindex="2" required>' +
+				'                       <option data-option="" value="">Select Product</option>' +
+				<?php foreach ($result as $product) { ?>
+				'						<option value="<?php echo $product['p_id']; ?>"> <?php echo $product['pt_name']; ?> </option>' +
+				<?php } ?>
+				'                   </select>' +
+				'                   <div class="help-block with-errors"></div>' +
+				'               </div>' +
+				'               <div class="col-sm-4 col-12">' +
+				'                   <label  class="control-label mb-10">Product Price</label>' +
+				'                   <div class="input-group">' +
+				'                       <div class="input-group-addon">RM</div>' +
+				'                       <input type="text" class="form-control" name="product_price[]" value="" placeholder="12.50" required>' +
+				'                   </div>' +
+				'               </div>' +
+				'               <div class="col-sm-4 col-12">' +
+				'                   <label class="control-label mb-10">Product Quantity</label>' +
+				'                      <input type="number" class="form-control" name="product_qty[]" placeholder="1" min="1" value="" required>' +
+				'                   <div class="help-block with-errors"></div>' +
+				'               </div>' +
+				'           </div>' +
+				'       </table>' +
+				'   </blockquote>' +
+				'</div>'
+			$(".add_product").append(product_clone);
+		});
 
+		$(document).on('click', '.btn-remove-product', function() {
+			$(this).parent().remove();
+		});
+	</script>
 
 </body>
 

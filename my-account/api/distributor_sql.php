@@ -219,8 +219,8 @@ if (!empty($postedToken)) {
                     $discount_amount = 0;
 
                     $table = "orders";
-                    $colname = array("status", "customer_name", "customer_email", "customer_address", "customer_postcode", "customer_city", "customer_state", "customer_contact", "total_price", "coupon_code", "discount_percent", "discount_amount", "total_payment", "track_code", "users_id", "date_created", "date_modified");
-                    $array = array(4, $customer_name, $customer_email, $customer_address, $customer_postcode, $customer_city, $customer_state, $customer_contact, $total_price, $coupon_code, $discount_percent, $discount_amount, $total_payment, $track_code, $user_id, $time, $time);
+                    $colname = array("status", "customer_name", "customer_email", "customer_address", "customer_postcode", "customer_city", "customer_state", "customer_contact", "total_price", "coupon_code", "discount_percent", "discount_amount", "total_payment", "track_code", "gateway_order_id", "users_id", "type", "admin_id", "date_created", "date_modified");
+                    $array = array(4, $customer_name, $customer_email, $customer_address, $customer_postcode, $customer_city, $customer_state, $customer_contact, $total_price, $coupon_code, $discount_percent, $discount_amount, $total_payment, $track_code, "self order - no id", $user_id, 2, $user_id, $time, $time);
                     $result_order = $db->insert($table, $colname, $array);
 
                     if ($result_order) {
@@ -236,12 +236,13 @@ if (!empty($postedToken)) {
                         $order_id = $order[0]['id'];
                         //--------------------------
 
-                        $product_price = $_POST["product_price"];
+                        $price = $_POST["product_price"];
                         $product_id = $_POST["product_id"];
                         $qty = $_POST["product_qty"];
                         foreach ($product_id as $key => $id) {
 
                             $product_qty = $qty[$key];
+                            $product_price = $price[$key];
                             $product_id = $id;
 
                             $table = "order_items";
