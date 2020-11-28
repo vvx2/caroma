@@ -231,7 +231,12 @@ if ($login != 1) {
     <!-- Init JavaScript -->
     <script src="dist/js/init.js"></script>
     <script src="dist/js/widgets-data.js"></script>
-
+    <script>
+        //this script for modal 
+        $('body').on('click', '[data-toggle="modal"]', function() {
+            $($(this).data("target") + ' .modal-content').load($(this).data("remote"));
+        });
+    </script>
 </body>
 
 </html>
