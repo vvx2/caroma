@@ -294,8 +294,7 @@ if (isset($_REQUEST['p'])) { // order status
 																							$status_desc = "The order is pending to Cancel.";
 																							$btn_action = $btn_cancel;
 																					}
-																					// to do add cancel function, each status set button for action
-
+																					
 																					if ($payment_type == 1) {
 																						$payment_display = "Online Payment";
 																					} else {

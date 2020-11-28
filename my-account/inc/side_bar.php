@@ -53,7 +53,7 @@ if ($onpage == "1") {
                 <a href="../shopping-cart.php" target="_blank"><i class="icon-basket-loaded mr-10"></i>Your Cart <span class="pull-right"></span></a>
             </li>
             <li>
-                <a class="<?php echo ($PageName == 'e-commerce' || $PageName == 'order-list' || $PageName == 'product') ? 'active' : ''; ?>" href="javascript:void(0);" data-toggle="collapse" data-target="#ecom_dr"><i class="fa fa-shopping-basket mr-10"></i>My Store<span class="pull-right"><span class="label label-success mr-10">4</span><i class="fa fa-fw fa-angle-down"></i></span></a>
+                <a class="<?php echo ($PageName == 'e-commerce' || $PageName == 'order-list' || $PageName == 'product' || $PageName == 'wallet' || $PageName == 'wallet_history') ? 'active' : ''; ?>" href="javascript:void(0);" data-toggle="collapse" data-target="#ecom_dr"><i class="fa fa-shopping-basket mr-10"></i>My Store<span class="pull-right"><span class="label label-success mr-10">4</span><i class="fa fa-fw fa-angle-down"></i></span></a>
                 <ul id="ecom_dr" class="collapse collapse-level-1">
                     <li>
                         <a class="<?php echo ($PageName == 'e-commerce') ? 'active' : ''; ?>" href="e-commerce.php">Dashboard</a>
@@ -63,6 +63,9 @@ if ($onpage == "1") {
                     </li>
                     <li>
                         <a class="<?php echo ($PageName == 'product') ? 'active' : ''; ?>" href="product.php">Products Management</a>
+                    </li>
+                    <li>
+                        <a class="<?php echo ($PageName == 'wallet') ? 'active' : ''; ?>" href="wallet.php">E-Wallet</a>
                     </li>
                 </ul>
             </li>

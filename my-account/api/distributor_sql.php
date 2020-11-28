@@ -293,6 +293,73 @@ if (!empty($postedToken)) {
                     $result_order = $db->update($tablename, $data, $array);
 
                     if ($result_order) {
+
+                        //--------------------------------------------------
+                        //              Get order details
+                        $col = "*";
+                        $tb = "orders";
+                        $opt = 'id = ?';
+                        $arr = array($order_id);
+                        $order = $db->advwhere($col, $tb, $opt, $arr);
+                        $order = $order[0];
+                        //--------------------------------------------------
+
+                        //---------------------------------------------------
+                        //       VARIABLE for wallet_transaction_history
+                        $total_payment = $order["total_payment"]; // amount to record
+                        $gateway_order_id = $order["gateway_order_id"]; // order to record in description
+                        $description = "Sale. Order Id: " . $gateway_order_id;
+                        //---------------------------------------------------
+
+                        //---------------------------------------------------
+                        //       VARIABLE for user_distributor
+                        $payment_type = $order["payment_type"]; //payment type to check if online payment will add amount to distributor wallet
+                        //--------------------------------------------------
+
+                        //--------------------------------------------------
+                        //   Check payment type if it is online payment
+                        if ($payment_type == 1) {
+                            //   Get Distributor wallet details - amount
+                            $col = "*";
+                            $tb = "user_distributor";
+                            $opt = 'user_id = ?';
+                            $arr = array($user_id);
+                            $distributor = $db->advwhere($col, $tb, $opt, $arr);
+                            $distributor = $distributor[0];
+                            $current_wallet_amount = $distributor["distributor_wallet"];
+
+                            //   Add total_payment to amount
+                            $added_wallet_amount = $current_wallet_amount + $total_payment;
+
+                            //   Update distributor_wallet
+                            $tablename = "user_distributor";
+                            $data = "distributor_wallet = ? WHERE user_id = ?";
+                            $array = array($added_wallet_amount, $user_id);
+                            $result_user_distributor = $db->update($tablename, $data, $array);
+
+                            if ($result_user_distributor) {
+                                //   Add Histroy to distributor_wallet_transaction_history
+                                $table = "distributor_wallet_transaction_history";
+                                $colname = array("amount", "description", "distributor_id", "date_created", "date_modified");
+                                $array = array($total_payment, $description, $user_id, $time, $time);
+                                $result_wallet_history = $db->insert($table, $colname, $array);
+
+                                if ($result_wallet_history) {
+                                    echo "<script>alert(\" Update Status Successful\");
+                                    window.location.href='../order-list.php?p=4';</script>";
+                                } else {
+                                    echo "<script>alert(\" Update Status Successful. But Insert History Fail\");
+                                    window.location.href='../order-list.php?p=4';</script>";
+                                }
+                            }else{
+                                echo "<script>alert(\" Update Status Successful. But Update Wallet Fail\");
+                                    window.location.href='../order-list.php?p=4';</script>";
+                            }
+
+                            exit;
+                        }
+                        //--------------------------------------------------
+
                         echo "<script>alert(\" Update Status Successful\");
                               window.location.href='../order-list.php?p=4';</script>";
                     } else {
@@ -340,6 +407,46 @@ if (!empty($postedToken)) {
 
             //--------------------------------------------------
             //              Distributor Order
+            //--------------------------------------------------
+
+            //--------------------------------------------------
+            //              Distributor Wallet
+            //--------------------------------------------------
+            else if ($type == "wallet_refund") {
+                if (isset($_POST['btnAction'])) {
+
+                    $refund_amt = $_POST['amount'];
+
+                    $col = "*";
+                    $tb = "user_distributor";
+                    $opt = 'user_id = ?';
+                    $arr = array($user_id);
+                    $distributor = $db->advwhere($col, $tb, $opt, $arr);
+                    $wallet_amt = $distributor[0]['distributor_wallet'];
+
+                    if ($wallet_amt >= $refund_amt) {
+
+                        $table = "distributor_wallet_transaction";
+                        $colname = array("status", "amount", "distributor_id", "date_created", "date_modified");
+                        $array = array(1, $refund_amt, $user_id, $time, $time);
+                        $result_wallet = $db->insert($table, $colname, $array);
+
+                        if ($result_wallet) {
+                            echo "<script>alert(\" Request Refund Successful\");
+                            window.location.href='../wallet.php';</script>";
+                        } else {
+                            echo "<script>alert(\" Request Refund Fail. Please try again.\");
+                        window.location.href='../wallet.php';</script>";
+                        }
+                    } else {
+                        echo "<script>alert(\" Wallet amount is insufficient. Please try other amount\");
+                        window.location.href='../wallet.php';</script>";
+                    }
+                }
+            }
+
+            //--------------------------------------------------
+            //              Distributor Wallet
             //--------------------------------------------------
 
         } // table admin
