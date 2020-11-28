@@ -1,7 +1,7 @@
 <?php
 include_once('../../administrator/connection/PDO_db_function.php');
 $db = new DB_Functions();
- 
+
 $id = $_REQUEST['p'];
 
 $col = "o.*, o.id as order_id, st.name as state_name";
@@ -12,6 +12,13 @@ $order = $db->advwhere($col, $tb, $opt, $arr);
 $order = $order[0];
 
 $status = $order['status'];
+$payment_type = $order['payment_type'];
+
+if ($payment_type == 1) {
+    $payment_display = "Online Payment";
+} else {
+    $payment_display = "Cash";
+}
 
 switch ($status) {
     case "1":
@@ -33,6 +40,11 @@ switch ($status) {
         $status_color = "bg-green";
         $status_show = "Completed";
         $status_desc = "The order was delivered.";
+        break;
+    case "5":
+        $status_color = "bg-black";
+        $status_show = "To Cancel";
+        $status_desc = "The order is pending to cancel. ";
         break;
     default:
         $status_color = "";
@@ -58,6 +70,16 @@ switch ($status) {
                     </tr>
                 </table>
             </blockquote>
+            <?php if ($status == 1) { ?>
+                <blockquote class="bg-warning">
+                    <table class="table-widths">
+                        <tr>
+                            <th class="spacing-titles"><i class="fa fa-info-circle"></i></th>
+                            <th class="spacing-titles1">Reason<br><span><?php echo $order['reason']; ?><span></th>
+                        </tr>
+                    </table>
+                </blockquote>
+            <?php } ?>
             <blockquote>
                 <table class="table-widths">
                     <tr>
@@ -88,7 +110,7 @@ switch ($status) {
                 <table class="table-widths">
                     <tr>
                         <th class="spacing-titles"><i class="fa fa-money"></i></th>
-                        <th class="spacing-titles1">Payment Method<br><span>Online Banking<span></th>
+                        <th class="spacing-titles1">Payment Method<br><span><?php echo $payment_display; ?><span></th>
                     </tr>
                 </table>
             </blockquote>
