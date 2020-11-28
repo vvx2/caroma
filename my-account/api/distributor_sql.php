@@ -272,9 +272,9 @@ if (!empty($postedToken)) {
                     $tablename = "orders";
                     $data = "status = ? , consignment_number =?, date_modified = ? WHERE id = ?";
                     $array = array(3, $consignment_number, $time, $order_id);
-                    $result_delivery = $db->update($tablename, $data, $array);
+                    $result_order = $db->update($tablename, $data, $array);
 
-                    if ($result_delivery) {
+                    if ($result_order) {
                         echo "<script>alert(\" Update Status Successful\");
                               window.location.href='../order-list.php?p=3';</script>";
                     } else {
@@ -290,9 +290,9 @@ if (!empty($postedToken)) {
                     $tablename = "orders";
                     $data = "status =?, date_modified = ? WHERE id = ?";
                     $array = array(4, $time, $order_id);
-                    $result_delivery = $db->update($tablename, $data, $array);
+                    $result_order = $db->update($tablename, $data, $array);
 
-                    if ($result_delivery) {
+                    if ($result_order) {
                         echo "<script>alert(\" Update Status Successful\");
                               window.location.href='../order-list.php?p=4';</script>";
                     } else {
@@ -308,9 +308,9 @@ if (!empty($postedToken)) {
                     $tablename = "orders";
                     $data = "status =?, date_modified = ? WHERE id = ?";
                     $array = array(1, $time, $order_id);
-                    $result_delivery = $db->update($tablename, $data, $array);
+                    $result_order = $db->update($tablename, $data, $array);
 
-                    if ($result_delivery) {
+                    if ($result_order) {
                         echo "<script>alert(\" Update Status Successful\");
                               window.location.href='../order-list.php?p=1';</script>";
                     } else {
@@ -326,9 +326,9 @@ if (!empty($postedToken)) {
                     $tablename = "orders";
                     $data = "status =?, date_modified = ? WHERE id = ?";
                     $array = array(2, $time, $order_id);
-                    $result_delivery = $db->update($tablename, $data, $array);
+                    $result_order = $db->update($tablename, $data, $array);
 
-                    if ($result_delivery) {
+                    if ($result_order) {
                         echo "<script>alert(\" Update Status Successful\");
                               window.location.href='../order-list.php?p=2';</script>";
                     } else {
