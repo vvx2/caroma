@@ -6,7 +6,7 @@ if ($login != 1) {
 	exit();
 }
 
-// page 2: to ship, 3: shipping, 4: completed, 1: rejected/fail
+// page 2: to ship, 3: shipping, 4: completed, 1: Canceled/fail
 if (isset($_REQUEST['p'])) { // order status
 	$order_page = $_REQUEST['p'];
 } else {
@@ -152,7 +152,7 @@ if (isset($_REQUEST['p'])) { // order status
 													<i class="icon-briefcase txt-light"></i>
 												</div>
 												<div class="col-xs-7 text-center data-wrap-right">
-													<h6 class="txt-light">Rejected / Failed</h6>
+													<h6 class="txt-light">Canceled / Failed</h6>
 													<span class="txt-light counter">
 														<?php
 														$col = "id";
@@ -197,7 +197,8 @@ if (isset($_REQUEST['p'])) { // order status
 											<li role="presentation" class="<?php echo ($order_page == "2") ? "active" : "" ?>"><a href="order-list.php?p=2">Pending</a></li>
 											<li role="presentation" class="<?php echo ($order_page == "3") ? "active" : "" ?>"><a href="order-list.php?p=3">Shipping</a></li>
 											<li role="presentation" class="<?php echo ($order_page == "4") ? "active" : "" ?>"><a href="order-list.php?p=4">Completed</a></li>
-											<li role="presentation" class="<?php echo ($order_page == "1") ? "active" : "" ?>"><a href="order-list.php?p=1">Rejected / Failed</a></li>
+											<li role="presentation" class="<?php echo ($order_page == "1") ? "active" : "" ?>"><a href="order-list.php?p=1">Canceled / Failed</a></li>
+											<li role="presentation" class="<?php echo ($order_page == "5") ? "active" : "" ?>"><a href="order-list.php?p=5">To Cancel</a></li>
 										</ul>
 										<div class="tab-content" id="myTabContent_11">
 											<div id="home_11" class="tab-pane fade active in" role="tabpanel">
@@ -221,6 +222,7 @@ if (isset($_REQUEST['p'])) { // order status
 																					<th>Name</th>
 																					<th>DateTime</th>
 																					<th>Total Amount</th>
+																					<th>Payment Type</th>
 																					<th>More Detail</th>
 																					<th>Action</th>
 																				</tr>
@@ -232,6 +234,7 @@ if (isset($_REQUEST['p'])) { // order status
 																					<th>Name</th>
 																					<th>DateTime</th>
 																					<th>Total Amount</th>
+																					<th>Payment Type</th>
 																					<th>More Detail</th>
 																					<th>Action</th>
 																				</tr>
@@ -240,7 +243,7 @@ if (isset($_REQUEST['p'])) { // order status
 																				<?php
 
 																				$i = 1;
-																				$col = "id, status, customer_name, gateway_order_id, date_created, total_payment";
+																				$col = "id, status, customer_name, gateway_order_id, date_created, total_payment, payment_type";
 																				$tb = "orders";
 																				$opt = 'admin_id = ? && status =? ORDER BY date_modified DESC';
 																				$arr = array($user_id, $order_page);
@@ -249,23 +252,22 @@ if (isset($_REQUEST['p'])) { // order status
 
 																					$id = $order['id'];
 																					$status = $order['status'];
+																					$payment_type = $order['payment_type'];
 
 																					//approve order when order is status "Failed / Canceled", maybe some reason cause order failed, can approve again with this button
-																					$btn_approve = '<i data-remote="ajax/distributor_order_assign.php?p=' . $id . '" data-toggle="modal" data-target=".bs-example-modal-lg" class="btn btn-success">Approve</i>';
+																					$btn_approve = '<i data-remote="ajax/distributor_order_approve.php?p=' . $id . '" data-toggle="modal" data-target=".bs-example-modal-lg" class="btn btn-success">Approve</i>';
 																					//to assign consignment number, status -> shipping
-																					$btn_assign_cosignment = '<i data-remote="ajax/distributor_order_assign.php?p=' . $id . '" data-toggle="modal" data-target=".bs-example-modal-lg" class="btn btn-success">Assign Consignment</i>';
-																					//to reject order, status -> failed/rejected
-																					$btn_cancel = '<i data-remote="ajax/distributor_order_assign.php?p=' . $id . '" data-toggle="modal" data-target=".bs-example-modal-lg" class="btn btn-success">Cancel</i>';
+																					$btn_assign_cosignment = '<i data-remote="ajax/distributor_order_assign.php?p=' . $id . '" data-toggle="modal" data-target=".bs-example-modal-lg" class="btn btn-success">Assign</i>';
+																					//to reject order, status -> failed/Canceled
+																					$btn_cancel = '<i data-remote="ajax/distributor_order_cancel.php?p=' . $id . '" data-toggle="modal" data-target=".bs-example-modal-lg" class="btn btn-success">Cancel</i>';
 																					//order deliverd, status -> completed
-																					$btn_complete = '<i data-remote="ajax/distributor_order_assign.php?p=' . $id . '" data-toggle="modal" data-target=".bs-example-modal-lg" class="btn btn-success">To Complete</i>';
-																					//view order
-																					$btn_view = '<i data-remote="ajax/distributor_order.php?p=' . $id . '" data-toggle="modal" data-target=".bs-example-modal-lg" class="fa fa-cogs toolsx"></i>';
+																					$btn_complete = '<i data-remote="ajax/distributor_order_complete.php?p=' . $id . '" data-toggle="modal" data-target=".bs-example-modal-lg" class="btn btn-success">To Complete</i>';
 
 																					switch ($status) {
 																						case "1":
 																							$status_color = "text-danger";
 																							$status_display = "Failed / Canceled";
-																							$status_desc = "This order was rejected, or your order payment was failed.";
+																							$status_desc = "This order was canceled, or your order payment was failed.";
 																							$btn_action = $btn_approve;
 																							break;
 																						case "2":
@@ -284,7 +286,20 @@ if (isset($_REQUEST['p'])) { // order status
 																							$status_color = "text-info";
 																							$status_display = "Completed";
 																							$status_desc = "The order was delivered.";
-																							$btn_action = "";
+																							$btn_action = "-";
+																							break;
+																						case "5":
+																							$status_color = "text-dark";
+																							$status_display = "To Cancel";
+																							$status_desc = "The order is pending to Cancel.";
+																							$btn_action = $btn_cancel;
+																					}
+																					// to do add cancel function, each status set button for action
+
+																					if ($payment_type == 1) {
+																						$payment_display = "Online Payment";
+																					} else {
+																						$payment_display = "Cash";
 																					}
 																				?>
 
@@ -294,6 +309,7 @@ if (isset($_REQUEST['p'])) { // order status
 																						<td><?php echo $order['customer_name']; ?></td>
 																						<td><?php echo $order['date_created']; ?></td>
 																						<td><?php echo $order['total_payment']; ?></td>
+																						<td><?php echo $payment_display; ?></td>
 																						<td><i data-remote="ajax/distributor_order.php?p=<?php echo $order['id']; ?>" data-toggle="modal" data-target=".bs-example-modal-lg" class="fa fa-cogs toolsx"></i></td>
 																						<td><?php echo $btn_action; ?></td>
 																					</tr>
@@ -395,10 +411,8 @@ if (isset($_REQUEST['p'])) { // order status
 				'                   <label  class="control-label mb-10">Product</label>' +
 				'                   <select class="input-width state_select form-control" name="product_id[]" tabindex="2" required>' +
 				'                       <option data-option="" value="">Select Product</option>' +
-				<?php foreach ($result as $product) { ?>
-				'						<option value="<?php echo $product['p_id']; ?>"> <?php echo $product['pt_name']; ?> </option>' +
-				<?php } ?>
-				'                   </select>' +
+				<?php foreach ($result as $product) { ?> '						<option value="<?php echo $product['p_id']; ?>"> <?php echo $product['pt_name']; ?> </option>' +
+				<?php } ?> '                   </select>' +
 				'                   <div class="help-block with-errors"></div>' +
 				'               </div>' +
 				'               <div class="col-sm-4 col-12">' +

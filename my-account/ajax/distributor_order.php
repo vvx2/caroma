@@ -12,12 +12,19 @@ $order = $db->advwhere($col, $tb, $opt, $arr);
 $order = $order[0];
 
 $status = $order['status'];
+$payment_type = $order['payment_type'];
+
+if ($payment_type == 1) {
+    $payment_display = "Online Payment";
+} else {
+    $payment_display = "Cash";
+}
 
 switch ($status) {
     case "1":
         $status_color = "bg-red";
         $status_show = "Failed / Canceled";
-        $status_desc = "This order was rejected, or your order payment was failed.";
+        $status_desc = "This order was cancel, or the order payment was failed.";
         break;
     case "2":
         $status_color = "bg-yellow";
@@ -33,6 +40,11 @@ switch ($status) {
         $status_color = "bg-green";
         $status_show = "Completed";
         $status_desc = "The order was delivered.";
+        break;
+    case "5":
+        $status_color = "bg-black";
+        $status_show = "To Cancel";
+        $status_desc = "The order is pending to cancel. You have to refund back the money or Contact your client";
         break;
     default:
         $status_color = "";
@@ -58,6 +70,16 @@ switch ($status) {
                     </tr>
                 </table>
             </blockquote>
+            <?php if ($status == 1) { ?>
+                <blockquote class="bg-warning">
+                    <table class="table-widths">
+                        <tr>
+                            <th class="spacing-titles"><i class="fa fa-info-circle"></i></th>
+                            <th class="spacing-titles1">Reason<br><span><?php echo $order['reason']; ?><span></th>
+                        </tr>
+                    </table>
+                </blockquote>
+            <?php } ?>
             <blockquote>
                 <table class="table-widths">
                     <tr>
@@ -88,7 +110,7 @@ switch ($status) {
                 <table class="table-widths">
                     <tr>
                         <th class="spacing-titles"><i class="fa fa-money"></i></th>
-                        <th class="spacing-titles1">Payment Method<br><span>Online Banking<span></th>
+                        <th class="spacing-titles1">Payment Method<br><span><?php echo $payment_display; ?><span></th>
                     </tr>
                 </table>
             </blockquote>
@@ -167,19 +189,19 @@ switch ($status) {
             <?php if ($status == 2) { ?>
 
                 <blockquote>
-                        <form data-toggle="validator" role="form" id="form_approve" action="api/distributor_sql.php?type=order_assign&tb=distributor" method="post" enctype="multipart/form-data">
-                            <input type="hidden" name="token" value="<?php echo $token; ?>" />
-                            <div class="form-group">
-                                <div class="form-group col-sm-12 no-padding">
-                                    <label for="consignment_number" class="control-label mb-10">Consignment Number</label>
-                                    <input data-match-error="consignment_number Is Required" type="text" class="form-control" id="consignment_number" name="consignment_number" value="" placeholder="Consignment Number" required>
-                                </div>
+                    <form data-toggle="validator" role="form" id="form_assign" action="api/distributor_sql.php?type=order_assign&tb=distributor" method="post" enctype="multipart/form-data">
+                        <input type="hidden" name="token" value="<?php echo $token; ?>" />
+                        <div class="form-group">
+                            <div class="form-group col-sm-12 no-padding">
+                                <label for="consignment_number" class="control-label mb-10">Consignment Number</label>
+                                <input data-match-error="consignment_number Is Required" type="text" class="form-control" id="consignment_number" name="consignment_number" value="" placeholder="Consignment Number" required>
                             </div>
+                        </div>
 
-                            <div class="form-group mb-0">
-                                <button type="submit" name="btnAction" value="<?php echo $id ?>" class="btn btn-success btn-anim"><i class="icon-rocket"></i><span class="btn-text">Submit</span></button>
-                            </div>
-                        </form>
+                        <div class="form-group mb-0">
+                            <button type="submit" class="btn btn-success btn-anim" name="btnAction" value="<?php echo $id ?>"><i class="icon-rocket"></i><span class="btn-text">Submit</span></button>
+                        </div>
+                    </form>
                 </blockquote>
 
             <?php } ?>

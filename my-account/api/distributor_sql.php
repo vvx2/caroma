@@ -253,14 +253,14 @@ if (!empty($postedToken)) {
 
                         if ($result_order_item) {
                             echo "<script>alert(\" Add Order Successful.\");
-                            window.location.href='../shop.php';</script>";
+                            window.location.href='../order-list.php';</script>";
                         } else {
                             echo "<script>alert(\" Add Order Successful, But record order item fail.\");
-                            window.location.href='../shop.php';</script>";
+                            window.location.href='../order-list.php';</script>";
                         }
                     } else {
                         echo "<script>alert(\" Add Order Fail. Please try again\");
-                              window.location.href='order-list.php';</script>";
+                              window.location.href='../order-list.php';</script>";
                     }
                 }
             } else if ($type == "order_assign") {
@@ -280,6 +280,60 @@ if (!empty($postedToken)) {
                     } else {
                         echo "<script>alert(\" Update Status Fail. Please Try Again\");
                               window.location.href='../order-list.php?p=3';</script>";
+                    }
+                }
+            } else if ($type == "order_complete") {
+                if (isset($_POST['btnAction'])) {
+
+                    $order_id = $_POST['btnAction'];
+
+                    $tablename = "orders";
+                    $data = "status =?, date_modified = ? WHERE id = ?";
+                    $array = array(4, $time, $order_id);
+                    $result_delivery = $db->update($tablename, $data, $array);
+
+                    if ($result_delivery) {
+                        echo "<script>alert(\" Update Status Successful\");
+                              window.location.href='../order-list.php?p=4';</script>";
+                    } else {
+                        echo "<script>alert(\" Update Status Fail. Please Try Again\");
+                              window.location.href='../order-list.php?p=4';</script>";
+                    }
+                }
+            } else if ($type == "order_cancel") {
+                if (isset($_POST['btnAction'])) {
+
+                    $order_id = $_POST['btnAction'];
+
+                    $tablename = "orders";
+                    $data = "status =?, date_modified = ? WHERE id = ?";
+                    $array = array(1, $time, $order_id);
+                    $result_delivery = $db->update($tablename, $data, $array);
+
+                    if ($result_delivery) {
+                        echo "<script>alert(\" Update Status Successful\");
+                              window.location.href='../order-list.php?p=1';</script>";
+                    } else {
+                        echo "<script>alert(\" Update Status Fail. Please Try Again\");
+                              window.location.href='../order-list.php?p=1';</script>";
+                    }
+                }
+            } else if ($type == "order_approve") {
+                if (isset($_POST['btnAction'])) {
+
+                    $order_id = $_POST['btnAction'];
+
+                    $tablename = "orders";
+                    $data = "status =?, date_modified = ? WHERE id = ?";
+                    $array = array(2, $time, $order_id);
+                    $result_delivery = $db->update($tablename, $data, $array);
+
+                    if ($result_delivery) {
+                        echo "<script>alert(\" Update Status Successful\");
+                              window.location.href='../order-list.php?p=2';</script>";
+                    } else {
+                        echo "<script>alert(\" Update Status Fail. Please Try Again\");
+                              window.location.href='../order-list.php?p=2';</script>";
                     }
                 }
             }
