@@ -67,6 +67,12 @@ if ($onpage == "1") {
                     <li>
                         <a class="<?php echo ($PageName == 'wallet') ? 'active' : ''; ?>" href="wallet.php">E-Wallet</a>
                     </li>
+                    <li>
+                        <a class="<?php echo ($PageName == 'shipping') ? 'active' : ''; ?>" href="shipping.php">Shipping</a>
+                    </li>
+                    <li>
+                        <a class="<?php echo ($PageName == 'geo_zone') ? 'active' : ''; ?>" href="geo_zone.php">Geo Zone</a>
+                    </li>
                 </ul>
             </li>
             <li>

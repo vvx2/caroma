@@ -351,7 +351,7 @@ if (!empty($postedToken)) {
                                     echo "<script>alert(\" Update Status Successful. But Insert History Fail\");
                                     window.location.href='../order-list.php?p=4';</script>";
                                 }
-                            }else{
+                            } else {
                                 echo "<script>alert(\" Update Status Successful. But Update Wallet Fail\");
                                     window.location.href='../order-list.php?p=4';</script>";
                             }
@@ -447,6 +447,99 @@ if (!empty($postedToken)) {
 
             //--------------------------------------------------
             //              Distributor Wallet
+            //--------------------------------------------------
+
+            //--------------------------------------------------
+            //              Distributor Geo Zone
+            //--------------------------------------------------
+            else if ($type == "geo_zone_add") {
+                if (isset($_POST['btnAction'])) {
+
+                    $name = $_POST['name'];
+                    $description = $_POST['description'];
+                    $zone = $_POST['zone'];
+
+                    $table = "geo_zone";
+                    $colname = array("name", "description", "admin_id", "date_created", "date_modified");
+                    $array = array($name, $description, $user_id, $time, $time);
+                    $result_geo_zone = $db->insert($table, $colname, $array);
+
+                    if ($result_geo_zone) {
+                        //--------------------------
+                        //  get geo_zone id inserted
+                        //--------------------------
+                        $table = "geo_zone";
+                        $col = "id";
+                        $opt = 'date_created = ?';
+                        $arr = array($time);
+                        $geo_zone = $db->advwhere($col, $table, $opt, $arr);
+                        $geo_zone_id = $geo_zone[0]['id'];
+                        //--------------------------
+
+                        foreach ($zone as $zone) {
+                            $state_id = $zone;
+
+                            $table = "geo_zone_list";
+                            $colname = array("geo_zone_id", "state_id");
+                            $array = array($geo_zone_id, $state_id);
+                            $result_geo_zone_list = $db->insert($table, $colname, $array);
+                        }
+
+                        if ($result_geo_zone_list) {
+                            echo "<script>alert(\" Add Geo Zone Successful.\");
+                            window.location.href='../geo_zone.php';</script>";
+                        } else {
+                            echo "<script>alert(\" Add Geo Zone Successful, But Add Geo Zone List fail.\");
+                            window.location.href='../geo_zone.php';</script>";
+                        }
+                    } else {
+                        echo "<script>alert(\" Add Geo Zone Fail. Please try again.\");
+                        window.location.href='../geo_zone.php';</script>";
+                    }
+                }
+            } else if ($type == "geo_zone_edit") {
+                if (isset($_POST['btnAction'])) {
+
+                    $geo_zone_id = $_POST['btnAction'];
+
+                    $name = $_POST['name'];
+                    $description = $_POST['description'];
+                    $zone = $_POST['zone'];
+
+                    $tablename = "geo_zone";
+                    $data = "name =?, description=?, date_modified = ? WHERE id = ?";
+                    $array = array($name, $description, $time, $geo_zone_id);
+                    $result_geo_zone_update = $db->update($tablename, $data, $array);
+
+                    if ($result_geo_zone_update) {
+
+                        //delete geo zone list and insert again
+                        $result_geo_zone_delete = $db->del("geo_zone_list", 'geo_zone_id', $geo_zone_id);
+
+                        foreach ($zone as $zone) {
+                            $state_id = $zone;
+
+                            $table = "geo_zone_list";
+                            $colname = array("geo_zone_id", "state_id");
+                            $array = array($geo_zone_id, $state_id);
+                            $result_geo_zone_list = $db->insert($table, $colname, $array);
+                        }
+
+                        if ($result_geo_zone_list) {
+                            echo "<script>alert(\" Edit Geo Zone Successful.\");
+                            window.location.href='../geo_zone.php';</script>";
+                        } else {
+                            echo "<script>alert(\" Edit Geo Zone Successful, But Add Geo Zone List fail.\");
+                            window.location.href='../geo_zone.php';</script>";
+                        }
+                    } else {
+                        echo "<script>alert(\" Edit Geo Zone Fail. Please try again.\");
+                        window.location.href='../geo_zone.php';</script>";
+                    }
+                }
+            }
+            //--------------------------------------------------
+            //              Distributor Geo Zone
             //--------------------------------------------------
 
         } // table admin
