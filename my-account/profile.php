@@ -6,8 +6,13 @@ if ($login != 1) {
 	echo "<script>window.location.replace('../login.php')</script>";
 	exit();
 }
-$tb = "users u left join user_address ua on u.id = ua.user_id left join user_distributor ud on u.id = ud.user_id";
-$col = "u.name as name,u.type as user_type,u.image as image, u.email as email, ua.contact as contact, ua.address as address, ua.postcode as postcode, ua.city as city, ua.state as state, ud.distributor_code as distributor_code";
+if ($user_type == 2) {
+	$tb = "users u left join user_address ua on u.id = ua.user_id left join user_distributor ud on u.id = ud.user_id";
+	$col = "u.name as name,u.type as user_type,u.image as image, u.email as email, ua.contact as contact, ua.address as address, ua.postcode as postcode, ua.city as city, ua.state as state, ud.distributor_code as distributor_code";
+} else {
+	$tb = "users u left join user_address ua on u.id = ua.user_id";
+	$col = "u.name as name,u.type as user_type,u.image as image, u.email as email, ua.contact as contact, ua.address as address, ua.postcode as postcode, ua.city as city, ua.state as state";
+}
 $opt = 'u.id = ?';
 $arr = array($user_id);
 $result_user = $db->advwhere($col, $tb, $opt, $arr);
@@ -84,44 +89,88 @@ $count_cart = count($user_cart);
 												<img class="img-circle inline-block mt-40 mb-10" src="<?php echo $image_path; ?>" alt="user" />
 												<h4 class="txt-light block  mb-5 capitalize-font"><?php echo $result_user['name']; ?></h4>
 												<h6 class="txt-light block uppercase-font pb-10"><?php echo $user_type_display; ?></h6>
-												<h6 class="txt-light block uppercase-font"><strong>Code: </strong><?php echo $result_user['distributor_code']; ?></h6>
+												<?php
+												if ($user_type == 2) {
+												?>
+													<h6 class="txt-light block uppercase-font"><strong>Code: </strong><?php echo $result_user['distributor_code']; ?></h6>
+												<?php
+												}
+												?>
+
 
 											</div>
 											<div class="profile-image-overlay"></div>
 										</div>
 										<div class="social-info txt-light">
 											<div class="row">
-												<div class="col-sm-6 text-center">
-													<i class="fa fa-truck block mb-10"></i>
-													<span class="counts block head-font mb-5"><?php echo $count_order; ?></span>
-													<span class="counts-text block">Total Order</span>
-												</div>
-												<div class="col-sm-6 text-center">
-													<i class="fa fa-shopping-cart block mb-10"></i>
-													<span class="counts block head-font mb-5"><?php echo $count_cart; ?></span>
-													<span class="counts-text block">Cart Items</span>
-												</div>
+												<?php
+												if ($user_type == 1) {
+													///if user type is normal user, display point here
+												?>
+													<div class="col-sm-4 text-center">
+														<i class="fa fa-truck block mb-10"></i>
+														<span class="counts block head-font mb-5"><?php echo $count_order; ?></span>
+														<span class="counts-text block">Total Order</span>
+													</div>
+													<div class="col-sm-4 text-center">
+														<i class="fa fa-money block mb-10"></i>
+														<span class="counts block head-font mb-5"><?php echo $count_cart; ?></span>
+														<span class="counts-text block">Point</span>
+													</div>
+													<div class="col-sm-4 text-center">
+														<i class="fa fa-shopping-cart block mb-10"></i>
+														<span class="counts block head-font mb-5"><?php echo $count_cart; ?></span>
+														<span class="counts-text block">Cart Items</span>
+													</div>
+
+												<?php
+												} else {
+												?>
+													<div class="col-sm-6 text-center">
+														<i class="fa fa-truck block mb-10"></i>
+														<span class="counts block head-font mb-5"><?php echo $count_order; ?></span>
+														<span class="counts-text block">Total Order</span>
+													</div>
+
+													<div class="col-sm-6 text-center">
+														<i class="fa fa-shopping-cart block mb-10"></i>
+														<span class="counts block head-font mb-5"><?php echo $count_cart; ?></span>
+														<span class="counts-text block">Cart Items</span>
+													</div>
+												<?php
+												}
+												?>
+
+
 											</div>
 										</div>
-										<div class="social-info txt-light">
-											<div class="row">
-												<div class="col-sm-12 text-center">
-													<i class="fa fa-link block mb-10">  URL For Dealer Register</i>
-													<?php
-													$actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
 
-													if ($actual_link != "http://localhost") {
-														$register_link =  $actual_link . "/register.php?code=" . $result_user['distributor_code'];
-													} else {
-														$register_link =  $actual_link . "/caroma/register.php?code=" . $result_user['distributor_code'];
-													}
-													echo "<a href='" . $register_link . "' target='_blank'>" . $register_link . "</a>";
+										<?php
+										if ($user_type == 2) {
+										?>
+											<div class="social-info txt-light">
+												<div class="row">
+													<div class="col-sm-12 text-center">
+														<i class="fa fa-link block mb-10"> URL For Dealer Register</i>
+														<?php
+														$actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
 
-													?>
+														if ($actual_link != "http://localhost") {
+															$register_link =  $actual_link . "/register.php?code=" . $result_user['distributor_code'];
+														} else {
+															$register_link =  $actual_link . "/caroma/register.php?code=" . $result_user['distributor_code'];
+														}
+														echo "<a href='" . $register_link . "' target='_blank'>" . $register_link . "</a>";
 
+														?>
+
+													</div>
 												</div>
 											</div>
-										</div>
+										<?php
+										}
+										?>
+
 									</div>
 								</div>
 							</div>

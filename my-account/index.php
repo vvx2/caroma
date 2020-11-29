@@ -14,7 +14,7 @@ if (isset($_REQUEST['p'])) { // order status
 }
 
 if ($user_type == "2") {
-	$url = "order-list";
+	$url = "index";
 } else {
 	$url = "index";
 }
