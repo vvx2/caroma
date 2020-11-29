@@ -223,6 +223,7 @@ if (count($get_cart) != 0) {
                                                         <div class="login-on-checkout">
 
                                                             <p class="form-row">
+
                                                                 <div class="col-sm-6 col-12 no-padding-left">
                                                                     <label class="label-width" for="name">Full Name</label>
                                                                     <input class="input-width" type="text" name="name" id="name" value="<?php echo $customer_name; ?>" placeholder="Your Full Name">
@@ -267,7 +268,87 @@ if (count($get_cart) != 0) {
                                                                     <label class="label-width" for="postcode">Zip Code</label>
                                                                     <input class="input-width" type="text" name="postcode" id="postcode" value="<?php echo $customer_postcode; ?>" maxlength="5" onkeypress=" return isNumber(event)" placeholder="Your Zipcode">
                                                                 </div>
+
+                                                                <?php
+                                                                if ($user_type != 1) {
+                                                                ?>
+
+                                                                    <div class="col-sm-12 col-12 no-padding-left">
+                                                                        <div class="form-group">
+                                                                            <label class="control-label mb-10">Delivery Type</label>
+                                                                            <div class="radio-list">
+                                                                                <div class="radio-inline pl-0">
+                                                                                    <div class="radio radio-info">
+                                                                                        <input checked type="radio" name="delivery_type" id="delivery" value="1">
+                                                                                        <label for="delivery">Delivery</label>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="radio-inline">
+                                                                                    <div class="radio radio-info">
+                                                                                        <input type="radio" name="delivery_type" id="self_collect" value="2">
+                                                                                        <label for="self_collect">Self Collect</label>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-sm-12 col-12 no-padding-left">
+                                                                        <div class="form-group">
+                                                                            <label class="control-label mb-10">Payment Type</label>
+                                                                            <div class="radio-list">
+                                                                                <div class="radio-inline pl-0">
+                                                                                    <div class="radio radio-info">
+                                                                                        <input checked type="radio" name="payment_type" id="online_pay" value="1">
+                                                                                        <label for="online_pay">Online Payment</label>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="radio-inline">
+                                                                                    <div class="radio radio-info">
+                                                                                        <input type="radio" name="payment_type" id="cash" value="2">
+                                                                                        <label for="cash">Cash</label>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                <?php
+                                                                } else {
+                                                                ?>
+                                                                    <div hidden>
+                                                                        <div class="col-sm-12 col-12 no-padding-left">
+                                                                            <div class="form-group">
+                                                                                <label class="control-label mb-10">Delivery Type</label>
+                                                                                <div class="radio-list">
+                                                                                    <div class="radio-inline pl-0">
+                                                                                        <div class="radio radio-info">
+                                                                                            <input checked type="radio" name="delivery_type" id="delivery" value="1">
+                                                                                            <label for="delivery">Delivery</label>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-sm-12 col-12 no-padding-left">
+                                                                            <div class="form-group">
+                                                                                <label class="control-label mb-10">Payment Type</label>
+                                                                                <div class="radio-list">
+                                                                                    <div class="radio-inline pl-0">
+                                                                                        <div class="radio radio-info">
+                                                                                            <input checked type="radio" name="payment_type" id="online_pay" value="1">
+                                                                                            <label for="online_pay">Online Payment</label>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                <?php
+                                                                }
+                                                                ?>
+
                                                             </p>
+
 
                                                             <button type="submit" name="btn-sbmt" class="btn custombtn">Continue To Purchase</button>
 
@@ -345,12 +426,19 @@ if (count($get_cart) != 0) {
                                                         <span class="stt-price" id="get_discount">- RM <?php echo number_format($discount, 2, '.', ''); ?></span>
                                                     </div>
                                                 </li>
-                                                <li>
-                                                    <div class="col-sm-12 col-12 no-padding-left">
-                                                        <label class="label-width" for="coupon">Coupon Code <span class="text-danger" id="get_coupon_msg"> </span></label>
-                                                        <input class="input-width" type="text" name="coupon" id="coupon" value="" placeholder="Enter Coupon Code">
-                                                    </div>
-                                                </li>
+                                                <?php
+                                                if ($user_type == 1) {
+                                                ?>
+                                                    <li>
+                                                        <div class="col-sm-12 col-12 no-padding-left">
+                                                            <label class="label-width" for="coupon">Coupon Code <span class="text-danger" id="get_coupon_msg"> </span></label>
+                                                            <input class="input-width" type="text" name="coupon" id="coupon" value="" placeholder="Enter Coupon Code">
+                                                        </div>
+                                                    </li>
+                                                <?php
+                                                }
+                                                ?>
+
                                                 <li>
                                                     <div class="subtotal-line">
                                                         <b class="stt-name">total:</b>
