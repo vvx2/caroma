@@ -131,6 +131,12 @@ if ($pagetype == 2) {
                                                             $status_display = "Completed";
                                                             $status_desc = "The order was delivered.";
                                                             $btn_action = $btn_view;
+                                                            break;
+                                                        case "5":
+                                                            $status_color = "text-dark";
+                                                            $status_display = "To Cancel";
+                                                            $status_desc = "The order is pending to Cancel.";
+                                                            $btn_action = $btn_cancel;
                                                     }
 
                                                 ?>
@@ -159,8 +165,6 @@ if ($pagetype == 2) {
                                                                 <?php echo $btn_action; ?>
                                                             </div>
                                                         </td>
-
-
 
                                                     </tr>
                                                 <?php $i++;
