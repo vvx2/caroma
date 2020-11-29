@@ -124,7 +124,13 @@ if (isset($_REQUEST['type'])) {
                         // write discount algorithm here
                         //------------------------------------------
 
-                        $coupon_code = $_POST['coupon'];
+                        // if user typr = 2 or 3 (distributor or dealer), will no have coupon
+                        if (isset($_POST['coupon'])) {
+                            $coupon_code = $_POST['coupon'];
+                        } else {
+                            $coupon_code = "";
+                        }
+
                         //check coupon use
                         if ($coupon_code != "") {
                             $coupon_return = validate_coupon($coupon_code, $user_id, $user_type, $total_payment, $shipping, $db);
@@ -136,13 +142,46 @@ if (isset($_REQUEST['type'])) {
                                 $shipping = $coupon_return['Shipping'];
                             }
                         }
-
                         //------------------------------------------
 
+                        //------------------------------------------
+                        //  check delivery type , paymeny type, admin id
+                        //------------------------------------------
+
+                        $delivery_type = $_POST['delivery_type'];
+                        $payment_type = $_POST['payment_type'];
+
+                        //delivery type 2 = self collect
+                        if ($delivery_type == 2) {
+                            $shipping = 0;
+                        }
+
+                        // when payment = cash(2), order will skip online payment step, direct success and wait distritor to approce on panel
+                        if ($payment_type == 2) {
+                            $status_order = 2;
+                        } else {
+                            $status_order = 1;
+                        }
+
+                        //when user type is dealer, admin id will be distributor id - to identify the order belong who
+                        if ($user_type == 3) {
+                            //get distributor id that dealer under with
+                            $table = 'user_dealer';
+                            $col = "*";
+                            $opt = 'users_id =?';
+                            $arr = array($user_id);
+                            $dealer = $db->advwhere($col, $table, $opt, $arr);
+                            $under_distributor = $dealer[0]['under_distributor'];
+
+                            $admin_id = $under_distributor;
+                        } else {
+                            $admin_id = 0;
+                        }
+                        //------------------------------------------
 
                         $table = "orders";
-                        $colname = array("status", "customer_name", "customer_email", "customer_address", "customer_postcode", "customer_city", "customer_state", "customer_contact", "total_price", "coupon_code", "discount_percent", "discount_amount", "total_payment", "track_code", "gateway_order_id", "users_id", "date_created", "date_modified");
-                        $array = array(1, $customer_name, $customer_email, $customer_address, $customer_postcode, $customer_city, $customer_state, $customer_contact, $total_price, $coupon_code, $discount_percent, $discount_amount, $total_payment, $track_code, $order_id, $user_id, $time, $time);
+                        $colname = array("status", "customer_name", "customer_email", "customer_address", "customer_postcode", "customer_city", "customer_state", "customer_contact", "total_price", "coupon_code", "discount_percent", "discount_amount", "shipping_fee", "total_payment", "track_code", "gateway_order_id", "payment_type", "users_id", "admin_id", "date_created", "date_modified");
+                        $array = array($status_order, $customer_name, $customer_email, $customer_address, $customer_postcode, $customer_city, $customer_state, $customer_contact, $total_price, $coupon_code, $discount_percent, $discount_amount, $shipping, $total_payment, $track_code, $order_id, $payment_type, $user_id, $admin_id, $time, $time);
                         $result_order = $db->insert($table, $colname, $array);
 
                         if ($result_order) {
@@ -173,31 +212,86 @@ if (isset($_REQUEST['type'])) {
 
                             //------------------------------------------
                             if ($result_order_item) {
+                                //if payment type is 1 (online payment)
+                                if ($payment_type == 1) {
 ?>
-                                <html>
+                                    <html>
 
-                                <head>
-                                    <title>Send data back to order</title>
-                                </head>
+                                    <head>
+                                        <title>Send data back to order</title>
+                                    </head>
 
-                                <body onload="document.order.submit()">
-                                    <form name="order" method="post" action="../checkout.php">
-                                        <input type="hidden" name="detail" value="<?php echo $_POST['detail']; ?>">
-                                        <input type="hidden" name="amount" value="<?php echo $total_payment; ?>">
-                                        <input type="hidden" name="order_id" value="<?php echo $_POST['order_id']; ?>">
-                                        <input type="hidden" name="name" value="<?php echo $_POST['name']; ?>">
-                                        <input type="hidden" name="email" value="<?php echo $_POST['email']; ?>">
-                                        <input type="hidden" name="phone" value="<?php echo $_POST['phone']; ?>">
-                                        <input type="hidden" name="address" value="<?php echo $_POST['address']; ?>">
-                                        <input type="hidden" name="state" value="<?php echo $_POST['state']; ?>">
-                                        <input type="hidden" name="city" value="<?php echo $_POST['city']; ?>">
-                                        <input type="hidden" name="postcode" value="<?php echo $_POST['postcode']; ?>">
+                                    <body onload="document.order.submit()">
+                                        <form name="order" method="post" action="../checkout.php">
+                                            <input type="hidden" name="detail" value="<?php echo $_POST['detail']; ?>">
+                                            <input type="hidden" name="amount" value="<?php echo $total_payment; ?>">
+                                            <input type="hidden" name="order_id" value="<?php echo $_POST['order_id']; ?>">
+                                            <input type="hidden" name="name" value="<?php echo $_POST['name']; ?>">
+                                            <input type="hidden" name="email" value="<?php echo $_POST['email']; ?>">
+                                            <input type="hidden" name="phone" value="<?php echo $_POST['phone']; ?>">
+                                            <input type="hidden" name="address" value="<?php echo $_POST['address']; ?>">
+                                            <input type="hidden" name="state" value="<?php echo $_POST['state']; ?>">
+                                            <input type="hidden" name="city" value="<?php echo $_POST['city']; ?>">
+                                            <input type="hidden" name="postcode" value="<?php echo $_POST['postcode']; ?>">
 
-                                    </form>
-                                </body>
+                                        </form>
+                                    </body>
 
-                                </html>
+                                    </html>
 <?php
+                                } else {
+
+                                    //------------------------------
+                                    // reduce product stock
+                                    //------------------------------
+                                    $table = "cart c left join product_role_price pp on c.product_id = pp.product_id";
+                                    $col = "c.product_id as product_id, c.qty as qty, pp.price as price";
+                                    $opt = 'c.customer_id = ? && pp.type = ?';
+                                    $arr = array($user_id, $user_type);
+                                    $result_cart = $db->advwhere($col, $table, $opt, $arr);
+
+                                    // loop all product in cart
+                                    foreach ($result_cart as $cart) {
+
+                                        // get product detail.
+                                        $col = "id, stock";
+                                        $table = "product";
+                                        $opt = 'id = ?';
+                                        $arr = array($cart['product_id']);
+                                        $product = $db->advwhere($col, $table, $opt, $arr);
+
+                                        //if product exists then execute
+                                        if ($product) {
+
+                                            $product_id = $product[0]["id"];
+                                            $product_stock = $product[0]["stock"];
+                                            $reduced_prodcut_stock = $product_stock - $cart['qty'];
+
+                                            $tablename = "product";
+                                            $data = "stock = ?, date_modified = ? WHERE id = ?";
+                                            $array = array($reduced_prodcut_stock, $time, $product_id);
+                                            $result_reduce_stock = $db->update($tablename, $data, $array);
+                                        } else {
+                                            continue;
+                                        }
+                                    }
+
+                                    //------------------------------
+                                    // reduce product stock
+                                    //------------------------------
+
+                                    //------------------------------
+                                    // Clear Cart Table
+                                    //------------------------------
+                                    $table = "cart";
+                                    $remove_from_cart = $db->del($table, 'customer_id', $user_id);
+
+                                    //------------------------------
+                                    // Clear Cart Table
+                                    //------------------------------
+                                    echo "<script> alert(\" Order Successful, Please check your order list.\");
+                                    window.location.href='../shop.php';</script>";
+                                }
                             }
                         } else {
                             echo "<script>alert(\" Checkout Fail. Please try again.\");

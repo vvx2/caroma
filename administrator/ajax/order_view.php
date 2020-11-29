@@ -33,6 +33,11 @@ switch ($status) {
         $status_show = "Completed";
         $status_desc = "The order was delivered.";
         break;
+    case "5":
+        $status_color = "bg-black";
+        $status_show = "To Cancel";
+        $status_desc = "The order is pending to cancel. You have to refund back the money or Contact your client";
+        break;
     default:
         $status_color = "";
         $status_show = "";
@@ -131,7 +136,7 @@ switch ($status) {
                                     <td><?php echo number_format($total, 2); ?></td>
                                 </tr>
                             <?php
-                                
+
                             } ?>
 
 
@@ -172,5 +177,5 @@ switch ($status) {
 
 </div>
 <div class="modal-footer">
-     <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+    <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
 </div>

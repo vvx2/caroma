@@ -13,9 +13,9 @@ $order = $order[0];
 
 $status = $order['status'];
 
-$status_color = "bg-yellow";
-$status_show = "Assign ";
-$status_desc = "Assign Consignment Number to user for tracking their order.";
+$status_color = "bg-green";
+$status_show = "To Complete ";
+$status_desc = "Complete the order.The order will be Completed status.<br> **Make sure the item is delivered**";
 
 
 
@@ -23,7 +23,7 @@ $status_desc = "Assign Consignment Number to user for tracking their order.";
 <!-- get from here -->
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h5 class="modal-title" id="myLargeModalLabel">Order Confirm</h5>
+    <h5 class="modal-title" id="myLargeModalLabel">Order Complete</h5>
 </div>
 <div class="modal-body">
     <div class="panel-wrapper collapse in">
@@ -37,17 +37,16 @@ $status_desc = "Assign Consignment Number to user for tracking their order.";
                 </table>
             </blockquote>
             <blockquote>
-                <form data-toggle="validator" role="form" id="form_assign" action="api/distributor_sql.php?type=order_assign&tb=distributor" method="post" enctype="multipart/form-data">
+                <form data-toggle="validator" role="form" id="form_complete" action="api/distributor_sql.php?type=order_complete&tb=distributor" method="post" enctype="multipart/form-data">
                     <input type="hidden" name="token" value="<?php echo $token; ?>" />
                     <div class="form-group">
                         <div class="form-group col-sm-12 no-padding">
-                            <label for="consignment_number" class="control-label mb-10">Consignment Number</label>
-                            <input data-match-error="consignment_number Is Required" type="text" class="form-control" id="consignment_number" name="consignment_number" value="" placeholder="Consignment Number" required>
+                            <label class="control-label mb-10">Are you sure to complete this order?</label>
                         </div>
                     </div>
 
                     <div class="form-group mb-0">
-                        <button type="submit" class="btn btn-success btn-anim" name="btnAction" value="<?php echo $id ?>"><i class="icon-rocket"></i><span class="btn-text">Submit</span></button>
+                        <button type="submit" class="btn btn-success btn-anim" name="btnAction" value="<?php echo $id ?>"><i class="icon-rocket"></i><span class="btn-text">Yes! Complete</span></button>
                     </div>
                 </form>
             </blockquote>

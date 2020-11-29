@@ -219,8 +219,8 @@ if (!empty($postedToken)) {
                     $discount_amount = 0;
 
                     $table = "orders";
-                    $colname = array("status", "customer_name", "customer_email", "customer_address", "customer_postcode", "customer_city", "customer_state", "customer_contact", "total_price", "coupon_code", "discount_percent", "discount_amount", "total_payment", "track_code", "users_id", "date_created", "date_modified");
-                    $array = array(4, $customer_name, $customer_email, $customer_address, $customer_postcode, $customer_city, $customer_state, $customer_contact, $total_price, $coupon_code, $discount_percent, $discount_amount, $total_payment, $track_code, $user_id, $time, $time);
+                    $colname = array("status", "customer_name", "customer_email", "customer_address", "customer_postcode", "customer_city", "customer_state", "customer_contact", "total_price", "coupon_code", "discount_percent", "discount_amount", "total_payment", "track_code", "gateway_order_id", "users_id", "type", "admin_id", "date_created", "date_modified");
+                    $array = array(4, $customer_name, $customer_email, $customer_address, $customer_postcode, $customer_city, $customer_state, $customer_contact, $total_price, $coupon_code, $discount_percent, $discount_amount, $total_payment, $track_code, "self order - no id", $user_id, 2, $user_id, $time, $time);
                     $result_order = $db->insert($table, $colname, $array);
 
                     if ($result_order) {
@@ -236,12 +236,13 @@ if (!empty($postedToken)) {
                         $order_id = $order[0]['id'];
                         //--------------------------
 
-                        $product_price = $_POST["product_price"];
+                        $price = $_POST["product_price"];
                         $product_id = $_POST["product_id"];
                         $qty = $_POST["product_qty"];
                         foreach ($product_id as $key => $id) {
 
                             $product_qty = $qty[$key];
+                            $product_price = $price[$key];
                             $product_id = $id;
 
                             $table = "order_items";
@@ -252,14 +253,14 @@ if (!empty($postedToken)) {
 
                         if ($result_order_item) {
                             echo "<script>alert(\" Add Order Successful.\");
-                            window.location.href='../shop.php';</script>";
+                            window.location.href='../order-list.php';</script>";
                         } else {
                             echo "<script>alert(\" Add Order Successful, But record order item fail.\");
-                            window.location.href='../shop.php';</script>";
+                            window.location.href='../order-list.php';</script>";
                         }
                     } else {
                         echo "<script>alert(\" Add Order Fail. Please try again\");
-                              window.location.href='order-list.php';</script>";
+                              window.location.href='../order-list.php';</script>";
                     }
                 }
             } else if ($type == "order_assign") {
@@ -271,9 +272,9 @@ if (!empty($postedToken)) {
                     $tablename = "orders";
                     $data = "status = ? , consignment_number =?, date_modified = ? WHERE id = ?";
                     $array = array(3, $consignment_number, $time, $order_id);
-                    $result_delivery = $db->update($tablename, $data, $array);
+                    $result_order = $db->update($tablename, $data, $array);
 
-                    if ($result_delivery) {
+                    if ($result_order) {
                         echo "<script>alert(\" Update Status Successful\");
                               window.location.href='../order-list.php?p=3';</script>";
                     } else {
@@ -281,10 +282,339 @@ if (!empty($postedToken)) {
                               window.location.href='../order-list.php?p=3';</script>";
                     }
                 }
+            } else if ($type == "order_complete") {
+                if (isset($_POST['btnAction'])) {
+
+                    $order_id = $_POST['btnAction'];
+
+                    $tablename = "orders";
+                    $data = "status =?, date_modified = ? WHERE id = ?";
+                    $array = array(4, $time, $order_id);
+                    $result_order = $db->update($tablename, $data, $array);
+
+                    if ($result_order) {
+
+                        //--------------------------------------------------
+                        //              Get order details
+                        $col = "*";
+                        $tb = "orders";
+                        $opt = 'id = ?';
+                        $arr = array($order_id);
+                        $order = $db->advwhere($col, $tb, $opt, $arr);
+                        $order = $order[0];
+                        //--------------------------------------------------
+
+                        //---------------------------------------------------
+                        //       VARIABLE for wallet_transaction_history
+                        $total_payment = $order["total_payment"]; // amount to record
+                        $gateway_order_id = $order["gateway_order_id"]; // order to record in description
+                        $description = "Sale. Order Id: " . $gateway_order_id;
+                        //---------------------------------------------------
+
+                        //---------------------------------------------------
+                        //       VARIABLE for user_distributor
+                        $payment_type = $order["payment_type"]; //payment type to check if online payment will add amount to distributor wallet
+                        //--------------------------------------------------
+
+                        //--------------------------------------------------
+                        //   Check payment type if it is online payment
+                        if ($payment_type == 1) {
+                            //   Get Distributor wallet details - amount
+                            $col = "*";
+                            $tb = "user_distributor";
+                            $opt = 'user_id = ?';
+                            $arr = array($user_id);
+                            $distributor = $db->advwhere($col, $tb, $opt, $arr);
+                            $distributor = $distributor[0];
+                            $current_wallet_amount = $distributor["distributor_wallet"];
+
+                            //   Add total_payment to amount
+                            $added_wallet_amount = $current_wallet_amount + $total_payment;
+
+                            //   Update distributor_wallet
+                            $tablename = "user_distributor";
+                            $data = "distributor_wallet = ? WHERE user_id = ?";
+                            $array = array($added_wallet_amount, $user_id);
+                            $result_user_distributor = $db->update($tablename, $data, $array);
+
+                            if ($result_user_distributor) {
+                                //   Add Histroy to distributor_wallet_transaction_history
+                                $table = "distributor_wallet_transaction_history";
+                                $colname = array("amount", "description", "distributor_id", "date_created", "date_modified");
+                                $array = array($total_payment, $description, $user_id, $time, $time);
+                                $result_wallet_history = $db->insert($table, $colname, $array);
+
+                                if ($result_wallet_history) {
+                                    echo "<script>alert(\" Update Status Successful\");
+                                    window.location.href='../order-list.php?p=4';</script>";
+                                } else {
+                                    echo "<script>alert(\" Update Status Successful. But Insert History Fail\");
+                                    window.location.href='../order-list.php?p=4';</script>";
+                                }
+                            } else {
+                                echo "<script>alert(\" Update Status Successful. But Update Wallet Fail\");
+                                    window.location.href='../order-list.php?p=4';</script>";
+                            }
+
+                            exit;
+                        }
+                        //--------------------------------------------------
+
+                        echo "<script>alert(\" Update Status Successful\");
+                              window.location.href='../order-list.php?p=4';</script>";
+                    } else {
+                        echo "<script>alert(\" Update Status Fail. Please Try Again\");
+                              window.location.href='../order-list.php?p=4';</script>";
+                    }
+                }
+            } else if ($type == "order_cancel") {
+                if (isset($_POST['btnAction'])) {
+
+                    $order_id = $_POST['btnAction'];
+
+                    $tablename = "orders";
+                    $data = "status =?, date_modified = ? WHERE id = ?";
+                    $array = array(1, $time, $order_id);
+                    $result_order = $db->update($tablename, $data, $array);
+
+                    if ($result_order) {
+                        echo "<script>alert(\" Update Status Successful\");
+                              window.location.href='../order-list.php?p=1';</script>";
+                    } else {
+                        echo "<script>alert(\" Update Status Fail. Please Try Again\");
+                              window.location.href='../order-list.php?p=1';</script>";
+                    }
+                }
+            } else if ($type == "order_approve") {
+                if (isset($_POST['btnAction'])) {
+
+                    $order_id = $_POST['btnAction'];
+
+                    $tablename = "orders";
+                    $data = "status =?, date_modified = ? WHERE id = ?";
+                    $array = array(2, $time, $order_id);
+                    $result_order = $db->update($tablename, $data, $array);
+
+                    if ($result_order) {
+                        echo "<script>alert(\" Update Status Successful\");
+                              window.location.href='../order-list.php?p=2';</script>";
+                    } else {
+                        echo "<script>alert(\" Update Status Fail. Please Try Again\");
+                              window.location.href='../order-list.php?p=2';</script>";
+                    }
+                }
             }
 
             //--------------------------------------------------
             //              Distributor Order
+            //--------------------------------------------------
+
+            //--------------------------------------------------
+            //              Distributor Wallet
+            //--------------------------------------------------
+            else if ($type == "wallet_refund") {
+                if (isset($_POST['btnAction'])) {
+
+                    $refund_amt = $_POST['amount'];
+
+                    $col = "*";
+                    $tb = "user_distributor";
+                    $opt = 'user_id = ?';
+                    $arr = array($user_id);
+                    $distributor = $db->advwhere($col, $tb, $opt, $arr);
+                    $wallet_amt = $distributor[0]['distributor_wallet'];
+
+                    if ($wallet_amt >= $refund_amt) {
+
+                        $table = "distributor_wallet_transaction";
+                        $colname = array("status", "amount", "distributor_id", "date_created", "date_modified");
+                        $array = array(1, $refund_amt, $user_id, $time, $time);
+                        $result_wallet = $db->insert($table, $colname, $array);
+
+                        if ($result_wallet) {
+                            echo "<script>alert(\" Request Refund Successful\");
+                            window.location.href='../wallet.php';</script>";
+                        } else {
+                            echo "<script>alert(\" Request Refund Fail. Please try again.\");
+                        window.location.href='../wallet.php';</script>";
+                        }
+                    } else {
+                        echo "<script>alert(\" Wallet amount is insufficient. Please try other amount\");
+                        window.location.href='../wallet.php';</script>";
+                    }
+                }
+            }
+
+            //--------------------------------------------------
+            //              Distributor Wallet
+            //--------------------------------------------------
+
+            //--------------------------------------------------
+            //              Distributor Geo Zone
+            //--------------------------------------------------
+            else if ($type == "geo_zone_add") {
+                if (isset($_POST['btnAction'])) {
+
+                    $name = $_POST['name'];
+                    $description = $_POST['description'];
+                    $zone = $_POST['zone'];
+
+                    $table = "geo_zone";
+                    $colname = array("name", "description", "admin_id", "date_created", "date_modified");
+                    $array = array($name, $description, $user_id, $time, $time);
+                    $result_geo_zone = $db->insert($table, $colname, $array);
+
+                    if ($result_geo_zone) {
+                        //--------------------------
+                        //  get geo_zone id inserted
+                        //--------------------------
+                        $table = "geo_zone";
+                        $col = "id";
+                        $opt = 'date_created = ?';
+                        $arr = array($time);
+                        $geo_zone = $db->advwhere($col, $table, $opt, $arr);
+                        $geo_zone_id = $geo_zone[0]['id'];
+                        //--------------------------
+
+                        foreach ($zone as $zone) {
+                            $state_id = $zone;
+
+                            $table = "geo_zone_list";
+                            $colname = array("geo_zone_id", "state_id");
+                            $array = array($geo_zone_id, $state_id);
+                            $result_geo_zone_list = $db->insert($table, $colname, $array);
+                        }
+
+                        if ($result_geo_zone_list) {
+                            echo "<script>alert(\" Add Geo Zone Successful.\");
+                            window.location.href='../geo_zone.php';</script>";
+                        } else {
+                            echo "<script>alert(\" Add Geo Zone Successful, But Add Geo Zone List fail.\");
+                            window.location.href='../geo_zone.php';</script>";
+                        }
+                    } else {
+                        echo "<script>alert(\" Add Geo Zone Fail. Please try again.\");
+                        window.location.href='../geo_zone.php';</script>";
+                    }
+                }
+            } else if ($type == "geo_zone_edit") {
+                if (isset($_POST['btnAction'])) {
+
+                    $geo_zone_id = $_POST['btnAction'];
+
+                    $name = $_POST['name'];
+                    $description = $_POST['description'];
+                    $zone = $_POST['zone'];
+
+                    $tablename = "geo_zone";
+                    $data = "name =?, description=?, date_modified = ? WHERE id = ?";
+                    $array = array($name, $description, $time, $geo_zone_id);
+                    $result_geo_zone_update = $db->update($tablename, $data, $array);
+
+                    if ($result_geo_zone_update) {
+
+                        //delete geo zone list and insert again
+                        $result_geo_zone_delete = $db->del("geo_zone_list", 'geo_zone_id', $geo_zone_id);
+
+                        foreach ($zone as $zone) {
+                            $state_id = $zone;
+
+                            $table = "geo_zone_list";
+                            $colname = array("geo_zone_id", "state_id");
+                            $array = array($geo_zone_id, $state_id);
+                            $result_geo_zone_list = $db->insert($table, $colname, $array);
+                        }
+
+                        if ($result_geo_zone_list) {
+                            echo "<script>alert(\" Edit Geo Zone Successful.\");
+                            window.location.href='../geo_zone.php';</script>";
+                        } else {
+                            echo "<script>alert(\" Edit Geo Zone Successful, But Add Geo Zone List fail.\");
+                            window.location.href='../geo_zone.php';</script>";
+                        }
+                    } else {
+                        echo "<script>alert(\" Edit Geo Zone Fail. Please try again.\");
+                        window.location.href='../geo_zone.php';</script>";
+                    }
+                }
+            }
+            //--------------------------------------------------
+            //              Distributor Geo Zone
+            //--------------------------------------------------
+
+            //--------------------------------------------------
+            //              Distributor Shipping
+            //--------------------------------------------------
+
+            else if ($type == "shipping_add") {
+                if (isset($_POST['btnAction'])) {
+
+                    $name = $_POST['name'];
+                    $geo_zone = $_POST['zone'];
+                    $first_weight = $_POST['first_weight'];
+                    $first_price = $_POST['first_price'];
+                    $next_weight = $_POST['next_weight'];
+                    $next_price = $_POST['next_price'];
+                    $charge = $_POST['charge'];
+
+                    $table = "shipping";
+                    $colname = array("name", "geo_zone", "first_weight", "first_price", "next_weight", "next_price", "charge", "admin_id", "status", "date_created", "date_modified");
+                    $array = array($name, $geo_zone, $first_weight, $first_price, $next_weight, $next_price, $charge, $user_id, 1, $time, $time);
+                    $result_shipping = $db->insert($table, $colname, $array);
+
+                    if ($result_shipping) {
+                        echo "<script>alert(\" Add Shipping Successful.\");
+                            window.location.href='../shipping.php';</script>";
+                    } else {
+                        echo "<script>alert(\" Add Shipping Fail. Please try again.\");
+                        window.location.href='../shipping.php';</script>";
+                    }
+                }
+            } else if ($type == "shipping_edit") {
+                if (isset($_POST['btnAction'])) {
+
+                    $shipping_id = $_POST['btnAction'];
+
+                    $name = $_POST['name'];
+                    $geo_zone = $_POST['zone'];
+                    $first_weight = $_POST['first_weight'];
+                    $first_price = $_POST['first_price'];
+                    $next_weight = $_POST['next_weight'];
+                    $next_price = $_POST['next_price'];
+                    $charge = $_POST['charge'];
+                    $status = $_POST['status'];
+
+                    $tablename = "shipping";
+                    $data = "name =?, geo_zone =?, first_weight =?, first_price =?, next_weight =?, next_price =?, charge =?, status =?, date_modified = ? WHERE id = ?";
+                    $array = array($name, $geo_zone, $first_weight, $first_price, $next_weight, $next_price, $charge, $status, $time, $shipping_id);
+                    $result_shipping_edit = $db->update($tablename, $data, $array);
+
+                    if ($result_shipping_edit) {
+                        echo "<script>alert(\" Edit Shipping Successful.\");
+                            window.location.href='../shipping.php';</script>";
+                    } else {
+                        echo "<script>alert(\" Edit Shipping Fail. Please try again.\");
+                        window.location.href='../shipping.php';</script>";
+                    }
+                }
+            } else if ($type == "shipping_delete") {
+                if (isset($_POST['btnAction'])) {
+
+                    $shipping_id = $_POST['btnAction'];
+
+                    $result_shipping_delete = $db->del("shipping", 'id', $shipping_id);
+                    if ($result_shipping_delete) {
+                        echo "<script>alert(\" Delete Shipping Successful.\");
+                            window.location.href='../shipping.php';</script>";
+                    } else {
+                        echo "<script>alert(\" Delete Shipping Fail. Please try again.\");
+                        window.location.href='../shipping.php';</script>";
+                    }
+                }
+            }
+
+            //--------------------------------------------------
+            //              Distributor Shipping
             //--------------------------------------------------
 
         } // table admin
