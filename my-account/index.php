@@ -252,7 +252,7 @@ if ($user_type == "2") {
 																						<td><?php echo $order['total_payment']; ?></td>
 																						<td><i data-remote="ajax/user_order_detail.php?p=<?php echo $order['id']; ?>" data-toggle="modal" data-target=".bs-example-modal-lg" class="fa fa-cogs toolsx"></i></td>
 																					</tr>
-																				<?php } ?>
+																				<?php $i++;} ?>
 																			</tbody>
 																		</table>
 																	</div>

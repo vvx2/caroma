@@ -173,7 +173,7 @@ if (isset($_REQUEST['p'])) { // refund request status (distributor_wallet_transa
                                                                                         <td><?php echo "-"; ?></td>
                                                                                         <td><?php echo "-"; ?></td>
                                                                                     </tr>
-                                                                                <?php } ?>
+                                                                                <?php $i++;} ?>
                                                                             </tbody>
                                                                         </table>
                                                                     </div>

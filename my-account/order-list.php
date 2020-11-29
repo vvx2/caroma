@@ -312,7 +312,7 @@ if (isset($_REQUEST['p'])) { // order status
 																						<td><i data-remote="ajax/distributor_order.php?p=<?php echo $order['id']; ?>" data-toggle="modal" data-target=".bs-example-modal-lg" class="fa fa-cogs toolsx"></i></td>
 																						<td><?php echo $btn_action; ?></td>
 																					</tr>
-																				<?php } ?>
+																				<?php $i++;} ?>
 																			</tbody>
 																		</table>
 																	</div>

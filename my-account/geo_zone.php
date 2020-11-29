@@ -118,7 +118,7 @@ if ($login != 1) {
                                                                                         <td><?php echo $description; ?></td>
                                                                                         <td><?php echo $btn_action; ?></td>
                                                                                     </tr>
-                                                                                <?php } ?>
+                                                                                <?php $i++;} ?>
                                                                             </tbody>
                                                                         </table>
                                                                     </div>

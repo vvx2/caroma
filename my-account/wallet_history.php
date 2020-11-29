@@ -156,7 +156,7 @@ if ($login != 1) {
                                                                                         <td><?php echo $desc; ?></td>
                                                                                         <td><?php echo $wallet['date_modified']; ?></td>
                                                                                     </tr>
-                                                                                <?php } ?>
+                                                                                <?php $i++;} ?>
                                                                             </tbody>
                                                                         </table>
                                                                     </div>
