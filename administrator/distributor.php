@@ -119,6 +119,7 @@ $PageName = "distributor";
                                             <th>Name</th>
                                             <th>Email</th>
                                             <th>Distributor Code</th>
+                                            <th>Wallet</th>
                                             <th>State</th>
                                             <th>Status</th>
                                             <th width=20%></th>
@@ -127,7 +128,7 @@ $PageName = "distributor";
                                     <tbody>
                                         <?php
                                         $i = 1;
-                                        $col = "users.id as id, users.name as name, users.email as email, users.status as status,users.date_modified as date_modified, user_distributor.distributor_code as distributor_code, state.name as state_name";
+                                        $col = "users.id as id, users.name as name, users.email as email, users.status as status,users.date_modified as date_modified, user_distributor.distributor_code as distributor_code, user_distributor.distributor_wallet as wallet, state.name as state_name";
                                         $tb = "users left join user_distributor on users.id = user_distributor.user_id left join user_address on users.id = user_address.user_id left join state on user_address.state = state.id";
                                         $opt = 'type = ? ORDER BY date_modified DESC';
                                         $arr = array(2);
@@ -154,6 +155,7 @@ $PageName = "distributor";
                                                 <td><?php echo $distributor["name"]; ?></td>
                                                 <td><?php echo $distributor["email"]; ?></td>
                                                 <td><?php echo $distributor["distributor_code"]; ?></td>
+                                                <td>RM <?php echo number_format($distributor["wallet"], 2); ?></td>
                                                 <td><?php echo $distributor["state_name"]; ?></td>
                                                 <td class="<?php echo $status_color; ?>"><?php echo $status_display; ?></td>
                                                 <td>
@@ -167,7 +169,7 @@ $PageName = "distributor";
                                         }
                                         ?>
                                     </tbody>
-                                    
+
                                 </table>
                             </div>
                         </div>
