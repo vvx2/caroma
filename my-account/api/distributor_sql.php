@@ -542,6 +542,81 @@ if (!empty($postedToken)) {
             //              Distributor Geo Zone
             //--------------------------------------------------
 
+            //--------------------------------------------------
+            //              Distributor Shipping
+            //--------------------------------------------------
+
+            else if ($type == "shipping_add") {
+                if (isset($_POST['btnAction'])) {
+
+                    $name = $_POST['name'];
+                    $geo_zone = $_POST['zone'];
+                    $first_weight = $_POST['first_weight'];
+                    $first_price = $_POST['first_price'];
+                    $next_weight = $_POST['next_weight'];
+                    $next_price = $_POST['next_price'];
+                    $charge = $_POST['charge'];
+
+                    $table = "shipping";
+                    $colname = array("name", "geo_zone", "first_weight", "first_price", "next_weight", "next_price", "charge", "admin_id", "status", "date_created", "date_modified");
+                    $array = array($name, $geo_zone, $first_weight, $first_price, $next_weight, $next_price, $charge, $user_id, 1, $time, $time);
+                    $result_shipping = $db->insert($table, $colname, $array);
+
+                    if ($result_shipping) {
+                        echo "<script>alert(\" Add Shipping Successful.\");
+                            window.location.href='../shipping.php';</script>";
+                    } else {
+                        echo "<script>alert(\" Add Shipping Fail. Please try again.\");
+                        window.location.href='../shipping.php';</script>";
+                    }
+                }
+            } else if ($type == "shipping_edit") {
+                if (isset($_POST['btnAction'])) {
+
+                    $shipping_id = $_POST['btnAction'];
+
+                    $name = $_POST['name'];
+                    $geo_zone = $_POST['zone'];
+                    $first_weight = $_POST['first_weight'];
+                    $first_price = $_POST['first_price'];
+                    $next_weight = $_POST['next_weight'];
+                    $next_price = $_POST['next_price'];
+                    $charge = $_POST['charge'];
+                    $status = $_POST['status'];
+
+                    $tablename = "shipping";
+                    $data = "name =?, geo_zone =?, first_weight =?, first_price =?, next_weight =?, next_price =?, charge =?, status =?, date_modified = ? WHERE id = ?";
+                    $array = array($name, $geo_zone, $first_weight, $first_price, $next_weight, $next_price, $charge, $status, $time, $shipping_id);
+                    $result_shipping_edit = $db->update($tablename, $data, $array);
+
+                    if ($result_shipping_edit) {
+                        echo "<script>alert(\" Edit Shipping Successful.\");
+                            window.location.href='../shipping.php';</script>";
+                    } else {
+                        echo "<script>alert(\" Edit Shipping Fail. Please try again.\");
+                        window.location.href='../shipping.php';</script>";
+                    }
+                }
+            } else if ($type == "shipping_delete") {
+                if (isset($_POST['btnAction'])) {
+
+                    $shipping_id = $_POST['btnAction'];
+
+                    $result_shipping_delete = $db->del("shipping", 'id', $shipping_id);
+                    if ($result_shipping_delete) {
+                        echo "<script>alert(\" Delete Shipping Successful.\");
+                            window.location.href='../shipping.php';</script>";
+                    } else {
+                        echo "<script>alert(\" Delete Shipping Fail. Please try again.\");
+                        window.location.href='../shipping.php';</script>";
+                    }
+                }
+            }
+
+            //--------------------------------------------------
+            //              Distributor Shipping
+            //--------------------------------------------------
+
         } // table admin
     } else {
         echo "Token Expired. Please Try Again";
