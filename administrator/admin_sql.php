@@ -555,8 +555,116 @@ if (!empty($postedToken)) {
         }
       }
 
+
+
+
       //--------------------------------------------------
       //                    DISTRIBUTOR
+      //--------------------------------------------------
+
+      //--------------------------------------------------
+      //             DISTRIBUTOR REFUND
+      //--------------------------------------------------
+
+      else if ($type == "refund_approve") {
+        if (isset($_POST['btnAction'])) {
+
+          $refund_id = $_POST['btnAction'];
+
+          $col = "dw.*, u.name as distributor_name, ud.*";
+          $tb = "distributor_wallet_transaction dw left join users u on dw.distributor_id = u.id left join user_distributor ud on dw.distributor_id = ud.user_id";
+          $opt = 'dw.id = ?';
+          $arr = array($refund_id);
+          $refund = $db->advwhere($col, $tb, $opt, $arr);
+
+          if (count($refund) != 0) {
+            $refund = $refund[0];
+
+            $amount_to_refund = $refund['amount'];
+            $distributor_wallet = $refund['distributor_wallet'];
+            $distributor_id = $refund['distributor_id'];
+            $refund_date_created = $refund['date_created'];
+
+            if ($distributor_wallet >= $amount_to_refund) {
+
+              if (!file_exists($_FILES['img']['tmp_name']) || !is_uploaded_file($_FILES['img']['tmp_name'])) { // no upload file will not update img name
+                echo "<script>alert(\" Upload Refund Proof Fail, PLease Try Again. \");
+                window.location.href='refund.php';</script>";
+                exit();
+              } else {
+                //------------------------------------------
+                //			Image Upload Start - img
+                //------------------------------------------
+                if ($_FILES["img"]["error"] > 0) {
+                  echo "<script>alert('error');</script>";
+                } else {
+                  if (file_exists("../img/refund/" . $_FILES["img"]["name"])) {
+                    echo "<script>alert('exist');</script>";
+                  } else {
+                    $temp = explode(".", $_FILES["img"]["name"]);
+                    $newfilename = 'REF' . round(microtime(true)) . '.' . end($temp);
+                    move_uploaded_file($_FILES["img"]["tmp_name"], "../img/refund/" . $newfilename);
+                  }
+                }
+                //------------------------------------------
+                //			Image Upload End - img
+                //------------------------------------------
+              }
+
+              //update refund request status
+              $table = "distributor_wallet_transaction";
+              $data = "status = ?, image =?, date_modified = ? WHERE id = ?";
+              $array = array(2, $newfilename, $time, $refund_id);
+              $result_distributor_wallet_transaction = $db->update($table, $data, $array);
+
+              if (!$result_distributor_wallet_transaction) {
+                echo "<script>alert(\" Update Refund Request Status Fail, PLease Try Again. \");
+                window.location.href='refund.php';</script>";
+                exit();
+              }
+
+              //update distributor wallet amount after reduce
+              $reduced_wallet_amount = $distributor_wallet - $amount_to_refund;
+              $negative_amount = $amount_to_refund * -1; // insert negative number to db, for identify it is reducing
+              $description = "Refund Request. Date: " . $refund_date_created; // history description
+
+              $table = "user_distributor";
+              $data = "distributor_wallet = ? WHERE user_id = ?";
+              $array = array($reduced_wallet_amount, $distributor_id);
+              $result_user_distributor = $db->update($table, $data, $array);
+
+              if (!$result_user_distributor) {
+                echo "<script>alert(\" Update Distributor Wallet Fail, PLease Try Again. (**Contact IT Support** )\");
+                window.location.href='refund.php';</script>";
+                exit();
+              }
+
+              //   Add Histroy to distributor_wallet_transaction_history
+              $table = "distributor_wallet_transaction_history";
+              $colname = array("amount", "current_amount", "description", "distributor_id", "date_created", "date_modified");
+              $array = array($negative_amount, $reduced_wallet_amount, $description, $distributor_id, $time, $time);
+              $result_wallet_history = $db->insert($table, $colname, $array);
+
+              if ($result_wallet_history) {
+                echo "<script>alert(\" Appprove Refund Request Successful\");
+                window.location.href='refund.php';</script>";
+              } else {
+                echo "<script>alert(\" Appprove Refund Request Successful, But Insert History Fail\");
+                window.location.href='refund.php';</script>";
+              }
+            } else {
+              echo "<script>alert(\" Wallet amount is insufficient , PLease Try Again. \");
+                     window.location.href='refund.php';</script>";
+            }
+          } else {
+            echo "<script>alert(\" This Refund not Exists in database, PLease Try Again. \");
+            window.location.href='refund.php';</script>";
+          }
+        }
+      }
+
+      //--------------------------------------------------
+      //              DISTRIBUTOR REFUND
       //--------------------------------------------------
 
       //--------------------------------------------------

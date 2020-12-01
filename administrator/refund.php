@@ -68,7 +68,7 @@ if (isset($_REQUEST['page'])) {
                                                 <?php
 
                                                 $i = 1;
-                                                $col = "*, dw.id as refund_id, dw.date_created as request_date";
+                                                $col = "*,dw.status as dw_status, dw.id as refund_id, dw.date_created as request_date";
                                                 $tb = "distributor_wallet_transaction dw left join users u on dw.distributor_id = u.id";
                                                 $opt = 'dw.status = ? ORDER BY dw.date_modified DESC';
                                                 $arr = array($refund_type);
@@ -76,7 +76,7 @@ if (isset($_REQUEST['page'])) {
                                                 foreach ($refund as $row) {
 
                                                     $id = $row['refund_id'];
-                                                    $status = $row['status'];
+                                                    $status = $row['dw_status'];
 
                                                     //approve refund
                                                     $btn_approve = '<a data-remote="ajax/refund_approve.php?p=' . $id . '" class="btn btn-white btn-xs" data-toggle="modal" data-target="#myModal">Approve</a>';
