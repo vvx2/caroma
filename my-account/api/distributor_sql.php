@@ -340,8 +340,8 @@ if (!empty($postedToken)) {
                             if ($result_user_distributor) {
                                 //   Add Histroy to distributor_wallet_transaction_history
                                 $table = "distributor_wallet_transaction_history";
-                                $colname = array("amount", "description", "distributor_id", "date_created", "date_modified");
-                                $array = array($total_payment, $description, $user_id, $time, $time);
+                                $colname = array("amount", "current_amount", "description", "distributor_id", "date_created", "date_modified");
+                                $array = array($total_payment, $added_wallet_amount, $description, $user_id, $time, $time);
                                 $result_wallet_history = $db->insert($table, $colname, $array);
 
                                 if ($result_wallet_history) {
