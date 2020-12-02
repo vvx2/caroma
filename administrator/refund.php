@@ -81,7 +81,7 @@ if (isset($_REQUEST['page'])) {
                                                     //approve refund
                                                     $btn_approve = '<a data-remote="ajax/refund_approve.php?p=' . $id . '" class="btn btn-white btn-xs" data-toggle="modal" data-target="#myModal">Approve</a>';
                                                     //to reject refund, status -> failed/rejected
-                                                    $btn_cancel = '<a data-remote="ajax/refund_cancel.php?p=' . $id . '" class="btn btn-white btn-xs" data-toggle="modal" data-target="#myModal">Cancel</a>';
+                                                    $btn_reject = '<a data-remote="ajax/refund_reject.php?p=' . $id . '" class="btn btn-white btn-xs" data-toggle="modal" data-target="#myModal">Reject</a>';
                                                     //view refund
                                                     $btn_view = '<a data-remote="ajax/refund_view.php?p=' . $id . '" class="btn btn-white btn-xs" data-toggle="modal" data-target="#myModal">View</a>';
 
@@ -90,7 +90,7 @@ if (isset($_REQUEST['page'])) {
                                                             $status_color = "text-warning";
                                                             $status_display = "Pending";
                                                             $status_desc = "This refund request is waiting admin to approve.";
-                                                            $btn_action = $btn_view . $btn_approve;
+                                                            $btn_action = $btn_view . $btn_approve. $btn_reject;
                                                             break;
                                                         case "2":
                                                             $status_color = "text-success";
@@ -99,10 +99,10 @@ if (isset($_REQUEST['page'])) {
                                                             $btn_action = $btn_view;
                                                             break;
                                                         case "3":
-                                                            $status_color = "text-success";
+                                                            $status_color = "text-danger";
                                                             $status_display = "Rejected";
                                                             $status_desc = "This refund was rejected.";
-                                                            $btn_action = $btn_view . $btn_cancel;
+                                                            $btn_action = $btn_view;
                                                     }
 
                                                 ?>

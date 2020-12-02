@@ -443,8 +443,26 @@ if (!empty($postedToken)) {
                         window.location.href='../wallet.php';</script>";
                     }
                 }
-            }
+            } else if ($type == "bank_update") {
+                if (isset($_POST['btnAction'])) {
 
+                    $bank_name = $_POST['bank_name'];
+                    $bank_account = $_POST['bank_account'];
+
+                    $tablename = "user_distributor";
+                    $data = "bank_name =?, bank_account =? WHERE user_id = ?";
+                    $array = array($bank_name, $bank_account, $user_id);
+                    $result_bank = $db->update($tablename, $data, $array);
+
+                    if ($result_bank) {
+                        echo "<script>alert(\" Edit Bank Detail Successful\");
+                            window.location.href='../wallet.php';</script>";
+                    } else {
+                        echo "<script>alert(\" Edit Bank Detail Fail. Please try again.\");
+                        window.location.href='../wallet.php';</script>";
+                    }
+                }
+            }
             //--------------------------------------------------
             //              Distributor Wallet
             //--------------------------------------------------

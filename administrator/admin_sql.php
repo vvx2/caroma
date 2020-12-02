@@ -589,7 +589,7 @@ if (!empty($postedToken)) {
 
               if (!file_exists($_FILES['img']['tmp_name']) || !is_uploaded_file($_FILES['img']['tmp_name'])) { // no upload file will not update img name
                 echo "<script>alert(\" Upload Refund Proof Fail, PLease Try Again. \");
-                window.location.href='refund.php';</script>";
+                window.location.href='refund.php?page=1';</script>";
                 exit();
               } else {
                 //------------------------------------------
@@ -619,7 +619,7 @@ if (!empty($postedToken)) {
 
               if (!$result_distributor_wallet_transaction) {
                 echo "<script>alert(\" Update Refund Request Status Fail, PLease Try Again. \");
-                window.location.href='refund.php';</script>";
+                window.location.href='refund.php?page=1';</script>";
                 exit();
               }
 
@@ -635,7 +635,7 @@ if (!empty($postedToken)) {
 
               if (!$result_user_distributor) {
                 echo "<script>alert(\" Update Distributor Wallet Fail, PLease Try Again. (**Contact IT Support** )\");
-                window.location.href='refund.php';</script>";
+                window.location.href='refund.php?page=1';</script>";
                 exit();
               }
 
@@ -647,18 +647,37 @@ if (!empty($postedToken)) {
 
               if ($result_wallet_history) {
                 echo "<script>alert(\" Appprove Refund Request Successful\");
-                window.location.href='refund.php';</script>";
+                window.location.href='refund.php?page=2';</script>";
               } else {
                 echo "<script>alert(\" Appprove Refund Request Successful, But Insert History Fail\");
-                window.location.href='refund.php';</script>";
+                window.location.href='refund.php?page=2';</script>";
               }
             } else {
               echo "<script>alert(\" Wallet amount is insufficient , PLease Try Again. \");
-                     window.location.href='refund.php';</script>";
+                     window.location.href='refund.php?page=1';</script>";
             }
           } else {
             echo "<script>alert(\" This Refund not Exists in database, PLease Try Again. \");
-            window.location.href='refund.php';</script>";
+            window.location.href='refund.php?page=1';</script>";
+          }
+        }
+      } else if ($type == "refund_reject") {
+        if (isset($_POST['btnAction'])) {
+
+          $refund_id = $_POST['btnAction'];
+          $reason = $_POST['reason'];
+
+          $tablename = "distributor_wallet_transaction";
+          $data = "status =?, reason =?, date_modified = ? WHERE id = ?";
+          $array = array(3, $reason, $time, $refund_id);
+          $result_distributor_wallet_transaction = $db->update($tablename, $data, $array);
+
+          if ($result_distributor_wallet_transaction) {
+            echo "<script>alert(\" Reject Refund Request Successful\");
+                      window.location.href='refund.php?page=3';</script>";
+          } else {
+            echo "<script>alert(\" Reject Refund Request Fail. Please Try Again\");
+                      window.location.href='refund.php?page=3';</script>";
           }
         }
       }

@@ -78,7 +78,30 @@ if (isset($_REQUEST['p'])) { // refund request status (distributor_wallet_transa
                             </div>
                         </div>
                     </div>
-
+                </div>
+                <!-- /Row -->
+                <!-- Row -->
+                <div class="row">
+                    <div class="col-sm-6 col-12">
+                            <div class="sm-data-box bg-blue">
+                                <div class="col-xs-5 text-center pa-0 icon-wrap-left">
+                                    <i class="txt-light">BANK NAME</i>
+                                </div>
+                                <div class="col-xs-7 text-center pa-0 icon-wrap-left">
+                                    <i class="txt-light"><?php echo ($distributor[0]['bank_name'] != NULL) ? $distributor[0]['bank_name'] : "NO BANK NAME"; ?></i>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="col-sm-6 col-12">
+                            <div class="sm-data-box bg-blue">
+                                <div class="col-xs-5 text-center pa-0 icon-wrap-left">
+                                    <i class="txt-light">BANK ACCOUNT</i>
+                                </div>
+                                <div class="col-xs-7 text-center pa-0 icon-wrap-left">
+                                    <i class="txt-light"><?php echo ($distributor[0]['bank_account'] != NULL) ? $distributor[0]['bank_account'] : "NO ACCOUNT"; ?></i>
+                                </div>
+                            </div>
+                    </div>
                 </div>
                 <!-- /Row -->
 
@@ -92,7 +115,8 @@ if (isset($_REQUEST['p'])) { // refund request status (distributor_wallet_transa
                                 </div>
                                 <div class="pull-right">
                                     <h6 class="panel-title txt-light">
-                                        <i data-remote="ajax/distributor_refund.php" data-toggle="modal" data-target=".bs-example-modal-lg" class="btn btn-success"><strong>Refund Request</strong></i>
+                                        <i data-remote="ajax/distributor_bank.php" data-toggle="modal" data-target=".bs-example-modal-lg" class="btn btn-primary"><strong>Edit Bank Detail</strong></i>
+                                        <i data-toggle="modal" data-target=".bs-example-modal-lg" class="btn btn-success" <?php echo (($distributor[0]['bank_account'] == NULL) || ($distributor[0]['bank_name'] == NULL)) ? "disabled" : 'data-remote="ajax/distributor_refund.php"'; ?>><strong>Refund Request</strong></i>
                                         <a href="wallet_history.php"><i class="btn btn-success"><strong>View Trasaction History</strong></i></a>
                                     </h6>
                                 </div>
@@ -100,7 +124,7 @@ if (isset($_REQUEST['p'])) { // refund request status (distributor_wallet_transa
                             </div>
                             <div class="panel-wrapper collapse in">
                                 <div class="panel-body">
-                                    <p class="text-muted">Please check your<code> Wallet Transaction </code> in this list.</p>
+                                    <p class="text-muted">Please check your<code> Wallet Transaction </code> in this list.</p> <?php echo (($distributor[0]['bank_account'] == NULL) || ($distributor[0]['bank_name'] == NULL)) ? "**To request refund, you need to fill up your bank details **" : ''; ?>
                                     <div class="pills-struct mt-40">
                                         <ul role="tablist" class="nav nav-pills nav-pills-rounded" id="myTabs_11">
                                             <li role="presentation" class="<?php echo ($wallet_page == "1") ? "active" : "" ?>"><a href="wallet.php?p=1">Pending</a></li>
@@ -173,7 +197,8 @@ if (isset($_REQUEST['p'])) { // refund request status (distributor_wallet_transa
                                                                                         <td><?php echo "-"; ?></td>
                                                                                         <td><?php echo "-"; ?></td>
                                                                                     </tr>
-                                                                                <?php $i++;} ?>
+                                                                                <?php $i++;
+                                                                                } ?>
                                                                             </tbody>
                                                                         </table>
                                                                     </div>
