@@ -37,13 +37,13 @@ $status = $shipping['status'];
 <!-- get from here -->
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h5 class="modal-title" id="myLargeModalLabel">Edit Geo Zone</h5>
+    <h5 class="modal-title" id="myLargeModalLabel">Edit Shipping</h5>
 </div>
 <div class="modal-body">
     <div class="panel-wrapper collapse in">
         <div class="panel-body no-padding">
             <div class="form-wrap">
-                <form data-toggle="validator" role="form" id="form_geo_zone" action="api/distributor_sql.php?type=shipping_edit&tb=distributor" method="post" enctype="multipart/form-data">
+                <form data-toggle="validator" role="form" id="form_shipping" action="api/distributor_sql.php?type=shipping_edit&tb=distributor" method="post" enctype="multipart/form-data">
                     <input type="hidden" name="token" value="<?php echo $token; ?>" />
 
                     <div class="form-group">

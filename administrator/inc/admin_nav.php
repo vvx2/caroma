@@ -88,6 +88,13 @@ if (isset($refund_type)) {
 					<li class="<?php echo ($refund_type == '3') ? 'active' : ''; ?>"><a href="refund.php?page=3">Rejected Refund</a></li>
 				</ul>
 			</li>
+			<li class="<?php echo ($PageName == 'shipping' || $PageName == 'geo_zone') ? 'active' : ''; ?>">
+				<a href=""><i class="fa fa-th-large"></i> <span class="nav-label">Shipping</span> <span class="fa arrow"></span></a>
+				<ul class="nav nav-second-level">
+					<li class="<?php echo ($PageName == 'shipping') ? 'active' : ''; ?>"><a href="shipping.php">Shipping</a></li>
+					<li class="<?php echo ($PageName == 'geo_zone') ? 'active' : ''; ?>"><a href="geo_zone.php">Geo Zone</a></li>
+				</ul>
+			</li>
 
 			<?php echo $adminclose ?>
 			<!--  Navigation bar END here  -->

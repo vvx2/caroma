@@ -872,6 +872,264 @@ if (!empty($postedToken)) {
       //                    ORDER
       //--------------------------------------------------
 
+      //--------------------------------------------------
+      //              Admin Geo Zone
+      //--------------------------------------------------
+      else if ($type == "geo_zone_add") {
+        if (isset($_POST['btnAction'])) {
+
+          $name = $_POST['name'];
+          $description = $_POST['description'];
+          $zone = $_POST['zone'];
+
+          // check geo_zone is it isset in database
+          $table = "geo_zone";
+          $col = "id";
+          $opt = 'name = ? && admin_id = ? ';
+          $arr = array($name, 0);
+          $check_geo_zone_isset = $db->advwhere($col, $table, $opt, $arr);
+
+          if (count($check_geo_zone_isset) == 0) {
+
+            $table = "geo_zone";
+            $colname = array("name", "description", "admin_id", "date_created", "date_modified");
+            $array = array($name, $description, 0, $time, $time);
+            $result_geo_zone = $db->insert($table, $colname, $array);
+
+            if ($result_geo_zone) {
+              //--------------------------
+              //  get geo_zone id inserted
+              //--------------------------
+              $table = "geo_zone";
+              $col = "id";
+              $opt = 'date_created = ?';
+              $arr = array($time);
+              $geo_zone = $db->advwhere($col, $table, $opt, $arr);
+              $geo_zone_id = $geo_zone[0]['id'];
+              //--------------------------
+
+              foreach ($zone as $zone) {
+
+                $state_id = $zone;
+                // check geo_zone list is it isset in database, if yes, then skip
+                $table = "geo_zone_list";
+                $col = "id";
+                $opt = 'geo_zone_id = ? && state_id = ?';
+                $arr = array($geo_zone_id, $state_id);
+                $check_geo_zone_list_isset = $db->advwhere($col, $table, $opt, $arr);
+
+                if (count($check_geo_zone_list_isset) != 0) {
+                  continue;
+                } else {
+
+                  $table = "geo_zone_list";
+                  $colname = array("geo_zone_id", "state_id");
+                  $array = array($geo_zone_id, $state_id);
+                  $result_geo_zone_list = $db->insert($table, $colname, $array);
+
+                  if ($zone == 0) {
+                    //delete geo zone list and insert again
+                    $result_geo_zone_delete = $db->del("geo_zone_list", 'geo_zone_id', $geo_zone_id);
+                    $result_geo_zone_list = $db->insert($table, $colname, $array);
+                    break;
+                  }
+                }
+              }
+
+              if ($result_geo_zone_list) {
+                echo "<script>alert(\" Add Geo Zone Successful.\");
+                          window.location.href='geo_zone.php';</script>";
+              } else {
+                echo "<script>alert(\" Add Geo Zone Successful, But Add Geo Zone List fail.\");
+                        window.location.href='geo_zone.php';</script>";
+              }
+            } else {
+              echo "<script>alert(\" Add Geo Zone Fail. Please try again.\");
+                      window.location.href='geo_zone.php';</script>";
+            }
+          } else {
+            echo "<script>alert(\" Geo Zone Exists, Please try again.\");
+          window.location.href='geo_zone.php';</script>";
+          }
+        }
+      } else if ($type == "geo_zone_edit") {
+        if (isset($_POST['btnAction'])) {
+
+          $geo_zone_id = $_POST['btnAction'];
+
+          $name = $_POST['name'];
+          $description = $_POST['description'];
+          $zone = $_POST['zone'];
+
+          // check geo_zone is it isset in database
+          $table = "geo_zone";
+          $col = "id";
+          $opt = 'name = ? && admin_id = ? && id != ?';
+          $arr = array($name, 0, $geo_zone_id);
+          $check_geo_zone_isset = $db->advwhere($col, $table, $opt, $arr);
+
+          if (count($check_geo_zone_isset) == 0) {
+
+            $tablename = "geo_zone";
+            $data = "name =?, description=?, date_modified = ? WHERE id = ?";
+            $array = array($name, $description, $time, $geo_zone_id);
+            $result_geo_zone_update = $db->update($tablename, $data, $array);
+
+            if ($result_geo_zone_update) {
+
+              //delete geo zone list and insert again
+              $result_geo_zone_delete = $db->del("geo_zone_list", 'geo_zone_id', $geo_zone_id);
+
+              foreach ($zone as $zone) {
+
+                $state_id = $zone;
+                // check geo_zone list is it isset in database, if yes, then skip
+                $table = "geo_zone_list";
+                $col = "id";
+                $opt = 'geo_zone_id = ? && state_id = ?';
+                $arr = array($geo_zone_id, $state_id);
+                $check_geo_zone_list_isset = $db->advwhere($col, $table, $opt, $arr);
+
+                if (count($check_geo_zone_list_isset) != 0) {
+                  continue;
+                } else {
+                  $table = "geo_zone_list";
+                  $colname = array("geo_zone_id", "state_id");
+                  $array = array($geo_zone_id, $state_id);
+                  $result_geo_zone_list = $db->insert($table, $colname, $array);
+
+                  if ($zone == 0) {
+                    //delete geo zone list and insert again
+                    $result_geo_zone_delete = $db->del("geo_zone_list", 'geo_zone_id', $geo_zone_id);
+                    $result_geo_zone_list = $db->insert($table, $colname, $array);
+                    break;
+                  }
+                }
+              }
+
+              if ($result_geo_zone_list) {
+                echo "<script>alert(\" Edit Geo Zone Successful.\");
+                          window.location.href='geo_zone.php';</script>";
+              } else {
+                echo "<script>alert(\" Edit Geo Zone Successful, But Add Geo Zone List fail.\");
+                          window.location.href='geo_zone.php';</script>";
+              }
+            } else {
+              echo "<script>alert(\" Edit Geo Zone Fail. Please try again.\");
+                      window.location.href='geo_zone.php';</script>";
+            }
+          } else {
+            echo "<script>alert(\" Geo Zone Exists, Please try again.\");
+        window.location.href='geo_zone.php';</script>";
+          }
+        }
+      }
+      //--------------------------------------------------
+      //              Admin Geo Zone
+      //--------------------------------------------------
+
+
+      //--------------------------------------------------
+      //              Admin Shipping
+      //--------------------------------------------------
+
+      else if ($type == "shipping_add") {
+        if (isset($_POST['btnAction'])) {
+
+          $name = $_POST['name'];
+          $geo_zone = $_POST['zone'];
+          $first_weight = $_POST['first_weight'];
+          $first_price = $_POST['first_price'];
+          $next_weight = $_POST['next_weight'];
+          $next_price = $_POST['next_price'];
+          $charge = $_POST['charge'];
+
+          // check geo_zone is it isset in database
+          $table = "shipping";
+          $col = "id";
+          $opt = 'name = ? && admin_id = ?';
+          $arr = array($name, 0);
+          $check_shipping_isset = $db->advwhere($col, $table, $opt, $arr);
+
+          if (count($check_shipping_isset) == 0) {
+
+            $table = "shipping";
+            $colname = array("name", "geo_zone", "first_weight", "first_price", "next_weight", "next_price", "charge", "admin_id", "status", "date_created", "date_modified");
+            $array = array($name, $geo_zone, $first_weight, $first_price, $next_weight, $next_price, $charge, 0, 1, $time, $time);
+            $result_shipping = $db->insert($table, $colname, $array);
+
+            if ($result_shipping) {
+              echo "<script>alert(\" Add Shipping Successful.\");
+                          window.location.href='shipping.php';</script>";
+            } else {
+              echo "<script>alert(\" Add Shipping Fail. Please try again.\");
+                      window.location.href='shipping.php';</script>";
+            }
+          } else {
+            echo "<script>alert(\" Shipping Exists, Please try again.\");
+           window.location.href='shipping.php';</script>";
+          }
+        }
+      } else if ($type == "shipping_edit") {
+        if (isset($_POST['btnAction'])) {
+
+          $shipping_id = $_POST['btnAction'];
+
+          $name = $_POST['name'];
+          $geo_zone = $_POST['zone'];
+          $first_weight = $_POST['first_weight'];
+          $first_price = $_POST['first_price'];
+          $next_weight = $_POST['next_weight'];
+          $next_price = $_POST['next_price'];
+          $charge = $_POST['charge'];
+          $status = $_POST['status'];
+
+          // check geo_zone is it isset in database
+          $table = "shipping";
+          $col = "id";
+          $opt = 'name = ? && admin_id = ? && id != ?';
+          $arr = array($name, 0, $shipping_id);
+          $check_shipping_isset = $db->advwhere($col, $table, $opt, $arr);
+
+          if (count($check_shipping_isset) == 0) {
+
+            $tablename = "shipping";
+            $data = "name =?, geo_zone =?, first_weight =?, first_price =?, next_weight =?, next_price =?, charge =?, status =?, date_modified = ? WHERE id = ?";
+            $array = array($name, $geo_zone, $first_weight, $first_price, $next_weight, $next_price, $charge, $status, $time, $shipping_id);
+            $result_shipping_edit = $db->update($tablename, $data, $array);
+
+            if ($result_shipping_edit) {
+              echo "<script>alert(\" Edit Shipping Successful.\");
+                          window.location.href='shipping.php';</script>";
+            } else {
+              echo "<script>alert(\" Edit Shipping Fail. Please try again.\");
+                      window.location.href='shipping.php';</script>";
+            }
+          } else {
+            echo "<script>alert(\" Shipping Exists, Please try again.\");
+         window.location.href='shipping.php';</script>";
+          }
+        }
+      } else if ($type == "shipping_delete") {
+        if (isset($_POST['btnAction'])) {
+
+          $shipping_id = $_POST['btnAction'];
+
+          $result_shipping_delete = $db->del("shipping", 'id', $shipping_id);
+          if ($result_shipping_delete) {
+            echo "<script>alert(\" Delete Shipping Successful.\");
+                          window.location.href='shipping.php';</script>";
+          } else {
+            echo "<script>alert(\" Delete Shipping Fail. Please try again.\");
+                      window.location.href='shipping.php';</script>";
+          }
+        }
+      }
+
+      //--------------------------------------------------
+      //              Admin Shipping
+      //--------------------------------------------------
+
     } // table admin
   } else {
     echo "Token Expired. Please Try Again";

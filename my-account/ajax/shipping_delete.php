@@ -37,11 +37,11 @@ $status_desc = "Delete This Shipping.";
                 </table>
             </blockquote>
             <blockquote>
-                <form data-toggle="validator" role="form" id="form_cancel" action="api/distributor_sql.php?type=shipping_delete&tb=distributor" method="post" enctype="multipart/form-data">
+                <form data-toggle="validator" role="form" id="form_delete" action="api/distributor_sql.php?type=shipping_delete&tb=distributor" method="post" enctype="multipart/form-data">
                     <input type="hidden" name="token" value="<?php echo $token; ?>" />
 
                     <div class="form-group mb-0">
-                        <button type="submit" class="btn btn-success btn-anim" name="btnAction" value="<?php echo $id ?>"><i class="icon-rocket"></i><span class="btn-text">Yes! Cancel</span></button>
+                        <button type="submit" class="btn btn-success btn-anim" name="btnAction" value="<?php echo $id ?>"><i class="icon-rocket"></i><span class="btn-text">Yes! Delete</span></button>
                     </div>
                 </form>
             </blockquote>

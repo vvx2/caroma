@@ -101,18 +101,18 @@ if ($login != 1) {
                                                                                 <?php
 
                                                                                 $i = 1;
-                                                                                $col = "*,s.name as shipping_name, g.name as geo_zone_name";
+                                                                                $col = "*,s.id as shipping_id,s.status as shipping_status, s.name as shipping_name, g.name as geo_zone_name";
                                                                                 $tb = "shipping s left join geo_zone g on s.geo_zone = g.id";
                                                                                 $opt = 's.admin_id = ? ORDER BY s.date_modified';
                                                                                 $arr = array($user_id);
                                                                                 $shipping = $db->advwhere($col, $tb, $opt, $arr);
                                                                                 foreach ($shipping as $shipping) {
 
-                                                                                    $btn_shipping_edit = '<i data-remote="ajax/shipping_edit.php?p=' . $shipping['id'] . '" data-toggle="modal" data-target=".bs-example-modal-lg" class="btn btn-success">Edit</i>';
-                                                                                    $btn_shipping_delete = '<i data-remote="ajax/shipping_delete.php?p=' . $shipping['id'] . '" data-toggle="modal" data-target=".bs-example-modal-lg" class="btn btn-danger">Delete</i>';
+                                                                                    $btn_shipping_edit = '<i data-remote="ajax/shipping_edit.php?p=' . $shipping['shipping_id'] . '" data-toggle="modal" data-target=".bs-example-modal-lg" class="btn btn-success">Edit</i>';
+                                                                                    $btn_shipping_delete = '<i data-remote="ajax/shipping_delete.php?p=' . $shipping['shipping_id'] . '" data-toggle="modal" data-target=".bs-example-modal-lg" class="btn btn-danger">Delete</i>';
                                                                                     $btn_action = $btn_shipping_edit . " " . $btn_shipping_delete;
                                                                                     $name = $shipping['shipping_name'];
-                                                                                    $status = $shipping['status'];
+                                                                                    $status = $shipping['shipping_status'];
                                                                                     $geo_zone_name = $shipping['geo_zone_name'];
 
                                                                                     switch ($status) {
