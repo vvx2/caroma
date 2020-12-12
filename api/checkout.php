@@ -124,6 +124,9 @@ if (isset($_REQUEST['type'])) {
                         // write discount algorithm here
                         //------------------------------------------
 
+                        // check shipping fee here
+                        //todo
+
                         // if user typr = 2 or 3 (distributor or dealer), will no have coupon
                         if (isset($_POST['coupon'])) {
                             $coupon_code = $_POST['coupon'];
