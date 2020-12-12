@@ -228,10 +228,10 @@
                                     <b class="stt-name">Subtotal <span class="sub">(<?php echo $number_cart; ?> items)</span></b>
                                     <span class="stt-price">RM <?php echo number_format($sub_total, 2, '.', ''); ?></span>
                                 </div>
-                                <div class="subtotal-line">
+                                <!-- <div class="subtotal-line">
                                     <b class="stt-name">Shipping</b>
                                     <span class="stt-price">RM <?php echo number_format($shipping, 2, '.', ''); ?></span>
-                                </div>
+                                </div> -->
                                 <div class="tax-fee">
                                 </div>
                                 <div class="subtotal-line">

@@ -104,7 +104,7 @@ if ($login == 0) {
                             //      All true will return this
                             //--------------------------------------------
                             $total_pay = $total_spend - $reduce_amt + $shipping;
-                            $json_arr = array('Status' => true, 'Amount' => $reduce_amt, "Total" => $total_spend, "Total_pay" => $total_pay, "Shipping" => $shipping);
+                            $json_arr = array('Status' => true, 'Amount' => $reduce_amt, "Total" => $total_spend, "Total_pay" => $total_pay, "Shipping_fee" => $shipping);
 
                             //--------------------------------------------
                             //      All true will return this

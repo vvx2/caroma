@@ -248,7 +248,7 @@ if (count($get_cart) != 0) {
 
                                                                         $tb = "state";
                                                                         $col = "id, name";
-                                                                        $opt = 'id != ?';
+                                                                        $opt = 'id != ? order by name asc';
                                                                         $arr = array(0);
                                                                         $result = $db->advwhere($col, $tb, $opt, $arr);
                                                                         foreach ($result as $state) {
@@ -350,7 +350,7 @@ if (count($get_cart) != 0) {
                                                             </p>
 
 
-                                                            <button type="submit" name="btn-sbmt" class="btn custombtn">Continue To Purchase</button>
+                                                            <button type="submit" name="btn-sbmt" class="btn custombtn btn-submit">Continue To Purchase</button>
 
                                                         </div>
                                                     </div>
@@ -421,6 +421,9 @@ if (count($get_cart) != 0) {
                                                     </div>
                                                 </li>
                                                 <li>
+                                                    <div class="get_shipping_error text-danger"></div>
+                                                </li>
+                                                <li>
                                                     <div class="subtotal-line">
                                                         <b class="stt-name">Discount</b>
                                                         <span class="stt-price" id="get_discount">- RM <?php echo number_format($discount, 2, '.', ''); ?></span>
@@ -449,6 +452,7 @@ if (count($get_cart) != 0) {
                                             <div hidden>
                                                 <input type="text" name="detail" value="<?php echo $order_detail; ?>" placeholder="Description of the transaction" size="30" required>
                                                 <input type="text" name="amount" id="total_payment" value="<?php echo $total_pay; ?>" placeholder="Amount to pay, for example 12.20" size="30" required>
+                                                <input type="number" name="shipping" id="total_shipping" value="0" required>
                                                 <input type="text" name="order_id" value="<?php echo time(); ?>" placeholder="Unique id to reference the transaction or order" size="30" required>
                                             </div>
                                         </div>
@@ -525,46 +529,150 @@ if (count($get_cart) != 0) {
                         }
                     });
 
+                    var state = $('[name="state"]').val()
+                    var delivery_type = $('[name="delivery_type"]').val()
+
+                    load_shipping(state, delivery_type, true);
+
                 });
 
                 //for check coupon
                 $('[name="coupon"]').blur(function() {
                     var coupon_code = $(this).val()
+                    if (coupon_code) {
+                        coupon_code = coupon_code;
+                    } else {
+                        coupon_code = "";
+                    }
+                    load_coupon(coupon_code);
+                });
+
+                //for check shipping fee
+                $('[name="state"]').change(function() {
+                    var delivery_type = $('[name="delivery_type"]').val()
+                    var state = $(this).val()
+                    if (state) {
+                        state = state;
+                    } else {
+                        state = "";
+                    }
+                    load_shipping(state, delivery_type, true);
+                });
+
+                function load_shipping(state, delivery_type, status) {
                     $('#loadDiv').show();
-                    $.post('api/validate_coupon.php', {
-                        sub_total: <?php echo $sub_total; ?>,
-                        shipping: <?php echo $shipping; ?>,
-                        coupon_code: coupon_code
-                    }, function(data) {
-                        setTimeout(function() {
-                            console.log(data);
-                            data = JSON.parse(data);
-                            if (coupon_code != "") {
+                    var coupon = $('[name="coupon"]').val()
+                    if (coupon) {
+                        coupon = coupon;
+                    } else {
+                        coupon = "";
+                    }
+                    if (state == "") {
+                        $(".btn-submit").attr('disabled', true);
+                        $(".get_shipping_error").html("You must select your state");
+                        $("#get_shipping").html('- RM ' + parseFloat(0).toFixed(2));
+                        $("#total_shipping").val(0);
+
+                        $("#get_totalpay").html('RM ' + "<?php echo number_format($total_pay, 2, '.', ''); ?>");
+                        $("#total_payment").val(<?php echo $sub_total; ?>);
+
+                        $('#loadDiv').hide();
+                        //status is for run load coupon when the coupon input is empty or coupon invalid
+                        if (coupon != "" && status) {
+                            load_coupon(coupon);
+                        }
+                    } else {
+                        $.post('api/shipping_fee.php', {
+                            sub_total: <?php echo $sub_total; ?>,
+                            state: state,
+                            delivery_type: delivery_type
+                        }, function(data) {
+                            // console.log("shipping api: " + data);
+                            setTimeout(function() {
+                                data = JSON.parse(data);
+                                if (data["Status"]) {
+                                    $(".btn-submit").attr('disabled', false);
+                                    $(".get_shipping_error").html("");
+                                    $("#get_shipping").html('+ RM ' + parseFloat(data["Shipping_fee"]).toFixed(2));
+                                    $("#get_totalpay").html('RM ' + parseFloat(data["Total_pay"]).toFixed(2));
+                                    $("#total_payment").val(data["Total_pay"]);
+                                    $("#total_shipping").val(data["Shipping_fee"]);
+                                } else {
+                                    $(".btn-submit").attr('disabled', true);
+                                    $(".get_shipping_error").html(data["Msg"]);
+                                    $("#get_shipping").html('+ RM ' + "<?php echo number_format($shipping, 2, '.', ''); ?>");
+                                    $("#get_totalpay").html('RM ' + "<?php echo number_format($total_pay, 2, '.', ''); ?>");
+                                    $("#total_shipping").val(0);
+                                    $("#total_payment").val(<?php echo $sub_total; ?>);
+
+
+                                }
+                                $('#loadDiv').hide();
+                                if (coupon != "" && status) {
+                                    load_coupon(coupon);
+                                }
+                            }, 500);
+                        });
+                    }
+
+
+
+                }
+
+                function load_coupon(coupon_code) {
+                    $('#loadDiv').show();
+                    var sub_total = "<?php echo $sub_total; ?>"
+                    var shipping = $('[id="total_shipping"]').val()
+                    var state = $('[name="state"]').val()
+                    var delivery_type = $('[name="delivery_type"]').val()
+                    if (state) {
+                        state = state;
+                    } else {
+                        state = "";
+                    }
+
+                    // console.log("coupon api shipping : " + shipping);
+                    // console.log("coupon api total_pay：" + sub_total);
+                    if (coupon_code != "") {
+                        $.post('api/validate_coupon.php', {
+                            sub_total: <?php echo $sub_total; ?>,
+                            shipping: shipping,
+                            coupon_code: coupon_code
+                        }, function(data) {
+                            setTimeout(function() {
+                                // console.log("coupon api" + data);
+                                data = JSON.parse(data);
                                 if (data["Status"]) {
                                     $("#get_coupon_msg").html("");
                                     $("#get_discount").html('- RM ' + parseFloat(data["Amount"]).toFixed(2));
-                                    $("#get_shippig").html('- RM ' + parseFloat(data["Shipping"]).toFixed(2));
+                                    $("#get_shipping").html('+ RM ' + parseFloat(data["Shipping_fee"]).toFixed(2));
                                     $("#get_totalpay").html('RM ' + parseFloat(data["Total_pay"]).toFixed(2));
                                     $("#total_payment").val(data["Total_pay"]);
+                                    $("#total_shipping").val(data["Shipping_fee"]);
                                 } else {
                                     $("#get_coupon_msg").html(data["Msg"]);
                                     $("#get_discount").html('- RM ' + "<?php echo number_format($discount, 2, '.', ''); ?>");
-                                    $("#get_shippig").html('+ RM ' + "<?php echo number_format($shipping, 2, '.', ''); ?>");
-                                    $("#get_totalpay").html('RM ' + "<?php echo number_format($total_pay, 2, '.', ''); ?>");
-                                    $("#total_payment").val(<?php echo number_format($total_pay, 2, '.', ''); ?>);
+                                    $("#get_shipping").html('+ RM ' + parseFloat(shipping).toFixed(2));
+                                    $("#get_totalpay").html('RM ' + parseFloat(sub_total).toFixed(2));
+                                    $("#total_payment").val(sub_total);
+                                    $("#total_shipping").val(shipping);
+                                    load_shipping(state, delivery_type, false);
                                 }
-                            } else {
-                                $("#get_coupon_msg").html("");
-                                $("#get_discount").html('- RM ' + "<?php echo number_format($discount, 2, '.', ''); ?>");
-                                $("#get_shippig").html('+ RM ' + "<?php echo number_format($shipping, 2, '.', ''); ?>");
-                                $("#get_totalpay").html('RM ' + "<?php echo number_format($total_pay, 2, '.', ''); ?>");
-                                $("#total_payment").val(<?php echo number_format($total_pay, 2, '.', ''); ?>);
-                            }
-                            $('#loadDiv').hide();
-                        }, 500);
+                                $('#loadDiv').hide();
+                            }, 500);
+                        });
+                    } else {
+                        load_shipping(state, delivery_type, false);
+                        $("#get_coupon_msg").html("");
+                        $("#get_discount").html('- RM ' + "<?php echo number_format($discount, 2, '.', ''); ?>");
+                        $("#get_shipping").html('+ RM ' + parseFloat(shipping).toFixed(2));
+                        $("#get_totalpay").html('RM ' + parseFloat(sub_total).toFixed(2));
+                        $("#total_payment").val(sub_total);
+                        $("#total_shipping").val(shipping);
 
-                    });
-                });
+                        $('#loadDiv').hide();
+                    }
+                }
             </script>
         </body>
 
