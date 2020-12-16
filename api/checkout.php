@@ -120,32 +120,6 @@ if (isset($_REQUEST['type'])) {
                             $total_price = $total_price + ($cart['qty'] * $cart['price']);
                         }
                         $total_payment = $total_price;
-                        //------------------------------------------
-                        // write discount algorithm here
-                        //------------------------------------------
-
-                        // check shipping fee here
-                        //todo
-
-                        // if user typr = 2 or 3 (distributor or dealer), will no have coupon
-                        if (isset($_POST['coupon'])) {
-                            $coupon_code = $_POST['coupon'];
-                        } else {
-                            $coupon_code = "";
-                        }
-
-                        //check coupon use
-                        if ($coupon_code != "") {
-                            $coupon_return = validate_coupon($coupon_code, $user_id, $user_type, $total_payment, $shipping, $db);
-
-                            if ($coupon_return['Status']) {
-                                $total_payment = $coupon_return['Total_pay'];
-                                $discount_percent = $coupon_return['Percentage'];
-                                $discount_amount = $coupon_return['Amount'];
-                                $shipping = $coupon_return['Shipping'];
-                            }
-                        }
-                        //------------------------------------------
 
                         //------------------------------------------
                         //  check delivery type , paymeny type, admin id
@@ -181,10 +155,47 @@ if (isset($_REQUEST['type'])) {
                             $admin_id = 0;
                         }
                         //------------------------------------------
+                        //------------------------------------------
+                        // write discount algorithm here
+                        //------------------------------------------
 
+                        // check shipping fee here
+                        $shipping_return = get_shipping_fee($user_id, $customer_state, $admin_id, $delivery_type, $db);
+
+                        if ($shipping_return['Status']) {
+                            $shipping = $shipping_return['Shipping_fee'];
+                        } else {
+                            $msg = $shipping_return['Msg'];
+                            echo "<script> alert(\" $msg \");
+                                window.location.href='../checkout.php';</script>";
+                            exit();
+                        }
+
+                        // if user typr = 2 or 3 (distributor or dealer), will no have coupon
+                        if (isset($_POST['coupon'])) {
+                            $coupon_code = $_POST['coupon'];
+                        } else {
+                            $coupon_code = "";
+                        }
+
+                        //check coupon use
+                        if ($coupon_code != "") {
+                            $coupon_return = validate_coupon($coupon_code, $user_id, $user_type, $total_payment, $shipping, $db);
+
+                            if ($coupon_return['Status']) {
+                                $total_payment = $coupon_return['Total_pay'];
+                                $discount_percent = $coupon_return['Percentage'];
+                                $discount_amount = $coupon_return['Amount'];
+                                $shipping = $coupon_return['Shipping'];
+                            }
+                        }
+                        //------------------------------------------
+
+
+                        $reason = "UnPaid";
                         $table = "orders";
-                        $colname = array("status", "customer_name", "customer_email", "customer_address", "customer_postcode", "customer_city", "customer_state", "customer_contact", "total_price", "coupon_code", "discount_percent", "discount_amount", "shipping_fee", "total_payment", "track_code", "gateway_order_id", "payment_type", "users_id", "admin_id", "date_created", "date_modified");
-                        $array = array($status_order, $customer_name, $customer_email, $customer_address, $customer_postcode, $customer_city, $customer_state, $customer_contact, $total_price, $coupon_code, $discount_percent, $discount_amount, $shipping, $total_payment, $track_code, $order_id, $payment_type, $user_id, $admin_id, $time, $time);
+                        $colname = array("status", "customer_name", "customer_email", "customer_address", "customer_postcode", "customer_city", "customer_state", "customer_contact", "total_price", "coupon_code", "discount_percent", "discount_amount", "shipping_fee", "total_payment", "track_code", "gateway_order_id", "payment_type", "reason", "users_id", "admin_id", "date_created", "date_modified");
+                        $array = array($status_order, $customer_name, $customer_email, $customer_address, $customer_postcode, $customer_city, $customer_state, $customer_contact, $total_price, $coupon_code, $discount_percent, $discount_amount, $shipping, $total_payment, $track_code, $order_id, $payment_type, $reason, $user_id, $admin_id, $time, $time);
                         $result_order = $db->insert($table, $colname, $array);
 
                         if ($result_order) {
@@ -530,5 +541,63 @@ function validate_coupon($coupon_code, $user_id, $user_type, $sub_total, $shippi
         }
     }
 
+    return $json_arr;
+}
+
+function get_shipping_fee($user_id, $state, $admin_id, $delivery_type, $db)
+{
+    if ($delivery_type == 2) {
+        $shipping_fee = 0;
+        $json_arr = array('Status' => true, 'Shipping_fee' => $shipping_fee);
+    } else {
+        $table = 'shipping s left join geo_zone g on s.geo_zone = g.id left join geo_zone_list gl on g.id = gl.geo_zone_id';
+        $col = "*, (first_weight*first_price)+(next_weight*next_price) as check_fee";
+        $opt = 's.admin_id = ? && (gl.state_id = ? || gl.state_id = ?) && s.status = ? order by check_fee ASC';
+        $arr = array($admin_id, $state, 0, 1);
+        $shipping = $db->advwhere($col, $table, $opt, $arr);
+        // var_dump($shipping);
+        if (count($shipping) <= 0) {
+            $json_arr = array('Status' => false, 'Msg' => 'State is not Available. No Shipping Fee Detail! Please Contact Admin');
+        } else {
+            $shipping = $shipping[0];
+
+            $first_weight = $shipping['first_weight'];
+            $first_price = $shipping['first_price'];
+            $next_weight = $shipping['next_weight'];
+            $next_price = $shipping['next_price'];
+            $charge = $shipping['charge'];
+
+            $table = "cart c left join product p on c.product_id = p.id";
+            $col = "c.product_id as product_id, c.qty as qty, p.weight as weight";
+            $opt = 'c.customer_id = ?';
+            $arr = array($user_id);
+            $result_cart = $db->advwhere($col, $table, $opt, $arr);
+
+            // check cart is exists item
+            if (count($result_cart) != 0) {
+                $total_weight = 0;
+                //count item total weight
+                foreach ($result_cart as $cart) {
+                    $total_weight = $total_weight + ($cart['qty'] * $cart['weight']);
+                }
+
+                if ($total_weight <= $first_weight) {
+                    $shipping_fee = $first_price;
+                } else {
+                    $remain_weight = $total_weight - $first_weight;
+                    $shipping_fee = $first_price;
+
+                    while ($remain_weight > 0) {
+                        $shipping_fee = $shipping_fee + $next_price;
+                        $remain_weight = $remain_weight - $next_weight;
+                    }
+                }
+                $shipping_fee = $shipping_fee + ($shipping_fee * ($charge / 100));
+                $json_arr = array('Status' => true, 'Shipping_fee' => $shipping_fee);
+            } else {
+                $json_arr = array('Status' => false, 'Msg' => 'Your Cart is Empty!');
+            }
+        }
+    }
     return $json_arr;
 }

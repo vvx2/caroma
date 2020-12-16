@@ -89,7 +89,7 @@ if ($delivery_type == 2) {
                         $remain_weight = $remain_weight - $next_weight;
                     }
                 }
-
+                $shipping_fee = $shipping_fee + ($shipping_fee * ($charge / 100));
                 $total_pay = $sub_total + $shipping_fee;
                 $json_arr = array('Status' => true, 'Shipping_fee' => $shipping_fee, 'Total_pay' => $total_pay);
             } else {
