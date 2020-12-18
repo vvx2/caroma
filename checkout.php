@@ -423,15 +423,16 @@ if (count($get_cart) != 0) {
                                                 <li>
                                                     <div class="get_shipping_error text-danger"></div>
                                                 </li>
-                                                <li>
-                                                    <div class="subtotal-line">
-                                                        <b class="stt-name">Discount</b>
-                                                        <span class="stt-price" id="get_discount">- RM <?php echo number_format($discount, 2, '.', ''); ?></span>
-                                                    </div>
-                                                </li>
+
                                                 <?php
                                                 if ($user_type == 1) {
                                                 ?>
+                                                    <li>
+                                                        <div class="subtotal-line">
+                                                            <b class="stt-name">Discount</b>
+                                                            <span class="stt-price" id="get_discount">- RM <?php echo number_format($discount, 2, '.', ''); ?></span>
+                                                        </div>
+                                                    </li>
                                                     <li>
                                                         <div class="col-sm-12 col-12 no-padding-left">
                                                             <label class="label-width" for="coupon">Coupon Code <span class="text-danger" id="get_coupon_msg"> </span></label>
@@ -587,7 +588,7 @@ if (count($get_cart) != 0) {
                             state: state,
                             delivery_type: delivery_type
                         }, function(data) {
-                            // console.log("shipping api: " + data);
+                            console.log("shipping api: " + data);
                             setTimeout(function() {
                                 data = JSON.parse(data);
                                 if (data["Status"]) {
