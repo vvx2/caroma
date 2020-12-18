@@ -9,6 +9,9 @@ if ($login != 1) {
 if ($user_type == 2) {
 	$tb = "users u left join user_address ua on u.id = ua.user_id left join user_distributor ud on u.id = ud.user_id";
 	$col = "u.name as name,u.type as user_type,u.image as image, u.email as email, ua.contact as contact, ua.address as address, ua.postcode as postcode, ua.city as city, ua.state as state, ud.distributor_code as distributor_code";
+} else if ($user_type == 3) { // ud = user_dealer, du = distributr's users table
+	$tb = "users u left join user_address ua on u.id = ua.user_id left join user_dealer ud on u.id = ud.user_id left join users du on ud.under_distributor = du.id left join user_distributor dis on ud.under_distributor = dis.user_id left join user_address dis_add on ud.under_distributor = dis_add.user_id";
+	$col = "u.name as name,u.type as user_type,u.image as image, u.email as email, ua.contact as contact, ua.address as address, ua.postcode as postcode, ua.city as city, ua.state as state, du.name as distributor_name, dis.distributor_code as distributor_code, dis_add.contact as distributor_contact";
 } else {
 	$tb = "users u left join user_address ua on u.id = ua.user_id";
 	$col = "u.name as name,u.type as user_type,u.image as image, u.email as email, ua.contact as contact, ua.address as address, ua.postcode as postcode, ua.city as city, ua.state as state";
@@ -156,14 +159,30 @@ $count_cart = count($user_cart);
 														$actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
 
 														if ($actual_link != "http://localhost") {
-															$register_link =  $actual_link . "/register.php?code=" . $result_user['distributor_code'];
+															$register_link =  $actual_link . "/register_dealer.php?code=" . $result_user['distributor_code'];
 														} else {
-															$register_link =  $actual_link . "/caroma/register.php?code=" . $result_user['distributor_code'];
+															$register_link =  $actual_link . "/caroma/register_dealer.php?code=" . $result_user['distributor_code'];
 														}
 														echo "<a href='" . $register_link . "' target='_blank'>" . $register_link . "</a>";
 
 														?>
 
+													</div>
+												</div>
+											</div>
+										<?php
+										} else if ($user_type == 3) {
+										?>
+											<div class="social-info txt-light">
+												<div class="row">
+													<div class="col-sm-12 text-center">
+														<i class="fa fa-link block mb-10"> Your Distributor</i>
+
+														<h5>
+															<strong>Name:</strong> <?php echo $result_user['distributor_name']; ?><br>
+															<strong>Code:</strong> <?php echo $result_user['distributor_code']; ?> <br>
+															<strong>Contact:</strong> <?php echo $result_user['distributor_contact']; ?><br>
+														</h5>
 													</div>
 												</div>
 											</div>
