@@ -155,10 +155,10 @@ if (!empty($postedToken)) {
 
 
                 if ($result_under_distributor && $result_dealer_address) {
-                  echo "<script>alert(\" Add Dealer Successful\");
+                  echo "<script>alert(\" Dealer Register Successful\");
                 window.location.href='$page.php';</script>";
                 } else {
-                  echo "<script>alert(\" Add Dealer Fail, PLease Try Again. \");
+                  echo "<script>alert(\" Dealer Register Fail, PLease Try Again. \");
                 window.location.href='$page.php';</script>";
                 }
               }

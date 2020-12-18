@@ -99,7 +99,7 @@
                                     <li>Save items to your Wishlist</li>
                                 </ul>
                                 <a href="register.php" class="btn btn-bold">Create an account</a>
-                                <a href="register.php" class="btn btn-bold">Join with Dealer</a>
+                                <a href="register_dealer.php" class="btn btn-bold">Join with Dealer</a>
                             </div>
                         </div>
                     </div>
