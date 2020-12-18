@@ -145,7 +145,7 @@ if (isset($_REQUEST['type'])) {
                             //get distributor id that dealer under with
                             $table = 'user_dealer';
                             $col = "*";
-                            $opt = 'users_id =?';
+                            $opt = 'user_id =?';
                             $arr = array($user_id);
                             $dealer = $db->advwhere($col, $table, $opt, $arr);
                             $under_distributor = $dealer[0]['under_distributor'];
