@@ -11,6 +11,7 @@ $PageName = "product";
     <link href="css/plugins/iCheck/custom.css" rel="stylesheet">
     <link href="css/plugins/touchspin/jquery.bootstrap-touchspin.min.css" rel="stylesheet">
     <link href="css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet">
+    <link href="css/plugins/summernote/summernote-bs4.css" rel="stylesheet">
 </head>
 
 <body>
@@ -54,17 +55,17 @@ $PageName = "product";
 
                                     <div class="form-group"><label>Name (English)</label> <input type="text" placeholder="Enter Product Name" class="form-control" name="name_en" value=''></div>
                                     <div class="form-group text-left"><label>Description (English)</label>
-                                        <textarea type="text" placeholder="Enter Description" class="form-control" name="desc_en" rows="5"></textarea>
+                                        <textarea id="summernote" type="text" placeholder="Enter Description" class="form-control" name="desc_en" rows="5"></textarea>
                                     </div>
                                     <hr>
                                     <div class="form-group"><label>Name (Chinese)</label> <input type="text" placeholder="Enter Product Name" class="form-control" name="name_cn" value=''></div>
                                     <div class="form-group text-left"><label>Description (Chinese)</label>
-                                        <textarea type="text" placeholder="Enter Description" class="form-control" name="desc_cn" rows="5"></textarea>
+                                        <textarea id="summernote" type="text" placeholder="Enter Description" class="form-control" name="desc_cn" rows="5"></textarea>
                                     </div>
                                     <hr>
                                     <div class="form-group"><label>Name (Malay)</label> <input type="text" placeholder="Enter Product Name" class="form-control" name="name_my" value=''></div>
                                     <div class="form-group text-left"><label>Description (Malay)</label>
-                                        <textarea type="text" placeholder="Enter Description" class="form-control" name="desc_my" rows="5"></textarea>
+                                        <textarea id="summernote" type="text" placeholder="Enter Description" class="form-control" name="desc_my" rows="5"></textarea>
                                     </div>
                                     <hr>
                                     <div class="form-group">
@@ -296,6 +297,8 @@ $PageName = "product";
     <script src="js/plugins/chosen/chosen.jquery.js"></script>
     <!-- iCheck -->
     <script src="js/plugins/iCheck/icheck.min.js"></script>
+    <!-- summernote -->
+    <script src="js/plugins/summernote/summernote-bs4.js"></script>
     <!-- TouchSpin -->
     <script src="js/plugins/touchspin/jquery.bootstrap-touchspin.min.js"></script>
 
@@ -318,6 +321,17 @@ $PageName = "product";
             radioClass: 'iradio_square-green',
         });
 
+        $('[id=summernote]').summernote({
+            placeholder: 'Description content',
+            tabsize: 2,
+            height: 120,
+            toolbar: [
+                ['style', ['style']],
+                ['font', ['bold', 'underline', 'clear']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+            ]
+        });
         $(document).ready(function() {
 
             $('.dataTables-example').DataTable({

@@ -95,17 +95,17 @@ $height = $product[0]['height'];
         <hr>
         <div class="form-group"><label>Name (English)</label> <input type="text" placeholder="Enter Product Name" class="form-control" name="name_en" value='<?php echo $product_name_en; ?>'></div>
         <div class="form-group text-left"><label>Description (English)</label>
-            <textarea type="text" placeholder="Enter Description" class="form-control" name="desc_en" rows="5"><?php echo $product_desc_en; ?></textarea>
+            <textarea id="summernote_edit" type="text" placeholder="Enter Description" class="form-control" name="desc_en" rows="5"><?php echo $product_desc_en; ?></textarea>
         </div>
         <hr>
         <div class="form-group"><label>Name (Chinese)</label> <input type="text" placeholder="Enter Product Name" class="form-control" name="name_cn" value='<?php echo $product_name_cn; ?>'></div>
         <div class="form-group text-left"><label>Description (Chinese)</label>
-            <textarea type="text" placeholder="Enter Description" class="form-control" name="desc_cn" rows="5"><?php echo $product_desc_cn; ?></textarea>
+            <textarea id="summernote_edit" type="text" placeholder="Enter Description" class="form-control" name="desc_cn" rows="5"><?php echo $product_desc_cn; ?></textarea>
         </div>
         <hr>
         <div class="form-group"><label>Name (Malay)</label> <input type="text" placeholder="Enter Product Name" class="form-control" name="name_my" value='<?php echo $product_name_my; ?>'></div>
         <div class="form-group text-left"><label>Description (Malay)</label>
-            <textarea type="text" placeholder="Enter Description" class="form-control" name="desc_my" rows="5"><?php echo $product_desc_my; ?></textarea>
+            <textarea id="summernote_edit" type="text" placeholder="Enter Description" class="form-control" name="desc_my" rows="5"><?php echo $product_desc_my; ?></textarea>
         </div>
         <hr>
 
@@ -184,6 +184,18 @@ $height = $product[0]['height'];
     });
 
     $(document).ready(function() {
+
+        $('[id=summernote_edit]').summernote({
+            placeholder: 'Description content',
+            tabsize: 2,
+            height: 120,
+            toolbar: [
+                ['style', ['style']],
+                ['font', ['bold', 'underline', 'clear']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+            ]
+        });
 
         $("#form_product_edit").validate({
             rules: {
