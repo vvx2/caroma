@@ -453,6 +453,19 @@ if (!empty($postedToken)) {
             window.location.href='distributor.php';</script>";
           } else {
 
+            // check Distributor state is it isset in database
+            $table = "users u left join user_address ad on u.id = ad.user_id";
+            $col = "state";
+            $opt = 'u.type =? && ad.state =?';
+            $arr = array(2, $state);
+            $check_distributor_state = $db->advwhere($col, $table, $opt, $arr);
+
+            if (count($check_distributor_state) != 0) {
+              echo "<script>alert(\" Distributor's State Existed\");
+              window.location.href='distributor.php';</script>";
+              exit();
+            }
+
             $table = "users";
             $colname = array("name", "email", "password", "type", "status", "date_created", "date_modified");
             $array = array($name, $email, $password, 2, 1, $time, $time);
