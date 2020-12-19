@@ -210,8 +210,107 @@ if (!empty($postedToken)) {
                               window.location.href='../index.php?p=5';</script>";
                     }
                 }
-            }
+            } else if ($type == "order_complete") {
+                if (isset($_POST['btnAction'])) {
 
+                    $order_id = $_POST['btnAction'];
+
+                    $tablename = "orders";
+                    $data = "status =?, date_modified = ? WHERE id = ?";
+                    $array = array(4, $time, $order_id);
+                    $result_order = $db->update($tablename, $data, $array);
+
+                    if ($result_order) {
+                        if ($user_type == 3) {
+
+                            //--------------------------------------------------
+                            //              Get order details
+                            $col = "*";
+                            $tb = "orders";
+                            $opt = 'id = ?';
+                            $arr = array($order_id);
+                            $order = $db->advwhere($col, $tb, $opt, $arr);
+                            $order = $order[0];
+                            //--------------------------------------------------
+
+                            //---------------------------------------------------
+                            //       VARIABLE for wallet_transaction_history
+                            $total_payment = $order["total_payment"]; // amount to record
+                            $gateway_order_id = $order["gateway_order_id"]; // order to record in description
+                            $description = "Sale. Order Id: " . $gateway_order_id;
+                            //---------------------------------------------------
+
+                            //---------------------------------------------------
+                            //       VARIABLE for user_distributor
+                            $payment_type = $order["payment_type"]; //payment type to check if online payment will add amount to distributor wallet
+                            //--------------------------------------------------
+
+                            //--------------------------------------------------
+                            //   Check payment type if it is online payment
+                            if ($payment_type == 1) {
+
+                                //get distributor id that dealer under with
+                                $table = 'user_dealer';
+                                $col = "*";
+                                $opt = 'user_id =?';
+                                $arr = array($user_id);
+                                $dealer = $db->advwhere($col, $table, $opt, $arr);
+                                $under_distributor = $dealer[0]['under_distributor'];
+                                $admin_id = $under_distributor;
+
+                                //   Get Distributor wallet details - amount
+                                $col = "*";
+                                $tb = "user_distributor";
+                                $opt = 'user_id = ?';
+                                $arr = array($admin_id);
+                                $distributor = $db->advwhere($col, $tb, $opt, $arr);
+                                $distributor = $distributor[0];
+                                $current_wallet_amount = $distributor["distributor_wallet"];
+
+                                //   Add total_payment to amount
+                                $added_wallet_amount = $current_wallet_amount + $total_payment;
+
+                                //   Update distributor_wallet
+                                $tablename = "user_distributor";
+                                $data = "distributor_wallet = ? WHERE user_id = ?";
+                                $array = array($added_wallet_amount, $admin_id);
+                                $result_user_distributor = $db->update($tablename, $data, $array);
+
+                                if ($result_user_distributor) {
+                                    //   Add Histroy to distributor_wallet_transaction_history
+                                    $table = "distributor_wallet_transaction_history";
+                                    $colname = array("amount", "current_amount", "description", "distributor_id", "date_created", "date_modified");
+                                    $array = array($total_payment, $added_wallet_amount, $description, $admin_id, $time, $time);
+                                    $result_wallet_history = $db->insert($table, $colname, $array);
+
+                                    if ($result_wallet_history) {
+                                        echo "<script>alert(\" Update Status Successful\");
+                                    window.location.href='../index.php?p=4';</script>";
+                                    } else {
+                                        echo "<script>alert(\" Update Status Successful. But Insert History Fail\");
+                                    window.location.href='../index.php?p=4';</script>";
+                                    }
+                                } else {
+                                    echo "<script>alert(\" Update Status Successful. But Update Wallet Fail\");
+                                    window.location.href='../index.php?p=4';</script>";
+                                }
+
+                                exit;
+                            } else {
+                                echo "<script>alert(\" Update Status Successful\");
+                              window.location.href='../index.php?p=4';</script>";
+                            }
+                            //--------------------------------------------------
+                        } else {
+                            echo "<script>alert(\" Update Status Successful\");
+                              window.location.href='../index.php?p=4';</script>";
+                        }
+                    } else {
+                        echo "<script>alert(\" Update Status Fail. Please Try Again\");
+                              window.location.href='../index.php?p=4';</script>";
+                    }
+                }
+            }
             //--------------------------------------------------
             //              Order
             //--------------------------------------------------

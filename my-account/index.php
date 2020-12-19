@@ -250,7 +250,7 @@ if ($user_type == "2") {
 																					$status = $order['status'];
 
 																					//to reject order, status -> failed/Canceled
-																					$btn_to_cancel = '<i data-remote="ajax/order_to_cancel.php?p=' . $id . '" data-toggle="modal" data-target=".bs-example-modal-lg" class="btn btn-success">To Cancel</i>';
+																					$btn_to_cancel = '<i data-remote="ajax/user_order_to_cancel.php?p=' . $id . '" data-toggle="modal" data-target=".bs-example-modal-lg" class="btn btn-success">To Cancel</i>';
 																					//order deliverd, status -> completed
 																					$btn_complete = '<i data-remote="ajax/user_order_complete.php?p=' . $id . '" data-toggle="modal" data-target=".bs-example-modal-lg" class="btn btn-success">To Complete</i>';
 
