@@ -531,7 +531,7 @@ if (count($get_cart) != 0) {
                     });
 
                     var state = $('[name="state"]').val()
-                    var delivery_type = $('[name="delivery_type"]').val()
+                    var delivery_type = $('[name="delivery_type"]:checked').val()
 
                     load_shipping(state, delivery_type, true);
 
@@ -550,13 +550,28 @@ if (count($get_cart) != 0) {
 
                 //for check shipping fee
                 $('[name="state"]').change(function() {
-                    var delivery_type = $('[name="delivery_type"]').val()
+                    var delivery_type = $('[name="delivery_type"]:checked').val()
                     var state = $(this).val()
                     if (state) {
                         state = state;
                     } else {
                         state = "";
                     }
+                    load_shipping(state, delivery_type, true);
+                });
+
+                //for check shipping fee with onclick delivety type
+                $('[name="delivery_type"]').change(function() {
+                    var delivery_type = $('[name="delivery_type"]:checked').val()
+                    var state = $('[name="state"]').val()
+                    if (state) {
+                        state = state;
+                    } else {
+                        state = "";
+                    }
+                    
+                    console.log("state: " + state);
+                    console.log("delivery_type: " + delivery_type);
                     load_shipping(state, delivery_type, true);
                 });
 
@@ -625,7 +640,7 @@ if (count($get_cart) != 0) {
                     var sub_total = "<?php echo $sub_total; ?>"
                     var shipping = $('[id="total_shipping"]').val()
                     var state = $('[name="state"]').val()
-                    var delivery_type = $('[name="delivery_type"]').val()
+                    var delivery_type = $('[name="delivery_type"]:checked').val()
                     if (state) {
                         state = state;
                     } else {
