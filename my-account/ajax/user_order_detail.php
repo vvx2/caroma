@@ -130,7 +130,7 @@ switch ($status) {
                 ?>
 
                     <div class="table-mxsp">
-                        <a href="../products-detail.php?p=<?php echo $item['id']?>" target="_blank">
+                        <a href="../products-detail.php?p=<?php echo $item['p_id']?>" target="_blank">
                             <table class="table-widths">
                                 <tr>
                                     <td class="product-imgsx" rowspan="3">
