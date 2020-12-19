@@ -78,6 +78,7 @@ if (isset($refund_type)) {
 					<li class="<?php echo ($pagetype == '3') ? 'active' : ''; ?>"><a href="order.php?page=3">Shipping Order</a></li>
 					<li class="<?php echo ($pagetype == '4') ? 'active' : ''; ?>"><a href="order.php?page=4">Completed Order</a></li>
 					<li class="<?php echo ($pagetype == '1') ? 'active' : ''; ?>"><a href="order.php?page=1">Reject/Failed Order</a></li>
+					<li class="<?php echo ($pagetype == '5') ? 'active' : ''; ?>"><a href="order.php?page=5">To Cancel</a></li>
 				</ul>
 			</li>
 			<li class="<?php echo ($PageName == 'refund') ? 'active' : ''; ?>">

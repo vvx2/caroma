@@ -3,7 +3,7 @@ include_once('../connection/PDO_db_function.php');
 $db = new DB_Functions();
 $id = $_REQUEST['p'];
 
-$col = "o.*, o.id as order_id, st.name as state_name, u.name as user_name";
+$col = "o.*, o.id as order_id, st.name as state_name, u.name as user_name, o.reason as reason";
 $tb = "orders o left join state st on o.customer_state = st.id left join users u on u.id = o.users_id";
 $opt = 'o.id = ?';
 $arr = array($id);
@@ -68,6 +68,13 @@ switch ($status) {
                     </thead>
 
                     <tbody>
+                        <?php if ($status == 1 || $status == 5) { ?>
+                            <tr>
+                                <td>Cancel Reason</td>
+                                <td><?php echo $order["reason"]; ?></td>
+                            </tr>
+
+                        <?php } ?>
                         <tr>
                             <td>Order User</td>
                             <td><?php echo $order["user_name"]; ?></td>
