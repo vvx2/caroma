@@ -197,6 +197,7 @@ if ($user_type == "2") {
 											<li role="presentation" class="<?php echo ($order_page == "3") ? "active" : "" ?>"><a href="index.php?p=3">Shipping</a></li>
 											<li role="presentation" class="<?php echo ($order_page == "4") ? "active" : "" ?>"><a href="index.php?p=4">Completed</a></li>
 											<li role="presentation" class="<?php echo ($order_page == "1") ? "active" : "" ?>"><a href="index.php?p=1">Rejected / Failed</a></li>
+											<li role="presentation" class="<?php echo ($order_page == "5") ? "active" : "" ?>"><a href="index.php?p=5">To Cancel</a></li>
 										</ul>
 										<div class="tab-content" id="myTabContent_11">
 											<div id="home_11" class="tab-pane fade active in" role="tabpanel">
@@ -221,6 +222,7 @@ if ($user_type == "2") {
 																					<th>DateTime</th>
 																					<th>Total Amount</th>
 																					<th>More Detail</th>
+																					<th>Action</th>
 																				</tr>
 																			</thead>
 																			<tfoot>
@@ -231,17 +233,58 @@ if ($user_type == "2") {
 																					<th>DateTime</th>
 																					<th>Total Amount</th>
 																					<th>More Detail</th>
+																					<th>Action</th>
 																				</tr>
 																			</tfoot>
 																			<tbody>
 																				<?php
 																				$i = 1;
-																				$col = "id, customer_name, gateway_order_id, date_created, total_payment";
+																				$col = "id, customer_name, gateway_order_id, date_created, total_payment, status";
 																				$tb = "orders";
 																				$opt = 'users_id = ? && status =? ORDER BY date_modified DESC';
 																				$arr = array($user_id, $order_page);
 																				$result_orders = $db->advwhere($col, $tb, $opt, $arr);
 																				foreach ($result_orders as $order) {
+
+																					$id = $order['id'];
+																					$status = $order['status'];
+
+																					//to reject order, status -> failed/Canceled
+																					$btn_to_cancel = '<i data-remote="ajax/order_to_cancel.php?p=' . $id . '" data-toggle="modal" data-target=".bs-example-modal-lg" class="btn btn-success">To Cancel</i>';
+																					//order deliverd, status -> completed
+																					$btn_complete = '<i data-remote="ajax/user_order_complete.php?p=' . $id . '" data-toggle="modal" data-target=".bs-example-modal-lg" class="btn btn-success">To Complete</i>';
+
+																					switch ($status) {
+																						case "1":
+																							$status_color = "text-danger";
+																							$status_display = "Failed / Canceled";
+																							$status_desc = "This order was canceled, or your order payment was failed.";
+																							$btn_action = "-";
+																							break;
+																						case "2":
+																							$status_color = "text-warning";
+																							$status_display = "To Ship";
+																							$status_desc = "Waiting for the Caroma Malaysia to ship out the products.";
+																							$btn_action = $btn_to_cancel;
+																							break;
+																						case "3":
+																							$status_color = "text-success";
+																							$status_display = "Shipping";
+																							$status_desc = "This order had been shipped.";
+																							$btn_action =  $btn_complete;
+																							break;
+																						case "4":
+																							$status_color = "text-info";
+																							$status_display = "Completed";
+																							$status_desc = "The order was delivered.";
+																							$btn_action = "-";
+																							break;
+																						case "5":
+																							$status_color = "text-dark";
+																							$status_display = "To Cancel";
+																							$status_desc = "The order is pending to Cancel.";
+																							$btn_action = "-";
+																					}
 																				?>
 
 																					<tr>
@@ -251,8 +294,10 @@ if ($user_type == "2") {
 																						<td><?php echo $order['date_created']; ?></td>
 																						<td><?php echo $order['total_payment']; ?></td>
 																						<td><i data-remote="ajax/user_order_detail.php?p=<?php echo $order['id']; ?>" data-toggle="modal" data-target=".bs-example-modal-lg" class="fa fa-cogs toolsx"></i></td>
+																						<td><?php echo $btn_action; ?></td>
 																					</tr>
-																				<?php $i++;} ?>
+																				<?php $i++;
+																				} ?>
 																			</tbody>
 																		</table>
 																	</div>
