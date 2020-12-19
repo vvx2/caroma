@@ -83,24 +83,24 @@ if (isset($_REQUEST['p'])) { // refund request status (distributor_wallet_transa
                 <!-- Row -->
                 <div class="row">
                     <div class="col-sm-6 col-12">
-                            <div class="sm-data-box bg-blue">
-                                <div class="col-xs-5 text-center pa-0 icon-wrap-left">
-                                    <i class="txt-light">BANK NAME</i>
-                                </div>
-                                <div class="col-xs-7 text-center pa-0 icon-wrap-left">
-                                    <i class="txt-light"><?php echo ($distributor[0]['bank_name'] != NULL) ? $distributor[0]['bank_name'] : "NO BANK NAME"; ?></i>
-                                </div>
+                        <div class="sm-data-box bg-blue">
+                            <div class="col-xs-5 text-center pa-0 icon-wrap-left">
+                                <h4><i class="txt-light">BANK NAME</i></h4>
                             </div>
+                            <div class="col-xs-7 text-center pa-0 icon-wrap-left">
+                                <i class="txt-light"><?php echo ($distributor[0]['bank_name'] != NULL) ? $distributor[0]['bank_name'] : "NO BANK NAME"; ?></i>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-sm-6 col-12">
-                            <div class="sm-data-box bg-blue">
-                                <div class="col-xs-5 text-center pa-0 icon-wrap-left">
-                                    <i class="txt-light">BANK ACCOUNT</i>
-                                </div>
-                                <div class="col-xs-7 text-center pa-0 icon-wrap-left">
-                                    <i class="txt-light"><?php echo ($distributor[0]['bank_account'] != NULL) ? $distributor[0]['bank_account'] : "NO ACCOUNT"; ?></i>
-                                </div>
+                        <div class="sm-data-box bg-blue">
+                            <div class="col-xs-5 text-center pa-0 icon-wrap-left">
+                                <h4><i class="txt-light">BANK ACCOUNT</i></h4>
                             </div>
+                            <div class="col-xs-7 text-center pa-0 icon-wrap-left">
+                                <i class="txt-light"><?php echo ($distributor[0]['bank_account'] != NULL) ? $distributor[0]['bank_account'] : "NO ACCOUNT"; ?></i>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <!-- /Row -->
