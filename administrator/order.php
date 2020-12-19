@@ -34,6 +34,93 @@ if ($pagetype == 2) {
             <?php include_once('inc/top_nav.php'); ?>
             <!-- top nav -->
             <div class="wrapper wrapper-content wrapperes">
+                <?php
+
+                $table = "orders";
+                $col = "id";
+                $opt = 'status = ? && admin_id = ? ';
+                $arr = array(2, 0);
+                $count_pending = $db->advwhere($col, $table, $opt, $arr);
+                $count_pending = count($count_pending);
+
+                $table = "orders";
+                $col = "id";
+                $opt = 'status = ? && admin_id = ? ';
+                $arr = array(3, 0);
+                $count_shipping = $db->advwhere($col, $table, $opt, $arr);
+                $count_shipping = count($count_shipping);
+
+                $table = "orders";
+                $col = "id";
+                $opt = 'status = ? && admin_id = ? ';
+                $arr = array(4, 0);
+                $count_complete = $db->advwhere($col, $table, $opt, $arr);
+                $count_complete = count($count_complete);
+
+                $table = "orders";
+                $col = "id";
+                $opt = 'status = ? && admin_id = ? ';
+                $arr = array(1, 0);
+                $count_cancel = $db->advwhere($col, $table, $opt, $arr);
+                $count_cancel = count($count_cancel);
+                ?>
+
+                <div class="wrapper wrapper-content wrapperes">
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <a href="order.php?page=2">
+                                <div class="ibox ">
+                                    <div class="ibox-title">
+                                        <h5>Pending</h5>
+                                    </div>
+                                    <div class="ibox-content">
+                                        <h1 class="no-margins"><?php echo $count_pending; ?></h1>
+                                        <small>Total</small>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-lg-3">
+                            <a href="order.php?page=3">
+                                <div class="ibox ">
+                                    <div class="ibox-title">
+                                        <h5>Shipping</h5>
+                                    </div>
+                                    <div class="ibox-content">
+                                        <h1 class="no-margins"><?php echo $count_shipping; ?></h1>
+                                        <small>Total</small>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-lg-3">
+                            <a href="order.php?page=4">
+                                <div class="ibox ">
+                                    <div class="ibox-title">
+                                        <h5>Complete</h5>
+                                    </div>
+                                    <div class="ibox-content">
+                                        <h1 class="no-margins"><?php echo $count_complete; ?></h1>
+                                        <small>Total</small>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-lg-3">
+                            <a href="order.php?page=1">
+                                <div class="ibox ">
+                                    <div class="ibox-title">
+                                        <h5>Canceled/Rejected</h5>
+                                    </div>
+                                    <div class="ibox-content">
+                                        <h1 class="no-margins"><?php echo $count_cancel; ?></h1>
+                                        <small>Total</small>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="wrapper wrapper-content animated fadeInRight wrapper_table">
                     <div class="row">
@@ -88,8 +175,8 @@ if ($pagetype == 2) {
                                                 $i = 1;
                                                 $col = "o.*, st.name as state_name, u.name as user_name";
                                                 $tb = "orders o left join state st on o.customer_state = st.id left join users u on u.id = o.users_id";
-                                                $opt = 'o.status = ? ORDER BY o.date_modified DESC';
-                                                $arr = array($pagetype);
+                                                $opt = 'o.status = ? && o.admin_id = ? ORDER BY o.date_modified DESC';
+                                                $arr = array($pagetype, 0);
                                                 $product = $db->advwhere($col, $tb, $opt, $arr);
                                                 foreach ($product as $row) {
 
@@ -136,13 +223,14 @@ if ($pagetype == 2) {
                                                             $status_color = "text-dark";
                                                             $status_display = "To Cancel";
                                                             $status_desc = "The order is pending to Cancel.";
-                                                            $btn_action = $btn_cancel;
+                                                            $btn_action =  $btn_view . $btn_cancel;
                                                     }
 
                                                 ?>
                                                     <tr>
                                                         <td><?php echo $i; ?></td>
-                                                        <td><span class="<?php echo $status_color; ?> font-weight-bold"><?php echo $status_display; ?></span></td>
+                                                        <td><span class="<?php echo $status_color; ?> font-weight-bold"><?php echo $status_display; ?></span>
+                                                        </td>
                                                         <td><?php echo $row['customer_name']; ?></td>
                                                         <td><?php echo $row['customer_email']; ?></td>
                                                         <td><?php echo $row['customer_address']; ?></td>
@@ -151,12 +239,14 @@ if ($pagetype == 2) {
                                                         <td><?php echo $row['state_name']; ?></td>
                                                         <td><?php echo $row['customer_contact']; ?></td>
                                                         <td><?php echo number_format($row['total_price'], 2); ?></td>
-                                                        <td><?php echo ($row['coupon_code'] != "") ? $row['coupon_code'] : "-"; ?></td>
+                                                        <td><?php echo ($row['coupon_code'] != "") ? $row['coupon_code'] : "-"; ?>
+                                                        </td>
                                                         <td><?php echo intval($row['discount_percent']); ?>%</td>
                                                         <td><?php echo number_format($row['discount_amount'], 2); ?></td>
                                                         <td><?php echo number_format($row['shipping_fee'], 2); ?></td>
                                                         <td><?php echo number_format($row['total_payment'], 2); ?></td>
-                                                        <td <?php echo $hide_cosignment; ?>><?php echo $row['consignment_number']; ?></td>
+                                                        <td <?php echo $hide_cosignment; ?>>
+                                                            <?php echo $row['consignment_number']; ?></td>
                                                         <td><?php echo $row['gateway_order_id']; ?></td>
                                                         <td><?php echo $row['user_name']; ?></td>
                                                         <td><?php echo $row['date_created']; ?></td>
