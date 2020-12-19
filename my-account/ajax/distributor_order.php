@@ -70,7 +70,7 @@ switch ($status) {
                     </tr>
                 </table>
             </blockquote>
-            <?php if ($status == 1) { ?>
+            <?php if ($status == 1 || $status == 5) { ?>
                 <blockquote class="bg-warning">
                     <table class="table-widths">
                         <tr>
@@ -130,7 +130,7 @@ switch ($status) {
                 ?>
 
                     <div class="table-mxsp">
-                        <a href="../products-detail.php" target="_blank">
+                        <a href="../products-detail.php?p=<?php echo $item['p_id'] ?>" target="_blank">
                             <table class="table-widths">
                                 <tr>
                                     <td class="product-imgsx" rowspan="3">

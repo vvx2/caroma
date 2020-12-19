@@ -4,7 +4,7 @@ $db = new DB_Functions();
 
 $id = $_REQUEST['p'];
 
-$col = "o.*, o.id as order_id, st.name as state_name, o.reason as reason";
+$col = "o.*, o.id as order_id, st.name as state_name";
 $tb = "orders o left join state st on o.customer_state = st.id";
 $opt = 'o.id = ?';
 $arr = array($id);
@@ -14,20 +14,16 @@ $order = $order[0];
 $status = $order['status'];
 
 $status_color = "bg-red";
-$status_show = "Cancel ";
-$status_desc = "Cancel the order.The order will be Canceled status.";
+$status_show = "To Cancel ";
+$status_desc = "Cancel the order.The order will be To Cancel status. Please contact the person in charge about the operation refund. ";
 
-if ($status == 5) {
-    $status_show = "To Cancel ";
-    $status_desc = "Cancel the order.The order will be Canceled status.<br> For record purpose, if status is To Cancel, Please write down the your comment under the reason with word '&lsaquo;br&rsaquo;' for start";
-}
 
 
 ?>
 <!-- get from here -->
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h5 class="modal-title" id="myLargeModalLabel">Order Cancel</h5>
+    <h5 class="modal-title" id="myLargeModalLabel">Order To Cancel</h5>
 </div>
 <div class="modal-body">
     <div class="panel-wrapper collapse in">
@@ -41,14 +37,12 @@ if ($status == 5) {
                 </table>
             </blockquote>
             <blockquote>
-                <form data-toggle="validator" role="form" id="form_cancel" action="api/distributor_sql.php?type=order_cancel&tb=distributor" method="post" enctype="multipart/form-data">
+                <form data-toggle="validator" role="form" id="form_cancel" action="api/user_sql.php?type=order_to_cancel&tb=user" method="post" enctype="multipart/form-data">
                     <input type="hidden" name="token" value="<?php echo $token; ?>" />
                     <div class="form-group">
                         <div class="form-group col-sm-12 no-padding">
                             <label for="order_cancel" class="control-label mb-10">Are you sure to cancel this order? Write the Reasons</label>
-                            <textarea data-match-error="consignment_number Is Required" rows="5" type="text" class="form-control" id="order_cancel" name="reason" placeholder="Wirte the reason" required>
-                                <?php echo $order['reason']; ?>
-                            </textarea>
+                            <textarea data-match-error="consignment_number Is Required" type="text" class="form-control" id="order_cancel" name="reason" placeholder="Wirte the reason" required></textarea>
 
                         </div>
                     </div>

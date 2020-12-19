@@ -371,10 +371,11 @@ if (!empty($postedToken)) {
                 if (isset($_POST['btnAction'])) {
 
                     $order_id = $_POST['btnAction'];
+                    $reason = $_POST['reason'];
 
                     $tablename = "orders";
-                    $data = "status =?, date_modified = ? WHERE id = ?";
-                    $array = array(1, $time, $order_id);
+                    $data = "status =?,reason =?, date_modified = ? WHERE id = ?";
+                    $array = array(1, $reason, $time, $order_id);
                     $result_order = $db->update($tablename, $data, $array);
 
                     if ($result_order) {

@@ -188,6 +188,34 @@ if (!empty($postedToken)) {
             //              User Profile
             //--------------------------------------------------
 
+            //--------------------------------------------------
+            //              Order
+            //--------------------------------------------------
+            else if ($type == "order_to_cancel") {
+                if (isset($_POST['btnAction'])) {
+
+                    $order_id = $_POST['btnAction'];
+                    $reason = $_POST['reason'];
+
+                    $tablename = "orders";
+                    $data = "status =?,reason =?, date_modified = ? WHERE id = ?";
+                    $array = array(5, $reason, $time, $order_id);
+                    $result_order = $db->update($tablename, $data, $array);
+
+                    if ($result_order) {
+                        echo "<script>alert(\" Update Status Successful\");
+                              window.location.href='../index.php?p=5';</script>";
+                    } else {
+                        echo "<script>alert(\" Update Status Fail. Please Try Again\");
+                              window.location.href='../index.php?p=5';</script>";
+                    }
+                }
+            }
+
+            //--------------------------------------------------
+            //              Order
+            //--------------------------------------------------
+
         } // table admin
     } else {
         echo "Token Expired. Please Try Again";

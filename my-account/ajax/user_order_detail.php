@@ -70,7 +70,7 @@ switch ($status) {
                     </tr>
                 </table>
             </blockquote>
-            <?php if ($status == 1) { ?>
+            <?php if ($status == 1 || $status == 5) { ?>
                 <blockquote class="bg-warning">
                     <table class="table-widths">
                         <tr>
