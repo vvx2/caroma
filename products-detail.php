@@ -7,6 +7,64 @@
     // $db = new DB_FUNCTIONS();
     require_once('inc/init.php');
     require_once('inc/head.php');
+
+    if (isset($_REQUEST['p'])) {
+        $product_id = $_REQUEST['p'];
+    } else {
+        echo "<script>alert(\" No product. Please select a product. Thank You.\");
+               window.location.href='shop.php';</script>";
+        exit();
+    }
+
+    $col = "*, p.id as p_id, pt.name as pt_name, pt.description as pt_description, ct.name as ct_name, rate.rating as rating, rate.rate_total as rate_total";
+    $tb = " product p left join product_translation pt on p.id = pt.product_id left join product_role_price pp on p.id = pp.product_id left join category_translation ct on p.category = ct.category_id left join (SELECT product_id, (sum(rate) / count(product_id)) as rating, count(product_id) as rate_total FROM order_items where rate != 0 group by product_id) rate on p.id = rate.product_id ";
+    $opt = 'pt.language = ? && pp.type =? && ct.language =? && p.status =? && p.id = ?';
+    $arr = array($language, $user_type, $language, 1, $product_id);
+    $result = $db->advwhere($col, $tb, $opt, $arr);
+
+    if (count($result) == 0) {
+        echo "<script>alert(\" No product. Please select a product. Thank You.\");
+               window.location.href='shop.php';</script>";
+        exit();
+    }
+    $result = $result[0];
+
+    if ($user_type == 3) {
+        //get distributor id that dealer under with
+        $table = 'user_dealer';
+        $col = "*";
+        $opt = 'user_id =?';
+        $arr = array($user_id);
+        $dealer = $db->advwhere($col, $table, $opt, $arr);
+        $under_distributor = $dealer[0]['under_distributor'];
+        $admin_id = $under_distributor;
+
+        $col = "id,stock";
+        $tb = "distributor_product";
+        $opt = 'product_id = ? && user_id = ? && status = ?';
+        $arr = array($product_id, $admin_id, 1);
+        $dis_product = $db->advwhere($col, $tb, $opt, $arr);
+
+        if (count($dis_product) != 0) {
+            $dis_product = $dis_product[0];
+            $stock = $dis_product['stock'];
+        } else {
+            echo "<script>alert(\" No product. Please select a product. Thank You.\");
+            window.location.href='shop.php';</script>";
+            exit();
+        }
+    } else {
+        $stock = $result['stock'];
+    }
+
+    if ($result['rating'] == NULL) {
+        $result['rating'] = 5;
+    }
+
+    $rate_per = ($result['rating'] / 5) * 100;
+    echo "<pre>";
+    var_dump($result);
+    echo "</pre>";
     ?>
 </head>
 
@@ -65,51 +123,39 @@
                 <div class="sumary-product single-layout">
                     <div class="media">
                         <ul class="biolife-carousel slider-for" data-slick='{"arrows":false,"dots":false,"slidesMargin":30,"slidesToShow":1,"slidesToScroll":1,"fade":true,"asNavFor":".slider-nav"}'>
-                            <li><img src="assets/images/details-product/p05.jpg" alt="" width="500" height="500"></li>
-                            <li><img src="assets/images/details-product/p04.jpg" alt="" width="500" height="500"></li>
-                            <li><img src="assets/images/details-product/p06.jpg" alt="" width="500" height="500"></li>
-                            <li><img src="assets/images/details-product/p07.jpg" alt="" width="500" height="500"></li>
-                            <li><img src="assets/images/details-product/p08.jpg" alt="" width="500" height="500"></li>
-                        </ul>
-                        <ul class="biolife-carousel slider-nav" data-slick='{"arrows":false,"dots":false,"centerMode":false,"focusOnSelect":true,"slidesMargin":10,"slidesToShow":4,"slidesToScroll":1,"asNavFor":".slider-for"}'>
-                            <li><img src="assets/images/details-product/thumb_p05.jpg" alt="" width="88" height="88"></li>
-                            <li><img src="assets/images/details-product/thumb_p04.jpg" alt="" width="88" height="88"></li>
-                            <li><img src="assets/images/details-product/thumb_p06.jpg" alt="" width="88" height="88"></li>
-                            <li><img src="assets/images/details-product/thumb_p07.jpg" alt="" width="88" height="88"></li>
-                            <li><img src="assets/images/details-product/thumb_p08.jpg" alt="" width="88" height="88"></li>
+                            <li><img src="img/product/<?php echo $result['image']; ?>" alt="" width="400" height="400"></li>
                         </ul>
                     </div>
                     <div class="product-attribute">
-                        <h3 class="title">Organic 10 Assorted Flavors Jelly Beans, 5.5 Oz</h3>
+                        <h3 class="title"><?php echo $result['pt_name']; ?></h3>
                         <div class="rating">
-                            <p class="star-rating"><span class="width-80percent"></span></p>
-                            <span class="review-count">(04 Reviews)</span>
+                            <p class="star-rating"><span class="width-percent" style="width: <?php echo $rate_per; ?>%;"></span></p>
+                            <span class="review-count"></span>
                             <span class="qa-text">Q&A</span>
-                            <b class="category">By: Natural food</b>
+                            <b class="category">By: <?php echo $result['ct_name']; ?></b>
                         </div>
-                        <span class="sku">Sku: #76584HH</span>
-                        <p class="excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vel maximus lacus. Duis ut mauris eget justo dictum tempus sed vel tellus.</p>
+                        <span class="sku">Stock: <?php echo $stock; ?></span>
                         <div class="price">
-                            <ins><span class="price-amount"><span class="currencySymbol">£</span>85.00</span></ins>
-                            <del><span class="price-amount"><span class="currencySymbol">£</span>95.00</span></del>
+                            <ins><span class="price-amount"><span class="currencySymbol">RM</span><?php echo number_format($result["price"], 2); ?></span></ins>
+                            <del><span class="price-amount"><span class="currencySymbol">RM</span><?php echo number_format($result["price"], 2); ?></span></del>
                         </div>
-                        <div class="biolife-countdown" data-datetime="2020/02/18 00:00:00"></div>
+                        <div class="biolife-countdown" data-datetime="2020/12/20 00:00:00"></div>
                         <div class="shipping-info">
                             <p class="shipping-day">3-Day Shipping</p>
-                            <p class="for-today">Shipping with POSLAJU</p>
+                            <p class="for-today">Shipping with CITYLINK</p>
                         </div>
                     </div>
                     <div class="action-form">
                         <div class="quantity-box">
                             <span class="title">Quantity:</span>
                             <div class="qty-input">
-                                <input type="text" name="qty12554" value="1" data-max_value="20" data-min_value="1" data-step="1">
+                                <input type="text" name="qty_product" value="1" data-max_value="<?php echo $stock; ?>" data-min_value="1" data-step="1">
                                 <a href="#" class="qty-btn btn-up"><i class="fa fa-caret-up" aria-hidden="true"></i></a>
                                 <a href="#" class="qty-btn btn-down"><i class="fa fa-caret-down" aria-hidden="true"></i></a>
                             </div>
                         </div>
                         <div class="buttons">
-                            <a href="#" class="btn add-to-cart-btn">add to cart</a>
+                            <button class="btn add-to-cart-btn btnAddCart" style="width: 100%;" data-value="<?php echo $result['p_id']; ?>"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i>add to cart</button>
                         </div>
                         <div class="social-media">
                             <ul class="social-list">
@@ -136,175 +182,102 @@
                     <div class="tab-head">
                         <ul class="tabs">
                             <li class="tab-element active"><a href="#tab_1st" class="tab-link">Products Descriptions</a></li>
-                            <li class="tab-element"><a href="#tab_2nd" class="tab-link">Addtional information</a></li>
-                            <li class="tab-element"><a href="#tab_3rd" class="tab-link">Shipping & Delivery</a></li>
-                            <li class="tab-element"><a href="#tab_4th" class="tab-link">Customer Reviews <sup>(3)</sup></a></li>
+                            <li class="tab-element"><a href="#tab_4th" class="tab-link">Customer Reviews</a></li>
                         </ul>
                     </div>
                     <div class="tab-content">
                         <div id="tab_1st" class="tab-contain desc-tab active">
-                            <p class="desc">Quisque quis ipsum venenatis, fermentum ante volutpat, ornare enim. Phasellus molestie risus non aliquet cursus. Integer vestibulum mi lorem, id hendrerit ante lobortis non. Nunc ante ante, lobortis non pretium non, vulputate vel nisi. Maecenas dolor elit, fringilla nec turpis ac, auctor vulputate nulla. Phasellus sed laoreet velit.
-                                Proin fringilla urna vel mattis euismod. Etiam sodales, massa non tincidunt iaculis, mauris libero scelerisque justo, ut rutrum lectus urna sit amet quam. Nulla maximus vestibulum mi vitae accumsan. Donec sit amet ligula et enim semper viverra a in arcu. Vestibulum enim ligula, varius sed enim vitae, posuere molestie velit. Morbi risus orci, congue in nulla at, sodales fermentum magna.</p>
-                            <div class="desc-expand">
-                                <span class="title">Organic Fresh Fruit</span>
-                                <ul class="list">
-                                    <li>100% real fruit ingredients</li>
-                                    <li>100 fresh fruit bags individually wrapped</li>
-                                    <li>Blending Eastern & Western traditions, naturally</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div id="tab_2nd" class="tab-contain addtional-info-tab">
-                            <table class="tbl_attributes">
-                                <tbody>
-                                    <tr>
-                                        <th>Color</th>
-                                        <td>
-                                            <p>Black, Blue, Purple, Red, Yellow</p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>Size</th>
-                                        <td>
-                                            <p>S, M, L</p>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div id="tab_3rd" class="tab-contain shipping-delivery-tab">
-                            <div class="accodition-tab biolife-accodition">
-                                <ul class="tabs">
-                                    <li class="tab-item">
-                                        <span class="title btn-expand">How long will it take to receive my order?</span>
-                                        <div class="content">
-                                            <p>Orders placed before 3pm eastern time will normally be processed and shipped by the following business day. For orders received after 3pm, they will generally be processed and shipped on the second business day. For example if you place your order after 3pm on Monday the order will ship on Wednesday. Business days do not include Saturday and Sunday and all Holidays. Please allow additional processing time if you order is placed on a weekend or holiday. Once an order is processed, speed of delivery will be determined as follows based on the shipping mode selected:</p>
-                                            <div class="desc-expand">
-                                                <span class="title">Shipping mode</span>
-                                                <ul class="list">
-                                                    <li>Standard (in transit 3-5 business days)</li>
-                                                    <li>Priority (in transit 2-3 business days)</li>
-                                                    <li>Express (in transit 1-2 business days)</li>
-                                                    <li>Gift Card Orders are shipped via USPS First Class Mail. First Class mail will be delivered within 8 business days</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="tab-item">
-                                        <span class="title btn-expand">How is the shipping cost calculated?</span>
-                                        <div class="content">
-                                            <p>You will pay a shipping rate based on the weight and size of the order. Large or heavy items may include an oversized handling fee. Total shipping fees are shown in your shopping cart. Please refer to the following shipping table:</p>
-                                            <p>Note: Shipping weight calculated in cart may differ from weights listed on product pages due to size and actual weight of the item.</p>
-                                        </div>
-                                    </li>
-                                    <li class="tab-item">
-                                        <span class="title btn-expand">Why Didn’t My Order Qualify for FREE shipping?</span>
-                                        <div class="content">
-                                            <p>We do not deliver to P.O. boxes or military (APO, FPO, PSC) boxes. We deliver to all 50 states plus Puerto Rico. Certain items may be excluded for delivery to Puerto Rico. This will be indicated on the product page.</p>
-                                        </div>
-                                    </li>
-                                    <li class="tab-item">
-                                        <span class="title btn-expand">Shipping Restrictions?</span>
-                                        <div class="content">
-                                            <p>We do not deliver to P.O. boxes or military (APO, FPO, PSC) boxes. We deliver to all 50 states plus Puerto Rico. Certain items may be excluded for delivery to Puerto Rico. This will be indicated on the product page.</p>
-                                        </div>
-                                    </li>
-                                    <li class="tab-item">
-                                        <span class="title btn-expand">Undeliverable Packages?</span>
-                                        <div class="content">
-                                            <p>Occasionally packages are returned to us as undeliverable by the carrier. When the carrier returns an undeliverable package to us, we will cancel the order and refund the purchase price less the shipping charges. Here are a few reasons packages may be returned to us as undeliverable:</p>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
+                            <?php echo $result['pt_description']; ?>
                         </div>
                         <div id="tab_4th" class="tab-contain review-tab">
                             <div class="container">
                                 <div class="row">
-                                    <div class="col-lg-5 col-md-5 col-sm-6 col-xs-12">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                         <div class="rating-info">
-                                            <p class="index"><strong class="rating">4.4</strong>out of 5</p>
+                                            <?php
+                                            $col = "id";
+                                            $tb = "order_items";
+                                            $opt = 'product_id = ? && rate = ?';
+                                            $arr = array($product_id, 5);
+                                            $rate5 = $db->advwhere($col, $tb, $opt, $arr);
+
+                                            $arr = array($product_id, 4);
+                                            $rate4 = $db->advwhere($col, $tb, $opt, $arr);
+
+                                            $arr = array($product_id, 3);
+                                            $rate3 = $db->advwhere($col, $tb, $opt, $arr);
+
+                                            $arr = array($product_id, 2);
+                                            $rate2 = $db->advwhere($col, $tb, $opt, $arr);
+
+                                            $arr = array($product_id, 1);
+                                            $rate1 = $db->advwhere($col, $tb, $opt, $arr);
+
+
+                                            $count_rate1 = count($rate1);
+                                            $count_rate2 = count($rate2);
+                                            $count_rate3 = count($rate3);
+                                            $count_rate4 = count($rate4);
+                                            $count_rate5 = count($rate5);
+                                            ?>
+                                            <p class="index"><strong class="rating"><?php echo number_format($result['rating'], 1); ?></strong>out of 5</p>
                                             <div class="rating">
-                                                <p class="star-rating"><span class="width-80percent"></span></p>
+                                                <p class="star-rating"><span class="width-percent" style="width: <?php echo $rate_per; ?>%;"></span></p>
                                             </div>
-                                            <p class="see-all">Total all 68 reviews</p>
+                                            <p class="see-all">Total all <?php echo number_format($result['rate_total'], 0); ?> reviews</p>
+                                            <?php
+                                            // php cant division in 0
+                                            if ($result['rate_total'] == 0) {
+                                                $result['rate_total'] = 1;
+                                            }
+                                            ?>
                                             <ul class="options">
                                                 <li>
                                                     <div class="detail-for">
                                                         <span class="option-name">5stars</span>
                                                         <span class="progres">
-                                                            <span class="line-100percent"><span class="percent width-90percent"></span></span>
+                                                            <span class="line-100percent"><span class="percent width-100percent" style="width: <?php echo ($count_rate5 / $result['rate_total']) * 100; ?>%;"></span></span>
                                                         </span>
-                                                        <span class="number">90</span>
+                                                        <span class="number"><?php echo $count_rate5; ?></span>
                                                     </div>
                                                 </li>
                                                 <li>
                                                     <div class="detail-for">
                                                         <span class="option-name">4stars</span>
                                                         <span class="progres">
-                                                            <span class="line-100percent"><span class="percent width-30percent"></span></span>
+                                                            <span class="line-100percent"><span class="percent width-100percent" style="width: <?php echo ($count_rate4 / $result['rate_total']) * 100; ?>%;"></span></span>
                                                         </span>
-                                                        <span class="number">30</span>
+                                                        <span class="number"><?php echo $count_rate4; ?></span>
                                                     </div>
                                                 </li>
                                                 <li>
                                                     <div class="detail-for">
                                                         <span class="option-name">3stars</span>
                                                         <span class="progres">
-                                                            <span class="line-100percent"><span class="percent width-40percent"></span></span>
+                                                            <span class="line-100percent"><span class="percent width-100percent" style="width: <?php echo ($count_rate3 / $result['rate_total']) * 100; ?>%;"></span></span>
                                                         </span>
-                                                        <span class="number">40</span>
+                                                        <span class="number"><?php echo $count_rate3; ?></span>
                                                     </div>
                                                 </li>
                                                 <li>
                                                     <div class="detail-for">
                                                         <span class="option-name">2stars</span>
                                                         <span class="progres">
-                                                            <span class="line-100percent"><span class="percent width-20percent"></span></span>
+                                                            <span class="line-100percent"><span class="percent width-100percent" style="width: <?php echo ($count_rate2 / $result['rate_total']) * 100; ?>%;"></span></span>
                                                         </span>
-                                                        <span class="number">20</span>
+                                                        <span class="number"><?php echo $count_rate2; ?></span>
                                                     </div>
                                                 </li>
                                                 <li>
                                                     <div class="detail-for">
                                                         <span class="option-name">1star</span>
                                                         <span class="progres">
-                                                            <span class="line-100percent"><span class="percent width-10percent"></span></span>
+                                                            <span class="line-100percent"><span class="percent width-100percent" style="width: <?php echo ($count_rate1 / $result['rate_total']) * 100; ?>%;"></span></span>
                                                         </span>
-                                                        <span class="number">10</span>
+                                                        <span class="number"><?php echo $count_rate1; ?></span>
                                                     </div>
                                                 </li>
                                             </ul>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-7 col-md-7 col-sm-6 col-xs-12">
-                                        <div class="review-form-wrapper">
-                                            <span class="title">Submit your review</span>
-                                            <form action="#" name="frm-review" method="post">
-                                                <div class="comment-form-rating">
-                                                    <label>1. Your rating of this products:</label>
-                                                    <p class="stars">
-                                                        <span>
-                                                            <a class="btn-rating" data-value="star-1" href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a>
-                                                            <a class="btn-rating" data-value="star-2" href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a>
-                                                            <a class="btn-rating" data-value="star-3" href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a>
-                                                            <a class="btn-rating" data-value="star-4" href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a>
-                                                            <a class="btn-rating" data-value="star-5" href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a>
-                                                        </span>
-                                                    </p>
-                                                </div>
-                                                <p class="form-row wide-half">
-                                                    <input type="text" name="name" value="Siti Zainal" placeholder="Your name" disabled>
-                                                </p>
-                                                <p class="form-row wide-half">
-                                                    <input type="email" name="email" value="siti@gmail.com" placeholder="Email address" disabled>
-                                                </p>
-                                                <p class="form-row">
-                                                </p>
-                                                <p class="form-row">
-                                                    <button type="submit" name="submit">submit review</button>
-                                                </p>
-                                            </form>
                                         </div>
                                     </div>
                                 </div>
@@ -521,6 +494,12 @@
     <script src="assets/js/slick.min.js"></script>
     <script src="assets/js/biolife.framework.js"></script>
     <script src="assets/js/functions.js"></script>
+    <script src="cart.js"></script>
+    <script>
+        $(document).ready(function() {
+            LoadCart();
+        });
+    </script>
 </body>
 
 </html>
