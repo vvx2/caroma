@@ -5,6 +5,11 @@ if ($login != 1) {
 	echo "<script>window.location.replace('../login.php')</script>";
 	exit();
 }
+if($user_type != 2){
+	echo "<script>alert(\" Your are not Distributor\");
+	window.location.href='index.php';</script>";
+	exit();
+}
 
 // page 2: to ship, 3: shipping, 4: completed, 1: Canceled/fail
 if (isset($_REQUEST['p'])) { // order status

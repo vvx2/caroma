@@ -5,7 +5,11 @@ if ($login != 1) {
     echo "<script>window.location.replace('../login.php')</script>";
     exit();
 }
-
+if($user_type != 2){
+	echo "<script>alert(\" Your are not Distributor\");
+	window.location.href='index.php';</script>";
+	exit();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
