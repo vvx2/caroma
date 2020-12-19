@@ -123,6 +123,7 @@ if($user_type != 2){
                                                                                     <th>#</th>
                                                                                     <th>Amount</th>
                                                                                     <th>Description</th>
+                                                                                    <th>Balance</th>
                                                                                     <th>Date Time</th>
                                                                                 </tr>
                                                                             </thead>
@@ -131,6 +132,7 @@ if($user_type != 2){
                                                                                     <th>#</th>
                                                                                     <th>Amount</th>
                                                                                     <th>Description</th>
+                                                                                    <th>Balance</th>
                                                                                     <th>Date Time</th>
                                                                                 </tr>
                                                                             </tfoot>
@@ -159,6 +161,7 @@ if($user_type != 2){
                                                                                         <td><?php echo $i; ?></td>
                                                                                         <td class="<?php echo $text_color; ?>"><strong><?php echo $amount; ?></strong></td>
                                                                                         <td><?php echo $desc; ?></td>
+                                                                                        <td><strong><?php echo $wallet['current_amount']; ?></strong></td>
                                                                                         <td><?php echo $wallet['date_modified']; ?></td>
                                                                                     </tr>
                                                                                 <?php $i++;} ?>
