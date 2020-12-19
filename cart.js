@@ -67,8 +67,8 @@ function AddToCart(product_id, product_qty, thisbtn, token) {
         token: token
     }, function (data) {
         data = JSON.parse(data)
-        console.log("-------------------------");
-        console.log(data);
+        // console.log("-------------------------");
+        // console.log(data);
         $('#token').val(data["Token"]);
         if (data["Status"]) {
             //Success Action
@@ -144,11 +144,33 @@ $('.btn-clear').click(function () {
     ClearCart(thisbtn, token);
 });
 
-$('.btnAddCart').click(function () {
+// $('[class="btnAddCart"]').click(function () {
+//     var thisbtn = $(this);
+//     let data = new FormData();
+//     var product_id = thisbtn.data('value');
+//     var product_qty = $('[name="qty_product"]').val();
+//     if (product_qty) {
+//         product_qty = product_qty;
+//     } else {
+//         product_qty = 1;
+//     }
+//     var token = $('#token').val();
+//     thisbtn.attr('disabled', true);
+//     thisbtn.html('<i class="fa fa-spin fa-spinner"></i> Loading...');
+//     console.log('qty:' + product_qty);
+//     AddToCart(product_id, product_qty, thisbtn, token);
+// });
+
+$(document).on('click', '.btnAddCart', function() {
     var thisbtn = $(this);
     let data = new FormData();
     var product_id = thisbtn.data('value');
-    var product_qty = 1;
+    var product_qty = $('[name="qty_product"]').val();
+    if (product_qty) {
+        product_qty = product_qty;
+    } else {
+        product_qty = 1;
+    }
     var token = $('#token').val();
     thisbtn.attr('disabled', true);
     thisbtn.html('<i class="fa fa-spin fa-spinner"></i> Loading...');
