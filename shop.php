@@ -246,8 +246,7 @@
                                 <div class="wrap-selectors">
                                     <div class="selector-item orderby-selector">
                                         <select name="orderby" class="orderby" aria-label="Shop order">
-                                            <option value="menu_order" selected="selected">Default sorting</option>
-                                            <option value="popularity">popularity</option>
+                                            <option value="popularity" selected="selected">popularity</option>
                                             <option value="rating">average rating</option>
                                             <option value="date">newness</option>
                                             <option value="price">price: low to high</option>
@@ -257,66 +256,11 @@
                                 </div>
                             </div>
                         </div>
-
+                        <input value='0' id='get_total_product'>
                         <div class="row">
-                            <ul class="products-list">
-                                <?php
-                                if (isset($_REQUEST["category"])) {
-                                    $filter_table = " left join category c on p.category = c.id";
-                                    $filter_opt = " && c.status =? && p.category =? ";
-                                    $filter_arr = array($language, $user_type, $language, 1, 1, $_REQUEST["category"]);
-                                } else if (isset($_REQUEST["price-from"]) && isset($_REQUEST["price-to"])) {
-                                    $filter_table = "";
-                                    $filter_opt = " && pp.price BETWEEN ? AND ? ";
-                                    $filter_arr = array($language, $user_type, $language, 1, $_REQUEST["price-from"], $_REQUEST["price-to"]);
-                                } else {
-                                    $filter_table = "";
-                                    $filter_opt = " ";
-                                    $filter_arr = array($language, $user_type, $language, 1);
-                                }
+                            <ul class="products-list product_display">
 
-                                $col = "*, p.id as p_id, pt.name as pt_name, pt.description as pt_description, ct.name as ct_name";
-                                $tb = "product p left join product_translation pt on p.id = pt.product_id left join product_role_price pp on p.id = pp.product_id left join category_translation ct on p.category = ct.category_id " . $filter_table;
-                                $opt = 'pt.language = ? && pp.type =? && ct.language =? && p.status =?' . $filter_opt . 'ORDER BY p.date_modified DESC';
-                                $arr = $filter_arr;
-                                $result = $db->advwhere($col, $tb, $opt, $arr);
-                                foreach ($result as $product) {
 
-                                ?>
-                                    <li class="product-item col-lg-4 col-md-4 col-sm-4 col-xs-6" id="product_<?php echo $product["p_id"] ?>">
-                                        <div class="contain-product layout-default">
-                                            <div class="product-thumb">
-                                                <a href="products-detail.php" class="link-to-product">
-                                                    <img src="img/product/<?php echo $product["image"] ?>" alt="dd" width="270" height="270" class="product-thumnail">
-                                                </a>
-                                            </div>
-                                            <div class="info">
-                                                <b class="categories"><?php echo $product["ct_name"] ?></b>
-                                                <h4 class="product-title"><a href="products-detail.php" class="pr-name"><?php echo $product["pt_name"] ?></a></h4>
-                                                <div class="price">
-                                                    <ins><span class="price-amount"><span class="currencySymbol">RM</span><?php echo number_format($product["price"], 2, '.', '') ?></span></ins>
-                                                    <del><span class="price-amount"><span class="currencySymbol">RM</span><?php echo number_format($product["price"], 2, '.', '') ?></span></del>
-                                                </div>
-                                                <div class="shipping-info">
-                                                    <p class="shipping-day">Description</p>
-                                                    <p class="for-today"><?php echo $product["pt_description"] ?></p>
-                                                </div>
-                                                <div class="slide-down-box">
-                                                    <p class="message">All products are carefully selected to ensure food safety.</p>
-                                                    <div class="buttons">
-                                                        <button class="btn add-to-cart-btn btnAddCart" style="width: 100%;" data-value="<?php echo $product["p_id"] ?>"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i>add to cart</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                <?php }
-
-                                if (count($result) == 0) {
-                                    echo "<h1>No Result</h1>";
-                                }
-                                ?>
-                                <input hidden value='<?php echo count($result); ?>' id='get_total_product'>
 
                                 <!-- <li class="product-item col-lg-4 col-md-4 col-sm-4 col-xs-6">
                                     <div class="contain-product layout-default">
@@ -524,11 +468,6 @@
                                         <p class="f-item"><button class="btn-submit" type="submit">go</button></p>
                                     </form>
                                 </div>
-                                <ul class="check-list bold single">
-                                    <li class="check-list-item"><a href="#" class="check-link">RM0 - RM20</a></li>
-                                    <li class="check-list-item"><a href="#" class="check-link">RM21 - RM50</a></li>
-                                    <li class="check-list-item"><a href="#" class="check-link">RM51 Above</a></li>
-                                </ul>
                             </div>
                         </div>
 
@@ -618,61 +557,101 @@
     <script>
         $(document).ready(function() {
             LoadCart();
-
+            LoadProduct(1)
 
             window.pagObj = $('#pagination').twbsPagination({
-                totalPages: Math.ceil(5),
-
-                visiblePages: 3,
+                totalPages: Math.ceil(3),
+                visiblePages: 5,
                 onPageClick: function(event, page) {
                     console.info(page + ' (from options)');
-
-
-                    // var district = $("input[name='district[]']:checkbox:checked").map(function() {
-                    //     return $(this).val();
-                    // }).get();
-
-                    // var special = $("input[name='special[]']:checkbox:checked").map(function() {
-                    //     return $(this).val();
-                    // }).get();
-
-                    // var gender = $("input[name='gender[]']:checkbox:checked").map(function() {
-                    //     return $(this).val();
-                    // }).get();
-
-                    // var search_doctor = $('[name="search_doctor"]').val();
-
                     $('#loadDiv').show();
 
-
-                    // $.ajax({
-                    //     type: "POST",
-                    //     url: "get_doctor.php",
-                    //     data: {
-                    //         district: district,
-                    //         special: special,
-                    //         search_doctor: search_doctor,
-                    //         gender: gender,
-                    //         page: page,
-                    //     },
-                    //     success: function(data) {
-                    //         setTimeout(function() {
-                    //             // console.log(data);
-                    //             $('.display_doctor').html(data);
-                    //             var count_result = $('#get_total_doctor').val();
-                    //             $('#count_result').html("已查找到相關的結果： " + count_result + "個");
-                    //             $('#loadDiv').hide();
-                    //         }, 300);
-                    //     }
-                    // });
-
                     setTimeout(function() {
+                        LoadProduct(page)
                         $('#loadDiv').hide();
                     }, 300);
                     // document.documentElement.scrollTop = 0;
                 }
             })
+
         });
+
+        //for onclick
+        function paging() {
+            var count_result = $('[id="get_total_product"]').val();
+            console.log('ourpage:' + count_result);
+            $('#pagination').twbsPagination('destroy');
+            $('#pagination').twbsPagination({
+                totalPages: Math.ceil(3),
+                visiblePages: 5,
+                onPageClick: function(event, page) {
+                    console.info(page + ' (from options paging())');
+                    $('#loadDiv').show();
+
+                    setTimeout(function() {
+                        var count_result = $('[id="get_total_product"]').val();
+                        console.log('inpage:' + count_result);
+                        LoadProduct(page)
+                        $('#loadDiv').hide();
+                    }, 300);
+                    // document.documentElement.scrollTop = 0;
+                }
+            })
+        }
+
+        function LoadProduct(page) {
+            var page = page;
+            var orderby = $('[name="orderby"]').val();
+            var category = 0;
+            var price_from = 0;
+            var price_to = 0;
+            $.post('api/product.php', {
+                page: page,
+                orderby: orderby,
+                category: category,
+                price_from: price_from,
+                price_to: price_to
+            }, function(data) {
+                data = JSON.parse(data)
+                console.log("getproduct:");
+                console.log(data);
+                if (data["Status"]) {
+                    //Success Action
+                    let product_item = '';
+                    $.each(data["product"], function(key, product) {
+                        product_item = product_item +
+                            '<li class="product-item col-lg-4 col-md-4 col-sm-4 col-xs-6" id="product_' + key + '">\n' +
+                            '       <div class="contain-product layout-default">\n' +
+                            '           <div class="product-thumb">\n' +
+                            '               <a href="products-detail.php?p=' + key + '" class="link-to-product">\n' +
+                            '                   <img src="img/product/' + product.image + '" alt="dd" width="270" height="270" class="product-thumnail">\n' +
+                            '               </a>\n' +
+                            '           </div>\n' +
+                            '           <div class="info">\n' +
+                            '               <b class="categories">' + product.category_name + '</b>\n' +
+                            '               <h4 class="product-title"><a href="products-detail.php?p=' + key + '" class="pr-name">' + product.product_name + '</a></h4>\n' +
+                            '               <div class="price">\n' +
+                            '                   <ins><span class="price-amount"><span class="currencySymbol">RM</span>' + parseFloat(product.price).toFixed(2) + '</span></ins>\n' +
+                            '                   <del><span class="price-amount"><span class="currencySymbol">RM</span>' + parseFloat(product.price).toFixed(2) + '</span></del>\n' +
+                            '               </div>\n' +
+                            '               <div class="slide-down-box">\n' +
+                            '                   <p class="message">All products are carefully selected to ensure food safety.</p>\n' +
+                            '                   <div class="buttons">\n' +
+                            '                       <button class="btn add-to-cart-btn btnAddCart" style="width: 100%;" data-value="' + key + '"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i>add to cart</button>\n' +
+                            '                   </div>\n' +
+                            '               </div>\n' +
+                            '           </div>\n' +
+                            '       </div>\n' +
+                            '</li>\n';
+                    });
+                    $(".product_display").html(product_item);
+                    $("#get_total_product").val(data["count_result"]);
+                } else {
+                    $(".product_display").html(data["msg"]);
+                    $("#get_total_product").val(0);
+                }
+            });
+        }
     </script>
 </body>
 
