@@ -84,7 +84,7 @@ function AddToCart(product_id, product_qty, thisbtn, token) {
             setTimeout(function () {
                 thisbtn.html('ADD TO CART');
                 thisbtn.attr('disabled', false);
-            }, 500);
+            }, 1000);
         }
         LoadCart();
     });
@@ -161,7 +161,7 @@ $('.btn-clear').click(function () {
 //     AddToCart(product_id, product_qty, thisbtn, token);
 // });
 
-$(document).on('click', '.btnAddCart', function() {
+$(document).on('click', '.btnAddCart', function () {
     var thisbtn = $(this);
     let data = new FormData();
     var product_id = thisbtn.data('value');

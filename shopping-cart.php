@@ -108,6 +108,17 @@
                                         $total_pay = 0;
 
                                         if ($login == 1) {
+                                            if ($user_type == 3) {
+                                                //get distributor id that dealer under with
+                                                $table = 'user_dealer';
+                                                $col = "*";
+                                                $opt = 'user_id =?';
+                                                $arr = array($user_id);
+                                                $dealer = $db->advwhere($col, $table, $opt, $arr);
+                                                $under_distributor = $dealer[0]['under_distributor'];
+
+                                                $admin_id = $under_distributor;
+                                            }
 
                                             $table = "cart c left join product p on c.product_id = p.id left join product_translation pt on c.product_id = pt.product_id left join product_role_price pp on c.product_id = pp.product_id";
                                             $col = "c.id as id, c.qty as qty, p.id as p_id, p.stock as stock, p.image as image, pt.name as name, pp.price as price";
@@ -116,6 +127,15 @@
                                             $get_cart = $db->advwhere($col, $table, $opt, $arr);
                                             if (count($get_cart) != 0) {
                                                 foreach ($get_cart as $cart) {
+                                                    if ($user_type == 3) {
+                                                        $table = "distributor_product";
+                                                        $col = "*";
+                                                        $opt = 'product_id = ? && user_id = ?';
+                                                        $arr = array($cart['p_id'], $admin_id);
+                                                        $check_product_under_distributor = $db->advwhere($col, $table, $opt, $arr);
+
+                                                        $cart['stock'] = $check_product_under_distributor[0]['stock'];
+                                                    }
                                                     $item[$cart['p_id']] = array("qty" => $cart['qty'], "image" => $cart['image'], "name" => $cart['name'], "price" => $cart['price'], "stock" => $cart['stock'], "product_total_price" => $cart['qty'] * $cart['price']);
                                                 }
                                             }

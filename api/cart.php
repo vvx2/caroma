@@ -1,16 +1,13 @@
 <?php
 require_once('../administrator/connection/PDO_db_function.php');
 $db = new DB_FUNCTIONS();
-if(isset($_SESSION['user_id']) && isset($_SESSION['type']))
-{	
+if (isset($_SESSION['user_id']) && isset($_SESSION['type'])) {
     $user_id = $_SESSION['user_id'];
-	$user_type = $_SESSION['type'];
-	$login = 1;
-	$_SESSION['login'] = $login;
-}
-else
-{
-	$login = 0;
+    $user_type = $_SESSION['type'];
+    $login = 1;
+    $_SESSION['login'] = $login;
+} else {
+    $login = 0;
     $_SESSION['login'] = $login;
     $user_type = 1;
 }
@@ -34,16 +31,56 @@ if (isset($_REQUEST['type'])) {
                 $product_id = $_POST['product_id'];
                 $product_qty = $_POST['product_qty'];
 
-                $table = "product";
-                $col = "stock,status";
-                $opt = 'id = ?';
-                $arr = array($product_id);
-                $product = $db->advwhere($col, $table, $opt, $arr);
-                $product_stock = $product[0]["stock"];
+                if ($login == 1) {
 
-                if ($product_stock >= $product_qty) {
-                    if ($login == 1) {
 
+
+                    //---------------------------------------------
+                    //      To check stock enough for add to cart
+                    //--------------------------------------------
+                    $table = "product";
+                    $col = "stock,status";
+                    $opt = 'id = ?';
+                    $arr = array($product_id);
+                    $product = $db->advwhere($col, $table, $opt, $arr);
+                    $product_stock = $product[0]["stock"];
+
+                    //todo
+                    //check stock with distributor when user type is dealer
+                    if ($user_type == 3) {
+
+                        //get distributor id that dealer under with
+                        $table = 'user_dealer';
+                        $col = "*";
+                        $opt = 'user_id =?';
+                        $arr = array($user_id);
+                        $dealer = $db->advwhere($col, $table, $opt, $arr);
+                        $under_distributor = $dealer[0]['under_distributor'];
+
+                        $admin_id = $under_distributor;
+
+                        $table = "distributor_product";
+                        $col = "*";
+                        $opt = 'product_id = ? && user_id = ?';
+                        $arr = array($product_id, $admin_id);
+                        $check_product_under_distributor = $db->advwhere($col, $table, $opt, $arr);
+
+                        $product_stock = $check_product_under_distributor[0]['stock'];
+                    }
+
+                    $table = "cart";
+                    $col = "*";
+                    $opt = 'product_id = ? && customer_id = ?';
+                    $arr = array($product_id, $user_id);
+                    $check_cart = $db->advwhere($col, $table, $opt, $arr);
+                    $cart_qty = $check_cart[0]["qty"];
+
+                    $product_add_qty = $cart_qty + $product_qty;
+                    //---------------------------------------------
+                    //      To check stock enough for add to cart
+                    //--------------------------------------------
+
+                    if ($product_stock >= $product_add_qty) {
                         // check cart is it isset in database
                         $table = "cart";
                         $col = "id, qty";
@@ -74,23 +111,23 @@ if (isset($_REQUEST['type'])) {
                             $json_arr = array('Status' => false, 'Msg' => 'Add To Cart Fail!');
                         }
                     } else {
-
-                        //Check IF SESSION Exist
-                        if (isset($_SESSION['cart'])) {
-                            $cart = $_SESSION['cart'];
-                            if (isset($cart['product'][$product_id])) {
-                                $product_qty = $product_qty + $cart['product'][$product_id];
-                            }
-
-                            $json_arr = array('Status' => true, 'Reload' => true);
-                            $_SESSION['cart']['product'][$product_id] = $product_qty;
-                        } else {
-                            $json_arr = array('Status' => true, 'Reload' => false);
-                            $_SESSION['cart'] = array('product' => array($product_id => $product_qty),);
-                        }
+                        $json_arr = array('Status' => false, 'Msg' => 'Stock Is Not Enough!');
                     }
                 } else {
-                    $json_arr = array('Status' => false, 'Msg' => 'Stock Is Not Enough!');
+
+                    //Check IF SESSION Exist
+                    if (isset($_SESSION['cart'])) {
+                        $cart = $_SESSION['cart'];
+                        if (isset($cart['product'][$product_id])) {
+                            $product_qty = $product_qty + $cart['product'][$product_id];
+                        }
+
+                        $json_arr = array('Status' => true, 'Reload' => true);
+                        $_SESSION['cart']['product'][$product_id] = $product_qty;
+                    } else {
+                        $json_arr = array('Status' => true, 'Reload' => false);
+                        $_SESSION['cart'] = array('product' => array($product_id => $product_qty),);
+                    }
                 }
 
                 $json_arr['Token'] = $token;
@@ -101,6 +138,43 @@ if (isset($_REQUEST['type'])) {
                 // var_dump($cart);
                 foreach ($cart as $key_product_id => $qty) {
                     if ($login == 1) {
+
+                        //to check product qty
+                        if ($user_type == 3) {
+
+                            //get distributor id that dealer under with
+                            $table = 'user_dealer';
+                            $col = "*";
+                            $opt = 'user_id =?';
+                            $arr = array($user_id);
+                            $dealer = $db->advwhere($col, $table, $opt, $arr);
+                            $under_distributor = $dealer[0]['under_distributor'];
+
+                            $admin_id = $under_distributor;
+
+                            $table = "distributor_product";
+                            $col = "*";
+                            $opt = 'product_id = ? && user_id = ?';
+                            $arr = array($key_product_id, $admin_id);
+                            $check_product_under_distributor = $db->advwhere($col, $table, $opt, $arr);
+
+                            $product_stock = $check_product_under_distributor[0]['stock'];
+                        } else {
+                            $table = "product";
+                            $col = "stock,status";
+                            $opt = 'id = ?';
+                            $arr = array($key_product_id);
+                            $product = $db->advwhere($col, $table, $opt, $arr);
+                            $product_stock = $product[0]["stock"];
+                        }
+
+                        // check qty in the cart, sum it to check. sum cant more than stock
+                        if ($qty > $product_stock) {
+                            $qty = $product_stock;
+                        } else {
+                            $qty = $qty;
+                        }
+
                         $table = "cart";
                         $data = "qty = ?, date_modified = ? WHERE customer_id = ? && product_id = ?";
                         $array = array($qty, $time, $user_id, $key_product_id);
