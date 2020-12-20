@@ -29,6 +29,7 @@ $usage_limit = $coupon['usage_limit'];
 $total_usage_limit = $coupon['total_usage_limit'];
 $status = $coupon['status'];
 $coupon_code = $coupon['code'];
+$delivery_type = $coupon['free_delivery'];
 
 $col = "*";
 $table = "coupon_translation";
@@ -112,7 +113,21 @@ $coupon_description_my = $coupon_name[0]['description'];
                 Percentange
             </label>
         </div>
-
+        <hr>
+        <label class="font-normal">Free Delivery</label>
+        <div class="radio">
+            <input type="radio" name="free_delivery" id="delivery_1" value="1" <?php echo ($delivery_type == 1) ? 'checked="" ' : ''; ?>>
+            <label for="delivery_1">
+                Free Delivery
+            </label>
+        </div>
+        <div class="radio">
+            <input type="radio" name="free_delivery" id="delivery_2" value="0" <?php echo ($delivery_type == 0) ? 'checked="" ' : ''; ?>>
+            <label for="delivery_2">
+                No
+            </label>
+        </div>
+        <hr>
         <div class="form-group">
             <label class="font-normal">Amount Discount</label>
             <input class="amount" type="text" value="<?php echo $amt ?>" name="amount">

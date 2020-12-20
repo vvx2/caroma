@@ -93,7 +93,21 @@ $PageName = "coupon";
                                             Percentange
                                         </label>
                                     </div>
-
+                                    <hr>
+                                    <label class="font-normal">Free Delivery</label>
+                                    <div class="radio">
+                                        <input type="radio" name="free_delivery" id="delivery_1" value="1" >
+                                        <label for="delivery_1">
+                                            Free Delivery
+                                        </label>
+                                    </div>
+                                    <div class="radio">
+                                        <input type="radio" name="free_delivery" id="delivery_2" value="0" checked="">
+                                        <label for="delivery_2">
+                                            No
+                                        </label>
+                                    </div>
+                                    <hr>
                                     <div class="form-group">
                                         <label class="font-normal">Amount Discount</label>
                                         <input class="amount" type="text" value="0" name="amount">
