@@ -253,6 +253,8 @@ if ($user_type == "2") {
 																					$btn_to_cancel = '<i data-remote="ajax/user_order_to_cancel.php?p=' . $id . '" data-toggle="modal" data-target=".bs-example-modal-lg" class="btn btn-success">To Cancel</i>';
 																					//order deliverd, status -> completed
 																					$btn_complete = '<i data-remote="ajax/user_order_complete.php?p=' . $id . '" data-toggle="modal" data-target=".bs-example-modal-lg" class="btn btn-success">To Complete</i>';
+																					//order Completed, rate 
+																					$btn_rate = '<i data-remote="ajax/user_order_rate.php?p=' . $id . '" data-toggle="modal" data-target=".bs-example-modal-lg" class="btn btn-success">Rate</i>';
 
 																					switch ($status) {
 																						case "1":
@@ -277,7 +279,7 @@ if ($user_type == "2") {
 																							$status_color = "text-info";
 																							$status_display = "Completed";
 																							$status_desc = "The order was delivered.";
-																							$btn_action = "-";
+																							$btn_action = $btn_rate;
 																							break;
 																						case "5":
 																							$status_color = "text-dark";

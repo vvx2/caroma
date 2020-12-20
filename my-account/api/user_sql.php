@@ -315,6 +315,39 @@ if (!empty($postedToken)) {
             //              Order
             //--------------------------------------------------
 
+            //--------------------------------------------------
+            //              Rate Procuct
+            //--------------------------------------------------
+            else if ($type == "order_product_rate") {
+                if (isset($_POST['btnAction'])) {
+
+                    $order_id = $_POST['btnAction'];
+                    $prouct_id = $_POST['id'];
+                    $prodcut_rate = $_POST['rate'];
+
+                    foreach ($prouct_id as $index => $prouct_id) {
+                        $this_product_rate = $prodcut_rate[$index];
+                        $this_prouct_id = $prouct_id;
+
+                        $tablename = "order_items";
+                        $data = "rate = ? , date_modified = ? WHERE order_id = ? && product_id =?";
+                        $array = array($this_product_rate, $time, $order_id, $this_prouct_id);
+                        $result_order_rate = $db->update($tablename, $data, $array);
+                    }
+
+                    if ($result_order_rate) {
+                        echo "<script>alert(\" Rate Successful\");
+                              window.location.href='../index.php?p=4';</script>";
+                    } else {
+                        echo "<script>alert(\" Rate Fail. Please Try Again\");
+                              window.location.href='../index.php?p=4';</script>";
+                    }
+                }
+            }
+            //--------------------------------------------------
+            //              Rate Procuct
+            //--------------------------------------------------
+
         } // table admin
     } else {
         echo "Token Expired. Please Try Again";
