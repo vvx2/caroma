@@ -1133,16 +1133,16 @@ body.open-mobile-search .header-area.layout-02{
     z-index: 15;
 }
 .header-area.layout-02 .header-middle:not(.pre-sticky){
-    background-color: rgba(0,0,0,0.3);
+    background-color: #005f2a;
     padding: 24px 0;
-    position: absolute;
+    position: initial;
     top: 100%;
     left: 0;
     right: 0;
     z-index: 1;
 }
 .header-area.layout-02 .header-middle.pre-sticky{
-    background-color: #51aa1b;
+    background-color: #005f2a;
     visibility: hidden;
     -webkit-transition: none;
     -moz-transition: none;
@@ -13409,9 +13409,6 @@ body.open-quickview-block .biolife-quickview-block{
 .width-100percent{ width: 100%;}
 .width-90percent{ width: 90%;}
 .width-80percent{ width: 80%;}
-.width-70percent{ width: 70%;}
-.width-60percent{ width: 60%;}
-.width-50percent{ width: 50%;}
 .width-40percent{ width: 40%;}
 .width-30percent{ width: 30%;}
 .width-20percent{ width: 20%;}
