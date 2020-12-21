@@ -13,10 +13,10 @@
         </ul>
         <ul class="horizontal-menu">
             <li class="horz-menu-item lang">
-                <select name="language">
-                    <option value="en" selected>EN</option>
-                    <option value="my">MY</option>
-                    <option value="cn">CN</option>
+                <select name="change_language">
+                    <option value="en" <?php echo ($_SESSION['language'] == "en") ? "selected" : "" ?>>EN</option>
+                    <option value="my" <?php echo ($_SESSION['language'] == "my") ? "selected" : "" ?>>MY</option>
+                    <option value="cn" <?php echo ($_SESSION['language'] == "cn") ? "selected" : "" ?>>CN</option>
                 </select>
             </li>
         </ul>

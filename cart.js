@@ -186,3 +186,17 @@ $(document).on('click', '.remove_cart', function () {
     thisbtn.html('<i class="fa fa-spin fa-spinner"></i> Loading...');
     RemoveFromCart(product_id, thisbtn, token);
 });
+
+$('[name="change_language"]').change(function () {
+    var language = $(this).val();
+
+    $.post('api/change_language.php', {
+        language: language
+    }, function (data) {
+        console.log("langauge api: " + data);
+        data = JSON.parse(data);
+        if (data["Status"]) {
+            location.reload();
+        }
+    });
+});
