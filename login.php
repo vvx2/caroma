@@ -67,7 +67,7 @@
                         <div class="signin-container">
                             <form action="login.php" name="frm-login" method="post">
                                 <p class="form-row">
-                                    <label for="uname">Email Address:<span class="requite">*</span></label>
+                                    <label for="uname"><?php echo $lang['lang-email_address']; ?>:<span class="requite">*</span></label>
                                     <input type="email" id="uname" name="email" value="" class="txt-input" required>
                                 </p>
                                 <p class="form-row">
