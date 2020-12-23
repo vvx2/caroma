@@ -85,7 +85,7 @@ if ($user_type == 3) {
 
     $col = "*,dp.stock as dis_stock, p.stock as admin_stock, p.id as p_id, pt.name as pt_name, pt.description as pt_description, ct.name as ct_name, rate.rating as rating";
     $tb = "distributor_product dp left join product p on dp.product_id = p.id left join product_translation pt on p.id = pt.product_id left join product_role_price pp on p.id = pp.product_id left join category_translation ct on p.category = ct.category_id left join (SELECT product_id, (sum(rate) / count(product_id)) as rating FROM order_items where rate != 0 group by product_id) rate on p.id = rate.product_id " . $filter_table;
-    $opt = 'dp.user_id = ? && pt.language = ? && pp.type =? && ct.language =? && dp.status =?' . $filter_opt . ' ORDER BY ' . $sqlorder . ' LIMIT 15 OFFSET ' . $offset . '';
+    $opt = 'dp.user_id = ? && pt.language = ? && pp.type =? && ct.language =? && dp.status =?' . $filter_opt . ' ORDER BY ' . $sqlorder . ' LIMIT 20 OFFSET ' . $offset . '';
     $arr = $filter_arr;
     $result = $db->advwhere($col, $tb, $opt, $arr);
 } else {
@@ -93,32 +93,35 @@ if ($user_type == 3) {
         $filter_table = " left join category c on p.category = c.id";
         $filter_opt = " && c.status =? && p.category =? ";
         $filter_arr = array($language, $user_type, $language, 1, 1, $_REQUEST["category"]);
-    } else if ((isset($_REQUEST["price_from"]) && isset($_REQUEST["price_to"])) && ($_REQUEST["price_from"] != 0 && $_REQUEST["price_to"] != 0)) {
+        $check_sql = "category";
+    } else if ((isset($_REQUEST["price_from"]) && isset($_REQUEST["price_to"])) && ($_REQUEST["price_to"] != 0)) {
         $filter_table = "";
         $filter_opt = " && pp.price BETWEEN ? AND ? ";
         $filter_arr = array($language, $user_type, $language, 1, $_REQUEST["price_from"], $_REQUEST["price_to"]);
+        $check_sql = "price";
     } else {
         $filter_table = "";
         $filter_opt = " ";
         $filter_arr = array($language, $user_type, $language, 1);
+        $check_sql = "none";
     }
 
     $col = "*, p.id as p_id, pt.name as pt_name, pt.description as pt_description, ct.name as ct_name, rate.rating as rating";
     $tb = " product p left join product_translation pt on p.id = pt.product_id left join product_role_price pp on p.id = pp.product_id left join category_translation ct on p.category = ct.category_id left join (SELECT product_id, (sum(rate) / count(product_id)) as rating FROM order_items where rate != 0 group by product_id) rate on p.id = rate.product_id " . $filter_table;
-    $opt = 'pt.language = ? && pp.type =? && ct.language =? && p.status =?' . $filter_opt . ' ORDER BY ' . $sqlorder . ' LIMIT 15 OFFSET ' . $offset . '';
+    $opt = 'pt.language = ? && pp.type =? && ct.language =? && p.status =?' . $filter_opt . ' ORDER BY ' . $sqlorder . ' LIMIT 20 OFFSET ' . $offset . '';
     $arr = $filter_arr;
     $result = $db->advwhere($col, $tb, $opt, $arr);
 }
 
 
 
-if ($result) {
+if (count($result) != 0) {
     foreach ($result as $product) {
         $item[$product['p_id']] = array("image" => $product['image'], "category_name" => $product['ct_name'], "product_name" => $product['pt_name'], "price" => $product['price']);
     }
-    $json_arr = array('Status' => true, 'product' => $item, 'count_result' => count($result));
+    $json_arr = array('Status' => true, 'product' => $item, 'count_result' => count($result), "checksql" => $check_sql);
 } else {
-    $json_arr = array('Status' => false, 'msg' => '<h1>No Result</h1>');
+    $json_arr = array('Status' => false, 'msg' => '<h1>No Result</h1>', "failresult" => $result);
 }
 // echo '<pre>';
 // var_dump($json_arr) ;

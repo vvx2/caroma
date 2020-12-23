@@ -7,6 +7,45 @@
     // $db = new DB_FUNCTIONS();
     require_once('inc/init.php');
     require_once('inc/head.php');
+
+
+    //when user type is dealer, admin id will be distributor id - to identify the order belong who
+    if ($user_type == 3) {
+        //get distributor id that dealer under with
+        $table = 'user_dealer';
+        $col = "*";
+        $opt = 'user_id =?';
+        $arr = array($user_id);
+        $dealer = $db->advwhere($col, $table, $opt, $arr);
+        $under_distributor = $dealer[0]['under_distributor'];
+        $admin_id = $under_distributor;
+
+
+        $filter_table = "";
+        $filter_opt = " ";
+        $filter_arr = array($admin_id, $language, $user_type, $language, 1);
+
+
+        $col = "*,dp.stock as dis_stock, p.stock as admin_stock, p.id as p_id, pt.name as pt_name, pt.description as pt_description, ct.name as ct_name, rate.rating as rating";
+        $tb = "distributor_product dp left join product p on dp.product_id = p.id left join product_translation pt on p.id = pt.product_id left join product_role_price pp on p.id = pp.product_id left join category_translation ct on p.category = ct.category_id left join (SELECT product_id, (sum(rate) / count(product_id)) as rating FROM order_items where rate != 0 group by product_id) rate on p.id = rate.product_id " . $filter_table;
+        $opt = 'dp.user_id = ? && pt.language = ? && pp.type =? && ct.language =? && dp.status =?';
+        $arr = $filter_arr;
+        $count_product_result = $db->advwhere($col, $tb, $opt, $arr);
+    } else {
+
+        $filter_table = "";
+        $filter_opt = " ";
+        $filter_arr = array($language, $user_type, $language, 1);
+
+
+        $col = "*, p.id as p_id, pt.name as pt_name, pt.description as pt_description, ct.name as ct_name, rate.rating as rating";
+        $tb = " product p left join product_translation pt on p.id = pt.product_id left join product_role_price pp on p.id = pp.product_id left join category_translation ct on p.category = ct.category_id left join (SELECT product_id, (sum(rate) / count(product_id)) as rating FROM order_items where rate != 0 group by product_id) rate on p.id = rate.product_id " . $filter_table;
+        $opt = 'pt.language = ? && pp.type =? && ct.language =? && p.status =?';
+        $arr = $filter_arr;
+        $count_product_result = $db->advwhere($col, $tb, $opt, $arr);
+    }
+
+    $count_product_result = count($count_product_result);
     ?>
 
     <style>
@@ -560,7 +599,7 @@
             LoadProduct(1)
 
             window.pagObj = $('#pagination').twbsPagination({
-                totalPages: Math.ceil(3),
+                totalPages: Math.ceil(<?php echo $count_product_result / 20 ?>),
                 visiblePages: 5,
                 onPageClick: function(event, page) {
                     console.info(page + ' (from options)');
@@ -582,7 +621,7 @@
             console.log('ourpage:' + count_result);
             $('#pagination').twbsPagination('destroy');
             $('#pagination').twbsPagination({
-                totalPages: Math.ceil(3),
+                totalPages: Math.ceil(count_result / 20),
                 visiblePages: 5,
                 onPageClick: function(event, page) {
                     console.info(page + ' (from options paging())');
@@ -602,9 +641,9 @@
         function LoadProduct(page) {
             var page = page;
             var orderby = $('[name="orderby"]').val();
-            var category = 0;
-            var price_from = 0;
-            var price_to = 0;
+            var category = <?php echo (isset($_REQUEST["category"]) && $_REQUEST["category"] != 0) ? $_REQUEST["category"] : 0 ?>;
+            var price_from = <?php echo (isset($_REQUEST["price-from"])) ? $_REQUEST["price-from"] : 0 ?>;
+            var price_to = <?php echo (isset($_REQUEST["price-to"])) ? $_REQUEST["price-to"] : 0 ?>;
             $.post('api/product.php', {
                 page: page,
                 orderby: orderby,
