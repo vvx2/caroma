@@ -67,13 +67,16 @@ if (isset($_REQUEST['type'])) {
 
                         $product_stock = $check_product_under_distributor[0]['stock'];
                     }
-
                     $table = "cart";
                     $col = "*";
                     $opt = 'product_id = ? && customer_id = ?';
                     $arr = array($product_id, $user_id);
                     $check_cart = $db->advwhere($col, $table, $opt, $arr);
-                    $cart_qty = $check_cart[0]["qty"];
+                    if (count($check_cart) != 0) {
+                        $cart_qty = $check_cart[0]["qty"];
+                    } else {
+                        $cart_qty = 0;
+                    }
 
                     $product_add_qty = $cart_qty + $product_qty;
                     //---------------------------------------------
