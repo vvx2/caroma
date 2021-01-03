@@ -78,6 +78,13 @@ if (($check_date == NULL || $check_date == "") || $yesterday != $check_date) {
     $description = "Checkin. Day: " . $new_continue_day;
 } else {
     // day_continue + 1
+    if ($yesterday == $check_date) {
+        if ($user_point["day_continue"] == 1) {
+            $day_continue = $user_point["day_continue"] + 1;
+        } else {
+            $day_continue = $user_point["day_continue"];
+        }
+    }
     $point_add = $day_continue;
     $added_point = $current_point + $point_add;
     $description = "Checkin. Day: " . $day_continue;
