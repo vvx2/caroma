@@ -15,9 +15,10 @@ $sub_total = 0;
 $discount = 0;
 $shipping = 0;
 $total_pay = 0;
+$total_point = 0;
 
 $table = "cart c left join product p on c.product_id = p.id left join product_translation pt on c.product_id = pt.product_id left join product_role_price pp on c.product_id = pp.product_id";
-$col = "c.id as id, c.qty as qty, p.id as p_id, p.stock as stock, p.image as image, pt.name as name, pp.price as price";
+$col = "c.id as id, c.qty as qty, p.id as p_id, p.stock as stock, p.point as point, p.image as image, pt.name as name, pp.price as price";
 $opt = 'c.customer_id = ? && pt.language = ? && pp.type = ?';
 $arr = array($user_id, $language, $user_type);
 $get_cart = $db->advwhere($col, $table, $opt, $arr);
@@ -375,6 +376,7 @@ if (count($get_cart) != 0) {
 
                                                 <?php
                                                 foreach ($get_cart as $cart) {
+                                                    $total_point = $total_point + ($cart["point"] * $cart["qty"]);
                                                     $sub_total = $sub_total + ($cart["price"] * $cart["qty"]);
                                                     $item[$cart['p_id']] = array("qty" => $cart['qty'], "image" => $cart['image'], "name" => $cart['name'], "price" => $cart['price'], "stock" => $cart['stock'], "product_total_price" => $cart['qty'] * $cart['price']);
 
@@ -437,6 +439,12 @@ if (count($get_cart) != 0) {
                                                         <div class="col-sm-12 col-12 no-padding-left">
                                                             <label class="label-width" for="coupon">Coupon Code <span class="text-danger" id="get_coupon_msg"> </span></label>
                                                             <input class="input-width" type="text" name="coupon" id="coupon" value="" placeholder="Enter Coupon Code">
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="subtotal-line">
+                                                            <b class="stt-name">Point Earn:</b>
+                                                            <span class="stt-price" style="color:green;"><?php echo $total_point; ?> Points</span>
                                                         </div>
                                                     </li>
                                                 <?php
@@ -569,7 +577,7 @@ if (count($get_cart) != 0) {
                     } else {
                         state = "";
                     }
-                    
+
                     console.log("state: " + state);
                     console.log("delivery_type: " + delivery_type);
                     load_shipping(state, delivery_type, true);

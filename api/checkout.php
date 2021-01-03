@@ -108,9 +108,10 @@ if (isset($_REQUEST['type'])) {
                     $discount_percent = 0;
                     $discount_amount = 0;
                     $shipping = 0;
+                    $total_point = 0;
 
-                    $table = "cart c left join product_role_price pp on c.product_id = pp.product_id";
-                    $col = "c.product_id as product_id, c.qty as qty, pp.price as price";
+                    $table = "cart c left join product_role_price pp on c.product_id = pp.product_id left join product p on c.product_id = p.id";
+                    $col = "c.product_id as product_id, c.qty as qty, pp.price as price, p.point as point";
                     $opt = 'c.customer_id = ? && pp.type = ?';
                     $arr = array($user_id, $user_type);
                     $result_cart = $db->advwhere($col, $table, $opt, $arr);
@@ -118,6 +119,7 @@ if (isset($_REQUEST['type'])) {
                         //count item sub total price for get total payment amount
                         foreach ($result_cart as $cart) {
                             $total_price = $total_price + ($cart['qty'] * $cart['price']);
+                            $total_point = $total_point + ($cart['qty'] * $cart['point']);
                         }
                         $total_payment = $total_price;
 
@@ -194,8 +196,8 @@ if (isset($_REQUEST['type'])) {
 
                         $reason = "UnPaid";
                         $table = "orders";
-                        $colname = array("status", "customer_name", "customer_email", "customer_address", "customer_postcode", "customer_city", "customer_state", "customer_contact", "total_price", "coupon_code", "discount_percent", "discount_amount", "shipping_fee", "total_payment", "track_code", "gateway_order_id", "payment_type", "reason", "users_id", "admin_id", "date_created", "date_modified");
-                        $array = array($status_order, $customer_name, $customer_email, $customer_address, $customer_postcode, $customer_city, $customer_state, $customer_contact, $total_price, $coupon_code, $discount_percent, $discount_amount, $shipping, $total_payment, $track_code, $order_id, $payment_type, $reason, $user_id, $admin_id, $time, $time);
+                        $colname = array("status", "customer_name", "customer_email", "customer_address", "customer_postcode", "customer_city", "customer_state", "customer_contact", "total_price", "coupon_code", "discount_percent", "discount_amount", "shipping_fee", "total_payment", "track_code", "gateway_order_id", "payment_type", "reason", "users_id", "admin_id", "reward_point", "date_created", "date_modified");
+                        $array = array($status_order, $customer_name, $customer_email, $customer_address, $customer_postcode, $customer_city, $customer_state, $customer_contact, $total_price, $coupon_code, $discount_percent, $discount_amount, $shipping, $total_payment, $track_code, $order_id, $payment_type, $reason, $user_id, $admin_id, $total_point, $time, $time);
                         $result_order = $db->insert($table, $colname, $array);
 
                         if ($result_order) {
@@ -219,8 +221,8 @@ if (isset($_REQUEST['type'])) {
                             foreach ($result_cart as $cart) {
 
                                 $table = "order_items";
-                                $colname = array("product_id", "qty", "price", "order_id", "date_created", "date_modified");
-                                $array = array($cart['product_id'], $cart['qty'], $cart['price'], $order_id, $time, $time);
+                                $colname = array("product_id", "qty", "price", "point", "order_id", "date_created", "date_modified");
+                                $array = array($cart['product_id'], $cart['qty'], $cart['price'], $cart['point'], $order_id, $time, $time);
                                 $result_order_item = $db->insert($table, $colname, $array);
                             }
 
