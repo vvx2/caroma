@@ -108,7 +108,14 @@ $count_cart = count($user_cart);
 											<div class="row">
 												<?php
 												if ($user_type == 1) {
-													///if user type is normal user, display point here
+													//if user type is normal user, display point here
+
+													$user_point = $db->where("point", "user_point", "user_id", $user_id);
+													if (count($user_point) != 0) {
+														$point = $user_point[0]['point'];
+													} else {
+														$point = 0;
+													}
 												?>
 													<div class="col-sm-4 text-center">
 														<i class="fa fa-truck block mb-10"></i>
@@ -117,7 +124,7 @@ $count_cart = count($user_cart);
 													</div>
 													<div class="col-sm-4 text-center">
 														<i class="fa fa-money block mb-10"></i>
-														<span class="counts block head-font mb-5"><?php echo $count_cart; ?></span>
+														<span class="counts block head-font mb-5"><?php echo $point; ?></span>
 														<span class="counts-text block">Point</span>
 													</div>
 													<div class="col-sm-4 text-center">
