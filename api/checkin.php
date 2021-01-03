@@ -62,10 +62,6 @@ if ($check_date == $today) {
 }
 
 $current_point = $user_point['point'];
-$description = "Checkin. Day: " . $day_continue;
-
-
-
 
 // var_dump($today);
 // echo "<br>";
@@ -79,12 +75,16 @@ if (($check_date == NULL || $check_date == "") || $yesterday != $check_date) {
     $point_add = 1;
     $added_point = $current_point + $point_add;
     $new_continue_day = 1;
+    $description = "Checkin. Day: " . $new_continue_day;
 } else {
     // day_continue + 1
-    $point_add = $day_continue + 1;
+    $point_add = $day_continue;
     $added_point = $current_point + $point_add;
+    $description = "Checkin. Day: " . $day_continue;
     $new_continue_day =  $day_continue + 1;
 }
+
+
 $tablename = "user_point";
 $data = "point =?, checked =?, check_date =?, day_continue =? , date_modified =? WHERE user_id = ?";
 $array = array($added_point, 1, $today, $new_continue_day, $time, $user_id);
@@ -92,6 +92,7 @@ $result_user_point = $db->update($tablename, $data, $array);
 
 
 if ($result_user_point) {
+
     //   Add Histroy to user_point_transaction_history
     $table = "user_point_transaction_history";
     $colname = array("point", "current_point", "description", "user_id", "date_created", "date_modified");

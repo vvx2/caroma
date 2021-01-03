@@ -152,7 +152,7 @@
                                 }
                             } else if ($check_date == $yesterday) {
                                 $icon_check = "timeline-icon";
-                                $day_continue = $user_point[0]["day_continue"] + 1;
+                                $day_continue = $user_point[0]["day_continue"] ;
                             } else {
                                 $icon_check = "timeline-icon";
                                 $day_continue = 1;
