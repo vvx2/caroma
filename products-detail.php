@@ -62,9 +62,9 @@
     }
 
     $rate_per = ($result['rating'] / 5) * 100;
-    echo "<pre>";
-    var_dump($result);
-    echo "</pre>";
+    // echo "<pre>";
+    // var_dump($result);
+    // echo "</pre>";
     ?>
 </head>
 
@@ -155,7 +155,7 @@
                             </div>
                         </div>
                         <div class="buttons">
-                            <button class="btn add-to-cart-btn btnAddCart" style="width: 100%;" data-value="<?php echo $result['p_id']; ?>"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i>add to cart</button>
+                            <button class="btn add-to-cart-btn btnAddCart" style="width: 100%;" data-value="<?php echo $result['p_id']; ?>"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i> add to cart</button>
                         </div>
                         <div class="social-media">
                             <ul class="social-list">

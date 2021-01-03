@@ -119,7 +119,8 @@ if (count($result) != 0) {
     foreach ($result as $product) {
         $item[$product['p_id']] = array("image" => $product['image'], "category_name" => $product['ct_name'], "product_name" => $product['pt_name'], "price" => $product['price']);
     }
-    $json_arr = array('Status' => true, 'product' => $item, 'count_result' => count($result), "checksql" => $check_sql);
+    $json_arr = array('Status' => true, 'product' => $item, 'count_result' => count($result));
+    // $json_arr = array('Status' => true, 'product' => $item, 'count_result' => count($result), "checksql" => $check_sql);
 } else {
     $json_arr = array('Status' => false, 'msg' => '<h1>No Result</h1>', "failresult" => $result);
 }
