@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 04, 2021 at 03:53 PM
+-- Generation Time: Jan 04, 2021 at 04:45 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -82,7 +82,8 @@ INSERT INTO `cart` (`id`, `product_id`, `qty`, `customer_id`, `date_created`, `d
 (106, 0, 1, 3, '2020-12-20 09:45:12', '2020-12-20 09:45:12'),
 (107, 2, 1, 3, '2020-12-20 09:46:18', '2020-12-20 09:46:18'),
 (108, 6, 1, 3, '2020-12-20 09:46:18', '2020-12-20 09:46:18'),
-(109, 7, 1, 3, '2020-12-20 09:46:18', '2020-12-20 09:46:18');
+(109, 7, 1, 3, '2020-12-20 09:46:18', '2020-12-20 09:46:18'),
+(121, 3, 1, 6, '2021-01-04 15:36:17', '2021-01-04 15:36:17');
 
 -- --------------------------------------------------------
 
@@ -705,6 +706,7 @@ CREATE TABLE `point_transaction` (
 CREATE TABLE `product` (
   `id` int(11) UNSIGNED NOT NULL,
   `point` int(11) UNSIGNED NOT NULL,
+  `point_allow_discount` int(11) UNSIGNED NOT NULL,
   `stock` int(11) UNSIGNED NOT NULL,
   `category` int(11) NOT NULL,
   `length` decimal(12,4) UNSIGNED NOT NULL DEFAULT 0.0000,
@@ -722,12 +724,12 @@ CREATE TABLE `product` (
 -- Dumping data for table `product`
 --
 
-INSERT INTO `product` (`id`, `point`, `stock`, `category`, `length`, `width`, `height`, `weight`, `image`, `is_point_deduct`, `status`, `date_created`, `date_modified`) VALUES
-(2, 22, 98, 1, '1.0000', '2.0000', '3.0000', '4.0000', 'PROD1601370391.jpg', 1, 1, '2020-09-29 09:06:31', '2021-01-04 13:58:01'),
-(3, 20, 181, 2, '0.0500', '0.0600', '0.0150', '1.0000', 'PROD1603465905.jpg', 1, 1, '2020-09-29 09:13:19', '2021-01-04 13:58:01'),
-(5, 1, 2215, 1, '1.0000', '1.0000', '1.0000', '5.0000', 'PROD1605375001.jpg', 1, 1, '2020-11-14 17:30:01', '2021-01-04 12:51:51'),
-(6, 12, 49, 2, '0.0130', '0.0110', '0.0050', '1.0030', 'PROD1606405413.jpg', 1, 1, '2020-11-26 15:43:32', '2021-01-04 14:00:35'),
-(7, 5, 15, 1, '0.0120', '0.0150', '0.0060', '0.0620', 'PROD1606405907.jpg', 1, 1, '2020-11-26 15:51:47', '2021-01-04 14:00:35');
+INSERT INTO `product` (`id`, `point`, `point_allow_discount`, `stock`, `category`, `length`, `width`, `height`, `weight`, `image`, `is_point_deduct`, `status`, `date_created`, `date_modified`) VALUES
+(2, 22, 33, 98, 1, '1.0000', '2.0000', '3.0000', '4.0000', 'PROD1601370391.jpg', 1, 1, '2020-09-29 09:06:31', '2021-01-04 13:58:01'),
+(3, 20, 50, 181, 2, '0.0500', '0.0600', '0.0150', '1.0000', 'PROD1603465905.jpg', 1, 1, '2020-09-29 09:13:19', '2021-01-04 13:58:01'),
+(5, 1, 44, 2215, 1, '1.0000', '1.0000', '1.0000', '5.0000', 'PROD1605375001.jpg', 1, 1, '2020-11-14 17:30:01', '2021-01-04 12:51:51'),
+(6, 12, 52, 49, 2, '0.0130', '0.0110', '0.0050', '1.0030', 'PROD1606405413.jpg', 1, 1, '2020-11-26 15:43:32', '2021-01-04 15:28:28'),
+(7, 5, 66, 15, 1, '0.0120', '0.0150', '0.0060', '0.0620', 'PROD1606405907.jpg', 1, 1, '2020-11-26 15:51:47', '2021-01-04 14:00:35');
 
 -- --------------------------------------------------------
 
@@ -767,7 +769,10 @@ INSERT INTO `product_role_price` (`id`, `price`, `type`, `product_id`) VALUES
 (18, 66.6600, 3, 6),
 (19, 55.0000, 1, 7),
 (20, 40.0000, 2, 7),
-(21, 50.6000, 3, 7);
+(21, 50.6000, 3, 7),
+(22, 33.0000, 1, 8),
+(23, 12.0000, 2, 8),
+(24, 21.0000, 3, 8);
 
 -- --------------------------------------------------------
 
@@ -808,7 +813,10 @@ INSERT INTO `product_translation` (`id`, `name`, `description`, `language`, `pro
 (18, 'malay name', 'malay descrption', 'my', 6),
 (19, 'other product', 'test', 'en', 7),
 (20, '测试', 'test', 'cn', 7),
-(21, 'test maly', 'test malay', 'my', 7);
+(21, 'test maly', 'test malay', 'my', 7),
+(22, 'test reduce point', '<p>test reduce point<br></p>', 'en', 8),
+(23, 'test reduce point', '<p>test reduce point<br></p>', 'cn', 8),
+(24, 'test reduce point', '<p>test reduce point<br></p>', 'my', 8);
 
 -- --------------------------------------------------------
 
@@ -1356,7 +1364,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=121;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=122;
 
 --
 -- AUTO_INCREMENT for table `category`
@@ -1452,19 +1460,19 @@ ALTER TABLE `point_transaction`
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `product_role_price`
 --
 ALTER TABLE `product_role_price`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `product_translation`
 --
 ALTER TABLE `product_translation`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `promotion`
