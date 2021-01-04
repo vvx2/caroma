@@ -117,6 +117,7 @@ $PageName = "user";
                                             <th>No</th>
                                             <th>Name</th>
                                             <th>Email</th>
+                                            <th>Point</th>
                                             <th>Status</th>
                                             <th width=20%></th>
                                         </tr>
@@ -124,9 +125,9 @@ $PageName = "user";
                                     <tbody>
                                         <?php
                                         $i = 1;
-                                        $col = "users.id as id, users.name as name, users.email as email, users.status as status";
-                                        $tb = "users";
-                                        $opt = 'type = ? ORDER BY date_modified DESC';
+                                        $col = "users.id as id, users.name as name, users.email as email, users.status as status, up.point as point";
+                                        $tb = "users left join user_point up on users.id = up.user_id";
+                                        $opt = 'type = ? ORDER BY users.date_modified DESC';
                                         $arr = array(1);
                                         $result = $db->advwhere($col, $tb, $opt, $arr);
                                         foreach ($result as $user) {
@@ -142,14 +143,16 @@ $PageName = "user";
 
                                             $btn_edit = '<a data-remote="ajax/user_edit.php?p=' . $user["id"] . '" class="btn btn-white btn-xs" data-toggle="modal" data-target="#myModal">Edit</a>';
                                             $btn_delete = '<a data-remote="ajax/delete_data.php?p=' . $user["id"] . '&table=users&page=user" class="btn btn-white btn-xs" data-toggle="modal" data-target="#myModal">Delete</a>';
+                                            $btn_history = '<a href="user_point_transaction.php?p=' . $user["id"] . '" class="btn btn-white btn-xs" target="_blank">Point Transaction History</a>';
 
-                                            $btn_action = $btn_edit . $btn_delete;
+                                            $btn_action = $btn_edit . $btn_delete . $btn_history;
 
                                         ?>
                                             <tr class="gradeX">
                                                 <td><?php echo $i; ?></td>
                                                 <td><?php echo $user["name"]; ?></td>
                                                 <td><?php echo $user["email"]; ?></td>
+                                                <td><?php echo $user["point"]; ?></td>
                                                 <td class="<?php echo $status_color; ?>"><?php echo $status_display; ?></td>
                                                 <td>
                                                     <div class="btn-group">
@@ -162,7 +165,7 @@ $PageName = "user";
                                         }
                                         ?>
                                     </tbody>
-                                    
+
                                 </table>
                             </div>
                         </div>
