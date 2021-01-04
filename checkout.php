@@ -15,9 +15,11 @@ $sub_total = 0;
 $discount = 0;
 $shipping = 0;
 $total_pay = 0;
+$total_point = 0;
+$point_discount = 0;
 
 $table = "cart c left join product p on c.product_id = p.id left join product_translation pt on c.product_id = pt.product_id left join product_role_price pp on c.product_id = pp.product_id";
-$col = "c.id as id, c.qty as qty, p.id as p_id, p.stock as stock, p.image as image, pt.name as name, pp.price as price";
+$col = "c.id as id, c.qty as qty, p.id as p_id, p.stock as stock, p.point as point, p.image as image, pt.name as name, pp.price as price";
 $opt = 'c.customer_id = ? && pt.language = ? && pp.type = ?';
 $arr = array($user_id, $language, $user_type);
 $get_cart = $db->advwhere($col, $table, $opt, $arr);
@@ -224,55 +226,132 @@ if (count($get_cart) != 0) {
 
                                                             <p class="form-row">
 
-                                                                <div class="col-sm-6 col-12 no-padding-left">
-                                                                    <label class="label-width" for="name">Full Name</label>
-                                                                    <input class="input-width" type="text" name="name" id="name" value="<?php echo $customer_name; ?>" placeholder="Your Full Name">
-                                                                </div>
-                                                                <div class="col-sm-6 col-12 no-padding-left">
-                                                                    <label class="label-width" for="contact">Contact Number</label>
-                                                                    <input class="input-width" type="text" name="phone" id="contact" value="<?php echo $customer_contact; ?>" placeholder="Your Contact Number">
+                                                            <div class="col-sm-6 col-12 no-padding-left">
+                                                                <label class="label-width" for="name">Full Name</label>
+                                                                <input class="input-width" type="text" name="name" id="name" value="<?php echo $customer_name; ?>" placeholder="Your Full Name">
+                                                            </div>
+                                                            <div class="col-sm-6 col-12 no-padding-left">
+                                                                <label class="label-width" for="contact">Contact Number</label>
+                                                                <input class="input-width" type="text" name="phone" id="contact" value="<?php echo $customer_contact; ?>" placeholder="Your Contact Number">
+                                                            </div>
+                                                            <div class="col-sm-12 col-12 no-padding-left">
+                                                                <label class="label-width" for="email">Email Address</label>
+                                                                <input class="input-width" type="email" name="email" id="email" value="<?php echo $customer_email; ?>" placeholder="Your Email">
+                                                            </div>
+                                                            <div class="col-sm-12 col-12 no-padding-left">
+                                                                <label class="label-width" for="address">Address</label>
+                                                                <input class="input-width" type="text" name="address" id="address" value="<?php echo $customer_address; ?>" placeholder="Your Address">
+                                                            </div>
+                                                            <div class="col-sm-4 col-12 no-padding-left">
+                                                                <label class="label-width" for="state">States</label>
+                                                                <select class="input-width state_select" name="state" tabindex="2" required>
+                                                                    <option data-option="" value="">Select State</option>
+                                                                    <?php
+
+                                                                    $tb = "state";
+                                                                    $col = "id, name";
+                                                                    $opt = 'id != ? order by name asc';
+                                                                    $arr = array(0);
+                                                                    $result = $db->advwhere($col, $tb, $opt, $arr);
+                                                                    foreach ($result as $state) {
+                                                                    ?>
+                                                                        <option value="<?php echo $state['id']; ?>" <?php echo ($state['id'] == $customer_state) ? "selected" : "" ?>><?php echo $state['name']; ?></option>
+
+
+                                                                    <?php
+                                                                    } ?>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-sm-4 col-12 no-padding-left">
+                                                                <label class="label-width" for="city">City</label>
+                                                                <input class="input-width" type="text" name="city" id="city" value="<?php echo $customer_city; ?>" placeholder="Your City">
+                                                            </div>
+                                                            <div class="col-sm-4 col-12 no-padding-left">
+                                                                <label class="label-width" for="postcode">Zip Code</label>
+                                                                <input class="input-width" type="text" name="postcode" id="postcode" value="<?php echo $customer_postcode; ?>" maxlength="5" onkeypress=" return isNumber(event)" placeholder="Your Zipcode">
+                                                            </div>
+
+                                                            <?php
+                                                            if ($user_type != 1) {
+                                                            ?>
+
+                                                                <div class="col-sm-12 col-12 no-padding-left">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label mb-10">Delivery Type</label>
+                                                                        <div class="radio-list">
+                                                                            <div class="radio-inline pl-0">
+                                                                                <div class="radio radio-info">
+                                                                                    <input checked type="radio" name="delivery_type" id="delivery" value="1">
+                                                                                    <label for="delivery">Delivery</label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="radio-inline">
+                                                                                <div class="radio radio-info">
+                                                                                    <input type="radio" name="delivery_type" id="self_collect" value="2">
+                                                                                    <label for="self_collect">Self Collect</label>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                                 <div class="col-sm-12 col-12 no-padding-left">
-                                                                    <label class="label-width" for="email">Email Address</label>
-                                                                    <input class="input-width" type="email" name="email" id="email" value="<?php echo $customer_email; ?>" placeholder="Your Email">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label mb-10">Payment Type</label>
+                                                                        <div class="radio-list">
+                                                                            <div class="radio-inline pl-0">
+                                                                                <div class="radio radio-info">
+                                                                                    <input checked type="radio" name="payment_type" id="online_pay" value="1">
+                                                                                    <label for="online_pay">Online Payment</label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="radio-inline">
+                                                                                <div class="radio radio-info">
+                                                                                    <input type="radio" name="payment_type" id="cash" value="2">
+                                                                                    <label for="cash">Cash</label>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
+                                                                <div hidden>
+                                                                    <div class="col-sm-12 col-12 no-padding-left">
+                                                                        <div class="form-group">
+                                                                            <label class="control-label mb-10">Use Point</label>
+                                                                            <div class="radio-list">
+                                                                                <div class="radio-inline pl-0">
+                                                                                    <div class="radio radio-info">
+                                                                                        <input checked type="radio" name="reward_point" id="is_point" value="0">
+                                                                                        <label for="is_point">No</label>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                            <?php
+                                                            } else {
+                                                            ?>
                                                                 <div class="col-sm-12 col-12 no-padding-left">
-                                                                    <label class="label-width" for="address">Address</label>
-                                                                    <input class="input-width" type="text" name="address" id="address" value="<?php echo $customer_address; ?>" placeholder="Your Address">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label mb-10">Use Point</label>
+                                                                        <div class="radio-list">
+                                                                            <div class="radio-inline pl-0">
+                                                                                <div class="radio radio-info">
+                                                                                    <input checked type="radio" name="reward_point" id="is_point" value="0">
+                                                                                    <label for="is_point">No</label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="radio-inline">
+                                                                                <div class="radio radio-info">
+                                                                                    <input type="radio" name="reward_point" id="no_point" value="1">
+                                                                                    <label for="no_point">Yes</label>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
-                                                                <div class="col-sm-4 col-12 no-padding-left">
-                                                                    <label class="label-width" for="state">States</label>
-                                                                    <select class="input-width state_select" name="state" tabindex="2" required>
-                                                                        <option data-option="" value="">Select State</option>
-                                                                        <?php
-
-                                                                        $tb = "state";
-                                                                        $col = "id, name";
-                                                                        $opt = 'id != ? order by name asc';
-                                                                        $arr = array(0);
-                                                                        $result = $db->advwhere($col, $tb, $opt, $arr);
-                                                                        foreach ($result as $state) {
-                                                                        ?>
-                                                                            <option value="<?php echo $state['id']; ?>" <?php echo ($state['id'] == $customer_state) ? "selected" : "" ?>><?php echo $state['name']; ?></option>
-
-
-                                                                        <?php
-                                                                        } ?>
-                                                                    </select>
-                                                                </div>
-                                                                <div class="col-sm-4 col-12 no-padding-left">
-                                                                    <label class="label-width" for="city">City</label>
-                                                                    <input class="input-width" type="text" name="city" id="city" value="<?php echo $customer_city; ?>" placeholder="Your City">
-                                                                </div>
-                                                                <div class="col-sm-4 col-12 no-padding-left">
-                                                                    <label class="label-width" for="postcode">Zip Code</label>
-                                                                    <input class="input-width" type="text" name="postcode" id="postcode" value="<?php echo $customer_postcode; ?>" maxlength="5" onkeypress=" return isNumber(event)" placeholder="Your Zipcode">
-                                                                </div>
-
-                                                                <?php
-                                                                if ($user_type != 1) {
-                                                                ?>
-
+                                                                <div hidden>
                                                                     <div class="col-sm-12 col-12 no-padding-left">
                                                                         <div class="form-group">
                                                                             <label class="control-label mb-10">Delivery Type</label>
@@ -281,12 +360,6 @@ if (count($get_cart) != 0) {
                                                                                     <div class="radio radio-info">
                                                                                         <input checked type="radio" name="delivery_type" id="delivery" value="1">
                                                                                         <label for="delivery">Delivery</label>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="radio-inline">
-                                                                                    <div class="radio radio-info">
-                                                                                        <input type="radio" name="delivery_type" id="self_collect" value="2">
-                                                                                        <label for="self_collect">Self Collect</label>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -302,50 +375,13 @@ if (count($get_cart) != 0) {
                                                                                         <label for="online_pay">Online Payment</label>
                                                                                     </div>
                                                                                 </div>
-                                                                                <div class="radio-inline">
-                                                                                    <div class="radio radio-info">
-                                                                                        <input type="radio" name="payment_type" id="cash" value="2">
-                                                                                        <label for="cash">Cash</label>
-                                                                                    </div>
-                                                                                </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
-
-                                                                <?php
-                                                                } else {
-                                                                ?>
-                                                                    <div hidden>
-                                                                        <div class="col-sm-12 col-12 no-padding-left">
-                                                                            <div class="form-group">
-                                                                                <label class="control-label mb-10">Delivery Type</label>
-                                                                                <div class="radio-list">
-                                                                                    <div class="radio-inline pl-0">
-                                                                                        <div class="radio radio-info">
-                                                                                            <input checked type="radio" name="delivery_type" id="delivery" value="1">
-                                                                                            <label for="delivery">Delivery</label>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-sm-12 col-12 no-padding-left">
-                                                                            <div class="form-group">
-                                                                                <label class="control-label mb-10">Payment Type</label>
-                                                                                <div class="radio-list">
-                                                                                    <div class="radio-inline pl-0">
-                                                                                        <div class="radio radio-info">
-                                                                                            <input checked type="radio" name="payment_type" id="online_pay" value="1">
-                                                                                            <label for="online_pay">Online Payment</label>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                <?php
-                                                                }
-                                                                ?>
+                                                                </div>
+                                                            <?php
+                                                            }
+                                                            ?>
 
                                                             </p>
 
@@ -375,6 +411,7 @@ if (count($get_cart) != 0) {
 
                                                 <?php
                                                 foreach ($get_cart as $cart) {
+                                                    $total_point = $total_point + ($cart["point"] * $cart["qty"]);
                                                     $sub_total = $sub_total + ($cart["price"] * $cart["qty"]);
                                                     $item[$cart['p_id']] = array("qty" => $cart['qty'], "image" => $cart['image'], "name" => $cart['name'], "price" => $cart['price'], "stock" => $cart['stock'], "product_total_price" => $cart['qty'] * $cart['price']);
 
@@ -401,7 +438,7 @@ if (count($get_cart) != 0) {
                                                 <?php
 
                                                 }
-                                                $total_pay = $sub_total + $shipping - $discount;
+                                                $total_pay = $sub_total + $shipping - $discount - $point_discount;
                                                 $order_detail = "Caromaca Purchase"
                                                 ?>
 
@@ -434,9 +471,21 @@ if (count($get_cart) != 0) {
                                                         </div>
                                                     </li>
                                                     <li>
+                                                        <div class="subtotal-line">
+                                                            <b class="stt-name">Point Discount</b>
+                                                            <span class="stt-price" id="get_point_discount">- RM <?php echo number_format(0, 2, '.', ''); ?></span>
+                                                        </div>
+                                                    </li>
+                                                    <li>
                                                         <div class="col-sm-12 col-12 no-padding-left">
                                                             <label class="label-width" for="coupon">Coupon Code <span class="text-danger" id="get_coupon_msg"> </span></label>
                                                             <input class="input-width" type="text" name="coupon" id="coupon" value="" placeholder="Enter Coupon Code">
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="subtotal-line">
+                                                            <b class="stt-name">Point Earn:</b>
+                                                            <span class="stt-price" style="color:green;"><?php echo $total_point; ?> Points</span>
                                                         </div>
                                                     </li>
                                                 <?php
@@ -454,6 +503,7 @@ if (count($get_cart) != 0) {
                                                 <input type="text" name="detail" value="<?php echo $order_detail; ?>" placeholder="Description of the transaction" size="30" required>
                                                 <input type="text" name="amount" id="total_payment" value="<?php echo $total_pay; ?>" placeholder="Amount to pay, for example 12.20" size="30" required>
                                                 <input type="number" name="shipping" id="total_shipping" value="0" required>
+                                                <input type="number" name="point_discount" id="total_point_discount" value="0" required>
                                                 <input type="text" name="order_id" value="<?php echo time(); ?>" placeholder="Unique id to reference the transaction or order" size="30" required>
                                             </div>
                                         </div>
@@ -532,8 +582,9 @@ if (count($get_cart) != 0) {
 
                     var state = $('[name="state"]').val()
                     var delivery_type = $('[name="delivery_type"]:checked').val()
+                    var point_use = $('[name="reward_point"]:checked').val()
 
-                    load_shipping(state, delivery_type, true);
+                    load_shipping(state, delivery_type, point_use, true);
 
                 });
 
@@ -550,6 +601,7 @@ if (count($get_cart) != 0) {
 
                 //for check shipping fee
                 $('[name="state"]').change(function() {
+                    var point_use = $('[name="reward_point"]:checked').val()
                     var delivery_type = $('[name="delivery_type"]:checked').val()
                     var state = $(this).val()
                     if (state) {
@@ -557,11 +609,12 @@ if (count($get_cart) != 0) {
                     } else {
                         state = "";
                     }
-                    load_shipping(state, delivery_type, true);
+                    load_shipping(state, delivery_type, point_use, true);
                 });
 
                 //for check shipping fee with onclick delivety type
                 $('[name="delivery_type"]').change(function() {
+                    var point_use = $('[name="reward_point"]:checked').val()
                     var delivery_type = $('[name="delivery_type"]:checked').val()
                     var state = $('[name="state"]').val()
                     if (state) {
@@ -569,13 +622,29 @@ if (count($get_cart) != 0) {
                     } else {
                         state = "";
                     }
-                    
+
                     console.log("state: " + state);
                     console.log("delivery_type: " + delivery_type);
-                    load_shipping(state, delivery_type, true);
+                    load_shipping(state, delivery_type, point_use, true);
                 });
 
-                function load_shipping(state, delivery_type, status) {
+                // for check point to discount
+                $('[name="reward_point"]').change(function() {
+                    var point_use = $('[name="reward_point"]:checked').val()
+                    var delivery_type = $('[name="delivery_type"]:checked').val()
+                    var state = $('[name="state"]').val()
+                    if (state) {
+                        state = state;
+                    } else {
+                        state = "";
+                    }
+
+                    console.log("state: " + state);
+                    console.log("reward point: " + point_use);
+                    load_shipping(state, delivery_type, point_use, true);
+                });
+
+                function load_shipping(state, delivery_type, point_use, status) {
                     $('#loadDiv').show();
                     var coupon = $('[name="coupon"]').val()
                     if (coupon) {
@@ -586,9 +655,10 @@ if (count($get_cart) != 0) {
                     if (state == "") {
                         $(".btn-submit").attr('disabled', true);
                         $(".get_shipping_error").html("You must select your state");
-                        $("#get_shipping").html('- RM ' + parseFloat(0).toFixed(2));
+                        $("#get_shipping").html('+ RM ' + parseFloat(0).toFixed(2));
                         $("#total_shipping").val(0);
-
+                        $("#get_point_discount").html('- RM ' + "<?php echo number_format(0, 2, '.', ''); ?>");
+                        $("#total_point_discount").val(0);
                         $("#get_totalpay").html('RM ' + "<?php echo number_format($total_pay, 2, '.', ''); ?>");
                         $("#total_payment").val(<?php echo $sub_total; ?>);
 
@@ -601,6 +671,7 @@ if (count($get_cart) != 0) {
                         $.post('api/shipping_fee.php', {
                             sub_total: <?php echo $sub_total; ?>,
                             state: state,
+                            point_use: point_use,
                             delivery_type: delivery_type
                         }, function(data) {
                             console.log("shipping api: " + data);
@@ -610,18 +681,20 @@ if (count($get_cart) != 0) {
                                     $(".btn-submit").attr('disabled', false);
                                     $(".get_shipping_error").html("");
                                     $("#get_shipping").html('+ RM ' + parseFloat(data["Shipping_fee"]).toFixed(2));
+                                    $("#get_point_discount").html('- RM ' + parseFloat(data["Point_discount"]).toFixed(2));
                                     $("#get_totalpay").html('RM ' + parseFloat(data["Total_pay"]).toFixed(2));
                                     $("#total_payment").val(data["Total_pay"]);
                                     $("#total_shipping").val(data["Shipping_fee"]);
+                                    $("#total_point_discount").val(data["Point_discount"]);
                                 } else {
                                     $(".btn-submit").attr('disabled', true);
                                     $(".get_shipping_error").html(data["Msg"]);
                                     $("#get_shipping").html('+ RM ' + "<?php echo number_format($shipping, 2, '.', ''); ?>");
+                                    $("#get_point_discount").html('- RM ' + "<?php echo number_format($point_discount, 2, '.', ''); ?>");
                                     $("#get_totalpay").html('RM ' + "<?php echo number_format($total_pay, 2, '.', ''); ?>");
                                     $("#total_shipping").val(0);
+                                    $("#total_point_discount").val(0);
                                     $("#total_payment").val(<?php echo $sub_total; ?>);
-
-
                                 }
                                 $('#loadDiv').hide();
                                 if (coupon != "" && status) {
@@ -639,6 +712,8 @@ if (count($get_cart) != 0) {
                     $('#loadDiv').show();
                     var sub_total = "<?php echo $sub_total; ?>"
                     var shipping = $('[id="total_shipping"]').val()
+                    var point_use = $('[name="reward_point"]:checked').val()
+                    var point_discount = $('[id="total_point_discount"]').val()
                     var state = $('[name="state"]').val()
                     var delivery_type = $('[name="delivery_type"]:checked').val()
                     if (state) {
@@ -653,38 +728,45 @@ if (count($get_cart) != 0) {
                         $.post('api/validate_coupon.php', {
                             sub_total: <?php echo $sub_total; ?>,
                             shipping: shipping,
+                            point_discount: point_discount,
                             coupon_code: coupon_code
                         }, function(data) {
                             setTimeout(function() {
-                                // console.log("coupon api" + data);
+                                console.log("coupon api" + data);
                                 data = JSON.parse(data);
                                 if (data["Status"]) {
                                     $("#get_coupon_msg").html("");
                                     $("#get_discount").html('- RM ' + parseFloat(data["Amount"]).toFixed(2));
                                     $("#get_shipping").html('+ RM ' + parseFloat(data["Shipping_fee"]).toFixed(2));
+                                    $("#get_point_discount").html('- RM ' + parseFloat(data["Point_discount"]).toFixed(2));
                                     $("#get_totalpay").html('RM ' + parseFloat(data["Total_pay"]).toFixed(2));
                                     $("#total_payment").val(data["Total_pay"]);
                                     $("#total_shipping").val(data["Shipping_fee"]);
+                                    $("#total_point_discount").val(data["Point_discount"]);
                                 } else {
                                     $("#get_coupon_msg").html(data["Msg"]);
                                     $("#get_discount").html('- RM ' + "<?php echo number_format($discount, 2, '.', ''); ?>");
                                     $("#get_shipping").html('+ RM ' + parseFloat(shipping).toFixed(2));
+                                    $("#get_point_discount").html('- RM ' + parseFloat(point_discount).toFixed(2));
                                     $("#get_totalpay").html('RM ' + parseFloat(sub_total).toFixed(2));
                                     $("#total_payment").val(sub_total);
                                     $("#total_shipping").val(shipping);
-                                    load_shipping(state, delivery_type, false);
+                                    $("#total_point_discount").val(point_discount);
+                                    load_shipping(state, delivery_type, point_use, false);
                                 }
                                 $('#loadDiv').hide();
                             }, 500);
                         });
                     } else {
-                        load_shipping(state, delivery_type, false);
+                        load_shipping(state, delivery_type, point_use, false);
                         $("#get_coupon_msg").html("");
                         $("#get_discount").html('- RM ' + "<?php echo number_format($discount, 2, '.', ''); ?>");
                         $("#get_shipping").html('+ RM ' + parseFloat(shipping).toFixed(2));
+                        $("#get_point_discount").html('- RM ' + parseFloat(point_discount).toFixed(2));
                         $("#get_totalpay").html('RM ' + parseFloat(sub_total).toFixed(2));
                         $("#total_payment").val(sub_total);
                         $("#total_shipping").val(shipping);
+                        $("#total_point_discount").val(point_discount);
 
                         $('#loadDiv').hide();
                     }

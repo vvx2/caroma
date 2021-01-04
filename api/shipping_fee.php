@@ -4,6 +4,7 @@ $db = new DB_FUNCTIONS();
 $time = date('Y-m-d H:i:s');
 $state = $_REQUEST['state'];
 $delivery_type = $_REQUEST['delivery_type'];
+$point_use = $_REQUEST['point_use'];
 $sub_total = $_REQUEST['sub_total'];
 
 if (isset($_SESSION['user_id']) && isset($_SESSION['type'])) {
@@ -65,7 +66,7 @@ if ($delivery_type == 2) {
             $charge = $shipping['charge'];
 
             $table = "cart c left join product p on c.product_id = p.id";
-            $col = "c.product_id as product_id, c.qty as qty, p.weight as weight";
+            $col = "c.product_id as product_id, c.qty as qty, p.weight as weight, p.point as point";
             $opt = 'c.customer_id = ?';
             $arr = array($user_id);
             $result_cart = $db->advwhere($col, $table, $opt, $arr);
@@ -73,10 +74,44 @@ if ($delivery_type == 2) {
             // check cart is exists item
             if (count($result_cart) != 0) {
                 $total_weight = 0;
+                $total_point = 0; // point can be use
                 //count item total weight
                 foreach ($result_cart as $cart) {
                     $total_weight = $total_weight + ($cart['qty'] * $cart['weight']);
+                    $total_point = $total_point + ($cart['qty'] * $cart['point']);
                 }
+                //----------------------------------------------
+                //  count reward point
+                //  when user type is normal user, check point use
+                if ($user_type == 1) {
+                    if ($point_use == 1) {
+                        $table = 'user_point';
+                        $col = "*";
+                        $opt = 'user_id =?';
+                        $arr = array($user_id);
+                        $user_point = $db->advwhere($col, $table, $opt, $arr);
+                        if (count($user_point) != 0) {
+                            $current_point = $user_point[0]["point"];
+
+                            // write point limit calculation here
+                            // to limit point use
+                            if ($current_point > $total_point) {
+                                $point_use = $total_point;
+                            } else {
+                                $point_use = $current_point;
+                            }
+
+                            $reduce_point_fee = $point_use / 100;
+                        } else {
+                            $reduce_point_fee = 0;
+                        }
+                    } else {
+                        $reduce_point_fee = 0;
+                    }
+                } else {
+                    $reduce_point_fee = 0;
+                }
+                //----------------------------------------------
 
                 if ($total_weight <= $first_weight) {
                     $shipping_fee = $first_price;
@@ -90,8 +125,8 @@ if ($delivery_type == 2) {
                     }
                 }
                 $shipping_fee = $shipping_fee + ($shipping_fee * ($charge / 100));
-                $total_pay = $sub_total + $shipping_fee;
-                $json_arr = array('Status' => true, 'Shipping_fee' => $shipping_fee, 'Total_pay' => $total_pay);
+                $total_pay = $sub_total + $shipping_fee - $reduce_point_fee;
+                $json_arr = array('Status' => true, 'Shipping_fee' => $shipping_fee, 'Point_discount' => $reduce_point_fee, 'Total_pay' => $total_pay);
             } else {
                 $json_arr = array('Status' => false, 'Msg' => 'Your Cart is Empty!');
             }

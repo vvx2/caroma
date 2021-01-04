@@ -107,10 +107,12 @@ if (isset($_REQUEST['type'])) {
                     $total_payment = 0;
                     $discount_percent = 0;
                     $discount_amount = 0;
+                    $discount_reward = 0;
                     $shipping = 0;
+                    $total_point = 0;
 
-                    $table = "cart c left join product_role_price pp on c.product_id = pp.product_id";
-                    $col = "c.product_id as product_id, c.qty as qty, pp.price as price";
+                    $table = "cart c left join product_role_price pp on c.product_id = pp.product_id left join product p on c.product_id = p.id";
+                    $col = "c.product_id as product_id, c.qty as qty, pp.price as price, p.point as point";
                     $opt = 'c.customer_id = ? && pp.type = ?';
                     $arr = array($user_id, $user_type);
                     $result_cart = $db->advwhere($col, $table, $opt, $arr);
@@ -118,6 +120,7 @@ if (isset($_REQUEST['type'])) {
                         //count item sub total price for get total payment amount
                         foreach ($result_cart as $cart) {
                             $total_price = $total_price + ($cart['qty'] * $cart['price']);
+                            $total_point = $total_point + ($cart['qty'] * $cart['point']);
                         }
                         $total_payment = $total_price;
 
@@ -189,13 +192,26 @@ if (isset($_REQUEST['type'])) {
                                 $shipping = $coupon_return['Shipping'];
                             }
                         }
+
+                        $point_use = $_POST['reward_point'];
+                        if ($point_use == 1) {
+                            $point_discount_return = get_point_discount($user_id, $point_use, $db);
+                            if ($point_discount_return['Status']) {
+                                $discount_reward = $point_discount_return['Point_discount'];
+                            } else {
+                                $discount_reward = 0;
+                            }
+                        } else {
+                            $discount_reward = 0;
+                        }
+                        $total_payment = $total_payment - $discount_reward;
                         //------------------------------------------
 
 
                         $reason = "UnPaid";
                         $table = "orders";
-                        $colname = array("status", "customer_name", "customer_email", "customer_address", "customer_postcode", "customer_city", "customer_state", "customer_contact", "total_price", "coupon_code", "discount_percent", "discount_amount", "shipping_fee", "total_payment", "track_code", "gateway_order_id", "payment_type", "reason", "users_id", "admin_id", "date_created", "date_modified");
-                        $array = array($status_order, $customer_name, $customer_email, $customer_address, $customer_postcode, $customer_city, $customer_state, $customer_contact, $total_price, $coupon_code, $discount_percent, $discount_amount, $shipping, $total_payment, $track_code, $order_id, $payment_type, $reason, $user_id, $admin_id, $time, $time);
+                        $colname = array("status", "customer_name", "customer_email", "customer_address", "customer_postcode", "customer_city", "customer_state", "customer_contact", "total_price", "coupon_code", "discount_percent", "discount_amount", "discount_reward", "shipping_fee", "total_payment", "track_code", "gateway_order_id", "payment_type", "reason", "users_id", "admin_id", "reward_point", "date_created", "date_modified");
+                        $array = array($status_order, $customer_name, $customer_email, $customer_address, $customer_postcode, $customer_city, $customer_state, $customer_contact, $total_price, $coupon_code, $discount_percent, $discount_amount, $discount_reward, $shipping, $total_payment, $track_code, $order_id, $payment_type, $reason, $user_id, $admin_id, $total_point, $time, $time);
                         $result_order = $db->insert($table, $colname, $array);
 
                         if ($result_order) {
@@ -219,8 +235,8 @@ if (isset($_REQUEST['type'])) {
                             foreach ($result_cart as $cart) {
 
                                 $table = "order_items";
-                                $colname = array("product_id", "qty", "price", "order_id", "date_created", "date_modified");
-                                $array = array($cart['product_id'], $cart['qty'], $cart['price'], $order_id, $time, $time);
+                                $colname = array("product_id", "qty", "price", "point", "order_id", "date_created", "date_modified");
+                                $array = array($cart['product_id'], $cart['qty'], $cart['price'], $cart['point'], $order_id, $time, $time);
                                 $result_order_item = $db->insert($table, $colname, $array);
                             }
 
@@ -344,6 +360,7 @@ if (isset($_REQUEST['type'])) {
                     $order_id = $order[0]['id'];
                     $email = $order[0]['customer_email'];
                     $coupon_code = $order[0]['coupon_code'];
+                    $gateway_order_id = $order[0]['gateway_order_id'];
 
                     $tablename = "orders";
                     $data = "status = ?, date_modified = ? WHERE id = ?";
@@ -369,6 +386,41 @@ if (isset($_REQUEST['type'])) {
                             $array = array($added_total_times_used, $coupon_code);
                             $db->update($tablename, $data, $array);
                         }
+
+
+                        //--------------------------------------------------
+                        //              Reduce user point
+                        $col = "*";
+                        $tb = "user_point";
+                        $opt = 'user_id = ?';
+                        $arr = array($user_id);
+                        $user_point = $db->advwhere($col, $tb, $opt, $arr);
+                        if (count($user_point) != 0) {
+
+                            $point_used = $order[0]['discount_reward'] * 100;
+                            $negative_amount = $point_used * -1; // insert negative number to db, for identify it is reducing
+
+                            $user_point = $user_point[0];
+                            $current_point = $user_point["point"];
+                            $reduced_point = $current_point - $point_used;
+                            $description = "Purchase Point Discount. Order ID: " . $gateway_order_id;
+
+                            $tablename = "user_point";
+                            $data = "point =?,  date_modified =? WHERE user_id = ?";
+                            $array = array($reduced_point, $time, $user_id);
+                            $result_user_point = $db->update($tablename, $data, $array);
+
+                            if ($result_user_point) {
+
+                                //   Add Histroy to user_point_transaction_history
+                                $table = "user_point_transaction_history";
+                                $colname = array("point", "current_point", "description", "user_id", "date_created", "date_modified");
+                                $array = array($negative_amount, $reduced_point, $description, $user_id, $time, $time);
+                                $result_user_point_history = $db->insert($table, $colname, $array);
+                            }
+                        }
+                        //--------------------------------------------------
+
 
                         //------------------------------
                         // reduce product stock
@@ -598,6 +650,62 @@ function get_shipping_fee($user_id, $state, $admin_id, $delivery_type, $db)
                 $json_arr = array('Status' => false, 'Msg' => 'Your Cart is Empty!');
             }
         }
+    }
+    return $json_arr;
+}
+
+function get_point_discount($user_id, $point_use, $db)
+{
+    if ($point_use == 1) {
+
+        $table = "cart c left join product p on c.product_id = p.id";
+        $col = "c.product_id as product_id, c.qty as qty, p.weight as weight, p.point as point";
+        $opt = 'c.customer_id = ?';
+        $arr = array($user_id);
+        $result_cart = $db->advwhere($col, $table, $opt, $arr);
+
+        // check cart is exists item
+        if (count($result_cart) != 0) {
+            $total_point = 0;
+            //count item total weight
+            foreach ($result_cart as $cart) {
+                $total_point = $total_point + ($cart['qty'] * $cart['point']);
+            }
+            //----------------------------------------------
+            //  count reward point
+            if ($point_use == 1) {
+                $table = 'user_point';
+                $col = "*";
+                $opt = 'user_id =?';
+                $arr = array($user_id);
+                $user_point = $db->advwhere($col, $table, $opt, $arr);
+                if (count($user_point) != 0) {
+                    $current_point = $user_point[0]["point"];
+
+                    // write point limit calculation here
+                    // to limit point use
+                    if ($current_point > $total_point) {
+                        $point_use = $total_point;
+                    } else {
+                        $point_use = $current_point;
+                    }
+
+                    $reduce_point_fee = $point_use / 100;
+                } else {
+                    $reduce_point_fee = 0;
+                }
+            } else {
+                $reduce_point_fee = 0;
+            }
+
+            //----------------------------------------------
+            $json_arr = array('Status' => true, 'Point_discount' => $reduce_point_fee);
+        } else {
+            $json_arr = array('Status' => false, 'Msg' => 'Your Cart is Empty!');
+        }
+    } else {
+        $reduce_point_fee = 0;
+        $json_arr = array('Status' => true, 'Point_discount' => $reduce_point_fee);
     }
     return $json_arr;
 }

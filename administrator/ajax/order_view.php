@@ -11,6 +11,13 @@ $order = $db->advwhere($col, $tb, $opt, $arr);
 $order = $order[0];
 
 $status = $order['status'];
+$payment_type = $order['payment_type'];
+
+if ($payment_type == 1) {
+    $payment_display = "Online Payment";
+} else {
+    $payment_display = "Cash";
+}
 
 switch ($status) {
     case "1":
@@ -95,11 +102,15 @@ switch ($status) {
                         </tr>
                         <tr>
                             <td>Payment Method</td>
-                            <td>Online Banking</td>
+                            <td><?php echo $payment_display; ?></td>
                         </tr>
                         <tr>
                             <td>Coupon Code</td>
                             <td><?php echo ($order["coupon_code"] == "") ? "-" : $order["coupon_code"]; ?></td>
+                        </tr>
+                        <tr>
+                            <td>Point Earn</td>
+                            <td><strong style="color:green;"><?php echo $order["reward_point"]; ?> Points</strong></td>
                         </tr>
                         <tr>
                             <td></td>

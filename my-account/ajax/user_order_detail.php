@@ -130,7 +130,7 @@ switch ($status) {
                 ?>
 
                     <div class="table-mxsp">
-                        <a href="../products-detail.php?p=<?php echo $item['p_id']?>" target="_blank">
+                        <a href="../products-detail.php?p=<?php echo $item['p_id'] ?>" target="_blank">
                             <table class="table-widths">
                                 <tr>
                                     <td class="product-imgsx" rowspan="3">
@@ -180,9 +180,20 @@ switch ($status) {
                 <div class="table-mxsp">
                     <table class="table-widths">
                         <tr>
-                            <td class="total-details-title">Coupon Code</td>
-                            <td class="total-details-titles"><?php echo ($order["coupon_code"] == "") ? "-" : $order["coupon_code"]; ?></td>
+                            <td class="total-details-title total-details-title-last">Coupon Code</td>
+                            <td class="total-details-titles total-details-title-last"><?php echo ($order["coupon_code"] == "") ? "-" : $order["coupon_code"]; ?></td>
                         </tr>
+                        <?php
+                        if ($_SESSION['type'] == "1") {
+
+                        ?>
+                            <tr>
+                                <td class="total-details-title total-details-title-last">Point Earn</td>
+                                <td class="total-details-titles total-details-title-last" style="color:green;"><?php echo $order["reward_point"]; ?> Points</td>
+                            </tr>
+                        <?php
+                        }
+                        ?>
                     </table>
                 </div>
             </blockquote>
