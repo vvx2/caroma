@@ -1564,174 +1564,74 @@
                                     <h3 class="title">Top Rated Products</h3>
                                 </div>
                                 <ul class="products biolife-carousel eq-height-contain nav-center-03 nav-none-on-mobile row-space-29px" data-slick='{"rows":2,"arrows":true,"dots":false,"infinite":false,"speed":400,"slidesMargin":30,"slidesToShow":2,"responsive":[{"breakpoint":1200,"settings":{ "rows":2, "slidesToShow": 2}},{"breakpoint":992, "settings":{ "rows":2, "slidesToShow": 1}},{"breakpoint":768, "settings":{ "rows":2, "slidesToShow": 2}},{"breakpoint":500, "settings":{ "rows":2, "slidesToShow": 1}}]}'>
-                                    <li class="product-item">
-                                        <div class="contain-product right-info-layout contain-product__right-info-layout">
-                                            <div class="product-thumb">
-                                                <a href="#" class="link-to-product">
-                                                    <img src="assets/images/products/p-19.jpg" alt="dd" width="270" height="270" class="product-thumnail">
-                                                </a>
-                                            </div>
-                                            <div class="info">
-                                                <b class="categories">Vegetables</b>
-                                                <h4 class="product-title"><a href="#" class="pr-name">Pumpkins Fairytale</a></h4>
-                                                <div class="price ">
-                                                    <ins><span class="price-amount"><span class="currencySymbol">£</span>85.00</span></ins>
-                                                    <del><span class="price-amount"><span class="currencySymbol">£</span>95.00</span></del>
+
+                                    <?php
+
+                                    $sqlorder = "rating DESC"; //this "rating" is count by quantity
+                                    $offset = 0;
+                                    if ($user_type == 3) {
+
+                                        $filter_table = "";
+                                        $filter_opt = " ";
+                                        $filter_arr = array($admin_id, $language, $user_type, $language, 1);
+
+                                        $col = "*,dp.stock as dis_stock, p.stock as admin_stock, p.id as p_id, pt.name as pt_name, pt.description as pt_description, ct.name as ct_name, rate.rating as rating, rate.rate_total as rate_total";
+                                        $tb = "distributor_product dp left join product p on dp.product_id = p.id left join product_translation pt on p.id = pt.product_id left join product_role_price pp on p.id = pp.product_id left join category_translation ct on p.category = ct.category_id left join (SELECT product_id, (sum(rating) / count(rate)) as rating, count(product_id) as rate_total FROM order_items where rate != 0 group by product_id) rate on p.id = rate.product_id " . $filter_table;
+                                        $opt = 'dp.user_id = ? && pt.language = ? && pp.type =? && ct.language =? && dp.status =?' . $filter_opt . ' ORDER BY ' . $sqlorder . ' LIMIT 8 OFFSET ' . $offset . '';
+                                        $arr = $filter_arr;
+                                        $top_result = $db->advwhere($col, $tb, $opt, $arr);
+                                    } else {
+
+                                        $filter_table = "";
+                                        $filter_opt = " ";
+                                        $filter_arr = array($language, $user_type, $language, 1);
+                                        $check_sql = "none";
+
+                                        $col = "*, p.id as p_id, pt.name as pt_name, pt.description as pt_description, ct.name as ct_name, rate.rating as rating, rate.rate_total as rate_total";
+                                        $tb = " product p left join product_translation pt on p.id = pt.product_id left join product_role_price pp on p.id = pp.product_id left join category_translation ct on p.category = ct.category_id left join (SELECT product_id, (sum(rate) / count(product_id)) as rating, count(product_id) as rate_total FROM order_items where rate != 0 group by product_id) rate on p.id = rate.product_id " . $filter_table;
+                                        $opt = 'pt.language = ? && pp.type =? && ct.language =? && p.status =?' . $filter_opt . ' ORDER BY ' . $sqlorder . ' LIMIT 8 OFFSET ' . $offset . '';
+                                        $arr = $filter_arr;
+                                        $top_result = $db->advwhere($col, $tb, $opt, $arr);
+                                    }
+                                    foreach ($top_result as $top) {
+
+                                        if ($top['rating'] == NULL) {
+                                            $top['rating'] = 5;
+                                        }
+
+                                        $rate_per = ($top['rating'] / 5) * 100;
+
+                                    ?>
+
+                                        <li class="product-item">
+                                            <div class="contain-product right-info-layout contain-product__right-info-layout">
+                                                <div class="product-thumb">
+                                                    <a href="#" class="link-to-product">
+                                                        <img src="img/product/<?php echo $top['image']; ?>" alt="dd" width="270" height="270" class="product-thumnail">
+                                                    </a>
                                                 </div>
-                                                <div class="rating">
-                                                    <p class="star-rating"><span class="width-80percent"></span></p>
-                                                    <span class="review-count">(05 Reviews)</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="product-item">
-                                        <div class="contain-product right-info-layout contain-product__right-info-layout">
-                                            <div class="product-thumb">
-                                                <a href="#" class="link-to-product">
-                                                    <img src="assets/images/products/p-03.jpg" alt="dd" width="270" height="270" class="product-thumnail">
-                                                </a>
-                                            </div>
-                                            <div class="info">
-                                                <b class="categories">Vegetables</b>
-                                                <h4 class="product-title"><a href="#" class="pr-name">Passover Cauliflower</a></h4>
-                                                <div class="price ">
-                                                    <ins><span class="price-amount"><span class="currencySymbol">£</span>85.00</span></ins>
-                                                    <del><span class="price-amount"><span class="currencySymbol">£</span>95.00</span></del>
-                                                </div>
-                                                <div class="rating">
-                                                    <p class="star-rating"><span class="width-80percent"></span></p>
-                                                    <span class="review-count">(05 Reviews)</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="product-item">
-                                        <div class="contain-product right-info-layout contain-product__right-info-layout">
-                                            <div class="product-thumb">
-                                                <a href="#" class="link-to-product">
-                                                    <img src="assets/images/products/p-02.jpg" alt="dd" width="270" height="270" class="product-thumnail">
-                                                </a>
-                                            </div>
-                                            <div class="info">
-                                                <b class="categories">Vegetables</b>
-                                                <h4 class="product-title"><a href="#" class="pr-name">Hot Chili Peppers</a></h4>
-                                                <div class="price ">
-                                                    <ins><span class="price-amount"><span class="currencySymbol">£</span>85.00</span></ins>
-                                                    <del><span class="price-amount"><span class="currencySymbol">£</span>95.00</span></del>
-                                                </div>
-                                                <div class="rating">
-                                                    <p class="star-rating"><span class="width-80percent"></span></p>
-                                                    <span class="review-count">(05 Reviews)</span>
+                                                <div class="info">
+                                                    <b class="categories"><?php echo $top['ct_name']; ?></b>
+                                                    <h4 class="product-title"><a href="#" class="pr-name"><?php echo $top['pt_name']; ?></a></h4>
+                                                    <div class="price ">
+                                                        <ins><span class="price-amount"><span class="currencySymbol">RM</span><?php echo number_format($top['price'], 2); ?></span></ins>
+                                                        <del><span class="price-amount"><span class="currencySymbol">RM</span><?php echo number_format($top['price'], 2); ?></span></del>
+                                                    </div>
+                                                    <div class="rating">
+                                                        <p class="star-rating"><span class="width-percent" style="width: <?php echo $rate_per; ?>%;">></span></p>
+                                                        <span class="review-count">(<?php echo number_format($top['rate_total'], 0); ?> Reviews)</span>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </li>
-                                    <li class="product-item">
-                                        <div class="contain-product right-info-layout contain-product__right-info-layout">
-                                            <div class="product-thumb">
-                                                <a href="#" class="link-to-product">
-                                                    <img src="assets/images/products/p-22.jpg" alt="dd" width="270" height="270" class="product-thumnail">
-                                                </a>
-                                            </div>
-                                            <div class="info">
-                                                <b class="categories">Vegetables</b>
-                                                <h4 class="product-title"><a href="#" class="pr-name">Cherry Tomato Seeds</a></h4>
-                                                <div class="price ">
-                                                    <ins><span class="price-amount"><span class="currencySymbol">£</span>85.00</span></ins>
-                                                    <del><span class="price-amount"><span class="currencySymbol">£</span>95.00</span></del>
-                                                </div>
-                                                <div class="rating">
-                                                    <p class="star-rating"><span class="width-80percent"></span></p>
-                                                    <span class="review-count">(05 Reviews)</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="product-item">
-                                        <div class="contain-product right-info-layout contain-product__right-info-layout">
-                                            <div class="product-thumb">
-                                                <a href="#" class="link-to-product">
-                                                    <img src="assets/images/products/p-20.jpg" alt="dd" width="270" height="270" class="product-thumnail">
-                                                </a>
-                                            </div>
-                                            <div class="info">
-                                                <b class="categories">Vegetables</b>
-                                                <h4 class="product-title"><a href="#" class="pr-name">National Fresh Fruit</a></h4>
-                                                <div class="price ">
-                                                    <ins><span class="price-amount"><span class="currencySymbol">£</span>85.00</span></ins>
-                                                    <del><span class="price-amount"><span class="currencySymbol">£</span>95.00</span></del>
-                                                </div>
-                                                <div class="rating">
-                                                    <p class="star-rating"><span class="width-80percent"></span></p>
-                                                    <span class="review-count">(05 Reviews)</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="product-item">
-                                        <div class="contain-product right-info-layout contain-product__right-info-layout">
-                                            <div class="product-thumb">
-                                                <a href="#" class="link-to-product">
-                                                    <img src="assets/images/products/p-05.jpg" alt="dd" width="270" height="270" class="product-thumnail">
-                                                </a>
-                                            </div>
-                                            <div class="info">
-                                                <b class="categories">Vegetables</b>
-                                                <h4 class="product-title"><a href="#" class="pr-name">Organic Hass Avocado</a></h4>
-                                                <div class="price ">
-                                                    <ins><span class="price-amount"><span class="currencySymbol">£</span>85.00</span></ins>
-                                                    <del><span class="price-amount"><span class="currencySymbol">£</span>95.00</span></del>
-                                                </div>
-                                                <div class="rating">
-                                                    <p class="star-rating"><span class="width-80percent"></span></p>
-                                                    <span class="review-count">(05 Reviews)</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="product-item">
-                                        <div class="contain-product right-info-layout contain-product__right-info-layout">
-                                            <div class="product-thumb">
-                                                <a href="#" class="link-to-product">
-                                                    <img src="assets/images/products/p-06.jpg" alt="dd" width="270" height="270" class="product-thumnail">
-                                                </a>
-                                            </div>
-                                            <div class="info">
-                                                <b class="categories">Vegetables</b>
-                                                <h4 class="product-title"><a href="#" class="pr-name">Packham's Pears</a></h4>
-                                                <div class="price ">
-                                                    <ins><span class="price-amount"><span class="currencySymbol">£</span>85.00</span></ins>
-                                                    <del><span class="price-amount"><span class="currencySymbol">£</span>95.00</span></del>
-                                                </div>
-                                                <div class="rating">
-                                                    <p class="star-rating"><span class="width-80percent"></span></p>
-                                                    <span class="review-count">(05 Reviews)</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="product-item">
-                                        <div class="contain-product right-info-layout contain-product__right-info-layout">
-                                            <div class="product-thumb">
-                                                <a href="#" class="link-to-product">
-                                                    <img src="assets/images/products/p-20.jpg" alt="dd" width="270" height="270" class="product-thumnail">
-                                                </a>
-                                            </div>
-                                            <div class="info">
-                                                <b class="categories">Vegetables</b>
-                                                <h4 class="product-title"><a href="#" class="pr-name">National Fresh Fruit</a></h4>
-                                                <div class="price ">
-                                                    <ins><span class="price-amount"><span class="currencySymbol">£</span>85.00</span></ins>
-                                                    <del><span class="price-amount"><span class="currencySymbol">£</span>95.00</span></del>
-                                                </div>
-                                                <div class="rating">
-                                                    <p class="star-rating"><span class="width-80percent"></span></p>
-                                                    <span class="review-count">(05 Reviews)</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
+                                        </li>
+
+                                    <?php
+                                    }
+                                    ?>
+
+
+
+
                                 </ul>
                                 <div class="biolife-banner style-01 biolife-banner__style-01 xs-margin-top-80px-im sm-margin-top-30px-im">
                                     <div class="banner-contain">
