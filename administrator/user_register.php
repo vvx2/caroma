@@ -135,10 +135,10 @@ if (!empty($postedToken)) {
 
 
                                 if ($result_user_address && $result_user_point) {
-                                    echo "<script>alert(\" Add User Successful\");
+                                    echo "<script>alert(\" Register Successful\");
                                       window.location.href='$page.php';</script>";
                                 } else {
-                                    echo "<script>alert(\" Add User Fail, PLease Try Again. \");
+                                    echo "<script>alert(\" Register Fail, PLease Try Again. \");
                                       window.location.href='$page.php';</script>";
                                 }
                             } // end $result_user

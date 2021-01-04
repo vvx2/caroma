@@ -8,7 +8,8 @@
     require_once('inc/init.php');
     require_once('inc/head.php');
     if ($login != 1) {
-        echo "<script>window.location.replace('login.php')</script>";
+        echo "<script>alert(\" Please Login.\");
+        window.location.replace('login.php')</script>";
         exit();
     }
     if ($user_type != 1) {
