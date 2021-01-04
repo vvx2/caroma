@@ -123,9 +123,11 @@ $count_cart = count($user_cart);
 														<span class="counts-text block">Total Order</span>
 													</div>
 													<div class="col-sm-4 text-center">
+														<a href="point_history.php" target="_blank">
 														<i class="fa fa-money block mb-10"></i>
 														<span class="counts block head-font mb-5"><?php echo $point; ?></span>
 														<span class="counts-text block">Point</span>
+														</a>
 													</div>
 													<div class="col-sm-4 text-center">
 														<i class="fa fa-shopping-cart block mb-10"></i>
