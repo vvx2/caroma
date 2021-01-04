@@ -212,9 +212,6 @@
 
     </div>
 
-    <!-- /Page Content -->
-    <div id='loadDiv' style='position: fixed; width: 100%; height: 100%; left: 0; top: 0; background: rgba(51,51,51,0.2); z-index: 9999; display:none;'><i class="fa fa-spin fa-spinner fa-5x text-success" style='position: fixed; left: 50%; top: 50%;'></i></div>
-
     <?php
     require_once('inc/footer.php');
     require_once('inc/mobile_footer.php');

@@ -227,19 +227,18 @@ select option{
 /* BIOLIFE ICON */
 
 @font-face {
-    font-family: "biolife";
-    src: url("../fonts/biolife.eot"); /* IE9 */
-    src: url("../fonts/biolife.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
-    url("../fonts/biolife.woff2") format("woff2"), /* chrome、firefox、opera、Safari, Android, iOS */
-    url("../fonts/biolife.woff") format("woff"), /* chrome、firefox */
-    url("../fonts/biolife.ttf") format("truetype"), /* chrome、firefox、opera、Safari, Android, iOS 4.2+ */
-    url("../fonts/biolife.svg#uxfonteditor") format("svg"); /* iOS 4.1- */
-}
+    font-family: 'icomoon';
+    src:  url('../fonts/icomoon.eot?xxerwu');
+    src:  url('../fonts/icomoon.eot?xxerwu#iefix') format('embedded-opentype'),
+      url('../fonts/icomoon.ttf?xxerwu') format('truetype'),
+      url('../fonts/icomoon.woff?xxerwu') format('woff'),
+      url('../fonts/icomoon.svg?xxerwu#icomoon') format('svg');
+  }
 
 
 .biolife-icon{
     /* use !important to prevent issues with browser extensions that change fonts */
-    font-family: 'biolife', sans-serif !important;
+    font-family: 'icomoon', sans-serif !important;
     speak: none;
     font-style: normal;
     font-weight: normal;
@@ -252,176 +251,190 @@ select option{
     -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-chocolate:before {
+  content: "\e941";
+}
+.icon-coffee:before {
+  content: "\e947";
+}
+.icon-null:before {
+  content: "\e902";
+}
+.icon-null1:before {
+  content: "\e903";
+}
+.icon-space:before {
+  content: "\20";
+}
 .icon-arrow-right:before {
-    content: "\e900";
+  content: "\e904";
 }
 .icon-arteries-about:before {
-    content: "\e901";
+  content: "\e905";
 }
 .icon-capacity-about:before {
-    content: "\e902";
+  content: "\e906";
 }
 .icon-cart:before {
-    content: "\e903";
+  content: "\e907";
 }
 .icon-cart-mini:before {
-    content: "\e904";
+  content: "\e908";
 }
 .icon-close-menu:before {
-    content: "\e905";
+  content: "\e909";
 }
 .icon-comment:before {
-    content: "\e906";
+  content: "\e90a";
 }
 .icon-clock:before {
-    content: "\e907";
+  content: "\e90b";
 }
 .icon-location:before {
-    content: "\e908";
+  content: "\e90c";
 }
 .icon-letter:before {
-    content: "\e909";
+  content: "\e90d";
 }
 .icon-phone:before {
-    content: "\e90a";
+  content: "\e90e";
 }
 .icon-fresh-drink:before {
-    content: "\e90b";
+  content: "\e90f";
 }
 .icon-green-safety:before {
-    content: "\e90c";
+  content: "\e910";
 }
 .icon-grid:before {
-    content: "\e90d";
+  content: "\e911";
 }
 .icon-healthy-about:before {
-    content: "\e90e";
+  content: "\e912";
 }
 .icon-heart-bold:before {
-    content: "\e90f";
+  content: "\e913";
 }
 .icon-left-arrow:before {
-    content: "\e910";
+  content: "\e914";
 }
 .icon-like:before {
-    content: "\e911";
+  content: "\e915";
 }
 .icon-list:before {
-    content: "\e912";
+  content: "\e916";
 }
 .icon-login:before {
-    content: "\e913";
+  content: "\e917";
 }
 .icon-location2:before {
-    content: "\e914";
+  content: "\e918";
 }
 .icon-fruits:before {
-    content: "\e915";
+  content: "\e919";
 }
 .icon-broccoli-1:before {
-    content: "\e916";
+  content: "\e91a";
 }
 .icon-beef:before {
-    content: "\e917";
+  content: "\e91b";
 }
 .icon-fish:before {
-    content: "\e918";
+  content: "\e91c";
 }
 .icon-fast-food:before {
-    content: "\e919";
-}
-.icon-honey:before {
-    content: "\e91a";
-}
-.icon-grape:before {
-    content: "\e91b";
-}
-.icon-onions:before {
-    content: "\e91c";
-}
-.icon-avocado:before {
-    content: "\e91d";
-}
-.icon-contain:before {
-    content: "\e91e";
-}
-.icon-fresh-juice:before {
-    content: "\e91f";
-}
-.icon-newsletter:before {
-    content: "\e920";
-}
-.icon-organic:before {
-    content: "\e921";
-}
-.icon-beer:before {
-    content: "\e922";
-}
-.icon-car:before {
-    content: "\e923";
-}
-.icon-schedule:before {
-    content: "\e924";
-}
-.icon-conversation:before {
-    content: "\e925";
-}
-.icon-heart-1:before {
-    content: "\e926";
-}
-.icon-title:before {
-    content: "\e927";
-}
-.icon-head-phone:before {
-    content: "\e928";
-}
-.icon-report:before {
-    content: "\e929";
-}
-.icon-search:before {
-    content: "\e92a";
-}
-.icon-suporter:before {
-    content: "\e92b";
-}
-.icon-grape2:before {
-    content: "\e92c";
-}
-.icon-broccoli:before {
-    content: "\e92d";
-}
-.icon-lemon:before {
-    content: "\e92e";
-}
-.icon-orange:before {
-    content: "\e92f";
-}
-.icon-blueberry:before {
-    content: "\e930";
-}
-.icon-ginger:before {
-  content: "\e931";
-}
-.icon-coconut:before {
-  content: "\e933";
-}
-.icon-matcha:before {
-  content: "\e932";
+  content: "\e91d";
 }
 .icon-soy:before {
   content: "\e934";
 }
-.icon-heathly:before {
-  content: "\e937";
+.icon-coconut:before {
+  content: "\e933";
 }
-
-.icon-shield:before {
-  content: "\e936";
+.icon-honey:before {
+  content: "\e91e";
 }
-
-.icon-leaf2:before {
+.icon-grape:before {
+  content: "\e91f";
+}
+.icon-onions:before {
+  content: "\e920";
+}
+.icon-avocado:before {
+  content: "\e921";
+}
+.icon-contain:before {
+  content: "\e922";
+}
+.icon-fresh-juice:before {
+  content: "\e923";
+}
+.icon-newsletter:before {
+  content: "\e924";
+}
+.icon-organic:before {
+  content: "\e925";
+}
+.icon-beer:before {
+  content: "\e926";
+}
+.icon-car:before {
+  content: "\e927";
+}
+.icon-schedule:before {
+  content: "\e928";
+}
+.icon-coversation:before {
+  content: "\e929";
+}
+.icon-heart-1:before {
+  content: "\e92a";
+}
+.icon-title:before {
+  content: "\e92b";
+}
+.icon-head-phone:before {
+  content: "\e92c";
+}
+.icon-report:before {
+  content: "\e92d";
+}
+.icon-search:before {
+  content: "\e92e";
+}
+.icon-suporter:before {
+  content: "\e92f";
+}
+.icon-grape2:before {
+  content: "\e930";
+}
+.icon-broccoli:before {
+  content: "\e931";
+}
+.icon-lemon:before {
+  content: "\e932";
+}
+.icon-orange:before {
   content: "\e935";
 }
+.icon-blueberry:before {
+  content: "\e936";
+}
+.icon-matcha:before {
+  content: "\e937";
+}
+.icon-heathly:before {
+  content: "\e938";
+}
+.icon-shield:before {
+  content: "\e939";
+}
+.icon-leaf2:before {
+  content: "\e93a";
+}
+.icon-ginger:before {
+  content: "\e93b";
+}
+
 /******************************************
 * Animation Effects                       *
 *******************************************/
@@ -3025,7 +3038,7 @@ body.open-mobile-search .header-area.layout-02{
     line-height: 0;
 }
 .footer-item .section-title{
-    font-size: 24px;
+    font-size: 16px;
     line-height: 1;
     color: #222222;
     font-weight: 700;
@@ -3161,7 +3174,7 @@ body.open-mobile-search .header-area.layout-02{
     padding-top: 50px;
 }
 .footer.layout-02 .footer-content{
-    padding-top: 80px;
+    padding : 40px 0px;
 }
 .header-area .primary-menu ul .wrap-megamenu{
     padding: 22px 30px 30px;
@@ -4066,7 +4079,7 @@ body.open-overlay #overlay{
     display: inline-block;
 }
 .background-footer-03{
-    background-color: #fafafa;
+    background-color:#005f2a;
 }
 .mobile-block-global{
     display: none;
@@ -9765,7 +9778,6 @@ li.slick-current .slider-opt04__layout01 .buttons .btn{
 .instagram-block{
     display: block;
     position: relative;
-    margin-top: 35px;
 }
 .instagram-block ul{
     padding: 0;
@@ -13691,7 +13703,7 @@ body.open-quickview-block .biolife-quickview-block{
         top: 76px;
     }
     .footer.layout-02 .footer-item .section-title{
-        font-size: 22px;
+        font-size: 18px;
     }
 }
 
@@ -14147,8 +14159,8 @@ body.open-quickview-block .biolife-quickview-block{
         box-shadow: 0 0 9px 0 rgba(0,0,0,.2);
         padding: 10px 0;
     }
-    .biolife-sticky-object.pre-sticky.is-sticky{
-        top: 0;
+    /*.biolife-sticky-object.pre-sticky.is-sticky{
+        top: 0;*/
     }
     .header-area.layout-01 .biolife-sticky-object.pre-sticky .primary-menu{
         margin-top: 15px;
