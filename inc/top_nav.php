@@ -1,5 +1,8 @@
 <div class="row">
-    <div class="col-lg-5 col-md-6 hidden-sm hidden-xs">
+    <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 des-logo">
+        <a href="index.php" class="biolife-logo bio-2-des"><img class="logo-center" src="assets/images/caroma-logo.png" alt="biolife logo" ></a>
+    </div>
+    <!--- <div class="col-lg-5 col-md-6 hidden-lg hidden-md hidden-sm hidden-xs">
         <div class="primary-menu">
             <ul class="menu biolife-menu clone-main-menu clone-primary-menu">
                 <li class="menu-item"><a href="index.php">Home</a></li>
@@ -9,12 +12,17 @@
                 <li class="menu-item"><a href="contact-us.php">Contact Us</a></li>
             </ul>
         </div>
-    </div>
-    <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6">
-        <a href="index.php" class="biolife-logo"><img src="assets/images/caroma-logo.png" alt="biolife logo" width="135" height="34"></a>
-    </div>
-    <div class="col-lg-5 col-md-4 col-sm-6 col-xs-6">
+    </div> --->
+    
+    <div class="col-lg-10 col-md-10 col-sm-6 col-xs-6">
         <div class="biolife-cart-info">
+        <div class="primary-menu hidden-sm hidden-xs">
+            <ul class="menu biolife-menu clone-main-menu clone-primary-menu">
+                <li class="menu-item"><a href="index.php">Home</a></li>
+                <li class="menu-item"><a href="shop.php" class="menu-name" data-title="Shop">Shop</a></li>
+                <li class="menu-item"><a href="index.php">Promotion</a></li>
+            </ul>
+        </div>
             <div class="login-item">
                 <a href="rewards.php" class="login-link"><i class="biolife-icon icon-title"></i>Rewards</a>
             </div>

@@ -57,8 +57,8 @@
         .pagination>.active>span:focus {
             z-index: 3;
             color: #fff;
-            background-color: #90bf2a;
-            border-color: #90bf2a;
+            background-color: #005f2a;
+            border-color: #005f2a;
         }
     </style>
 </head>

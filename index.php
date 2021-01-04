@@ -163,7 +163,7 @@
                                     <a href="#tab01_1st" class="tab-link"><span class="biolife-icon icon-ginger"></span>Ginger</a>
                                 </li>
                                 <li class="tab-element">
-                                    <a href="#tab01_2nd" class="tab-link"><span class="biolife-icon icon-honey"></span>Honey</a>
+                                    <a href="#tab01_2nd" class="tab-link"><span class="biolife-icon icon-coffee"></span>Coffee</a>
                                 </li>
                                 <li class="tab-element">
                                     <a href="#tab01_3rd" class="tab-link"><span class="biolife-icon icon-matcha"></span>Matcha</a>
@@ -173,6 +173,9 @@
                                 </li>
                                 <li class="tab-element">
                                     <a href="#tab01_5th" class="tab-link"><span class="biolife-icon icon-soy"></span>Soy</a>
+                                </li>
+                                <li class="tab-element">
+                                    <a href="#tab01_6th" class="tab-link"><span class="biolife-icon icon-chocolate"></span>Chocolate</a>
                                 </li>
                             </ul>
                         </div>
@@ -1237,6 +1240,218 @@
                                     </li>
                                 </ul>
                             </div>
+                            <div id="tab01_6th" class="tab-contain ">
+                                <ul class="products-list biolife-carousel nav-center-02 nav-none-on-mobile eq-height-contain" data-slick='{"rows":1 ,"arrows":true,"dots":false,"infinite":true,"speed":400,"slidesMargin":10,"slidesToShow":4, "responsive":[{"breakpoint":1200, "settings":{ "slidesToShow": 4}},{"breakpoint":992, "settings":{ "slidesToShow": 3, "slidesMargin":30}},{"breakpoint":768, "settings":{ "slidesToShow": 2, "rows":2 ,"slidesMargin":15}}]}'>
+                                    <li class="product-item">
+                                        <div class="contain-product layout-default">
+                                            <div class="product-thumb">
+                                                <a href="#" class="link-to-product">
+                                                    <img src="assets/images/products/p-08.jpg" alt="Fresh Fruit" width="270" height="270" class="product-thumnail">
+                                                </a>
+                                                <a class="lookup btn_call_quickview" href="#"><i class="biolife-icon icon-search"></i></a>
+                                            </div>
+                                            <div class="info">
+                                                <b class="categories">Fresh Fruit</b>
+                                                <h4 class="product-title"><a href="#" class="pr-name">National Fresh Fruit</a></h4>
+                                                <div class="price ">
+                                                    <ins><span class="price-amount"><span class="currencySymbol">£</span>85.00</span></ins>
+                                                    <del><span class="price-amount"><span class="currencySymbol">£</span>95.00</span></del>
+                                                </div>
+                                                <div class="slide-down-box">
+                                                    <p class="message">All products are carefully selected to ensure food safety.</p>
+                                                    <div class="buttons">
+
+                                                        <a href="#" class="btn add-to-cart-btn"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i>add to cart</a>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="product-item">
+                                        <div class="contain-product layout-default">
+                                            <div class="product-thumb">
+                                                <a href="#" class="link-to-product">
+                                                    <img src="assets/images/products/p-10.jpg" alt="Fresh Fruit" width="270" height="270" class="product-thumnail">
+                                                </a>
+                                                <a class="lookup btn_call_quickview" href="#"><i class="biolife-icon icon-search"></i></a>
+                                            </div>
+                                            <div class="info">
+                                                <b class="categories">Fresh Fruit</b>
+                                                <h4 class="product-title"><a href="#" class="pr-name">National Fresh Fruit</a></h4>
+                                                <div class="price ">
+                                                    <ins><span class="price-amount"><span class="currencySymbol">£</span>85.00</span></ins>
+                                                    <del><span class="price-amount"><span class="currencySymbol">£</span>95.00</span></del>
+                                                </div>
+                                                <div class="slide-down-box">
+                                                    <p class="message">All products are carefully selected to ensure food safety.</p>
+                                                    <div class="buttons">
+
+                                                        <a href="#" class="btn add-to-cart-btn"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i>add to cart</a>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="product-item">
+                                        <div class="contain-product layout-default">
+                                            <div class="product-thumb">
+                                                <a href="#" class="link-to-product">
+                                                    <img src="assets/images/products/p-29.jpg" alt="Fresh Fruit" width="270" height="270" class="product-thumnail">
+                                                </a>
+                                                <a class="lookup btn_call_quickview" href="#"><i class="biolife-icon icon-search"></i></a>
+                                            </div>
+                                            <div class="info">
+                                                <b class="categories">Fresh Fruit</b>
+                                                <h4 class="product-title"><a href="#" class="pr-name">National Fresh Fruit</a></h4>
+                                                <div class="price ">
+                                                    <ins><span class="price-amount"><span class="currencySymbol">£</span>85.00</span></ins>
+                                                    <del><span class="price-amount"><span class="currencySymbol">£</span>95.00</span></del>
+                                                </div>
+                                                <div class="slide-down-box">
+                                                    <p class="message">All products are carefully selected to ensure food safety.</p>
+                                                    <div class="buttons">
+
+                                                        <a href="#" class="btn add-to-cart-btn"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i>add to cart</a>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="product-item">
+                                        <div class="contain-product layout-default">
+                                            <div class="product-thumb">
+                                                <a href="#" class="link-to-product">
+                                                    <img src="assets/images/products/p-13.jpg" alt="Fresh Fruit" width="270" height="270" class="product-thumnail">
+                                                </a>
+                                                <a class="lookup btn_call_quickview" href="#"><i class="biolife-icon icon-search"></i></a>
+                                            </div>
+                                            <div class="info">
+                                                <b class="categories">Fresh Fruit</b>
+                                                <h4 class="product-title"><a href="#" class="pr-name">National Fresh Fruit</a></h4>
+                                                <div class="price ">
+                                                    <ins><span class="price-amount"><span class="currencySymbol">£</span>85.00</span></ins>
+                                                    <del><span class="price-amount"><span class="currencySymbol">£</span>95.00</span></del>
+                                                </div>
+                                                <div class="slide-down-box">
+                                                    <p class="message">All products are carefully selected to ensure food safety.</p>
+                                                    <div class="buttons">
+
+                                                        <a href="#" class="btn add-to-cart-btn"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i>add to cart</a>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="product-item">
+                                        <div class="contain-product layout-default">
+                                            <div class="product-thumb">
+                                                <a href="#" class="link-to-product">
+                                                    <img src="assets/images/products/p-09.jpg" alt="Fresh Fruit" width="270" height="270" class="product-thumnail">
+                                                </a>
+                                                <a class="lookup btn_call_quickview" href="#"><i class="biolife-icon icon-search"></i></a>
+                                            </div>
+                                            <div class="info">
+                                                <b class="categories">Fresh Fruit</b>
+                                                <h4 class="product-title"><a href="#" class="pr-name">National Fresh Fruit</a></h4>
+                                                <div class="price ">
+                                                    <ins><span class="price-amount"><span class="currencySymbol">£</span>85.00</span></ins>
+                                                    <del><span class="price-amount"><span class="currencySymbol">£</span>95.00</span></del>
+                                                </div>
+                                                <div class="slide-down-box">
+                                                    <p class="message">All products are carefully selected to ensure food safety.</p>
+                                                    <div class="buttons">
+
+                                                        <a href="#" class="btn add-to-cart-btn"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i>add to cart</a>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="product-item">
+                                        <div class="contain-product layout-default">
+                                            <div class="product-thumb">
+                                                <a href="#" class="link-to-product">
+                                                    <img src="assets/images/products/p-16.jpg" alt="Fresh Fruit" width="270" height="270" class="product-thumnail">
+                                                </a>
+                                                <a class="lookup btn_call_quickview" href="#"><i class="biolife-icon icon-search"></i></a>
+                                            </div>
+                                            <div class="info">
+                                                <b class="categories">Fresh Fruit</b>
+                                                <h4 class="product-title"><a href="#" class="pr-name">National Fresh Fruit</a></h4>
+                                                <div class="price ">
+                                                    <ins><span class="price-amount"><span class="currencySymbol">£</span>85.00</span></ins>
+                                                    <del><span class="price-amount"><span class="currencySymbol">£</span>95.00</span></del>
+                                                </div>
+                                                <div class="slide-down-box">
+                                                    <p class="message">All products are carefully selected to ensure food safety.</p>
+                                                    <div class="buttons">
+
+                                                        <a href="#" class="btn add-to-cart-btn"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i>add to cart</a>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="product-item">
+                                        <div class="contain-product layout-default">
+                                            <div class="product-thumb">
+                                                <a href="#" class="link-to-product">
+                                                    <img src="assets/images/products/p-11.jpg" alt="Fresh Fruit" width="270" height="270" class="product-thumnail">
+                                                </a>
+                                                <a class="lookup btn_call_quickview" href="#"><i class="biolife-icon icon-search"></i></a>
+                                            </div>
+                                            <div class="info">
+                                                <b class="categories">Fresh Fruit</b>
+                                                <h4 class="product-title"><a href="#" class="pr-name">National Fresh Fruit</a></h4>
+                                                <div class="price ">
+                                                    <ins><span class="price-amount"><span class="currencySymbol">£</span>85.00</span></ins>
+                                                    <del><span class="price-amount"><span class="currencySymbol">£</span>95.00</span></del>
+                                                </div>
+                                                <div class="slide-down-box">
+                                                    <p class="message">All products are carefully selected to ensure food safety.</p>
+                                                    <div class="buttons">
+
+                                                        <a href="#" class="btn add-to-cart-btn"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i>add to cart</a>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="product-item">
+                                        <div class="contain-product layout-default">
+                                            <div class="product-thumb">
+                                                <a href="#" class="link-to-product">
+                                                    <img src="assets/images/products/p-30.jpg" alt="Fresh Fruit" width="270" height="270" class="product-thumnail">
+                                                </a>
+                                                <a class="lookup btn_call_quickview" href="#"><i class="biolife-icon icon-search"></i></a>
+                                            </div>
+                                            <div class="info">
+                                                <b class="categories">Fresh Fruit</b>
+                                                <h4 class="product-title"><a href="#" class="pr-name">National Fresh Fruit</a></h4>
+                                                <div class="price ">
+                                                    <ins><span class="price-amount"><span class="currencySymbol">£</span>85.00</span></ins>
+                                                    <del><span class="price-amount"><span class="currencySymbol">£</span>95.00</span></del>
+                                                </div>
+                                                <div class="slide-down-box">
+                                                    <p class="message">All products are carefully selected to ensure food safety.</p>
+                                                    <div class="buttons">
+
+                                                        <a href="#" class="btn add-to-cart-btn"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i>add to cart</a>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
 
@@ -1553,133 +1768,6 @@
                             </p>
                         </div>
                     </div>
-                </div>
-            </div>
-
-            <!-- Block 07: Blog posts-->
-            <div class="blog-posts background-fafafa sm-margin-top-33px sm-padding-top-75px sm-padding-bottom-80px xs-margin-top-30px xs-padding-top-30px xs-padding-bottom-50px">
-                <div class="container">
-                    <div class="biolife-title-box biolife-title-box__bold-center">
-                        <i class="subtitle">The freshest and most exciting news</i>
-                        <h3 class="main-title">Our Latest Promotion</h3>
-                    </div>
-                    <ul class="biolife-carousel nav-center xs-margin-top-34px nav-none-on-mobile" data-slick='{"rows":1,"arrows":true,"dots":false,"infinite":false,"speed":400,"slidesMargin":30,"slidesToShow":3, "responsive":[{"breakpoint":1200, "settings":{ "slidesToShow": 3}},{"breakpoint":992, "settings":{ "slidesToShow": 2}},{"breakpoint":768, "settings":{ "slidesToShow": 2}},{"breakpoint":600, "settings":{ "slidesToShow": 1}}]}'>
-                        <li>
-                            <div class="post-item effect-01 style-bottom-info layout-03">
-                                <div class="thumbnail">
-                                    <a href="#" class="link-to-post"><img src="assets/images/our-blog/post-thumb-04.jpg" width="370" height="270" alt=""></a>
-                                    <div class="post-date">
-                                        <span class="date">26</span>
-                                        <span class="month">dec</span>
-                                    </div>
-                                </div>
-                                <div class="post-content">
-                                    <h4 class="post-name"><a href="#" class="linktopost">Ashwagandha: #1 Herb Anxiety?</a></h4>
-                                    <div class="post-meta">
-                                        <p class="post-meta__item author">Posted By: <a href="#" class="link-to-author">Caroma Malaysia</a></p>
-
-
-                                    </div>
-                                    <p class="excerpt">Did you know that red-staining foods are excellent lymph-movers? In fact, many plants...</p>
-                                    <div class="group-buttons">
-                                        <a href="news.php" class="btn readmore">continue reading</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="post-item effect-01 style-bottom-info layout-03">
-                                <div class="thumbnail">
-                                    <a href="news.php" class="link-to-post"><img src="assets/images/our-blog/post-thumb-05.jpg" width="370" height="270" alt=""></a>
-                                    <div class="post-date">
-                                        <span class="date">26</span>
-                                        <span class="month">dec</span>
-                                    </div>
-                                </div>
-                                <div class="post-content">
-                                    <h4 class="post-name"><a href="news.php" class="linktopost">Ashwagandha: #1 Herb Anxiety?</a></h4>
-                                    <div class="post-meta">
-                                        <p class="post-meta__item author">Posted By: <a href="#" class="link-to-author">Caroma Malaysia</a></p>
-
-
-                                    </div>
-                                    <p class="excerpt">Did you know that red-staining foods are excellent lymph-movers? In fact, many plants...</p>
-                                    <div class="group-buttons">
-                                        <a href="news.php" class="btn readmore">continue reading</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="post-item effect-01 style-bottom-info layout-03">
-                                <div class="thumbnail">
-                                    <a href="news.php" class="link-to-post"><img src="assets/images/our-blog/post-thumb-01.jpg" width="370" height="270" alt=""></a>
-                                    <div class="post-date">
-                                        <span class="date">26</span>
-                                        <span class="month">dec</span>
-                                    </div>
-                                </div>
-                                <div class="post-content">
-                                    <h4 class="post-name"><a href="news.php" class="linktopost">Ashwagandha: #1 Herb Anxiety?</a></h4>
-                                    <div class="post-meta">
-                                        <p class="post-meta__item author">Posted By: <a href="#" class="link-to-author">Caroma Malaysia</a></p>
-
-
-                                    </div>
-                                    <p class="excerpt">Did you know that red-staining foods are excellent lymph-movers? In fact, many plants...</p>
-                                    <div class="group-buttons">
-                                        <a href="news.php" class="btn readmore">continue reading</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="post-item effect-01 style-bottom-info layout-03">
-                                <div class="thumbnail">
-                                    <a href="news.php" class="link-to-post"><img src="assets/images/our-blog/post-thumb-02.jpg" width="370" height="270" alt=""></a>
-                                    <div class="post-date">
-                                        <span class="date">26</span>
-                                        <span class="month">dec</span>
-                                    </div>
-                                </div>
-                                <div class="post-content">
-                                    <h4 class="post-name"><a href="news.php" class="linktopost">Ashwagandha: #1 Herb Anxiety?</a></h4>
-                                    <div class="post-meta">
-                                        <p class="post-meta__item author">Posted By: <a href="" class="link-to-author">Caroma Malaysia</a></p>
-
-
-                                    </div>
-                                    <p class="excerpt">Did you know that red-staining foods are excellent lymph-movers? In fact, many plants...</p>
-                                    <div class="group-buttons">
-                                        <a href="news.php" class="btn readmore">continue reading</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="post-item effect-01 style-bottom-info layout-03">
-                                <div class="thumbnail">
-                                    <a href="news.php" class="link-to-post"><img src="assets/images/our-blog/post-thumb-03.jpg" width="370" height="270" alt=""></a>
-                                    <div class="post-date">
-                                        <span class="date">26</span>
-                                        <span class="month">dec</span>
-                                    </div>
-                                </div>
-                                <div class="post-content">
-                                    <h4 class="post-name"><a href="news.php" class="linktopost">Ashwagandha: #1 Herb Anxiety?</a></h4>
-                                    <div class="post-meta">
-                                        <p class="post-meta__item author">Posted By: <a href="#" class="link-to-author">Caroma Malaysia</a></p>
-
-
-                                    </div>
-                                    <p class="excerpt">Did you know that red-staining foods are excellent lymph-movers? In fact, many plants...</p>
-                                    <div class="group-buttons">
-                                        <a href="news.php" class="btn readmore">continue reading</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
                 </div>
             </div>
 
