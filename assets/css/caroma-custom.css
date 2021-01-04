@@ -22,6 +22,52 @@
     text-align: center;
 }
 
+.copyright-footer{
+	padding : 18px 0px;
+	background : #cba478 ;
+	text-align:  center;
+}
+
+.wrap-custom-menu.vertical-menu-2 ul li a{
+	color : white !important;
+}
+
+.cp-title{
+	color : white ;
+}
+
+.header-top .right .nice-select{
+	border : none ;
+}
+
+.des-logo{
+	height : 48.9px;
+}
+
+.bio-2-des{
+	vertical-align: -webkit-baseline-middle;
+}
+
+.logo-center{
+	position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@media (max-width: 767px){
+.logo-center{
+	position: initial;
+    top: 0;
+    left: 0;
+	transform: inherit;}
+}
+
+.footer-title-color {
+	color : #cba478 !important ;
+}
+
+
 .srv-details{
 	display: inline-block;
     font-size: 14px;
@@ -56,7 +102,7 @@
 }
 
 .section-title {
-    font-size: 24px;
+    font-size: 18px;
     line-height: 1;
     color: #222222;
     font-weight: 700;
@@ -161,7 +207,6 @@
 }
 
 .reg-button{
-	text-align : center ;
 	margin-bottom : 12% !important;
 }
 .reg-but{
@@ -177,7 +222,19 @@
 	height : 16px !important ; 
 }
 
-#fname_error_message{
+#name_error_message{
+	color: red;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+#city_error_message{
+	color: red;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+#state_error_message{
 	color: red;
     font-size: 14px;
     font-weight: 700;

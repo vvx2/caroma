@@ -256,7 +256,7 @@
 	 box-sizing: border-box;
 	 width: 120px;
 	 height: 99px;
-	 background: #f5e8df;
+	 background: #cba478;
 	 text-align: center;
 	 padding-top: 28px;
 	 transition: all 0.4s ease-in-out;
@@ -273,10 +273,12 @@
 }
  .stats .value {
 	 font-size: 18px;
-	 font-weight: 600;
+   font-weight: 600;
+   color :white ;
 }
  .stats .parameter {
-	 font-size: 11px;
+   font-size: 12px;
+   color :white ;
 }
 
 .center-profiles{
