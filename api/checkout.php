@@ -659,7 +659,7 @@ function get_point_discount($user_id, $point_use, $db)
     if ($point_use == 1) {
 
         $table = "cart c left join product p on c.product_id = p.id";
-        $col = "c.product_id as product_id, c.qty as qty, p.weight as weight, p.point as point";
+        $col = "c.product_id as product_id, c.qty as qty, p.weight as weight, p.point as point, p.point_allow_discount as point_allow_discount";
         $opt = 'c.customer_id = ?';
         $arr = array($user_id);
         $result_cart = $db->advwhere($col, $table, $opt, $arr);
@@ -669,7 +669,7 @@ function get_point_discount($user_id, $point_use, $db)
             $total_point = 0;
             //count item total weight
             foreach ($result_cart as $cart) {
-                $total_point = $total_point + ($cart['qty'] * $cart['point']);
+                $total_point = $total_point + ($cart['qty'] * $cart['point_allow_discount']); // for reduce check
             }
             //----------------------------------------------
             //  count reward point

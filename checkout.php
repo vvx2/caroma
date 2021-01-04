@@ -419,7 +419,7 @@ if (count($get_cart) != 0) {
                                                     <li class="cart-elem">
                                                         <div class="cart-item">
                                                             <div class="product-thumb">
-                                                                <a class="prd-thumb" href="#">
+                                                                <a class="prd-thumb" href="products-detail.php?p=<?php echo $cart["p_id"] ?>">
                                                                     <figure><img src="img/product/<?php echo $cart["image"] ?>" width="113" height="113" alt="shop-cart"></figure>
                                                                 </a>
                                                             </div>

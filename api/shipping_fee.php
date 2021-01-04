@@ -66,7 +66,7 @@ if ($delivery_type == 2) {
             $charge = $shipping['charge'];
 
             $table = "cart c left join product p on c.product_id = p.id";
-            $col = "c.product_id as product_id, c.qty as qty, p.weight as weight, p.point as point";
+            $col = "c.product_id as product_id, c.qty as qty, p.weight as weight, p.point as point, p.point_allow_discount as point_allow_discount";
             $opt = 'c.customer_id = ?';
             $arr = array($user_id);
             $result_cart = $db->advwhere($col, $table, $opt, $arr);
@@ -78,7 +78,7 @@ if ($delivery_type == 2) {
                 //count item total weight
                 foreach ($result_cart as $cart) {
                     $total_weight = $total_weight + ($cart['qty'] * $cart['weight']);
-                    $total_point = $total_point + ($cart['qty'] * $cart['point']);
+                    $total_point = $total_point + ($cart['qty'] * $cart['point_allow_discount']); // for reduce check
                 }
                 //----------------------------------------------
                 //  count reward point

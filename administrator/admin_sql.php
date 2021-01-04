@@ -205,6 +205,7 @@ if (!empty($postedToken)) {
           $category = $_POST['category'];
           $stock = $_POST['stock'];
           $point = $_POST['point'];
+          $point_allow_discount = $_POST['point_allow_discount'];
 
           $user_price = $_POST['user_price'];
           $distributor_price = $_POST['distributor_price'];
@@ -252,8 +253,8 @@ if (!empty($postedToken)) {
             //------------------------------------------
 
             $table = "product";
-            $colname = array("point", "stock", "category", "length",  "width",  "height",  "weight",  "image", "status", "date_created", "date_modified");
-            $array = array($point, $stock, $category, $length, $width, $height, $weight, $newfilename, 1, $time, $time);
+            $colname = array("point", "point_allow_discount", "stock", "category", "length",  "width",  "height",  "weight",  "image", "status", "date_created", "date_modified");
+            $array = array($point, $point_allow_discount, $stock, $category, $length, $width, $height, $weight, $newfilename, 1, $time, $time);
             $result_product = $db->insert($table, $colname, $array);
 
             if ($result_product) {
@@ -328,6 +329,7 @@ if (!empty($postedToken)) {
           $category = $_POST['category'];
           $stock = $_POST['stock'];
           $point = $_POST['point'];
+          $point_allow_discount = $_POST['point_allow_discount'];
 
           $length = $_POST['length'];
           $width = $_POST['width'];
@@ -343,8 +345,8 @@ if (!empty($postedToken)) {
           //------------------------------------------------------------------------------------
           if (!file_exists($_FILES['img']['tmp_name']) || !is_uploaded_file($_FILES['img']['tmp_name'])) { // no upload file will not update img name
             $table = "product";
-            $data = "point =?, stock =?, category =?, length =?, width =?, height =?, weight =?, status =?, date_modified = ? WHERE id = ?";
-            $array = array($point, $stock, $category, $length, $width, $height, $weight, $status, $time, $product_id);
+            $data = "point =?, point_allow_discount=?, stock =?, category =?, length =?, width =?, height =?, weight =?, status =?, date_modified = ? WHERE id = ?";
+            $array = array($point, $point_allow_discount, $stock, $category, $length, $width, $height, $weight, $status, $time, $product_id);
             $result_product = $db->update($table, $data, $array);
           } else {
             //------------------------------------------
@@ -366,8 +368,8 @@ if (!empty($postedToken)) {
             //------------------------------------------
 
             $table = "product";
-            $data = "point =?, stock =?, category =?, length =?, width =?, height =?, weight =?, image =?, status =?, date_modified = ? WHERE id = ?";
-            $array = array($point, $stock, $category, $length, $width, $height, $weight, $newfilename, $status, $time, $product_id);
+            $data = "point =?,point_allow_discount=?, stock =?, category =?, length =?, width =?, height =?, weight =?, image =?, status =?, date_modified = ? WHERE id = ?";
+            $array = array($point, $point_allow_discount, $stock, $category, $length, $width, $height, $weight, $newfilename, $status, $time, $product_id);
             $result_product = $db->update($table, $data, $array);
           }
           //------------------------------------------------------------------------------------
