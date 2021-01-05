@@ -7,6 +7,7 @@
     // $db = new DB_FUNCTIONS();
     require_once('inc/init.php');
     require_once('inc/head.php');
+    $time = date('Y-m-d H:i:s');
     ?>
 </head>
 
@@ -244,6 +245,31 @@
                                         }
                                         foreach ($hot_result as $hot) {
 
+                                            $normal_price = $hot['price'];
+                                            if ($user_type == 1) {
+                                                $col = "*, DATE_ADD(end, INTERVAL 1 DAY) as new_end_date";
+                                                $tb = "promotion pr left join promotion_product prp on pr.id = prp.promotion_id";
+                                                $opt = 'prp.product_id = ? && start <= ? && DATE_ADD(end, INTERVAL 1 DAY) >= ? ORDER BY date_modified';
+                                                $arr = array($hot['p_id'], $time, $time);
+                                                $check_promotion_prodcut = $db->advwhere($col, $tb, $opt, $arr);
+
+                                                if (count($check_promotion_prodcut) != 0) {
+                                                    $check_promotion_prodcut = $check_promotion_prodcut[0];
+                                                    if ($check_promotion_prodcut["type"] == 1) {
+                                                        $promo_price = $normal_price - $check_promotion_prodcut["amt"];
+                                                    } else {
+                                                        $promo_price = $normal_price - ($normal_price * $check_promotion_prodcut["percentage"] / 100);
+                                                    }
+                                                    $hidden_promo = "";
+                                                    $price_display = $promo_price;
+                                                } else {
+                                                    $hidden_promo = "hidden";
+                                                    $price_display = $normal_price;
+                                                }
+                                            } else {
+                                                $hidden_promo = "hidden";
+                                                $price_display = $normal_price;
+                                            }
 
                                         ?>
 
@@ -259,8 +285,8 @@
                                                         <b class="categories"><?php echo $hot['ct_name']; ?></b>
                                                         <h4 class="product-title"><a href="products-detail.php?p=<?php echo $hot['p_id']; ?>" class="pr-name"><?php echo $hot['ct_name']; ?></a></h4>
                                                         <div class="price ">
-                                                            <ins><span class="price-amount"><span class="currencySymbol">RM</span><?php echo number_format($hot['price'], 2); ?></span></ins>
-                                                            <del><span class="price-amount"><span class="currencySymbol">RM</span><?php echo number_format($hot['price'], 2); ?></span></del>
+                                                            <ins><span class="price-amount"><span class="currencySymbol">RM</span><?php echo number_format($price_display, 2); ?></span></ins>
+                                                            <del class="<?php echo $hidden_promo; ?>"><span class="price-amount"><span class="currencySymbol">RM</span><?php echo number_format($normal_price, 2); ?></span></del>
                                                         </div>
                                                         <div class="slide-down-box">
                                                             <p class="message">All products are carefully selected to ensure food safety.</p>
@@ -295,93 +321,82 @@
                                     <h3 class="title">Deals of the day</h3>
                                 </div>
                                 <ul class="products biolife-carousel nav-top-right nav-none-on-mobile" data-slick='{"arrows":true, "autoplaySpeed": 5000, "autoplay": true, "dots":false, "infinite":false, "speed":400, "slidesMargin":30, "slidesToShow":1}'>
-                                    <li class="product-item">
-                                        <div class="contain-product deal-layout contain-product__deal-layout">
-                                            <div class="product-thumb">
-                                                <a href="#" class="link-to-product">
-                                                    <img src="assets/images/home-03/product_deal_330x330.jpg" alt="dd" width="330" height="330" class="product-thumnail">
-                                                </a>
-                                                <div class="labels">
-                                                    <span class="sale-label">-50%</span>
-                                                </div>
-                                            </div>
-                                            <div class="info">
-                                                <div class="biolife-countdown" data-datetime="2020/02/18 00:00:00"></div>
-                                                <b class="categories">Fresh Fruit</b>
-                                                <h4 class="product-title"><a href="#" class="pr-name">National Fresh Fruit</a></h4>
-                                                <div class="price ">
-                                                    <ins><span class="price-amount"><span class="currencySymbol">£</span>85.00</span></ins>
-                                                    <del><span class="price-amount"><span class="currencySymbol">£</span>95.00</span></del>
-                                                </div>
-                                                <div class="slide-down-box">
-                                                    <p class="message">All products are carefully selected to ensure food safety.</p>
-                                                    <div class="buttons">
+                                    <?php
 
-                                                        <a href="#" class="btn add-to-cart-btn">add to cart</a>
 
+
+                                    $col = "*, DATE_ADD(end, INTERVAL 1 DAY) as new_end_date";
+                                    $tb = "promotion";
+                                    $opt = 'start <= ? && DATE_ADD(end, INTERVAL 1 DAY) >= ? ORDER BY date_modified';
+                                    $arr = array($time, $time);
+                                    $promotion_result = $db->advwhere($col, $tb, $opt, $arr);
+
+                                    if (count($promotion_result) == 0) {
+                                        echo "<p class='title text-info'>PROMOTION IS COMMING SOON</p>";
+                                    } else {
+                                        $promotion_result = $promotion_result[0];
+
+                                        $col = "*, p.id as p_id, pt.name as pt_name, pt.description as pt_description, ct.name as ct_name, rate.rating as rating";
+                                        $tb = " promotion_product prp left join product p on prp.product_id = p.id left join product_translation pt on p.id = pt.product_id left join product_role_price pp on p.id = pp.product_id left join category_translation ct on p.category = ct.category_id left join (SELECT product_id, (sum(qty) / count(product_id)) as rating FROM order_items where rate != 0 group by product_id) rate on p.id = rate.product_id ";
+                                        $opt = 'prp.promotion_id = ? && pt.language = ? && pp.type =? && ct.language =? && p.status =? ORDER BY rating DESC LIMIT 6';
+                                        $arr = array($promotion_result['id'], $language, $user_type, $language, 1);
+                                        $promotion_product_result = $db->advwhere($col, $tb, $opt, $arr);
+
+
+
+                                        foreach ($promotion_product_result as $promo) {
+
+
+                                    ?>
+
+                                            <li class="product-item">
+                                                <div class="contain-product deal-layout contain-product__deal-layout">
+                                                    <div class="product-thumb">
+                                                        <a href="products-detail.php?p=<?php echo $promo['p_id']; ?>" class="link-to-product">
+                                                            <img src="img/product/<?php echo $promo['image']; ?>" alt="<?php echo $promo['ct_name']; ?>" width="330" height="330" class="product-thumnail">
+                                                        </a>
+                                                        <div class="labels">
+                                                            <span class="sale-label">
+                                                                <?php
+                                                                $normal_price = $promo['price'];
+                                                                if ($promotion_result["type"] == 1) {
+
+                                                                    $promo_price = $normal_price - $promotion_result["amt"];
+                                                                    echo "- RM" . number_format($promotion_result["amt"], 2);
+                                                                } else {
+
+                                                                    $promo_price = $normal_price - ($normal_price * $promotion_result["percentage"] / 100);
+                                                                    echo $promotion_result["percentage"] . "%";
+                                                                }
+                                                                ?>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="info">
+                                                        <div class="biolife-countdown" data-datetime="<?php echo $promotion_result['new_end_date']; ?>"></div>
+                                                        <b class="categories">Fresh Fruit</b>
+                                                        <h4 class="product-title"><a href="products-detail.php?p=<?php echo $promo['p_id']; ?>" class="pr-name">National Fresh Fruit</a></h4>
+                                                        <div class="price ">
+                                                            <ins><span class="price-amount"><span class="currencySymbol">RM</span><?php echo number_format($promo_price, 2); ?></span></ins>
+                                                            <del><span class="price-amount"><span class="currencySymbol">RM</span><?php echo number_format($normal_price, 2); ?></span></del>
+                                                        </div>
+                                                        <div class="slide-down-box">
+                                                            <p class="message">All products are carefully selected to ensure food safety.</p>
+                                                            <div class="buttons">
+                                                                <button class="btn add-to-cart-btn btnAddCart" style="width: 100%;" data-value="<?php echo $promo['p_id']; ?>"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i>add to cart</button>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="product-item">
-                                        <div class="contain-product deal-layout contain-product__deal-layout">
-                                            <div class="product-thumb">
-                                                <a href="#" class="link-to-product">
-                                                    <img src="assets/images/home-03/product_deal-02_330x330.jpg" alt="dd" width="330" height="330" class="product-thumnail">
-                                                </a>
-                                                <div class="labels">
-                                                    <span class="sale-label">-50%</span>
-                                                </div>
-                                            </div>
-                                            <div class="info">
-                                                <div class="biolife-countdown" data-datetime="2020/04/18 00:00:00"></div>
-                                                <b class="categories">Fresh Fruit</b>
-                                                <h4 class="product-title"><a href="#" class="pr-name">National Fresh Fruit</a></h4>
-                                                <div class="price ">
-                                                    <ins><span class="price-amount"><span class="currencySymbol">£</span>85.00</span></ins>
-                                                    <del><span class="price-amount"><span class="currencySymbol">£</span>95.00</span></del>
-                                                </div>
-                                                <div class="slide-down-box">
-                                                    <p class="message">All products are carefully selected to ensure food safety.</p>
-                                                    <div class="buttons">
+                                            </li>
 
-                                                        <a href="#" class="btn add-to-cart-btn">add to cart</a>
+                                    <?php
+                                        }
+                                    }
+                                    ?>
 
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="product-item">
-                                        <div class="contain-product deal-layout contain-product__deal-layout">
-                                            <div class="product-thumb">
-                                                <a href="#" class="link-to-product">
-                                                    <img src="assets/images/home-03/product_deal-03_330x330.jpg" alt="dd" width="330" height="330" class="product-thumnail">
-                                                </a>
-                                                <div class="labels">
-                                                    <span class="sale-label">-50%</span>
-                                                </div>
-                                            </div>
-                                            <div class="info">
-                                                <div class="biolife-countdown" data-datetime="2020/01/18 00:00:00"></div>
-                                                <b class="categories">Fresh Fruit</b>
-                                                <h4 class="product-title"><a href="#" class="pr-name">National Fresh Fruit</a></h4>
-                                                <div class="price ">
-                                                    <ins><span class="price-amount"><span class="currencySymbol">£</span>85.00</span></ins>
-                                                    <del><span class="price-amount"><span class="currencySymbol">£</span>95.00</span></del>
-                                                </div>
-                                                <div class="slide-down-box">
-                                                    <p class="message">All products are carefully selected to ensure food safety.</p>
-                                                    <div class="buttons">
 
-                                                        <a href="#" class="btn add-to-cart-btn">add to cart</a>
 
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -428,6 +443,32 @@
 
                                         $rate_per = ($top['rating'] / 5) * 100;
 
+                                        $normal_price = $top['price'];
+                                        if ($user_type == 1) {
+                                            $col = "*, DATE_ADD(end, INTERVAL 1 DAY) as new_end_date";
+                                            $tb = "promotion pr left join promotion_product prp on pr.id = prp.promotion_id";
+                                            $opt = 'prp.product_id = ? && start <= ? && DATE_ADD(end, INTERVAL 1 DAY) >= ? ORDER BY date_modified';
+                                            $arr = array($top['p_id'], $time, $time);
+                                            $check_promotion_prodcut = $db->advwhere($col, $tb, $opt, $arr);
+
+                                            if (count($check_promotion_prodcut) != 0) {
+                                                $check_promotion_prodcut = $check_promotion_prodcut[0];
+                                                if ($check_promotion_prodcut["type"] == 1) {
+                                                    $promo_price = $normal_price - $check_promotion_prodcut["amt"];
+                                                } else {
+                                                    $promo_price = $normal_price - ($normal_price * $check_promotion_prodcut["percentage"] / 100);
+                                                }
+                                                $hidden_promo = "";
+                                                $price_display = $promo_price;
+                                            } else {
+                                                $hidden_promo = "hidden";
+                                                $price_display = $normal_price;
+                                            }
+                                        } else {
+                                            $hidden_promo = "hidden";
+                                            $price_display = $normal_price;
+                                        }
+
                                     ?>
 
                                         <li class="product-item">
@@ -441,8 +482,8 @@
                                                     <b class="categories"><?php echo $top['ct_name']; ?></b>
                                                     <h4 class="product-title"><a href="#" class="pr-name"><?php echo $top['pt_name']; ?></a></h4>
                                                     <div class="price ">
-                                                        <ins><span class="price-amount"><span class="currencySymbol">RM</span><?php echo number_format($top['price'], 2); ?></span></ins>
-                                                        <del><span class="price-amount"><span class="currencySymbol">RM</span><?php echo number_format($top['price'], 2); ?></span></del>
+                                                        <ins><span class="price-amount"><span class="currencySymbol">RM</span><?php echo number_format($price_display, 2); ?></span></ins>
+                                                        <del class="<?php echo $hidden_promo; ?>"><span class="price-amount"><span class="currencySymbol">RM</span><?php echo number_format($normal_price, 2); ?></span></del>
                                                     </div>
                                                     <div class="rating">
                                                         <p class="star-rating"><span class="width-percent" style="width: <?php echo $rate_per; ?>%;">></span></p>
