@@ -139,7 +139,7 @@
                             <ins><span class="price-amount"><span class="currencySymbol">RM</span><?php echo number_format($result["price"], 2); ?></span></ins>
                             <del><span class="price-amount"><span class="currencySymbol">RM</span><?php echo number_format($result["price"], 2); ?></span></del>
                         </div>
-                        <div class="biolife-countdown" data-datetime="2020/12/20 00:00:00"></div>
+                        <div class="biolife-countdown" data-datetime="2021-01-25 00:00:00"></div>
                         <div class="shipping-info">
                             <p class="shipping-day">3-Day Shipping</p>
                             <p class="for-today">Shipping with CITYLINK</p>
@@ -295,181 +295,68 @@
                     </div>
                     <ul class="products-list biolife-carousel nav-center-02 nav-none-on-mobile" data-slick='{"rows":1,"arrows":true,"dots":false,"infinite":false,"speed":400,"slidesMargin":0,"slidesToShow":5, "responsive":[{"breakpoint":1200, "settings":{ "slidesToShow": 4}},{"breakpoint":992, "settings":{ "slidesToShow": 3, "slidesMargin":20 }},{"breakpoint":768, "settings":{ "slidesToShow": 2, "slidesMargin":10}}]}'>
 
-                        <li class="product-item">
-                            <div class="contain-product layout-default">
-                                <div class="product-thumb">
-                                    <a href="#" class="link-to-product">
-                                        <img src="assets/images/products/p-13.jpg" alt="dd" width="270" height="270" class="product-thumnail">
-                                    </a>
-                                </div>
-                                <div class="info">
-                                    <b class="categories">Fresh Fruit</b>
-                                    <h4 class="product-title"><a href="#" class="pr-name">National Fresh Fruit</a></h4>
-                                    <div class="price">
-                                        <ins><span class="price-amount"><span class="currencySymbol">£</span>85.00</span></ins>
-                                        <del><span class="price-amount"><span class="currencySymbol">£</span>95.00</span></del>
+
+                        <?php
+
+                        $sqlorder = "rating DESC"; //this "rating" is count by quantity
+                        $offset = 0;
+                        if ($user_type == 3) {
+
+                            $filter_table = "";
+                            $filter_opt = " ";
+                            $filter_arr = array($admin_id, $language, $user_type, $language, 1);
+
+                            $col = "*,dp.stock as dis_stock, p.stock as admin_stock, p.id as p_id, pt.name as pt_name, pt.description as pt_description, ct.name as ct_name, rate.rating as rating";
+                            $tb = "distributor_product dp left join product p on dp.product_id = p.id left join product_translation pt on p.id = pt.product_id left join product_role_price pp on p.id = pp.product_id left join category_translation ct on p.category = ct.category_id left join (SELECT product_id, (sum(qty) / count(product_id)) as rating FROM order_items where rate != 0 group by product_id) rate on p.id = rate.product_id " . $filter_table;
+                            $opt = 'dp.user_id = ? && pt.language = ? && pp.type =? && ct.language =? && dp.status =?' . $filter_opt . ' ORDER BY ' . $sqlorder . ' LIMIT 5 OFFSET ' . $offset . '';
+                            $arr = $filter_arr;
+                            $hot_result = $db->advwhere($col, $tb, $opt, $arr);
+                        } else {
+
+                            $filter_table = "";
+                            $filter_opt = " ";
+                            $filter_arr = array($language, $user_type, $language, 1);
+                            $check_sql = "none";
+
+                            $col = "*, p.id as p_id, pt.name as pt_name, pt.description as pt_description, ct.name as ct_name, rate.rating as rating";
+                            $tb = " product p left join product_translation pt on p.id = pt.product_id left join product_role_price pp on p.id = pp.product_id left join category_translation ct on p.category = ct.category_id left join (SELECT product_id, (sum(qty) / count(product_id)) as rating FROM order_items where rate != 0 group by product_id) rate on p.id = rate.product_id " . $filter_table;
+                            $opt = 'pt.language = ? && pp.type =? && ct.language =? && p.status =?' . $filter_opt . ' ORDER BY ' . $sqlorder . ' LIMIT 5 OFFSET ' . $offset . '';
+                            $arr = $filter_arr;
+                            $hot_result = $db->advwhere($col, $tb, $opt, $arr);
+                        }
+                        foreach ($hot_result as $hot) {
+
+
+                        ?>
+
+                            <li class="product-item">
+                                <div class="contain-product layout-default">
+                                    <div class="product-thumb">
+                                        <a href="products-detail.php?p=<?php echo $hot['p_id']; ?>" class="link-to-product">
+                                            <img src="img/product/<?php echo $hot['image']; ?>" alt="<?php echo $hot['ct_name']; ?>" width="270" height="270" class="product-thumnail">
+                                        </a>
+                                        <a class="lookup btn_call_quickview" href="products-detail.php?p=<?php echo $hot['p_id']; ?>"><i class="biolife-icon icon-search"></i></a>
                                     </div>
-                                    <div class="slide-down-box">
-                                        <p class="message">All products are carefully selected to ensure food safety.</p>
-                                        <div class="buttons">
-
-                                            <a href="#" class="btn add-to-cart-btn"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i>add to cart</a>
-
+                                    <div class="info">
+                                        <b class="categories"><?php echo $hot['ct_name']; ?></b>
+                                        <h4 class="product-title"><a href="products-detail.php?p=<?php echo $hot['p_id']; ?>" class="pr-name"><?php echo $hot['ct_name']; ?></a></h4>
+                                        <div class="price ">
+                                            <ins><span class="price-amount"><span class="currencySymbol">RM</span><?php echo number_format($hot['price'], 2); ?></span></ins>
+                                            <del><span class="price-amount"><span class="currencySymbol">RM</span><?php echo number_format($hot['price'], 2); ?></span></del>
+                                        </div>
+                                        <div class="slide-down-box">
+                                            <p class="message">All products are carefully selected to ensure food safety.</p>
+                                            <div class="buttons">
+                                                <button class="btn add-to-cart-btn btnAddCart" style="width: 100%;" data-value="<?php echo $hot['p_id']; ?>"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i>add to cart</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </li>
-                        <li class="product-item">
-                            <div class="contain-product layout-default">
-                                <div class="product-thumb">
-                                    <a href="#" class="link-to-product">
-                                        <img src="assets/images/products/p-14.jpg" alt="dd" width="270" height="270" class="product-thumnail">
-                                    </a>
-                                </div>
-                                <div class="info">
-                                    <b class="categories">Fresh Fruit</b>
-                                    <h4 class="product-title"><a href="#" class="pr-name">National Fresh Fruit</a></h4>
-                                    <div class="price">
-                                        <ins><span class="price-amount"><span class="currencySymbol">£</span>85.00</span></ins>
-                                        <del><span class="price-amount"><span class="currencySymbol">£</span>95.00</span></del>
-                                    </div>
-                                    <div class="slide-down-box">
-                                        <p class="message">All products are carefully selected to ensure food safety.</p>
-                                        <div class="buttons">
+                            </li>
 
-                                            <a href="#" class="btn add-to-cart-btn"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i>add to cart</a>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="product-item">
-                            <div class="contain-product layout-default">
-                                <div class="product-thumb">
-                                    <a href="#" class="link-to-product">
-                                        <img src="assets/images/products/p-15.jpg" alt="dd" width="270" height="270" class="product-thumnail">
-                                    </a>
-                                </div>
-                                <div class="info">
-                                    <b class="categories">Fresh Fruit</b>
-                                    <h4 class="product-title"><a href="#" class="pr-name">National Fresh Fruit</a></h4>
-                                    <div class="price">
-                                        <ins><span class="price-amount"><span class="currencySymbol">£</span>85.00</span></ins>
-                                        <del><span class="price-amount"><span class="currencySymbol">£</span>95.00</span></del>
-                                    </div>
-                                    <div class="slide-down-box">
-                                        <p class="message">All products are carefully selected to ensure food safety.</p>
-                                        <div class="buttons">
-
-                                            <a href="#" class="btn add-to-cart-btn"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i>add to cart</a>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="product-item">
-                            <div class="contain-product layout-default">
-                                <div class="product-thumb">
-                                    <a href="#" class="link-to-product">
-                                        <img src="assets/images/products/p-10.jpg" alt="dd" width="270" height="270" class="product-thumnail">
-                                    </a>
-                                </div>
-                                <div class="info">
-                                    <b class="categories">Fresh Fruit</b>
-                                    <h4 class="product-title"><a href="#" class="pr-name">National Fresh Fruit</a></h4>
-                                    <div class="price">
-                                        <ins><span class="price-amount"><span class="currencySymbol">£</span>85.00</span></ins>
-                                        <del><span class="price-amount"><span class="currencySymbol">£</span>95.00</span></del>
-                                    </div>
-                                    <div class="slide-down-box">
-                                        <p class="message">All products are carefully selected to ensure food safety.</p>
-                                        <div class="buttons">
-
-                                            <a href="#" class="btn add-to-cart-btn"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i>add to cart</a>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="product-item">
-                            <div class="contain-product layout-default">
-                                <div class="product-thumb">
-                                    <a href="#" class="link-to-product">
-                                        <img src="assets/images/products/p-08.jpg" alt="dd" width="270" height="270" class="product-thumnail">
-                                    </a>
-                                </div>
-                                <div class="info">
-                                    <b class="categories">Fresh Fruit</b>
-                                    <h4 class="product-title"><a href="#" class="pr-name">National Fresh Fruit</a></h4>
-                                    <div class="price">
-                                        <ins><span class="price-amount"><span class="currencySymbol">£</span>85.00</span></ins>
-                                        <del><span class="price-amount"><span class="currencySymbol">£</span>95.00</span></del>
-                                    </div>
-                                    <div class="slide-down-box">
-                                        <p class="message">All products are carefully selected to ensure food safety.</p>
-                                        <div class="buttons">
-
-                                            <a href="#" class="btn add-to-cart-btn"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i>add to cart</a>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="product-item">
-                            <div class="contain-product layout-default">
-                                <div class="product-thumb">
-                                    <a href="#" class="link-to-product">
-                                        <img src="assets/images/products/p-21.jpg" alt="dd" width="270" height="270" class="product-thumnail">
-                                    </a>
-                                </div>
-                                <div class="info">
-                                    <b class="categories">Fresh Fruit</b>
-                                    <h4 class="product-title"><a href="#" class="pr-name">National Fresh Fruit</a></h4>
-                                    <div class="price">
-                                        <ins><span class="price-amount"><span class="currencySymbol">£</span>85.00</span></ins>
-                                        <del><span class="price-amount"><span class="currencySymbol">£</span>95.00</span></del>
-                                    </div>
-                                    <div class="slide-down-box">
-                                        <p class="message">All products are carefully selected to ensure food safety.</p>
-                                        <div class="buttons">
-
-                                            <a href="#" class="btn add-to-cart-btn"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i>add to cart</a>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="product-item">
-                            <div class="contain-product layout-default">
-                                <div class="product-thumb">
-                                    <a href="#" class="link-to-product">
-                                        <img src="assets/images/products/p-18.jpg" alt="dd" width="270" height="270" class="product-thumnail">
-                                    </a>
-                                </div>
-                                <div class="info">
-                                    <b class="categories">Fresh Fruit</b>
-                                    <h4 class="product-title"><a href="#" class="pr-name">National Fresh Fruit</a></h4>
-                                    <div class="price">
-                                        <ins><span class="price-amount"><span class="currencySymbol">£</span>85.00</span></ins>
-                                        <del><span class="price-amount"><span class="currencySymbol">£</span>95.00</span></del>
-                                    </div>
-                                    <div class="slide-down-box">
-                                        <p class="message">All products are carefully selected to ensure food safety.</p>
-                                        <div class="buttons">
-
-                                            <a href="#" class="btn add-to-cart-btn"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i>add to cart</a>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
+                        <?php
+                        }
+                        ?>
 
                     </ul>
                 </div>
