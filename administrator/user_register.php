@@ -121,8 +121,7 @@ if (!empty($postedToken)) {
                                 $arr = array($time);
                                 $user = $db->advwhere($col, $table, $opt, $arr);
                                 $user_id = $user[0]['id'];
-                                // $user_email = $user[0]['email'];
-                                $user_email = "puahweewee@gmail.com";
+                                $user_email = $user[0]['email'];
                                 //--------------------------
 
                                 $table = "user_address";
