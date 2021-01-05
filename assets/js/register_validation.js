@@ -208,7 +208,7 @@ $(function() {
    check_state();
 
       if (error_name === false && error_email === false && error_password === false && error_retype_password === false && error_phone === false && error_address === false && error_zip === false && error_city === false && error_state === false) {
-         alert("Registration Successfull");
+         // alert("Registration Successfull");
          return true;
       } else {
          alert("Please Fill the form Correctly");
