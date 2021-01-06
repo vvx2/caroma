@@ -732,8 +732,16 @@ function get_point_discount($user_id, $point_use, $db)
                     } else {
                         $point_use = $current_point;
                     }
-
-                    $reduce_point_fee = $point_use / 100;
+                    //-----------------------
+                    //      get point value
+                    $result_point_value = $db->get("*", "reward_point_value", 1);
+                    if (count($result_point_value) != 0) {
+                        $point_value = $result_point_value[0]['value'];
+                    } else {
+                        $point_value = 1;
+                    }
+                    //-----------------------
+                    $reduce_point_fee = ($point_use / 100) * $point_value;
                 } else {
                     $reduce_point_fee = 0;
                 }
