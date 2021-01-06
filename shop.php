@@ -7,6 +7,7 @@
     // $db = new DB_FUNCTIONS();
     require_once('inc/init.php');
     require_once('inc/head.php');
+    $time = date('Y-m-d H:i:s');
 
 
     //when user type is dealer, admin id will be distributor id - to identify the order belong who
@@ -457,14 +458,19 @@
                 price_to: price_to
             }, function(data) {
 
-                console.log(data);
+                // console.log(data);
                 data = JSON.parse(data)
-                console.log("getproduct:");
-                console.log(data);
+                // console.log("getproduct:");
+                // console.log(data);
                 if (data["Status"]) {
                     //Success Action
                     let product_item = '';
                     $.each(data["product"], function(key, product) {
+                        if (product.is_promo == 1) {
+                            display_ori_price = '                   <del ><span class="price-amount"><span class="currencySymbol">RM</span>' + parseFloat(product.ori_price).toFixed(2) + '</span></del>\n'
+                        } else {
+                            display_ori_price = '                   <del ><span class="price-amount"><span class="currencySymbol">&nbsp;</span></span></del>\n'
+                        }
                         product_item = product_item +
                             '<li class="product-item col-lg-4 col-md-4 col-sm-4 col-xs-6" id="product_' + key + '">\n' +
                             '       <div class="contain-product layout-default">\n' +
@@ -478,7 +484,7 @@
                             '               <h4 class="product-title"><a href="products-detail.php?p=' + key + '" class="pr-name">' + product.product_name + '</a></h4>\n' +
                             '               <div class="price">\n' +
                             '                   <ins><span class="price-amount"><span class="currencySymbol">RM</span>' + parseFloat(product.price).toFixed(2) + '</span></ins>\n' +
-                            '                   <del><span class="price-amount"><span class="currencySymbol">RM</span>' + parseFloat(product.price).toFixed(2) + '</span></del>\n' +
+                            display_ori_price +
                             '               </div>\n' +
                             '               <div class="slide-down-box">\n' +
                             '                   <p class="message">All products are carefully selected to ensure food safety.</p>\n' +

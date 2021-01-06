@@ -7,6 +7,7 @@
     // $db = new DB_FUNCTIONS();
     require_once('inc/init.php');
     require_once('inc/head.php');
+    $time = date('Y-m-d H:i:s');
 
     if (isset($_REQUEST['p'])) {
         $product_id = $_REQUEST['p'];
@@ -62,6 +63,32 @@
     }
 
     $rate_per = ($result['rating'] / 5) * 100;
+
+    $normal_price = $result['price'];
+    if ($user_type == 1) {
+        $col = "*, DATE_ADD(end, INTERVAL 1 DAY) as new_end_date";
+        $tb = "promotion pr left join promotion_product prp on pr.id = prp.promotion_id";
+        $opt = 'prp.product_id = ? && start <= ? && DATE_ADD(end, INTERVAL 1 DAY) >= ? ORDER BY date_modified';
+        $arr = array($result['p_id'], $time, $time);
+        $check_promotion_prodcut = $db->advwhere($col, $tb, $opt, $arr);
+
+        if (count($check_promotion_prodcut) != 0) {
+            $check_promotion_prodcut = $check_promotion_prodcut[0];
+            if ($check_promotion_prodcut["type"] == 1) {
+                $promo_price = $normal_price - $check_promotion_prodcut["amt"];
+            } else {
+                $promo_price = $normal_price - ($normal_price * $check_promotion_prodcut["percentage"] / 100);
+            }
+            $hidden_promo = "";
+            $price_display = $promo_price;
+        } else {
+            $hidden_promo = "hidden";
+            $price_display = $normal_price;
+        }
+    } else {
+        $hidden_promo = "hidden";
+        $price_display = $normal_price;
+    }
     // echo "<pre>";
     // var_dump($result);
     // echo "</pre>";
@@ -136,10 +163,16 @@
                         </div>
                         <span class="sku">Stock: <?php echo $stock; ?></span>
                         <div class="price">
-                            <ins><span class="price-amount"><span class="currencySymbol">RM</span><?php echo number_format($result["price"], 2); ?></span></ins>
-                            <del><span class="price-amount"><span class="currencySymbol">RM</span><?php echo number_format($result["price"], 2); ?></span></del>
+                            <ins><span class="price-amount"><span class="currencySymbol">RM</span><?php echo number_format($price_display, 2); ?></span></ins>
+                            <del class="<?php echo $hidden_promo; ?>"><span class="price-amount"><span class="currencySymbol">RM</span><?php echo number_format($normal_price, 2); ?></span></del>
                         </div>
-                        <div class="biolife-countdown" data-datetime="2021-01-25 00:00:00"></div>
+                        <?php
+                        if ($user_type == 1 && count($check_promotion_prodcut) != 0) {
+                        ?>
+                            <div class="biolife-countdown" data-datetime="<?php echo $check_promotion_prodcut['new_end_date']; ?>"></div>
+                        <?php
+                        }
+                        ?>
                         <div class="shipping-info">
                             <p class="shipping-day">3-Day Shipping</p>
                             <p class="for-today">Shipping with CITYLINK</p>
@@ -327,6 +360,32 @@
                         foreach ($hot_result as $hot) {
 
 
+                            $normal_price = $hot['price'];
+                            if ($user_type == 1) {
+                                $col = "*, DATE_ADD(end, INTERVAL 1 DAY) as new_end_date";
+                                $tb = "promotion pr left join promotion_product prp on pr.id = prp.promotion_id";
+                                $opt = 'prp.product_id = ? && start <= ? && DATE_ADD(end, INTERVAL 1 DAY) >= ? ORDER BY date_modified';
+                                $arr = array($hot['p_id'], $time, $time);
+                                $check_promotion_prodcut = $db->advwhere($col, $tb, $opt, $arr);
+
+                                if (count($check_promotion_prodcut) != 0) {
+                                    $check_promotion_prodcut = $check_promotion_prodcut[0];
+                                    if ($check_promotion_prodcut["type"] == 1) {
+                                        $promo_price = $normal_price - $check_promotion_prodcut["amt"];
+                                    } else {
+                                        $promo_price = $normal_price - ($normal_price * $check_promotion_prodcut["percentage"] / 100);
+                                    }
+                                    $hidden_promo = "";
+                                    $price_display = $promo_price;
+                                } else {
+                                    $hidden_promo = "hidden";
+                                    $price_display = $normal_price;
+                                }
+                            } else {
+                                $hidden_promo = "hidden";
+                                $price_display = $normal_price;
+                            }
+
                         ?>
 
                             <li class="product-item">
@@ -341,8 +400,8 @@
                                         <b class="categories"><?php echo $hot['ct_name']; ?></b>
                                         <h4 class="product-title"><a href="products-detail.php?p=<?php echo $hot['p_id']; ?>" class="pr-name"><?php echo $hot['ct_name']; ?></a></h4>
                                         <div class="price ">
-                                            <ins><span class="price-amount"><span class="currencySymbol">RM</span><?php echo number_format($hot['price'], 2); ?></span></ins>
-                                            <del><span class="price-amount"><span class="currencySymbol">RM</span><?php echo number_format($hot['price'], 2); ?></span></del>
+                                            <ins><span class="price-amount"><span class="currencySymbol">RM</span><?php echo number_format($price_display, 2); ?></span></ins>
+                                            <del class="<?php echo $hidden_promo; ?>"><span class="price-amount"><span class="currencySymbol">RM</span><?php echo number_format($normal_price, 2); ?></span></del>
                                         </div>
                                         <div class="slide-down-box">
                                             <p class="message">All products are carefully selected to ensure food safety.</p>

@@ -8,6 +8,16 @@
     require_once('inc/init.php');
     require_once('inc/head.php');
     $time = date('Y-m-d H:i:s');
+    if ($user_type == 3) {
+        //get distributor id that dealer under with
+        $table = 'user_dealer';
+        $col = "*";
+        $opt = 'user_id =?';
+        $arr = array($user_id);
+        $dealer = $db->advwhere($col, $table, $opt, $arr);
+        $under_distributor = $dealer[0]['under_distributor'];
+        $admin_id = $under_distributor;
+    }
     ?>
 </head>
 
@@ -167,6 +177,7 @@
                                 $arr = array($language);
                                 $result_category = $db->advwhere($col, $tb, $opt, $arr);
                                 $i = 1;
+
                                 foreach ($result_category as $cate) {
                                     if ($i == 1) {
                                         $active_display = "active";
@@ -174,10 +185,17 @@
                                         $active_display = "";
                                     }
                                     $i++;
+
+                                    $col = "name";
+                                    $tb = " category_translation ";
+                                    $opt = 'category_id =? && language =?';
+                                    $arr = array($cate['c_id'], "en");
+                                    $category_name = $db->advwhere($col, $tb, $opt, $arr);
                                 ?>
                                     <li class="tab-element <?php echo $active_display; ?>">
-                                        <a href="#category_<?php echo $cate['c_id']; ?>" class="tab-link"><span class="biolife-icon icon-ginger"></span><?php echo $cate['ct_name']; ?></a>
+                                        <a href="#category_<?php echo $cate['c_id']; ?>" class="tab-link"><span class="biolife-icon icon-<?php echo strtolower($category_name[0]["name"]) ?>"></span><?php echo $cate['ct_name']; ?></a>
                                     </li>
+
                                 <?php } ?>
 
                                 <!-- <li class="tab-element">
@@ -331,67 +349,73 @@
                                     $arr = array($time, $time);
                                     $promotion_result = $db->advwhere($col, $tb, $opt, $arr);
 
-                                    if (count($promotion_result) == 0) {
-                                        echo "<p class='title text-info'>PROMOTION IS COMMING SOON</p>";
-                                    } else {
-                                        $promotion_result = $promotion_result[0];
-
-                                        $col = "*, p.id as p_id, pt.name as pt_name, pt.description as pt_description, ct.name as ct_name, rate.rating as rating";
-                                        $tb = " promotion_product prp left join product p on prp.product_id = p.id left join product_translation pt on p.id = pt.product_id left join product_role_price pp on p.id = pp.product_id left join category_translation ct on p.category = ct.category_id left join (SELECT product_id, (sum(qty) / count(product_id)) as rating FROM order_items where rate != 0 group by product_id) rate on p.id = rate.product_id ";
-                                        $opt = 'prp.promotion_id = ? && pt.language = ? && pp.type =? && ct.language =? && p.status =? ORDER BY rating DESC LIMIT 6';
-                                        $arr = array($promotion_result['id'], $language, $user_type, $language, 1);
-                                        $promotion_product_result = $db->advwhere($col, $tb, $opt, $arr);
+                                    if ($user_type == 1) {
 
 
+                                        if (count($promotion_result) == 0) {
+                                            echo "<p class='title text-info'>PROMOTION IS COMMING SOON</p>";
+                                        } else {
+                                            $promotion_result = $promotion_result[0];
 
-                                        foreach ($promotion_product_result as $promo) {
+                                            $col = "*, p.id as p_id, pt.name as pt_name, pt.description as pt_description, ct.name as ct_name, rate.rating as rating";
+                                            $tb = " promotion_product prp left join product p on prp.product_id = p.id left join product_translation pt on p.id = pt.product_id left join product_role_price pp on p.id = pp.product_id left join category_translation ct on p.category = ct.category_id left join (SELECT product_id, (sum(qty) / count(product_id)) as rating FROM order_items where rate != 0 group by product_id) rate on p.id = rate.product_id ";
+                                            $opt = 'prp.promotion_id = ? && pt.language = ? && pp.type =? && ct.language =? && p.status =? ORDER BY rating DESC LIMIT 6';
+                                            $arr = array($promotion_result['id'], $language, $user_type, $language, 1);
+                                            $promotion_product_result = $db->advwhere($col, $tb, $opt, $arr);
+
+
+
+                                            foreach ($promotion_product_result as $promo) {
 
 
                                     ?>
 
-                                            <li class="product-item">
-                                                <div class="contain-product deal-layout contain-product__deal-layout">
-                                                    <div class="product-thumb">
-                                                        <a href="products-detail.php?p=<?php echo $promo['p_id']; ?>" class="link-to-product">
-                                                            <img src="img/product/<?php echo $promo['image']; ?>" alt="<?php echo $promo['ct_name']; ?>" width="330" height="330" class="product-thumnail">
-                                                        </a>
-                                                        <div class="labels">
-                                                            <span class="sale-label">
-                                                                <?php
-                                                                $normal_price = $promo['price'];
-                                                                if ($promotion_result["type"] == 1) {
+                                                <li class="product-item">
+                                                    <div class="contain-product deal-layout contain-product__deal-layout">
+                                                        <div class="product-thumb">
+                                                            <a href="products-detail.php?p=<?php echo $promo['p_id']; ?>" class="link-to-product">
+                                                                <img src="img/product/<?php echo $promo['image']; ?>" alt="<?php echo $promo['ct_name']; ?>" width="330" height="330" class="product-thumnail">
+                                                            </a>
+                                                            <div class="labels">
+                                                                <span class="sale-label">
+                                                                    <?php
+                                                                    $normal_price = $promo['price'];
+                                                                    if ($promotion_result["type"] == 1) {
 
-                                                                    $promo_price = $normal_price - $promotion_result["amt"];
-                                                                    echo "- RM" . number_format($promotion_result["amt"], 2);
-                                                                } else {
+                                                                        $promo_price = $normal_price - $promotion_result["amt"];
+                                                                        echo "- RM" . number_format($promotion_result["amt"], 2);
+                                                                    } else {
 
-                                                                    $promo_price = $normal_price - ($normal_price * $promotion_result["percentage"] / 100);
-                                                                    echo $promotion_result["percentage"] . "%";
-                                                                }
-                                                                ?>
-                                                            </span>
+                                                                        $promo_price = $normal_price - ($normal_price * $promotion_result["percentage"] / 100);
+                                                                        echo $promotion_result["percentage"] . "%";
+                                                                    }
+                                                                    ?>
+                                                                </span>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="info">
-                                                        <div class="biolife-countdown" data-datetime="<?php echo $promotion_result['new_end_date']; ?>"></div>
-                                                        <b class="categories">Fresh Fruit</b>
-                                                        <h4 class="product-title"><a href="products-detail.php?p=<?php echo $promo['p_id']; ?>" class="pr-name">National Fresh Fruit</a></h4>
-                                                        <div class="price ">
-                                                            <ins><span class="price-amount"><span class="currencySymbol">RM</span><?php echo number_format($promo_price, 2); ?></span></ins>
-                                                            <del><span class="price-amount"><span class="currencySymbol">RM</span><?php echo number_format($normal_price, 2); ?></span></del>
-                                                        </div>
-                                                        <div class="slide-down-box">
-                                                            <p class="message">All products are carefully selected to ensure food safety.</p>
-                                                            <div class="buttons">
-                                                                <button class="btn add-to-cart-btn btnAddCart" style="width: 100%;" data-value="<?php echo $promo['p_id']; ?>"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i>add to cart</button>
+                                                        <div class="info">
+                                                            <div class="biolife-countdown" data-datetime="<?php echo $promotion_result['new_end_date']; ?>"></div>
+                                                            <b class="categories">Fresh Fruit</b>
+                                                            <h4 class="product-title"><a href="products-detail.php?p=<?php echo $promo['p_id']; ?>" class="pr-name">National Fresh Fruit</a></h4>
+                                                            <div class="price ">
+                                                                <ins><span class="price-amount"><span class="currencySymbol">RM</span><?php echo number_format($promo_price, 2); ?></span></ins>
+                                                                <del><span class="price-amount"><span class="currencySymbol">RM</span><?php echo number_format($normal_price, 2); ?></span></del>
+                                                            </div>
+                                                            <div class="slide-down-box">
+                                                                <p class="message">All products are carefully selected to ensure food safety.</p>
+                                                                <div class="buttons">
+                                                                    <button class="btn add-to-cart-btn btnAddCart" style="width: 100%;" data-value="<?php echo $promo['p_id']; ?>"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i>add to cart</button>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </li>
+                                                </li>
 
                                     <?php
+                                            }
                                         }
+                                    } else {
+                                        echo "<p class='title text-info'>PROMOTION ONLY FOR NORMAL USER</p>";
                                     }
                                     ?>
 
@@ -418,8 +442,8 @@
                                         $filter_arr = array($admin_id, $language, $user_type, $language, 1);
 
                                         $col = "*,dp.stock as dis_stock, p.stock as admin_stock, p.id as p_id, pt.name as pt_name, pt.description as pt_description, ct.name as ct_name, rate.rating as rating, rate.rate_total as rate_total";
-                                        $tb = "distributor_product dp left join product p on dp.product_id = p.id left join product_translation pt on p.id = pt.product_id left join product_role_price pp on p.id = pp.product_id left join category_translation ct on p.category = ct.category_id left join (SELECT product_id, (sum(rating) / count(rate)) as rating, count(product_id) as rate_total FROM order_items where rate != 0 group by product_id) rate on p.id = rate.product_id " . $filter_table;
-                                        $opt = 'dp.user_id = ? && pt.language = ? && pp.type =? && ct.language =? && dp.status =?' . $filter_opt . ' ORDER BY ' . $sqlorder . ' LIMIT 8 OFFSET ' . $offset . '';
+                                        $tb = "distributor_product dp left join product p on dp.product_id = p.id left join product_translation pt on p.id = pt.product_id left join product_role_price pp on p.id = pp.product_id left join category_translation ct on p.category = ct.category_id left join (SELECT product_id, (sum(rate) / count(rate)) as rating, count(product_id) as rate_total FROM order_items where rate != 0 group by product_id) rate on p.id = rate.product_id ";
+                                        $opt = 'dp.user_id = ? && pt.language = ? && pp.type =? && ct.language =? && dp.status =? ORDER BY rating DESC LIMIT 8';
                                         $arr = $filter_arr;
                                         $top_result = $db->advwhere($col, $tb, $opt, $arr);
                                     } else {

@@ -119,7 +119,29 @@ if (isset($_REQUEST['type'])) {
                     if ($result_cart) {
                         //count item sub total price for get total payment amount
                         foreach ($result_cart as $cart) {
-                            $total_price = $total_price + ($cart['qty'] * $cart['price']);
+                            $normal_price = $cart['price'];
+                            if ($user_type == 1) {
+                                $col = "*, DATE_ADD(end, INTERVAL 1 DAY) as new_end_date";
+                                $tb = "promotion pr left join promotion_product prp on pr.id = prp.promotion_id";
+                                $opt = 'prp.product_id = ? && start <= ? && DATE_ADD(end, INTERVAL 1 DAY) >= ? ORDER BY date_modified';
+                                $arr = array($cart['product_id'], $time, $time);
+                                $check_promotion_prodcut = $db->advwhere($col, $tb, $opt, $arr);
+
+                                if (count($check_promotion_prodcut) != 0) {
+                                    $check_promotion_prodcut = $check_promotion_prodcut[0];
+                                    if ($check_promotion_prodcut["type"] == 1) {
+                                        $promo_price = $normal_price - $check_promotion_prodcut["amt"];
+                                    } else {
+                                        $promo_price = $normal_price - ($normal_price * $check_promotion_prodcut["percentage"] / 100);
+                                    }
+                                    $price_display = $promo_price;
+                                } else {
+                                    $price_display = $normal_price;
+                                }
+                            } else {
+                                $price_display = $normal_price;
+                            }
+                            $total_price = $total_price + ($cart['qty'] * $price_display);
                             $total_point = $total_point + ($cart['qty'] * $cart['point']);
                         }
                         $total_payment = $total_price;
@@ -233,10 +255,31 @@ if (isset($_REQUEST['type'])) {
                             // move cart record to order_items table
                             //------------------------------------------
                             foreach ($result_cart as $cart) {
+                                $normal_price = $cart['price'];
+                                if ($user_type == 1) {
+                                    $col = "*, DATE_ADD(end, INTERVAL 1 DAY) as new_end_date";
+                                    $tb = "promotion pr left join promotion_product prp on pr.id = prp.promotion_id";
+                                    $opt = 'prp.product_id = ? && start <= ? && DATE_ADD(end, INTERVAL 1 DAY) >= ? ORDER BY date_modified';
+                                    $arr = array($cart['product_id'], $time, $time);
+                                    $check_promotion_prodcut = $db->advwhere($col, $tb, $opt, $arr);
 
+                                    if (count($check_promotion_prodcut) != 0) {
+                                        $check_promotion_prodcut = $check_promotion_prodcut[0];
+                                        if ($check_promotion_prodcut["type"] == 1) {
+                                            $promo_price = $normal_price - $check_promotion_prodcut["amt"];
+                                        } else {
+                                            $promo_price = $normal_price - ($normal_price * $check_promotion_prodcut["percentage"] / 100);
+                                        }
+                                        $price_display = $promo_price;
+                                    } else {
+                                        $price_display = $normal_price;
+                                    }
+                                } else {
+                                    $price_display = $normal_price;
+                                }
                                 $table = "order_items";
                                 $colname = array("product_id", "qty", "price", "point", "order_id", "date_created", "date_modified");
-                                $array = array($cart['product_id'], $cart['qty'], $cart['price'], $cart['point'], $order_id, $time, $time);
+                                $array = array($cart['product_id'], $cart['qty'], $price_display, $cart['point'], $order_id, $time, $time);
                                 $result_order_item = $db->insert($table, $colname, $array);
                             }
 

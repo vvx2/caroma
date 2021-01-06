@@ -7,6 +7,7 @@ if ($login != 1) {
     exit();
 }
 
+$time = date('Y-m-d H:i:s');
 $item = array();
 $total_cart_price = 0;
 $number_cart = 0;
@@ -411,9 +412,35 @@ if (count($get_cart) != 0) {
 
                                                 <?php
                                                 foreach ($get_cart as $cart) {
+                                                    $normal_price = $cart['price'];
+                                                    if ($user_type == 1) {
+                                                        $col = "*, DATE_ADD(end, INTERVAL 1 DAY) as new_end_date";
+                                                        $tb = "promotion pr left join promotion_product prp on pr.id = prp.promotion_id";
+                                                        $opt = 'prp.product_id = ? && start <= ? && DATE_ADD(end, INTERVAL 1 DAY) >= ? ORDER BY date_modified';
+                                                        $arr = array($cart['p_id'], $time, $time);
+                                                        $check_promotion_prodcut = $db->advwhere($col, $tb, $opt, $arr);
+
+                                                        if (count($check_promotion_prodcut) != 0) {
+                                                            $check_promotion_prodcut = $check_promotion_prodcut[0];
+                                                            if ($check_promotion_prodcut["type"] == 1) {
+                                                                $promo_price = $normal_price - $check_promotion_prodcut["amt"];
+                                                            } else {
+                                                                $promo_price = $normal_price - ($normal_price * $check_promotion_prodcut["percentage"] / 100);
+                                                            }
+                                                            $hidden_promo = "";
+                                                            $price_display = $promo_price;
+                                                        } else {
+                                                            $hidden_promo = "hidden";
+                                                            $price_display = $normal_price;
+                                                        }
+                                                    } else {
+                                                        $hidden_promo = "hidden";
+                                                        $price_display = $normal_price;
+                                                    }
+
                                                     $total_point = $total_point + ($cart["point"] * $cart["qty"]);
-                                                    $sub_total = $sub_total + ($cart["price"] * $cart["qty"]);
-                                                    $item[$cart['p_id']] = array("qty" => $cart['qty'], "image" => $cart['image'], "name" => $cart['name'], "price" => $cart['price'], "stock" => $cart['stock'], "product_total_price" => $cart['qty'] * $cart['price']);
+                                                    $sub_total = $sub_total + ($price_display * $cart["qty"]);
+                                                    $item[$cart['p_id']] = array("qty" => $cart['qty'], "image" => $cart['image'], "name" => $cart['name'], "price" => $price_display, "ori_price" => $normal_price, "hidden_promo" => $hidden_promo, "stock" => $cart['stock'], "product_total_price" => $cart['qty'] * $cart['price']);
 
                                                 ?>
                                                     <li class="cart-elem">
@@ -428,8 +455,8 @@ if (count($get_cart) != 0) {
                                                                 <a href="#" class="pr-name"><?php echo $cart["name"] ?></a>
                                                             </div>
                                                             <div class="price price-contain">
-                                                                <ins><span class="price-amount"><span class="currencySymbol">RM </span><?php echo number_format($cart["price"] * $cart["qty"], 2, '.', ''); ?></span></ins>
-                                                                <del><span class="price-amount"><span class="currencySymbol">RM </span><?php echo number_format($cart["price"] * $cart["qty"], 2, '.', ''); ?></span></del>
+                                                                <ins><span class="price-amount"><span class="currencySymbol">RM </span><?php echo number_format($price_display * $cart["qty"], 2, '.', ''); ?></span></ins>
+                                                                <del class="<?php echo $hidden_promo; ?>"><span class="price-amount"><span class="currencySymbol">RM </span><?php echo number_format($normal_price * $cart["qty"], 2, '.', ''); ?></span></del>
                                                             </div>
                                                         </div>
                                                     </li>
