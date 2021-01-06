@@ -498,13 +498,13 @@
                                         <li class="product-item">
                                             <div class="contain-product right-info-layout contain-product__right-info-layout">
                                                 <div class="product-thumb">
-                                                    <a href="#" class="link-to-product">
+                                                    <a href="products-detail.php?p=<?php echo $top['p_id']; ?>" class="link-to-product">
                                                         <img src="img/product/<?php echo $top['image']; ?>" alt="dd" width="270" height="270" class="product-thumnail">
                                                     </a>
                                                 </div>
                                                 <div class="info">
                                                     <b class="categories"><?php echo $top['ct_name']; ?></b>
-                                                    <h4 class="product-title"><a href="#" class="pr-name"><?php echo $top['pt_name']; ?></a></h4>
+                                                    <h4 class="product-title"><a href="products-detail.php?p=<?php echo $top['p_id']; ?>" class="pr-name"><?php echo $top['pt_name']; ?></a></h4>
                                                     <div class="price ">
                                                         <ins><span class="price-amount"><span class="currencySymbol">RM</span><?php echo number_format($price_display, 2); ?></span></ins>
                                                         <del class="<?php echo $hidden_promo; ?>"><span class="price-amount"><span class="currencySymbol">RM</span><?php echo number_format($normal_price, 2); ?></span></del>
