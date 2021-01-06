@@ -1226,6 +1226,35 @@ if (!empty($postedToken)) {
       //              Admin Shipping
       //--------------------------------------------------
 
+      //--------------------------------------------------
+      //                 POINT VALUE
+      //--------------------------------------------------
+
+      else if ($type == "point_value_edit") {
+        if (isset($_POST['btnAction'])) {
+
+          $point_id = $_POST['btnAction'];
+          $point_value = $_POST['point_value'];
+
+          $table = "reward_point_value";
+          $data = "value = ? WHERE id = ?";
+          $array = array($point_value, $point_id);
+          $result_point_value = $db->update($table, $data, $array);
+
+          if ($result_point_value) {
+            echo "<script>alert(\" Edit Point Value Successful\");
+              window.location.href='index.php';</script>";
+          } else {
+            echo "<script>alert(\" Edit Point Value Fail, PLease Try Again. \");
+              window.location.href='index.php';</script>";
+          }
+        }
+      }
+
+      //--------------------------------------------------
+      //               POINT VALUE
+      //--------------------------------------------------
+
     } // table admin
   } else {
     echo "Token Expired. Please Try Again";

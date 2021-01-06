@@ -440,7 +440,17 @@ if (isset($_REQUEST['type'])) {
                         $user_point = $db->advwhere($col, $tb, $opt, $arr);
                         if (count($user_point) != 0) {
 
-                            $point_used = $order[0]['discount_reward'] * 100;
+                            //-----------------------
+                            //      get point value
+                            $result_point_value = $db->get("*", "reward_point_value", 1);
+                            if (count($result_point_value) != 0) {
+                                $point_value = $result_point_value[0]['value'];
+                            } else {
+                                $point_value = 1;
+                            }
+                            //-----------------------
+
+                            $point_used = ($order[0]['discount_reward'] * 100) * $point_value;
                             $negative_amount = $point_used * -1; // insert negative number to db, for identify it is reducing
 
                             $user_point = $user_point[0];
