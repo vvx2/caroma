@@ -1,11 +1,19 @@
 <?php
 $onpage = $user_type;
+
+$col = "id";
+$tb = "orders";
+$opt = 'users_id = ? && status =?';
+$arr = array($user_id, 2);
+$count_order = $db->advwhere($col, $tb, $opt, $arr);
+$number_order_pending = count($count_order);
+
 if ($onpage == "1") {
 ?>
     <div class="fixed-sidebar-left">
         <ul class="nav navbar-nav side-nav nicescroll-bar">
             <li>
-                <a class="<?php echo ($PageName == 'index') ? 'active' : ''; ?>" href="javascript:void(0);" data-toggle="collapse" data-target="#dashboard_dr"><i class="icon-home mr-10"></i>Dashboard <span class="pull-right"><span class="label label-success mr-10">4</span><i class="fa fa-fw fa-angle-down"></i></span></a>
+                <a class="<?php echo ($PageName == 'index') ? 'active' : ''; ?>" href="javascript:void(0);" data-toggle="collapse" data-target="#dashboard_dr"><i class="icon-home mr-10"></i>Dashboard <span class="pull-right"><span class="label label-success mr-10"><?php echo $number_order_pending ?></span><i class="fa fa-fw fa-angle-down"></i></span></a>
                 <ul id="dashboard_dr" class="collapse collapse-level-1">
                     <li>
                         <a class="<?php echo ($PageName == 'index') ? 'active' : ''; ?>" href="index.php">My Purchase</a>
@@ -32,11 +40,17 @@ if ($onpage == "1") {
 
 <?php
 } else if ($onpage == "2") {
+    $col = "id";
+    $tb = "orders";
+    $opt = 'admin_id = ? && status =?';
+    $arr = array($user_id, 2);
+    $dis_count_order = $db->advwhere($col, $tb, $opt, $arr);
+    $number_dis_order_pending = count($dis_count_order);
 ?>
     <div class="fixed-sidebar-left">
         <ul class="nav navbar-nav side-nav nicescroll-bar">
             <li>
-                <a class="<?php echo ($PageName == 'index') ? 'active' : ''; ?>" href="javascript:void(0);" data-toggle="collapse" data-target="#dashboard_dr"><i class="icon-home mr-10"></i>Dashboard <span class="pull-right"><span class="label label-success mr-10">4</span><i class="fa fa-fw fa-angle-down"></i></span></a>
+                <a class="<?php echo ($PageName == 'index') ? 'active' : ''; ?>" href="javascript:void(0);" data-toggle="collapse" data-target="#dashboard_dr"><i class="icon-home mr-10"></i>Dashboard <span class="pull-right"><span class="label label-success mr-10"><?php echo $number_order_pending ?></span><i class="fa fa-fw fa-angle-down"></i></span></a>
                 <ul id="dashboard_dr" class="collapse collapse-level-1">
                     <li>
                         <a class="<?php echo ($PageName == 'index') ? 'active' : ''; ?>" href="index.php">My Purchase</a>
@@ -53,7 +67,7 @@ if ($onpage == "1") {
                 <a href="../shopping-cart.php" target="_blank"><i class="icon-basket-loaded mr-10"></i>Your Cart <span class="pull-right"></span></a>
             </li>
             <li>
-                <a class="<?php echo ($PageName == 'e-commerce' || $PageName == 'order-list' || $PageName == 'product' || $PageName == 'wallet' || $PageName == 'wallet_history') ? 'active' : ''; ?>" href="javascript:void(0);" data-toggle="collapse" data-target="#ecom_dr"><i class="fa fa-shopping-basket mr-10"></i>My Store<span class="pull-right"><span class="label label-success mr-10">4</span><i class="fa fa-fw fa-angle-down"></i></span></a>
+                <a class="<?php echo ($PageName == 'e-commerce' || $PageName == 'order-list' || $PageName == 'product' || $PageName == 'wallet' || $PageName == 'wallet_history') ? 'active' : ''; ?>" href="javascript:void(0);" data-toggle="collapse" data-target="#ecom_dr"><i class="fa fa-shopping-basket mr-10"></i>My Store<span class="pull-right"><span class="label label-success mr-10"><?php echo $number_dis_order_pending ?></span><i class="fa fa-fw fa-angle-down"></i></span></a>
                 <ul id="ecom_dr" class="collapse collapse-level-1">
                     <li>
                         <a class="<?php echo ($PageName == 'e-commerce') ? 'active' : ''; ?>" href="e-commerce.php">Dashboard</a>
@@ -90,7 +104,7 @@ if ($onpage == "1") {
     <div class="fixed-sidebar-left">
         <ul class="nav navbar-nav side-nav nicescroll-bar">
             <li>
-                <a class="<?php echo ($PageName == 'index') ? 'active' : ''; ?>" href="javascript:void(0);" data-toggle="collapse" data-target="#dashboard_dr"><i class="icon-home mr-10"></i>Dashboard <span class="pull-right"><span class="label label-success mr-10">4</span><i class="fa fa-fw fa-angle-down"></i></span></a>
+                <a class="<?php echo ($PageName == 'index') ? 'active' : ''; ?>" href="javascript:void(0);" data-toggle="collapse" data-target="#dashboard_dr"><i class="icon-home mr-10"></i>Dashboard <span class="pull-right"><span class="label label-success mr-10"><?php echo $number_order_pending ?></span><i class="fa fa-fw fa-angle-down"></i></span></a>
                 <ul id="dashboard_dr" class="collapse collapse-level-1">
                     <li>
                         <a class="<?php echo ($PageName == 'index') ? 'active' : ''; ?>" href="index.php">My Purchase</a>
