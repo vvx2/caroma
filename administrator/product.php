@@ -94,6 +94,7 @@ $PageName = "product";
                                     <hr>
                                     <div class="form-group"><label>Stock</label> <input type="number" placeholder="Enter Stock " class="form-control" name="stock" value='' min="0"></div>
                                     <div class="form-group"><label>Point</label> <input type="number" placeholder="Enter Point" class="form-control" name="point" value='' min="0"></div>
+                                    <div class="form-group"><label>Point Allow to Discount (Per Item)</label> <input type="number" placeholder="Enter Point Discount" class="form-control" name="point_allow_discount" value='' min="0"></div>
                                     <hr>
                                     <div class="form-group"><label>Price (Normal User)</label> <input type="number" placeholder="Enter User Price" class="form-control" name="user_price" value='' min="0"></div>
                                     <div class="form-group"><label>Price (Distributor)</label> <input type="number" placeholder="Enter Distributor Price" class="form-control" name="distributor_price" value='' min="0"></div>
@@ -382,6 +383,10 @@ $PageName = "product";
 
                     },
                     point: {
+                        required: true,
+
+                    },
+                    point_allow_discount: {
                         required: true,
 
                     },

@@ -7,6 +7,7 @@
     // $db = new DB_FUNCTIONS();
     require_once('inc/init.php');
     require_once('inc/head.php');
+    $time = date('Y-m-d H:i:s');
 
 
     //when user type is dealer, admin id will be distributor id - to identify the order belong who
@@ -57,8 +58,8 @@
         .pagination>.active>span:focus {
             z-index: 3;
             color: #fff;
-            background-color: #90bf2a;
-            border-color: #90bf2a;
+            background-color: #005f2a;
+            border-color: #005f2a;
         }
     </style>
 </head>
@@ -117,160 +118,60 @@
                         <h3 class="title-product-content">Hot Sales</h3>
                         <ul class="products-list biolife-carousel nav-center-02 nav-none-on-mobile" data-slick='{"rows":1,"arrows":true, "autoplaySpeed": 1500, "autoplay": true, "dots":false,"infinite":true,"speed":400,"slidesMargin":0,"slidesToShow":5, "responsive":[{"breakpoint":1200, "settings":{ "slidesToShow": 3}},{"breakpoint":992, "settings":{ "slidesToShow": 3, "slidesMargin":30}},{"breakpoint":768, "settings":{ "slidesToShow": 2, "slidesMargin":10}}]}'>
 
+                            <?php
 
-                            <li class="product-item">
-                                <div class="contain-product layout-02">
-                                    <div class="product-thumb">
-                                        <a href="products-detail.php" class="link-to-product">
-                                            <img src="assets/images/products/p-08.jpg" alt="dd" width="270" height="270" class="product-thumnail">
-                                        </a>
-                                    </div>
-                                    <div class="info">
-                                        <b class="categories">Fresh Fruit</b>
-                                        <h4 class="product-title"><a href="products-detail.php" class="pr-name">National Fresh Fruit</a></h4>
-                                        <div class="price">
-                                            <ins><span class="price-amount"><span class="currencySymbol">RM</span>85.00</span></ins>
-                                            <del><span class="price-amount"><span class="currencySymbol">RM</span>95.00</span></del>
+                            $sqlorder = "rating DESC"; //this "rating" is count by quantity
+                            $offset = 0;
+                            if ($user_type == 3) {
+
+                                $filter_table = "";
+                                $filter_opt = " ";
+                                $filter_arr = array($admin_id, $language, $user_type, $language, 1);
+
+                                $col = "*,dp.stock as dis_stock, p.stock as admin_stock, p.id as p_id, pt.name as pt_name, pt.description as pt_description, ct.name as ct_name, rate.rating as rating";
+                                $tb = "distributor_product dp left join product p on dp.product_id = p.id left join product_translation pt on p.id = pt.product_id left join product_role_price pp on p.id = pp.product_id left join category_translation ct on p.category = ct.category_id left join (SELECT product_id, (sum(qty) / count(product_id)) as rating FROM order_items where rate != 0 group by product_id) rate on p.id = rate.product_id " . $filter_table;
+                                $opt = 'dp.user_id = ? && pt.language = ? && pp.type =? && ct.language =? && dp.status =?' . $filter_opt . ' ORDER BY ' . $sqlorder . ' LIMIT 10 OFFSET ' . $offset . '';
+                                $arr = $filter_arr;
+                                $hot_result = $db->advwhere($col, $tb, $opt, $arr);
+                            } else {
+
+                                $filter_table = "";
+                                $filter_opt = " ";
+                                $filter_arr = array($language, $user_type, $language, 1);
+                                $check_sql = "none";
+
+                                $col = "*, p.id as p_id, pt.name as pt_name, pt.description as pt_description, ct.name as ct_name, rate.rating as rating";
+                                $tb = " product p left join product_translation pt on p.id = pt.product_id left join product_role_price pp on p.id = pp.product_id left join category_translation ct on p.category = ct.category_id left join (SELECT product_id, (sum(qty) / count(product_id)) as rating FROM order_items where rate != 0 group by product_id) rate on p.id = rate.product_id " . $filter_table;
+                                $opt = 'pt.language = ? && pp.type =? && ct.language =? && p.status =?' . $filter_opt . ' ORDER BY ' . $sqlorder . ' LIMIT 10 OFFSET ' . $offset . '';
+                                $arr = $filter_arr;
+                                $hot_result = $db->advwhere($col, $tb, $opt, $arr);
+                            }
+                            foreach ($hot_result as $hot) {
+
+
+                            ?>
+                                <li class="product-item">
+                                    <div class="contain-product layout-02">
+                                        <div class="product-thumb">
+                                            <a href="products-detail.php?p=<?php echo $hot['p_id']; ?>" class="link-to-product">
+                                                <img src="img/product/<?php echo $hot['image']; ?>" alt="dd" width="270" height="270" class="product-thumnail">
+                                            </a>
+                                        </div>
+                                        <div class="info">
+                                            <b class="categories"><?php echo $hot['ct_name']; ?></b>
+                                            <h4 class="product-title"><a href="products-detail.php" class="pr-name"><?php echo $hot['pt_name']; ?></a></h4>
+                                            <div class="price">
+                                                <ins><span class="price-amount"><span class="currencySymbol">RM</span><?php echo number_format($hot['price'], 2); ?></span></ins>
+                                                <del><span class="price-amount"><span class="currencySymbol">RM</span><?php echo number_format($hot['price'], 2); ?></span></del>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </li>
-                            <li class="product-item">
-                                <div class="contain-product layout-02">
-                                    <div class="product-thumb">
-                                        <a href="products-detail.php" class="link-to-product">
-                                            <img src="assets/images/products/p-11.jpg" alt="dd" width="270" height="270" class="product-thumnail">
-                                        </a>
-                                    </div>
-                                    <div class="info">
-                                        <b class="categories">Fresh Fruit</b>
-                                        <h4 class="product-title"><a href="products-detail.php" class="pr-name">National Fresh Fruit</a></h4>
-                                        <div class="price">
-                                            <ins><span class="price-amount"><span class="currencySymbol">RM</span>85.00</span></ins>
-                                            <del><span class="price-amount"><span class="currencySymbol">RM</span>95.00</span></del>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="product-item">
-                                <div class="contain-product layout-02">
-                                    <div class="product-thumb">
-                                        <a href="products-detail.php" class="link-to-product">
-                                            <img src="assets/images/products/p-17.jpg" alt="dd" width="270" height="270" class="product-thumnail">
-                                        </a>
-                                    </div>
-                                    <div class="info">
-                                        <b class="categories">Fresh Fruit</b>
-                                        <h4 class="product-title"><a href="products-detail.php" class="pr-name">National Fresh Fruit</a></h4>
-                                        <div class="price">
-                                            <ins><span class="price-amount"><span class="currencySymbol">RM</span>85.00</span></ins>
-                                            <del><span class="price-amount"><span class="currencySymbol">RM</span>95.00</span></del>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="product-item">
-                                <div class="contain-product layout-02">
-                                    <div class="product-thumb">
-                                        <a href="products-detail.php" class="link-to-product">
-                                            <img src="assets/images/products/p-15.jpg" alt="dd" width="270" height="270" class="product-thumnail">
-                                        </a>
-                                    </div>
-                                    <div class="info">
-                                        <b class="categories">Fresh Fruit</b>
-                                        <h4 class="product-title"><a href="products-detail.php" class="pr-name">National Fresh Fruit</a></h4>
-                                        <div class="price">
-                                            <ins><span class="price-amount"><span class="currencySymbol">RM</span>85.00</span></ins>
-                                            <del><span class="price-amount"><span class="currencySymbol">RM</span>95.00</span></del>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="product-item">
-                                <div class="contain-product layout-02">
-                                    <div class="product-thumb">
-                                        <a href="products-detail.php" class="link-to-product">
-                                            <img src="assets/images/products/p-09.jpg" alt="dd" width="270" height="270" class="product-thumnail">
-                                        </a>
-                                    </div>
-                                    <div class="info">
-                                        <b class="categories">Fresh Fruit</b>
-                                        <h4 class="product-title"><a href="products-detail.php" class="pr-name">National Fresh Fruit</a></h4>
-                                        <div class="price">
-                                            <ins><span class="price-amount"><span class="currencySymbol">RM</span>85.00</span></ins>
-                                            <del><span class="price-amount"><span class="currencySymbol">RM</span>95.00</span></del>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="product-item">
-                                <div class="contain-product layout-02">
-                                    <div class="product-thumb">
-                                        <a href="products-detail.php" class="link-to-product">
-                                            <img src="assets/images/products/p-02.jpg" alt="dd" width="270" height="270" class="product-thumnail">
-                                        </a>
-                                    </div>
-                                    <div class="info">
-                                        <b class="categories">Fresh Fruit</b>
-                                        <h4 class="product-title"><a href="products-detail.php" class="pr-name">National Fresh Fruit</a></h4>
-                                        <div class="price">
-                                            <ins><span class="price-amount"><span class="currencySymbol">RM</span>85.00</span></ins>
-                                            <del><span class="price-amount"><span class="currencySymbol">RM</span>95.00</span></del>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="product-item">
-                                <div class="contain-product layout-02">
-                                    <div class="product-thumb">
-                                        <a href="products-detail.php" class="link-to-product">
-                                            <img src="assets/images/products/p-07.jpg" alt="dd" width="270" height="270" class="product-thumnail">
-                                        </a>
-                                    </div>
-                                    <div class="info">
-                                        <b class="categories">Fresh Fruit</b>
-                                        <h4 class="product-title"><a href="products-detail.php" class="pr-name">National Fresh Fruit</a></h4>
-                                        <div class="price">
-                                            <ins><span class="price-amount"><span class="currencySymbol">RM</span>85.00</span></ins>
-                                            <del><span class="price-amount"><span class="currencySymbol">RM</span>95.00</span></del>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="product-item">
-                                <div class="contain-product layout-02">
-                                    <div class="product-thumb">
-                                        <a href="products-detail.php" class="link-to-product">
-                                            <img src="assets/images/products/p-03.jpg" alt="dd" width="270" height="270" class="product-thumnail">
-                                        </a>
-                                    </div>
-                                    <div class="info">
-                                        <b class="categories">Fresh Fruit</b>
-                                        <h4 class="product-title"><a href="products-detail.php" class="pr-name">National Fresh Fruit</a></h4>
-                                        <div class="price">
-                                            <ins><span class="price-amount"><span class="currencySymbol">RM</span>85.00</span></ins>
-                                            <del><span class="price-amount"><span class="currencySymbol">RM</span>95.00</span></del>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="product-item">
-                                <div class="contain-product layout-02">
-                                    <div class="product-thumb">
-                                        <a href="products-detail.php" class="link-to-product">
-                                            <img src="assets/images/products/p-21.jpg" alt="dd" width="270" height="270" class="product-thumnail">
-                                        </a>
-                                    </div>
-                                    <div class="info">
-                                        <b class="categories">Fresh Fruit</b>
-                                        <h4 class="product-title"><a href="products-detail.php" class="pr-name">National Fresh Fruit</a></h4>
-                                        <div class="price">
-                                            <ins><span class="price-amount"><span class="currencySymbol">RM</span>85.00</span></ins>
-                                            <del><span class="price-amount"><span class="currencySymbol">RM</span>95.00</span></del>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
+                                </li>
+
+                            <?php
+                            }
+                            ?>
+
                         </ul>
                     </div>
 
@@ -295,129 +196,11 @@
                                 </div>
                             </div>
                         </div>
-                        <input value='0' id='get_total_product'>
+                        <input value='0' id='get_total_product' hidden>
                         <div class="row">
                             <ul class="products-list product_display">
 
-
-
-                                <!-- <li class="product-item col-lg-4 col-md-4 col-sm-4 col-xs-6">
-                                    <div class="contain-product layout-default">
-                                        <div class="product-thumb">
-                                            <a href="products-detail.php" class="link-to-product">
-                                                <img src="assets/images/products/p-13.jpg" alt="dd" width="270" height="270" class="product-thumnail">
-                                            </a>
-                                        </div>
-                                        <div class="info">
-                                            <b class="categories">Fresh Fruit</b>
-                                            <h4 class="product-title"><a href="products-detail.php" class="pr-name">National Fresh Fruit</a></h4>
-                                            <div class="price">
-                                                <ins><span class="price-amount"><span class="currencySymbol">RM</span>85.00</span></ins>
-                                                <del><span class="price-amount"><span class="currencySymbol">RM</span>95.00</span></del>
-                                            </div>
-                                            <div class="shipping-info">
-                                                <p class="shipping-day">3-Day Shipping</p>
-                                                <p class="for-today">Pree Pickup Today</p>
-                                            </div>
-                                            <div class="slide-down-box">
-                                                <p class="message">All products are carefully selected to ensure food safety.</p>
-                                                <div class="buttons">
-
-                                                    <a href="products-detail.php" class="btn add-to-cart-btn"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i>add to cart</a>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="product-item col-lg-4 col-md-4 col-sm-4 col-xs-6">
-                                    <div class="contain-product layout-default">
-                                        <div class="product-thumb">
-                                            <a href="products-detail.php" class="link-to-product">
-                                                <img src="assets/images/products/p-21.jpg" alt="dd" width="270" height="270" class="product-thumnail">
-                                            </a>
-                                        </div>
-                                        <div class="info">
-                                            <b class="categories">Fresh Fruit</b>
-                                            <h4 class="product-title"><a href="products-detail.php" class="pr-name">National Fresh Fruit</a></h4>
-                                            <div class="price">
-                                                <ins><span class="price-amount"><span class="currencySymbol">RM</span>85.00</span></ins>
-                                                <del><span class="price-amount"><span class="currencySymbol">RM</span>95.00</span></del>
-                                            </div>
-                                            <div class="shipping-info">
-                                                <p class="shipping-day">3-Day Shipping</p>
-                                                <p class="for-today">Pree Pickup Today</p>
-                                            </div>
-                                            <div class="slide-down-box">
-                                                <p class="message">All products are carefully selected to ensure food safety.</p>
-                                                <div class="buttons">
-
-                                                    <a href="products-detail.php" class="btn add-to-cart-btn"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i>add to cart</a>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-
-                                <li class="product-item col-lg-4 col-md-4 col-sm-4 col-xs-6">
-                                    <div class="contain-product layout-default">
-                                        <div class="product-thumb">
-                                            <a href="products-detail.php" class="link-to-product">
-                                                <img src="assets/images/products/p-14.jpg" alt="dd" width="270" height="270" class="product-thumnail">
-                                            </a>
-                                        </div>
-                                        <div class="info">
-                                            <b class="categories">Fresh Fruit</b>
-                                            <h4 class="product-title"><a href="products-detail.php" class="pr-name">National Fresh Fruit</a></h4>
-                                            <div class="price">
-                                                <ins><span class="price-amount"><span class="currencySymbol">RM</span>85.00</span></ins>
-                                                <del><span class="price-amount"><span class="currencySymbol">RM</span>95.00</span></del>
-                                            </div>
-                                            <div class="shipping-info">
-                                                <p class="shipping-day">3-Day Shipping</p>
-                                                <p class="for-today">Pree Pickup Today</p>
-                                            </div>
-                                            <div class="slide-down-box">
-                                                <p class="message">All products are carefully selected to ensure food safety.</p>
-                                                <div class="buttons">
-
-                                                    <a href="products-detail.php" class="btn add-to-cart-btn"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i>add to cart</a>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="product-item col-lg-4 col-md-4 col-sm-4 col-xs-6">
-                                    <div class="contain-product layout-default">
-                                        <div class="product-thumb">
-                                            <a href="products-detail.php" class="link-to-product">
-                                                <img src="assets/images/products/p-15.jpg" alt="dd" width="270" height="270" class="product-thumnail">
-                                            </a>
-                                        </div>
-                                        <div class="info">
-                                            <b class="categories">Fresh Fruit</b>
-                                            <h4 class="product-title"><a href="products-detail.php" class="pr-name">National Fresh Fruit</a></h4>
-                                            <div class="price">
-                                                <ins><span class="price-amount"><span class="currencySymbol">RM</span>85.00</span></ins>
-                                                <del><span class="price-amount"><span class="currencySymbol">RM</span>95.00</span></del>
-                                            </div>
-                                            <div class="shipping-info">
-                                                <p class="shipping-day">3-Day Shipping</p>
-                                                <p class="for-today">Pree Pickup Today</p>
-                                            </div>
-                                            <div class="slide-down-box">
-                                                <p class="message">All products are carefully selected to ensure food safety.</p>
-                                                <div class="buttons">
-
-                                                    <a href="products-detail.php" class="btn add-to-cart-btn"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i>add to cart</a>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
+                                <!--
                                 <li class="product-item col-lg-4 col-md-4 col-sm-4 col-xs-6">
                                     <div class="contain-product layout-default">
                                         <div class="product-thumb">
@@ -446,7 +229,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                </li> -->
+                                </li> 
+                                -->
 
                             </ul>
                         </div>
@@ -533,18 +317,40 @@
 
                                     <?php
 
-                                    $col = "*, p.id as p_id, pt.name as pt_name, pt.description as pt_description, ct.name as ct_name";
-                                    $tb = "product p left join product_translation pt on p.id = pt.product_id left join product_role_price pp on p.id = pp.product_id left join category_translation ct on p.category = ct.category_id";
-                                    $opt = 'pt.language = ? && pp.type =? && ct.language =? ORDER BY p.date_modified DESC Limit 5';
-                                    $arr = array($language, $user_type, $language);
-                                    $result_latest_product = $db->advwhere($col, $tb, $opt, $arr);
+                                    $sqlorder = "p.date_modified DESC";
+                                    $offset = 0;
+                                    if ($user_type == 3) {
+
+                                        $filter_table = "";
+                                        $filter_opt = " ";
+                                        $filter_arr = array($admin_id, $language, $user_type, $language, 1);
+
+                                        $col = "*,dp.stock as dis_stock, p.stock as admin_stock, p.id as p_id, pt.name as pt_name, pt.description as pt_description, ct.name as ct_name, rate.rating as rating";
+                                        $tb = "distributor_product dp left join product p on dp.product_id = p.id left join product_translation pt on p.id = pt.product_id left join product_role_price pp on p.id = pp.product_id left join category_translation ct on p.category = ct.category_id left join (SELECT product_id, (sum(qty) / count(product_id)) as rating FROM order_items where rate != 0 group by product_id) rate on p.id = rate.product_id " . $filter_table;
+                                        $opt = 'dp.user_id = ? && pt.language = ? && pp.type =? && ct.language =? && dp.status =?' . $filter_opt . ' ORDER BY ' . $sqlorder . ' LIMIT 5 OFFSET ' . $offset . '';
+                                        $arr = $filter_arr;
+                                        $result_latest_product = $db->advwhere($col, $tb, $opt, $arr);
+                                    } else {
+
+                                        $filter_table = "";
+                                        $filter_opt = " ";
+                                        $filter_arr = array($language, $user_type, $language, 1);
+                                        $check_sql = "none";
+
+                                        $col = "*, p.id as p_id, pt.name as pt_name, pt.description as pt_description, ct.name as ct_name, rate.rating as rating";
+                                        $tb = " product p left join product_translation pt on p.id = pt.product_id left join product_role_price pp on p.id = pp.product_id left join category_translation ct on p.category = ct.category_id left join (SELECT product_id, (sum(qty) / count(product_id)) as rating FROM order_items where rate != 0 group by product_id) rate on p.id = rate.product_id " . $filter_table;
+                                        $opt = 'pt.language = ? && pp.type =? && ct.language =? && p.status =?' . $filter_opt . ' ORDER BY ' . $sqlorder . ' LIMIT 5 OFFSET ' . $offset . '';
+                                        $arr = $filter_arr;
+                                        $result_latest_product = $db->advwhere($col, $tb, $opt, $arr);
+                                    }
+
 
                                     foreach ($result_latest_product as $latest_product) {
                                     ?>
                                         <li class="pr-item">
                                             <div class="contain-product style-widget">
                                                 <div class="product-thumb">
-                                                    <a href="products=detail.php?p=<?php echo $latest_product["p_id"] ?>" class="link-to-product" tabindex="0">
+                                                    <a href="products-detail.php?p=<?php echo $latest_product["p_id"] ?>" class="link-to-product" tabindex="0">
                                                         <img src="img/product/<?php echo $latest_product["image"] ?>" alt="dd" width="270" height="270" class="product-thumnail">
                                                     </a>
                                                 </div>
@@ -651,13 +457,20 @@
                 price_from: price_from,
                 price_to: price_to
             }, function(data) {
+
+                // console.log(data);
                 data = JSON.parse(data)
-                console.log("getproduct:");
-                console.log(data);
+                // console.log("getproduct:");
+                // console.log(data);
                 if (data["Status"]) {
                     //Success Action
                     let product_item = '';
                     $.each(data["product"], function(key, product) {
+                        if (product.is_promo == 1) {
+                            display_ori_price = '                   <del ><span class="price-amount"><span class="currencySymbol">RM</span>' + parseFloat(product.ori_price).toFixed(2) + '</span></del>\n'
+                        } else {
+                            display_ori_price = '                   <del ><span class="price-amount"><span class="currencySymbol">&nbsp;</span></span></del>\n'
+                        }
                         product_item = product_item +
                             '<li class="product-item col-lg-4 col-md-4 col-sm-4 col-xs-6" id="product_' + key + '">\n' +
                             '       <div class="contain-product layout-default">\n' +
@@ -671,7 +484,7 @@
                             '               <h4 class="product-title"><a href="products-detail.php?p=' + key + '" class="pr-name">' + product.product_name + '</a></h4>\n' +
                             '               <div class="price">\n' +
                             '                   <ins><span class="price-amount"><span class="currencySymbol">RM</span>' + parseFloat(product.price).toFixed(2) + '</span></ins>\n' +
-                            '                   <del><span class="price-amount"><span class="currencySymbol">RM</span>' + parseFloat(product.price).toFixed(2) + '</span></del>\n' +
+                            display_ori_price +
                             '               </div>\n' +
                             '               <div class="slide-down-box">\n' +
                             '                   <p class="message">All products are carefully selected to ensure food safety.</p>\n' +

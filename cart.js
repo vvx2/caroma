@@ -5,8 +5,8 @@ function LoadCart() {
         token: token
     }, function (data) {
         data = JSON.parse(data)
-        // console.log("getcart:");
-        // console.log(data);
+        console.log("getcart:");
+        console.log(data);
         $('#token').val(data["Token"]);
         $('#form_token').val(data["Token"]);
         if (data["Status"]) {
@@ -14,6 +14,11 @@ function LoadCart() {
             let cart = '';
 
             $.each(data["cart"], function (key, product) {
+                if (product.is_promo == 1) {
+                    display_ori_price = '                   <del><span class="price-amount"><span class="currencySymbol">RM </span>' + parseFloat(product.ori_price).toFixed(2) + '</span></del>\n';
+                } else {
+                    display_ori_price = '                   <del ><span class="price-amount"><span class="currencySymbol"></span></span></del>\n';
+                }
                 cart = cart +
                     '   <li>\n' +
                     '       <div class="minicart-item">\n' +
@@ -24,7 +29,7 @@ function LoadCart() {
                     '               <div class="product-title"><a href="products-detail.php?p=' + key + '" class="product-name">' + product.name + '</a></div>\n' +
                     '               <div class="price">\n' +
                     '                   <ins><span class="price-amount"><span class="currencySymbol">RM </span>' + parseFloat(product.price).toFixed(2) + '</span></ins>\n' +
-                    '                   <del><span class="price-amount"><span class="currencySymbol">RM </span>' + parseFloat(product.price).toFixed(2) + '</span></del>\n' +
+                    display_ori_price +
                     '               </div>\n' +
                     '               <div class="qty">\n' +
                     '                   <label for="cart[id123]">Qty:</label>\n' +
@@ -120,10 +125,10 @@ function ClearCart(thisbtn, token) {
         type: 'clearcart',
         token: token
     }, function (data) {
-        console.log(data);
+        // console.log(data);
         data = JSON.parse(data)
-        console.log("-------------------------");
-        console.log(data);
+        // console.log("-------------------------");
+        // console.log(data);
         $('#token').val(data["Token"]);
         if (data["Status"]) {
             location.reload();

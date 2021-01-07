@@ -5,6 +5,8 @@ $time = date('Y-m-d H:i:s');
 $coupon_code = $_REQUEST['coupon_code'];
 $sub_total = $_REQUEST['sub_total'];
 $shipping = $_REQUEST['shipping'];
+// $reduce_point_fee = 0;
+$reduce_point_fee = $_REQUEST['point_discount'];
 
 if (isset($_SESSION['user_id']) && isset($_SESSION['type'])) {
     $user_id = $_SESSION['user_id'];
@@ -118,8 +120,8 @@ if ($login == 0) {
                                 //--------------------------------------------
                                 //      All true will return this
                                 //--------------------------------------------
-                                $total_pay = $total_spend - $reduce_amt + $shipping;
-                                $json_arr = array('Status' => true, 'Amount' => $reduce_amt, "Total" => $total_spend, "Total_pay" => $total_pay, "Shipping_fee" => $shipping);
+                                $total_pay = $total_spend - $reduce_amt + $shipping - $reduce_point_fee;
+                                $json_arr = array('Status' => true, 'Amount' => $reduce_amt, "Total" => $total_spend, "Total_pay" => $total_pay, "Shipping_fee" => $shipping, "Point_discount" => $reduce_point_fee);
 
                                 //--------------------------------------------
                                 //      All true will return this

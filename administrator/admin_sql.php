@@ -205,6 +205,7 @@ if (!empty($postedToken)) {
           $category = $_POST['category'];
           $stock = $_POST['stock'];
           $point = $_POST['point'];
+          $point_allow_discount = $_POST['point_allow_discount'];
 
           $user_price = $_POST['user_price'];
           $distributor_price = $_POST['distributor_price'];
@@ -252,8 +253,8 @@ if (!empty($postedToken)) {
             //------------------------------------------
 
             $table = "product";
-            $colname = array("point", "stock", "category", "length",  "width",  "height",  "weight",  "image", "status", "date_created", "date_modified");
-            $array = array($point, $stock, $category, $length, $width, $height, $weight, $newfilename, 1, $time, $time);
+            $colname = array("point", "point_allow_discount", "stock", "category", "length",  "width",  "height",  "weight",  "image", "status", "date_created", "date_modified");
+            $array = array($point, $point_allow_discount, $stock, $category, $length, $width, $height, $weight, $newfilename, 1, $time, $time);
             $result_product = $db->insert($table, $colname, $array);
 
             if ($result_product) {
@@ -328,6 +329,7 @@ if (!empty($postedToken)) {
           $category = $_POST['category'];
           $stock = $_POST['stock'];
           $point = $_POST['point'];
+          $point_allow_discount = $_POST['point_allow_discount'];
 
           $length = $_POST['length'];
           $width = $_POST['width'];
@@ -343,8 +345,8 @@ if (!empty($postedToken)) {
           //------------------------------------------------------------------------------------
           if (!file_exists($_FILES['img']['tmp_name']) || !is_uploaded_file($_FILES['img']['tmp_name'])) { // no upload file will not update img name
             $table = "product";
-            $data = "point =?, stock =?, category =?, length =?, width =?, height =?, weight =?, status =?, date_modified = ? WHERE id = ?";
-            $array = array($point, $stock, $category, $length, $width, $height, $weight, $status, $time, $product_id);
+            $data = "point =?, point_allow_discount=?, stock =?, category =?, length =?, width =?, height =?, weight =?, status =?, date_modified = ? WHERE id = ?";
+            $array = array($point, $point_allow_discount, $stock, $category, $length, $width, $height, $weight, $status, $time, $product_id);
             $result_product = $db->update($table, $data, $array);
           } else {
             //------------------------------------------
@@ -366,8 +368,8 @@ if (!empty($postedToken)) {
             //------------------------------------------
 
             $table = "product";
-            $data = "point =?, stock =?, category =?, length =?, width =?, height =?, weight =?, image =?, status =?, date_modified = ? WHERE id = ?";
-            $array = array($point, $stock, $category, $length, $width, $height, $weight, $newfilename, $status, $time, $product_id);
+            $data = "point =?,point_allow_discount=?, stock =?, category =?, length =?, width =?, height =?, weight =?, image =?, status =?, date_modified = ? WHERE id = ?";
+            $array = array($point, $point_allow_discount, $stock, $category, $length, $width, $height, $weight, $newfilename, $status, $time, $product_id);
             $result_product = $db->update($table, $data, $array);
           }
           //------------------------------------------------------------------------------------
@@ -872,6 +874,66 @@ if (!empty($postedToken)) {
           $result = $db->update($tablename, $data, $array);
 
           if ($result) {
+
+
+            //--------------------------------------------------
+            //              Get order details
+            $col = "*";
+            $tb = "orders";
+            $opt = 'id = ?';
+            $arr = array($order_id);
+            $order = $db->advwhere($col, $tb, $opt, $arr);
+            $order = $order[0];
+            //--------------------------------------------------
+
+            $user_id = $order["users_id"];
+            //--------------------------------------------------
+            //              Get user point details
+            $col = "*";
+            $tb = "user_point";
+            $opt = 'user_id = ?';
+            $arr = array($user_id);
+            $user_point = $db->advwhere($col, $tb, $opt, $arr);
+            if (count($user_point) == 0) {
+              echo "<script>alert(\" Update Status Successful, But No Point\");
+              window.location.href='order.php?page=4';</script>";
+              exit();
+            }
+            $user_point = $user_point[0];
+            //--------------------------------------------------
+
+            $current_point = $user_point['point'];
+            $order_point = $order['reward_point'];
+            $gateway_order_id = $order["gateway_order_id"]; // order to record in description
+            $description = "Sale. Order Id: " . $gateway_order_id;
+            $added_point = $current_point + $order_point;
+
+            $tablename = "user_point";
+            $data = "point =? WHERE user_id = ?";
+            $array = array($added_point, $user_id);
+            $result_user_point = $db->update($tablename, $data, $array);
+
+            if ($result_user_point) {
+              //   Add Histroy to user_point_transaction_history
+              $table = "user_point_transaction_history";
+              $colname = array("point", "current_point", "description", "user_id", "date_created", "date_modified");
+              $array = array($order_point, $added_point, $description, $user_id, $time, $time);
+              $result_user_point_history = $db->insert($table, $colname, $array);
+
+              if ($result_user_point_history) {
+                echo "<script>alert(\" Update Status Successful\");
+                window.location.href='order.php?page=4';</script>";
+              } else {
+                echo "<script>alert(\" Update Status Successful. But Insert Points History Fail\");
+                window.location.href='order.php?page=4';</script>";
+              }
+            } else {
+              echo "<script>alert(\" Update Status Successful. But Update Points Fail\");
+              window.location.href='order.php?page=4';</script>";
+            }
+
+
+
             echo "<script>alert(\" Update Status Successful\");
                     window.location.href='order.php?page=4';</script>";
           } else {
@@ -1162,6 +1224,35 @@ if (!empty($postedToken)) {
 
       //--------------------------------------------------
       //              Admin Shipping
+      //--------------------------------------------------
+
+      //--------------------------------------------------
+      //                 POINT VALUE
+      //--------------------------------------------------
+
+      else if ($type == "point_value_edit") {
+        if (isset($_POST['btnAction'])) {
+
+          $point_id = $_POST['btnAction'];
+          $point_value = $_POST['point_value'];
+
+          $table = "reward_point_value";
+          $data = "value = ? WHERE id = ?";
+          $array = array($point_value, $point_id);
+          $result_point_value = $db->update($table, $data, $array);
+
+          if ($result_point_value) {
+            echo "<script>alert(\" Edit Point Value Successful\");
+              window.location.href='index.php';</script>";
+          } else {
+            echo "<script>alert(\" Edit Point Value Fail, PLease Try Again. \");
+              window.location.href='index.php';</script>";
+          }
+        }
+      }
+
+      //--------------------------------------------------
+      //               POINT VALUE
       //--------------------------------------------------
 
     } // table admin

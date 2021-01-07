@@ -64,6 +64,7 @@ $product = $db->advwhere($col, $table, $opt, $arr);
 $product_status = $product[0]['status'];
 $product_stock = $product[0]['stock'];
 $product_point = $product[0]['point'];
+$product_point_allow_discount = $product[0]['point_allow_discount'];
 $product_category = $product[0]['category'];
 
 $length = $product[0]['length'];
@@ -135,6 +136,7 @@ $height = $product[0]['height'];
         <hr>
         <div class="form-group"><label>Stock</label> <input type="number" placeholder="Enter Stock " class="form-control" name="stock" value='<?php echo $product_stock; ?>' min="0"></div>
         <div class="form-group"><label>Point</label> <input type="number" placeholder="Enter Point" class="form-control" name="point" value='<?php echo $product_point; ?>' min="0"></div>
+        <div class="form-group"><label>Point Allow to Discount (Per Item)</label> <input type="number" placeholder="Enter Point Discount" class="form-control" name="point_allow_discount" value='<?php echo $product_point_allow_discount; ?>' min="0"></div>
         <hr>
         <div class="form-group"><label>Price (Normal User)</label> <input type="number" placeholder="Enter User Price" class="form-control" name="user_price" value='<?php echo $user_price; ?>' min="0"></div>
         <div class="form-group"><label>Price (Distributor)</label> <input type="number" placeholder="Enter Distributor Price" class="form-control" name="distributor_price" value='<?php echo $distributor_price; ?>' min="0"></div>
@@ -228,6 +230,10 @@ $height = $product[0]['height'];
 
                 },
                 point: {
+                    required: true,
+
+                },
+                point_allow_discount: {
                     required: true,
 
                 },

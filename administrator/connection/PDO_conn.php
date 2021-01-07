@@ -14,6 +14,13 @@ if ($server == 1) {
     define('username', 'caromaca_shop');
     define('pass', ';irmNFv*C~^c');
 }
+if ($server == 1) { //1= local, 2 = staging, 3 = live;
+    $server_path = "http://www.staging4.caroma.com.my/";
+} else if ($server == 2) {
+    $server_path = "http://www.staging4.caroma.com.my/";
+} else if ($server == 3) {
+    $server_path = "http://www.staging4.caroma.com.my/";
+}
 
 
 try {

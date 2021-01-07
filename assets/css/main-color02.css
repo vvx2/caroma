@@ -58,7 +58,7 @@
 .content-404 .button,
 .slider-opt03__layout01 .buttons .btn.btn-bold:not(:hover),
 .biolife-cart-info .icon-qty-combine .qty{
-    background-color: #90bf2a;
+    background-color:#005f2a;
 }
 .hover-main-color:hover,
 .contain-product__right-info-layout2.cate .cat-info .cat-item:hover,
@@ -84,7 +84,7 @@
 .tab-head__default .tab-element .tab-link:hover,
 .tab-head__default .tab-element.active .tab-link,
 .biolife-tweet-item .tw-content .message .link-bold:not(:hover),
-.header-area .biolife-cart-info .login-item .login-link:hover,
+/*.header-area .biolife-cart-info .login-item .login-link:hover,*/
 .header-area.layout-02 .header-top .top-bar .horizontal-menu a:hover,
 .header-area.layout-02 .header-top .top-bar .social-list li a:hover,
 .style-bottom-info.layout-03 .post-meta__item a:hover,
@@ -156,19 +156,19 @@
 .wrap-custom-menu ul.menu>li a:hover,
 .minicart-item .left-info .product-name:hover,
 .header-area .primary-menu>ul>li.has-child:hover>a::after,
-.header-area .primary-menu>ul>li:hover>a,
+/*.header-area .primary-menu>ul>li:hover>a,*/
 .nice-select .option:hover,
 .nice-select .option.focus,
 .content-404 .heading,
 .slider-opt03__layout01 .buttons .btn-thin:not(:hover),
 .nice-select .option.selected.focus{
-    color: #90bf2a;
+    color: #005f2a;
 }
 body.top-refine-opened .top-functions-area .flt-item.group-on-mobile .wrap-selectors,
 .newsletter-block_popup-layout .form-content .dismiss-newsletter:hover::before,
 .mobile-search .mobile-search-content,
 .biolife-cart-info .minicart-block .cart-inner{
-    border-top-color: #90bf2a;
+    border-top-color:  #005f2a;
 }
 .btn.btn-thin:hover,
 .testml-elem-2 .avata,
@@ -190,5 +190,5 @@ body.top-refine-opened .top-functions-area .flt-item.group-on-mobile .wrap-selec
 .sidebar .wgt-content .check-list li.selected a::before,
 .slider-opt03__layout01 .buttons .btn-thin:not(:hover),
 .sidebar .wgt-content .check-list li a:hover::before{
-	border-color: #90bf2a;
+	border-color: #005f2a;
 }

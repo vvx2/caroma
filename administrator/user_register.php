@@ -5,7 +5,7 @@ use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\SMTP;
 
 require_once('connection/PDO_db_function.php');
-$db = new DB_Functions(); 
+$db = new DB_Functions();
 // require_once('inc/init.php');
 if (isset($_REQUEST['type']) && isset($_REQUEST['tb'])) {
     $type = $_REQUEST['type'];
@@ -121,6 +121,7 @@ if (!empty($postedToken)) {
                                 $arr = array($time);
                                 $user = $db->advwhere($col, $table, $opt, $arr);
                                 $user_id = $user[0]['id'];
+                                $user_email = $user[0]['email'];
                                 //--------------------------
 
                                 $table = "user_address";
@@ -135,10 +136,53 @@ if (!empty($postedToken)) {
 
 
                                 if ($result_user_address && $result_user_point) {
-                                    echo "<script>alert(\" Add User Successful\");
+
+                                    //--------------------------
+                                    //       for email
+                                    //--------------------------
+                                    require_once "vendor/autoload.php";
+                                    //PHPMailer Object
+                                    $mail = new PHPMailer;
+                                    // $mail->SMTPDebug = 3;
+                                    $mail->isSMTP();
+                                    $mail->Host = "mail.caroma.com.my";
+                                    $mail->SMTPAuth = true;
+                                    $mail->Username = "test@caroma.com.my";
+                                    $mail->Password = "=HV[GXQv+7l?";
+                                    $mail->SMTPSecure = "tls";
+                                    $mail->Port = "587";
+                                    //Send HTML or Plain Text email
+                                    $mail->isHTML(true);
+                                    //From email address and name
+                                    $mail->From = "test@caroma.com.my";
+                                    $mail->FromName = "Caroma Team";
+
+                                    //--------------------------
+                                    //       for email
+                                    //--------------------------
+
+                                    //To address and name
+                                    $mail->addAddress($user_email);
+                                    $mail->Subject = "REGISTER SUCCESSFUL";
+                                    $mail->Body = "Congratulations on successful registration";
+                                    $mail->send();
+                                    // if (!$mail->send()) {
+                                    //     echo "Mailer Error: " . $mail->ErrorInfo;
+                                    // } else {
+                                    //     echo "Message has been sent successfully2";
+                                    // }
+                                    //----------------------------
+                                    //		Email code here(end)
+                                    //----------------------------
+                                    if ($mail) {
+                                        echo "<script>alert(\" Register Successful\");
                                       window.location.href='$page.php';</script>";
+                                    } else {
+                                        echo "<script>alert(\" Register Successful! But Send Mail Fail.\");
+                                      window.location.href='$page.php';</script>";
+                                    }
                                 } else {
-                                    echo "<script>alert(\" Add User Fail, PLease Try Again. \");
+                                    echo "<script>alert(\" Register Fail, PLease Try Again. \");
                                       window.location.href='$page.php';</script>";
                                 }
                             } // end $result_user

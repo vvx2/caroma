@@ -117,9 +117,37 @@ if ($user_type == 3) {
 
 if (count($result) != 0) {
     foreach ($result as $product) {
-        $item[$product['p_id']] = array("image" => $product['image'], "category_name" => $product['ct_name'], "product_name" => $product['pt_name'], "price" => $product['price']);
+
+        $normal_price = $product['price'];
+        if ($user_type == 1) {
+            $col = "*, DATE_ADD(end, INTERVAL 1 DAY) as new_end_date";
+            $tb = "promotion pr left join promotion_product prp on pr.id = prp.promotion_id";
+            $opt = 'prp.product_id = ? && start <= ? && DATE_ADD(end, INTERVAL 1 DAY) >= ? ORDER BY date_modified';
+            $arr = array($product['p_id'], $time, $time);
+            $check_promotion_prodcut = $db->advwhere($col, $tb, $opt, $arr);
+
+            if (count($check_promotion_prodcut) != 0) {
+                $check_promotion_prodcut = $check_promotion_prodcut[0];
+                if ($check_promotion_prodcut["type"] == 1) {
+                    $promo_price = $normal_price - $check_promotion_prodcut["amt"];
+                } else {
+                    $promo_price = $normal_price - ($normal_price * $check_promotion_prodcut["percentage"] / 100);
+                }
+                $is_promo = 1;
+                $price_display = $promo_price;
+            } else {
+                $is_promo = 0;
+                $price_display = $normal_price;
+            }
+        } else {
+            $is_promo = 0;
+            $price_display = $normal_price;
+        }
+
+        $item[$product['p_id']] = array("image" => $product['image'], "category_name" => $product['ct_name'], "product_name" => $product['pt_name'], "price" => $price_display, "ori_price" => $normal_price, "is_promo" => $is_promo);
     }
-    $json_arr = array('Status' => true, 'product' => $item, 'count_result' => count($result), "checksql" => $check_sql);
+    $json_arr = array('Status' => true, 'product' => $item, 'count_result' => count($result));
+    // $json_arr = array('Status' => true, 'product' => $item, 'count_result' => count($result), "checksql" => $check_sql);
 } else {
     $json_arr = array('Status' => false, 'msg' => '<h1>No Result</h1>', "failresult" => $result);
 }
