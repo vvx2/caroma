@@ -447,7 +447,7 @@ $state = $order['state_name'];
                                       <td style="padding:0;Margin:0;font-size:14px;line-height:21px;color:#FFFFFF">Order
                                         Total:</td>
                                       <td style="padding:0;Margin:0;font-size:14px;line-height:21px;color:#FFFFFF">
-                                        RM <?php echo $total_payment; ?></td>
+                                        RM <?php echo number_format($total_payment, 2); ?></td>
                                     </tr>
                                   </table>
                                   <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:14px;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#FFFFFF">
