@@ -577,7 +577,7 @@ if (isset($_REQUEST['type'])) {
                         //To address and name
                         $mail->addAddress($email);
                         $mail->Subject = "Purchase Successful";
-                        $mail->Body = get_include_contents('mail.php', $order_detail);
+                        $mail->Body = get_include_contents('../administrator/mail/purchase_success_mail.php', $order_detail);
                         $mail->send();
                         // if (!$mail->send()) {
                         //     echo "Mailer Error: " . $mail->ErrorInfo;
