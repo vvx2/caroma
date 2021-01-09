@@ -66,6 +66,9 @@ if (isset($refund_type)) {
 			<li class="<?php echo ($PageName == 'promotion') ? 'active' : ''; ?>">
 				<a href="promotion.php"><i class="fa fa-th-large"></i> <span class="nav-label">Promotion</span></a>
 			</li>
+			<li class="<?php echo ($PageName == 'new_arrival') ? 'active' : ''; ?>">
+				<a href="new_arrival.php"><i class="fa fa-th-large"></i> <span class="nav-label">New Arrival</span></a>
+			</li>
 			<li class="<?php echo ($PageName == 'user' || $PageName == 'distributor' || $PageName == 'dealer') ? 'active' : ''; ?>">
 				<a href=""><i class="fa fa-th-large"></i> <span class="nav-label">Users</span> <span class="fa arrow"></span></a>
 				<ul class="nav nav-second-level">
