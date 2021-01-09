@@ -116,7 +116,7 @@ if (!empty($postedToken)) {
                                 //  get user id inserted
                                 //--------------------------
                                 $table = "users";
-                                $col = "id";
+                                $col = "id,email";
                                 $opt = 'date_created = ?';
                                 $arr = array($time);
                                 $user = $db->advwhere($col, $table, $opt, $arr);
