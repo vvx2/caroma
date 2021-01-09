@@ -30,6 +30,73 @@ if (isset($_REQUEST['page'])) {
             <?php include_once('inc/top_nav.php'); ?>
             <!-- top nav -->
             <div class="wrapper wrapper-content wrapperes">
+                <?php
+
+                $table = "distributor_wallet_transaction";
+                $col = "id";
+                $opt = 'status = ?';
+                $arr = array(1);
+                $count_pending = $db->advwhere($col, $table, $opt, $arr);
+                $count_pending = count($count_pending);
+
+                $table = "distributor_wallet_transaction";
+                $col = "id";
+                $opt = 'status = ?';
+                $arr = array(2);
+                $count_success = $db->advwhere($col, $table, $opt, $arr);
+                $count_success = count($count_success);
+
+                $table = "distributor_wallet_transaction";
+                $col = "id";
+                $opt = 'status = ?';
+                $arr = array(3);
+                $count_reject = $db->advwhere($col, $table, $opt, $arr);
+                $count_reject = count($count_reject);
+
+
+                ?>
+
+                <div class="row">
+                    <div class="col-lg-4">
+                        <a href="refund.php?page=1">
+                            <div class="ibox ">
+                                <div class="ibox-title">
+                                    <h5>Pending</h5>
+                                </div>
+                                <div class="ibox-content">
+                                    <h1 class="no-margins"><?php echo $count_pending; ?></h1>
+                                    <small>Total</small>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-lg-4">
+                        <a href="refund.php?page=2">
+                            <div class="ibox ">
+                                <div class="ibox-title">
+                                    <h5>Success</h5>
+                                </div>
+                                <div class="ibox-content">
+                                    <h1 class="no-margins"><?php echo $count_success; ?></h1>
+                                    <small>Total</small>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-lg-4">
+                        <a href="refund.php?page=3">
+                            <div class="ibox ">
+                                <div class="ibox-title">
+                                    <h5>Rejected</h5>
+                                </div>
+                                <div class="ibox-content">
+                                    <h1 class="no-margins"><?php echo $count_reject; ?></h1>
+                                    <small>Total</small>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
 
                 <div class="wrapper wrapper-content animated fadeInRight wrapper_table">
                     <div class="row">
@@ -90,7 +157,7 @@ if (isset($_REQUEST['page'])) {
                                                             $status_color = "text-warning";
                                                             $status_display = "Pending";
                                                             $status_desc = "This refund request is waiting admin to approve.";
-                                                            $btn_action = $btn_view . $btn_approve. $btn_reject;
+                                                            $btn_action = $btn_view . $btn_approve . $btn_reject;
                                                             break;
                                                         case "2":
                                                             $status_color = "text-success";

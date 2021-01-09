@@ -59,56 +59,56 @@
         <!-- Main content -->
         <div id="main-content" class="main-content">
             <div class="container-fluid">
-            <div class="container" style="margin-bottom : 5% ; padding : 0px 30px ;">
-	<div class="row">
-		<div class="row">
-        <div class="row">
-            <div class="col-md-4 col-md-offset-4">
-    
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <div class="text-center">
-                          <h3><i class="glyphicon glyphicon-envelope color-blue" style="font-size:300%;"></i></h3>
-                          <h2 class="text-center">Password Reset</h2>
-                            <div class="panel-body">
-                              
-                              <form class="form">
-                                <fieldset>
-                                 
-                                      
-                                <div class="form-group">
-                                    <label>New Password</label>
-                                    <div class="form-group pass_show"> 
-                                        <input type="password" value="faisal.khan@123" class="form-control" placeholder="New Password"> 
-                                    </div> 
-                                    <label>Confirm Password</label>
-                                    <div class="form-group pass_show"> 
-                                        <input type="password" value="faisal.khan@123" class="form-control" placeholder="Confirm Password"> 
-                                    </div> 
-                                </div>
+                <div class="container" style="margin-bottom : 5% ; padding : 0px 30px ;">
+                    <div class="row">
+                        <div class="row">
+                            <div class="row">
+                                <div class="col-md-4 col-md-offset-4">
 
-                                <div class="form-group">
-                                    <input name="recover-submit" class="btn btn-lg btn-primary btn-block" value="Reset Password" type="submit">
-                                </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-body">
+                                            <div class="text-center">
+                                                <h3><i class="glyphicon glyphicon-envelope color-blue" style="font-size:300%;"></i></h3>
+                                                <h2 class="text-center">Password Reset</h2>
+                                                <div class="panel-body">
 
-                                </fieldset>
-                              </form>
+                                                    <form class="form">
+                                                        <fieldset>
+
+
+                                                            <div class="form-group">
+                                                                <label>New Password</label>
+                                                                <div class="form-group pass_show">
+                                                                    <input type="password" value="" class="form-control" placeholder="New Password">
+                                                                </div>
+                                                                <label>Confirm Password</label>
+                                                                <div class="form-group pass_show">
+                                                                    <input type="password" value="" class="form-control" placeholder="Confirm Password">
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <input name="recover-submit" class="btn btn-lg btn-primary btn-block" value="Reset Password" type="submit">
+                                                            </div>
+
+                                                        </fieldset>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
-	</div>
-</div>
-            
-            </div>
-	    </div>
-    </div>
-                    
-            
-            
+
+
+
 
 
 

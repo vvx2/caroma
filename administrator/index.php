@@ -12,11 +12,104 @@ if (count($result_point_value) != 0) {
 }
 //-----------------------
 ?>
+
+
+<?php
+
+$table = "orders";
+$col = "id";
+$opt = 'status = ? && admin_id = ? ';
+$arr = array(2, 0);
+$count_pending = $db->advwhere($col, $table, $opt, $arr);
+$count_pending = count($count_pending);
+
+$table = "orders";
+$col = "id";
+$opt = 'status = ? && admin_id = ? ';
+$arr = array(3, 0);
+$count_shipping = $db->advwhere($col, $table, $opt, $arr);
+$count_shipping = count($count_shipping);
+
+$table = "orders";
+$col = "id";
+$opt = 'status = ? && admin_id = ? ';
+$arr = array(4, 0);
+$count_complete = $db->advwhere($col, $table, $opt, $arr);
+$count_complete = count($count_complete);
+
+$table = "orders";
+$col = "id";
+$opt = 'status = ? && admin_id = ? ';
+$arr = array(1, 0);
+$count_cancel = $db->advwhere($col, $table, $opt, $arr);
+$count_cancel = count($count_cancel);
+
+$table = "users";
+$col = "id";
+$opt = 'type = ?';
+$arr = array(1);
+$count_user = $db->advwhere($col, $table, $opt, $arr);
+$count_user = count($count_user);
+
+$table = "users";
+$col = "id";
+$opt = 'type = ?';
+$arr = array(2);
+$count_distributor = $db->advwhere($col, $table, $opt, $arr);
+$count_distributor = count($count_distributor);
+
+$table = "users";
+$col = "id";
+$opt = 'type = ?';
+$arr = array(3);
+$count_dealer = $db->advwhere($col, $table, $opt, $arr);
+$count_dealer = count($count_dealer);
+
+$table = "coupon";
+$col = "id";
+$opt = 'status = ?';
+$arr = array(1);
+$count_coupon = $db->advwhere($col, $table, $opt, $arr);
+$count_coupon = count($count_coupon);
+
+$table = "promotion";
+$col = "id";
+$opt = 'status = ?';
+$arr = array(1);
+$count_promotion = $db->advwhere($col, $table, $opt, $arr);
+$count_promotion = count($count_promotion);
+
+
+$table = "distributor_wallet_transaction";
+$col = "id";
+$opt = 'status = ?';
+$arr = array(1);
+$count_pending = $db->advwhere($col, $table, $opt, $arr);
+$count_pending = count($count_pending);
+
+$table = "distributor_wallet_transaction";
+$col = "id";
+$opt = 'status = ?';
+$arr = array(2);
+$count_success = $db->advwhere($col, $table, $opt, $arr);
+$count_success = count($count_success);
+
+$table = "distributor_wallet_transaction";
+$col = "id";
+$opt = 'status = ?';
+$arr = array(3);
+$count_reject = $db->advwhere($col, $table, $opt, $arr);
+$count_reject = count($count_reject);
+
+?>
 <!DOCTYPE html>
 <html>
 
 <head>
     <?php include_once('inc/header.php'); ?>
+
+    <link href="css/plugins/datapicker/datepicker3.css" rel="stylesheet">
+    <link href="css/plugins/daterangepicker/daterangepicker-bs3.css" rel="stylesheet">
 </head>
 
 <body>
@@ -31,7 +124,7 @@ if (count($result_point_value) != 0) {
             <div class="wrapper wrapper-content wrapperes">
 
                 <div class="row">
-                    <div class="col-lg-3">
+                    <div class="col-lg-4">
                         <div class="widget style1 yellow-bg">
                             <div class="row">
                                 <div class="col-4">
@@ -44,10 +137,211 @@ if (count($result_point_value) != 0) {
                             </div>
                         </div>
                     </div>
+                    <div class="col-lg-4">
+                        <div class="widget style1 blue-bg">
+                            <div class="row">
+                                <div class="col-4">
+                                    <a href="coupon.php" style="color:white;"><i class="fa fa-ticket fa-5x"></i></a>
+                                </div>
+                                <div class="col-8 text-right">
+                                    <span> Coupon </span>
+                                    <h2 class="font-bold"><?php echo $count_coupon; ?></h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="widget style1 blue-bg">
+                            <div class="row">
+                                <div class="col-4">
+                                    <a href="promotion.php" style="color:white;"><i class="fa fa-money fa-5x"></i></a>
+                                </div>
+                                <div class="col-8 text-right">
+                                    <span> Promotion </span>
+                                    <h2 class="font-bold"><?php echo $count_promotion; ?></h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
+                <div class="row">
+                    <div class="col-lg-4">
+                        <a href="user.php">
+                            <div class="ibox ">
+                                <div class="ibox-title">
+                                    <h5>Normal User</h5>
+                                </div>
+                                <div class="ibox-content">
+                                    <h1 class="no-margins"><?php echo $count_user; ?></h1>
+                                    <small>Total</small>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-lg-4">
+                        <a href="distributor.php">
+                            <div class="ibox ">
+                                <div class="ibox-title">
+                                    <h5>Distributor</h5>
+                                </div>
+                                <div class="ibox-content">
+                                    <h1 class="no-margins"><?php echo $count_distributor; ?></h1>
+                                    <small>Total</small>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-lg-4">
+                        <a href="dealer.php">
+                            <div class="ibox ">
+                                <div class="ibox-title">
+                                    <h5>Dealer</h5>
+                                </div>
+                                <div class="ibox-content">
+                                    <h1 class="no-margins"><?php echo $count_dealer; ?></h1>
+                                    <small>Total</small>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-4">
+                        <a href="refund.php?page=1">
+                            <div class="ibox ">
+                                <div class="ibox-title">
+                                    <h5>Pending</h5>
+                                </div>
+                                <div class="ibox-content">
+                                    <h1 class="no-margins"><?php echo $count_pending; ?></h1>
+                                    <small>Total</small>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-lg-4">
+                        <a href="refund.php?page=2">
+                            <div class="ibox ">
+                                <div class="ibox-title">
+                                    <h5>Success</h5>
+                                </div>
+                                <div class="ibox-content">
+                                    <h1 class="no-margins"><?php echo $count_success; ?></h1>
+                                    <small>Total</small>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-lg-4">
+                        <a href="refund.php?page=3">
+                            <div class="ibox ">
+                                <div class="ibox-title">
+                                    <h5>Rejected</h5>
+                                </div>
+                                <div class="ibox-content">
+                                    <h1 class="no-margins"><?php echo $count_reject; ?></h1>
+                                    <small>Total</small>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-3">
+                        <a href="order.php?page=2">
+                            <div class="ibox ">
+                                <div class="ibox-title">
+                                    <h5>Order Pending</h5>
+                                </div>
+                                <div class="ibox-content">
+                                    <h1 class="no-margins"><?php echo $count_pending; ?></h1>
+                                    <small>Total</small>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-lg-3">
+                        <a href="order.php?page=3">
+                            <div class="ibox ">
+                                <div class="ibox-title">
+                                    <h5>Order Shipping</h5>
+                                </div>
+                                <div class="ibox-content">
+                                    <h1 class="no-margins"><?php echo $count_shipping; ?></h1>
+                                    <small>Total</small>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-lg-3">
+                        <a href="order.php?page=4">
+                            <div class="ibox ">
+                                <div class="ibox-title">
+                                    <h5>Order Complete</h5>
+                                </div>
+                                <div class="ibox-content">
+                                    <h1 class="no-margins"><?php echo $count_complete; ?></h1>
+                                    <small>Total</small>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-lg-3">
+                        <a href="order.php?page=1">
+                            <div class="ibox ">
+                                <div class="ibox-title">
+                                    <h5>Order Canceled/Rejected</h5>
+                                </div>
+                                <div class="ibox-content">
+                                    <h1 class="no-margins"><?php echo $count_cancel; ?></h1>
+                                    <small>Total</small>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="ibox-content">
+
+                <div class="form-group" id="data_5">
+                    <label class="font-normal">Range select</label>
+                    <form role="form" id="form_get_order" method="post">
+
+                        <div class="input-daterange input-group" id="datepicker">
+
+                            <input type="text" class="form-control-sm form-control" name="min" id="min" value="" />
+                            <span class="input-group-addon">to</span>
+                            <input type="text" class="form-control-sm form-control" name="max" id="max" value="" />
+                            &nbsp;
+
+
+                            <a id="get_order" class="btn btn-white btn-xs" onclick="get_order();"><i class="fa fa-search"></i> Search </a>
+
+                        </div>
+                    </form>
+                </div>
+
+                <script type="text/javascript">
+                    var from;
+                    var to;
+
+
+                    function get_order() {
+                        from = document.getElementById("min");
+                        to = document.getElementById("max");
+                        window.open("report.php?from=" + from.value + "&to=" + to.value, '_blank');
+                    }
+                </script>
+
 
 
             </div>
+
         </div>
     </div>
     <div class="modal inmodal" id="point_value_edit" tabindex="-1" role="dialog" aria-hidden="true">
@@ -91,10 +385,16 @@ if (count($result_point_value) != 0) {
 
     <script src="js/plugins/dataTables/datatables.min.js"></script>
     <script src="js/plugins/dataTables/dataTables.bootstrap4.min.js"></script>
+    <!-- Data picker -->
+    <script src="js/plugins/datapicker/bootstrap-datepicker.js"></script>
 
     <!-- Page-Level Scripts -->
     <script>
-
+        $('#data_5 .input-daterange').datepicker({
+            keyboardNavigation: false,
+            forceParse: false,
+            autoclose: true
+        });
     </script>
 
 </body>
