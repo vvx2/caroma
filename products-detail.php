@@ -153,7 +153,25 @@
                 <div class="sumary-product single-layout">
                     <div class="media">
                         <ul class="biolife-carousel slider-for" data-slick='{"arrows":false,"dots":false,"slidesMargin":30,"slidesToShow":1,"slidesToScroll":1,"fade":true,"asNavFor":".slider-nav"}'>
-                            <li><img src="img/product/<?php echo $result['image']; ?>" alt="" width="400" height="400"></li>
+                            <?php
+                            $col = "*";
+                            $tb = "product_image";
+                            $opt = 'product_id = ?';
+                            $arr = array($product_id);
+                            $product_image = $db->advwhere($col, $tb, $opt, $arr);
+
+                            foreach ($product_image as $img) {
+                            ?>
+                                <li><img src="img/product/<?php echo $img['image']; ?>" alt="" width="400" height="400"></li>
+                            <?php } ?>
+                        </ul>
+                        <ul class="biolife-carousel slider-nav" data-slick='{"arrows":false,"dots":false,"centerMode":false,"focusOnSelect":true,"slidesMargin":10,"slidesToShow":4,"slidesToScroll":1,"asNavFor":".slider-for"}'>
+                            <?php
+                            foreach ($product_image as $img) {
+                            ?>
+                                <li><img src="img/product/<?php echo $img['image']; ?>" alt="" width="88" height="88"></li>
+                            <?php } ?>
+
                         </ul>
                     </div>
                     <div class="product-attribute">

@@ -5,7 +5,7 @@ if ($login != 1) {
 	echo "<script>window.location.replace('../login.php')</script>";
 	exit();
 }
-if($user_type != 2){
+if ($user_type != 2) {
 	echo "<script>alert(\" Your are not Distributor\");
 	window.location.href='index.php';</script>";
 	exit();
@@ -120,7 +120,6 @@ if($user_type != 2){
 																$product_width = $result[0]['width'];
 																$product_height = $result[0]['height'];
 																$product_weight = $result[0]['weight'];
-
 															}
 															foreach ($result as $product) {
 															?>
@@ -253,12 +252,23 @@ if($user_type != 2){
 											<div class="seprator-block"></div>
 											<h6 class="txt-dark capitalize-font"><i class="icon-picture mr-10"></i>Product Images</h6>
 											<hr>
-											<div class="row">
-												<div class="col-lg-3">
-													<div class="img-upload-wrap padding-15-t-b">
-														<img id="get_img" class="img-responsive" src="../img/product/<?php echo $product_image; ?>" alt="upload_img">
+											<div class="row" id="image_display">
+												<?php
+												echo $product['p_id'];
+												$col = "*";
+												$tb = "product_image";
+												$opt = 'product_id = ?';
+												$arr = array($result[0]['p_id']);
+												$product_image = $db->advwhere($col, $tb, $opt, $arr);
+
+												foreach ($product_image as $image) {
+												?>
+													<div class="col-lg-3">
+														<div class="img-upload-wrap padding-15-t-b">
+															<img class="img-responsive" src="../img/product/<?php echo $image['image']; ?>" alt="upload_img">
+														</div>
 													</div>
-												</div>
+												<?php } ?>
 											</div>
 											<div class="seprator-block"></div>
 											<div class="form-actions">
@@ -361,16 +371,27 @@ if($user_type != 2){
 				setTimeout(function() {
 					console.log(data);
 					data = JSON.parse(data);
+					console.log(data);
 					if (data["Status"]) {
+						let product_image = '';
+						// $("#get_img").attr("src", "../img/product/" + data["image"]);
+						$.each(data["image"], function(key, image) {
+							product_image = product_image +
+								'	<div class="col-lg-3">\n' +
+								'		<div class="img-upload-wrap padding-15-t-b" id="image_display">\n' +
+								'			<img class="img-responsive" src="../img/product/' + image + '" alt="upload_img">\n' +
+								'		</div>\n' +
+								'	</div>\n';
+						});
+						$("#image_display").html(product_image);
 						$("#get_coupon_msg").html("");
-						$("#get_img").attr("src", "../img/product/" + data["image"]);
 						$("#get_price").val(parseFloat(data["price"]).toFixed(2));
 						$("#get_category").val(data["category"]);
 						$("#get_length").val(parseFloat(data["length"]).toFixed(3));
 						$("#get_width").val(parseFloat(data["width"]).toFixed(3));
 						$("#get_height").val(parseFloat(data["height"]).toFixed(3));
 						$("#get_weight").val(parseFloat(data["weight"]).toFixed(3));
-					} 
+					}
 					$('#loadDiv').hide();
 				}, 500);
 

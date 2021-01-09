@@ -37,11 +37,25 @@ if ($login == 0) {
     if (count($product) <= 0) {
         $json_arr = array('Status' => false, 'Msg' => 'Product No Exists!');
     } else {
+
+
+        $image_arr = array();
+
+        $col = "*";
+        $tb = "product_image";
+        $opt = 'product_id = ?';
+        $arr = array($product_id);
+        $product_image = $db->advwhere($col, $tb, $opt, $arr);
+        foreach ($product_image as $image) {
+            $image_arr[] = $image['image'];
+        }
+
+
+        $product_image = $image_arr;
         //get product details
         $product = $product[0];
         $product_price = $product['price'];
         $product_category = $product['ct_name'];
-        $product_image = $product['image'];
         $product_length = $product['length'];
         $product_width = $product['width'];
         $product_height = $product['height'];
