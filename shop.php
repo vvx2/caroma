@@ -40,7 +40,11 @@
 
 
         $col = "*, p.id as p_id, pt.name as pt_name, pt.description as pt_description, ct.name as ct_name, rate.rating as rating";
-        $tb = " product p left join product_translation pt on p.id = pt.product_id left join product_role_price pp on p.id = pp.product_id left join category_translation ct on p.category = ct.category_id left join (SELECT product_id, (sum(rate) / count(product_id)) as rating FROM order_items where rate != 0 group by product_id) rate on p.id = rate.product_id " . $filter_table;
+        if (isset($_REQUEST["new_arrival"]) && $_REQUEST["new_arrival"] == 1) {
+            $tb = " new_arrival na left join product p on na.product_id = p.id left join product_translation pt on p.id = pt.product_id left join product_role_price pp on p.id = pp.product_id left join category_translation ct on p.category = ct.category_id left join (SELECT product_id, (sum(rate) / count(product_id)) as rating FROM order_items where rate != 0 group by product_id) rate on p.id = rate.product_id " . $filter_table;
+        } else {
+            $tb = " product p left join product_translation pt on p.id = pt.product_id left join product_role_price pp on p.id = pp.product_id left join category_translation ct on p.category = ct.category_id left join (SELECT product_id, (sum(rate) / count(product_id)) as rating FROM order_items where rate != 0 group by product_id) rate on p.id = rate.product_id " . $filter_table;
+        }
         $opt = 'pt.language = ? && pp.type =? && ct.language =? && p.status =?';
         $arr = $filter_arr;
         $count_product_result = $db->advwhere($col, $tb, $opt, $arr);
@@ -271,6 +275,10 @@
                                     ?>
                                         <li class="cat-list-item"><a href="shop.php?category=<?php echo $cate['c_id']; ?>" class="cat-link"><?php echo $cate['ct_name']; ?></a></li>
                                     <?php } ?>
+                                    <li class="cat-list-item"><a href="shop.php?new_arrival=1" class="cat-link">NEW ARRIVAL</a></li>
+                                    <?php if ($user_type == 1) { ?>
+                                        <li class="cat-list-item"><a href="shop.php?is_promotion=1" class="cat-link">PROMOTION</a></li>
+                                    <?php } ?>
                                 </ul>
                             </div>
                         </div>
@@ -444,15 +452,25 @@
             })
         }
 
+        $('[name="orderby"]').change(function() {
+            LoadProduct(1);
+        });
+
+
         function LoadProduct(page) {
+
             var page = page;
-            var orderby = $('[name="orderby"]').val();
+            var orderby = $('[name="orderby"]').children("option:selected").val();
+            var new_arrival = <?php echo (isset($_REQUEST["new_arrival"]) && $_REQUEST["new_arrival"] != 0) ? $_REQUEST["new_arrival"] : 0 ?>;
+            var is_promotion = <?php echo (isset($_REQUEST["is_promotion"]) && $_REQUEST["is_promotion"] != 0) ? $_REQUEST["is_promotion"] : 0 ?>;
             var category = <?php echo (isset($_REQUEST["category"]) && $_REQUEST["category"] != 0) ? $_REQUEST["category"] : 0 ?>;
             var price_from = <?php echo (isset($_REQUEST["price-from"])) ? $_REQUEST["price-from"] : 0 ?>;
             var price_to = <?php echo (isset($_REQUEST["price-to"])) ? $_REQUEST["price-to"] : 0 ?>;
             $.post('api/product.php', {
                 page: page,
                 orderby: orderby,
+                new_arrival: new_arrival,
+                is_promotion: is_promotion,
                 category: category,
                 price_from: price_from,
                 price_to: price_to
@@ -460,8 +478,8 @@
 
                 // console.log(data);
                 data = JSON.parse(data)
-                // console.log("getproduct:");
-                // console.log(data);
+                console.log("getproduct:");
+                console.log(data);
                 if (data["Status"]) {
                     //Success Action
                     let product_item = '';
@@ -472,16 +490,16 @@
                             display_ori_price = '                   <del ><span class="price-amount"><span class="currencySymbol">&nbsp;</span></span></del>\n'
                         }
                         product_item = product_item +
-                            '<li class="product-item col-lg-4 col-md-4 col-sm-4 col-xs-6" id="product_' + key + '">\n' +
+                            '<li class="product-item col-lg-4 col-md-4 col-sm-4 col-xs-6" id="product_' + product.product_id + '">\n' +
                             '       <div class="contain-product layout-default">\n' +
                             '           <div class="product-thumb">\n' +
-                            '               <a href="products-detail.php?p=' + key + '" class="link-to-product">\n' +
+                            '               <a href="products-detail.php?p=' + product.product_id + '" class="link-to-product">\n' +
                             '                   <img src="img/product/' + product.image + '" alt="dd" width="270" height="270" class="product-thumnail">\n' +
                             '               </a>\n' +
                             '           </div>\n' +
                             '           <div class="info">\n' +
                             '               <b class="categories">' + product.category_name + '</b>\n' +
-                            '               <h4 class="product-title"><a href="products-detail.php?p=' + key + '" class="pr-name">' + product.product_name + '</a></h4>\n' +
+                            '               <h4 class="product-title"><a href="products-detail.php?p=' + product.product_id + '" class="pr-name">' + product.product_name + '</a></h4>\n' +
                             '               <div class="price">\n' +
                             '                   <ins><span class="price-amount"><span class="currencySymbol">RM</span>' + parseFloat(product.price).toFixed(2) + '</span></ins>\n' +
                             display_ori_price +
@@ -489,7 +507,7 @@
                             '               <div class="slide-down-box">\n' +
                             '                   <p class="message">All products are carefully selected to ensure food safety.</p>\n' +
                             '                   <div class="buttons">\n' +
-                            '                       <button class="btn add-to-cart-btn btnAddCart" style="width: 100%;" data-value="' + key + '"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i>add to cart</button>\n' +
+                            '                       <button class="btn add-to-cart-btn btnAddCart" style="width: 100%;" data-value="' + product.product_id + '"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i>add to cart</button>\n' +
                             '                   </div>\n' +
                             '               </div>\n' +
                             '           </div>\n' +
