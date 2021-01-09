@@ -208,6 +208,7 @@
 
 .reg-button{
 	margin-bottom : 12% !important;
+	text-align: center;
 }
 .reg-but{
 	min-width : 200px !important;
@@ -223,6 +224,12 @@
 }
 
 #name_error_message{
+	color: red;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+#distributor_code_error_message{
 	color: red;
     font-size: 14px;
     font-weight: 700;
@@ -274,4 +281,8 @@
 	color: red;
     font-size: 14px;
     font-weight: 700;
+}
+
+.reg-height{
+	height : 110px;
 }
