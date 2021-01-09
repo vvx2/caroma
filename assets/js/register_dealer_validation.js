@@ -55,7 +55,7 @@ $(function() {
      });
  
     function check_distributor_code() {
-       var pattern = /^[a-zA-Z\s]+$/;
+       var pattern = /^[a-zA-Z0-9\s]+$/;
        var distributor_code = $("#distributor_code").val();
        if (pattern.test(distributor_code) && distributor_code !== '') {
           $("#distributor_code_error_message").hide();
@@ -229,7 +229,7 @@ $(function() {
     check_state();
     check_distributor_code()
  
-       if (error_name === false && error_email === false && error_password === false && error_retype_password === false && error_phone === false && error_address === false && error_zip === false && error_city === false && error_state === false && error_distributor_code) {
+       if (error_name === false && error_email === false && error_password === false && error_retype_password === false && error_phone === false && error_address === false && error_zip === false && error_city === false && error_state === false && error_distributor_code === false) {
           // alert("Registration Successfull");
           return true;
        } else {
