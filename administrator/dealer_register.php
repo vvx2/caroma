@@ -5,7 +5,7 @@ use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\SMTP;
 
 require_once('connection/PDO_db_function.php');
-$db = new DB_Functions(); 
+$db = new DB_Functions();
 if (isset($_REQUEST['type']) && isset($_REQUEST['tb'])) {
   $type = $_REQUEST['type'];
   $tb = $_REQUEST['tb'];
@@ -24,7 +24,7 @@ if (!empty($postedToken)) {
         $pagefail = "dealer";
       } else {
         $page = "../login";
-        $pagefail = "../register";
+        $pagefail = "../register_dealer";
       }
 
       if ($type == "add") {
@@ -135,11 +135,12 @@ if (!empty($postedToken)) {
                 //  get dealer id inserted
                 //--------------------------
                 $table = "users";
-                $col = "id";
+                $col = "id, email";
                 $opt = 'date_created = ?';
                 $arr = array($time);
                 $dealer = $db->advwhere($col, $table, $opt, $arr);
                 $dealer_id = $dealer[0]['id'];
+                $user_email = $dealer[0]['email'];
                 //--------------------------
 
 
@@ -155,8 +156,52 @@ if (!empty($postedToken)) {
 
 
                 if ($result_under_distributor && $result_dealer_address) {
-                  echo "<script>alert(\" Dealer Register Successful\");
+                  //--------------------------
+                  //       for email
+                  //--------------------------
+                  require_once "vendor/autoload.php";
+                  //PHPMailer Object
+                  $mail = new PHPMailer;
+                  // $mail->SMTPDebug = 3;
+                  $mail->isSMTP();
+                  $mail->Host = $email_host;
+                  $mail->SMTPAuth = true;
+                  $mail->Username = $email_username;
+                  $mail->Password = $email_password;
+                  $mail->SMTPSecure = "tls";
+                  $mail->Port = "587";
+                  //Send HTML or Plain Text email
+                  $mail->isHTML(true);
+                  //From email address and name
+                  $mail->From = $email_from;
+                  $mail->FromName = $email_from_name;
+
+                  //--------------------------
+                  //       for email
+                  //--------------------------
+                  // $order_detail = array("order" => $order, "order_item" => $order_item, "server_path" => $server_path);
+
+                  //To address and name
+                  $mail->addAddress($user_email);
+                  $mail->Subject = "REGISTER SUCCESSFUL";
+                  $mail->Body = "Congratulations on successful registration";
+                  // $mail->Body = get_include_contents('../administrator/mail/purchase_success_mail.php', $order_detail);
+                  $mail->send();
+                  // if (!$mail->send()) {
+                  //     echo "Mailer Error: " . $mail->ErrorInfo;
+                  // } else {
+                  //     echo "Message has been sent successfully2";
+                  // }
+                  //----------------------------
+                  //		Email code here(end)
+                  //----------------------------
+                  if ($mail) {
+                    echo "<script>alert(\" Dealer Register Successful\");
+                  window.location.href='$page.php';</script>";
+                  } else {
+                    echo "<script>alert(\" Dealer Register Successful! But Send Mail Fail.\");
                 window.location.href='$page.php';</script>";
+                  }
                 } else {
                   echo "<script>alert(\" Dealer Register Fail, PLease Try Again. \");
                 window.location.href='$page.php';</script>";

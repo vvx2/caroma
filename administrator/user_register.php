@@ -145,17 +145,17 @@ if (!empty($postedToken)) {
                                     $mail = new PHPMailer;
                                     // $mail->SMTPDebug = 3;
                                     $mail->isSMTP();
-                                    $mail->Host = "mail.caroma.com.my";
+                                    $mail->Host = $email_host;
                                     $mail->SMTPAuth = true;
-                                    $mail->Username = "test@caroma.com.my";
-                                    $mail->Password = "=HV[GXQv+7l?";
+                                    $mail->Username = $email_username;
+                                    $mail->Password = $email_password;
                                     $mail->SMTPSecure = "tls";
                                     $mail->Port = "587";
                                     //Send HTML or Plain Text email
                                     $mail->isHTML(true);
                                     //From email address and name
-                                    $mail->From = "test@caroma.com.my";
-                                    $mail->FromName = "Caroma Team";
+                                    $mail->From = $email_from;
+                                    $mail->FromName = $email_from_name;
 
                                     //--------------------------
                                     //       for email
