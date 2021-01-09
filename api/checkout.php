@@ -139,6 +139,9 @@ if (isset($_REQUEST['type'])) {
                                     } else {
                                         $promo_price = $normal_price - ($normal_price * $check_promotion_prodcut["percentage"] / 100);
                                     }
+                                    if ($promo_price <= 0) {
+                                        $promo_price = 0;
+                                    }
                                     $price_display = $promo_price;
                                 } else {
                                     $price_display = $normal_price;
@@ -274,6 +277,9 @@ if (isset($_REQUEST['type'])) {
                                             $promo_price = $normal_price - $check_promotion_prodcut["amt"];
                                         } else {
                                             $promo_price = $normal_price - ($normal_price * $check_promotion_prodcut["percentage"] / 100);
+                                        }
+                                        if ($promo_price <= 0) {
+                                            $promo_price = 0;
                                         }
                                         $price_display = $promo_price;
                                     } else {

@@ -79,6 +79,9 @@
             } else {
                 $promo_price = $normal_price - ($normal_price * $check_promotion_prodcut["percentage"] / 100);
             }
+            if ($promo_price <= 0) {
+                $promo_price = 0;
+            }
             $hidden_promo = "";
             $price_display = $promo_price;
         } else {
@@ -374,6 +377,9 @@
                                         $promo_price = $normal_price - $check_promotion_prodcut["amt"];
                                     } else {
                                         $promo_price = $normal_price - ($normal_price * $check_promotion_prodcut["percentage"] / 100);
+                                    }
+                                    if ($promo_price <= 0) {
+                                        $promo_price = 0;
                                     }
                                     $hidden_promo = "";
                                     $price_display = $promo_price;
