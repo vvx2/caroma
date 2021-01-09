@@ -160,11 +160,13 @@ if (!empty($postedToken)) {
                                     //--------------------------
                                     //       for email
                                     //--------------------------
+                                    // $order_detail = array("order" => $order, "order_item" => $order_item, "server_path" => $server_path);
 
                                     //To address and name
                                     $mail->addAddress($user_email);
                                     $mail->Subject = "REGISTER SUCCESSFUL";
                                     $mail->Body = "Congratulations on successful registration";
+                                    // $mail->Body = get_include_contents('../administrator/mail/purchase_success_mail.php', $order_detail);
                                     $mail->send();
                                     // if (!$mail->send()) {
                                     //     echo "Mailer Error: " . $mail->ErrorInfo;
