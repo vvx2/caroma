@@ -68,37 +68,37 @@
                             <form role="form" id="form_user" action="administrator/user_register.php?type=user_register&tb=user" method="post" enctype="multipart/form-data">
                                 <input type="hidden" name="token" id="form_token" value="<?php echo $token; ?>" />
                                 <p class="form-row">
-                                    <div class="col-sm-6 col-12 no-padding-left">
+                                    <div class="col-sm-6 col-12 no-padding-left reg-height">
                                         <label class="label-width" for="name">Full Name</label>
                                         <input class="input-width" type="text" name="name" id="name" value="" placeholder="Your Name" >
                                         <span class="error_form" id="name_error_message"></span>
                                     </div>
-                                    <div class="col-sm-6 col-12 no-padding-left">
+                                    <div class="col-sm-6 col-12 no-padding-left reg-height">
                                         <label class="label-width" for="email">Email Address</label>
                                         <input class="input-width" type="email" name="email" id="email" value="" placeholder="Your email" >
                                         <span class="error_form" id="email_error_message"></span>
                                     </div>
-                                    <div class="col-sm-6 col-12 no-padding-left">
+                                    <div class="col-sm-6 col-12 no-padding-left reg-height">
                                         <label class="label-width" for="password">Password</label>
                                         <input class="input-width" type="password" name="password" id="password" value="" placeholder="Your Password" >
                                         <span class="error_form" id="password_error_message"></span>
                                     </div>
-                                    <div class="col-sm-6 col-12 no-padding-left">
+                                    <div class="col-sm-6 col-12 no-padding-left reg-height">
                                         <label class="label-width" for="c_password">Confirm Password</label>
                                         <input class="input-width" type="password" name="c_password" id="c_password" value="" placeholder="Confirm Password" >
                                         <span class="error_form" id="retype_password_error_message"></span>
                                     </div>
-                                    <div class="col-sm-12 col-12 no-padding-left">
+                                    <div class="col-sm-12 col-12 no-padding-left reg-height">
                                         <label class="label-width" for="contact">Contact Number</label>
                                         <input class="input-width" type="tel" name="contact" id="contact" value="" placeholder="Your Contact" >
                                         <span class="error_form" id="phone_error_message"></span>
                                     </div>
-                                    <div class="col-sm-12 col-12 no-padding-left">
+                                    <div class="col-sm-12 col-12 no-padding-left reg-height">
                                         <label class="label-width" for="address">Address</label>
                                         <input class="input-width" type="text" name="address" id="address" value="" placeholder="Your Address" >
                                         <span class="error_form" id="address_error_message"></span>
                                     </div>
-                                    <div class="col-sm-4 col-12 no-padding-left">
+                                    <div class="col-sm-4 col-12 no-padding-left reg-height">
                                         <label class="label-width" for="state">States</label>
                                         <select class="input-width error-select" style="border: 1px solid #e6e6e6;" name="state" id="state" tabindex="2" >
                                             <option data-option="" selected value="">Select State</option>
@@ -119,26 +119,20 @@
                                         </select>
                                         <span class="error_form" id="state_error_message"></span>
                                     </div>
-                                    <div class="col-sm-4 col-12 no-padding-left">
+                                    <div class="col-sm-4 col-12 no-padding-left reg-height">
                                         <label class="label-width" for="city">City</label>
                                         <input class="input-width" type="text" name="city" id="city" value="" placeholder="Your City" >
                                         <span class="error_form" id="city_error_message"></span>
                                     </div>
-                                    <div class="col-sm-4 col-12 no-padding-left">
+                                    <div class="col-sm-4 col-12 no-padding-left reg-height">
                                         <label class="label-width" for="postcode">Zip Code</label>
                                         <input class="input-width" type="text" name="postcode" maxlength="5" onkeypress=" return isNumber(event)" id="postcode" value="" placeholder="Your Zip Code" >
                                         <span class="error_form" id="zip_error_message"></span>
                                     </div>
-                                </p>
-                                <div class="row">
-                                    <div class="col-4"></div>
-
-                                    <div class="col-4 reg-style wrap-btn reg-button">
+                                    <div class="col-sm-12 col-12 no-padding-left reg-height reg-style wrap-btn reg-button">
                                         <button class="btn btn-submit btn-bold reg-but" type="submit" name="btnAction">Register Now</button>
                                     </div>
-
-                                    <div class="col-4"></div>
-                                </div>
+                                </p>
                             </form>
                         </div>
                     </div>

@@ -161,8 +161,8 @@
             <div class="product-tab z-index-20 sm-margin-top-61px xs-margin-top-80px">
                 <div class="container">
 
-                    <div class="biolife-title-box biolife-title-box__icon-at-top-style hidden-icon-on-mobile">
-                        <span class="icon-at-top biolife-icon icon-organic"></span>
+                    <div class="biolife-title-box biolife-title-box__icon-at-top-style">
+                        <span class="icon-at-top biolife-icon icon-capacity-about"></span>
                         <span class="subtitle">All the best item for You</span>
                         <h3 class="main-title">Bestseller Products</h3>
                     </div>
@@ -233,7 +233,7 @@
                                 $i++;
                             ?>
                                 <div id="category_<?php echo $cate['c_id']; ?>" class="tab-contain <?php echo $active_display; ?>">
-                                    <ul class="products-list biolife-carousel nav-center-02 nav-none-on-mobile eq-height-contain" data-slick='{"rows":1 ,"arrows":true,"dots":false,"infinite":true,"speed":400,"slidesMargin":10,"slidesToShow":4, "responsive":[{"breakpoint":1200, "settings":{ "slidesToShow": 4}},{"breakpoint":992, "settings":{ "slidesToShow": 3, "rows":2, "slidesMargin":20}},{"breakpoint":768, "settings":{ "slidesToShow": 2, "rows":2 ,"slidesMargin":15}}]}'>
+                                    <ul class="products-list biolife-carousel nav-center-02 nav-none-on-mobile eq-height-contain" data-slick='{"rows":1 ,"arrows":true,"dots":false,"infinite":false,"speed":400,"slidesMargin":10,"slidesToShow":4, "responsive":[{"breakpoint":1200, "settings":{ "slidesToShow": 4}},{"breakpoint":992, "settings":{ "slidesToShow": 3, "rows":2, "slidesMargin":20}},{"breakpoint":768, "settings":{ "slidesToShow": 2, "rows":2 ,"slidesMargin":15}}]}'>
                                         <?php
 
                                         $sqlorder = "rating DESC"; //this "rating" is count by quantity

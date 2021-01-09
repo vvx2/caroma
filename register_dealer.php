@@ -73,38 +73,45 @@
                             <form role="form" id="form_dealer" action="administrator/dealer_register.php?type=dealer_register&tb=dealer" method="post" enctype="multipart/form-data">
                                 <input type="hidden" name="token" id="form_token" value="<?php echo $token; ?>" />
                                 <p class="form-row">
-                                    <div class="col-sm-12 col-12 no-padding-left">
-                                        <label class="label-width" for="name">Distributor Code</label>
-                                        <input class="input-width" type="text" name="distributor_code" id="distributor_code" value="<?php echo $distrinbutor_code; ?>" placeholder="Enter Distributor Code" required>
+                                    <div class="col-sm-12 col-12 no-padding-left reg-height">
+                                        <label class="label-width" for="distributor_code">Distributor Code</label>
+                                        <input class="input-width" type="text" name="distributor_code" id="distributor_code" value="<?php echo $distrinbutor_code; ?>" placeholder="Enter Distributor Code" >
+                                        <span class="error_form" id="distributor_code_error_message"></span>
                                     </div>
-                                    <div class="col-sm-6 col-12 no-padding-left">
+                                    <div class="col-sm-6 col-12 no-padding-left reg-height">
                                         <label class="label-width" for="name">Full Name</label>
-                                        <input class="input-width" type="text" name="name" id="name" value="" placeholder="Your Name" required>
+                                        <input class="input-width" type="text" name="name" id="name" value="" placeholder="Your Name">
+                                        <span class="error_form" id="name_error_message"></span>
                                     </div>
-                                    <div class="col-sm-6 col-12 no-padding-left">
+                                    <div class="col-sm-6 col-12 no-padding-left reg-height">
                                         <label class="label-width" for="email">Email Address</label>
-                                        <input class="input-width" type="email" name="email" id="email" value="" placeholder="Your email" required>
+                                        <input class="input-width" type="email" name="email" id="email" value="" placeholder="Your email">
+                                        <span class="error_form" id="email_error_message"></span>
                                     </div>
-                                    <div class="col-sm-6 col-12 no-padding-left">
+                                    <div class="col-sm-6 col-12 no-padding-left reg-height">
                                         <label class="label-width" for="password">Password</label>
-                                        <input class="input-width" type="password" name="password" id="password" value="" placeholder="Your Password" required>
+                                        <input class="input-width" type="password" name="password" id="password" value="" placeholder="Your Password">
+                                        <span class="error_form" id="password_error_message"></span>
                                     </div>
-                                    <div class="col-sm-6 col-12 no-padding-left">
+                                    <div class="col-sm-6 col-12 no-padding-left reg-height">
                                         <label class="label-width" for="c_password">Confirm Password</label>
-                                        <input class="input-width" type="password" name="c_password" id="c_password" value="" placeholder="Confirm Password" required>
+                                        <input class="input-width" type="password" name="c_password" id="c_password" value="" placeholder="Confirm Password">
+                                        <span class="error_form" id="retype_password_error_message"></span>
                                     </div>
-                                    <div class="col-sm-12 col-12 no-padding-left">
+                                    <div class="col-sm-12 col-12 no-padding-left reg-height">
                                         <label class="label-width" for="contact">Contact Number</label>
-                                        <input class="input-width" type="tel" name="contact" id="contact" value="" placeholder="Your Contact" required>
+                                        <input class="input-width" type="tel" name="contact" id="contact" value="" placeholder="Your Contact">
+                                        <span class="error_form" id="phone_error_message"></span>
                                     </div>
-                                    <div class="col-sm-12 col-12 no-padding-left">
+                                    <div class="col-sm-12 col-12 no-padding-left reg-height">
                                         <label class="label-width" for="address">Address</label>
-                                        <input class="input-width" type="text" name="address" id="address" value="" placeholder="Your Address" required>
+                                        <input class="input-width" type="text" name="address" id="address" value="" placeholder="Your Address">
+                                        <span class="error_form" id="address_error_message"></span>
                                     </div>
-                                    <div class="col-sm-4 col-12 no-padding-left">
+                                    <div class="col-sm-4 col-12 no-padding-left reg-height">
                                         <label class="label-width" for="state">States</label>
-                                        <select class="input-width" style="border: 1px solid #e6e6e6;" name="state" tabindex="2" required>
-                                            <option data-option="" value="">Select State</option>
+                                        <select class="input-width error-select" style="border: 1px solid #e6e6e6;" name="state"  id="state" tabindex="2">
+                                            <option data-option="" selected value="">Select State</option>
                                             <?php
 
                                             $tb = "state";
@@ -120,17 +127,20 @@
                                             <?php
                                             } ?>
                                         </select>
+                                        <span class="error_form" id="state_error_message"></span>
                                     </div>
-                                    <div class="col-sm-4 col-12 no-padding-left">
+                                    <div class="col-sm-4 col-12 no-padding-left reg-height">
                                         <label class="label-width" for="city">City</label>
-                                        <input class="input-width" type="text" name="city" id="city" value="" placeholder="Your City" required>
+                                        <input class="input-width" type="text" name="city" id="city" value="" placeholder="Your City">
+                                        <span class="error_form" id="city_error_message"></span>
                                     </div>
-                                    <div class="col-sm-4 col-12 no-padding-left">
+                                    <div class="col-sm-4 col-12 no-padding-left reg-height">
                                         <label class="label-width" for="postcode">Zip Code</label>
-                                        <input class="input-width" type="text" name="postcode" id="postcode" value="" placeholder="Your Zip Code" required>
+                                        <input class="input-width" type="text" name="postcode" id="postcode" maxlength="5" onkeypress=" return isNumber(event)" value="" placeholder="Your Zip Code">
+                                        <span class="error_form" id="zip_error_message"></span>
                                     </div>
                                 </p>
-                                <div class="reg-style wrap-btn reg-button">
+                                <div class="col-sm-12 col-12 no-padding-left reg-height reg-style wrap-btn reg-button">
                                     <button class="btn btn-submit btn-bold reg-but" type="submit" name="btnAction">Register Now</button>
                                 </div>
                             </form>
@@ -165,6 +175,8 @@
     <script src="assets/js/slick.min.js"></script>
     <script src="assets/js/biolife.framework.js"></script>
     <script src="assets/js/functions.js"></script>
+    <script src="assets/js/register_dealer_validation.js"></script>
+    <script src="assets/js/numberic.js"></script>
     <script src="cart.js"></script>
     <script>
         $(document).ready(function() {

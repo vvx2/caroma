@@ -15,3 +15,4 @@
 <link rel="stylesheet" href="assets/css/style.css">
 <link rel="stylesheet" href="assets/css/main-color02.css">
 <link rel="stylesheet" href="assets/css/caroma-custom.css">
+<link rel="stylesheet" href="assets/css/reset.css">
