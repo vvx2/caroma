@@ -119,7 +119,7 @@ $PageName = "product";
                                     <hr>
                                     <div class="form-group">
                                         <label>Product Image</label>
-                                        <input class="form-control" type="file" name="img" accept=".jpg,.png,.jpeg,.pdf">
+                                        <input class="form-control" type="file" name="img[]" accept=".jpg,.png,.jpeg,.pdf" multiple="multiple">
                                         </span>
                                     </div>
 
@@ -200,8 +200,9 @@ $PageName = "product";
 
                                                     $btn_edit = '<a data-remote="ajax/product_edit.php?p=' . $product_id . '" class="btn btn-white btn-xs" data-toggle="modal" data-target="#myModal">Edit</a>';
                                                     $btn_delete = '<a data-remote="ajax/delete_data.php?p=' . $product_id . '&table=product&page=product" class="btn btn-white btn-xs" data-toggle="modal" data-target="#myModal">Delete</a>';
+                                                    $btn_img = '<a href="product_image.php?p=' . $product_id . '" target="_blank"  class="btn btn-white btn-xs">View All Images</a>';
 
-                                                    $btn_action = $btn_edit . $btn_delete;
+                                                    $btn_action = $btn_edit . $btn_delete . $btn_img;
 
                                                     $col = "*";
                                                     $table = "product_role_price";

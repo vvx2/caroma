@@ -159,12 +159,6 @@ $height = $product[0]['height'];
             <input class="weight" type="text" value="<?php echo $weight; ?>" name="weight">
         </div>
         <hr>
-        <div class="form-group">
-            <label>Product Image</label>
-            <input class="form-control" type="file" name="img" accept=".jpg,.png,.jpeg,.pdf">
-            </span>
-        </div>
-
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
