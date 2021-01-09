@@ -161,8 +161,8 @@
             <div class="product-tab z-index-20 sm-margin-top-61px xs-margin-top-80px">
                 <div class="container">
 
-                    <div class="biolife-title-box biolife-title-box__icon-at-top-style hidden-icon-on-mobile">
-                        <span class="icon-at-top biolife-icon icon-organic"></span>
+                    <div class="biolife-title-box biolife-title-box__icon-at-top-style">
+                        <span class="icon-at-top biolife-icon icon-capacity-about"></span>
                         <span class="subtitle">All the best item for You</span>
                         <h3 class="main-title">Bestseller Products</h3>
                     </div>
@@ -197,7 +197,12 @@
                                     </li>
 
                                 <?php } ?>
-
+                                <li class="tab-element">
+                                    <a href="#promotion" class="tab-link"><span class="biolife-icon icon-soy"></span>Promotion</a>
+                                </li>
+                                <li class="tab-element">
+                                    <a href="#new_arrival" class="tab-link"><span class="biolife-icon icon-chocolate"></span>New</a>
+                                </li>
                                 <!-- <li class="tab-element">
                                     <a href="#tab01_2nd" class="tab-link"><span class="biolife-icon icon-coffee"></span>Coffee</a>
                                 </li>
@@ -206,13 +211,9 @@
                                 </li>
                                 <li class="tab-element">
                                     <a href="#tab01_4th" class="tab-link"><span class="biolife-icon icon-coconut"></span>Coconut</a>
-                                </li>
-                                <li class="tab-element">
-                                    <a href="#tab01_5th" class="tab-link"><span class="biolife-icon icon-soy"></span>Soy</a>
-                                </li>
-                                <li class="tab-element">
-                                    <a href="#tab01_6th" class="tab-link"><span class="biolife-icon icon-chocolate"></span>Chocolate</a>
-                                </li> -->
+                                </li>-->
+
+
                             </ul>
                         </div>
                         <div class="tab-content">
@@ -232,7 +233,7 @@
                                 $i++;
                             ?>
                                 <div id="category_<?php echo $cate['c_id']; ?>" class="tab-contain <?php echo $active_display; ?>">
-                                    <ul class="products-list biolife-carousel nav-center-02 nav-none-on-mobile eq-height-contain" data-slick='{"rows":1 ,"arrows":true,"dots":false,"infinite":true,"speed":400,"slidesMargin":10,"slidesToShow":4, "responsive":[{"breakpoint":1200, "settings":{ "slidesToShow": 4}},{"breakpoint":992, "settings":{ "slidesToShow": 3, "rows":2, "slidesMargin":20}},{"breakpoint":768, "settings":{ "slidesToShow": 2, "rows":2 ,"slidesMargin":15}}]}'>
+                                    <ul class="products-list biolife-carousel nav-center-02 nav-none-on-mobile eq-height-contain" data-slick='{"rows":1 ,"arrows":true,"dots":false,"infinite":false,"speed":400,"slidesMargin":10,"slidesToShow":4, "responsive":[{"breakpoint":1200, "settings":{ "slidesToShow": 4}},{"breakpoint":992, "settings":{ "slidesToShow": 3, "rows":2, "slidesMargin":20}},{"breakpoint":768, "settings":{ "slidesToShow": 2, "rows":2 ,"slidesMargin":15}}]}'>
                                         <?php
 
                                         $sqlorder = "rating DESC"; //this "rating" is count by quantity
@@ -245,7 +246,7 @@
 
                                             $col = "*,dp.stock as dis_stock, p.stock as admin_stock, p.id as p_id, pt.name as pt_name, pt.description as pt_description, ct.name as ct_name, rate.rating as rating";
                                             $tb = "distributor_product dp left join product p on dp.product_id = p.id left join product_translation pt on p.id = pt.product_id left join product_role_price pp on p.id = pp.product_id left join category_translation ct on p.category = ct.category_id left join (SELECT product_id, (sum(qty) / count(product_id)) as rating FROM order_items where rate != 0 group by product_id) rate on p.id = rate.product_id " . $filter_table;
-                                            $opt = 'p.category = ? && dp.user_id = ? && pt.language = ? && pp.type =? && ct.language =? && dp.status =?' . $filter_opt . ' ORDER BY ' . $sqlorder . ' LIMIT 6 OFFSET ' . $offset . '';
+                                            $opt = 'p.category = ? && dp.user_id = ? && pt.language = ? && pp.type =? && ct.language =? && dp.status =?' . $filter_opt . ' ORDER BY ' . $sqlorder;
                                             $arr = $filter_arr;
                                             $hot_result = $db->advwhere($col, $tb, $opt, $arr);
                                         } else {
@@ -257,7 +258,7 @@
 
                                             $col = "*, p.id as p_id, pt.name as pt_name, pt.description as pt_description, ct.name as ct_name, rate.rating as rating";
                                             $tb = " product p left join product_translation pt on p.id = pt.product_id left join product_role_price pp on p.id = pp.product_id left join category_translation ct on p.category = ct.category_id left join (SELECT product_id, (sum(qty) / count(product_id)) as rating FROM order_items where rate != 0 group by product_id) rate on p.id = rate.product_id " . $filter_table;
-                                            $opt = 'p.category = ? && pt.language = ? && pp.type =? && ct.language =? && p.status =?' . $filter_opt . ' ORDER BY ' . $sqlorder . ' LIMIT 6 OFFSET ' . $offset . '';
+                                            $opt = 'p.category = ? && pt.language = ? && pp.type =? && ct.language =? && p.status =?' . $filter_opt . ' ORDER BY ' . $sqlorder;
                                             $arr = $filter_arr;
                                             $hot_result = $db->advwhere($col, $tb, $opt, $arr);
                                         }
@@ -278,6 +279,9 @@
                                                     } else {
                                                         $promo_price = $normal_price - ($normal_price * $check_promotion_prodcut["percentage"] / 100);
                                                     }
+                                                    if ($promo_price <= 0) {
+                                                        $promo_price = 0;
+                                                    }
                                                     $hidden_promo = "";
                                                     $price_display = $promo_price;
                                                 } else {
@@ -295,13 +299,13 @@
                                                 <div class="contain-product layout-default">
                                                     <div class="product-thumb">
                                                         <a href="products-detail.php?p=<?php echo $hot['p_id']; ?>" class="link-to-product">
-                                                            <img src="img/product/<?php echo $hot['image']; ?>" alt="<?php echo $hot['ct_name']; ?>" width="270" height="270" class="product-thumnail">
+                                                            <img src="img/product/<?php echo $hot['image']; ?>" alt="<?php echo $hot['pt_name']; ?>" width="270" height="270" class="product-thumnail">
                                                         </a>
                                                         <a class="lookup btn_call_quickview" href="products-detail.php?p=<?php echo $hot['p_id']; ?>"><i class="biolife-icon icon-search"></i></a>
                                                     </div>
                                                     <div class="info">
                                                         <b class="categories"><?php echo $hot['ct_name']; ?></b>
-                                                        <h4 class="product-title"><a href="products-detail.php?p=<?php echo $hot['p_id']; ?>" class="pr-name"><?php echo $hot['ct_name']; ?></a></h4>
+                                                        <h4 class="product-title"><a href="products-detail.php?p=<?php echo $hot['p_id']; ?>" class="pr-name"><?php echo $hot['pt_name']; ?></a></h4>
                                                         <div class="price ">
                                                             <ins><span class="price-amount"><span class="currencySymbol">RM</span><?php echo number_format($price_display, 2); ?></span></ins>
                                                             <del class="<?php echo $hidden_promo; ?>"><span class="price-amount"><span class="currencySymbol">RM</span><?php echo number_format($normal_price, 2); ?></span></del>
@@ -323,6 +327,158 @@
                                     </ul>
                                 </div>
                             <?php } ?>
+
+                            <div id="new_arrival" class="tab-contain">
+                                <ul class="products-list biolife-carousel nav-center-02 nav-none-on-mobile eq-height-contain" data-slick='{"rows":1 ,"arrows":true,"dots":false,"infinite":true,"speed":400,"slidesMargin":10,"slidesToShow":4, "responsive":[{"breakpoint":1200, "settings":{ "slidesToShow": 4}},{"breakpoint":992, "settings":{ "slidesToShow": 3, "rows":2, "slidesMargin":20}},{"breakpoint":768, "settings":{ "slidesToShow": 2, "rows":2 ,"slidesMargin":15}}]}'>
+                                    <?php
+
+                                    $sqlorder = "rating DESC"; //this "rating" is count by quantity
+                                    $offset = 0;
+                                    if ($user_type == 3) {
+
+                                        $filter_table = "";
+                                        $filter_opt = " ";
+                                        $filter_arr = array($cate['c_id'], $admin_id, $language, $user_type, $language, 1);
+
+                                        $col = "*,dp.stock as dis_stock, p.stock as admin_stock, p.id as p_id, pt.name as pt_name, pt.description as pt_description, ct.name as ct_name, rate.rating as rating";
+                                        $tb = "new_arrival na left join distributor_product dp on na.product_id = dp.product_id left join product p on dp.product_id = p.id left join product_translation pt on p.id = pt.product_id left join product_role_price pp on p.id = pp.product_id left join category_translation ct on p.category = ct.category_id left join (SELECT product_id, (sum(qty) / count(product_id)) as rating FROM order_items where rate != 0 group by product_id) rate on p.id = rate.product_id " . $filter_table;
+                                        $opt = 'p.category = ? && dp.user_id = ? && pt.language = ? && pp.type =? && ct.language =? && dp.status =?' . $filter_opt . ' ORDER BY ' . $sqlorder;
+                                        $arr = $filter_arr;
+                                        $new_arrival_result = $db->advwhere($col, $tb, $opt, $arr);
+                                    } else {
+
+                                        $filter_table = "";
+                                        $filter_opt = " ";
+                                        $filter_arr = array($language, $user_type, $language, 1);
+                                        $check_sql = "none";
+
+                                        $col = "*, p.id as p_id, pt.name as pt_name, pt.description as pt_description, ct.name as ct_name, rate.rating as rating";
+                                        $tb = "new_arrival na left join product p on na.product_id = p.id left join product_translation pt on p.id = pt.product_id left join product_role_price pp on p.id = pp.product_id left join category_translation ct on p.category = ct.category_id left join (SELECT product_id, (sum(qty) / count(product_id)) as rating FROM order_items where rate != 0 group by product_id) rate on p.id = rate.product_id " . $filter_table;
+                                        $opt = 'pt.language = ? && pp.type =? && ct.language =? && p.status =?' . $filter_opt . ' ORDER BY ' . $sqlorder;
+                                        $arr = $filter_arr;
+                                        $new_arrival_result = $db->advwhere($col, $tb, $opt, $arr);
+                                    }
+                                    foreach ($new_arrival_result as $new) {
+
+                                        $normal_price = $new['price'];
+                                        if ($user_type == 1) {
+                                            $col = "*, DATE_ADD(end, INTERVAL 1 DAY) as new_end_date";
+                                            $tb = "promotion pr left join promotion_product prp on pr.id = prp.promotion_id";
+                                            $opt = 'prp.product_id = ? && start <= ? && DATE_ADD(end, INTERVAL 1 DAY) >= ? ORDER BY date_modified';
+                                            $arr = array($new['p_id'], $time, $time);
+                                            $check_promotion_prodcut = $db->advwhere($col, $tb, $opt, $arr);
+
+                                            if (count($check_promotion_prodcut) != 0) {
+                                                $check_promotion_prodcut = $check_promotion_prodcut[0];
+                                                if ($check_promotion_prodcut["type"] == 1) {
+                                                    $promo_price = $normal_price - $check_promotion_prodcut["amt"];
+                                                } else {
+                                                    $promo_price = $normal_price - ($normal_price * $check_promotion_prodcut["percentage"] / 100);
+                                                }
+                                                if ($promo_price <= 0) {
+                                                    $promo_price = 0;
+                                                }
+                                                $hidden_promo = "";
+                                                $price_display = $promo_price;
+                                            } else {
+                                                $hidden_promo = "hidden";
+                                                $price_display = $normal_price;
+                                            }
+                                        } else {
+                                            $hidden_promo = "hidden";
+                                            $price_display = $normal_price;
+                                        }
+
+                                    ?>
+
+                                        <li class="product-item">
+                                            <div class="contain-product layout-default">
+                                                <div class="product-thumb">
+                                                    <a href="products-detail.php?p=<?php echo $new['p_id']; ?>" class="link-to-product">
+                                                        <img src="img/product/<?php echo $new['image']; ?>" alt="<?php echo $new['pt_name']; ?>" width="270" height="270" class="product-thumnail">
+                                                    </a>
+                                                    <a class="lookup btn_call_quickview" href="products-detail.php?p=<?php echo $new['p_id']; ?>"><i class="biolife-icon icon-search"></i></a>
+                                                </div>
+                                                <div class="info">
+                                                    <b class="categories"><?php echo $new['ct_name']; ?></b>
+                                                    <h4 class="product-title"><a href="products-detail.php?p=<?php echo $new['p_id']; ?>" class="pr-name"><?php echo $new['pt_name']; ?></a></h4>
+                                                    <div class="price ">
+                                                        <ins><span class="price-amount"><span class="currencySymbol">RM</span><?php echo number_format($price_display, 2); ?></span></ins>
+                                                        <del class="<?php echo $hidden_promo; ?>"><span class="price-amount"><span class="currencySymbol">RM</span><?php echo number_format($normal_price, 2); ?></span></del>
+                                                    </div>
+                                                    <div class="slide-down-box">
+                                                        <p class="message">All products are carefully selected to ensure food safety.</p>
+                                                        <div class="buttons">
+                                                            <button class="btn add-to-cart-btn btnAddCart" style="width: 100%;" data-value="<?php echo $new['p_id']; ?>"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i>add to cart</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+
+                                    <?php
+                                    }
+                                    ?>
+
+                                </ul>
+                            </div>
+
+                            <div id="promotion" class="tab-contain">
+                                <ul class="products-list biolife-carousel nav-center-02 nav-none-on-mobile eq-height-contain" data-slick='{"rows":1 ,"arrows":true,"dots":false,"infinite":true,"speed":400,"slidesMargin":10,"slidesToShow":4, "responsive":[{"breakpoint":1200, "settings":{ "slidesToShow": 4}},{"breakpoint":992, "settings":{ "slidesToShow": 3, "rows":2, "slidesMargin":20}},{"breakpoint":768, "settings":{ "slidesToShow": 2, "rows":2 ,"slidesMargin":15}}]}'>
+                                    <?php
+
+                                    $col = "*, DATE_ADD(end, INTERVAL 1 DAY) as new_end_date";
+                                    $tb = "promotion";
+                                    $opt = 'start <= ? && DATE_ADD(end, INTERVAL 1 DAY) >= ? ORDER BY date_modified';
+                                    $arr = array($time, $time);
+                                    $promotion_result = $db->advwhere($col, $tb, $opt, $arr);
+
+
+                                    $promotion_result = $promotion_result[0];
+
+                                    $col = "*, p.id as p_id, pt.name as pt_name, pt.description as pt_description, ct.name as ct_name, rate.rating as rating";
+                                    $tb = " promotion_product prp left join product p on prp.product_id = p.id left join product_translation pt on p.id = pt.product_id left join product_role_price pp on p.id = pp.product_id left join category_translation ct on p.category = ct.category_id left join (SELECT product_id, (sum(qty) / count(product_id)) as rating FROM order_items where rate != 0 group by product_id) rate on p.id = rate.product_id ";
+                                    $opt = 'prp.promotion_id = ? && pt.language = ? && pp.type =? && ct.language =? && p.status =? ORDER BY rating DESC LIMIT 6';
+                                    $arr = array($promotion_result['id'], $language, $user_type, $language, 1);
+                                    $promotion_product_result = $db->advwhere($col, $tb, $opt, $arr);
+
+
+                                    foreach ($promotion_product_result as $promo) {
+
+                                    ?>
+
+                                        <li class="product-item">
+                                            <div class="contain-product layout-default">
+                                                <div class="product-thumb">
+                                                    <a href="products-detail.php?p=<?php echo $promo['p_id']; ?>" class="link-to-product">
+                                                        <img src="img/product/<?php echo $promo['image']; ?>" alt="<?php echo $promo['pt_name']; ?>" width="270" height="270" class="product-thumnail">
+                                                    </a>
+                                                    <a class="lookup btn_call_quickview" href="products-detail.php?p=<?php echo $promo['p_id']; ?>"><i class="biolife-icon icon-search"></i></a>
+                                                </div>
+                                                <div class="info">
+                                                    <b class="categories"><?php echo $promo['ct_name']; ?></b>
+                                                    <h4 class="product-title"><a href="products-detail.php?p=<?php echo $promo['p_id']; ?>" class="pr-name"><?php echo $promo['pt_name']; ?></a></h4>
+                                                    <div class="price ">
+                                                        <ins><span class="price-amount"><span class="currencySymbol">RM</span><?php echo number_format($price_display, 2); ?></span></ins>
+                                                        <del class="<?php echo $hidden_promo; ?>"><span class="price-amount"><span class="currencySymbol">RM</span><?php echo number_format($normal_price, 2); ?></span></del>
+                                                    </div>
+                                                    <div class="slide-down-box">
+                                                        <p class="message">All products are carefully selected to ensure food safety.</p>
+                                                        <div class="buttons">
+                                                            <button class="btn add-to-cart-btn btnAddCart" style="width: 100%;" data-value="<?php echo $promo['p_id']; ?>"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i>add to cart</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+
+                                    <?php
+                                    }
+                                    ?>
+
+                                </ul>
+                            </div>
+
                         </div>
                     </div>
 
@@ -341,29 +497,12 @@
                                 <ul class="products biolife-carousel nav-top-right nav-none-on-mobile" data-slick='{"arrows":true, "autoplaySpeed": 5000, "autoplay": true, "dots":false, "infinite":false, "speed":400, "slidesMargin":30, "slidesToShow":1}'>
                                     <?php
 
-
-
-                                    $col = "*, DATE_ADD(end, INTERVAL 1 DAY) as new_end_date";
-                                    $tb = "promotion";
-                                    $opt = 'start <= ? && DATE_ADD(end, INTERVAL 1 DAY) >= ? ORDER BY date_modified';
-                                    $arr = array($time, $time);
-                                    $promotion_result = $db->advwhere($col, $tb, $opt, $arr);
-
                                     if ($user_type == 1) {
 
 
                                         if (count($promotion_result) == 0) {
                                             echo "<p class='title text-info'>PROMOTION IS COMMING SOON</p>";
                                         } else {
-                                            $promotion_result = $promotion_result[0];
-
-                                            $col = "*, p.id as p_id, pt.name as pt_name, pt.description as pt_description, ct.name as ct_name, rate.rating as rating";
-                                            $tb = " promotion_product prp left join product p on prp.product_id = p.id left join product_translation pt on p.id = pt.product_id left join product_role_price pp on p.id = pp.product_id left join category_translation ct on p.category = ct.category_id left join (SELECT product_id, (sum(qty) / count(product_id)) as rating FROM order_items where rate != 0 group by product_id) rate on p.id = rate.product_id ";
-                                            $opt = 'prp.promotion_id = ? && pt.language = ? && pp.type =? && ct.language =? && p.status =? ORDER BY rating DESC LIMIT 6';
-                                            $arr = array($promotion_result['id'], $language, $user_type, $language, 1);
-                                            $promotion_product_result = $db->advwhere($col, $tb, $opt, $arr);
-
-
 
                                             foreach ($promotion_product_result as $promo) {
 
@@ -388,6 +527,11 @@
 
                                                                         $promo_price = $normal_price - ($normal_price * $promotion_result["percentage"] / 100);
                                                                         echo $promotion_result["percentage"] . "%";
+                                                                    }
+
+
+                                                                    if ($promo_price <= 0) {
+                                                                        $promo_price = 0;
                                                                     }
                                                                     ?>
                                                                 </span>
@@ -481,6 +625,9 @@
                                                     $promo_price = $normal_price - $check_promotion_prodcut["amt"];
                                                 } else {
                                                     $promo_price = $normal_price - ($normal_price * $check_promotion_prodcut["percentage"] / 100);
+                                                }
+                                                if ($promo_price <= 0) {
+                                                    $promo_price = 0;
                                                 }
                                                 $hidden_promo = "";
                                                 $price_display = $promo_price;

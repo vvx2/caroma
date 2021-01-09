@@ -22,6 +22,17 @@ if ($server == 1) { //1= local, 2 = staging, 3 = live;
     $server_path = "http://www.staging4.caroma.com.my/";
 }
 
+//-------------------------------------
+//         email setting
+//-------------------------------------
+
+$email_host = "mail.caroma.com.my";
+$email_username = "test@caroma.com.my";
+$email_password = "=HV[GXQv+7l?";
+$email_from = "info@caroma.com.my";
+$email_from_name = "Caroma Team";
+
+//-------------------------------------
 
 try {
     $dbh = new PDO(host, username, pass); // initialize pdo

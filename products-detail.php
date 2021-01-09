@@ -79,6 +79,9 @@
             } else {
                 $promo_price = $normal_price - ($normal_price * $check_promotion_prodcut["percentage"] / 100);
             }
+            if ($promo_price <= 0) {
+                $promo_price = 0;
+            }
             $hidden_promo = "";
             $price_display = $promo_price;
         } else {
@@ -150,7 +153,25 @@
                 <div class="sumary-product single-layout">
                     <div class="media">
                         <ul class="biolife-carousel slider-for" data-slick='{"arrows":false,"dots":false,"slidesMargin":30,"slidesToShow":1,"slidesToScroll":1,"fade":true,"asNavFor":".slider-nav"}'>
-                            <li><img src="img/product/<?php echo $result['image']; ?>" alt="" width="400" height="400"></li>
+                            <?php
+                            $col = "*";
+                            $tb = "product_image";
+                            $opt = 'product_id = ?';
+                            $arr = array($product_id);
+                            $product_image = $db->advwhere($col, $tb, $opt, $arr);
+
+                            foreach ($product_image as $img) {
+                            ?>
+                                <li><img src="img/product/<?php echo $img['image']; ?>" alt="" width="400" height="400"></li>
+                            <?php } ?>
+                        </ul>
+                        <ul class="biolife-carousel slider-nav" data-slick='{"arrows":false,"dots":false,"centerMode":false,"focusOnSelect":true,"slidesMargin":10,"slidesToShow":4,"slidesToScroll":1,"asNavFor":".slider-for"}'>
+                            <?php
+                            foreach ($product_image as $img) {
+                            ?>
+                                <li><img src="img/product/<?php echo $img['image']; ?>" alt="" width="88" height="88"></li>
+                            <?php } ?>
+
                         </ul>
                     </div>
                     <div class="product-attribute">
@@ -375,6 +396,9 @@
                                     } else {
                                         $promo_price = $normal_price - ($normal_price * $check_promotion_prodcut["percentage"] / 100);
                                     }
+                                    if ($promo_price <= 0) {
+                                        $promo_price = 0;
+                                    }
                                     $hidden_promo = "";
                                     $price_display = $promo_price;
                                 } else {
@@ -392,13 +416,13 @@
                                 <div class="contain-product layout-default">
                                     <div class="product-thumb">
                                         <a href="products-detail.php?p=<?php echo $hot['p_id']; ?>" class="link-to-product">
-                                            <img src="img/product/<?php echo $hot['image']; ?>" alt="<?php echo $hot['ct_name']; ?>" width="270" height="270" class="product-thumnail">
+                                            <img src="img/product/<?php echo $hot['image']; ?>" alt="<?php echo $hot['pt_name']; ?>" width="270" height="270" class="product-thumnail">
                                         </a>
                                         <a class="lookup btn_call_quickview" href="products-detail.php?p=<?php echo $hot['p_id']; ?>"><i class="biolife-icon icon-search"></i></a>
                                     </div>
                                     <div class="info">
                                         <b class="categories"><?php echo $hot['ct_name']; ?></b>
-                                        <h4 class="product-title"><a href="products-detail.php?p=<?php echo $hot['p_id']; ?>" class="pr-name"><?php echo $hot['ct_name']; ?></a></h4>
+                                        <h4 class="product-title"><a href="products-detail.php?p=<?php echo $hot['p_id']; ?>" class="pr-name"><?php echo $hot['pt_name']; ?></a></h4>
                                         <div class="price ">
                                             <ins><span class="price-amount"><span class="currencySymbol">RM</span><?php echo number_format($price_display, 2); ?></span></ins>
                                             <del class="<?php echo $hidden_promo; ?>"><span class="price-amount"><span class="currencySymbol">RM</span><?php echo number_format($normal_price, 2); ?></span></del>

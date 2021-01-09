@@ -4,21 +4,21 @@ $(function() {
    $("#email_error_message").hide();
    $("#password_error_message").hide();
    $("#retype_password_error_message").hide();
- $("#phone_error_message").hide();
- $("#address_error_message").hide();
- $("#zip_error_message").hide();
- $("#city_error_message").hide();
- $("#state_error_message").hide();
+   $("#phone_error_message").hide();
+   $("#address_error_message").hide();
+   $("#zip_error_message").hide();
+   $("#city_error_message").hide();
+   $("#state_error_message").hide();
 
    var error_name = false;
    var error_email = false;
    var error_password = false;
    var error_retype_password = false;
- var error_phone = false;
- var error_address = false;
- var error_zip = false;
- var error_city = false;
- var error_state = false;
+   var error_phone = false;
+   var error_address = false;
+   var error_zip = false;
+   var error_city = false;
+   var error_state = false;
  
 
    $("#name").focusout(function(){
@@ -33,13 +33,13 @@ $(function() {
    $("#c_password").focusout(function() {
       check_retype_password();
    });
- $("#contact").focusout(function(){
+   $("#contact").focusout(function(){
       check_phone();
    });
- $("#address").focusout(function() {
+   $("#address").focusout(function() {
       check_address();
    });
- $("#postcode").focusout(function() {
+   $("#postcode").focusout(function() {
       check_zip();
    });
    $("#city").focusout(function() {
@@ -65,19 +65,20 @@ $(function() {
 
 
    function check_password() {
-      var password_length = $("#password").val().length;
-      if (password_length < 8) {
-         $("#password_error_message").html("Atleast 8 Characters");
-         $("#password_error_message").show();
-         $("#password").css("border-bottom","2px solid #F90A0A");
-         error_password = true;
-      } else {
-         $("#password_error_message").hide();
-         $("#password").css("border-bottom","2px solid #34F458");
-      }
-   }
-
-   function check_retype_password() {
+        var pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$@!%&*?])[A-Za-z\d#$@!%&*?]{8,30}$/;
+       var password_length = $("#password").val();
+       if (pattern.test(password_length) && password_length !== '') {
+        $("#password_error_message").hide();
+        $("#password").css("border-bottom","2px solid #34F458");
+       } else {
+          $("#password_error_message").html("Atleast 8 Characters & uppercase letter & lowercase letter & special character & number.");
+          $("#password_error_message").show();
+          $("#password").css("border-bottom","2px solid #F90A0A");
+          error_password = true;
+       }
+    }
+ 
+    function check_retype_password() {
       var password = $("#password").val();
       var retype_password = $("#c_password").val();
    if (retype_password == ''){
@@ -187,20 +188,20 @@ $(function() {
  
 
    $("#form_user").submit(function() {
-      error_name = false;
-      error_email = false;
-      error_password = false;
-      error_retype_password = false;
+   error_name = false;
+   error_email = false;
+   error_password = false;
+   error_retype_password = false;
    error_phone = false;
    error_address = false;
    error_zip = false;
    error_city = false;
    error_state = false;
 
-      check_name();
-      check_email();
-      check_password();
-      check_retype_password();
+   check_name();
+   check_email();
+   check_password();
+   check_retype_password();
    check_phone();
    check_address();
    check_zip();

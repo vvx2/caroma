@@ -116,7 +116,7 @@ if (!empty($postedToken)) {
                                 //  get user id inserted
                                 //--------------------------
                                 $table = "users";
-                                $col = "id";
+                                $col = "id,email";
                                 $opt = 'date_created = ?';
                                 $arr = array($time);
                                 $user = $db->advwhere($col, $table, $opt, $arr);
@@ -145,26 +145,28 @@ if (!empty($postedToken)) {
                                     $mail = new PHPMailer;
                                     // $mail->SMTPDebug = 3;
                                     $mail->isSMTP();
-                                    $mail->Host = "mail.caroma.com.my";
+                                    $mail->Host = $email_host;
                                     $mail->SMTPAuth = true;
-                                    $mail->Username = "test@caroma.com.my";
-                                    $mail->Password = "=HV[GXQv+7l?";
+                                    $mail->Username = $email_username;
+                                    $mail->Password = $email_password;
                                     $mail->SMTPSecure = "tls";
                                     $mail->Port = "587";
                                     //Send HTML or Plain Text email
                                     $mail->isHTML(true);
                                     //From email address and name
-                                    $mail->From = "test@caroma.com.my";
-                                    $mail->FromName = "Caroma Team";
+                                    $mail->From = $email_from;
+                                    $mail->FromName = $email_from_name;
 
                                     //--------------------------
                                     //       for email
                                     //--------------------------
+                                    // $order_detail = array("order" => $order, "order_item" => $order_item, "server_path" => $server_path);
 
                                     //To address and name
                                     $mail->addAddress($user_email);
                                     $mail->Subject = "REGISTER SUCCESSFUL";
                                     $mail->Body = "Congratulations on successful registration";
+                                    // $mail->Body = get_include_contents('../administrator/mail/purchase_success_mail.php', $order_detail);
                                     $mail->send();
                                     // if (!$mail->send()) {
                                     //     echo "Mailer Error: " . $mail->ErrorInfo;

@@ -140,6 +140,15 @@ class DB_FUNCTIONS
 		return $result;
 	}
 
+	function delall($tablename, $data, $array)
+	{
+		global $conn;
+		$stmt = $conn->prepare("DELETE FROM `$tablename` WHERE $data != $array");
+		$result = $stmt->execute();
+		return $result;
+	}
+
+
 	function advdel($tablename, $opt, $arr)
 	{
 		global $conn;

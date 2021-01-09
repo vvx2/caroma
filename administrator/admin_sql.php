@@ -232,29 +232,11 @@ if (!empty($postedToken)) {
             window.location.href='product.php';</script>";
           } else {
 
-            //------------------------------------------
-            //			Image Upload Start - img
-            //------------------------------------------
-            if ($_FILES["img"]["error"] > 0) {
-              echo "<script>alert('error');</script>";
-            } else {
 
-
-              if (file_exists("../img/product/" . $_FILES["img"]["name"])) {
-                echo "<script>alert('exist');</script>";
-              } else {
-                $temp = explode(".", $_FILES["img"]["name"]);
-                $newfilename = 'PROD' . round(microtime(true)) . '.' . end($temp);
-                move_uploaded_file($_FILES["img"]["tmp_name"], "../img/product/" . $newfilename);
-              }
-            }
-            //------------------------------------------
-            //			Image Upload End - img
-            //------------------------------------------
 
             $table = "product";
             $colname = array("point", "point_allow_discount", "stock", "category", "length",  "width",  "height",  "weight",  "image", "status", "date_created", "date_modified");
-            $array = array($point, $point_allow_discount, $stock, $category, $length, $width, $height, $weight, $newfilename, 1, $time, $time);
+            $array = array($point, $point_allow_discount, $stock, $category, $length, $width, $height, $weight, "", 1, $time, $time);
             $result_product = $db->insert($table, $colname, $array);
 
             if ($result_product) {
@@ -269,6 +251,59 @@ if (!empty($postedToken)) {
               $product = $db->advwhere($col, $table, $opt, $arr);
               $product_id = $product[0]['id'];
               //--------------------------
+
+
+              //------------------------------------------
+              //			Image Upload Start - img
+              //------------------------------------------
+              // if ($_FILES["img"]["error"] > 0) {
+              //   echo "<script>alert('error');</script>";
+              // } else {
+
+              //   if (file_exists("../img/product/" . $_FILES["img"]["name"])) {
+              //     echo "<script>alert('exist');</script>";
+              //   } else {
+              //     $temp = explode(".", $_FILES["img"]["name"]);
+              //     $newfilename = 'PROD' . round(microtime(true)) . '.' . end($temp);
+              //     move_uploaded_file($_FILES["img"]["tmp_name"], "../img/product/" . $newfilename);
+              //   }
+              // }
+
+              $files = array_filter($_FILES['img']['name']); //Use something similar before processing files.
+              // Count the number of uploaded files in array
+              $total_count = count($_FILES['img']['name']);
+              // Loop through every file
+              for ($i = 0; $i < $total_count; $i++) {
+                //The temp file path is obtained
+                $tmpFilePath = $_FILES['img']['tmp_name'][$i];
+                //A file path needs to be present
+                if ($tmpFilePath != "") {
+                  //Setup our new file path
+                  $temp = explode(".", $_FILES['img']['name'][$i]);
+                  $newfilename = 'PROD' . round(microtime(true)) . $i . '.' . end($temp);
+                  $newFilePath = "../img/product/" . $newfilename;
+                  //File is uploaded to temp dir
+                  if (move_uploaded_file($tmpFilePath, $newFilePath)) {
+                    //Other code goes here
+                    if ($i == 0) {
+                      $table = "product";
+                      $data = "image = ? WHERE id = ?";
+                      $array = array($newfilename, $product_id);
+                      $result_update_image = $db->update($table, $data, $array);
+                    }
+                    $table = "product_image";
+                    $colname = array("image", "product_id");
+                    $array = array($newfilename, $product_id);
+                    $result_insert_multi_image = $db->insert($table, $colname, $array);
+                  }
+                }
+              }
+
+
+
+              //------------------------------------------
+              //			Image Upload End - img
+              //------------------------------------------
 
 
               //--------------------------
@@ -343,35 +378,12 @@ if (!empty($postedToken)) {
           //------------------------------------------------------------------------------------
           //			Update product detail
           //------------------------------------------------------------------------------------
-          if (!file_exists($_FILES['img']['tmp_name']) || !is_uploaded_file($_FILES['img']['tmp_name'])) { // no upload file will not update img name
-            $table = "product";
-            $data = "point =?, point_allow_discount=?, stock =?, category =?, length =?, width =?, height =?, weight =?, status =?, date_modified = ? WHERE id = ?";
-            $array = array($point, $point_allow_discount, $stock, $category, $length, $width, $height, $weight, $status, $time, $product_id);
-            $result_product = $db->update($table, $data, $array);
-          } else {
-            //------------------------------------------
-            //			Image Upload Start - img
-            //------------------------------------------
-            if ($_FILES["img"]["error"] > 0) {
-              echo "<script>alert('error');</script>";
-            } else {
-              if (file_exists("../img/product/" . $_FILES["img"]["name"])) {
-                echo "<script>alert('exist');</script>";
-              } else {
-                $temp = explode(".", $_FILES["img"]["name"]);
-                $newfilename = 'PROD' . round(microtime(true)) . '.' . end($temp);
-                move_uploaded_file($_FILES["img"]["tmp_name"], "../img/product/" . $newfilename);
-              }
-            }
-            //------------------------------------------
-            //			Image Upload End - img
-            //------------------------------------------
 
-            $table = "product";
-            $data = "point =?,point_allow_discount=?, stock =?, category =?, length =?, width =?, height =?, weight =?, image =?, status =?, date_modified = ? WHERE id = ?";
-            $array = array($point, $point_allow_discount, $stock, $category, $length, $width, $height, $weight, $newfilename, $status, $time, $product_id);
-            $result_product = $db->update($table, $data, $array);
-          }
+          $table = "product";
+          $data = "point =?, point_allow_discount=?, stock =?, category =?, length =?, width =?, height =?, weight =?, status =?, date_modified = ? WHERE id = ?";
+          $array = array($point, $point_allow_discount, $stock, $category, $length, $width, $height, $weight, $status, $time, $product_id);
+          $result_product = $db->update($table, $data, $array);
+
           //------------------------------------------------------------------------------------
 
           if ($result_product) {
@@ -417,6 +429,120 @@ if (!empty($postedToken)) {
           } else {
             echo "<script>alert(\" Edit Product Fail, PLease Try Again. \");
               window.location.href='product.php';</script>";
+          }
+        }
+      } else if ($type == "product_image_set_primary") {
+        if (isset($_POST['btnAction'])) {
+
+          $image_id = $_POST['btnAction'];
+
+          $col = "*";
+          $tb = "product_image";
+          $opt = 'id = ?';
+          $arr = array($image_id);
+          $product_image = $db->advwhere($col, $tb, $opt, $arr);
+
+          if (count($product_image) != 0) {
+            $product_id = $product_image[0]['product_id'];
+            $image_name = $product_image[0]['image'];
+          } else {
+            echo "<script>alert(\" Setting Product Image Fail. Cant Get Product Details. Please try again.\");
+                      window.location.href='product_image.php?p=$product_id';</script>";
+            exit();
+          }
+
+          $table = "product";
+          $data = " image = ?, date_modified =? WHERE id = ? ";
+          $array = array($image_name, $time, $product_id);
+          $result_set_product_image = $db->update($table, $data, $array);
+
+          if ($result_set_product_image) {
+            echo "<script>alert(\" Delete Product Image Successful.\");
+                            window.location.href='product_image.php?p=$product_id';</script>";
+          } else {
+            echo "<script>alert(\" Delete Product Image Fail. Please try again.\");
+                        window.location.href='product_image.php?p=$product_id';</script>";
+          }
+        }
+      } else if ($type == "product_add_image") {
+        if (isset($_POST['btnAction'])) {
+
+          $product_id = $_POST['btnAction'];
+
+
+          $files = array_filter($_FILES['img']['name']); //Use something similar before processing files.
+          // Count the number of uploaded files in array
+          $total_count = count($_FILES['img']['name']);
+          // Loop through every file
+          for ($i = 0; $i < $total_count; $i++) {
+            //The temp file path is obtained
+            $tmpFilePath = $_FILES['img']['tmp_name'][$i];
+            //A file path needs to be present
+            if ($tmpFilePath != "") {
+              //Setup our new file path
+              $temp = explode(".", $_FILES['img']['name'][$i]);
+              $newfilename = 'PROD' . round(microtime(true)) . $i . '.' . end($temp);
+              $newFilePath = "../img/product/" . $newfilename;
+              //File is uploaded to temp dir
+              if (move_uploaded_file($tmpFilePath, $newFilePath)) {
+                //Other code goes here
+                $table = "product_image";
+                $colname = array("image", "product_id");
+                $array = array($newfilename, $product_id);
+                $result_insert_multi_image = $db->insert($table, $colname, $array);
+              } else {
+                $result_insert_multi_image = false;
+              }
+            }
+          }
+
+          // var_dump($result_insert_multi_image);
+          if ($result_insert_multi_image) {
+            echo "<script>alert(\" Add Product Image Successful.\");
+                          window.location.href='product_image.php?p=$product_id';</script>";
+          } else {
+            echo "<script>alert(\" Add Product Image Fail. Please try again.\");
+                      window.location.href='product_image.php?p=$product_id';</script>";
+          }
+
+
+
+          //------------------------------------------
+          //			Image Upload End - img
+          //------------------------------------------
+
+        }
+      } else if ($type == "product_delete") {
+        if (isset($_POST['btnAction'])) {
+
+          $image_id = $_POST['btnAction'];
+
+          $col = "*";
+          $tb = "product_image";
+          $opt = 'id = ?';
+          $arr = array($image_id);
+          $product_image = $db->advwhere($col, $tb, $opt, $arr);
+
+          if (count($product_image) != 0) {
+            $product_id = $product_image[0]['product_id'];
+            $image_name = $product_image[0]['image'];
+          } else {
+            echo "<script>alert(\" Delete Product Image Fail. Cant Get Product Details. Please try again.\");
+                      window.location.href='product_image.php?p=$product_id';</script>";
+            exit();
+          }
+
+          if (file_exists("../img/product/" . $image_name)) {
+            unlink("../img/product/" . $image_name);
+          }
+          $result_product_image_delete = $db->del("product_image", 'id', $image_id);
+
+          if ($result_product_image_delete) {
+            echo "<script>alert(\" Delete Product Image Successful.\");
+                          window.location.href='product_image.php?p=$product_id';</script>";
+          } else {
+            echo "<script>alert(\" Delete Product Image Fail. Please try again.\");
+                      window.location.href='product_image.php?p=$product_id';</script>";
           }
         }
       }

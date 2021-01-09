@@ -139,6 +139,9 @@ if (isset($_REQUEST['type'])) {
                                     } else {
                                         $promo_price = $normal_price - ($normal_price * $check_promotion_prodcut["percentage"] / 100);
                                     }
+                                    if ($promo_price <= 0) {
+                                        $promo_price = 0;
+                                    }
                                     $price_display = $promo_price;
                                 } else {
                                     $price_display = $normal_price;
@@ -274,6 +277,9 @@ if (isset($_REQUEST['type'])) {
                                             $promo_price = $normal_price - $check_promotion_prodcut["amt"];
                                         } else {
                                             $promo_price = $normal_price - ($normal_price * $check_promotion_prodcut["percentage"] / 100);
+                                        }
+                                        if ($promo_price <= 0) {
+                                            $promo_price = 0;
                                         }
                                         $price_display = $promo_price;
                                     } else {
@@ -556,17 +562,17 @@ if (isset($_REQUEST['type'])) {
                         $mail = new PHPMailer;
                         // $mail->SMTPDebug = 3;
                         $mail->isSMTP();
-                        $mail->Host = "mail.caroma.com.my";
+                        $mail->Host = $email_host;
                         $mail->SMTPAuth = true;
-                        $mail->Username = "test@caroma.com.my";
-                        $mail->Password = "=HV[GXQv+7l?";
+                        $mail->Username = $email_username;
+                        $mail->Password = $email_password;
                         $mail->SMTPSecure = "tls";
                         $mail->Port = "587";
                         //Send HTML or Plain Text email
                         $mail->isHTML(true);
                         //From email address and name
-                        $mail->From = "test@caroma.com.my";
-                        $mail->FromName = "Caroma Team";
+                        $mail->From = $email_from;
+                        $mail->FromName = $email_from_name;
                         // $mail->AddEmbeddedImage('../img/product/PROD1601368421.png', 'pic1');
                         // $mail->AddEmbeddedImage('../img/product/PROD1601370800.png', 'pic2');
                         // $mail->AddEmbeddedImage('../img/product/PROD1601374119.png', 'pic3');
@@ -577,7 +583,7 @@ if (isset($_REQUEST['type'])) {
                         //To address and name
                         $mail->addAddress($email);
                         $mail->Subject = "Purchase Successful";
-                        $mail->Body = get_include_contents('mail.php', $order_detail);
+                        $mail->Body = get_include_contents('../administrator/mail/purchase_success_mail.php', $order_detail);
                         $mail->send();
                         // if (!$mail->send()) {
                         //     echo "Mailer Error: " . $mail->ErrorInfo;

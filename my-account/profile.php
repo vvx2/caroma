@@ -40,9 +40,8 @@ if ($user_img != "" || $user_img != NULL) {
 $user_order = $db->where("id", "orders", "users_id", $user_id);
 $user_cart = $db->where("id", "cart", "customer_id", $user_id);
 
-$count_order = count($user_order);
+$count_user_order = count($user_order);
 $count_cart = count($user_cart);
-
 ?>
 
 <!DOCTYPE html>
@@ -119,7 +118,7 @@ $count_cart = count($user_cart);
 												?>
 													<div class="col-sm-4 text-center">
 														<i class="fa fa-truck block mb-10"></i>
-														<span class="counts block head-font mb-5"><?php echo $count_order; ?></span>
+														<span class="counts block head-font mb-5"><?php echo $count_user_order; ?></span>
 														<span class="counts-text block">Total Order</span>
 													</div>
 													<div class="col-sm-4 text-center">
@@ -140,7 +139,7 @@ $count_cart = count($user_cart);
 												?>
 													<div class="col-sm-6 text-center">
 														<i class="fa fa-truck block mb-10"></i>
-														<span class="counts block head-font mb-5"><?php echo $count_order; ?></span>
+														<span class="counts block head-font mb-5"><?php echo $count_user_order; ?></span>
 														<span class="counts-text block">Total Order</span>
 													</div>
 

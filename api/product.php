@@ -107,7 +107,11 @@ if ($user_type == 3) {
     }
 
     $col = "*, p.id as p_id, pt.name as pt_name, pt.description as pt_description, ct.name as ct_name, rate.rating as rating";
-    $tb = " product p left join product_translation pt on p.id = pt.product_id left join product_role_price pp on p.id = pp.product_id left join category_translation ct on p.category = ct.category_id left join (SELECT product_id, (sum(rate) / count(product_id)) as rating FROM order_items where rate != 0 group by product_id) rate on p.id = rate.product_id " . $filter_table;
+    if (isset($_REQUEST["new_arrival"]) && $_REQUEST["new_arrival"] == 1) {
+        $tb = " new_arrival na left join product p on na.product_id = p.id left join product_translation pt on p.id = pt.product_id left join product_role_price pp on p.id = pp.product_id left join category_translation ct on p.category = ct.category_id left join (SELECT product_id, (sum(rate) / count(product_id)) as rating FROM order_items where rate != 0 group by product_id) rate on p.id = rate.product_id " . $filter_table;
+    } else {
+        $tb = " product p left join product_translation pt on p.id = pt.product_id left join product_role_price pp on p.id = pp.product_id left join category_translation ct on p.category = ct.category_id left join (SELECT product_id, (sum(rate) / count(product_id)) as rating FROM order_items where rate != 0 group by product_id) rate on p.id = rate.product_id " . $filter_table;
+    }
     $opt = 'pt.language = ? && pp.type =? && ct.language =? && p.status =?' . $filter_opt . ' ORDER BY ' . $sqlorder . ' LIMIT 20 OFFSET ' . $offset . '';
     $arr = $filter_arr;
     $result = $db->advwhere($col, $tb, $opt, $arr);
@@ -116,6 +120,7 @@ if ($user_type == 3) {
 
 
 if (count($result) != 0) {
+    $count_result = 1;
     foreach ($result as $product) {
 
         $normal_price = $product['price'];
@@ -133,21 +138,27 @@ if (count($result) != 0) {
                 } else {
                     $promo_price = $normal_price - ($normal_price * $check_promotion_prodcut["percentage"] / 100);
                 }
+                if ($promo_price <= 0) {
+                    $promo_price = 0;
+                }
                 $is_promo = 1;
                 $price_display = $promo_price;
             } else {
                 $is_promo = 0;
                 $price_display = $normal_price;
+                if (isset($_REQUEST["is_promotion"]) && $_REQUEST["is_promotion"] == 1) {
+                    continue;
+                }
             }
         } else {
             $is_promo = 0;
             $price_display = $normal_price;
         }
-
-        $item[$product['p_id']] = array("image" => $product['image'], "category_name" => $product['ct_name'], "product_name" => $product['pt_name'], "price" => $price_display, "ori_price" => $normal_price, "is_promo" => $is_promo);
+        $count_result++;
+        $item[] = array("product_id" => $product['p_id'], "image" => $product['image'], "category_name" => $product['ct_name'], "product_name" => $product['pt_name'], "price" => $price_display, "ori_price" => $normal_price, "is_promo" => $is_promo);
     }
-    $json_arr = array('Status' => true, 'product' => $item, 'count_result' => count($result));
-    // $json_arr = array('Status' => true, 'product' => $item, 'count_result' => count($result), "checksql" => $check_sql);
+    $json_arr = array('Status' => true, 'product' => $item, 'count_result' => $count_result);
+    // $json_arr = array('Status' => true, 'product' => $item, 'count_result' => $count_result, "checksql" => $sqlorder);
 } else {
     $json_arr = array('Status' => false, 'msg' => '<h1>No Result</h1>', "failresult" => $result);
 }

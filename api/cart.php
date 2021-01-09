@@ -220,6 +220,9 @@ if (isset($_REQUEST['type'])) {
                                     } else {
                                         $promo_price = $normal_price - ($normal_price * $check_promotion_prodcut["percentage"] / 100);
                                     }
+                                    if ($promo_price <= 0) {
+                                        $promo_price = 0;
+                                    }
                                     $is_promo = 1;
                                     $price_display = $promo_price;
                                 } else {
@@ -262,6 +265,9 @@ if (isset($_REQUEST['type'])) {
                                     } else {
                                         $promo_price = $normal_price - ($normal_price * $check_promotion_prodcut["percentage"] / 100);
                                     }
+                                    if ($promo_price <= 0) {
+                                        $promo_price = 0;
+                                    }
                                     $is_promo = 1;
                                     $price_display = $promo_price;
                                 } else {
@@ -287,10 +293,17 @@ if (isset($_REQUEST['type'])) {
                 if ($login == 1) {
 
                     $table = "cart";
+                    $col = "id";
                     $opt = 'customer_id = ? && product_id = ?';
                     $arr = array($user_id, $product_id);
-                    $remove_from_cart = $db->advdel($table, $opt, $arr);
-                    $json_arr = array('Status' => true, 'Token' => $token,);
+                    $get_cart_id = $db->advwhere($col, $table, $opt, $arr);
+                    if (count($get_cart_id) != 0) {
+                        $cart_id = $get_cart_id[0]['id'];
+                        $remove_from_cart = $db->del("cart", 'id', $cart_id);
+                        $json_arr = array('Status' => true, 'Token' => $token,);
+                    } else {
+                        $json_arr = array('Status' => false, 'Token' => $token, 'Msg' => 'Remove Product Fail!');
+                    }
                 } else {
                     if (isset($_SESSION['cart']['product'][$product_id])) {
                         unset($_SESSION['cart']['product'][$product_id]);
@@ -303,11 +316,7 @@ if (isset($_REQUEST['type'])) {
             } else if ($type == 'clearcart') {
 
                 if ($login == 1) {
-
-                    $table = "cart";
-                    $opt = 'customer_id = ?';
-                    $arr = array($user_id);
-                    $remove_from_cart = $db->advdel($table, $opt, $arr);
+                    $remove_from_cart = $db->del("cart", 'customer_id', $user_id);
                     $json_arr = array('Status' => true, 'Token' => $token);
                 } else {
                     if (isset($_SESSION['cart'])) {
