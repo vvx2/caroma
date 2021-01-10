@@ -213,6 +213,7 @@ if (isset($_REQUEST['type'])) {
 
                         //check coupon use
                         if ($coupon_code != "") {
+                            //total_paymenrt - discount in function
                             $coupon_return = validate_coupon($coupon_code, $user_id, $user_type, $total_payment, $shipping, $db);
 
                             if ($coupon_return['Status']) {
@@ -225,6 +226,7 @@ if (isset($_REQUEST['type'])) {
 
                         $point_use = $_POST['reward_point'];
                         if ($point_use == 1) {
+                            //total_paymenrt - discount not function
                             $point_discount_return = get_point_discount($user_id, $point_use, $db);
                             if ($point_discount_return['Status']) {
                                 $discount_reward = $point_discount_return['Point_discount'];
@@ -234,7 +236,7 @@ if (isset($_REQUEST['type'])) {
                         } else {
                             $discount_reward = 0;
                         }
-                        $total_payment = $total_payment - $discount_reward;
+                        $total_payment = $total_payment - $discount_reward + $shipping;
                         //------------------------------------------
 
 
@@ -634,6 +636,7 @@ function validate_coupon($coupon_code, $user_id, $user_type, $sub_total, $shippi
         $percentage = $coupon['percentage'];
         $min_spend = $coupon['min_spend'];
         $capped = $coupon['capped'];
+        $free_delivery = $coupon['free_delivery'];
         $usage_limit = $coupon['usage_limit']; // how many time can be used per 1 user
         $total_usage_limit = $coupon['total_usage_limit'];
         $total_times_used = $coupon['total_times_used'];
@@ -689,10 +692,14 @@ function validate_coupon($coupon_code, $user_id, $user_type, $sub_total, $shippi
                                 }
                             }
 
+                            if ($free_delivery == 1) {
+                                $shipping = 0;
+                            }
+
                             //--------------------------------------------
                             //      All true will return this
                             //--------------------------------------------
-                            $total_pay = $total_spend - $reduce_amt + $shipping;
+                            $total_pay = $total_spend - $reduce_amt;
                             $json_arr = array('Status' => true, 'Amount' => $reduce_amt, 'Percentage' => $percentage, "Total" => $total_spend, "Total_pay" => $total_pay, "Shipping" => $shipping);
 
                             //--------------------------------------------

@@ -3,6 +3,43 @@ require_once('inc/init.php');
 $PageName = "index";
 
 $hide_cosignment = "hidden";
+
+if (isset($_REQUEST['from'])) {
+    $from = $_REQUEST['from'];
+} else {
+    echo "<script>alert(\" No Date From. Please select your date. Thank You.\");
+               window.location.href='index.php';</script>";
+    exit();
+}
+
+if (isset($_REQUEST['to'])) {
+    $to = $_REQUEST['to'];
+} else {
+    echo "<script>alert(\" No Date To. Please select your date. Thank You.\");
+               window.location.href='index.php';</script>";
+    exit();
+}
+
+if (isset($_REQUEST['status'])) {
+    $status = $_REQUEST['status'];
+} else {
+    $status = 4;
+}
+
+if ($to == '' || $to == NULL) {
+    $to = date('Y-m-d H:i:s');
+}
+
+
+$from = strtotime($from);
+$from_display = date('Y-m-d', $from);
+$from = date('Y-m-d H:i:s', $from);
+
+$to = strtotime($to);
+$to_display = date('Y-m-d', $to);
+$to = date('Y-m-d H:i:s', $to);
+
+$admin_id = 0;
 ?>
 <!DOCTYPE html>
 <html>
@@ -44,36 +81,87 @@ $hide_cosignment = "hidden";
 
                 <br>
 
-                <?php
-
-                $from = $_REQUEST['from'];
-                $to = $_REQUEST['to'];
-                if ($to == '' || $to == NULL) {
-                    $to = date('Y-m-d H:i:s');
-                }
-                $from = strtotime($from);
-                $from = date('Y-m-d H:i:s', $from);
-
-                $to = strtotime($to);
-                $to = date('Y-m-d H:i:s', $to);
-
-                // echo $from . "<br>" . $to;
-
-                ?>
-
                 <div class="row">
                     <div class="col-md-9 text-center">
 
                     </div>
                     <div class="col-md-3 text-center">
                         <a data-toggle="modal" class="btn btn-primary btn-lg btn-block" href="#summary"> &nbsp;View Summary</a>
-
                     </div>
-
-
                 </div>
                 <br>
+                <div class="row">
+                    <div class="col-lg-3">
+                        <a href="report.php?from=<?php echo $_REQUEST['from']; ?>&to=<?php echo $_REQUEST['to']; ?>&status=2">
+                            <div class="ibox ">
+                                <div class="ibox-title">
+                                    <h5>Order Pending</h5>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-lg-3">
+                        <a href="report.php?from=<?php echo $_REQUEST['from']; ?>&to=<?php echo $_REQUEST['to']; ?>&status=3">
+                            <div class="ibox ">
+                                <div class="ibox-title">
+                                    <h5>Order Shipping</h5>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-lg-3">
+                        <a href="report.php?from=<?php echo $_REQUEST['from']; ?>&to=<?php echo $_REQUEST['to']; ?>&status=4">
+                            <div class="ibox ">
+                                <div class="ibox-title">
+                                    <h5>Order Complete</h5>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-lg-3">
+                        <a href="report.php?from=<?php echo $_REQUEST['from']; ?>&to=<?php echo $_REQUEST['to']; ?>&status=1">
+                            <div class="ibox ">
+                                <div class="ibox-title">
+                                    <h5>Order Canceled/Rejected</h5>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <br>
+                <div class="ibox-content">
 
+                    <div class="form-group" id="data_5">
+                        <label class="font-normal">Range select</label>
+                        <form role="form" id="form_get_order" method="post">
+
+                            <div class="input-daterange input-group" id="datepicker">
+
+                                <input type="text" class="form-control-sm form-control" name="min" id="min" value="" required />
+                                <span class="input-group-addon">to</span>
+                                <input type="text" class="form-control-sm form-control" name="max" id="max" value="" required />
+                                &nbsp;
+
+
+                                <a id="get_order" class="btn btn-white btn-xs" onclick="get_order();"><i class="fa fa-search"></i> Search </a>
+
+                            </div>
+                        </form>
+                    </div>
+
+                    <script type="text/javascript">
+                        var from;
+                        var to;
+
+
+                        function get_order() {
+                            from = document.getElementById("min");
+                            to = document.getElementById("max");
+                            window.open("report.php?from=" + from.value + "&to=" + to.value, '');
+                        }
+                    </script>
+                </div>
+                <br>
 
                 <div class="modal inmodal" id="summary" tabindex="-1" role="dialog" aria-hidden="true">
                     <div class="modal-dialog modal-lg">
@@ -85,21 +173,29 @@ $hide_cosignment = "hidden";
                             <div class="modal-body">
 
                                 <?php
-                                $col = 'SUM(total_payment) as total_payment';
+                                $col = 'SUM(total_payment) as total_payment, SUM(total_price) as total_price, SUM(discount_amount) as discount_amount, SUM(discount_reward) as discount_reward, SUM(shipping_fee) as shipping_fee';
                                 $tb = ' orders';
-                                $opt = 'date_created >= ? AND date_created <= ? AND status = ? AND admin_id = ?';
-                                $arr = array($from, $to, 4, 0);
+                                $opt = 'date_modified >= ? AND DATE_ADD(date_modified, INTERVAL -1 DAY) <= ? AND status = ? AND admin_id = ?';
+                                $arr = array($from, $to, $status, $admin_id);
                                 $get_result_payment = $db->advwhere($col, $tb, $opt, $arr);
                                 if ($get_result_payment[0]['total_payment'] == NULL) {
                                     $total_payment = 0;
+                                    $total_price = 0;
+                                    $total_shipping = 0;
+                                    $total_discount = 0;
+                                    $total_point_discount = 0;
                                 } else {
                                     $total_payment = $get_result_payment[0]['total_payment'];
+                                    $total_price = $get_result_payment[0]['total_price'];
+                                    $total_shipping = $get_result_payment[0]['shipping_fee'];
+                                    $total_discount = $get_result_payment[0]['discount_amount'];
+                                    $total_point_discount = $get_result_payment[0]['discount_reward'];
                                 }
 
                                 $col = 'SUM(oi.qty) as total_item';
                                 $tb = 'order_items oi left join orders o on oi.order_id = o.id';
-                                $opt = 'o.date_created >= ? AND o.date_created <= ? AND o.status = ? AND o.admin_id = ? group by o.id';
-                                $arr = array($from, $to, 4, 0);
+                                $opt = 'o.date_modified >= ? AND DATE_ADD(o.date_modified, INTERVAL -1 DAY) <= ? AND o.status = ? AND o.admin_id = ?';
+                                $arr = array($from, $to, $status, $admin_id);
                                 $result = $db->advwhere($col, $tb, $opt, $arr);
 
                                 if ($result[0]['total_item'] == NULL) {
@@ -122,7 +218,23 @@ $hide_cosignment = "hidden";
                                                 </thead>
                                                 <tbody>
                                                     <tr>
-                                                        <td>Total Order Payment</td>
+                                                        <td>Total Order Price</td>
+                                                        <td>RM <?php echo number_format($total_price, 2); ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Total Discount Price</td>
+                                                        <td>-RM <?php echo number_format($total_discount, 2); ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Total Point Discount</td>
+                                                        <td>-RM <?php echo number_format($total_point_discount, 2); ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Total Shipping</td>
+                                                        <td>RM <?php echo number_format($total_shipping, 2); ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Total Order Payment (Counted Shipping & Discount)</td>
                                                         <td>RM <?php echo number_format($total_payment, 2); ?></td>
                                                     </tr>
                                                     <tr>
@@ -144,15 +256,16 @@ $hide_cosignment = "hidden";
                                                         <tr>
                                                             <th>Item List</th>
                                                             <th>Quantity</th>
+                                                            <th>Sales</th>
 
                                                         </tr>
                                                     </thead>
                                                     <tbody>
                                                         <?php
-                                                        $col = "SUM(oi.qty) as product_qty, pt.name as product_name";
+                                                        $col = "SUM(oi.qty) as product_qty, SUM(oi.price * oi.qty) as product_price, pt.name as product_name";
                                                         $tb = 'order_items oi left join orders o on oi.order_id = o.id left join product_translation pt on pt.product_id = oi.product_id';
-                                                        $opt = 'o.date_created >= ? AND o.date_created <= ? AND o.status = ? AND pt.language = ? AND o.admin_id = 0 GROUP BY pt.name ORDER BY pt.name ASC';
-                                                        $arr = array($from, $to, 4, "en");
+                                                        $opt = 'o.admin_id = ? AND o.date_modified >= ? AND DATE_ADD(o.date_modified, INTERVAL -1 DAY) <= ? AND o.status = ? AND pt.language = ? AND o.admin_id = 0 GROUP BY pt.name ORDER BY pt.name ASC';
+                                                        $arr = array($admin_id, $from, $to, $status, "en");
                                                         $result_item = $db->advwhere($col, $tb, $opt, $arr);
                                                         foreach ($result_item as $row) {
 
@@ -162,6 +275,7 @@ $hide_cosignment = "hidden";
                                                                     <div><strong><?php echo $row["product_name"]; ?></strong></div>
                                                                 </td>
                                                                 <td><?php echo $row["product_qty"]; ?></td>
+                                                                <td>RM <?php echo number_format($row["product_price"], 2); ?></td>
                                                             </tr>
                                                         <?php
 
@@ -178,7 +292,7 @@ $hide_cosignment = "hidden";
 
                             </div>
                             <div class="modal-footer">
-                                <!-- <a href="admin_print_summary.php?p=<?php echo $from; ?>&&q=<?php echo $to; ?>" target="_blank" class="btn btn-primary"><i class="fa fa-print"></i> Print </a> -->
+                                <a href="print_summary.php?from=<?php echo $from; ?>&&to=<?php echo $to; ?>" target="_blank" class="btn btn-primary"><i class="fa fa-print"></i> Print </a>
                                 <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
                             </div>
                         </div>
@@ -193,8 +307,8 @@ $hide_cosignment = "hidden";
                             <div class="ibox-title">
                                 <h5>Order Ranged
                                     <?php
-                                    echo '  from: ' . $from;
-                                    echo ' to: ' . $to;
+                                    echo '  from: ' . $from_display;
+                                    echo ' to: ' . $to_display;
                                     ?>
                                 </h5>
                             </div>
@@ -222,7 +336,7 @@ $hide_cosignment = "hidden";
                                                 <th <?php echo $hide_cosignment; ?>>Consignment Number</th>
                                                 <th>Order Id</th>
                                                 <th>User</th>
-                                                <th>Date Create</th>
+                                                <th>Date Settle</th>
                                                 <th>Action</th>
 
                                             </tr>
@@ -233,8 +347,8 @@ $hide_cosignment = "hidden";
                                             $i = 1;
                                             $col = "o.*, st.name as state_name, u.name as user_name";
                                             $tb = "orders o left join state st on o.customer_state = st.id left join users u on u.id = o.users_id";
-                                            $opt = 'o.date_created >= ? AND o.date_created <= ? AND o.status = ? && o.admin_id = ? ORDER BY o.date_modified DESC';
-                                            $arr = array($from, $to, 4, 0);
+                                            $opt = 'o.date_modified >= ? AND DATE_ADD(o.date_modified, INTERVAL -1 DAY) <= ? AND o.status = ? && o.admin_id = ? ORDER BY o.date_modified DESC';
+                                            $arr = array($from, $to, $status, $admin_id);
                                             $product = $db->advwhere($col, $tb, $opt, $arr);
                                             foreach ($product as $row) {
 
@@ -299,7 +413,7 @@ $hide_cosignment = "hidden";
                                                         <?php echo $row['consignment_number']; ?></td>
                                                     <td><?php echo $row['gateway_order_id']; ?></td>
                                                     <td><?php echo $row['user_name']; ?></td>
-                                                    <td><?php echo $row['date_created']; ?></td>
+                                                    <td><?php echo $row['date_modified']; ?></td>
                                                     <td>
                                                         <div class="btn-group">
                                                             <?php echo $btn_action; ?>
@@ -358,9 +472,17 @@ $hide_cosignment = "hidden";
 
     <script src="js/plugins/dataTables/datatables.min.js"></script>
     <script src="js/plugins/dataTables/dataTables.bootstrap4.min.js"></script>
+    <!-- Data picker -->
+    <script src="js/plugins/datapicker/bootstrap-datepicker.js"></script>
 
     <!-- Page-Level Scripts -->
     <script>
+        $('#data_5 .input-daterange').datepicker({
+            keyboardNavigation: false,
+            forceParse: false,
+            autoclose: true
+        });
+
         //this script for modal 
         $('body').on('click', '[data-toggle="modal"]', function() {
             $($(this).data("target") + ' .modal-content').load($(this).data("remote"));

@@ -170,6 +170,12 @@
                     <div class="biolife-tab biolife-tab-contain sm-margin-top-34px">
                         <div class="tab-head tab-head__icon-top-layout icon-top-layout type-02">
                             <ul class="tabs md-margin-bottom-35-im sm-margin-bottom-57-im">
+                                <li class="tab-element">
+                                    <a href="#promotion" class="tab-link"><span class="biolife-icon icon-schedule"></span>Promotion</a>
+                                </li>
+                                <li class="tab-element">
+                                    <a href="#new_arrival" class="tab-link"><span class="biolife-icon icon-title"></span>New</a>
+                                </li>
                                 <?php
                                 $col = "c.id as c_id, ct.name as ct_name";
                                 $tb = "category c left join category_translation ct on c.id = ct.category_id";
@@ -197,12 +203,7 @@
                                     </li>
 
                                 <?php } ?>
-                                <li class="tab-element">
-                                    <a href="#promotion" class="tab-link"><span class="biolife-icon icon-soy"></span>Promotion</a>
-                                </li>
-                                <li class="tab-element">
-                                    <a href="#new_arrival" class="tab-link"><span class="biolife-icon icon-chocolate"></span>New</a>
-                                </li>
+
                                 <!-- <li class="tab-element">
                                     <a href="#tab01_2nd" class="tab-link"><span class="biolife-icon icon-coffee"></span>Coffee</a>
                                 </li>
