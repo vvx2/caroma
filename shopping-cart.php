@@ -7,6 +7,7 @@
     // $db = new DB_FUNCTIONS();
     require_once('inc/init.php');
     require_once('inc/head.php');
+    $time = date('Y-m-d H:i:s');
     ?>
 </head>
 
@@ -136,7 +137,36 @@
 
                                                         $cart['stock'] = $check_product_under_distributor[0]['stock'];
                                                     }
-                                                    $item[$cart['p_id']] = array("qty" => $cart['qty'], "image" => $cart['image'], "name" => $cart['name'], "price" => $cart['price'], "stock" => $cart['stock'], "product_total_price" => $cart['qty'] * $cart['price']);
+
+                                                    $normal_price = $cart['price'];
+                                                    if ($user_type == 1) {
+                                                        $col = "*, DATE_ADD(end, INTERVAL 1 DAY) as new_end_date";
+                                                        $tb = "promotion pr left join promotion_product prp on pr.id = prp.promotion_id";
+                                                        $opt = 'prp.product_id = ? && start <= ? && DATE_ADD(end, INTERVAL 1 DAY) >= ? ORDER BY date_modified';
+                                                        $arr = array($cart['p_id'], $time, $time);
+                                                        $check_promotion_prodcut = $db->advwhere($col, $tb, $opt, $arr);
+
+                                                        if (count($check_promotion_prodcut) != 0) {
+                                                            $check_promotion_prodcut = $check_promotion_prodcut[0];
+                                                            if ($check_promotion_prodcut["type"] == 1) {
+                                                                $promo_price = $normal_price - $check_promotion_prodcut["amt"];
+                                                            } else {
+                                                                $promo_price = $normal_price - ($normal_price * $check_promotion_prodcut["percentage"] / 100);
+                                                            }
+                                                            if ($promo_price <= 0) {
+                                                                $promo_price = 0;
+                                                            }
+                                                            $is_promo = 1;
+                                                            $price_display = $promo_price;
+                                                        } else {
+                                                            $is_promo = 0;
+                                                            $price_display = $normal_price;
+                                                        }
+                                                    } else {
+                                                        $is_promo = 0;
+                                                        $price_display = $normal_price;
+                                                    }
+                                                    $item[$cart['p_id']] = array("qty" => $cart['qty'], "image" => $cart['image'], "name" => $cart['name'], "price" => $price_display, "ori_price" => $normal_price, "is_promo" => $is_promo, "stock" => $cart['stock'], "product_total_price" => $cart['qty'] * $cart['price']);
                                                 }
                                             }
                                         } else {
@@ -150,7 +180,36 @@
                                                     $get_cart = $db->advwhere($col, $table, $opt, $arr);
                                                     $get_cart = $get_cart[0];
 
-                                                    $item[$key_product_id] = array("qty" => $qty, "image" => $get_cart['image'], "name" => $get_cart['name'], "price" => $get_cart['price'], "stock" => $get_cart['stock'], "product_total_price" => $qty * $get_cart['price']);
+                                                    $normal_price = $get_cart['price'];
+                                                    if ($user_type == 1) {
+                                                        $col = "*, DATE_ADD(end, INTERVAL 1 DAY) as new_end_date";
+                                                        $tb = "promotion pr left join promotion_product prp on pr.id = prp.promotion_id";
+                                                        $opt = 'prp.product_id = ? && start <= ? && DATE_ADD(end, INTERVAL 1 DAY) >= ? ORDER BY date_modified';
+                                                        $arr = array($get_cart['p_id'], $time, $time);
+                                                        $check_promotion_prodcut = $db->advwhere($col, $tb, $opt, $arr);
+
+                                                        if (count($check_promotion_prodcut) != 0) {
+                                                            $check_promotion_prodcut = $check_promotion_prodcut[0];
+                                                            if ($check_promotion_prodcut["type"] == 1) {
+                                                                $promo_price = $normal_price - $check_promotion_prodcut["amt"];
+                                                            } else {
+                                                                $promo_price = $normal_price - ($normal_price * $check_promotion_prodcut["percentage"] / 100);
+                                                            }
+                                                            if ($promo_price <= 0) {
+                                                                $promo_price = 0;
+                                                            }
+                                                            $is_promo = 1;
+                                                            $price_display = $promo_price;
+                                                        } else {
+                                                            $is_promo = 0;
+                                                            $price_display = $normal_price;
+                                                        }
+                                                    } else {
+                                                        $is_promo = 0;
+                                                        $price_display = $normal_price;
+                                                    }
+
+                                                    $item[$key_product_id] = array("qty" => $qty, "image" => $get_cart['image'], "name" => $get_cart['name'], "price" => $price_display, "ori_price" => $normal_price, "is_promo" => $is_promo, "stock" => $get_cart['stock'], "product_total_price" => $qty * $get_cart['price']);
                                                 }
                                             }
                                         }
