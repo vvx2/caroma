@@ -126,7 +126,7 @@ if (!empty($postedToken)) {
 
               $table = "users";
               $colname = array("name", "email", "password", "type", "status", "date_created", "date_modified");
-              $array = array($name, $email, $password, 3, 1, $time, $time);
+              $array = array($name, $email, $password, 3, 0, $time, $time);
               $result_dealer = $db->insert($table, $colname, $array);
 
               if ($result_dealer) {
@@ -179,13 +179,22 @@ if (!empty($postedToken)) {
                   //--------------------------
                   //       for email
                   //--------------------------
-                  // $order_detail = array("order" => $order, "order_item" => $order_item, "server_path" => $server_path);
+                  $active_code = encrypt_decrypt('encrypt', $user_id);
+                  if ($server == 1) {
+                    $path_active = "http://localhost/caroma/api/active_account.php?active_code=" . $active_code . "&active_mail=" . $user_email;
+                  } else if ($server == 2) {
+                    $path_active = "http://staging3.caroma.com.my/api/active_account.php?active_code=" . $active_code . "&active_mail=" . $user_email;
+                  } else {
+                    $path_active = "http://staging3.caroma.com.my/api/active_account.php?active_code=" . $active_code . "&active_mail=" . $user_email;
+                  }
+
+                  $active_detail = array("path" => $path_active, "user_name" => $name);
 
                   //To address and name
                   $mail->addAddress($user_email);
                   $mail->Subject = "REGISTER SUCCESSFUL";
-                  $mail->Body = "Congratulations on successful registration";
-                  // $mail->Body = get_include_contents('../administrator/mail/purchase_success_mail.php', $order_detail);
+                  // $mail->Body = "Congratulations on successful registration";
+                  $mail->Body = get_include_contents('mail/register_active.php', $active_detail);
                   $mail->send();
                   // if (!$mail->send()) {
                   //     echo "Mailer Error: " . $mail->ErrorInfo;
