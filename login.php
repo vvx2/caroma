@@ -151,7 +151,12 @@
                     if (data[0]) {
                         window.location.replace('api/routing.php?login_key=' + data[1]);
                     } else {
-                        $('#error_msg').html('<b>Wrong Username Or Password</b>');
+                        if (data[1] == 5) {
+                            $('#error_msg').html('<b>Account Inactive</b>');
+                        } else {
+                            $('#error_msg').html('<b>Wrong Username Or Password </b>');
+                        }
+
                     }
                 });
 
