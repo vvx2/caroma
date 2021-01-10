@@ -343,7 +343,7 @@
                 <!-- related products -->
                 <div class="product-related-box single-layout">
                     <div class="biolife-title-box lg-margin-bottom-26px-im">
-                        <span class="biolife-icon icon-organic"></span>
+                        <span class="biolife-icon icon-capacity-about"></span>
                         <span class="subtitle">All the best item for You</span>
                         <h3 class="main-title">Hot Products</h3>
                     </div>

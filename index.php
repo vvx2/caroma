@@ -68,7 +68,7 @@
                                 <p class="third-line">Drink life to the fullest with caroma</p>
                                 <p class="buttons">
                                     <a href="shop.php" class="btn btn-bold">Shop now</a>
-                                    <a href="news.php" class="btn btn-thin">Promotion</a>
+                                    <a href="shop.php?is_promotion=1" class="btn btn-thin">Promotion</a>
                                 </p>
                             </div>
                         </div>
@@ -82,7 +82,7 @@
                                 <p class="third-line">Drink life to the fullest with caroma</p>
                                 <p class="buttons">
                                     <a href="shop.php" class="btn btn-bold">Shop now</a>
-                                    <a href="news.php" class="btn btn-thin">Promotion</a>
+                                    <a href="shop.php?is_promotion=1" class="btn btn-thin">Promotion</a>
                                 </p>
                             </div>
                         </div>
@@ -96,7 +96,7 @@
                                 <p class="third-line">Drink life to the fullest with caroma</p>
                                 <p class="buttons">
                                     <a href="shop.php" class="btn btn-bold">Shop now</a>
-                                    <a href="news.php" class="btn btn-thin">Promotion</a>
+                                    <a href="shop.php?is_promotion=1" class="btn btn-thin">Promotion</a>
                                 </p>
                             </div>
                         </div>
@@ -114,7 +114,7 @@
                                 <span class="second-line"><i>Welcome to Caroma</i></span>
                                 <p class="third-line">Caroma loves to bring for you naturally and easily. We dedicate you and your family the best of organic beverage. Be with Caroma to get natural taste and stay healthy always.</p>
                                 <p class="buttons">
-                                    <a href="about-us.php" class="btn btn-bold">Read More</a>
+                                    <a href="shop.php?is_promotion=1" class="btn btn-bold">Promotion</a>
                                     <a href="shop.php" class="btn btn-thin">Shop Now</a>
                                 </p>
                             </div>
@@ -158,7 +158,7 @@
 
 
             <!-- Block 02: Product Tab-->
-            <div class="product-tab z-index-20 sm-margin-top-61px xs-margin-top-80px">
+            <div id="promotion" class="product-tab z-index-20 sm-margin-top-61px xs-margin-top-80px">
                 <div class="container">
 
                     <div class="biolife-title-box biolife-title-box__icon-at-top-style">
@@ -540,8 +540,8 @@
                                                         </div>
                                                         <div class="info">
                                                             <div class="biolife-countdown" data-datetime="<?php echo $promotion_result['new_end_date']; ?>"></div>
-                                                            <b class="categories">Fresh Fruit</b>
-                                                            <h4 class="product-title"><a href="products-detail.php?p=<?php echo $promo['p_id']; ?>" class="pr-name">National Fresh Fruit</a></h4>
+                                                            <b class="categories"><?php echo $promo['ct_name']; ?></b>
+                                                            <h4 class="product-title"><a href="products-detail.php?p=<?php echo $promo['p_id']; ?>" class="pr-name"><?php echo $promo['pt_name']; ?></a></h4>
                                                             <div class="price ">
                                                                 <ins><span class="price-amount"><span class="currencySymbol">RM</span><?php echo number_format($promo_price, 2); ?></span></ins>
                                                                 <del><span class="price-amount"><span class="currencySymbol">RM</span><?php echo number_format($normal_price, 2); ?></span></del>

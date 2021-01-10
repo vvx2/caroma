@@ -366,17 +366,26 @@ if (isset($_REQUEST['p'])) { // order status
 	<!-- JavaScript -->
 
 	<!-- jQuery -->
-	<script src="vendors/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="vendors/bower_components/jquery/dist/jquery.min.js"></script>
 
-	<!-- Bootstrap Core JavaScript -->
-	<script src="vendors/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-
+    <!-- Bootstrap Core JavaScript -->
+    <script src="vendors/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    
+	<!-- Vector Maps JavaScript -->
+    <script src="vendors/vectormap/jquery-jvectormap-2.0.2.min.js"></script>
+    <script src="vendors/vectormap/jquery-jvectormap-world-mill-en.js"></script>
+	<script src="dist/js/vectormap-data.js"></script>
+	
 	<!-- Calender JavaScripts -->
 	<script src="vendors/bower_components/moment/min/moment.min.js"></script>
 	<script src="vendors/jquery-ui.min.js"></script>
 	<script src="vendors/bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
 	<script src="dist/js/fullcalendar-data.js"></script>
-
+	
+	<!-- Progressbar Animation JavaScript -->
+	<script src="vendors/bower_components/waypoints/lib/jquery.waypoints.min.js"></script>
+	<script src="vendors/bower_components/Counter-Up/jquery.counterup.min.js"></script>
+	
 	<!-- Data table JavaScript -->
 	<script src="vendors/bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
 	<script src="vendors/bower_components/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
@@ -384,11 +393,31 @@ if (isset($_REQUEST['p'])) { // order status
 	<script src="vendors/bower_components/jszip/dist/jszip.min.js"></script>
 	<script src="vendors/bower_components/pdfmake/build/pdfmake.min.js"></script>
 	<script src="vendors/bower_components/pdfmake/build/vfs_fonts.js"></script>
-
+	
 	<script src="vendors/bower_components/datatables.net-buttons/js/buttons.html5.min.js"></script>
 	<script src="vendors/bower_components/datatables.net-buttons/js/buttons.print.min.js"></script>
 	<script src="dist/js/export-table-data.js"></script>
-
+	
+	<!-- Slimscroll JavaScript -->
+	<script src="dist/js/jquery.slimscroll.js"></script>
+	
+	<!-- Fancy Dropdown JS -->
+	<script src="dist/js/dropdown-bootstrap-extended.js"></script>
+	
+	<!-- Sparkline JavaScript -->
+	<script src="vendors/jquery.sparkline/dist/jquery.sparkline.min.js"></script>
+	
+	<script src="vendors/bower_components/jquery.easy-pie-chart/dist/jquery.easypiechart.min.js"></script>
+	<script src="dist/js/skills-counter-data.js"></script>
+	
+	<script src="vendors/bower_components/bootstrap-validator/dist/validator.min.js"></script>
+	
+	
+	<!-- Morris Charts JavaScript -->
+    <script src="vendors/bower_components/raphael/raphael.min.js"></script>
+    <script src="vendors/bower_components/morris.js/morris.min.js"></script>
+    <script src="dist/js/morris-data.js"></script>
+	
 	<!-- Init JavaScript -->
 	<script src="dist/js/init.js"></script>
 	<script src="dist/js/widgets-data.js"></script>

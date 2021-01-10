@@ -5246,6 +5246,7 @@ body.open-overlay #overlay{
     float: left;
     min-width: 184px;
 }
+
 .shopping-cart-container table td.wrap-btn-control .btn-clear{
     margin-left: 20px;
     color: #888888 !important;

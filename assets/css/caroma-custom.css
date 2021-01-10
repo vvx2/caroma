@@ -81,8 +81,12 @@
 }
 
 .biolife-banner__promotion2 .media{
-	background-image: url(../images/coffe_man.png);
+	background-image: url(../images/product_bannner.png);
 	background-position: bottom center;
+}
+
+.cart-b-m{
+	margin-bottom : 15% ;
 }
 
 .fresh-content{

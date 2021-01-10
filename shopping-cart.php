@@ -55,7 +55,7 @@
         </nav>
     </div>
 
-    <div class="page-contain shopping-cart">
+    <div class="page-contain shopping-cart cart-b-m">
 
         <!-- Main content -->
         <div id="main-content" class="main-content">
