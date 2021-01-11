@@ -40,6 +40,24 @@ $to_display = date('Y-m-d', $to);
 $to = date('Y-m-d H:i:s', $to);
 
 $admin_id = 0;
+
+switch ($status) {
+    case "1":
+        $status_summary_display = "Failed / Canceled";
+        break;
+    case "2":
+        $status_summary_display = "To Ship";
+        break;
+    case "3":
+        $status_summary_display = "Shipping";
+        break;
+    case "4":
+        $status_summary_display = "Completed";
+        break;
+    case "5":
+        $status_summary_display = "To Cancel";
+}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -210,7 +228,15 @@ $admin_id = 0;
                                 <div class="ibox-content">
                                     <div class="col-lg-12">
                                         <div class="contact-box ">
-                                            <h2 class="m-b-xs"><strong>Total Item</strong></h2>
+                                            <h2 class="m-b-xs">
+                                                <strong>Order <?php echo $status_summary_display; ?>:</strong>
+                                                <h3>Order Ranged
+                                                    <?php
+                                                    echo '  from: ' . $from_display;
+                                                    echo ' to: ' . $to_display;
+                                                    ?>
+                                                </h3>
+                                            </h2>
                                             <br>
                                             <table class="table">
 
@@ -257,7 +283,6 @@ $admin_id = 0;
                                                             <th>Item List</th>
                                                             <th>Quantity</th>
                                                             <th>Sales</th>
-
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -338,7 +363,6 @@ $admin_id = 0;
                                                 <th>User</th>
                                                 <th>Date Settle</th>
                                                 <th>Action</th>
-
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -353,12 +377,12 @@ $admin_id = 0;
                                             foreach ($product as $row) {
 
                                                 $id = $row['id'];
-                                                $status = $row['status'];
+                                                $order_status = $row['status'];
 
                                                 //view order
                                                 $btn_view = '<a data-remote="ajax/order_view.php?p=' . $id . '" class="btn btn-white btn-xs" data-toggle="modal" data-target="#myModal">View</a>';
 
-                                                switch ($status) {
+                                                switch ($order_status) {
                                                     case "1":
                                                         $status_color = "text-danger";
                                                         $status_display = "Failed / Canceled";
@@ -426,15 +450,57 @@ $admin_id = 0;
                                         </tbody>
                                     </table>
                                 </div>
-
                             </div>
                         </div>
-
-
                     </div>
+                </div>
 
+                <div class="row">
+                    <div class="col-lg-12">
 
+                        <div class="ibox ">
+                            <div class="ibox-title">
+                                <h5>Order Ranged
+                                    <?php
+                                    echo '  from: ' . $from_display;
+                                    echo ' to: ' . $to_display;
+                                    ?>
+                                </h5>
+                            </div>
+                            <div class="ibox-content">
 
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered table-hover dataTables-example">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Item List</th>
+                                                <th>Quantity</th>
+                                                <th>Sales</th>
+                                        </thead>
+                                        <tbody>
+                                            <?php
+
+                                            $i = 1;
+
+                                            foreach ($result_item as $row) {
+
+                                            ?>
+                                                <tr>
+                                                    <td><?php echo $i; ?></td>
+                                                    <td><strong><?php echo $row["product_name"]; ?></strong></td>
+                                                    <td><?php echo $row["product_qty"]; ?></td>
+                                                    <td>RM <?php echo number_format($row["product_price"], 2); ?></td>
+
+                                                </tr>
+                                            <?php $i++;
+                                            } ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
 

@@ -39,6 +39,23 @@ $to_display = date('Y-m-d', $to);
 $to = date('Y-m-d H:i:s', $to);
 
 $admin_id = 0;
+
+switch ($status) {
+    case "1":
+        $status_summary_display = "Failed / Canceled";
+        break;
+    case "2":
+        $status_summary_display = "To Ship";
+        break;
+    case "3":
+        $status_summary_display = "Shipping";
+        break;
+    case "4":
+        $status_summary_display = "Completed";
+        break;
+    case "5":
+        $status_summary_display = "To Cancel";
+}
 ?>
 
 <head>
@@ -91,7 +108,15 @@ $admin_id = 0;
             <div class="col-lg-12">
                 <div class="contact-box ">
 
-                    <h2 class="m-b-xs"><strong>Total Item</strong></h2>
+                    <h2 class="m-b-xs">
+                        <strong>Order <?php echo $status_summary_display; ?>:</strong>
+                        <h3>Order Ranged
+                            <?php
+                            echo '  from: ' . $from_display;
+                            echo ' to: ' . $to_display;
+                            ?>
+                        </h3>
+                    </h2>
                     <br>
                     <table class="table">
 
