@@ -156,7 +156,7 @@
                             <?php
                             $col = "*";
                             $tb = "product";
-                            $opt = 'product_id = ?';
+                            $opt = 'id = ?';
                             $arr = array($product_id);
                             $product_main_image = $db->advwhere($col, $tb, $opt, $arr);
                             $product_main_image = $product_main_image[0];
@@ -178,22 +178,9 @@
                             <?php } ?>
                         </ul>
                         <ul class="biolife-carousel slider-nav" data-slick='{"arrows":false,"dots":false,"centerMode":false,"focusOnSelect":true,"slidesMargin":10,"slidesToShow":4,"slidesToScroll":1,"asNavFor":".slider-for"}'>
-                            <?php
-                            $col = "*";
-                            $tb = "product";
-                            $opt = 'product_id = ?';
-                            $arr = array($product_id);
-                            $product_main_image = $db->advwhere($col, $tb, $opt, $arr);
-                            $product_main_image = $product_main_image[0];
-                            ?>
+                            
                             <li><img src="img/product/<?php echo $product_main_image['image']; ?>" alt="" width="400" height="400"></li>
                             <?php
-                            $col = "*";
-                            $tb = "product_image";
-                            $opt = 'product_id = ?';
-                            $arr = array($product_id);
-                            $product_image = $db->advwhere($col, $tb, $opt, $arr);
-
                             foreach ($product_image as $img) {
                                 if ($product_main_image['image'] == $img['image']) {
                                     continue;
