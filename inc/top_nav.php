@@ -18,9 +18,10 @@
         <div class="biolife-cart-info">
         <div class="primary-menu hidden-sm hidden-xs">
             <ul class="menu biolife-menu clone-main-menu clone-primary-menu">
-                <li class="menu-item"><a href="index.php">Home</a></li>
+            <li class="menu-item"><a href="https://staging2.caroma.com.my">Caroma Home</a></li>
+                <li class="menu-item"><a href="index.php">Shop Home</a></li>
                 <li class="menu-item"><a href="shop.php" class="menu-name" data-title="Shop">Shop</a></li>
-                <li class="menu-item"><a href="index.php">Promotion</a></li>
+                <li class="menu-item"><a href="shop.php?is_promotion=1">Promotion</a></li>
             </ul>
         </div>
             <div class="login-item">

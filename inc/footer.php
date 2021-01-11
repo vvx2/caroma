@@ -43,11 +43,11 @@
                                  <h3 class="section-title footer-title-color">ADDITIONAL INFO</h3>
                                  <div class="wrap-custom-menu vertical-menu-2 bigger">
                                      <ul class="menu">
-                                         <li><a href="news.html">News</a></li>
-                                         <li><a href="about-us.html">About Our Shop</a></li>
-                                         <li><a href="shop.html">Secure Shopping</a></li>
-                                         <li><a href="#">Delivery infomation</a></li>
-                                         <li><a href="#">Privacy Policy</a></li>
+                                         <li><a href="">News</a></li>
+                                         <li><a href="">About Our Shop</a></li>
+                                         <li><a href="">Secure Shopping</a></li>
+                                         <li><a href="">Delivery infomation</a></li>
+                                         <li><a href="">Privacy Policy</a></li>
                                      </ul>
                                  </div>
                              </section>
@@ -57,11 +57,12 @@
                                  <h3 class="section-title footer-title-color">OUR PRODUCT</h3>
                                  <div class="wrap-custom-menu vertical-menu-2 bigger">
                                      <ul class="menu">
-                                         <li><a href="shop.html">Ginger</a></li>
-                                         <li><a href="shop.html">Honey</a></li>
-                                         <li><a href="shop.html">Matcha</a></li>
-                                         <li><a href="shop.html">Coconut</a></li>
-                                         <li><a href="shop.html">Soy</a></li>
+                                         <li><a href="shop.php?category=4">Ginger Series</a></li>
+                                         <li><a href="shop.php?category=5">Chocolate Series</a></li>
+                                         <li><a href="shop.php?category=6">Matcha Series</a></li>
+                                         <li><a href="shop.php?category=8">Coconut Series</a></li>
+                                         <li><a href="shop.php?category=7">Soy Series</a></li>
+                                         <li><a href="shop.php?category=9">Coffee Series</a></li>
                                      </ul>
                                  </div>
                              </section>

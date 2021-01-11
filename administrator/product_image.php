@@ -161,7 +161,7 @@ $product = $db->advwhere($col, $tb, $opt, $arr);
                                         <tr class="gradeX">
                                             <td><?php echo $i; ?></td>
                                             <td class="<?php echo $text_color; ?>"><?php echo $image_name; ?></td>
-                                            <td><img src="../img/product/<?php echo $image_name; ?>"></td>
+                                            <td><img width="40%" src="../img/product/<?php echo $image_name; ?>"></td>
                                             <td>
                                                 <div class="btn-group">
                                                     <?php echo $btn_action; ?>

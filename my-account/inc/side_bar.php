@@ -24,13 +24,13 @@ if ($onpage == "1") {
                 <a class="<?php echo ($PageName == 'profile') ? 'active' : ''; ?>" href="profile.php"><i class="fa fa-user mr-10"></i>Profile <span class="pull-right"></span></a>
             </li>
             <li>
-                <a href="../shop.php" target="_blank"><i class="fa fa-gift mr-10"></i>Shopping <span class="pull-right"></span></a>
+                <a href="../shop.php"><i class="fa fa-gift mr-10"></i>Shopping <span class="pull-right"></span></a>
             </li>
             <li>
-                <a href="../shopping-cart.php" target="_blank"><i class="icon-basket-loaded mr-10"></i>Your Cart <span class="pull-right"></span></a>
+                <a href="../shopping-cart.php"><i class="icon-basket-loaded mr-10"></i>Your Cart <span class="pull-right"></span></a>
             </li>
             <li>
-                <a href="../index.php" target="_blank"><i class="fa fa-leaf mr-10"></i>Caroma Home <span class="pull-right"></span></a>
+                <a href="../index.php"><i class="fa fa-leaf mr-10"></i>Shop Home <span class="pull-right"></span></a>
             </li>
             <li>
                 <a href="../api/logout.php"><i class="fa fa-sign-out mr-10"></i>Logout <span class="pull-right"></span></a>
