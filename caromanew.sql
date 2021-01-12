@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 04, 2021 at 04:45 PM
--- Server version: 10.4.14-MariaDB
--- PHP Version: 7.4.10
+-- Generation Time: Jan 12, 2021 at 11:25 AM
+-- Server version: 10.4.6-MariaDB
+-- PHP Version: 7.3.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -83,7 +84,10 @@ INSERT INTO `cart` (`id`, `product_id`, `qty`, `customer_id`, `date_created`, `d
 (107, 2, 1, 3, '2020-12-20 09:46:18', '2020-12-20 09:46:18'),
 (108, 6, 1, 3, '2020-12-20 09:46:18', '2020-12-20 09:46:18'),
 (109, 7, 1, 3, '2020-12-20 09:46:18', '2020-12-20 09:46:18'),
-(121, 3, 1, 6, '2021-01-04 15:36:17', '2021-01-04 15:36:17');
+(127, 8, 1, 17, '2021-01-06 20:29:57', '2021-01-06 20:29:57'),
+(139, 13, 1, 6, '2021-01-10 08:28:31', '2021-01-10 08:28:31'),
+(140, 14, 1, 6, '2021-01-10 08:28:31', '2021-01-10 08:28:31'),
+(141, 15, 1, 6, '2021-01-10 08:28:32', '2021-01-10 08:28:32');
 
 -- --------------------------------------------------------
 
@@ -103,8 +107,12 @@ CREATE TABLE `category` (
 --
 
 INSERT INTO `category` (`id`, `status`, `date_created`, `date_modified`) VALUES
-(1, 1, '2020-09-28 13:48:54', '2020-09-29 06:53:44'),
-(2, 1, '2020-09-29 06:41:09', '2020-09-29 06:53:33');
+(4, 1, '2021-01-06 18:01:24', '2021-01-07 18:04:20'),
+(5, 1, '2021-01-06 18:01:58', '2021-01-07 18:04:13'),
+(6, 1, '2021-01-06 18:03:22', '2021-01-06 18:03:22'),
+(7, 1, '2021-01-06 18:04:00', '2021-01-07 18:03:32'),
+(8, 1, '2021-01-06 18:04:48', '2021-01-06 18:16:26'),
+(9, 1, '2021-01-06 18:05:16', '2021-01-07 18:04:25');
 
 -- --------------------------------------------------------
 
@@ -133,7 +141,25 @@ INSERT INTO `category_translation` (`id`, `name`, `description`, `language`, `ca
 (6, 'dsatu1', '', 'my', 2),
 (7, 'testdelete', '', 'en', 3),
 (8, 'deelte', '', 'cn', 3),
-(9, 'delete', '', 'my', 3);
+(9, 'delete', '', 'my', 3),
+(10, 'GINGER SERIES', '', 'en', 4),
+(11, '姜茶系列', '', 'cn', 4),
+(12, 'GINGER SERIES', '', 'my', 4),
+(13, 'CHOCOLATE', '', 'en', 5),
+(14, '巧克力饮品', '', 'cn', 5),
+(15, 'CHOCOLATE', '', 'my', 5),
+(16, 'MATCHA SERIES', '', 'en', 6),
+(17, '抹茶系列', '', 'cn', 6),
+(18, 'MATCHA SERIES', '', 'my', 6),
+(19, 'SOY / MALT', '', 'en', 7),
+(20, '大豆/麦芽饮品', '', 'cn', 7),
+(21, 'SOY / MALT', '', 'my', 7),
+(22, 'COCONUT SERIES', '', 'en', 8),
+(23, '低糖系列', '', 'cn', 8),
+(24, 'COCONUT SERIES', '', 'my', 8),
+(25, 'COFFEE SERIES', '', 'en', 9),
+(26, '咖啡系列', '', 'cn', 9),
+(27, 'COFFEE SERIES', '', 'my', 9);
 
 -- --------------------------------------------------------
 
@@ -170,7 +196,7 @@ INSERT INTO `coupon` (`id`, `start`, `end`, `type`, `amt`, `percentage`, `min_sp
 (3, '2019-12-11 16:00:00', '2020-10-06 16:00:00', 1, '0.0000', 0, '0.0000', '0.0000', 1, 1, 1, 0, 0, 'HAHAHA123', 0, '2020-10-17 10:54:07', '2020-11-14 13:57:33'),
 (5, '2019-12-11 16:00:00', '2019-12-23 16:00:00', 1, '0.0000', 0, '0.0000', '0.0000', 1, 1, 1, 0, 0, 'TEST', 1, '2020-10-17 11:01:56', '2020-10-17 11:01:56'),
 (6, '2020-10-05 16:00:00', '2020-10-19 16:00:00', 2, '10.0000', 20, '50.0000', '10.0000', 1, 1, 80, 1, 0, 'QQWERT', 1, '2020-10-17 14:24:15', '2020-10-18 11:02:31'),
-(7, '2020-10-05 16:00:00', '2021-02-03 16:00:00', 1, '4.0000', 0, '10.0000', '0.0000', 1, 1, 50, 4, 0, 'GGSDFF', 1, '2020-11-14 13:54:22', '2020-11-14 13:54:22'),
+(7, '2020-10-05 16:00:00', '2021-02-03 16:00:00', 1, '4.0000', 0, '10.0000', '0.0000', 1, 1, 50, 6, 0, 'GGSDFF', 1, '2020-11-14 13:54:22', '2020-11-14 13:54:22'),
 (8, '2020-10-04 16:00:00', '2020-12-24 16:00:00', 1, '12.0000', 0, '1000.0000', '0.0000', 1, 1, 1, 0, 0, 'WF7K2F33', 1, '2020-11-14 13:59:25', '2020-11-14 13:59:25');
 
 -- --------------------------------------------------------
@@ -369,7 +395,9 @@ CREATE TABLE `distributor_product` (
 INSERT INTO `distributor_product` (`id`, `user_id`, `product_id`, `stock`, `status`, `date_created`, `date_modified`) VALUES
 (3, 3, 7, 10, 1, '2020-11-26 17:04:53', '2020-11-26 17:04:53'),
 (4, 3, 5, 23, 0, '2020-11-26 17:18:04', '2020-11-26 17:18:17'),
-(5, 3, 3, 95, 1, '2020-11-26 17:25:21', '2020-11-26 17:25:21');
+(5, 3, 3, 95, 1, '2020-11-26 17:25:21', '2020-11-26 17:25:21'),
+(6, 3, 36, 99, 1, '2021-01-09 08:10:11', '2021-01-09 08:10:11'),
+(7, 3, 32, 22, 1, '2021-01-09 08:10:49', '2021-01-09 08:10:49');
 
 -- --------------------------------------------------------
 
@@ -446,10 +474,10 @@ CREATE TABLE `geo_zone` (
 INSERT INTO `geo_zone` (`id`, `name`, `description`, `admin_id`, `status`, `date_created`, `date_modified`) VALUES
 (1, 'Test Geo', 'This  is testing geo zone', 3, 1, '2020-11-28 18:12:21', '2020-12-06 10:41:09'),
 (2, 'test222', 'This  is testing geo zone2222222', 3, 1, '2020-11-28 18:14:33', '2020-11-28 18:14:33'),
-(4, 'admin geo zone', 'this is admin all zone', 0, 1, '2020-12-06 08:28:56', '2020-12-08 15:08:42'),
-(8, 'tt', 'ttt', 0, 1, '2020-12-06 08:46:08', '2020-12-06 08:46:08'),
-(15, 'kl selangor', 'This  is testing geo zone2222222', 0, 1, '2020-12-06 09:30:42', '2020-12-08 15:06:46'),
-(16, 'admin geo testedit', 'this is admin all zone', 0, 1, '2020-12-06 10:29:50', '2020-12-08 15:09:25');
+(4, 'All Zone', 'for All State', 0, 1, '2020-12-06 08:28:56', '2021-01-10 11:38:59'),
+(8, 'Kuala Lumpur and Selangor', 'Only for KL and Selangor', 0, 1, '2020-12-06 08:46:08', '2021-01-10 11:38:25'),
+(15, 'Penang and Perlis', 'North Area', 0, 1, '2020-12-06 09:30:42', '2021-01-10 11:40:18'),
+(16, 'Johor only', 'only for Johor', 0, 1, '2020-12-06 10:29:50', '2021-01-10 11:39:36');
 
 -- --------------------------------------------------------
 
@@ -473,15 +501,35 @@ INSERT INTO `geo_zone_list` (`id`, `geo_zone_id`, `state_id`) VALUES
 (4, 2, 4),
 (5, 2, 6),
 (9, 3, 12),
-(20, 8, 0),
 (53, 1, 0),
-(55, 15, 12),
-(56, 15, 14),
-(57, 4, 14),
-(58, 16, 1),
-(59, 16, 2),
-(60, 16, 3),
-(61, 16, 12);
+(62, 8, 14),
+(63, 8, 12),
+(65, 4, 0),
+(66, 16, 1),
+(67, 15, 9),
+(68, 15, 8);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `new_arrival`
+--
+
+CREATE TABLE `new_arrival` (
+  `id` int(11) UNSIGNED NOT NULL,
+  `product_id` int(11) UNSIGNED NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `new_arrival`
+--
+
+INSERT INTO `new_arrival` (`id`, `product_id`) VALUES
+(41, 15),
+(40, 14),
+(39, 10),
+(38, 9),
+(37, 8);
 
 -- --------------------------------------------------------
 
@@ -564,11 +612,21 @@ INSERT INTO `orders` (`id`, `status`, `customer_name`, `customer_email`, `custom
 (38, 4, 'new name1', 'test@gmail.com', '1023 kamoung abc, jalan hahaa', '73200', 'johor bahru', '4', '0163723123', '250.2200', '', '0.0000', '0.0000', '0.0000', '0.0000', '250.2200', 'CAMR5PKMZY', NULL, 'self order - no id', 1, NULL, 3, 2, 3, 0, '2020-12-19 11:21:52', '2020-12-19 11:21:52'),
 (39, 4, 'Test Dealer', 'dealer@gmail.com', 'kampung baru abc', '12345', 'hahacity', '1', '01637237223', '131.6000', '', '0.0000', '0.0000', '0.0000', '0.0000', '131.6000', 'CACC1BS71R', 'testcomplete', '1608377194', 1, 'test cancel reason                     \r\n\r\n<br>to test cancel reason. approve this cancel', 5, 1, 3, 0, '2020-12-19 11:26:59', '2020-12-19 15:35:30'),
 (40, 1, 'Wayne Test', 'puahweewee@gmail.com', 'thsis is tester address', '12345', 'testcity', '2', '0169032551', '740.0000', '', '0.0000', '0.0000', '0.0000', '2.5800', '740.0000', 'CAEAD2TNP3', NULL, '1609672632', 1, 'UnPaid', 6, 1, 0, 0, '2021-01-03 11:27:14', '2021-01-03 11:27:14'),
-(41, 4, 'Wayne Test', 'puahweewee@gmail.com', 'thsis is tester address', '12345', 'testcity', '2', '0169032551', '740.0000', '', '0.0000', '0.0000', '0.0000', '2.5800', '740.0000', 'CAD2XBSHST', 'test point', '1609673555', 1, 'UnPaid', 6, 1, 0, 114, '2021-01-03 11:33:29', '2021-01-03 12:36:55'),
+(41, 4, 'Wayne Test', 'puahweewee@gmail.com', 'thsis is tester address', '12345', 'testcity', '2', '0169032551', '740.0000', '', '0.0000', '0.0000', '0.0000', '2.5800', '742.5800', 'CAD2XBSHST', 'test point', '1609673555', 1, 'UnPaid', 6, 1, 0, 114, '2021-01-03 11:33:29', '2021-01-03 12:36:55'),
 (42, 2, 'Wayne Test', 'puahweewee@gmail.com', 'thsis is tester address', '12345', 'testcity', '2', '0169032551', '740.0000', '', '0.0000', '0.0000', '1.1400', '2.5800', '738.8600', 'CAA0WQ6L2Y', NULL, '1609764692', 1, 'UnPaid', 6, 1, 0, 114, '2021-01-04 12:51:44', '2021-01-04 12:51:51'),
 (43, 2, 'Wayne Test', 'puahweewee@gmail.com', 'thsis is tester address', '12345', 'testcity', '2', '0169032551', '72.5000', '', '0.0000', '0.0000', '0.4200', '1.0300', '72.0800', 'CAXTERRKLS', NULL, '1609768605', 1, 'UnPaid', 6, 1, 0, 42, '2021-01-04 13:57:04', '2021-01-04 13:57:18'),
 (44, 2, 'Wayne Test', 'puahweewee@gmail.com', 'thsis is tester address', '12345', 'testcity', '2', '0169032551', '72.5000', '', '0.0000', '0.0000', '0.0000', '1.0300', '72.5000', 'CAAO74FICA', NULL, '1609768665', 1, 'UnPaid', 6, 1, 0, 42, '2021-01-04 13:57:51', '2021-01-04 13:58:01'),
-(45, 2, 'Wayne Test', 'puahweewee@gmail.com', 'thsis is tester address', '12345', 'testcity', '2', '0169032551', '128.0000', '', '0.0000', '0.0000', '0.1700', '0.4100', '127.8300', 'CA0JHU9ACK', NULL, '1609768745', 1, 'UnPaid', 6, 1, 0, 17, '2021-01-04 14:00:19', '2021-01-04 14:00:35');
+(45, 2, 'Wayne Test', 'puahweewee@gmail.com', 'thsis is tester address', '12345', 'testcity', '2', '0169032551', '128.0000', '', '0.0000', '0.0000', '0.1700', '0.4100', '127.8300', 'CA0JHU9ACK', NULL, '1609768745', 1, 'UnPaid', 6, 1, 0, 17, '2021-01-04 14:00:19', '2021-01-04 14:00:35'),
+(46, 4, 'Wayne Test', 'puahweewee@gmail.com', 'thsis is tester address', '12345', 'testcity', '2', '0169032551', '305.5000', 'GGSDFF', '0.0000', '4.0000', '1.4800', '1.6500', '301.6700', 'CASJOQG0XN', '3456', '1609775367', 1, 'UnPaid', 6, 1, 0, 43, '2021-01-04 15:49:43', '2021-01-04 20:01:13'),
+(47, 1, 'nicky', 'nickyzz111406@gmail.com', 'no test 1', '81000', 'Johor', '1', '0123456789', '94.5000', '', '0.0000', '0.0000', '0.0100', '1.6500', '94.4900', 'CAAARH7M73', NULL, '1609790165', 1, 'UnPaid', 21, 1, 0, 64, '2021-01-04 19:56:36', '2021-01-04 19:56:36'),
+(48, 4, 'nicky', 'nickyzz111406@gmail.com', 'no test 1', '81000', 'Johor', '1', '0123456789', '94.5000', '', '0.0000', '0.0000', '0.0100', '1.6500', '94.4900', 'CACFTVP9HP', '123456', '1609790238', 1, 'UnPaid', 21, 1, 0, 64, '2021-01-04 19:57:25', '2021-01-04 20:00:24'),
+(49, 2, 'Wayne Test', 'puahweewee@gmail.com', 'thsis is tester address', '12345', 'testcity', '2', '0169032551', '117.6000', 'GGSDFF', '0.0000', '4.0000', '2.9700', '1.6500', '112.2800', 'CADPL1FRP7', NULL, '1610034249', 1, 'UnPaid', 6, 1, 0, 297, '2021-01-07 15:46:05', '2021-01-07 15:46:13'),
+(50, 1, 'Wayne Test', 'puahweewee@gmail.com', 'thsis is tester address', '12345', 'testcity', '2', '0169032551', '59.8000', '', '0.0000', '0.0000', '5.9400', '1.9600', '53.8600', 'CAYUAPNK31', NULL, '1610266652', 1, 'UnPaid', 6, 1, 0, 297, '2021-01-10 08:18:24', '2021-01-10 08:18:24'),
+(51, 2, 'Wayne Test', 'puahweewee@gmail.com', 'thsis is tester address', '12345', 'testcity', '2', '0169032551', '59.8000', '', '0.0000', '0.0000', '5.9400', '1.9600', '53.8600', 'CAHU9GV6FR', NULL, '1610266803', 1, 'UnPaid', 6, 1, 0, 297, '2021-01-10 08:21:23', '2021-01-10 08:21:29'),
+(52, 1, 'Wayne Test', 'puahweewee@gmail.com', 'thsis is tester address', '12345', 'testcity', '2', '0169032551', '19.8000', '', '0.0000', '0.0000', '5.9400', '1.6500', '13.8600', 'CAGCLQBRZN', NULL, '1610267785', 1, 'UnPaid', 6, 1, 0, 297, '2021-01-10 08:37:09', '2021-01-10 08:37:09'),
+(53, 1, 'Wayne Test', 'puahweewee@gmail.com', 'thsis is tester address', '12345', 'testcity', '2', '0169032551', '19.8000', '', '0.0000', '0.0000', '5.9400', '1.6500', '13.8600', 'CAVUWNYZRE', NULL, '1610267876', 1, 'UnPaid', 6, 1, 0, 297, '2021-01-10 08:38:07', '2021-01-10 08:38:07'),
+(54, 1, 'Wayne Test', 'puahweewee@gmail.com', 'thsis is tester address', '12345', 'testcity', '2', '0169032551', '19.8000', '', '0.0000', '0.0000', '5.9400', '1.6500', '15.5100', 'CAE6ISNHEI', NULL, '1610267896', 1, 'UnPaid', 6, 1, 0, 297, '2021-01-10 08:46:03', '2021-01-10 08:46:03'),
+(55, 1, 'Wayne Test', 'puahweewee@gmail.com', 'thsis is tester address', '12345', 'testcity', '1', '0169032551', '19.8000', '', '0.0000', '0.0000', '0.0000', '1.6500', '21.4500', 'CAR3GPACCO', NULL, '1610444632', 1, 'UnPaid', 6, 1, 0, 297, '2021-01-12 09:44:03', '2021-01-12 09:44:03');
 
 -- --------------------------------------------------------
 
@@ -681,7 +739,35 @@ INSERT INTO `order_items` (`id`, `product_id`, `qty`, `price`, `point`, `rate`, 
 (86, 2, 1, '22.0000', 22, 0, 44, '2021-01-04 13:57:51', '2021-01-04 13:57:51'),
 (87, 3, 1, '50.5000', 20, 0, 44, '2021-01-04 13:57:51', '2021-01-04 13:57:51'),
 (88, 7, 1, '55.0000', 5, 0, 45, '2021-01-04 14:00:19', '2021-01-04 14:00:19'),
-(89, 6, 1, '73.0000', 12, 0, 45, '2021-01-04 14:00:19', '2021-01-04 14:00:19');
+(89, 6, 1, '73.0000', 12, 0, 45, '2021-01-04 14:00:19', '2021-01-04 14:00:19'),
+(90, 2, 1, '22.0000', 22, 0, 46, '2021-01-04 15:49:43', '2021-01-04 15:49:43'),
+(91, 3, 1, '50.5000', 20, 0, 46, '2021-01-04 15:49:43', '2021-01-04 15:49:43'),
+(92, 5, 1, '233.0000', 1, 0, 46, '2021-01-04 15:49:43', '2021-01-04 15:49:43'),
+(93, 2, 2, '22.0000', 22, 0, 47, '2021-01-04 19:56:36', '2021-01-04 19:56:36'),
+(94, 3, 1, '50.5000', 20, 0, 47, '2021-01-04 19:56:36', '2021-01-04 19:56:36'),
+(95, 2, 2, '22.0000', 22, 2, 48, '2021-01-04 19:57:25', '2021-01-04 20:01:40'),
+(96, 3, 1, '50.5000', 20, 5, 48, '2021-01-04 19:57:25', '2021-01-04 20:01:40'),
+(97, 9, 1, '84.9000', 99, 0, 49, '2021-01-07 15:46:05', '2021-01-07 15:46:05'),
+(98, 12, 1, '12.8000', 99, 0, 49, '2021-01-07 15:46:05', '2021-01-07 15:46:05'),
+(99, 22, 1, '19.9000', 99, 0, 49, '2021-01-07 15:46:05', '2021-01-07 15:46:05'),
+(100, 8, 1, '34.9000', 99, 0, 50, '2021-01-10 08:18:24', '2021-01-10 08:18:24'),
+(101, 10, 1, '16.0000', 99, 0, 50, '2021-01-10 08:18:24', '2021-01-10 08:18:24'),
+(102, 11, 1, '8.9000', 99, 0, 50, '2021-01-10 08:18:24', '2021-01-10 08:18:24'),
+(103, 8, 1, '34.9000', 99, 0, 51, '2021-01-10 08:21:23', '2021-01-10 08:21:23'),
+(104, 10, 1, '16.0000', 99, 0, 51, '2021-01-10 08:21:23', '2021-01-10 08:21:23'),
+(105, 11, 1, '8.9000', 99, 0, 51, '2021-01-10 08:21:23', '2021-01-10 08:21:23'),
+(106, 13, 1, '10.9000', 99, 0, 52, '2021-01-10 08:37:09', '2021-01-10 08:37:09'),
+(107, 14, 1, '8.9000', 99, 0, 52, '2021-01-10 08:37:09', '2021-01-10 08:37:09'),
+(108, 15, 1, '0.0000', 99, 0, 52, '2021-01-10 08:37:09', '2021-01-10 08:37:09'),
+(109, 13, 1, '10.9000', 99, 0, 53, '2021-01-10 08:38:07', '2021-01-10 08:38:07'),
+(110, 14, 1, '8.9000', 99, 0, 53, '2021-01-10 08:38:07', '2021-01-10 08:38:07'),
+(111, 15, 1, '0.0000', 99, 0, 53, '2021-01-10 08:38:07', '2021-01-10 08:38:07'),
+(112, 13, 1, '10.9000', 99, 0, 54, '2021-01-10 08:46:03', '2021-01-10 08:46:03'),
+(113, 14, 1, '8.9000', 99, 0, 54, '2021-01-10 08:46:03', '2021-01-10 08:46:03'),
+(114, 15, 1, '0.0000', 99, 0, 54, '2021-01-10 08:46:03', '2021-01-10 08:46:03'),
+(115, 13, 1, '10.9000', 99, 0, 55, '2021-01-12 09:44:03', '2021-01-12 09:44:03'),
+(116, 14, 1, '8.9000', 99, 0, 55, '2021-01-12 09:44:03', '2021-01-12 09:44:03'),
+(117, 15, 1, '0.0000', 99, 0, 55, '2021-01-12 09:44:03', '2021-01-12 09:44:03');
 
 -- --------------------------------------------------------
 
@@ -725,11 +811,64 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`id`, `point`, `point_allow_discount`, `stock`, `category`, `length`, `width`, `height`, `weight`, `image`, `is_point_deduct`, `status`, `date_created`, `date_modified`) VALUES
-(2, 22, 33, 98, 1, '1.0000', '2.0000', '3.0000', '4.0000', 'PROD1601370391.jpg', 1, 1, '2020-09-29 09:06:31', '2021-01-04 13:58:01'),
-(3, 20, 50, 181, 2, '0.0500', '0.0600', '0.0150', '1.0000', 'PROD1603465905.jpg', 1, 1, '2020-09-29 09:13:19', '2021-01-04 13:58:01'),
-(5, 1, 44, 2215, 1, '1.0000', '1.0000', '1.0000', '5.0000', 'PROD1605375001.jpg', 1, 1, '2020-11-14 17:30:01', '2021-01-04 12:51:51'),
-(6, 12, 52, 49, 2, '0.0130', '0.0110', '0.0050', '1.0030', 'PROD1606405413.jpg', 1, 1, '2020-11-26 15:43:32', '2021-01-04 15:28:28'),
-(7, 5, 66, 15, 1, '0.0120', '0.0150', '0.0060', '0.0620', 'PROD1606405907.jpg', 1, 1, '2020-11-26 15:51:47', '2021-01-04 14:00:35');
+(8, 99, 99, 98, 6, '3.0500', '3.0000', '1.7500', '3.3200', 'PROD16101985540.tmp', 1, 1, '2021-01-06 18:32:51', '2021-01-10 08:21:29'),
+(9, 99, 99, 98, 6, '3.0500', '3.0000', '1.7500', '3.3200', 'PROD16101985540.tmp', 1, 1, '2021-01-06 18:54:16', '2021-01-07 15:46:13'),
+(10, 99, 99, 98, 6, '3.0500', '3.0000', '1.7500', '3.8780', 'PROD16101985540.tmp', 1, 1, '2021-01-06 18:58:42', '2021-01-10 08:21:29'),
+(11, 99, 99, 98, 8, '3.0500', '3.0000', '1.7500', '3.3200', 'PROD16101985540.tmp', 1, 1, '2021-01-06 19:03:59', '2021-01-10 08:21:29'),
+(12, 99, 99, 98, 8, '3.5000', '3.0000', '1.7500', '3.3200', 'PROD16101985540.tmp', 1, 1, '2021-01-06 19:06:40', '2021-01-07 15:46:13'),
+(13, 99, 99, 99, 7, '3.0500', '3.0000', '1.7500', '3.3200', 'PROD16101985540.tmp', 1, 1, '2021-01-06 19:11:00', '2021-01-06 19:11:00'),
+(14, 99, 99, 99, 7, '3.0500', '3.0000', '1.7500', '3.3200', 'PROD16101985540.tmp', 1, 1, '2021-01-06 19:13:05', '2021-01-06 19:13:05'),
+(15, 99, 99, 99, 7, '3.0500', '3.0000', '1.7500', '3.3200', 'PROD16101985540.tmp', 1, 1, '2021-01-06 19:15:01', '2021-01-06 19:15:01'),
+(16, 99, 99, 99, 5, '3.0500', '3.0000', '1.7500', '3.3200', 'PROD16101985540.tmp', 1, 1, '2021-01-06 19:17:58', '2021-01-06 19:17:58'),
+(17, 99, 99, 99, 4, '0.9000', '0.7000', '1.6000', '1.0000', 'PROD16101985540.tmp', 1, 1, '2021-01-06 19:23:04', '2021-01-06 19:23:04'),
+(18, 99, 99, 99, 4, '3.0500', '3.0000', '1.7500', '3.7000', 'PROD16101985540.tmp', 1, 1, '2021-01-06 19:25:45', '2021-01-06 19:25:45'),
+(19, 99, 99, 99, 4, '3.0500', '3.0000', '1.7500', '3.3200', 'PROD16101985540.tmp', 1, 1, '2021-01-06 19:27:42', '2021-01-06 19:27:42'),
+(20, 99, 99, 99, 4, '2.4000', '1.8500', '1.1500', '2.0900', 'PROD16101985540.tmp', 1, 1, '2021-01-06 19:30:08', '2021-01-06 19:30:08'),
+(21, 99, 99, 99, 4, '3.0500', '3.0000', '1.7500', '3.3300', 'PROD16101985540.tmp', 1, 1, '2021-01-06 19:32:15', '2021-01-06 19:32:15'),
+(22, 99, 99, 98, 4, '3.0500', '3.0000', '1.7500', '3.3300', 'PROD16101985540.tmp', 1, 1, '2021-01-06 19:34:24', '2021-01-07 15:46:13'),
+(23, 99, 99, 99, 4, '3.0500', '3.0000', '1.7500', '3.3200', 'PROD16101985540.tmp', 1, 1, '2021-01-06 19:36:20', '2021-01-06 19:36:20'),
+(24, 99, 99, 99, 9, '3.0500', '3.0000', '1.7500', '3.3200', 'PROD16101985540.tmp', 1, 1, '2021-01-06 19:55:39', '2021-01-06 19:55:39'),
+(25, 99, 99, 99, 9, '3.0500', '3.0000', '1.7500', '3.3200', 'PROD16101985540.tmp', 1, 1, '2021-01-06 19:58:26', '2021-01-06 19:58:26'),
+(26, 99, 99, 99, 9, '3.0500', '3.0000', '1.7500', '3.3200', 'PROD16101985540.tmp', 1, 1, '2021-01-06 20:00:18', '2021-01-06 20:00:18'),
+(27, 99, 99, 99, 9, '3.0500', '3.0000', '1.7500', '3.3200', 'PROD16101985540.tmp', 1, 1, '2021-01-06 20:01:43', '2021-01-06 20:01:43'),
+(28, 99, 99, 99, 9, '3.0500', '3.0000', '1.7500', '3.3200', 'PROD16101985540.tmp', 1, 1, '2021-01-06 20:02:45', '2021-01-06 20:02:45'),
+(29, 99, 99, 99, 9, '3.0500', '3.0000', '1.7500', '3.3200', 'PROD16101985540.tmp', 1, 1, '2021-01-06 20:04:30', '2021-01-06 20:07:05'),
+(30, 99, 99, 99, 9, '3.0500', '3.0000', '1.7500', '3.3200', 'PROD16101985540.tmp', 1, 1, '2021-01-06 20:06:50', '2021-01-06 20:06:50'),
+(31, 99, 99, 99, 9, '3.0500', '3.0000', '1.7500', '3.3200', 'PROD16101985540.tmp', 1, 1, '2021-01-06 20:09:09', '2021-01-06 20:09:09'),
+(32, 99, 99, 99, 9, '3.0500', '3.0000', '1.7500', '3.3200', 'PROD16101985540.tmp', 1, 1, '2021-01-06 20:11:14', '2021-01-06 20:11:14'),
+(33, 99, 99, 99, 9, '3.0500', '3.0000', '1.7500', '3.3200', 'PROD16101985540.tmp', 1, 1, '2021-01-06 20:13:28', '2021-01-06 20:23:09'),
+(34, 99, 99, 99, 9, '3.0500', '3.0000', '1.7500', '3.3200', 'PROD16101985540.tmp', 1, 1, '2021-01-06 20:15:31', '2021-01-06 20:15:31'),
+(35, 99, 99, 99, 9, '3.0500', '3.0000', '1.7500', '3.3200', 'PROD16101985540.tmp', 1, 1, '2021-01-06 20:17:34', '2021-01-06 20:17:34'),
+(36, 99, 99, 99, 9, '3.0500', '3.0000', '1.7500', '3.3200', 'PROD16101985540.tmp', 1, 1, '2021-01-06 20:19:58', '2021-01-06 20:19:58'),
+(37, 99, 99, 99, 9, '3.0500', '3.0000', '1.7500', '3.3200', 'PROD16101985540.tmp', 1, 1, '2021-01-06 20:21:52', '2021-01-06 20:21:52'),
+(39, 122, 23, 100, 4, '0.0020', '0.0020', '0.0020', '0.0050', 'PROD16101985540.tmp', 1, 1, '2021-01-09 13:18:45', '2021-01-09 13:18:45'),
+(40, 123, 22, 100, 4, '0.0020', '0.0030', '0.0040', '0.0050', 'PROD16101985543.tmp', 1, 1, '2021-01-09 13:22:34', '2021-01-09 14:08:51');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_image`
+--
+
+CREATE TABLE `product_image` (
+  `id` int(11) UNSIGNED NOT NULL,
+  `product_id` int(11) UNSIGNED NOT NULL,
+  `image` varchar(55) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `product_image`
+--
+
+INSERT INTO `product_image` (`id`, `product_id`, `image`) VALUES
+(6, 40, 'PROD16101985540.tmp'),
+(8, 40, 'PROD16101985542.tmp'),
+(9, 40, 'PROD16101985543.tmp'),
+(12, 40, 'PROD16102031020.jpg'),
+(13, 40, 'PROD16102031021.jpg'),
+(14, 40, 'PROD16102031022.jpg'),
+(15, 40, 'PROD16102032050.jpg'),
+(16, 40, 'PROD16102032051.jpg');
 
 -- --------------------------------------------------------
 
@@ -770,9 +909,99 @@ INSERT INTO `product_role_price` (`id`, `price`, `type`, `product_id`) VALUES
 (19, 55.0000, 1, 7),
 (20, 40.0000, 2, 7),
 (21, 50.6000, 3, 7),
-(22, 33.0000, 1, 8),
-(23, 12.0000, 2, 8),
-(24, 21.0000, 3, 8);
+(22, 84.9000, 1, 8),
+(23, 75.0000, 2, 8),
+(24, 80.0000, 3, 8),
+(25, 84.9000, 1, 9),
+(26, 75.0000, 2, 9),
+(27, 80.0000, 3, 9),
+(28, 16.0000, 1, 10),
+(29, 10.0000, 2, 10),
+(30, 13.0000, 3, 10),
+(31, 8.9000, 1, 11),
+(32, 8.0000, 2, 11),
+(33, 8.5000, 3, 11),
+(34, 12.8000, 1, 12),
+(35, 12.0000, 2, 12),
+(36, 12.5000, 3, 12),
+(37, 10.9000, 1, 13),
+(38, 10.0000, 2, 13),
+(39, 10.5000, 3, 13),
+(40, 8.9000, 1, 14),
+(41, 8.0000, 2, 14),
+(42, 8.5000, 3, 14),
+(43, 10.5000, 1, 15),
+(44, 10.0000, 2, 15),
+(45, 10.2000, 3, 15),
+(46, 12.9000, 1, 16),
+(47, 12.0000, 2, 16),
+(48, 12.5000, 3, 16),
+(49, 28.8000, 1, 17),
+(50, 25.0000, 2, 17),
+(51, 28.0000, 3, 17),
+(52, 59.0000, 1, 18),
+(53, 59.0000, 2, 18),
+(54, 59.0000, 3, 18),
+(55, 16.0000, 1, 19),
+(56, 16.0000, 2, 19),
+(57, 16.0000, 3, 19),
+(58, 38.0000, 1, 20),
+(59, 38.0000, 2, 20),
+(60, 38.0000, 3, 20),
+(61, 19.9000, 1, 21),
+(62, 19.9000, 2, 21),
+(63, 19.9000, 3, 21),
+(64, 19.9000, 1, 22),
+(65, 19.9000, 2, 22),
+(66, 19.9000, 3, 22),
+(67, 19.9000, 1, 23),
+(68, 19.9000, 2, 23),
+(69, 19.9000, 3, 23),
+(70, 6.9000, 1, 24),
+(71, 6.9000, 2, 24),
+(72, 6.9000, 3, 24),
+(73, 34.0000, 1, 25),
+(74, 34.0000, 2, 25),
+(75, 34.0000, 3, 25),
+(76, 19.9000, 1, 26),
+(77, 19.9000, 2, 26),
+(78, 19.9000, 3, 26),
+(79, 19.9000, 1, 27),
+(80, 19.9000, 2, 27),
+(81, 19.9000, 3, 27),
+(82, 19.9000, 1, 28),
+(83, 19.9000, 2, 28),
+(84, 19.9000, 3, 28),
+(85, 10.5000, 1, 29),
+(86, 10.5000, 2, 29),
+(87, 10.5000, 3, 29),
+(88, 9.0000, 1, 30),
+(89, 9.0000, 2, 30),
+(90, 9.0000, 3, 30),
+(91, 34.9000, 1, 31),
+(92, 34.9000, 2, 31),
+(93, 34.9000, 3, 31),
+(94, 11.9000, 1, 32),
+(95, 11.9000, 2, 32),
+(96, 11.9000, 3, 32),
+(97, 18.9000, 1, 33),
+(98, 18.9000, 2, 33),
+(99, 18.9000, 3, 33),
+(100, 34.9000, 1, 34),
+(101, 34.9000, 2, 34),
+(102, 34.9000, 3, 34),
+(103, 34.9000, 1, 35),
+(104, 34.9000, 2, 35),
+(105, 34.9000, 3, 35),
+(106, 34.9000, 1, 36),
+(107, 34.9000, 2, 36),
+(108, 34.9000, 3, 36),
+(109, 38.9000, 1, 37),
+(110, 38.9000, 2, 37),
+(111, 38.9000, 3, 37),
+(118, 444.0000, 1, 40),
+(119, 222.0000, 2, 40),
+(120, 333.6000, 3, 40);
 
 -- --------------------------------------------------------
 
@@ -814,9 +1043,101 @@ INSERT INTO `product_translation` (`id`, `name`, `description`, `language`, `pro
 (19, 'other product', 'test', 'en', 7),
 (20, '测试', 'test', 'cn', 7),
 (21, 'test maly', 'test malay', 'my', 7),
-(22, 'test reduce point', '<p>test reduce point<br></p>', 'en', 8),
-(23, 'test reduce point', '<p>test reduce point<br></p>', 'cn', 8),
-(24, 'test reduce point', '<p>test reduce point<br></p>', 'my', 8);
+(22, 'Premium Imported Japan Hojicha Roasted Green Tea Powder', '<h5><font color=\"#2d2a2a\" face=\"Poppins, Arial, Helvetica, sans-serif\" style=\"font-weight: normal;\">[CAROMA] Premium Imported Japan Hojicha Roasted Green Tea Powder /150g/ Halal /Gluten Free/Ceremonial Grade Quality/ Natural/ Low Caffeine/ Serbuk Green Tea Roasted</font></h5><h5><font color=\"#2d2a2a\" face=\"Poppins, Arial, Helvetica, sans-serif\" style=\"font-weight: normal;\"><br></font></h5><h5><font color=\"#2d2a2a\" face=\"Poppins, Arial, Helvetica, sans-serif\" style=\"font-weight: normal;\">CAROMA Hojicha Roasted Green Tea Powder Imported from Yame City, Fukuoka Prefecture Japan, its fragrant aroma and nutty, toasty flavor, Hojicha Roasted Green Tea (also known as houjicha) is a popular tea with plenty of health benefits.</font></h5><h5><font color=\"#2d2a2a\" face=\"Poppins, Arial, Helvetica, sans-serif\" style=\"font-weight: normal;\">In Japan, hojicha’s popularity stems from the fact that this roasted green tea is soothing and low in caffeine. Although it has a distinct and uniquely enjoyable taste, it is hojicha’s health benefits that make this green tea a staple in many homes.</font></h5><h5><font color=\"#2d2a2a\" face=\"Poppins, Arial, Helvetica, sans-serif\" style=\"font-weight: normal;\"><br></font></h5><h5><font color=\"#2d2a2a\" face=\"Poppins, Arial, Helvetica, sans-serif\" style=\"font-weight: normal;\">Hojicha Powder is the easiest way to enjoy the sweet taste and the pleasant aroma of Japanese roasted green tea. The superfine Hojicha Powder makes the perfect hojicha latte at the cafe or at home. This green tea powder is highly versatile and can also be used in recipes in addition or as a substitute for matcha green tea.</font></h5><h5><font color=\"#2d2a2a\" face=\"Poppins, Arial, Helvetica, sans-serif\" style=\"font-weight: normal;\"><br></font></h5><h5><font color=\"#2d2a2a\" face=\"Poppins, Arial, Helvetica, sans-serif\" style=\"font-weight: normal;\">1)Pure Roasted Green Tea Leaves</font></h5><h5><font color=\"#2d2a2a\" face=\"Poppins, Arial, Helvetica, sans-serif\" style=\"font-weight: normal;\">2)Sugar Free</font></h5><h5><font color=\"#2d2a2a\" face=\"Poppins, Arial, Helvetica, sans-serif\" style=\"font-weight: normal;\">3)Gluten Free</font></h5><h5><font color=\"#2d2a2a\" face=\"Poppins, Arial, Helvetica, sans-serif\" style=\"font-weight: normal;\">4)No Added Preservative</font></h5><h5><font color=\"#2d2a2a\" face=\"Poppins, Arial, Helvetica, sans-serif\" style=\"font-weight: normal;\">5)No Added Colouring</font></h5><h5><font color=\"#2d2a2a\" face=\"Poppins, Arial, Helvetica, sans-serif\" style=\"font-weight: normal;\">6)Low Caffeine</font></h5><h5><font color=\"#2d2a2a\" face=\"Poppins, Arial, Helvetica, sans-serif\" style=\"font-weight: normal;\">7)Certified by HACCP, ISO22000, cGMP, MeSTI and HALAL by JAKIM.</font></h5><h5><font color=\"#2d2a2a\" face=\"Poppins, Arial, Helvetica, sans-serif\"></font></h5>', 'en', 8),
+(23, 'Premium Imported Japan Hojicha Roasted Green Tea Powder', '<h5 open=\"\" sans\",=\"\" \"helvetica=\"\" neue\",=\"\" helvetica,=\"\" arial,=\"\" sans-serif;=\"\" color:=\"\" rgb(0,=\"\" 0,=\"\" 0);\"=\"\"><font color=\"#2d2a2a\" face=\"Poppins, Arial, Helvetica, sans-serif\" style=\"font-weight: normal;\">[CAROMA] Premium Imported Japan Hojicha Roasted Green Tea Powder /150g/ Halal /Gluten Free/Ceremonial Grade Quality/ Natural/ Low Caffeine/ Serbuk Green Tea Roasted</font></h5><h5 open=\"\" sans\",=\"\" \"helvetica=\"\" neue\",=\"\" helvetica,=\"\" arial,=\"\" sans-serif;=\"\" color:=\"\" rgb(0,=\"\" 0,=\"\" 0);\"=\"\"><font color=\"#2d2a2a\" face=\"Poppins, Arial, Helvetica, sans-serif\" style=\"font-weight: normal;\"><br></font></h5><h5 open=\"\" sans\",=\"\" \"helvetica=\"\" neue\",=\"\" helvetica,=\"\" arial,=\"\" sans-serif;=\"\" color:=\"\" rgb(0,=\"\" 0,=\"\" 0);\"=\"\"><font color=\"#2d2a2a\" face=\"Poppins, Arial, Helvetica, sans-serif\" style=\"font-weight: normal;\">CAROMA Hojicha Roasted Green Tea Powder Imported from Yame City, Fukuoka Prefecture Japan, its fragrant aroma and nutty, toasty flavor, Hojicha Roasted Green Tea (also known as houjicha) is a popular tea with plenty of health benefits.</font></h5><h5 open=\"\" sans\",=\"\" \"helvetica=\"\" neue\",=\"\" helvetica,=\"\" arial,=\"\" sans-serif;=\"\" color:=\"\" rgb(0,=\"\" 0,=\"\" 0);\"=\"\"><font color=\"#2d2a2a\" face=\"Poppins, Arial, Helvetica, sans-serif\" style=\"font-weight: normal;\">In Japan, hojicha’s popularity stems from the fact that this roasted green tea is soothing and low in caffeine. Although it has a distinct and uniquely enjoyable taste, it is hojicha’s health benefits that make this green tea a staple in many homes.</font></h5><h5 open=\"\" sans\",=\"\" \"helvetica=\"\" neue\",=\"\" helvetica,=\"\" arial,=\"\" sans-serif;=\"\" color:=\"\" rgb(0,=\"\" 0,=\"\" 0);\"=\"\"><font color=\"#2d2a2a\" face=\"Poppins, Arial, Helvetica, sans-serif\" style=\"font-weight: normal;\"><br></font></h5><h5 open=\"\" sans\",=\"\" \"helvetica=\"\" neue\",=\"\" helvetica,=\"\" arial,=\"\" sans-serif;=\"\" color:=\"\" rgb(0,=\"\" 0,=\"\" 0);\"=\"\"><font color=\"#2d2a2a\" face=\"Poppins, Arial, Helvetica, sans-serif\" style=\"font-weight: normal;\">Hojicha Powder is the easiest way to enjoy the sweet taste and the pleasant aroma of Japanese roasted green tea. The superfine Hojicha Powder makes the perfect hojicha latte at the cafe or at home. This green tea powder is highly versatile and can also be used in recipes in addition or as a substitute for matcha green tea.</font></h5><h5 open=\"\" sans\",=\"\" \"helvetica=\"\" neue\",=\"\" helvetica,=\"\" arial,=\"\" sans-serif;=\"\" color:=\"\" rgb(0,=\"\" 0,=\"\" 0);\"=\"\"><font color=\"#2d2a2a\" face=\"Poppins, Arial, Helvetica, sans-serif\" style=\"font-weight: normal;\"><br></font></h5><h5 open=\"\" sans\",=\"\" \"helvetica=\"\" neue\",=\"\" helvetica,=\"\" arial,=\"\" sans-serif;=\"\" color:=\"\" rgb(0,=\"\" 0,=\"\" 0);\"=\"\"><font color=\"#2d2a2a\" face=\"Poppins, Arial, Helvetica, sans-serif\" style=\"font-weight: normal;\">1)Pure Roasted Green Tea Leaves</font></h5><h5 open=\"\" sans\",=\"\" \"helvetica=\"\" neue\",=\"\" helvetica,=\"\" arial,=\"\" sans-serif;=\"\" color:=\"\" rgb(0,=\"\" 0,=\"\" 0);\"=\"\"><font color=\"#2d2a2a\" face=\"Poppins, Arial, Helvetica, sans-serif\" style=\"font-weight: normal;\">2)Sugar Free</font></h5><h5 open=\"\" sans\",=\"\" \"helvetica=\"\" neue\",=\"\" helvetica,=\"\" arial,=\"\" sans-serif;=\"\" color:=\"\" rgb(0,=\"\" 0,=\"\" 0);\"=\"\"><font color=\"#2d2a2a\" face=\"Poppins, Arial, Helvetica, sans-serif\" style=\"font-weight: normal;\">3)Gluten Free</font></h5><h5 open=\"\" sans\",=\"\" \"helvetica=\"\" neue\",=\"\" helvetica,=\"\" arial,=\"\" sans-serif;=\"\" color:=\"\" rgb(0,=\"\" 0,=\"\" 0);\"=\"\"><font color=\"#2d2a2a\" face=\"Poppins, Arial, Helvetica, sans-serif\" style=\"font-weight: normal;\">4)No Added Preservative</font></h5><h5 open=\"\" sans\",=\"\" \"helvetica=\"\" neue\",=\"\" helvetica,=\"\" arial,=\"\" sans-serif;=\"\" color:=\"\" rgb(0,=\"\" 0,=\"\" 0);\"=\"\"><font color=\"#2d2a2a\" face=\"Poppins, Arial, Helvetica, sans-serif\" style=\"font-weight: normal;\">5)No Added Colouring</font></h5><h5 open=\"\" sans\",=\"\" \"helvetica=\"\" neue\",=\"\" helvetica,=\"\" arial,=\"\" sans-serif;=\"\" color:=\"\" rgb(0,=\"\" 0,=\"\" 0);\"=\"\"><font color=\"#2d2a2a\" face=\"Poppins, Arial, Helvetica, sans-serif\" style=\"font-weight: normal;\">6)Low Caffeine</font></h5><h5 open=\"\" sans\",=\"\" \"helvetica=\"\" neue\",=\"\" helvetica,=\"\" arial,=\"\" sans-serif;=\"\" color:=\"\" rgb(0,=\"\" 0,=\"\" 0);\"=\"\"><font color=\"#2d2a2a\" face=\"Poppins, Arial, Helvetica, sans-serif\" style=\"font-weight: normal;\">7)Certified by HACCP, ISO22000, cGMP, MeSTI and HALAL by JAKIM.</font></h5><h5 style=\"font-family: \" open=\"\" sans\",=\"\" \"helvetica=\"\" neue\",=\"\" helvetica,=\"\" arial,=\"\" sans-serif;=\"\" color:=\"\" rgb(0,=\"\" 0,=\"\" 0);\"=\"\"><font color=\"#2d2a2a\" face=\"Poppins, Arial, Helvetica, sans-serif\"></font></h5>', 'cn', 8),
+(24, 'Premium Imported Japan Hojicha Roasted Green Tea Powder', '<h5 open=\"\" sans\",=\"\" \"helvetica=\"\" neue\",=\"\" helvetica,=\"\" arial,=\"\" sans-serif;=\"\" color:=\"\" rgb(0,=\"\" 0,=\"\" 0);\"=\"\"><font color=\"#2d2a2a\" face=\"Poppins, Arial, Helvetica, sans-serif\" style=\"font-weight: normal;\">[CAROMA] Premium Imported Japan Hojicha Roasted Green Tea Powder /150g/ Halal /Gluten Free/Ceremonial Grade Quality/ Natural/ Low Caffeine/ Serbuk Green Tea Roasted</font></h5><h5 open=\"\" sans\",=\"\" \"helvetica=\"\" neue\",=\"\" helvetica,=\"\" arial,=\"\" sans-serif;=\"\" color:=\"\" rgb(0,=\"\" 0,=\"\" 0);\"=\"\"><font color=\"#2d2a2a\" face=\"Poppins, Arial, Helvetica, sans-serif\" style=\"font-weight: normal;\"><br></font></h5><h5 open=\"\" sans\",=\"\" \"helvetica=\"\" neue\",=\"\" helvetica,=\"\" arial,=\"\" sans-serif;=\"\" color:=\"\" rgb(0,=\"\" 0,=\"\" 0);\"=\"\"><font color=\"#2d2a2a\" face=\"Poppins, Arial, Helvetica, sans-serif\" style=\"font-weight: normal;\">CAROMA Hojicha Roasted Green Tea Powder Imported from Yame City, Fukuoka Prefecture Japan, its fragrant aroma and nutty, toasty flavor, Hojicha Roasted Green Tea (also known as houjicha) is a popular tea with plenty of health benefits.</font></h5><h5 open=\"\" sans\",=\"\" \"helvetica=\"\" neue\",=\"\" helvetica,=\"\" arial,=\"\" sans-serif;=\"\" color:=\"\" rgb(0,=\"\" 0,=\"\" 0);\"=\"\"><font color=\"#2d2a2a\" face=\"Poppins, Arial, Helvetica, sans-serif\" style=\"font-weight: normal;\">In Japan, hojicha’s popularity stems from the fact that this roasted green tea is soothing and low in caffeine. Although it has a distinct and uniquely enjoyable taste, it is hojicha’s health benefits that make this green tea a staple in many homes.</font></h5><h5 open=\"\" sans\",=\"\" \"helvetica=\"\" neue\",=\"\" helvetica,=\"\" arial,=\"\" sans-serif;=\"\" color:=\"\" rgb(0,=\"\" 0,=\"\" 0);\"=\"\"><font color=\"#2d2a2a\" face=\"Poppins, Arial, Helvetica, sans-serif\" style=\"font-weight: normal;\"><br></font></h5><h5 open=\"\" sans\",=\"\" \"helvetica=\"\" neue\",=\"\" helvetica,=\"\" arial,=\"\" sans-serif;=\"\" color:=\"\" rgb(0,=\"\" 0,=\"\" 0);\"=\"\"><font color=\"#2d2a2a\" face=\"Poppins, Arial, Helvetica, sans-serif\" style=\"font-weight: normal;\">Hojicha Powder is the easiest way to enjoy the sweet taste and the pleasant aroma of Japanese roasted green tea. The superfine Hojicha Powder makes the perfect hojicha latte at the cafe or at home. This green tea powder is highly versatile and can also be used in recipes in addition or as a substitute for matcha green tea.</font></h5><h5 open=\"\" sans\",=\"\" \"helvetica=\"\" neue\",=\"\" helvetica,=\"\" arial,=\"\" sans-serif;=\"\" color:=\"\" rgb(0,=\"\" 0,=\"\" 0);\"=\"\"><font color=\"#2d2a2a\" face=\"Poppins, Arial, Helvetica, sans-serif\" style=\"font-weight: normal;\"><br></font></h5><h5 open=\"\" sans\",=\"\" \"helvetica=\"\" neue\",=\"\" helvetica,=\"\" arial,=\"\" sans-serif;=\"\" color:=\"\" rgb(0,=\"\" 0,=\"\" 0);\"=\"\"><font color=\"#2d2a2a\" face=\"Poppins, Arial, Helvetica, sans-serif\" style=\"font-weight: normal;\">1)Pure Roasted Green Tea Leaves</font></h5><h5 open=\"\" sans\",=\"\" \"helvetica=\"\" neue\",=\"\" helvetica,=\"\" arial,=\"\" sans-serif;=\"\" color:=\"\" rgb(0,=\"\" 0,=\"\" 0);\"=\"\"><font color=\"#2d2a2a\" face=\"Poppins, Arial, Helvetica, sans-serif\" style=\"font-weight: normal;\">2)Sugar Free</font></h5><h5 open=\"\" sans\",=\"\" \"helvetica=\"\" neue\",=\"\" helvetica,=\"\" arial,=\"\" sans-serif;=\"\" color:=\"\" rgb(0,=\"\" 0,=\"\" 0);\"=\"\"><font color=\"#2d2a2a\" face=\"Poppins, Arial, Helvetica, sans-serif\" style=\"font-weight: normal;\">3)Gluten Free</font></h5><h5 open=\"\" sans\",=\"\" \"helvetica=\"\" neue\",=\"\" helvetica,=\"\" arial,=\"\" sans-serif;=\"\" color:=\"\" rgb(0,=\"\" 0,=\"\" 0);\"=\"\"><font color=\"#2d2a2a\" face=\"Poppins, Arial, Helvetica, sans-serif\" style=\"font-weight: normal;\">4)No Added Preservative</font></h5><h5 open=\"\" sans\",=\"\" \"helvetica=\"\" neue\",=\"\" helvetica,=\"\" arial,=\"\" sans-serif;=\"\" color:=\"\" rgb(0,=\"\" 0,=\"\" 0);\"=\"\"><font color=\"#2d2a2a\" face=\"Poppins, Arial, Helvetica, sans-serif\" style=\"font-weight: normal;\">5)No Added Colouring</font></h5><h5 open=\"\" sans\",=\"\" \"helvetica=\"\" neue\",=\"\" helvetica,=\"\" arial,=\"\" sans-serif;=\"\" color:=\"\" rgb(0,=\"\" 0,=\"\" 0);\"=\"\"><font color=\"#2d2a2a\" face=\"Poppins, Arial, Helvetica, sans-serif\" style=\"font-weight: normal;\">6)Low Caffeine</font></h5><h5 open=\"\" sans\",=\"\" \"helvetica=\"\" neue\",=\"\" helvetica,=\"\" arial,=\"\" sans-serif;=\"\" color:=\"\" rgb(0,=\"\" 0,=\"\" 0);\"=\"\"><font color=\"#2d2a2a\" face=\"Poppins, Arial, Helvetica, sans-serif\" style=\"font-weight: normal;\">7)Certified by HACCP, ISO22000, cGMP, MeSTI and HALAL by JAKIM.</font></h5><h5 style=\"font-family: \" open=\"\" sans\",=\"\" \"helvetica=\"\" neue\",=\"\" helvetica,=\"\" arial,=\"\" sans-serif;=\"\" color:=\"\" rgb(0,=\"\" 0,=\"\" 0);\"=\"\"><font color=\"#2d2a2a\" face=\"Poppins, Arial, Helvetica, sans-serif\"></font></h5>', 'my', 8),
+(25, 'Premium Imported Japan Pure Matcha Green Tea Powder', '<p>Matcha Green Tea with High antioxidants including the powerful EGCg:</p><p><br></p><p>1)Boosts metabolism and burns calories</p><p>2)Detoxifies effectively and naturally</p><p>3)Calms the mind and relaxes the body</p><p>4)Is rich in fiber, chlorophyll and vitamins</p><p>5)Enhances mood and aids in concentration</p><p>6)Provides vitamin C, selenium, chromium, zinc and magnesium</p><p>7)Prevents disease</p><p>8)Lowers cholesterol and blood sugar</p><p>It is suitable to drink hot or cold.</p><p><br></p><p>**Preparation in Hot/ Panas:</p><p>Step 1: Scoop 1 or 1 1/2 Teaspoons Matcha Powder into a cup.</p><p>Step 2: Add 10ml 80 °C water + mix thoroughly to remove Matcha Lumps.</p><p>Step 3: Add 120ML- 150ml 80 °C water + stir well and enjoy.</p><p>Preparation in Cold/ Sejuk:</p><p>Step 1: Scoop 1 or 1 1/2 Teaspoons Matcha Powder into a cup.</p><p>Step 2: Add 10MLl 80 °C water + mix thoroughly to remove Matcha Lumps.</p><p>Step 3: Add 100ML+ 80 °C water + stir well and enjoy + add ice and enjoy</p><p><br></p><p>**Remarks: Add skimmed milk or fresh milk or sugar if desired.</p><p>**Suitable for: Smoothies, Baking and Latte</p><p>Keep in the cool and dry place.</p><p><br></p><p>CAROMA are internationally certified by HACCP, ISO22000, cGMP, MeSTI and HALAL by JAKIM.</p>', 'en', 9),
+(26, 'Premium Imported Japan Pure Matcha Green Tea Powder', '<p>Matcha Green Tea with High antioxidants including the powerful EGCg:</p><p><br></p><p>1)Boosts metabolism and burns calories</p><p>2)Detoxifies effectively and naturally</p><p>3)Calms the mind and relaxes the body</p><p>4)Is rich in fiber, chlorophyll and vitamins</p><p>5)Enhances mood and aids in concentration</p><p>6)Provides vitamin C, selenium, chromium, zinc and magnesium</p><p>7)Prevents disease</p><p>8)Lowers cholesterol and blood sugar</p><p>It is suitable to drink hot or cold.</p><p><br></p><p>**Preparation in Hot/ Panas:</p><p>Step 1: Scoop 1 or 1 1/2 Teaspoons Matcha Powder into a cup.</p><p>Step 2: Add 10ml 80 °C water + mix thoroughly to remove Matcha Lumps.</p><p>Step 3: Add 120ML- 150ml 80 °C water + stir well and enjoy.</p><p>Preparation in Cold/ Sejuk:</p><p>Step 1: Scoop 1 or 1 1/2 Teaspoons Matcha Powder into a cup.</p><p>Step 2: Add 10MLl 80 °C water + mix thoroughly to remove Matcha Lumps.</p><p>Step 3: Add 100ML+ 80 °C water + stir well and enjoy + add ice and enjoy</p><p><br></p><p>**Remarks: Add skimmed milk or fresh milk or sugar if desired.</p><p>**Suitable for: Smoothies, Baking and Latte</p><p>Keep in the cool and dry place.</p><p><br></p><p>CAROMA are internationally certified by HACCP, ISO22000, cGMP, MeSTI and HALAL by JAKIM.</p>', 'cn', 9),
+(27, 'Premium Imported Japan Pure Matcha Green Tea Powder', '<p>Matcha Green Tea with High antioxidants including the powerful EGCg:</p><p><br></p><p>1)Boosts metabolism and burns calories</p><p>2)Detoxifies effectively and naturally</p><p>3)Calms the mind and relaxes the body</p><p>4)Is rich in fiber, chlorophyll and vitamins</p><p>5)Enhances mood and aids in concentration</p><p>6)Provides vitamin C, selenium, chromium, zinc and magnesium</p><p>7)Prevents disease</p><p>8)Lowers cholesterol and blood sugar</p><p>It is suitable to drink hot or cold.</p><p><br></p><p>**Preparation in Hot/ Panas:</p><p>Step 1: Scoop 1 or 1 1/2 Teaspoons Matcha Powder into a cup.</p><p>Step 2: Add 10ml 80 °C water + mix thoroughly to remove Matcha Lumps.</p><p>Step 3: Add 120ML- 150ml 80 °C water + stir well and enjoy.</p><p>Preparation in Cold/ Sejuk:</p><p>Step 1: Scoop 1 or 1 1/2 Teaspoons Matcha Powder into a cup.</p><p>Step 2: Add 10MLl 80 °C water + mix thoroughly to remove Matcha Lumps.</p><p>Step 3: Add 100ML+ 80 °C water + stir well and enjoy + add ice and enjoy</p><p><br></p><p>**Remarks: Add skimmed milk or fresh milk or sugar if desired.</p><p>**Suitable for: Smoothies, Baking and Latte</p><p>Keep in the cool and dry place.</p><p><br></p><p>CAROMA are internationally certified by HACCP, ISO22000, cGMP, MeSTI and HALAL by JAKIM.</p>', 'my', 9),
+(28, 'Premium Imported Japan Instant Matcha Green Tea Latte', '<p>Matcha Green Tea with High antioxidants including the powerful EGCg:</p><p><br></p><p>1)High in antioxidants</p><p>2)May help protect the liver</p><p>3)Boosts brain function</p><p>4)May help prevent cancer</p><p>5)May promote heart health</p><p>6)Helps you lose weight</p><p><br></p><p>#Ingredients: Non-dairy creamer, Dextrose, Matcha and Sugar</p><p>#Nutrition Information/25 gram: Calories: 110kcal | Energy: 464kJ</p><p>It is suitable to drink hot or cold.</p><p>Preparation in Hot/ Panas:</p><p>#Add 150ml 80 °C water + 1 Sachets Matcha Latte powder +stir well and enjoy.</p><p>Preparation in Cold/ Sejuk:</p><p>#Add 100ml 80 °C water + 1 Sachets Matcha Latte powder +stir well +Added some ice and enjoy.</p><p><br></p><p>CAROMA are internationally certified by HACCP, ISO22000, cGMP, MeSTI and HALAL by JAKIM.</p>', 'en', 10),
+(29, 'Premium Imported Japan Instant Matcha Green Tea Latte', '<p>Matcha Green Tea with High antioxidants including the powerful EGCg:</p><p><br></p><p>1)High in antioxidants</p><p>2)May help protect the liver</p><p>3)Boosts brain function</p><p>4)May help prevent cancer</p><p>5)May promote heart health</p><p>6)Helps you lose weight</p><p><br></p><p>#Ingredients: Non-dairy creamer, Dextrose, Matcha and Sugar</p><p>#Nutrition Information/25 gram: Calories: 110kcal | Energy: 464kJ</p><p>It is suitable to drink hot or cold.</p><p>Preparation in Hot/ Panas:</p><p>#Add 150ml 80 °C water + 1 Sachets Matcha Latte powder +stir well and enjoy.</p><p>Preparation in Cold/ Sejuk:</p><p>#Add 100ml 80 °C water + 1 Sachets Matcha Latte powder +stir well +Added some ice and enjoy.</p><p><br></p><p>CAROMA are internationally certified by HACCP, ISO22000, cGMP, MeSTI and HALAL by JAKIM.</p>', 'cn', 10),
+(30, 'Premium Imported Japan Instant Matcha Green Tea Latte', '<p>Matcha Green Tea with High antioxidants including the powerful EGCg:</p><p><br></p><p>1)High in antioxidants</p><p>2)May help protect the liver</p><p>3)Boosts brain function</p><p>4)May help prevent cancer</p><p>5)May promote heart health</p><p>6)Helps you lose weight</p><p><br></p><p>#Ingredients: Non-dairy creamer, Dextrose, Matcha and Sugar</p><p>#Nutrition Information/25 gram: Calories: 110kcal | Energy: 464kJ</p><p>It is suitable to drink hot or cold.</p><p>Preparation in Hot/ Panas:</p><p>#Add 150ml 80 °C water + 1 Sachets Matcha Latte powder +stir well and enjoy.</p><p>Preparation in Cold/ Sejuk:</p><p>#Add 100ml 80 °C water + 1 Sachets Matcha Latte powder +stir well +Added some ice and enjoy.</p><p><br></p><p>CAROMA are internationally certified by HACCP, ISO22000, cGMP, MeSTI and HALAL by JAKIM.</p>', 'my', 10),
+(31, 'Low GI Sugar Cane (Gula Tebu )', '<p>[CAROMA] Premium/ Better Sugar Cane (Gula Tebu ) /500g / Low Glycemic (Low-GI) (Halal) / Raw Sugar Cane</p><p><br></p><p>The low-glycemic (low-GI) diet is based on the concept of the glycemic index (GI). Foods with a low-GI value are the preferred choice, as they are slowly digested and absorbed, causing a slower and smaller rise in blood sugar levels.</p><p><br></p><p>1)Supports sugar-reduction</p><p>2)Low-Glycemic</p><p>3)Tastes great and less Sweet</p><p>4)Milled, not refined sugar</p><p>5)All natural</p><p>6)GMO free</p><p>7)NO Chemical</p><p>8)NO Pesticides</p><p>9)NO Synthetic Fertilizer</p><p>10)Certified by HACCP, ISO22000 and HALAL by JAKIM</p>', 'en', 11),
+(32, 'Low GI Sugar Cane (Gula Tebu )', '<p>[CAROMA] Premium/ Better Sugar Cane (Gula Tebu ) /500g / Low Glycemic (Low-GI) (Halal) / Raw Sugar Cane</p><p><br></p><p>The low-glycemic (low-GI) diet is based on the concept of the glycemic index (GI). Foods with a low-GI value are the preferred choice, as they are slowly digested and absorbed, causing a slower and smaller rise in blood sugar levels.</p><p><br></p><p>1)Supports sugar-reduction</p><p>2)Low-Glycemic</p><p>3)Tastes great and less Sweet</p><p>4)Milled, not refined sugar</p><p>5)All natural</p><p>6)GMO free</p><p>7)NO Chemical</p><p>8)NO Pesticides</p><p>9)NO Synthetic Fertilizer</p><p>10)Certified by HACCP, ISO22000 and HALAL by JAKIM</p>', 'cn', 11),
+(33, 'Low GI Sugar Cane (Gula Tebu )', '<p>[CAROMA] Premium/ Better Sugar Cane (Gula Tebu ) /500g / Low Glycemic (Low-GI) (Halal) / Raw Sugar Cane</p><p><br></p><p>The low-glycemic (low-GI) diet is based on the concept of the glycemic index (GI). Foods with a low-GI value are the preferred choice, as they are slowly digested and absorbed, causing a slower and smaller rise in blood sugar levels.</p><p><br></p><p>1)Supports sugar-reduction</p><p>2)Low-Glycemic</p><p>3)Tastes great and less Sweet</p><p>4)Milled, not refined sugar</p><p>5)All natural</p><p>6)GMO free</p><p>7)NO Chemical</p><p>8)NO Pesticides</p><p>9)NO Synthetic Fertilizer</p><p>10)Certified by HACCP, ISO22000 and HALAL by JAKIM</p>', 'my', 11),
+(34, 'Premium Pure Coconut Palm Sugar/Gula Kelapa Halus', '<p>[CAROMA] Premium Pure Coconut Palm Sugar / 250g/ Low GI / Gluten Free / Halal / Gula Kelapa</p><p><br></p><p>Enjoy CAROMA 100% Natural Coconut Palm Sugar as a healthier choice with :</p><p><br></p><p>1)100% Coconut Palm sugar</p><p>2)Gluten Free</p><p>3)NO Chemical</p><p>4)NO Pesticides</p><p>5)NO Synthetic Fertilizer</p><p>6)Low-Glycemic</p><p>7)All natural</p><p>8)Tastes great and less Sweet</p><p>9)Certified by HACCP,ISO22000 and HALAL by JAKIM.</p><p><br></p><p>The low-glycemic (low-GI) diet is based on the concept of the glycemic index (GI). Foods with a low-GI value are the preferred choice, as they are slowly digested and absorbed, causing a slower and smaller rise in blood sugar levels.</p><p><br></p><p># Used for cooking, baking, dessert and beverage.</p><p>Storage Instructions: Keep in a cool, dry place. Avoid exposure to sunlight or excessive heat.</p>', 'en', 12),
+(35, 'Premium Pure Coconut Palm Sugar/Gula Kelapa Halus', '<p>[CAROMA] Premium Pure Coconut Palm Sugar / 250g/ Low GI / Gluten Free / Halal / Gula Kelapa</p><p><br></p><p>Enjoy CAROMA 100% Natural Coconut Palm Sugar as a healthier choice with :</p><p><br></p><p>1)100% Coconut Palm sugar</p><p>2)Gluten Free</p><p>3)NO Chemical</p><p>4)NO Pesticides</p><p>5)NO Synthetic Fertilizer</p><p>6)Low-Glycemic</p><p>7)All natural</p><p>8)Tastes great and less Sweet</p><p>9)Certified by HACCP,ISO22000 and HALAL by JAKIM.</p><p><br></p><p>The low-glycemic (low-GI) diet is based on the concept of the glycemic index (GI). Foods with a low-GI value are the preferred choice, as they are slowly digested and absorbed, causing a slower and smaller rise in blood sugar levels.</p><p><br></p><p># Used for cooking, baking, dessert and beverage.</p><p>Storage Instructions: Keep in a cool, dry place. Avoid exposure to sunlight or excessive heat.</p>', 'cn', 12),
+(36, 'Premium Pure Coconut Palm Sugar/Gula Kelapa Halus', '<p>[CAROMA] Premium Pure Coconut Palm Sugar / 250g/ Low GI / Gluten Free / Halal / Gula Kelapa</p><p><br></p><p>Enjoy CAROMA 100% Natural Coconut Palm Sugar as a healthier choice with :</p><p><br></p><p>1)100% Coconut Palm sugar</p><p>2)Gluten Free</p><p>3)NO Chemical</p><p>4)NO Pesticides</p><p>5)NO Synthetic Fertilizer</p><p>6)Low-Glycemic</p><p>7)All natural</p><p>8)Tastes great and less Sweet</p><p>9)Certified by HACCP,ISO22000 and HALAL by JAKIM.</p><p><br></p><p>The low-glycemic (low-GI) diet is based on the concept of the glycemic index (GI). Foods with a low-GI value are the preferred choice, as they are slowly digested and absorbed, causing a slower and smaller rise in blood sugar levels.</p><p><br></p><p># Used for cooking, baking, dessert and beverage.</p><p>Storage Instructions: Keep in a cool, dry place. Avoid exposure to sunlight or excessive heat.</p>', 'my', 12),
+(37, 'Healthy Malt Milk Drink Powder', '<p>[CAROMA] Malt Milk Drink Powder/250g/Low GI/ Less Sugar/ Less Sweet/Halal/Serbuk Susu Malt/Nutritional/Nutrient/Healthy</p><p><br></p><p>CAROMA Malt Milk Drink- is a premium selection of Malt and Barley Powder with less sweet Low GI Sugar. Enjoy, the real taste of malt milk in anywhere, anytime. CAROMA is your healthier choice!</p><p><br></p><p># Ingredients : Non-Dairy Creamer, Sugar(Low GI), Malt Extract Powder, Barley Powder</p><p># Ramuan: Krimer Bukan Tenusu, Gula(Rendah GI), Serbuk Ekstrak Malt, Serbuk Barli</p><p>It is suitable to drink hot or cold.</p><p><br></p><p>Preparation in Hot/ Panas:</p><p># Add 150ml 80 °C water + 2 spoon Malt Powder + stir well and enjoy.</p><p>Preparation in Cold/ Sejuk:</p><p># Add 100ml 80 °C water + 2 spoon Malt Powder + stir well +Added some ice and enjoy.</p><p>Storage Instructions: Keep in a cool, dry place. Avoid exposure to sunlight or excessive heat.</p><p><br></p><p># Is malted milk powder good for you?</p><p>A heart-healthy mix, malt contains fiber, potassium, folate, and vitamin B6, which together lower cholesterol and decrease the risk of cardiac disease. It is an abundant source of vitamins, minerals, amino acids, dietary silicon (supports bone health), B complex vitamins and micro minerals</p><p><br></p><p># What is malt milk powder?</p><p>Malted milk is a powdered gruel made from a mixture of malted barley, wheat flour, and evaporated whole milk. The powder is used to add its distinctive flavor to beverages and other foods, but it is also used in baking to help dough cook properly. Malt powder comes in two forms: diastatic and non-diastatic.</p><p><br></p><p># Is malted milk the same as powdered milk?</p><p>Malted Milk Powder. Malted milk powder is a fine light-yellow powder with a mellow, nutty flavor and a natural sweetness. The term \"malt\" refers to a grain (usually barley) that has been sprouted and quickly dried. At the supermarket, malted milk powder is sold in the same section as powdered milk.</p><p><br></p><p>Storage Instructions: Keep in a cool, dry place. Avoid exposure to sunlight or excessive heat.</p>', 'en', 13),
+(38, 'Healthy Malt Milk Drink Powder', '<p>[CAROMA] Malt Milk Drink Powder/250g/Low GI/ Less Sugar/ Less Sweet/Halal/Serbuk Susu Malt/Nutritional/Nutrient/Healthy</p><p><br></p><p>CAROMA Malt Milk Drink- is a premium selection of Malt and Barley Powder with less sweet Low GI Sugar. Enjoy, the real taste of malt milk in anywhere, anytime. CAROMA is your healthier choice!</p><p><br></p><p># Ingredients : Non-Dairy Creamer, Sugar(Low GI), Malt Extract Powder, Barley Powder</p><p># Ramuan: Krimer Bukan Tenusu, Gula(Rendah GI), Serbuk Ekstrak Malt, Serbuk Barli</p><p>It is suitable to drink hot or cold.</p><p><br></p><p>Preparation in Hot/ Panas:</p><p># Add 150ml 80 °C water + 2 spoon Malt Powder + stir well and enjoy.</p><p>Preparation in Cold/ Sejuk:</p><p># Add 100ml 80 °C water + 2 spoon Malt Powder + stir well +Added some ice and enjoy.</p><p>Storage Instructions: Keep in a cool, dry place. Avoid exposure to sunlight or excessive heat.</p><p><br></p><p># Is malted milk powder good for you?</p><p>A heart-healthy mix, malt contains fiber, potassium, folate, and vitamin B6, which together lower cholesterol and decrease the risk of cardiac disease. It is an abundant source of vitamins, minerals, amino acids, dietary silicon (supports bone health), B complex vitamins and micro minerals</p><p><br></p><p># What is malt milk powder?</p><p>Malted milk is a powdered gruel made from a mixture of malted barley, wheat flour, and evaporated whole milk. The powder is used to add its distinctive flavor to beverages and other foods, but it is also used in baking to help dough cook properly. Malt powder comes in two forms: diastatic and non-diastatic.</p><p><br></p><p># Is malted milk the same as powdered milk?</p><p>Malted Milk Powder. Malted milk powder is a fine light-yellow powder with a mellow, nutty flavor and a natural sweetness. The term \"malt\" refers to a grain (usually barley) that has been sprouted and quickly dried. At the supermarket, malted milk powder is sold in the same section as powdered milk.</p><p><br></p><p>Storage Instructions: Keep in a cool, dry place. Avoid exposure to sunlight or excessive heat.</p>', 'cn', 13),
+(39, 'Healthy Malt Milk Drink Powder', '<p>[CAROMA] Malt Milk Drink Powder/250g/Low GI/ Less Sugar/ Less Sweet/Halal/Serbuk Susu Malt/Nutritional/Nutrient/Healthy</p><p><br></p><p>CAROMA Malt Milk Drink- is a premium selection of Malt and Barley Powder with less sweet Low GI Sugar. Enjoy, the real taste of malt milk in anywhere, anytime. CAROMA is your healthier choice!</p><p><br></p><p># Ingredients : Non-Dairy Creamer, Sugar(Low GI), Malt Extract Powder, Barley Powder</p><p># Ramuan: Krimer Bukan Tenusu, Gula(Rendah GI), Serbuk Ekstrak Malt, Serbuk Barli</p><p>It is suitable to drink hot or cold.</p><p><br></p><p>Preparation in Hot/ Panas:</p><p># Add 150ml 80 °C water + 2 spoon Malt Powder + stir well and enjoy.</p><p>Preparation in Cold/ Sejuk:</p><p># Add 100ml 80 °C water + 2 spoon Malt Powder + stir well +Added some ice and enjoy.</p><p>Storage Instructions: Keep in a cool, dry place. Avoid exposure to sunlight or excessive heat.</p><p><br></p><p># Is malted milk powder good for you?</p><p>A heart-healthy mix, malt contains fiber, potassium, folate, and vitamin B6, which together lower cholesterol and decrease the risk of cardiac disease. It is an abundant source of vitamins, minerals, amino acids, dietary silicon (supports bone health), B complex vitamins and micro minerals</p><p><br></p><p># What is malt milk powder?</p><p>Malted milk is a powdered gruel made from a mixture of malted barley, wheat flour, and evaporated whole milk. The powder is used to add its distinctive flavor to beverages and other foods, but it is also used in baking to help dough cook properly. Malt powder comes in two forms: diastatic and non-diastatic.</p><p><br></p><p># Is malted milk the same as powdered milk?</p><p>Malted Milk Powder. Malted milk powder is a fine light-yellow powder with a mellow, nutty flavor and a natural sweetness. The term \"malt\" refers to a grain (usually barley) that has been sprouted and quickly dried. At the supermarket, malted milk powder is sold in the same section as powdered milk.</p><p><br></p><p>Storage Instructions: Keep in a cool, dry place. Avoid exposure to sunlight or excessive heat.</p>', 'my', 13),
+(40, 'High Protein Organic Soy Milk Powder (Sachets)', '<p># Ingredients: Organic Soy Powder (Non-GMO), Brown Sugar, Dextrose.</p><p><br></p><p># Ramuan: Serbuk Soya dari Sumber Organk, Dextrose, Gula Perang.</p><p># Nutrition Information (100gram):</p><p><br></p><p>Calories : 390 kcal | Energy: 1638kJ | Carbohydrate: 78.5gram | Protein: 10.8 gram</p><p>It is suitable to drink hot or cold.</p><p><br></p><p>Preparation in Hot/ Panas:</p><p># Add 150ml 80 °C water + 2 spoon Organic Soy Powder +stir well and enjoy.</p><p>Preparation in Cold/ Sejuk:</p><p># Add 100ml 80 °C water + 2 spoon Organic Soy Powder +stir well +Added some ice and enjoy.</p><p>Storage Instructions: Keep in a cool, dry place. Avoid exposure to sunlight or excessive heat.</p><p>CAROMA internationally certified by HACCP, ISO22000, MeSTI, cGMP and HALAL by JAKIM.</p>', 'en', 14),
+(41, 'High Protein Organic Soy Milk Powder (Sachets)', '<p># Ingredients: Organic Soy Powder (Non-GMO), Brown Sugar, Dextrose.</p><p><br></p><p># Ramuan: Serbuk Soya dari Sumber Organk, Dextrose, Gula Perang.</p><p># Nutrition Information (100gram):</p><p><br></p><p>Calories : 390 kcal | Energy: 1638kJ | Carbohydrate: 78.5gram | Protein: 10.8 gram</p><p>It is suitable to drink hot or cold.</p><p><br></p><p>Preparation in Hot/ Panas:</p><p># Add 150ml 80 °C water + 2 spoon Organic Soy Powder +stir well and enjoy.</p><p>Preparation in Cold/ Sejuk:</p><p># Add 100ml 80 °C water + 2 spoon Organic Soy Powder +stir well +Added some ice and enjoy.</p><p>Storage Instructions: Keep in a cool, dry place. Avoid exposure to sunlight or excessive heat.</p><p>CAROMA internationally certified by HACCP, ISO22000, MeSTI, cGMP and HALAL by JAKIM.</p>', 'cn', 14),
+(42, 'High Protein Organic Soy Milk Powder (Sachets)', '<p># Ingredients: Organic Soy Powder (Non-GMO), Brown Sugar, Dextrose.</p><p><br></p><p># Ramuan: Serbuk Soya dari Sumber Organk, Dextrose, Gula Perang.</p><p># Nutrition Information (100gram):</p><p><br></p><p>Calories : 390 kcal | Energy: 1638kJ | Carbohydrate: 78.5gram | Protein: 10.8 gram</p><p>It is suitable to drink hot or cold.</p><p><br></p><p>Preparation in Hot/ Panas:</p><p># Add 150ml 80 °C water + 2 spoon Organic Soy Powder +stir well and enjoy.</p><p>Preparation in Cold/ Sejuk:</p><p># Add 100ml 80 °C water + 2 spoon Organic Soy Powder +stir well +Added some ice and enjoy.</p><p>Storage Instructions: Keep in a cool, dry place. Avoid exposure to sunlight or excessive heat.</p><p>CAROMA internationally certified by HACCP, ISO22000, MeSTI, cGMP and HALAL by JAKIM.</p>', 'my', 14),
+(43, 'High Protein Organic Soy Milk Powder', '<p># Ingredients: Organic Soy Powder (Non-GMO), Brown Sugar, Dextrose.</p><p><br></p><p># Ramuan: Serbuk Soya dari Sumber Organk, Dextrose, Gula Perang.</p><p><br></p><p># Nutrition Information (100gram):</p><p>Calories : 390 kcal | Energy: 1638kJ | Carbohydrate: 78.5gram | Protein: 10.8 gram</p><p>It is suitable to drink hot or cold.</p><p><br></p><p>Preparation in Hot/ Panas:</p><p># Add 150ml 80 °C water + 2 spoon Organic Soy Powder +stir well and enjoy.</p><p>Preparation in Cold/ Sejuk:</p><p># Add 100ml 80 °C water + 2 spoon Organic Soy Powder +stir well +Added some ice and enjoy.</p><p>Storage Instructions: Keep in a cool, dry place. Avoid exposure to sunlight or excessive heat.</p><p>CAROMA internationally certified by HACCP, ISO22000, MeSTI, cGMP and HALAL by JAKIM.</p>', 'en', 15),
+(44, 'High Protein Organic Soy Milk Powder', '<p># Ingredients: Organic Soy Powder (Non-GMO), Brown Sugar, Dextrose.</p><p><br></p><p># Ramuan: Serbuk Soya dari Sumber Organk, Dextrose, Gula Perang.</p><p><br></p><p># Nutrition Information (100gram):</p><p>Calories : 390 kcal | Energy: 1638kJ | Carbohydrate: 78.5gram | Protein: 10.8 gram</p><p>It is suitable to drink hot or cold.</p><p><br></p><p>Preparation in Hot/ Panas:</p><p># Add 150ml 80 °C water + 2 spoon Organic Soy Powder +stir well and enjoy.</p><p>Preparation in Cold/ Sejuk:</p><p># Add 100ml 80 °C water + 2 spoon Organic Soy Powder +stir well +Added some ice and enjoy.</p><p>Storage Instructions: Keep in a cool, dry place. Avoid exposure to sunlight or excessive heat.</p><p>CAROMA internationally certified by HACCP, ISO22000, MeSTI, cGMP and HALAL by JAKIM.</p>', 'cn', 15),
+(45, 'High Protein Organic Soy Milk Powder', '<p># Ingredients: Organic Soy Powder (Non-GMO), Brown Sugar, Dextrose.</p><p><br></p><p># Ramuan: Serbuk Soya dari Sumber Organk, Dextrose, Gula Perang.</p><p><br></p><p># Nutrition Information (100gram):</p><p>Calories : 390 kcal | Energy: 1638kJ | Carbohydrate: 78.5gram | Protein: 10.8 gram</p><p>It is suitable to drink hot or cold.</p><p><br></p><p>Preparation in Hot/ Panas:</p><p># Add 150ml 80 °C water + 2 spoon Organic Soy Powder +stir well and enjoy.</p><p>Preparation in Cold/ Sejuk:</p><p># Add 100ml 80 °C water + 2 spoon Organic Soy Powder +stir well +Added some ice and enjoy.</p><p>Storage Instructions: Keep in a cool, dry place. Avoid exposure to sunlight or excessive heat.</p><p>CAROMA internationally certified by HACCP, ISO22000, MeSTI, cGMP and HALAL by JAKIM.</p>', 'my', 15),
+(46, 'Premium Hot Chocolate Drink', '<p>[CAROMA] Premium Chocolate Drink / Imported Coklat Malt Drink/ 250g / Less Sweet /Halal / Cocoa</p><p><br></p><p># Ingredients : Non-Dairy Creamer, Sugar, Cocoa Powder, Malt Extract Powder</p><p># Ramuan: Krimer Bukan Tenusu, Gula, Serbuk Koko, Serbuk Ekstrak Malt.</p><p>It is suitable to drink hot or cold.</p><p><br></p><p>Preparation in Hot/ Panas:</p><p># Add 150ml 80 °C water + 2 Teaspoons Chocolate Malt +stir well and enjoy.</p><p>Preparation in Cold/ Sejuk:</p><p># Add 100ml 80 °C water + 2 Teaspoons Chocolate Malt +stir well +Added some ice and enjoy.</p><p>Storage Instructions: Keep in a cool, dry place. Avoid exposure to sunlight or excessive heat.</p>', 'en', 16),
+(47, 'Premium Hot Chocolate Drink', '<p>[CAROMA] Premium Chocolate Drink / Imported Coklat Malt Drink/ 250g / Less Sweet /Halal / Cocoa</p><p><br></p><p># Ingredients : Non-Dairy Creamer, Sugar, Cocoa Powder, Malt Extract Powder</p><p># Ramuan: Krimer Bukan Tenusu, Gula, Serbuk Koko, Serbuk Ekstrak Malt.</p><p>It is suitable to drink hot or cold.</p><p><br></p><p>Preparation in Hot/ Panas:</p><p># Add 150ml 80 °C water + 2 Teaspoons Chocolate Malt +stir well and enjoy.</p><p>Preparation in Cold/ Sejuk:</p><p># Add 100ml 80 °C water + 2 Teaspoons Chocolate Malt +stir well +Added some ice and enjoy.</p><p>Storage Instructions: Keep in a cool, dry place. Avoid exposure to sunlight or excessive heat.</p>', 'cn', 16),
+(48, 'Premium Hot Chocolate Drink', '<p>[CAROMA] Premium Chocolate Drink / Imported Coklat Malt Drink/ 250g / Less Sweet /Halal / Cocoa</p><p><br></p><p># Ingredients : Non-Dairy Creamer, Sugar, Cocoa Powder, Malt Extract Powder</p><p># Ramuan: Krimer Bukan Tenusu, Gula, Serbuk Koko, Serbuk Ekstrak Malt.</p><p>It is suitable to drink hot or cold.</p><p><br></p><p>Preparation in Hot/ Panas:</p><p># Add 150ml 80 °C water + 2 Teaspoons Chocolate Malt +stir well and enjoy.</p><p>Preparation in Cold/ Sejuk:</p><p># Add 100ml 80 °C water + 2 Teaspoons Chocolate Malt +stir well +Added some ice and enjoy.</p><p>Storage Instructions: Keep in a cool, dry place. Avoid exposure to sunlight or excessive heat.</p>', 'my', 16),
+(49, 'Healthy Snack Dried Slice Ginger / Hirisan Halia Kering', '<p>[CAROMA] Healthy Snack Dried Slice Ginger/Hirisan Halia Kering/ Natural Pure Soilless Bentong /80gram/ Halal/No Sugar</p><p><br></p><p>Healthy Snack Dried Ginger Slice / Snek Hirisan Halia Kering:</p><p># 1 bottle: 80 gram</p><p># Shelf Life : 24 months</p><p># Appearance Colour : Dried sliced ginger</p><p># Colour: Light brown colour</p><p># Taste: Sweet ginger taste, slightly spicy</p><p># Aroma : Light ginger odour, no mouldy smell</p><p>#100% Natural Farming Soilless (Using Coconut Coir Fiber)</p><p># Soilles Bentong Ginger Slice</p><p># NO pesticides</p><p># NO herbicides</p><p># NO added preservative</p><p># No added Sugar</p><p># No added coloring</p><p># Chemical and Residue Free</p><p># Halal</p><p><br></p><p>CAROMA Bentong Ginger are rich in Antioxidants and Potassium to protect your cells from the effects of free radicals and able to reduce an overabundance of inflammation in your body.</p><p><br></p><p>1)Improve digestive process</p><p>2)Improve blood circulation</p><p>3)Rich in Antioxidant</p><p>4)Anti-inflammatory property</p><p>5)Promote intestinal absorption of nutrients</p><p>6)Promote blood circulation</p><p>7)Relief stress</p><p>8)Relief nausea</p><p>9)Control blood sugar level</p><p><br></p><p>CAROMA Is Your Healthier Choice!</p><p><br></p><p>Storage Instructions: Keep in a cool, dry place. Avoid exposure to sunlight or excessive heat.</p><p>CAROMA is internationally certified by HACCP, ISO22000, MeSTI, cGMP and HALAL by JAKIM.</p>', 'en', 17),
+(50, 'Healthy Snack Dried Slice Ginger / Hirisan Halia Kering', '<p>[CAROMA] Healthy Snack Dried Slice Ginger/Hirisan Halia Kering/ Natural Pure Soilless Bentong /80gram/ Halal/No Sugar</p><p><br></p><p>Healthy Snack Dried Ginger Slice / Snek Hirisan Halia Kering:</p><p># 1 bottle: 80 gram</p><p># Shelf Life : 24 months</p><p># Appearance Colour : Dried sliced ginger</p><p># Colour: Light brown colour</p><p># Taste: Sweet ginger taste, slightly spicy</p><p># Aroma : Light ginger odour, no mouldy smell</p><p>#100% Natural Farming Soilless (Using Coconut Coir Fiber)</p><p># Soilles Bentong Ginger Slice</p><p># NO pesticides</p><p># NO herbicides</p><p># NO added preservative</p><p># No added Sugar</p><p># No added coloring</p><p># Chemical and Residue Free</p><p># Halal</p><p><br></p><p>CAROMA Bentong Ginger are rich in Antioxidants and Potassium to protect your cells from the effects of free radicals and able to reduce an overabundance of inflammation in your body.</p><p><br></p><p>1)Improve digestive process</p><p>2)Improve blood circulation</p><p>3)Rich in Antioxidant</p><p>4)Anti-inflammatory property</p><p>5)Promote intestinal absorption of nutrients</p><p>6)Promote blood circulation</p><p>7)Relief stress</p><p>8)Relief nausea</p><p>9)Control blood sugar level</p><p><br></p><p>CAROMA Is Your Healthier Choice!</p><p><br></p><p>Storage Instructions: Keep in a cool, dry place. Avoid exposure to sunlight or excessive heat.</p><p>CAROMA is internationally certified by HACCP, ISO22000, MeSTI, cGMP and HALAL by JAKIM.</p>', 'cn', 17),
+(51, 'Healthy Snack Dried Slice Ginger / Hirisan Halia Kering', '<p>[CAROMA] Healthy Snack Dried Slice Ginger/Hirisan Halia Kering/ Natural Pure Soilless Bentong /80gram/ Halal/No Sugar</p><p><br></p><p>Healthy Snack Dried Ginger Slice / Snek Hirisan Halia Kering:</p><p># 1 bottle: 80 gram</p><p># Shelf Life : 24 months</p><p># Appearance Colour : Dried sliced ginger</p><p># Colour: Light brown colour</p><p># Taste: Sweet ginger taste, slightly spicy</p><p># Aroma : Light ginger odour, no mouldy smell</p><p>#100% Natural Farming Soilless (Using Coconut Coir Fiber)</p><p># Soilles Bentong Ginger Slice</p><p># NO pesticides</p><p># NO herbicides</p><p># NO added preservative</p><p># No added Sugar</p><p># No added coloring</p><p># Chemical and Residue Free</p><p># Halal</p><p><br></p><p>CAROMA Bentong Ginger are rich in Antioxidants and Potassium to protect your cells from the effects of free radicals and able to reduce an overabundance of inflammation in your body.</p><p><br></p><p>1)Improve digestive process</p><p>2)Improve blood circulation</p><p>3)Rich in Antioxidant</p><p>4)Anti-inflammatory property</p><p>5)Promote intestinal absorption of nutrients</p><p>6)Promote blood circulation</p><p>7)Relief stress</p><p>8)Relief nausea</p><p>9)Control blood sugar level</p><p><br></p><p>CAROMA Is Your Healthier Choice!</p><p><br></p><p>Storage Instructions: Keep in a cool, dry place. Avoid exposure to sunlight or excessive heat.</p><p>CAROMA is internationally certified by HACCP, ISO22000, MeSTI, cGMP and HALAL by JAKIM.</p>', 'my', 17),
+(52, 'High Protein Organic Soy with Bentong Ginger Powder', '<p>Ginger are rich in Antioxidants and protect your cells from the effects of free radicals and able to reduce an overabundance of inflammation in your body.</p><p><br></p><p>1)Improve digestive process</p><p>2)Improve blood circulation</p><p>3)Rich in Antioxidant</p><p>4)Rich in vitamins and minerals</p><p>5)Anti-inflammatory property</p><p>6)Promote intestinal absorption of nutrients</p><p>7)Promote blood circulation</p><p>8)Relief stress</p><p>9)Relief nausea</p><p>10)Control blood sugar level</p><p><br></p><p># Ingredients: Soy Source from Organic, , Brown Sugar, Ginger Powder</p><p># Ramuan: Serbuk Soya dari Sumber Organk, Polidextrose, Gula Perang and Serbuk Halia</p><p><br></p><p># Nutrition Information (25gram):</p><p>Calories : 101 kcal | Energy: 424kJ | Carbohydrate: 19.2gram | Protein: 2.9 gram</p><p>Storage Instructions: Keep in a cool, dry place. Avoid exposure to sunlight or excessive heat.</p>', 'en', 18),
+(53, 'High Protein Organic Soy with Bentong Ginger Powder', '<p>Ginger are rich in Antioxidants and protect your cells from the effects of free radicals and able to reduce an overabundance of inflammation in your body.</p><p><br></p><p>1)Improve digestive process</p><p>2)Improve blood circulation</p><p>3)Rich in Antioxidant</p><p>4)Rich in vitamins and minerals</p><p>5)Anti-inflammatory property</p><p>6)Promote intestinal absorption of nutrients</p><p>7)Promote blood circulation</p><p>8)Relief stress</p><p>9)Relief nausea</p><p>10)Control blood sugar level</p><p><br></p><p># Ingredients: Soy Source from Organic, , Brown Sugar, Ginger Powder</p><p># Ramuan: Serbuk Soya dari Sumber Organk, Polidextrose, Gula Perang and Serbuk Halia</p><p><br></p><p># Nutrition Information (25gram):</p><p>Calories : 101 kcal | Energy: 424kJ | Carbohydrate: 19.2gram | Protein: 2.9 gram</p><p>Storage Instructions: Keep in a cool, dry place. Avoid exposure to sunlight or excessive heat.</p>', 'cn', 18),
+(54, 'High Protein Organic Soy with Bentong Ginger Powder', '<p>Ginger are rich in Antioxidants and protect your cells from the effects of free radicals and able to reduce an overabundance of inflammation in your body.</p><p><br></p><p>1)Improve digestive process</p><p>2)Improve blood circulation</p><p>3)Rich in Antioxidant</p><p>4)Rich in vitamins and minerals</p><p>5)Anti-inflammatory property</p><p>6)Promote intestinal absorption of nutrients</p><p>7)Promote blood circulation</p><p>8)Relief stress</p><p>9)Relief nausea</p><p>10)Control blood sugar level</p><p><br></p><p># Ingredients: Soy Source from Organic, , Brown Sugar, Ginger Powder</p><p># Ramuan: Serbuk Soya dari Sumber Organk, Polidextrose, Gula Perang and Serbuk Halia</p><p><br></p><p># Nutrition Information (25gram):</p><p>Calories : 101 kcal | Energy: 424kJ | Carbohydrate: 19.2gram | Protein: 2.9 gram</p><p>Storage Instructions: Keep in a cool, dry place. Avoid exposure to sunlight or excessive heat.</p>', 'my', 18),
+(55, 'Bentong Ginger with Tea', '<p>Ginger are high in Antioxidants and protect your cells from the effects of free radicals and able to reduce an overabundance of inflammation in your body.</p><p><br></p><p>1)Improve digestive process</p><p>2)Improve blood circulation</p><p>3)Rich in Antioxidant</p><p>4)Anti-inflammatory property</p><p>5)Promote intestinal absorption of nutrients</p><p>6)Promote blood circulation</p><p>7)Relief stress</p><p>8)Relief nausea</p><p>9)Control blood sugar level</p><p>CAROMA Is Your Healthier Choice!</p><p><br></p><p>#Ingredients: Brown Sugar, Coconut Sugar, Dextrose, Bentong Ginger Powder and Tea Powder.</p><p>It is suitable to drink hot or cold.</p><p><br></p><p>Preparation in Hot/ Panas:</p><p># Add 150ml 80 °C water + 1 Sachet Bentong Ginger Tea +stir well and enjoy.</p><p><br></p><p>Preparation in Cold/ Sejuk:</p><p># Add 100ml 80 °C water + 1 Sachet Bentong Ginger Tea +stir well +Added some ice and enjoy.</p><p>CAROMA are internationally certified by HACCP, ISO22000, cGMP, MeSTI and HALAL by JAKIM.</p>', 'en', 19),
+(56, 'Bentong Ginger with Tea', '<p>Ginger are high in Antioxidants and protect your cells from the effects of free radicals and able to reduce an overabundance of inflammation in your body.</p><p><br></p><p>1)Improve digestive process</p><p>2)Improve blood circulation</p><p>3)Rich in Antioxidant</p><p>4)Anti-inflammatory property</p><p>5)Promote intestinal absorption of nutrients</p><p>6)Promote blood circulation</p><p>7)Relief stress</p><p>8)Relief nausea</p><p>9)Control blood sugar level</p><p>CAROMA Is Your Healthier Choice!</p><p><br></p><p>#Ingredients: Brown Sugar, Coconut Sugar, Dextrose, Bentong Ginger Powder and Tea Powder.</p><p>It is suitable to drink hot or cold.</p><p><br></p><p>Preparation in Hot/ Panas:</p><p># Add 150ml 80 °C water + 1 Sachet Bentong Ginger Tea +stir well and enjoy.</p><p><br></p><p>Preparation in Cold/ Sejuk:</p><p># Add 100ml 80 °C water + 1 Sachet Bentong Ginger Tea +stir well +Added some ice and enjoy.</p><p>CAROMA are internationally certified by HACCP, ISO22000, cGMP, MeSTI and HALAL by JAKIM.</p>', 'cn', 19);
+INSERT INTO `product_translation` (`id`, `name`, `description`, `language`, `product_id`) VALUES
+(57, 'Bentong Ginger with Tea', '<p>Ginger are high in Antioxidants and protect your cells from the effects of free radicals and able to reduce an overabundance of inflammation in your body.</p><p><br></p><p>1)Improve digestive process</p><p>2)Improve blood circulation</p><p>3)Rich in Antioxidant</p><p>4)Anti-inflammatory property</p><p>5)Promote intestinal absorption of nutrients</p><p>6)Promote blood circulation</p><p>7)Relief stress</p><p>8)Relief nausea</p><p>9)Control blood sugar level</p><p>CAROMA Is Your Healthier Choice!</p><p><br></p><p>#Ingredients: Brown Sugar, Coconut Sugar, Dextrose, Bentong Ginger Powder and Tea Powder.</p><p>It is suitable to drink hot or cold.</p><p><br></p><p>Preparation in Hot/ Panas:</p><p># Add 150ml 80 °C water + 1 Sachet Bentong Ginger Tea +stir well and enjoy.</p><p><br></p><p>Preparation in Cold/ Sejuk:</p><p># Add 100ml 80 °C water + 1 Sachet Bentong Ginger Tea +stir well +Added some ice and enjoy.</p><p>CAROMA are internationally certified by HACCP, ISO22000, cGMP, MeSTI and HALAL by JAKIM.</p>', 'my', 19),
+(58, 'Natural Pure Soilless Bentong Ginger Powder/ Halia Asli', '<p>CAROMA Bentong Ginger Powder are rich in Antioxidants and Potassium to protect your cells from the effects of free radicals and able to reduce an overabundance of inflammation in your body.</p><p><br></p><p>1)Improve digestive process</p><p>2)Improve blood circulation</p><p>3)Rich in Antioxidant</p><p>4)Anti-inflammatory property</p><p>5)Promote intestinal absorption of nutrients</p><p>6)Promote blood circulation</p><p>7)Relief stress</p><p>8)Relief nausea</p><p>9)Control blood sugar level</p>', 'en', 20),
+(59, 'Natural Pure Soilless Bentong Ginger Powder/ Halia Asli', '<p>CAROMA Bentong Ginger Powder are rich in Antioxidants and Potassium to protect your cells from the effects of free radicals and able to reduce an overabundance of inflammation in your body.</p><p><br></p><p>1)Improve digestive process</p><p>2)Improve blood circulation</p><p>3)Rich in Antioxidant</p><p>4)Anti-inflammatory property</p><p>5)Promote intestinal absorption of nutrients</p><p>6)Promote blood circulation</p><p>7)Relief stress</p><p>8)Relief nausea</p><p>9)Control blood sugar level</p>', 'cn', 20),
+(60, 'Natural Pure Soilless Bentong Ginger Powder/ Halia Asli', '<p>CAROMA Bentong Ginger Powder are rich in Antioxidants and Potassium to protect your cells from the effects of free radicals and able to reduce an overabundance of inflammation in your body.</p><p><br></p><p>1)Improve digestive process</p><p>2)Improve blood circulation</p><p>3)Rich in Antioxidant</p><p>4)Anti-inflammatory property</p><p>5)Promote intestinal absorption of nutrients</p><p>6)Promote blood circulation</p><p>7)Relief stress</p><p>8)Relief nausea</p><p>9)Control blood sugar level</p>', 'my', 20),
+(61, 'Pure Honey with Bentong Ginger', '<p>1)Improve digestive process</p><p>2)Improve blood circulation</p><p>3)Rich in Antioxidant</p><p>4)Anti-inflammatory property</p><p>5)Promote intestinal absorption of nutrients</p><p>6)Promote blood circulation</p><p>7)Relief stress</p><p>8)Relief nausea</p><p>9)Control blood sugar level</p><p>CAROMA Is Your Healthier Choice!</p><p><br></p><p># Ingredients: Honey Powder, Bentong Ginger Powder, Brown Sugar and Dextrose.</p><p>It is suitable to drink hot or cold.</p><p><br></p><p>Preparation in Hot/ Panas:</p><p># Add 150ml 80 °C water + 1 Sachet Bentong Ginger with Honey+stir well and enjoy.</p><p><br></p><p>Preparation in Cold/ Sejuk:</p><p># Add 100ml 80 °C water + 1 Sachet Bentong Ginger with Honey +stir well +Added some ice and enjoy.</p><p>Storage Instructions: Keep in a cool, dry place. Avoid exposure to sunlight or excessive heat.</p><p>CAROMA are internationally certified by HACCP, ISO22000, cGMP, MeSTI and HALAL by JAKIM.</p>', 'en', 21),
+(62, 'Pure Honey with Bentong Ginger', '<p>1)Improve digestive process</p><p>2)Improve blood circulation</p><p>3)Rich in Antioxidant</p><p>4)Anti-inflammatory property</p><p>5)Promote intestinal absorption of nutrients</p><p>6)Promote blood circulation</p><p>7)Relief stress</p><p>8)Relief nausea</p><p>9)Control blood sugar level</p><p>CAROMA Is Your Healthier Choice!</p><p><br></p><p># Ingredients: Honey Powder, Bentong Ginger Powder, Brown Sugar and Dextrose.</p><p>It is suitable to drink hot or cold.</p><p><br></p><p>Preparation in Hot/ Panas:</p><p># Add 150ml 80 °C water + 1 Sachet Bentong Ginger with Honey+stir well and enjoy.</p><p><br></p><p>Preparation in Cold/ Sejuk:</p><p># Add 100ml 80 °C water + 1 Sachet Bentong Ginger with Honey +stir well +Added some ice and enjoy.</p><p>Storage Instructions: Keep in a cool, dry place. Avoid exposure to sunlight or excessive heat.</p><p>CAROMA are internationally certified by HACCP, ISO22000, cGMP, MeSTI and HALAL by JAKIM.</p>', 'cn', 21),
+(63, 'Pure Honey with Bentong Ginger', '<p>1)Improve digestive process</p><p>2)Improve blood circulation</p><p>3)Rich in Antioxidant</p><p>4)Anti-inflammatory property</p><p>5)Promote intestinal absorption of nutrients</p><p>6)Promote blood circulation</p><p>7)Relief stress</p><p>8)Relief nausea</p><p>9)Control blood sugar level</p><p>CAROMA Is Your Healthier Choice!</p><p><br></p><p># Ingredients: Honey Powder, Bentong Ginger Powder, Brown Sugar and Dextrose.</p><p>It is suitable to drink hot or cold.</p><p><br></p><p>Preparation in Hot/ Panas:</p><p># Add 150ml 80 °C water + 1 Sachet Bentong Ginger with Honey+stir well and enjoy.</p><p><br></p><p>Preparation in Cold/ Sejuk:</p><p># Add 100ml 80 °C water + 1 Sachet Bentong Ginger with Honey +stir well +Added some ice and enjoy.</p><p>Storage Instructions: Keep in a cool, dry place. Avoid exposure to sunlight or excessive heat.</p><p>CAROMA are internationally certified by HACCP, ISO22000, cGMP, MeSTI and HALAL by JAKIM.</p>', 'my', 21),
+(64, 'Pure Honey Lemon with Bentong Ginger', '<p>Ginger are high in Antioxidants and protect your cells from the effects of free radicals and able to reduce an overabundance of inflammation in your body.</p><p><br></p><p>1)Improve digestive process</p><p>2)Improve blood circulation</p><p>3)Rich in Antioxidant</p><p>4)Anti-inflammatory property</p><p>5)Promote intestinal absorption of nutrients</p><p>6)Promote blood circulation</p><p>7)Relief stress</p><p>8)Relief nausea</p><p>9)Control blood sugar level</p><p>CAROMA Is Your Healthier Choice!</p><p><br></p><p># Ingredients: Honey Powder, Bentong Ginger Powder, Lemon Powder, Brown Sugar and Dextrose.</p><p>It is suitable to drink hot or cold.</p><p><br></p><p>Preparation in Hot/ Panas:</p><p># Add 150ml 80 °C water + 1 Sachet Bentong Ginger with Honey Lemon +stir well and enjoy.</p><p><br></p><p>Preparation in Cold/ Sejuk:</p><p># Add 100ml 80 °C water + 1 Sachet Bentong Ginger with Honey Lemon +stir well +Added some ice and enjoy.</p><p>Storage Instructions: Keep in a cool, dry place. Avoid exposure to sunlight or excessive heat.</p><p>CAROMA are internationally certified by HACCP, ISO22000, cGMP, MeSTI and HALAL by JAKIM.</p>', 'en', 22),
+(65, 'Pure Honey Lemon with Bentong Ginger', '<p>Ginger are high in Antioxidants and protect your cells from the effects of free radicals and able to reduce an overabundance of inflammation in your body.</p><p><br></p><p>1)Improve digestive process</p><p>2)Improve blood circulation</p><p>3)Rich in Antioxidant</p><p>4)Anti-inflammatory property</p><p>5)Promote intestinal absorption of nutrients</p><p>6)Promote blood circulation</p><p>7)Relief stress</p><p>8)Relief nausea</p><p>9)Control blood sugar level</p><p>CAROMA Is Your Healthier Choice!</p><p><br></p><p># Ingredients: Honey Powder, Bentong Ginger Powder, Lemon Powder, Brown Sugar and Dextrose.</p><p>It is suitable to drink hot or cold.</p><p><br></p><p>Preparation in Hot/ Panas:</p><p># Add 150ml 80 °C water + 1 Sachet Bentong Ginger with Honey Lemon +stir well and enjoy.</p><p><br></p><p>Preparation in Cold/ Sejuk:</p><p># Add 100ml 80 °C water + 1 Sachet Bentong Ginger with Honey Lemon +stir well +Added some ice and enjoy.</p><p>Storage Instructions: Keep in a cool, dry place. Avoid exposure to sunlight or excessive heat.</p><p>CAROMA are internationally certified by HACCP, ISO22000, cGMP, MeSTI and HALAL by JAKIM.</p>', 'cn', 22),
+(66, 'Pure Honey Lemon with Bentong Ginger', '<p>Ginger are high in Antioxidants and protect your cells from the effects of free radicals and able to reduce an overabundance of inflammation in your body.</p><p><br></p><p>1)Improve digestive process</p><p>2)Improve blood circulation</p><p>3)Rich in Antioxidant</p><p>4)Anti-inflammatory property</p><p>5)Promote intestinal absorption of nutrients</p><p>6)Promote blood circulation</p><p>7)Relief stress</p><p>8)Relief nausea</p><p>9)Control blood sugar level</p><p>CAROMA Is Your Healthier Choice!</p><p><br></p><p># Ingredients: Honey Powder, Bentong Ginger Powder, Lemon Powder, Brown Sugar and Dextrose.</p><p>It is suitable to drink hot or cold.</p><p><br></p><p>Preparation in Hot/ Panas:</p><p># Add 150ml 80 °C water + 1 Sachet Bentong Ginger with Honey Lemon +stir well and enjoy.</p><p><br></p><p>Preparation in Cold/ Sejuk:</p><p># Add 100ml 80 °C water + 1 Sachet Bentong Ginger with Honey Lemon +stir well +Added some ice and enjoy.</p><p>Storage Instructions: Keep in a cool, dry place. Avoid exposure to sunlight or excessive heat.</p><p>CAROMA are internationally certified by HACCP, ISO22000, cGMP, MeSTI and HALAL by JAKIM.</p>', 'my', 22),
+(67, 'Coconut with Bentong Ginger', '<p>Ginger are high in Antioxidants and protect your cells from the effects of free radicals and able to reduce an overabundance of inflammation in your body.</p><p><br></p><p>1)Improve digestive process</p><p>2)Improve blood circulation</p><p>3)Rich in Antioxidant</p><p>4)Anti-inflammatory property</p><p>5)Promote intestinal absorption of nutrients</p><p>6)Promote blood circulation</p><p>7)Relief stress</p><p>8)Relief nausea</p><p>9)Control blood sugar level</p><p>CAROMA Is Your Healthier Choice</p><p><br></p><p># Ingredients: Coconut Water, Brown Sugar, Dextrose, Bentong Ginger Powder</p><p>It is suitable to drink hot or cold.</p><p><br></p><p>Preparation in Hot/ Panas:</p><p># Add 150ml 80 °C water + 1 Sachet Coconut with Bentong Ginger + stir well and enjoy.</p><p><br></p><p>Preparation in Cold/ Sejuk:</p><p># Add 100ml 80 °C water + 1 Sachet Coconut with Bentong Ginger +stir well +Added some ice and enjoy.</p><p>Storage Instructions: Keep in a cool, dry place. Avoid exposure to sunlight or excessive heat.</p><p>CAROMA are internationally certified by HACCP, ISO22000, cGMP, MeSTI and HALAL by JAKIM.</p>', 'en', 23),
+(68, 'Coconut with Bentong Ginger', '<p>Ginger are high in Antioxidants and protect your cells from the effects of free radicals and able to reduce an overabundance of inflammation in your body.</p><p><br></p><p>1)Improve digestive process</p><p>2)Improve blood circulation</p><p>3)Rich in Antioxidant</p><p>4)Anti-inflammatory property</p><p>5)Promote intestinal absorption of nutrients</p><p>6)Promote blood circulation</p><p>7)Relief stress</p><p>8)Relief nausea</p><p>9)Control blood sugar level</p><p>CAROMA Is Your Healthier Choice</p><p><br></p><p># Ingredients: Coconut Water, Brown Sugar, Dextrose, Bentong Ginger Powder</p><p>It is suitable to drink hot or cold.</p><p><br></p><p>Preparation in Hot/ Panas:</p><p># Add 150ml 80 °C water + 1 Sachet Coconut with Bentong Ginger + stir well and enjoy.</p><p><br></p><p>Preparation in Cold/ Sejuk:</p><p># Add 100ml 80 °C water + 1 Sachet Coconut with Bentong Ginger +stir well +Added some ice and enjoy.</p><p>Storage Instructions: Keep in a cool, dry place. Avoid exposure to sunlight or excessive heat.</p><p>CAROMA are internationally certified by HACCP, ISO22000, cGMP, MeSTI and HALAL by JAKIM.</p>', 'cn', 23),
+(69, 'Coconut with Bentong Ginger', '<p>Ginger are high in Antioxidants and protect your cells from the effects of free radicals and able to reduce an overabundance of inflammation in your body.</p><p><br></p><p>1)Improve digestive process</p><p>2)Improve blood circulation</p><p>3)Rich in Antioxidant</p><p>4)Anti-inflammatory property</p><p>5)Promote intestinal absorption of nutrients</p><p>6)Promote blood circulation</p><p>7)Relief stress</p><p>8)Relief nausea</p><p>9)Control blood sugar level</p><p>CAROMA Is Your Healthier Choice</p><p><br></p><p># Ingredients: Coconut Water, Brown Sugar, Dextrose, Bentong Ginger Powder</p><p>It is suitable to drink hot or cold.</p><p><br></p><p>Preparation in Hot/ Panas:</p><p># Add 150ml 80 °C water + 1 Sachet Coconut with Bentong Ginger + stir well and enjoy.</p><p><br></p><p>Preparation in Cold/ Sejuk:</p><p># Add 100ml 80 °C water + 1 Sachet Coconut with Bentong Ginger +stir well +Added some ice and enjoy.</p><p>Storage Instructions: Keep in a cool, dry place. Avoid exposure to sunlight or excessive heat.</p><p>CAROMA are internationally certified by HACCP, ISO22000, cGMP, MeSTI and HALAL by JAKIM.</p>', 'my', 23),
+(70, 'Coffee Tea Mate Non-dairy Creamer Powder /250 gram/Halal', '<p>[CAROMA] Coffee Mate Non-dairy Creamer Powder (250g) ( Halal)</p><p><br></p><p>CAROMA Coffee Mate Non-dairy creamers, commonly called tea whiteners or coffee whiteners are liquid or granular substances intended to substitute for milk or cream as an additive to coffee, tea, hot chocolate or other beverages.</p><p><br></p><p>Transform the coffee you like into the coffee you love with Coffee mate The Original coffee creamer. It\'s rich and smooth with a classic taste that is lactose-free, cholesterol-free, and gluten-free. With Coffee mate non-dairy coffee creamer, you can create your perfect cup of velvety goodness by adding the right amount of flavor you want every time.</p><p><br></p><p>1)Lactose-free</p><p>2)Cholesterol-free</p><p>3)Gluten-free</p><p>4)Certified by HACCP, ISO22000, MeSTI, cGMP and HALAL by JAKIM.</p><p><br></p><p>#Ingredients: Non Dairy Creamer.</p><p><br></p><p>#Preparation in Hot/ Panas:</p><p>Spoon powder into prepared coffee, tea of hot chocolate. Stir well and enjoy.</p><p><br></p><p>#Preparation in Cold/ Sejuk:</p><p>Spoon powder into prepared coffee, tea of hot chocolate. Stir well, add some ice and enjoy.</p><p><br></p><p>8 Delicious Uses for Coffee Creamer:</p><p>1) Add to hot chocolate. That\'s right,it is just like sweetened varieties of creamer can flavor coffee, they can also be used to flavor hot chocolate.</p><p>2) Mix into hot cereals. Splash in waffle or pancake batter. ...</p><p>3) Add to mashed potatoes.Make a two-ingredient cake icing. ...</p><p>4) Pour over fresh fruit</p><p>5) Add to cream-based soups.</p><p>6) Can be used in tea.</p><p><br></p><p>Storage Instructions: Keep in a cool, dry place. Avoid exposure to sunlight or excessive heat.</p><p>CAROMA is internationally certified by HACCP, ISO22000, MeSTI, cGMP and HALAL by JAKIM.</p>', 'en', 24),
+(71, 'Coffee Tea Mate Non-dairy Creamer Powder /250 gram/Halal', '<p>[CAROMA] Coffee Mate Non-dairy Creamer Powder (250g) ( Halal)</p><p><br></p><p>CAROMA Coffee Mate Non-dairy creamers, commonly called tea whiteners or coffee whiteners are liquid or granular substances intended to substitute for milk or cream as an additive to coffee, tea, hot chocolate or other beverages.</p><p><br></p><p>Transform the coffee you like into the coffee you love with Coffee mate The Original coffee creamer. It\'s rich and smooth with a classic taste that is lactose-free, cholesterol-free, and gluten-free. With Coffee mate non-dairy coffee creamer, you can create your perfect cup of velvety goodness by adding the right amount of flavor you want every time.</p><p><br></p><p>1)Lactose-free</p><p>2)Cholesterol-free</p><p>3)Gluten-free</p><p>4)Certified by HACCP, ISO22000, MeSTI, cGMP and HALAL by JAKIM.</p><p><br></p><p>#Ingredients: Non Dairy Creamer.</p><p><br></p><p>#Preparation in Hot/ Panas:</p><p>Spoon powder into prepared coffee, tea of hot chocolate. Stir well and enjoy.</p><p><br></p><p>#Preparation in Cold/ Sejuk:</p><p>Spoon powder into prepared coffee, tea of hot chocolate. Stir well, add some ice and enjoy.</p><p><br></p><p>8 Delicious Uses for Coffee Creamer:</p><p>1) Add to hot chocolate. That\'s right,it is just like sweetened varieties of creamer can flavor coffee, they can also be used to flavor hot chocolate.</p><p>2) Mix into hot cereals. Splash in waffle or pancake batter. ...</p><p>3) Add to mashed potatoes.Make a two-ingredient cake icing. ...</p><p>4) Pour over fresh fruit</p><p>5) Add to cream-based soups.</p><p>6) Can be used in tea.</p><p><br></p><p>Storage Instructions: Keep in a cool, dry place. Avoid exposure to sunlight or excessive heat.</p><p>CAROMA is internationally certified by HACCP, ISO22000, MeSTI, cGMP and HALAL by JAKIM.</p>', 'cn', 24),
+(72, 'Coffee Tea Mate Non-dairy Creamer Powder /250 gram/Halal', '<p>[CAROMA] Coffee Mate Non-dairy Creamer Powder (250g) ( Halal)</p><p><br></p><p>CAROMA Coffee Mate Non-dairy creamers, commonly called tea whiteners or coffee whiteners are liquid or granular substances intended to substitute for milk or cream as an additive to coffee, tea, hot chocolate or other beverages.</p><p><br></p><p>Transform the coffee you like into the coffee you love with Coffee mate The Original coffee creamer. It\'s rich and smooth with a classic taste that is lactose-free, cholesterol-free, and gluten-free. With Coffee mate non-dairy coffee creamer, you can create your perfect cup of velvety goodness by adding the right amount of flavor you want every time.</p><p><br></p><p>1)Lactose-free</p><p>2)Cholesterol-free</p><p>3)Gluten-free</p><p>4)Certified by HACCP, ISO22000, MeSTI, cGMP and HALAL by JAKIM.</p><p><br></p><p>#Ingredients: Non Dairy Creamer.</p><p><br></p><p>#Preparation in Hot/ Panas:</p><p>Spoon powder into prepared coffee, tea of hot chocolate. Stir well and enjoy.</p><p><br></p><p>#Preparation in Cold/ Sejuk:</p><p>Spoon powder into prepared coffee, tea of hot chocolate. Stir well, add some ice and enjoy.</p><p><br></p><p>8 Delicious Uses for Coffee Creamer:</p><p>1) Add to hot chocolate. That\'s right,it is just like sweetened varieties of creamer can flavor coffee, they can also be used to flavor hot chocolate.</p><p>2) Mix into hot cereals. Splash in waffle or pancake batter. ...</p><p>3) Add to mashed potatoes.Make a two-ingredient cake icing. ...</p><p>4) Pour over fresh fruit</p><p>5) Add to cream-based soups.</p><p>6) Can be used in tea.</p><p><br></p><p>Storage Instructions: Keep in a cool, dry place. Avoid exposure to sunlight or excessive heat.</p><p>CAROMA is internationally certified by HACCP, ISO22000, MeSTI, cGMP and HALAL by JAKIM.</p>', 'my', 24),
+(73, 'Twin Packs/ [CAROMA] Instant 3 in 1 White Coffee/39g x 15 sachets/Per pack /Halal/ Ipoh White Coffee', '<p>Twin Packs/ [CAROMA] Instant 3 in 1 White Coffee/39g x 15 sachets/Per pack /Halal/ Ipoh White Coffee</p><p><br></p><p>CAROMA Instant Blende White Coffee is a famous coffee among the Malaysians. The roasting process for normal black coffee involves roasting the beans with sugar, margarine and wheat. It is different for white coffee when The coffee beans are roasted with only margarine, without sugar, which gives the coffee a lighter shade.</p><p><br></p><p>When you drink white coffee, you are able to taste different layers of flavor in the coffee, which is thick and aromatic. Caroma Blende White Coffee is a premium selection of the first grade Arabica coffee beans. So you can enjoy the real taste of good coffee anytime, anywhere. Ideal to serve with either hot or cold drink.</p><p><br></p><p>#One Pack : 39g x 15 sachets</p><p>#Twin pack : 2 packs x 39g x 15 sachets</p><p>#Roasted coffee</p><p>#Rich and Creamy</p><p>#Little nutty</p><p>#Sweet</p><p>#Certified by HACCP, ISO22000, MeSTI, cGMP and HALAL by JAKIM</p><p><br></p><p>Preparation in Hot/ Panas:</p><p>#Add 150ml 80 °C water + 1 sachets Instant white coffee powder + stir well and enjoy</p><p><br></p><p>Preparation in Cold/ Sejuk:</p><p>#Add 100ml 80 °C water + 1 sachets Instant white coffee powder + + stir well +Added some ice and enjoy.</p><p><br></p><p>Storage Instructions: Keep in a cool, dry place. Avoid exposure to sunlight or excessive heat.</p>', 'en', 25),
+(74, 'Twin Packs/ [CAROMA] Instant 3 in 1 White Coffee/39g x 15 sachets/Per pack /Halal/ Ipoh White Coffee', '<p>Twin Packs/ [CAROMA] Instant 3 in 1 White Coffee/39g x 15 sachets/Per pack /Halal/ Ipoh White Coffee</p><p><br></p><p>CAROMA Instant Blende White Coffee is a famous coffee among the Malaysians. The roasting process for normal black coffee involves roasting the beans with sugar, margarine and wheat. It is different for white coffee when The coffee beans are roasted with only margarine, without sugar, which gives the coffee a lighter shade.</p><p><br></p><p>When you drink white coffee, you are able to taste different layers of flavor in the coffee, which is thick and aromatic. Caroma Blende White Coffee is a premium selection of the first grade Arabica coffee beans. So you can enjoy the real taste of good coffee anytime, anywhere. Ideal to serve with either hot or cold drink.</p><p><br></p><p>#One Pack : 39g x 15 sachets</p><p>#Twin pack : 2 packs x 39g x 15 sachets</p><p>#Roasted coffee</p><p>#Rich and Creamy</p><p>#Little nutty</p><p>#Sweet</p><p>#Certified by HACCP, ISO22000, MeSTI, cGMP and HALAL by JAKIM</p><p><br></p><p>Preparation in Hot/ Panas:</p><p>#Add 150ml 80 °C water + 1 sachets Instant white coffee powder + stir well and enjoy</p><p><br></p><p>Preparation in Cold/ Sejuk:</p><p>#Add 100ml 80 °C water + 1 sachets Instant white coffee powder + + stir well +Added some ice and enjoy.</p><p><br></p><p>Storage Instructions: Keep in a cool, dry place. Avoid exposure to sunlight or excessive heat.</p>', 'cn', 25),
+(75, 'Twin Packs/ [CAROMA] Instant 3 in 1 White Coffee/39g x 15 sachets/Per pack /Halal/ Ipoh White Coffee', '<p>Twin Packs/ [CAROMA] Instant 3 in 1 White Coffee/39g x 15 sachets/Per pack /Halal/ Ipoh White Coffee</p><p><br></p><p>CAROMA Instant Blende White Coffee is a famous coffee among the Malaysians. The roasting process for normal black coffee involves roasting the beans with sugar, margarine and wheat. It is different for white coffee when The coffee beans are roasted with only margarine, without sugar, which gives the coffee a lighter shade.</p><p><br></p><p>When you drink white coffee, you are able to taste different layers of flavor in the coffee, which is thick and aromatic. Caroma Blende White Coffee is a premium selection of the first grade Arabica coffee beans. So you can enjoy the real taste of good coffee anytime, anywhere. Ideal to serve with either hot or cold drink.</p><p><br></p><p>#One Pack : 39g x 15 sachets</p><p>#Twin pack : 2 packs x 39g x 15 sachets</p><p>#Roasted coffee</p><p>#Rich and Creamy</p><p>#Little nutty</p><p>#Sweet</p><p>#Certified by HACCP, ISO22000, MeSTI, cGMP and HALAL by JAKIM</p><p><br></p><p>Preparation in Hot/ Panas:</p><p>#Add 150ml 80 °C water + 1 sachets Instant white coffee powder + stir well and enjoy</p><p><br></p><p>Preparation in Cold/ Sejuk:</p><p>#Add 100ml 80 °C water + 1 sachets Instant white coffee powder + + stir well +Added some ice and enjoy.</p><p><br></p><p>Storage Instructions: Keep in a cool, dry place. Avoid exposure to sunlight or excessive heat.</p>', 'my', 25),
+(76, 'Drip Pack Coffee Filter -Brazil Coffee Beans (Strong)', '<p>[CAROMA] Drip Pack Coffee Filter - Premium Coffee Bean Species/Strong/Arabica/10g x 6 Bag/Halal/Ground Coffee</p><p>100% Brazil Arabica / Drip Filter Coffee / Ground Coffee</p><p><br></p><p>Imported from Brazil Cerrado Coffee Beans: the highest grade of the famous Brazilian beans, lively and inviting with a smooth, sweet taste.</p><p><br></p><p>Dark roasting brings out an exceptional nutty flavor and enhances the body of the coffee. Our Cerrado is a traditionally natural dry processed coffee. This method creates a complexity of flavors. Brazilian coffees make excellent bases for some very intriguing blends, particularly in espresso.</p>', 'en', 26),
+(77, 'Drip Pack Coffee Filter -Brazil Coffee Beans (Strong)', '<p>[CAROMA] Drip Pack Coffee Filter - Premium Coffee Bean Species/Strong/Arabica/10g x 6 Bag/Halal/Ground Coffee</p><p>100% Brazil Arabica / Drip Filter Coffee / Ground Coffee</p><p><br></p><p>Imported from Brazil Cerrado Coffee Beans: the highest grade of the famous Brazilian beans, lively and inviting with a smooth, sweet taste.</p><p><br></p><p>Dark roasting brings out an exceptional nutty flavor and enhances the body of the coffee. Our Cerrado is a traditionally natural dry processed coffee. This method creates a complexity of flavors. Brazilian coffees make excellent bases for some very intriguing blends, particularly in espresso.</p>', 'cn', 26),
+(78, 'Drip Pack Coffee Filter -Brazil Coffee Beans (Strong)', '<p>[CAROMA] Drip Pack Coffee Filter - Premium Coffee Bean Species/Strong/Arabica/10g x 6 Bag/Halal/Ground Coffee</p><p>100% Brazil Arabica / Drip Filter Coffee / Ground Coffee</p><p><br></p><p>Imported from Brazil Cerrado Coffee Beans: the highest grade of the famous Brazilian beans, lively and inviting with a smooth, sweet taste.</p><p><br></p><p>Dark roasting brings out an exceptional nutty flavor and enhances the body of the coffee. Our Cerrado is a traditionally natural dry processed coffee. This method creates a complexity of flavors. Brazilian coffees make excellent bases for some very intriguing blends, particularly in espresso.</p>', 'my', 26),
+(79, 'Drip Pack Coffee Filter -Guatemala Arabica Bean (Sour)', '<p>[CAROMA] Drip Pack Coffee Filter -Premium Coffee Bean Species/Sour Brew Arabica/10g x 6 Bag/Halal/Ground Coffee</p><p>Guatemala Acatenango 100% Arabica / Drip Filter Coffee / Ground Coffee</p><p><br></p><p>This coffee comes from Los Planes, which is in the well-known Acatenango region of Guatemala. The region produces aromatic, clean and balanced coffees year after year, exhilaratingly intense and intricate floral notes, candied citrus, crisp roasted cacao nib, a hint of moist pipe tobacco in aroma and cup. Balanced, gently bright acidity; silky, buoyant mouthfeel.</p><p><br></p><p>Very sweet, long, juicy finish.&amp;nbsp;Thanks partly to the active and nearby Fuego volcano that keeps replenishing the soil with minerals.</p>', 'en', 27),
+(80, 'Drip Pack Coffee Filter -Guatemala Arabica Bean (Sour)', '<p>[CAROMA] Drip Pack Coffee Filter -Premium Coffee Bean Species/Sour Brew Arabica/10g x 6 Bag/Halal/Ground Coffee</p><p>Guatemala Acatenango 100% Arabica / Drip Filter Coffee / Ground Coffee</p><p><br></p><p>This coffee comes from Los Planes, which is in the well-known Acatenango region of Guatemala. The region produces aromatic, clean and balanced coffees year after year, exhilaratingly intense and intricate floral notes, candied citrus, crisp roasted cacao nib, a hint of moist pipe tobacco in aroma and cup. Balanced, gently bright acidity; silky, buoyant mouthfeel.</p><p><br></p><p>Very sweet, long, juicy finish.&amp;nbsp;Thanks partly to the active and nearby Fuego volcano that keeps replenishing the soil with minerals.</p>', 'cn', 27),
+(81, 'Drip Pack Coffee Filter -Guatemala Arabica Bean (Sour)', '<p>[CAROMA] Drip Pack Coffee Filter -Premium Coffee Bean Species/Sour Brew Arabica/10g x 6 Bag/Halal/Ground Coffee</p><p>Guatemala Acatenango 100% Arabica / Drip Filter Coffee / Ground Coffee</p><p><br></p><p>This coffee comes from Los Planes, which is in the well-known Acatenango region of Guatemala. The region produces aromatic, clean and balanced coffees year after year, exhilaratingly intense and intricate floral notes, candied citrus, crisp roasted cacao nib, a hint of moist pipe tobacco in aroma and cup. Balanced, gently bright acidity; silky, buoyant mouthfeel.</p><p><br></p><p>Very sweet, long, juicy finish.&amp;nbsp;Thanks partly to the active and nearby Fuego volcano that keeps replenishing the soil with minerals.</p>', 'my', 27),
+(82, 'Drip Pack Coffee Filter -Colombia Arabica Bean (Original)', '<p>[CAROMA] Drip Pack Coffee Filter/ Premium Colombia Santander Coffee Bean Species /Original Arabica/10g x 6 Bag/Halal /Ground Coffee/Drip Taste</p><p><br></p><p>Located in the north of the Cordillera Oriental, Santander Colombia, blessed with a rich biodiversity and lots of sunlight, coffee here grows in the shade of native forests giving it exquisite herbal notes, this shade-grown coffee is bright, exhibits medium to full body and is silky smooth with a rich mildly fruity and chocolate flavor due to its ideal weather conditions.</p>', 'en', 28),
+(83, 'Drip Pack Coffee Filter -Colombia Arabica Bean (Original)', '<p>[CAROMA] Drip Pack Coffee Filter/ Premium Colombia Santander Coffee Bean Species /Original Arabica/10g x 6 Bag/Halal /Ground Coffee/Drip Taste</p><p><br></p><p>Located in the north of the Cordillera Oriental, Santander Colombia, blessed with a rich biodiversity and lots of sunlight, coffee here grows in the shade of native forests giving it exquisite herbal notes, this shade-grown coffee is bright, exhibits medium to full body and is silky smooth with a rich mildly fruity and chocolate flavor due to its ideal weather conditions.</p>', 'cn', 28),
+(84, 'Drip Pack Coffee Filter -Colombia Arabica Bean (Original)', '<p>[CAROMA] Drip Pack Coffee Filter/ Premium Colombia Santander Coffee Bean Species /Original Arabica/10g x 6 Bag/Halal /Ground Coffee/Drip Taste</p><p><br></p><p>Located in the north of the Cordillera Oriental, Santander Colombia, blessed with a rich biodiversity and lots of sunlight, coffee here grows in the shade of native forests giving it exquisite herbal notes, this shade-grown coffee is bright, exhibits medium to full body and is silky smooth with a rich mildly fruity and chocolate flavor due to its ideal weather conditions.</p>', 'my', 28),
+(85, 'Instant 3-in-1 Original Ipoh White Coffee Powder', '<p># Ingredients: Non-Dairy Creamer, Dextrose Sugar, Instant Coffee Powder</p><p><br></p><p># Ramuan: Krimer Bukan Tenusu, Dektrosa Sugar, Serbuk Kopi Segera</p><p>It is suitable to drink hot or cold.</p><p><br></p><p>Preparation in Hot/ Panas:</p><p># Add 150ml 80 °C water + 2 Spoon Ipoh White Coffee Powder +stir well and enjoy.</p><p><br></p><p>Preparation in Cold/ Sejuk:</p><p># Add 100ml 80 °C water + 2 spoon Ipoh White Coffee Powder +stir well +Added some ice and enjoy.</p><p>Storage Instructions: Keep in a cool, dry place. Avoid exposure to sunlight or excessive heat.</p><p><br></p><p>CAROMA internationally certified by HACCP, ISO22000, MeSTI, cGMP and HALAL by JAKIM.</p>', 'en', 29),
+(86, 'Instant 3-in-1 Original Ipoh White Coffee Powder', '<p># Ingredients: Non-Dairy Creamer, Dextrose Sugar, Instant Coffee Powder</p><p><br></p><p># Ramuan: Krimer Bukan Tenusu, Dektrosa Sugar, Serbuk Kopi Segera</p><p>It is suitable to drink hot or cold.</p><p><br></p><p>Preparation in Hot/ Panas:</p><p># Add 150ml 80 °C water + 2 Spoon Ipoh White Coffee Powder +stir well and enjoy.</p><p><br></p><p>Preparation in Cold/ Sejuk:</p><p># Add 100ml 80 °C water + 2 spoon Ipoh White Coffee Powder +stir well +Added some ice and enjoy.</p><p>Storage Instructions: Keep in a cool, dry place. Avoid exposure to sunlight or excessive heat.</p><p><br></p><p>CAROMA internationally certified by HACCP, ISO22000, MeSTI, cGMP and HALAL by JAKIM.</p>', 'cn', 29),
+(87, 'Instant 3-in-1 Original Ipoh White Coffee Powder', '<p># Ingredients: Non-Dairy Creamer, Dextrose Sugar, Instant Coffee Powder</p><p><br></p><p># Ramuan: Krimer Bukan Tenusu, Dektrosa Sugar, Serbuk Kopi Segera</p><p>It is suitable to drink hot or cold.</p><p><br></p><p>Preparation in Hot/ Panas:</p><p># Add 150ml 80 °C water + 2 Spoon Ipoh White Coffee Powder +stir well and enjoy.</p><p><br></p><p>Preparation in Cold/ Sejuk:</p><p># Add 100ml 80 °C water + 2 spoon Ipoh White Coffee Powder +stir well +Added some ice and enjoy.</p><p>Storage Instructions: Keep in a cool, dry place. Avoid exposure to sunlight or excessive heat.</p><p><br></p><p>CAROMA internationally certified by HACCP, ISO22000, MeSTI, cGMP and HALAL by JAKIM.</p>', 'my', 29),
+(88, 'Instant 3-in-1 Original Ipoh White Coffee (sachets)', '<p>[CAROMA] Less Sweet Instant 3-in-1/ Original Ipoh White Coffee/ 8 sachets x 20g/Halal/Low GI/ Instant Kopi Segera</p><p><br></p><p>A taste of Malaysian Authentic all-time favorite \"IPOH WHITE COFFEE\" roasted coffee. Its aromatic, creamy and smooth texture loved by most Malaysian and coffee lovers.</p><p><br></p><p>#Weight: 250gram</p><p>#No Preservative</p><p>#No Artificial Colouring</p><p>#Less Sweet</p><p>#Low GI Sugar</p><p>#Smooth</p><p>#Healthier</p><p>#Creamy and delicious</p><p>#Suitable for Vegetarian</p><p>#Certified by HACCP, ISO22000, MeSTI, cGMP and HALAL by JAKIM</p>', 'en', 30),
+(89, 'Instant 3-in-1 Original Ipoh White Coffee (sachets)', '<p>[CAROMA] Less Sweet Instant 3-in-1/ Original Ipoh White Coffee/ 8 sachets x 20g/Halal/Low GI/ Instant Kopi Segera</p><p><br></p><p>A taste of Malaysian Authentic all-time favorite \"IPOH WHITE COFFEE\" roasted coffee. Its aromatic, creamy and smooth texture loved by most Malaysian and coffee lovers.</p><p><br></p><p>#Weight: 250gram</p><p>#No Preservative</p><p>#No Artificial Colouring</p><p>#Less Sweet</p><p>#Low GI Sugar</p><p>#Smooth</p><p>#Healthier</p><p>#Creamy and delicious</p><p>#Suitable for Vegetarian</p><p>#Certified by HACCP, ISO22000, MeSTI, cGMP and HALAL by JAKIM</p>', 'cn', 30),
+(90, 'Instant 3-in-1 Original Ipoh White Coffee (sachets)', '<p>[CAROMA] Less Sweet Instant 3-in-1/ Original Ipoh White Coffee/ 8 sachets x 20g/Halal/Low GI/ Instant Kopi Segera</p><p><br></p><p>A taste of Malaysian Authentic all-time favorite \"IPOH WHITE COFFEE\" roasted coffee. Its aromatic, creamy and smooth texture loved by most Malaysian and coffee lovers.</p><p><br></p><p>#Weight: 250gram</p><p>#No Preservative</p><p>#No Artificial Colouring</p><p>#Less Sweet</p><p>#Low GI Sugar</p><p>#Smooth</p><p>#Healthier</p><p>#Creamy and delicious</p><p>#Suitable for Vegetarian</p><p>#Certified by HACCP, ISO22000, MeSTI, cGMP and HALAL by JAKIM</p>', 'my', 30),
+(91, 'Medium Roasted Colombia Arabica Coffee Whole Beans', '<p>#What makes this Colombia Santander Coffee special?</p><p>Beyond the wonderfully green and sustainable nature of Java Planet is a truly worthy coffee. This coffee is a great low acid alternative to the typically bright Colombian cup. A mouth watering aroma of cherry and nut leads to a taste of, you guessed it, cherry and nut. These flavor notes are balanced with a pleasing caramel-toned sweetness that doesn\'t overwhelm.</p><p><br></p><p>Benefits of Black Coffee:</p><p>#It improves cardiovascular health</p><p>#It improves your memory</p><p>#It is good for your liver</p><p>#It helps you cleanse your stomach</p><p>#It may help prevent the risk of developing cancer</p><p>#It is rich in antioxidants</p><p><br></p><p>#Preparation: Recipe for FRENCH PRESS</p><p>Yield: 1 Portion [150ml of Base Brew]</p><p>Kopi: 20g</p><p>Water: 200g @ 95-98˚C (plus extra to rinse + pre-heat)</p><p>Kit: French Press, Spoon, Mug, Timer</p><p>Filter Prep: Pre-heated</p><p>Brew Time: 3 minutes approx.</p><p>Step1: Pre-heat mug with hot water</p><p>Step 2: Pre-heat French Press and discard hot water</p><p>Step 3: Add CAROMA Coffee Powder to French Press</p><p>Step 4: Add 200g hot water to CAROMA Coffee Powder</p><p>Step 5: Set a 3 minute timer and stir 10 times in one direction</p><p>Step 6: When the timer is up, stir grounds once more to reintegrate into brew, then press plunger. Take care not to press the actual coffee grounds</p><p>Step 7: Discard water from pre-heated mug and pour in your French Press brew - you should have 150ml approx.</p><p>Step 8: Congrats - you\'ve made your French Press base brew!</p><p><br></p><p>#Examples of what to do with your base brew:</p><p>#Kopi-O Kosong (black coffee, unsweetened) - dilute with 70ml hot water</p><p>#Kopi-O (black coffee) - add 2 tsp sugar to your diluted coffee</p><p>#Adding evaporated or condensed milk? Reduce the amount of water</p><p><br></p><p>Storage Instructions: Keep in a cool, dry place. Avoid exposure to sunlight or excessive heat.</p>', 'en', 31),
+(92, 'Medium Roasted Colombia Arabica Coffee Whole Beans', '<p>#What makes this Colombia Santander Coffee special?</p><p>Beyond the wonderfully green and sustainable nature of Java Planet is a truly worthy coffee. This coffee is a great low acid alternative to the typically bright Colombian cup. A mouth watering aroma of cherry and nut leads to a taste of, you guessed it, cherry and nut. These flavor notes are balanced with a pleasing caramel-toned sweetness that doesn\'t overwhelm.</p><p><br></p><p>Benefits of Black Coffee:</p><p>#It improves cardiovascular health</p><p>#It improves your memory</p><p>#It is good for your liver</p><p>#It helps you cleanse your stomach</p><p>#It may help prevent the risk of developing cancer</p><p>#It is rich in antioxidants</p><p><br></p><p>#Preparation: Recipe for FRENCH PRESS</p><p>Yield: 1 Portion [150ml of Base Brew]</p><p>Kopi: 20g</p><p>Water: 200g @ 95-98˚C (plus extra to rinse + pre-heat)</p><p>Kit: French Press, Spoon, Mug, Timer</p><p>Filter Prep: Pre-heated</p><p>Brew Time: 3 minutes approx.</p><p>Step1: Pre-heat mug with hot water</p><p>Step 2: Pre-heat French Press and discard hot water</p><p>Step 3: Add CAROMA Coffee Powder to French Press</p><p>Step 4: Add 200g hot water to CAROMA Coffee Powder</p><p>Step 5: Set a 3 minute timer and stir 10 times in one direction</p><p>Step 6: When the timer is up, stir grounds once more to reintegrate into brew, then press plunger. Take care not to press the actual coffee grounds</p><p>Step 7: Discard water from pre-heated mug and pour in your French Press brew - you should have 150ml approx.</p><p>Step 8: Congrats - you\'ve made your French Press base brew!</p><p><br></p><p>#Examples of what to do with your base brew:</p><p>#Kopi-O Kosong (black coffee, unsweetened) - dilute with 70ml hot water</p><p>#Kopi-O (black coffee) - add 2 tsp sugar to your diluted coffee</p><p>#Adding evaporated or condensed milk? Reduce the amount of water</p><p><br></p><p>Storage Instructions: Keep in a cool, dry place. Avoid exposure to sunlight or excessive heat.</p>', 'cn', 31),
+(93, 'Medium Roasted Colombia Arabica Coffee Whole Beans', '<p>#What makes this Colombia Santander Coffee special?</p><p>Beyond the wonderfully green and sustainable nature of Java Planet is a truly worthy coffee. This coffee is a great low acid alternative to the typically bright Colombian cup. A mouth watering aroma of cherry and nut leads to a taste of, you guessed it, cherry and nut. These flavor notes are balanced with a pleasing caramel-toned sweetness that doesn\'t overwhelm.</p><p><br></p><p>Benefits of Black Coffee:</p><p>#It improves cardiovascular health</p><p>#It improves your memory</p><p>#It is good for your liver</p><p>#It helps you cleanse your stomach</p><p>#It may help prevent the risk of developing cancer</p><p>#It is rich in antioxidants</p><p><br></p><p>#Preparation: Recipe for FRENCH PRESS</p><p>Yield: 1 Portion [150ml of Base Brew]</p><p>Kopi: 20g</p><p>Water: 200g @ 95-98˚C (plus extra to rinse + pre-heat)</p><p>Kit: French Press, Spoon, Mug, Timer</p><p>Filter Prep: Pre-heated</p><p>Brew Time: 3 minutes approx.</p><p>Step1: Pre-heat mug with hot water</p><p>Step 2: Pre-heat French Press and discard hot water</p><p>Step 3: Add CAROMA Coffee Powder to French Press</p><p>Step 4: Add 200g hot water to CAROMA Coffee Powder</p><p>Step 5: Set a 3 minute timer and stir 10 times in one direction</p><p>Step 6: When the timer is up, stir grounds once more to reintegrate into brew, then press plunger. Take care not to press the actual coffee grounds</p><p>Step 7: Discard water from pre-heated mug and pour in your French Press brew - you should have 150ml approx.</p><p>Step 8: Congrats - you\'ve made your French Press base brew!</p><p><br></p><p>#Examples of what to do with your base brew:</p><p>#Kopi-O Kosong (black coffee, unsweetened) - dilute with 70ml hot water</p><p>#Kopi-O (black coffee) - add 2 tsp sugar to your diluted coffee</p><p>#Adding evaporated or condensed milk? Reduce the amount of water</p><p><br></p><p>Storage Instructions: Keep in a cool, dry place. Avoid exposure to sunlight or excessive heat.</p>', 'my', 31),
+(94, 'French Press Roasted Black Coffee O Mixture Powder', '<p>Benefits of Black Coffee:</p><p># It improves cardiovascular health</p><p>#It improves your memory</p><p>#It is good for your liver</p><p>#It helps you cleanse your stomach</p><p>#It may help prevent the risk of developing cancer</p><p>#It is rich in antioxidants</p><p><br></p><p># Ingredients : Coffee Bean, Wheat, Margarine, Sugar</p><p>#Ramuan: Biji Kopi, Gandum, Marjerin dan Gula</p><p><br></p><p>#Preparation: A. Recipe for 1 cup of Kopi using COFFEE BAG:</p><p>Yield: 1 Portion [150ml of Base Brew], Kopi: 20g</p><p>Step 1: Add 2 teaspoon (heaped) of kopi powder to a coffee bag,</p><p>Step 2: Close bag, place in cup (8oz),</p><p>Step3: Fill with water just off the boil,</p><p>Step 4: Wait 5 mins (make sure bag is completely submerged, use a spoon to hold down the bag),</p><p>Step 5: Remove bag</p><p>Step 6: Add condiments of choice, Enjoy!</p><p><br></p><p>#Don\'t have a Coffee Sock Filter at hand? Don\'t worry! The following brew recipe is a good alternative for offices, or other places you may not have your Coffee Sock Filter with you. Whilst not quite as smooth and refined as the traditional sock method, using a French Press still provides a similar experience.</p><p><br></p><p>#Preparation: B. Recipe for FRENCH PRESS</p><p>Yield: 1 Portion [150ml of Base Brew]</p><p>Kopi: 20g</p><p>Water: 200g @ 95-98˚C (plus extra to rinse + pre-heat)</p><p>Kit: French Press, Spoon, Mug, Timer</p><p>Filter Prep: Pre-heated</p><p>Brew Time: 3 minutes approx.</p><p>Step1: Pre-heat mug with hot water</p><p>Step 2: Pre-heat French Press and discard hot water</p><p>Step 3: Add CAROMA Coffee Powder to French Press</p><p>Step 4: Add 200g hot water to CAROMA Coffee Powder</p><p>Step 5: Set a 3 minute timer and stir 10 times in one direction</p><p>Step 6: When the timer is up, stir grounds once more to reintegrate into brew, then press plunger. Take care not to press the actual coffee grounds</p><p>Step 7: Discard water from pre-heated mug and pour in your French Press brew - you should have 150ml approx.</p><p>Step 8: Congrats - you\'ve made your French Press base brew!</p><p><br></p><p>#Examples of what to do with your base brew:</p><p><br></p><p>#Kopi-O Kosong (black coffee, unsweetened) - dilute with 70ml hot water</p><p><br></p><p>#Kopi-O (black coffee) - add 2 tsp sugar to your diluted coffee</p><p><br></p><p>#Adding evaporated or condensed milk? Reduce the amount of water</p><p>Storage Instructions: Keep in a cool, dry place. Avoid exposure to sunlight or excessive heat.</p>', 'en', 32),
+(95, 'French Press Roasted Black Coffee O Mixture Powder', '<p>Benefits of Black Coffee:</p><p># It improves cardiovascular health</p><p>#It improves your memory</p><p>#It is good for your liver</p><p>#It helps you cleanse your stomach</p><p>#It may help prevent the risk of developing cancer</p><p>#It is rich in antioxidants</p><p><br></p><p># Ingredients : Coffee Bean, Wheat, Margarine, Sugar</p><p>#Ramuan: Biji Kopi, Gandum, Marjerin dan Gula</p><p><br></p><p>#Preparation: A. Recipe for 1 cup of Kopi using COFFEE BAG:</p><p>Yield: 1 Portion [150ml of Base Brew], Kopi: 20g</p><p>Step 1: Add 2 teaspoon (heaped) of kopi powder to a coffee bag,</p><p>Step 2: Close bag, place in cup (8oz),</p><p>Step3: Fill with water just off the boil,</p><p>Step 4: Wait 5 mins (make sure bag is completely submerged, use a spoon to hold down the bag),</p><p>Step 5: Remove bag</p><p>Step 6: Add condiments of choice, Enjoy!</p><p><br></p><p>#Don\'t have a Coffee Sock Filter at hand? Don\'t worry! The following brew recipe is a good alternative for offices, or other places you may not have your Coffee Sock Filter with you. Whilst not quite as smooth and refined as the traditional sock method, using a French Press still provides a similar experience.</p><p><br></p><p>#Preparation: B. Recipe for FRENCH PRESS</p><p>Yield: 1 Portion [150ml of Base Brew]</p><p>Kopi: 20g</p><p>Water: 200g @ 95-98˚C (plus extra to rinse + pre-heat)</p><p>Kit: French Press, Spoon, Mug, Timer</p><p>Filter Prep: Pre-heated</p><p>Brew Time: 3 minutes approx.</p><p>Step1: Pre-heat mug with hot water</p><p>Step 2: Pre-heat French Press and discard hot water</p><p>Step 3: Add CAROMA Coffee Powder to French Press</p><p>Step 4: Add 200g hot water to CAROMA Coffee Powder</p><p>Step 5: Set a 3 minute timer and stir 10 times in one direction</p><p>Step 6: When the timer is up, stir grounds once more to reintegrate into brew, then press plunger. Take care not to press the actual coffee grounds</p><p>Step 7: Discard water from pre-heated mug and pour in your French Press brew - you should have 150ml approx.</p><p>Step 8: Congrats - you\'ve made your French Press base brew!</p><p><br></p><p>#Examples of what to do with your base brew:</p><p><br></p><p>#Kopi-O Kosong (black coffee, unsweetened) - dilute with 70ml hot water</p><p><br></p><p>#Kopi-O (black coffee) - add 2 tsp sugar to your diluted coffee</p><p><br></p><p>#Adding evaporated or condensed milk? Reduce the amount of water</p><p>Storage Instructions: Keep in a cool, dry place. Avoid exposure to sunlight or excessive heat.</p>', 'cn', 32),
+(96, 'French Press Roasted Black Coffee O Mixture Powder', '<p>Benefits of Black Coffee:</p><p># It improves cardiovascular health</p><p>#It improves your memory</p><p>#It is good for your liver</p><p>#It helps you cleanse your stomach</p><p>#It may help prevent the risk of developing cancer</p><p>#It is rich in antioxidants</p><p><br></p><p># Ingredients : Coffee Bean, Wheat, Margarine, Sugar</p><p>#Ramuan: Biji Kopi, Gandum, Marjerin dan Gula</p><p><br></p><p>#Preparation: A. Recipe for 1 cup of Kopi using COFFEE BAG:</p><p>Yield: 1 Portion [150ml of Base Brew], Kopi: 20g</p><p>Step 1: Add 2 teaspoon (heaped) of kopi powder to a coffee bag,</p><p>Step 2: Close bag, place in cup (8oz),</p><p>Step3: Fill with water just off the boil,</p><p>Step 4: Wait 5 mins (make sure bag is completely submerged, use a spoon to hold down the bag),</p><p>Step 5: Remove bag</p><p>Step 6: Add condiments of choice, Enjoy!</p><p><br></p><p>#Don\'t have a Coffee Sock Filter at hand? Don\'t worry! The following brew recipe is a good alternative for offices, or other places you may not have your Coffee Sock Filter with you. Whilst not quite as smooth and refined as the traditional sock method, using a French Press still provides a similar experience.</p><p><br></p><p>#Preparation: B. Recipe for FRENCH PRESS</p><p>Yield: 1 Portion [150ml of Base Brew]</p><p>Kopi: 20g</p><p>Water: 200g @ 95-98˚C (plus extra to rinse + pre-heat)</p><p>Kit: French Press, Spoon, Mug, Timer</p><p>Filter Prep: Pre-heated</p><p>Brew Time: 3 minutes approx.</p><p>Step1: Pre-heat mug with hot water</p><p>Step 2: Pre-heat French Press and discard hot water</p><p>Step 3: Add CAROMA Coffee Powder to French Press</p><p>Step 4: Add 200g hot water to CAROMA Coffee Powder</p><p>Step 5: Set a 3 minute timer and stir 10 times in one direction</p><p>Step 6: When the timer is up, stir grounds once more to reintegrate into brew, then press plunger. Take care not to press the actual coffee grounds</p><p>Step 7: Discard water from pre-heated mug and pour in your French Press brew - you should have 150ml approx.</p><p>Step 8: Congrats - you\'ve made your French Press base brew!</p><p><br></p><p>#Examples of what to do with your base brew:</p><p><br></p><p>#Kopi-O Kosong (black coffee, unsweetened) - dilute with 70ml hot water</p><p><br></p><p>#Kopi-O (black coffee) - add 2 tsp sugar to your diluted coffee</p><p><br></p><p>#Adding evaporated or condensed milk? Reduce the amount of water</p><p>Storage Instructions: Keep in a cool, dry place. Avoid exposure to sunlight or excessive heat.</p>', 'my', 32),
+(97, 'Special Arabica & Robusta Instant Coffee Powder', '<p>[CAROMA] Special Premium House Blend/ Instant Coffee Powder/150g/ Arabica + Robusta Beans Mixed/Halal/No Sugar/ Coffee O/ Black Coffee/Kopi O</p><p><br></p><p>A taste of Malaysian Authentic all-time favorite \"CAROMA Distinctive PREMIUM INSTANT PURE SOLUBLE COFFEE\" roasted coffee.</p><p><br></p><p>#Weight: 150gram</p><p>#Special House Blend Instant Pure Soluble Coffee</p><p>#Premium Selection Arabica + Robusta Beans Mixed Blend</p><p>#Aroma Full Bodied</p><p>#Lively Aroma</p><p>#No Sugar</p><p>#No Preservative</p><p>#No Artificial Colouring</p><p>#Certified by HACCP, ISO22000, cGMP, MeSTI and HALAL by JAKIM.</p>', 'en', 33),
+(98, 'Special Arabica & Robusta Instant Coffee Powder', '<p>[CAROMA] Special Premium House Blend/ Instant Coffee Powder/150g/ Arabica + Robusta Beans Mixed/Halal/No Sugar/ Coffee O/ Black Coffee/Kopi O</p><p><br></p><p>A taste of Malaysian Authentic all-time favorite \"CAROMA Distinctive PREMIUM INSTANT PURE SOLUBLE COFFEE\" roasted coffee.</p><p><br></p><p>#Weight: 150gram</p><p>#Special House Blend Instant Pure Soluble Coffee</p><p>#Premium Selection Arabica + Robusta Beans Mixed Blend</p><p>#Aroma Full Bodied</p><p>#Lively Aroma</p><p>#No Sugar</p><p>#No Preservative</p><p>#No Artificial Colouring</p><p>#Certified by HACCP, ISO22000, cGMP, MeSTI and HALAL by JAKIM.</p>', 'cn', 33);
+INSERT INTO `product_translation` (`id`, `name`, `description`, `language`, `product_id`) VALUES
+(99, 'Special Arabica & Robusta Instant Coffee Powder', '<p>[CAROMA] Special Premium House Blend/ Instant Coffee Powder/150g/ Arabica + Robusta Beans Mixed/Halal/No Sugar/ Coffee O/ Black Coffee/Kopi O</p><p><br></p><p>A taste of Malaysian Authentic all-time favorite \"CAROMA Distinctive PREMIUM INSTANT PURE SOLUBLE COFFEE\" roasted coffee.</p><p><br></p><p>#Weight: 150gram</p><p>#Special House Blend Instant Pure Soluble Coffee</p><p>#Premium Selection Arabica + Robusta Beans Mixed Blend</p><p>#Aroma Full Bodied</p><p>#Lively Aroma</p><p>#No Sugar</p><p>#No Preservative</p><p>#No Artificial Colouring</p><p>#Certified by HACCP, ISO22000, cGMP, MeSTI and HALAL by JAKIM.</p>', 'my', 33),
+(100, 'Light-Medium Roast Guatemala Arabica Coffee Beans', '<p>#Ingredients : Whole Coffee Bean</p><p>#Aroma: Floral, Citrus</p><p>#Flavor: Chocolate, Sweet, Nutty (slight)</p><p>#Body: Full, Round</p><p>#Acidity: Bright, Pleasant</p><p>#Milling Process: Washed, Sun-Dried</p><p>#Fragrance: Balanced body and clean lingering finish</p><p><br></p><p>Benefits of Black Coffee:</p><p>#It improves cardiovascular health</p><p>#It improves your memory</p><p>#It is good for your liver</p><p>#It helps you cleanse your stomach</p><p>#It may help prevent the risk of developing cancer</p><p>#It is rich in antioxidants</p><p><br></p><p>#Preparation: Recipe for FRENCH PRESS</p><p>Yield: 1 Portion [150ml of Base Brew]</p><p>Kopi: 20g</p><p>Water: 200g @ 95-98˚C (plus extra to rinse + pre-heat)</p><p>Kit: French Press, Spoon, Mug, Timer</p><p>Filter Prep: Pre-heated</p><p>Brew Time: 3 minutes approx.</p><p>Step1: Pre-heat mug with hot water</p><p>Step 2: Pre-heat French Press and discard hot water</p><p>Step 3: Add CAROMA Coffee Powder to French Press</p><p>Step 4: Add 200g hot water to CAROMA Coffee Powder</p><p>Step 5: Set a 3 minute timer and stir 10 times in one direction</p><p>Step 6: When the timer is up, stir grounds once more to reintegrate into brew, then press plunger. Take care not to press the actual coffee grounds</p><p>Step 7: Discard water from pre-heated mug and pour in your French Press brew - you should have 150ml approx.</p><p>Step 8: Congrats - you\'ve made your French Press base brew!</p><p><br></p><p>#Examples of what to do with your base brew:</p><p>#Kopi-O Kosong (black coffee, unsweetened) - dilute with 70ml hot water</p><p><br></p><p>#Kopi-O (black coffee) - add 2 tsp sugar to your diluted coffee</p><p>#Adding evaporated or condensed milk? Reduce the amount of water</p><p>Storage Instructions: Keep in a cool, dry place. Avoid exposure to sunlight or excessive heat.</p>', 'en', 34),
+(101, 'Light-Medium Roast Guatemala Arabica Coffee Beans', '<p>#Ingredients : Whole Coffee Bean</p><p>#Aroma: Floral, Citrus</p><p>#Flavor: Chocolate, Sweet, Nutty (slight)</p><p>#Body: Full, Round</p><p>#Acidity: Bright, Pleasant</p><p>#Milling Process: Washed, Sun-Dried</p><p>#Fragrance: Balanced body and clean lingering finish</p><p><br></p><p>Benefits of Black Coffee:</p><p>#It improves cardiovascular health</p><p>#It improves your memory</p><p>#It is good for your liver</p><p>#It helps you cleanse your stomach</p><p>#It may help prevent the risk of developing cancer</p><p>#It is rich in antioxidants</p><p><br></p><p>#Preparation: Recipe for FRENCH PRESS</p><p>Yield: 1 Portion [150ml of Base Brew]</p><p>Kopi: 20g</p><p>Water: 200g @ 95-98˚C (plus extra to rinse + pre-heat)</p><p>Kit: French Press, Spoon, Mug, Timer</p><p>Filter Prep: Pre-heated</p><p>Brew Time: 3 minutes approx.</p><p>Step1: Pre-heat mug with hot water</p><p>Step 2: Pre-heat French Press and discard hot water</p><p>Step 3: Add CAROMA Coffee Powder to French Press</p><p>Step 4: Add 200g hot water to CAROMA Coffee Powder</p><p>Step 5: Set a 3 minute timer and stir 10 times in one direction</p><p>Step 6: When the timer is up, stir grounds once more to reintegrate into brew, then press plunger. Take care not to press the actual coffee grounds</p><p>Step 7: Discard water from pre-heated mug and pour in your French Press brew - you should have 150ml approx.</p><p>Step 8: Congrats - you\'ve made your French Press base brew!</p><p><br></p><p>#Examples of what to do with your base brew:</p><p>#Kopi-O Kosong (black coffee, unsweetened) - dilute with 70ml hot water</p><p><br></p><p>#Kopi-O (black coffee) - add 2 tsp sugar to your diluted coffee</p><p>#Adding evaporated or condensed milk? Reduce the amount of water</p><p>Storage Instructions: Keep in a cool, dry place. Avoid exposure to sunlight or excessive heat.</p>', 'cn', 34),
+(102, 'Light-Medium Roast Guatemala Arabica Coffee Beans', '<p>#Ingredients : Whole Coffee Bean</p><p>#Aroma: Floral, Citrus</p><p>#Flavor: Chocolate, Sweet, Nutty (slight)</p><p>#Body: Full, Round</p><p>#Acidity: Bright, Pleasant</p><p>#Milling Process: Washed, Sun-Dried</p><p>#Fragrance: Balanced body and clean lingering finish</p><p><br></p><p>Benefits of Black Coffee:</p><p>#It improves cardiovascular health</p><p>#It improves your memory</p><p>#It is good for your liver</p><p>#It helps you cleanse your stomach</p><p>#It may help prevent the risk of developing cancer</p><p>#It is rich in antioxidants</p><p><br></p><p>#Preparation: Recipe for FRENCH PRESS</p><p>Yield: 1 Portion [150ml of Base Brew]</p><p>Kopi: 20g</p><p>Water: 200g @ 95-98˚C (plus extra to rinse + pre-heat)</p><p>Kit: French Press, Spoon, Mug, Timer</p><p>Filter Prep: Pre-heated</p><p>Brew Time: 3 minutes approx.</p><p>Step1: Pre-heat mug with hot water</p><p>Step 2: Pre-heat French Press and discard hot water</p><p>Step 3: Add CAROMA Coffee Powder to French Press</p><p>Step 4: Add 200g hot water to CAROMA Coffee Powder</p><p>Step 5: Set a 3 minute timer and stir 10 times in one direction</p><p>Step 6: When the timer is up, stir grounds once more to reintegrate into brew, then press plunger. Take care not to press the actual coffee grounds</p><p>Step 7: Discard water from pre-heated mug and pour in your French Press brew - you should have 150ml approx.</p><p>Step 8: Congrats - you\'ve made your French Press base brew!</p><p><br></p><p>#Examples of what to do with your base brew:</p><p>#Kopi-O Kosong (black coffee, unsweetened) - dilute with 70ml hot water</p><p><br></p><p>#Kopi-O (black coffee) - add 2 tsp sugar to your diluted coffee</p><p>#Adding evaporated or condensed milk? Reduce the amount of water</p><p>Storage Instructions: Keep in a cool, dry place. Avoid exposure to sunlight or excessive heat.</p>', 'my', 34),
+(103, 'Medium Roast Brazil Arabica Coffee Whole Beans', '<p>[CAROMA] 250g/Premium Roasted Coffee Whole Beans/Brazil CerradoBean/100% Arabica/(Halal/High Quality/French Press/ Brew Coffee</p><p><br></p><p>#Ingredients : Whole Coffee Bean</p><p>#Roast: Medium-Dark</p><p>#Body: Full, creamy</p><p>#Taste: Rich, notes of walnut &amp;amp; dark chocolate</p><p>#Fragrance: Strong, Chocolate</p><p>#Aroma: Chocolate, nuts</p><p>#Sweetness: Caramel-toned</p><p>#Acidity: Mild</p><p>#Aftertaste: Clean &amp;amp; smooth</p><p><br></p><p>Benefits of Black Coffee:</p><p># It improves cardiovascular health</p><p>#It improves your memory</p><p>#It is good for your liver</p><p>#It helps you cleanse your stomach</p><p>#It may help prevent the risk of developing cancer</p><p>#It is rich in antioxidants</p><p><br></p><p>#Preparation: Recipe for FRENCH PRESS</p><p>Yield: 1 Portion [150ml of Base Brew]</p><p>Kopi: 20g</p><p>Water: 200g @ 95-98˚C (plus extra to rinse + pre-heat)</p><p>Kit: French Press, Spoon, Mug, Timer</p><p>Filter Prep: Pre-heated</p><p>Brew Time: 3 minutes approx.</p><p><br></p><p>Step1: Pre-heat mug with hot water</p><p>Step 2: Pre-heat French Press and discard hot water</p><p>Step 3: Add CAROMA Coffee Powder to French Press</p><p>Step 4: Add 200g hot water to CAROMA Coffee Powder</p><p>Step 5: Set a 3 minute timer and stir 10 times in one direction</p><p>Step 6: When the timer is up, stir grounds once more to reintegrate into brew, then press plunger. Take care not to press the actual coffee grounds</p><p>Step 7: Discard water from pre-heated mug and pour in your French Press brew - you should have 150ml approx.</p><p>Step 8: Congrats - you\'ve made your French Press base brew!</p><p><br></p><p>#Examples of what to do with your base brew:</p><p>#Kopi-O Kosong (black coffee, unsweetened) - dilute with 70ml hot water</p><p>#Kopi-O (black coffee) - add 2 tsp sugar to your diluted coffee</p><p>#Adding evaporated or condensed milk? Reduce the amount of water</p><p><br></p><p>Storage Instructions: Keep in a cool, dry place. Avoid exposure to sunlight or excessive heat.</p>', 'en', 35),
+(104, 'Medium Roast Brazil Arabica Coffee Whole Beans', '<p>[CAROMA] 250g/Premium Roasted Coffee Whole Beans/Brazil CerradoBean/100% Arabica/(Halal/High Quality/French Press/ Brew Coffee</p><p><br></p><p>#Ingredients : Whole Coffee Bean</p><p>#Roast: Medium-Dark</p><p>#Body: Full, creamy</p><p>#Taste: Rich, notes of walnut &amp;amp; dark chocolate</p><p>#Fragrance: Strong, Chocolate</p><p>#Aroma: Chocolate, nuts</p><p>#Sweetness: Caramel-toned</p><p>#Acidity: Mild</p><p>#Aftertaste: Clean &amp;amp; smooth</p><p><br></p><p>Benefits of Black Coffee:</p><p># It improves cardiovascular health</p><p>#It improves your memory</p><p>#It is good for your liver</p><p>#It helps you cleanse your stomach</p><p>#It may help prevent the risk of developing cancer</p><p>#It is rich in antioxidants</p><p><br></p><p>#Preparation: Recipe for FRENCH PRESS</p><p>Yield: 1 Portion [150ml of Base Brew]</p><p>Kopi: 20g</p><p>Water: 200g @ 95-98˚C (plus extra to rinse + pre-heat)</p><p>Kit: French Press, Spoon, Mug, Timer</p><p>Filter Prep: Pre-heated</p><p>Brew Time: 3 minutes approx.</p><p><br></p><p>Step1: Pre-heat mug with hot water</p><p>Step 2: Pre-heat French Press and discard hot water</p><p>Step 3: Add CAROMA Coffee Powder to French Press</p><p>Step 4: Add 200g hot water to CAROMA Coffee Powder</p><p>Step 5: Set a 3 minute timer and stir 10 times in one direction</p><p>Step 6: When the timer is up, stir grounds once more to reintegrate into brew, then press plunger. Take care not to press the actual coffee grounds</p><p>Step 7: Discard water from pre-heated mug and pour in your French Press brew - you should have 150ml approx.</p><p>Step 8: Congrats - you\'ve made your French Press base brew!</p><p><br></p><p>#Examples of what to do with your base brew:</p><p>#Kopi-O Kosong (black coffee, unsweetened) - dilute with 70ml hot water</p><p>#Kopi-O (black coffee) - add 2 tsp sugar to your diluted coffee</p><p>#Adding evaporated or condensed milk? Reduce the amount of water</p><p><br></p><p>Storage Instructions: Keep in a cool, dry place. Avoid exposure to sunlight or excessive heat.</p>', 'cn', 35),
+(105, 'Medium Roast Brazil Arabica Coffee Whole Beans', '<p>[CAROMA] 250g/Premium Roasted Coffee Whole Beans/Brazil CerradoBean/100% Arabica/(Halal/High Quality/French Press/ Brew Coffee</p><p><br></p><p>#Ingredients : Whole Coffee Bean</p><p>#Roast: Medium-Dark</p><p>#Body: Full, creamy</p><p>#Taste: Rich, notes of walnut &amp;amp; dark chocolate</p><p>#Fragrance: Strong, Chocolate</p><p>#Aroma: Chocolate, nuts</p><p>#Sweetness: Caramel-toned</p><p>#Acidity: Mild</p><p>#Aftertaste: Clean &amp;amp; smooth</p><p><br></p><p>Benefits of Black Coffee:</p><p># It improves cardiovascular health</p><p>#It improves your memory</p><p>#It is good for your liver</p><p>#It helps you cleanse your stomach</p><p>#It may help prevent the risk of developing cancer</p><p>#It is rich in antioxidants</p><p><br></p><p>#Preparation: Recipe for FRENCH PRESS</p><p>Yield: 1 Portion [150ml of Base Brew]</p><p>Kopi: 20g</p><p>Water: 200g @ 95-98˚C (plus extra to rinse + pre-heat)</p><p>Kit: French Press, Spoon, Mug, Timer</p><p>Filter Prep: Pre-heated</p><p>Brew Time: 3 minutes approx.</p><p><br></p><p>Step1: Pre-heat mug with hot water</p><p>Step 2: Pre-heat French Press and discard hot water</p><p>Step 3: Add CAROMA Coffee Powder to French Press</p><p>Step 4: Add 200g hot water to CAROMA Coffee Powder</p><p>Step 5: Set a 3 minute timer and stir 10 times in one direction</p><p>Step 6: When the timer is up, stir grounds once more to reintegrate into brew, then press plunger. Take care not to press the actual coffee grounds</p><p>Step 7: Discard water from pre-heated mug and pour in your French Press brew - you should have 150ml approx.</p><p>Step 8: Congrats - you\'ve made your French Press base brew!</p><p><br></p><p>#Examples of what to do with your base brew:</p><p>#Kopi-O Kosong (black coffee, unsweetened) - dilute with 70ml hot water</p><p>#Kopi-O (black coffee) - add 2 tsp sugar to your diluted coffee</p><p>#Adding evaporated or condensed milk? Reduce the amount of water</p><p><br></p><p>Storage Instructions: Keep in a cool, dry place. Avoid exposure to sunlight or excessive heat.</p>', 'my', 35),
+(106, 'Medium Roast Ethiopian Coffee Whole Beans', '<p>#Ingredients : Whole Coffee Bean</p><p>#Aroma: Floral, Slight Woody</p><p>#Flavor: Honeysuckle, Berries, Blueberry, Berry Jam&nbsp;</p><p><br></p><p>Sweetness,Currant</p><p>#Currant Body: Medium, Smooth</p><p>#Milling Process: Fully Washed,Dried on raised beds</p><p>#Acidity: Winey</p><p>#Certified by HACCP, ISO22000, MeSTI, cGMP and HALAL by JAKIM.</p><p>Benefits of Black Coffee:</p><p>#It improves cardiovascular health</p><p>#It improves your memory</p><p>#It is good for your liver</p><p>#It helps you cleanse your stomach</p><p>#It may help prevent the risk of developing cancer</p><p>#It is rich in antioxidants</p><p><br></p><p>#Preparation: Recipe for FRENCH PRESS</p><p>Yield: 1 Portion [150ml of Base Brew]</p><p>Kopi: 20g</p><p>Water: 200g @ 95-98˚C (plus extra to rinse + pre-heat)</p><p>Kit: French Press, Spoon, Mug, Timer</p><p>Filter Prep: Pre-heated</p><p>Brew Time: 3 minutes approx.</p><p>Step1: Pre-heat mug with hot water</p><p>Step 2: Pre-heat French Press and discard hot water</p><p>Step 3: Add CAROMA Coffee Powder to French Press</p><p>Step 4: Add 200g hot water to CAROMA Coffee Powder</p><p>Step 5: Set a 3 minute timer and stir 10 times in one direction</p><p>Step 6: When the timer is up, stir grounds once more to reintegrate into brew, then press plunger. Take care not to press the actual coffee grounds</p><p>Step 7: Discard water from pre-heated mug and pour in your French Press brew - you should have 150ml approx.</p><p>Step 8: Congrats - you\'ve made your French Press base brew!</p><p><br></p><p>#Examples of what to do with your base brew:</p><p>#Kopi-O Kosong (black coffee, unsweetened) - dilute with 70ml hot water</p><p><br></p><p>#Kopi-O (black coffee) - add 2 tsp sugar to your diluted coffee</p><p><br></p><p>#Adding evaporated or condensed milk? Reduce the amount of water</p><p>Storage Instructions: Keep in a cool, dry place. Avoid exposure to sunlight or excessive heat.</p>', 'en', 36),
+(107, 'Medium Roast Ethiopian Coffee Whole Beans', '<p>#Ingredients : Whole Coffee Bean</p><p>#Aroma: Floral, Slight Woody</p><p>#Flavor: Honeysuckle, Berries, Blueberry, Berry Jam&nbsp;</p><p><br></p><p>Sweetness,Currant</p><p>#Currant Body: Medium, Smooth</p><p>#Milling Process: Fully Washed,Dried on raised beds</p><p>#Acidity: Winey</p><p>#Certified by HACCP, ISO22000, MeSTI, cGMP and HALAL by JAKIM.</p><p>Benefits of Black Coffee:</p><p>#It improves cardiovascular health</p><p>#It improves your memory</p><p>#It is good for your liver</p><p>#It helps you cleanse your stomach</p><p>#It may help prevent the risk of developing cancer</p><p>#It is rich in antioxidants</p><p><br></p><p>#Preparation: Recipe for FRENCH PRESS</p><p>Yield: 1 Portion [150ml of Base Brew]</p><p>Kopi: 20g</p><p>Water: 200g @ 95-98˚C (plus extra to rinse + pre-heat)</p><p>Kit: French Press, Spoon, Mug, Timer</p><p>Filter Prep: Pre-heated</p><p>Brew Time: 3 minutes approx.</p><p>Step1: Pre-heat mug with hot water</p><p>Step 2: Pre-heat French Press and discard hot water</p><p>Step 3: Add CAROMA Coffee Powder to French Press</p><p>Step 4: Add 200g hot water to CAROMA Coffee Powder</p><p>Step 5: Set a 3 minute timer and stir 10 times in one direction</p><p>Step 6: When the timer is up, stir grounds once more to reintegrate into brew, then press plunger. Take care not to press the actual coffee grounds</p><p>Step 7: Discard water from pre-heated mug and pour in your French Press brew - you should have 150ml approx.</p><p>Step 8: Congrats - you\'ve made your French Press base brew!</p><p><br></p><p>#Examples of what to do with your base brew:</p><p>#Kopi-O Kosong (black coffee, unsweetened) - dilute with 70ml hot water</p><p><br></p><p>#Kopi-O (black coffee) - add 2 tsp sugar to your diluted coffee</p><p><br></p><p>#Adding evaporated or condensed milk? Reduce the amount of water</p><p>Storage Instructions: Keep in a cool, dry place. Avoid exposure to sunlight or excessive heat.</p>', 'cn', 36),
+(108, 'Medium Roast Ethiopian Coffee Whole Beans', '<p>#Ingredients : Whole Coffee Bean</p><p>#Aroma: Floral, Slight Woody</p><p>#Flavor: Honeysuckle, Berries, Blueberry, Berry Jam&nbsp;</p><p><br></p><p>Sweetness,Currant</p><p>#Currant Body: Medium, Smooth</p><p>#Milling Process: Fully Washed,Dried on raised beds</p><p>#Acidity: Winey</p><p>#Certified by HACCP, ISO22000, MeSTI, cGMP and HALAL by JAKIM.</p><p>Benefits of Black Coffee:</p><p>#It improves cardiovascular health</p><p>#It improves your memory</p><p>#It is good for your liver</p><p>#It helps you cleanse your stomach</p><p>#It may help prevent the risk of developing cancer</p><p>#It is rich in antioxidants</p><p><br></p><p>#Preparation: Recipe for FRENCH PRESS</p><p>Yield: 1 Portion [150ml of Base Brew]</p><p>Kopi: 20g</p><p>Water: 200g @ 95-98˚C (plus extra to rinse + pre-heat)</p><p>Kit: French Press, Spoon, Mug, Timer</p><p>Filter Prep: Pre-heated</p><p>Brew Time: 3 minutes approx.</p><p>Step1: Pre-heat mug with hot water</p><p>Step 2: Pre-heat French Press and discard hot water</p><p>Step 3: Add CAROMA Coffee Powder to French Press</p><p>Step 4: Add 200g hot water to CAROMA Coffee Powder</p><p>Step 5: Set a 3 minute timer and stir 10 times in one direction</p><p>Step 6: When the timer is up, stir grounds once more to reintegrate into brew, then press plunger. Take care not to press the actual coffee grounds</p><p>Step 7: Discard water from pre-heated mug and pour in your French Press brew - you should have 150ml approx.</p><p>Step 8: Congrats - you\'ve made your French Press base brew!</p><p><br></p><p>#Examples of what to do with your base brew:</p><p>#Kopi-O Kosong (black coffee, unsweetened) - dilute with 70ml hot water</p><p><br></p><p>#Kopi-O (black coffee) - add 2 tsp sugar to your diluted coffee</p><p><br></p><p>#Adding evaporated or condensed milk? Reduce the amount of water</p><p>Storage Instructions: Keep in a cool, dry place. Avoid exposure to sunlight or excessive heat.</p>', 'my', 36),
+(109, 'GOLD Freeze Dried Instant Soluble Coffee Powder', '<p>[CAROMA] GOLD Selection Premium /Freeze Dried /Instant Soluble Coffee Powder/150g/Halal /Colombia Bean Arabica/Coffee o/ Black Coffee/ No sugar</p><p><br></p><p>CAROMA Colombia GOLD Instant 100% Arabica coffee, Freeze Dried Technology Soluble Coffee 150gram. The taste profile of a Fusion Coffee is closer to fresh brewed coffee. There is no such other place for coffee cultivation on the entire planet as Colombia, with its tender climate, fertile volcanic soil and heavy rains.</p><p><br></p><p>Freeze-drying our Colombia coffee ensures that the flavors and nutrients of our beans are preserved, giving you a cup of coffee that is deliciously dark and rich of intense aroma. There is no sugar added and can enjoy closer to fresh brewed coffee.</p><p><br></p><p>Freeze-drying is a key stage in instant coffee production. Coffee beans are first roasted and ground, then dissolved into hot water. After filtration, the coffee extract is dried to get the solid soluble coffee. The liquor is frozen to about -40°C to form a thin layer that is then broken into tiny pieces.</p><p><br></p><p>#Weight: 150gram</p><p>#Premium GOLD Colombian Instant Soluble Coffee</p><p>#Freeze Dried Technology</p><p>#Strong Taste</p><p>#Perfect aroma of natural coffee and a balanced</p><p>#Aroma Brew Coffee</p><p>#No Sugar</p><p>#No Preservative</p><p>#No Artificial Colouring</p><p>#Certified by HACCP, ISO22000, cGMP, MeSTI and HALAL by JAKIM.</p>', 'en', 37),
+(110, 'GOLD Freeze Dried Instant Soluble Coffee Powder', '<p>[CAROMA] GOLD Selection Premium /Freeze Dried /Instant Soluble Coffee Powder/150g/Halal /Colombia Bean Arabica/Coffee o/ Black Coffee/ No sugar</p><p><br></p><p>CAROMA Colombia GOLD Instant 100% Arabica coffee, Freeze Dried Technology Soluble Coffee 150gram. The taste profile of a Fusion Coffee is closer to fresh brewed coffee. There is no such other place for coffee cultivation on the entire planet as Colombia, with its tender climate, fertile volcanic soil and heavy rains.</p><p><br></p><p>Freeze-drying our Colombia coffee ensures that the flavors and nutrients of our beans are preserved, giving you a cup of coffee that is deliciously dark and rich of intense aroma. There is no sugar added and can enjoy closer to fresh brewed coffee.</p><p><br></p><p>Freeze-drying is a key stage in instant coffee production. Coffee beans are first roasted and ground, then dissolved into hot water. After filtration, the coffee extract is dried to get the solid soluble coffee. The liquor is frozen to about -40°C to form a thin layer that is then broken into tiny pieces.</p><p><br></p><p>#Weight: 150gram</p><p>#Premium GOLD Colombian Instant Soluble Coffee</p><p>#Freeze Dried Technology</p><p>#Strong Taste</p><p>#Perfect aroma of natural coffee and a balanced</p><p>#Aroma Brew Coffee</p><p>#No Sugar</p><p>#No Preservative</p><p>#No Artificial Colouring</p><p>#Certified by HACCP, ISO22000, cGMP, MeSTI and HALAL by JAKIM.</p>', 'cn', 37),
+(111, 'GOLD Freeze Dried Instant Soluble Coffee Powder', '<p>[CAROMA] GOLD Selection Premium /Freeze Dried /Instant Soluble Coffee Powder/150g/Halal /Colombia Bean Arabica/Coffee o/ Black Coffee/ No sugar</p><p><br></p><p>CAROMA Colombia GOLD Instant 100% Arabica coffee, Freeze Dried Technology Soluble Coffee 150gram. The taste profile of a Fusion Coffee is closer to fresh brewed coffee. There is no such other place for coffee cultivation on the entire planet as Colombia, with its tender climate, fertile volcanic soil and heavy rains.</p><p><br></p><p>Freeze-drying our Colombia coffee ensures that the flavors and nutrients of our beans are preserved, giving you a cup of coffee that is deliciously dark and rich of intense aroma. There is no sugar added and can enjoy closer to fresh brewed coffee.</p><p><br></p><p>Freeze-drying is a key stage in instant coffee production. Coffee beans are first roasted and ground, then dissolved into hot water. After filtration, the coffee extract is dried to get the solid soluble coffee. The liquor is frozen to about -40°C to form a thin layer that is then broken into tiny pieces.</p><p><br></p><p>#Weight: 150gram</p><p>#Premium GOLD Colombian Instant Soluble Coffee</p><p>#Freeze Dried Technology</p><p>#Strong Taste</p><p>#Perfect aroma of natural coffee and a balanced</p><p>#Aroma Brew Coffee</p><p>#No Sugar</p><p>#No Preservative</p><p>#No Artificial Colouring</p><p>#Certified by HACCP, ISO22000, cGMP, MeSTI and HALAL by JAKIM.</p>', 'my', 37),
+(118, 'testmulti product', '<p>testmulti product<br></p>', 'en', 40),
+(119, 'testmulti product', '<p>testmulti product<br></p>', 'cn', 40),
+(120, 'testmulti product', '<p>testmulti product<br></p>', 'my', 40);
 
 -- --------------------------------------------------------
 
@@ -833,10 +1154,18 @@ CREATE TABLE `promotion` (
   `percentage` int(11) NOT NULL,
   `capped` decimal(12,4) UNSIGNED NOT NULL,
   `free_delivery` int(11) NOT NULL,
+  `priority` int(10) UNSIGNED NOT NULL,
   `status` int(11) NOT NULL,
   `date_created` timestamp NULL DEFAULT NULL,
   `date_modified` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `promotion`
+--
+
+INSERT INTO `promotion` (`id`, `start`, `end`, `type`, `amt`, `percentage`, `capped`, `free_delivery`, `priority`, `status`, `date_created`, `date_modified`) VALUES
+(1, '2020-12-31 16:00:00', '2021-01-30 16:00:00', 1, '50.0000', 0, '0.0000', 0, 0, 1, '2021-01-08 18:47:56', '2021-01-09 09:50:58');
 
 -- --------------------------------------------------------
 
@@ -849,6 +1178,18 @@ CREATE TABLE `promotion_product` (
   `product_id` int(11) UNSIGNED NOT NULL,
   `promotion_id` int(11) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `promotion_product`
+--
+
+INSERT INTO `promotion_product` (`id`, `product_id`, `promotion_id`) VALUES
+(42, 8, 1),
+(43, 9, 1),
+(44, 15, 1),
+(45, 16, 1),
+(46, 17, 1),
+(47, 18, 1);
 
 -- --------------------------------------------------------
 
@@ -863,6 +1204,15 @@ CREATE TABLE `promotion_translation` (
   `language` varchar(55) NOT NULL,
   `promotion_id` int(11) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `promotion_translation`
+--
+
+INSERT INTO `promotion_translation` (`id`, `name`, `description`, `language`, `promotion_id`) VALUES
+(1, 'test', '', 'en', 1),
+(2, 'test', '', 'cn', 1),
+(3, 'test', '', 'my', 1);
 
 -- --------------------------------------------------------
 
@@ -880,7 +1230,7 @@ CREATE TABLE `reward_point_value` (
 --
 
 INSERT INTO `reward_point_value` (`id`, `value`) VALUES
-(1, 1);
+(1, 2);
 
 -- --------------------------------------------------------
 
@@ -970,7 +1320,7 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `image`, `type`, `status`, `date_created`, `date_modified`) VALUES
 (3, 'new name1', 'test@gmail.com', 'eGJvanZhUkhPbGl3VU03Z0pUMWwydz09', 'USER1606553276.jpg', 2, 1, '2020-10-04 09:30:11', '2020-12-06 12:18:00'),
 (5, 'Test Dealer', 'dealer@gmail.com', 'c2RzSWNlUzIrQkozTTNoLytJMStzUT09', 'USER1608119130.jpg', 3, 1, '2020-10-04 12:44:40', '2020-12-19 11:25:04'),
-(6, 'Wayne Test', 'puahweewee@gmail.com', 'c2RzSWNlUzIrQkozTTNoLytJMStzUT09', NULL, 1, 1, '2020-10-04 12:53:42', '2020-12-19 15:47:49'),
+(6, 'Wayne Test', 'puahweewee@gmail.com', 'eGJvanZhUkhPbGl3VU03Z0pUMWwydz09', NULL, 1, 1, '2020-10-04 12:53:42', '2020-12-19 15:47:49'),
 (7, 'Test USer 1', 'puah@gmail.com1', 'c2RzSWNlUzIrQkozTTNoLytJMStzUT09', NULL, 1, 1, '2020-10-15 14:00:15', '2020-10-15 14:17:46'),
 (9, 'test register', '12345', 'RXp4MSs5R1hHMERmRVdqMDM2YjV3Zz09', NULL, 1, 1, '2020-10-15 14:41:16', '2020-10-15 14:41:16'),
 (10, 'dasdsa', 'eqwew', 'dTVFNjRicmhnR0xUUGFJSUkwbC9YQT09', NULL, 1, 1, '2020-10-17 05:44:23', '2020-10-17 05:44:23'),
@@ -983,7 +1333,18 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `image`, `type`, `status
 (17, 'nicky', 'nickyz111406@gmail.com', 'R2VDa2tMZWtQMi9vajZMclhoY1VqUT09', NULL, 1, 1, '2020-11-16 06:43:58', '2020-12-06 12:18:34'),
 (18, 'dealer2', 'dealer2@gmail.com', 'c2RzSWNlUzIrQkozTTNoLytJMStzUT09', NULL, 3, 1, '2020-12-16 11:59:43', '2020-12-16 11:59:43'),
 (19, 'register yest', 'register@gmail.com', 'R2VDa2tMZWtQMi9vajZMclhoY1VqUT09', NULL, 1, 1, '2021-01-04 14:35:20', '2021-01-04 14:35:20'),
-(20, 'register test two', 'register2@gmail.com', 'R2VDa2tMZWtQMi9vajZMclhoY1VqUT09', NULL, 1, 1, '2021-01-04 14:40:37', '2021-01-04 14:40:37');
+(20, 'register test two', 'register2@gmail.com', 'R2VDa2tMZWtQMi9vajZMclhoY1VqUT09', NULL, 1, 1, '2021-01-04 14:40:37', '2021-01-04 14:40:37'),
+(21, 'nicky', 'nickyzz111406@gmail.com', 'R2VDa2tMZWtQMi9vajZMclhoY1VqUT09', 'USER1609790100.png', 1, 1, '2021-01-04 19:52:52', '2021-01-04 19:55:00'),
+(22, 'nicky', 'TESTnkwservice@gmail.com', 'R2VDa2tMZWtQMi9vajZMclhoY1VqUT09', NULL, 1, 1, '2021-01-06 17:58:28', '2021-01-06 17:58:28'),
+(24, 'nicky', 'testnickyzz111406@gmail.com', 'R2VDa2tMZWtQMi9vajZMclhoY1VqUT09', NULL, 1, 1, '2021-01-09 05:49:53', '2021-01-09 05:49:53'),
+(25, 'puah wee wee', 'hahhaha@hotmail.COM', 'eGJvanZhUkhPbGl3VU03Z0pUMWwydz09', NULL, 3, 1, '2021-01-09 12:30:46', '2021-01-09 12:30:46'),
+(26, 'puah wee wee', 'testtesatetast@hotmail.COM', 'eGJvanZhUkhPbGl3VU03Z0pUMWwydz09', NULL, 3, 1, '2021-01-09 12:42:35', '2021-01-09 12:42:35'),
+(27, 'puah wee wee', '123123@hotmail.COM', 'eGJvanZhUkhPbGl3VU03Z0pUMWwydz09', NULL, 3, 1, '2021-01-09 12:46:53', '2021-01-09 12:46:53'),
+(28, 'puah wee wee', '321321@hotmail.COM', 'eGJvanZhUkhPbGl3VU03Z0pUMWwydz09', NULL, 3, 1, '2021-01-09 12:50:06', '2021-01-09 12:50:06'),
+(29, 'puah wee wee', 'puahweewee@hotmail.com', 'eGJvanZhUkhPbGl3VU03Z0pUMWwydz09', NULL, 3, 1, '2021-01-09 12:55:46', '2021-01-09 12:55:46'),
+(30, 'puah wee wee', 'puahweewee23@gmail.com', 'eGJvanZhUkhPbGl3VU03Z0pUMWwydz09', NULL, 3, 1, '2021-01-09 12:56:26', '2021-01-09 12:56:26'),
+(32, 'puah wee wee', 'PUAHWEEWEE333@gmail.COM', 'eGJvanZhUkhPbGl3VU03Z0pUMWwydz09', NULL, 1, 0, '2021-01-10 15:01:59', '2021-01-10 15:01:59'),
+(33, 'puah wee wee', 'PUAHWEEWEE555@gmail.COM', 'eGJvanZhUkhPbGl3VU03Z0pUMWwydz09', NULL, 1, 1, '2021-01-10 15:15:00', '2021-01-10 15:15:00');
 
 -- --------------------------------------------------------
 
@@ -1028,7 +1389,19 @@ INSERT INTO `user_address` (`id`, `name`, `contact`, `address`, `postcode`, `cit
 (16, '-', '0123456789', 'testing', '81100', 'JB', 1, 1, 17, '2020-11-16 06:43:58', '2020-12-06 12:18:34'),
 (17, '-', '016372372', '12345', '12345', '12334', 1, 1, 18, '2020-12-16 11:59:43', '2020-12-16 11:59:43'),
 (18, '-', '01612365478', 'register address 123', '12345', 'kota tinggi', 1, 1, 19, '2021-01-04 14:35:20', '2021-01-04 14:35:20'),
-(19, '-', '0163723722', 'hhaaha road 333', '75244', 'johor bahru', 1, 1, 20, '2021-01-04 14:40:37', '2021-01-04 14:40:37');
+(19, '-', '0163723722', 'hhaaha road 333', '75244', 'johor bahru', 1, 1, 20, '2021-01-04 14:40:37', '2021-01-04 14:40:37'),
+(20, '-', '0123456789', 'no test 1', '81000', 'Johor', 1, 1, 21, '2021-01-04 19:52:52', '2021-01-04 19:55:00'),
+(21, '-', '0123456789', 'sdfdfegewe', '52200', 'KUALA LUMPUR', 12, 1, 22, '2021-01-06 17:58:28', '2021-01-06 17:58:28'),
+(22, '-', '+60169043123', '123 KAMPUNG BARU', '73200', 'GEMENCHEH', 3, 1, 23, '2021-01-09 05:47:46', '2021-01-09 05:47:46'),
+(23, '-', '+60169043123', '123 KAMPUNG BARU', '73200', 'GEMENCHEH', 2, 1, 24, '2021-01-09 05:49:53', '2021-01-09 05:49:53'),
+(24, '-', '+60169043022', '108 KAMPUNG BARU', '73200', 'GEMENCHEH', 2, 1, 25, '2021-01-09 12:30:46', '2021-01-09 12:30:46'),
+(25, '-', '+60169041234', '108 KAMPUNG BARU', '73200', 'GEMENCHEH', 2, 1, 26, '2021-01-09 12:42:35', '2021-01-09 12:42:35'),
+(26, '-', '+60169043022', '108 KAMPUNG BARU', '73200', 'GEMENCHEH', 3, 1, 27, '2021-01-09 12:46:53', '2021-01-09 12:46:53'),
+(27, '-', '+60169043022', '108 KAMPUNG BARU', '73200', 'GEMENCHEH', 5, 1, 28, '2021-01-09 12:50:06', '2021-01-09 12:50:06'),
+(28, '-', '+60169043022', '108 KAMPUNG BARU', '73200', 'GEMENCHEH', 2, 1, 29, '2021-01-09 12:55:46', '2021-01-09 12:55:46'),
+(29, '-', '+60169043022', '108 KAMPUNG BARU', '73200', 'GEMENCHEH', 1, 1, 30, '2021-01-09 12:56:26', '2021-01-09 12:56:26'),
+(31, '-', '+60169043022', '108 KAMPUNG BARU', '73200', 'GEMENCHEH', 2, 1, 32, '2021-01-10 15:01:59', '2021-01-10 15:01:59'),
+(32, '-', '+60169043022', '108 KAMPUNG BARU', '73200', 'GEMENCHEH', 1, 1, 33, '2021-01-10 15:15:00', '2021-01-10 15:15:00');
 
 -- --------------------------------------------------------
 
@@ -1049,7 +1422,13 @@ CREATE TABLE `user_dealer` (
 INSERT INTO `user_dealer` (`id`, `under_distributor`, `user_id`) VALUES
 (1, 3, 5),
 (2, 3, 6),
-(3, 3, 18);
+(3, 3, 18),
+(4, 3, 25),
+(5, 3, 26),
+(6, 3, 27),
+(7, 3, 28),
+(8, 3, 29),
+(9, 3, 30);
 
 -- --------------------------------------------------------
 
@@ -1097,7 +1476,7 @@ CREATE TABLE `user_point` (
 
 INSERT INTO `user_point` (`id`, `point`, `checked`, `check_date`, `day_continue`, `user_id`, `date_modified`) VALUES
 (1, 0, 0, '2021-01-03', 1, 7, NULL),
-(2, 55224, 1, '2021-01-03', 3, 6, '2021-01-04 14:00:35'),
+(2, 53637, 1, '2021-01-04', 4, 6, '2021-01-10 08:21:29'),
 (3, 0, 0, NULL, 1, 8, NULL),
 (4, 0, 0, NULL, 1, 9, NULL),
 (5, 0, 0, NULL, 1, 10, NULL),
@@ -1109,7 +1488,13 @@ INSERT INTO `user_point` (`id`, `point`, `checked`, `check_date`, `day_continue`
 (11, 0, 0, NULL, 1, 16, NULL),
 (12, 0, 0, NULL, 1, 17, NULL),
 (13, 0, 0, NULL, 1, 19, NULL),
-(14, 0, 0, NULL, 1, 20, NULL);
+(14, 0, 0, NULL, 1, 20, NULL),
+(15, 64, 1, '2021-01-05', 1, 21, '2021-01-04 19:57:39'),
+(16, 0, 0, NULL, 1, 22, NULL),
+(17, 0, 0, NULL, 1, 23, NULL),
+(18, 0, 0, NULL, 1, 24, NULL),
+(20, 0, 0, NULL, 1, 32, NULL),
+(21, 0, 0, NULL, 1, 33, NULL);
 
 -- --------------------------------------------------------
 
@@ -1152,7 +1537,15 @@ INSERT INTO `user_point_transaction_history` (`id`, `point`, `current_point`, `d
 (19, 2, 55283, 'Checkin. Day: 2', 6, '2021-01-03 14:52:42', '2021-01-03 14:52:42'),
 (20, -42, 55241, 'Purchase Point Discount. Order ID: 43', 6, '2021-01-04 13:57:18', '2021-01-04 13:57:18'),
 (21, 0, 55241, 'Purchase Point Discount. Order ID: 44', 6, '2021-01-04 13:58:01', '2021-01-04 13:58:01'),
-(22, -17, 55224, 'Purchase Point Discount. Order ID: 45', 6, '2021-01-04 14:00:35', '2021-01-04 14:00:35');
+(22, -17, 55224, 'Purchase Point Discount. Order ID: 45', 6, '2021-01-04 14:00:35', '2021-01-04 14:00:35'),
+(23, -148, 55076, 'Purchase Point Discount. Order ID: 1609775367', 6, '2021-01-04 15:49:54', '2021-01-04 15:49:54'),
+(24, 3, 55079, 'Checkin. Day: 3', 6, '2021-01-04 15:52:50', '2021-01-04 15:52:50'),
+(25, 1, 1, 'Checkin. Day: 1', 21, '2021-01-04 19:54:36', '2021-01-04 19:54:36'),
+(26, -1, 0, 'Purchase Point Discount. Order ID: 1609790238', 21, '2021-01-04 19:57:39', '2021-01-04 19:57:39'),
+(27, 64, 64, 'Sale. Order Id: 1609790238', 21, '2021-01-04 20:00:24', '2021-01-04 20:00:24'),
+(28, 43, 55122, 'Sale. Order Id: 1609775367', 6, '2021-01-04 20:01:13', '2021-01-04 20:01:13'),
+(29, -297, 54825, 'Purchase Point Discount. Order ID: 1610034249', 6, '2021-01-07 15:46:13', '2021-01-07 15:46:13'),
+(30, -1188, 53637, 'Purchase Point Discount. Order ID: 1610266803', 6, '2021-01-10 08:21:29', '2021-01-10 08:21:29');
 
 --
 -- Indexes for dumped tables
@@ -1243,6 +1636,12 @@ ALTER TABLE `geo_zone_list`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `new_arrival`
+--
+ALTER TABLE `new_arrival`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `orders`
 --
 ALTER TABLE `orders`
@@ -1264,6 +1663,12 @@ ALTER TABLE `point_transaction`
 -- Indexes for table `product`
 --
 ALTER TABLE `product`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `product_image`
+--
+ALTER TABLE `product_image`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1364,19 +1769,19 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=122;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=142;
 
 --
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `category_translation`
 --
 ALTER TABLE `category_translation`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `coupon`
@@ -1412,7 +1817,7 @@ ALTER TABLE `coupon_user`
 -- AUTO_INCREMENT for table `distributor_product`
 --
 ALTER TABLE `distributor_product`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `distributor_wallet_transaction`
@@ -1436,19 +1841,25 @@ ALTER TABLE `geo_zone`
 -- AUTO_INCREMENT for table `geo_zone_list`
 --
 ALTER TABLE `geo_zone_list`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
+
+--
+-- AUTO_INCREMENT for table `new_arrival`
+--
+ALTER TABLE `new_arrival`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT for table `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=118;
 
 --
 -- AUTO_INCREMENT for table `point_transaction`
@@ -1460,37 +1871,43 @@ ALTER TABLE `point_transaction`
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+
+--
+-- AUTO_INCREMENT for table `product_image`
+--
+ALTER TABLE `product_image`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `product_role_price`
 --
 ALTER TABLE `product_role_price`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=121;
 
 --
 -- AUTO_INCREMENT for table `product_translation`
 --
 ALTER TABLE `product_translation`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=121;
 
 --
 -- AUTO_INCREMENT for table `promotion`
 --
 ALTER TABLE `promotion`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `promotion_product`
 --
 ALTER TABLE `promotion_product`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT for table `promotion_translation`
 --
 ALTER TABLE `promotion_translation`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `reward_point_value`
@@ -1514,19 +1931,19 @@ ALTER TABLE `state`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `user_address`
 --
 ALTER TABLE `user_address`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `user_dealer`
 --
 ALTER TABLE `user_dealer`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `user_distributor`
@@ -1538,13 +1955,13 @@ ALTER TABLE `user_distributor`
 -- AUTO_INCREMENT for table `user_point`
 --
 ALTER TABLE `user_point`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `user_point_transaction_history`
 --
 ALTER TABLE `user_point_transaction_history`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
