@@ -7,6 +7,14 @@
     // $db = new DB_FUNCTIONS();
     require_once('inc/init.php');
     require_once('inc/head.php');
+
+    if ($_REQUEST['reset_code'] == "" || $_REQUEST['reset_code'] == null) {
+        echo "<script>alert(\" Reset Empty, Please Try Again\");
+              window.location.href='login.php';</script>";
+        exit();
+    } else {
+        $reset_code = $_REQUEST['reset_code'];
+    }
     ?>
 </head>
 
@@ -72,25 +80,32 @@
                                                 <h2 class="text-center">Password Reset</h2>
                                                 <div class="panel-body">
 
-                                                    <form class="form">
+                                                    <form class="form" role="form" id="form_reset_password_api" action="api/mail_reset_password.php?type=reset_password_api&tb=user" method="post" enctype="multipart/form-data">
+                                                        <input type="hidden" name="token" id="form_token" value="<?php echo $token; ?>" />
                                                         <fieldset>
 
 
                                                             <div class="form-group">
+                                                                <div class="hidden">
+                                                                    <input name="reset_code" type="password" value="<?php echo $reset_code ?>" class="form-control" placeholder="New Password">
+                                                                </div>
                                                                 <label>New Password</label>
                                                                 <div class="form-group pass_show">
-                                                                    <input type="password" value="" class="form-control" placeholder="New Password">
+                                                                    <input id="password" name="password" type="password" value="" class="form-control" placeholder="New Password">
+
                                                                 </div>
+                                                                <span class="error_form" id="password_error_message"></span>
                                                                 <label>Confirm Password</label>
                                                                 <div class="form-group pass_show">
-                                                                    <input type="password" value="" class="form-control" placeholder="Confirm Password">
+                                                                    <input id="c_password" name="c_password" type="password" value="" class="form-control" placeholder="Confirm Password">
+
                                                                 </div>
+                                                                <span class="error_form" id="retype_password_error_message"></span>
                                                             </div>
 
                                                             <div class="form-group">
-                                                                <input name="recover-submit" class="btn btn-lg btn-primary btn-block" value="Reset Password" type="submit">
+                                                                <input name="btnAction" class="btn btn-lg btn-primary btn-block" value="Reset Password" type="submit">
                                                             </div>
-
                                                         </fieldset>
                                                     </form>
                                                 </div>

@@ -70,8 +70,8 @@
                     <p>You can reset your password here.</p>
                     <div class="panel-body">
 
-                      <form id="register-form" role="form" autocomplete="off" class="form" method="post">
-
+                      <form role="form" id="form_reset_password" action="api/mail_reset_password.php?type=reset_password&tb=user" method="post" enctype="multipart/form-data">
+                        <input type="hidden" name="token" id="form_token" value="<?php echo $token; ?>" />
                         <div class="form-group">
                           <div class="input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-envelope color-blue"></i></span>
@@ -79,10 +79,8 @@
                           </div>
                         </div>
                         <div class="form-group">
-                          <input name="recover-submit" class="btn btn-lg btn-primary btn-block" value="Reset Password" type="submit">
+                          <input name="btnAction" class="btn btn-lg btn-primary btn-block" value="Reset Password" type="submit">
                         </div>
-
-                        <input type="hidden" class="hide" name="token" id="token" value="">
                       </form>
 
                     </div>

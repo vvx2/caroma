@@ -79,7 +79,7 @@
                                 </div>
                                 <p class="form-row wrap-btn">
                                     <button class="btn btn-submit btn-bold" type="submit" id="btnsubmit">sign in</button>
-                                    <a href="#" class="link-to-help">Forgot your password</a>
+                                    <a href="reset-password.php" class="link-to-help">Forgot your password</a>
                                 </p>
                             </form>
                         </div>
