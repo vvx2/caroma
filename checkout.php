@@ -332,10 +332,50 @@ if (count($get_cart) != 0) {
 
                                                             <?php
                                                             } else {
+                                                                $table = "cart c left join product p on c.product_id = p.id";
+                                                                $col = "c.product_id as product_id, c.qty as qty, p.weight as weight, p.point as point, p.point_allow_discount as point_allow_discount";
+                                                                $opt = 'c.customer_id = ?';
+                                                                $arr = array($user_id);
+                                                                $result_cart = $db->advwhere($col, $table, $opt, $arr);
+
+                                                                // check cart is exists item
+                                                                if (count($result_cart) != 0) {
+                                                                    $total_point = 0; // point can be use
+                                                                    //count item total weight
+                                                                    foreach ($result_cart as $cart) {
+                                                                        $total_point = $total_point + ($cart['qty'] * $cart['point_allow_discount']); // for reduce check
+                                                                    }
+                                                                }
+
+                                                                $table = 'user_point';
+                                                                $col = "*";
+                                                                $opt = 'user_id =?';
+                                                                $arr = array($user_id);
+                                                                $user_point = $db->advwhere($col, $table, $opt, $arr);
+                                                                if (count($user_point) != 0) {
+                                                                    $current_point = $user_point[0]["point"];
+
+                                                                    //-----------------------
+                                                                    //      get point value
+                                                                    $result_point_value = $db->get("*", "reward_point_value", 1);
+                                                                    if (count($result_point_value) != 0) {
+                                                                        $point_value = $result_point_value[0]['value'];
+                                                                    } else {
+                                                                        $point_value = 1;
+                                                                    }
+                                                                    //-----------------------
+                                                                } else {
+                                                                }
+
                                                             ?>
                                                                 <div class="col-sm-12 col-12 no-padding-left">
                                                                     <div class="form-group">
-                                                                        <label class="control-label mb-10">Use Point</label>
+                                                                        <label class="control-label mb-10">Your Point : <strong><?php echo $current_point; ?> Points</strong></label>
+                                                                        <br>
+                                                                        <label class="control-label mb-10">Point Can Be Discount : <strong><?php echo $total_point; ?> Points</strong></label>
+                                                                        <br>
+                                                                        <label class="control-label mb-10">Use Point <strong>(1 Point = RM <?php echo number_format($point_value / 100, 2) ?>)</strong></label>
+                                                                        
                                                                         <div class="radio-list">
                                                                             <div class="radio-inline pl-0">
                                                                                 <div class="radio radio-info">

@@ -376,7 +376,7 @@ if (isset($_REQUEST['type'])) {
                                     // Clear Cart Table
                                     //------------------------------
                                     echo "<script> alert(\" Order Successful, Please check your order list.\");
-                                    window.location.href='../shop.php';</script>";
+                                    window.location.href='../my-account/index.php';</script>";
                                 }
                             }
                         } else {
@@ -597,9 +597,10 @@ if (isset($_REQUEST['type'])) {
                         //----------------------------
 
                         // if something done, run this
-                        echo "<script> window.location.href='../shop.php';</script>";
+                        echo "<script> window.location.href='../my-account/index.php';</script>";
                     } else { //end result
-                        echo "Update Status Fail. Please Contact admin. Your order number: $gateway_order_id";
+                        echo "<script>alert(\" Update Status Fail. Please Contact admin. Your order number: $gateway_order_id\");
+                                 window.location.href='../my-account/index.php?p=1';</script>";
                     }
                 } //end $success==1
             } // end else if
