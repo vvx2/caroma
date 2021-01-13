@@ -490,7 +490,7 @@ switch ($status) {
                                                     <td><?php echo $i; ?></td>
                                                     <td><strong><?php echo $row["product_name"]; ?></strong></td>
                                                     <td><?php echo $row["product_qty"]; ?></td>
-                                                    <td>RM <?php echo number_format($row["product_price"], 2); ?></td>
+                                                    <td><?php echo number_format($row["product_price"], 2); ?></td>
 
                                                 </tr>
                                             <?php $i++;

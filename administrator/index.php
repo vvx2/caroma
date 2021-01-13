@@ -212,7 +212,7 @@ $count_reject = count($count_reject);
                         <a href="refund.php?page=1">
                             <div class="ibox ">
                                 <div class="ibox-title">
-                                    <h5>Pending</h5>
+                                    <h5>Refund Pending</h5>
                                 </div>
                                 <div class="ibox-content">
                                     <h1 class="no-margins"><?php echo $count_pending; ?></h1>
@@ -225,7 +225,7 @@ $count_reject = count($count_reject);
                         <a href="refund.php?page=2">
                             <div class="ibox ">
                                 <div class="ibox-title">
-                                    <h5>Success</h5>
+                                    <h5>Refund Success</h5>
                                 </div>
                                 <div class="ibox-content">
                                     <h1 class="no-margins"><?php echo $count_success; ?></h1>
@@ -238,7 +238,7 @@ $count_reject = count($count_reject);
                         <a href="refund.php?page=3">
                             <div class="ibox ">
                                 <div class="ibox-title">
-                                    <h5>Rejected</h5>
+                                    <h5>Refund Rejected</h5>
                                 </div>
                                 <div class="ibox-content">
                                     <h1 class="no-margins"><?php echo $count_reject; ?></h1>
