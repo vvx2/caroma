@@ -180,13 +180,8 @@ if (!empty($postedToken)) {
                   //       for email
                   //--------------------------
                   $active_code = encrypt_decrypt('encrypt', $user_id);
-                  if ($server == 1) {
-                    $path_active = "http://localhost/caroma/api/active_account.php?active_code=" . $active_code . "&active_mail=" . $user_email;
-                  } else if ($server == 2) {
-                    $path_active = "http://staging3.caroma.com.my/api/active_account.php?active_code=" . $active_code . "&active_mail=" . $user_email;
-                  } else {
-                    $path_active = "http://staging3.caroma.com.my/api/active_account.php?active_code=" . $active_code . "&active_mail=" . $user_email;
-                  }
+
+                  $path_active = $server_path . "api/active_account.php?active_code=" . $active_code . "&active_mail=" . $user_email;
 
                   $active_detail = array("path" => $path_active, "user_name" => $name);
 

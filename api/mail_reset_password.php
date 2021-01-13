@@ -92,13 +92,8 @@ if (!empty($postedToken)) {
                         // echo $password;
                         // echo '<br>';
                         //--------------------------
-                        if ($server == 1) {
-                            $path_reset = "http://localhost/caroma/reset-password-api.php?reset_code=" . $reset_code;
-                        } else if ($server == 2) {
-                            $path_reset = "http://staging3.caroma.com.my/reset-password-api.php?reset_code=" . $reset_code;
-                        } else {
-                            $path_reset = "http://staging3.caroma.com.my/reset-password-api.php?reset_code=" . $reset_code;
-                        }
+
+                        $path_reset = $server_path . "reset-password-api.php?reset_code=" . $reset_code;
 
                         $reset_detail = array("path" => $path_reset, "user_name" => $name);
 
@@ -117,7 +112,7 @@ if (!empty($postedToken)) {
                         //		Email code here(end)
                         //----------------------------
                         if ($mail) {
-                            echo "<script>alert(\" Reset Successful\");
+                            echo "<script>alert(\" Request Successful, Please Check Your Mail\");
                                       window.location.href='../login.php';</script>";
                         } else {
                             echo "<script>alert(\"Send Mail Fail. Please Try Again\");

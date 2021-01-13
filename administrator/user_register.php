@@ -11,6 +11,14 @@ if (isset($_REQUEST['type']) && isset($_REQUEST['tb'])) {
     $type = $_REQUEST['type'];
     $tb = $_REQUEST['tb'];
 }
+if ($tb == "admin") {
+    $page = "user";
+    $pagefail = "user";
+} else {
+    $page = "../login";
+    $pagefail = "../register";
+}
+
 $postedToken = filter_input(INPUT_POST, 'token');
 if (!empty($postedToken)) {
 
@@ -19,13 +27,7 @@ if (!empty($postedToken)) {
     if (isTokenValid($postedToken)) {
         if ($tb == "admin" || $tb == "user") {
 
-            if ($tb == "admin") {
-                $page = "user";
-                $pagefail = "user";
-            } else {
-                $page = "../login";
-                $pagefail = "../register";
-            }
+
 
             if ($type == "add") {
                 if (isset($_POST['submit'])) {
@@ -161,13 +163,8 @@ if (!empty($postedToken)) {
                                     //       for email
                                     //--------------------------
                                     $active_code = encrypt_decrypt('encrypt', $user_id);
-                                    if ($server == 1) {
-                                        $path_active = "http://localhost/caroma/api/active_account.php?active_code=" . $active_code . "&active_mail=" . $user_email;
-                                    } else if ($server == 2) {
-                                        $path_active = "http://staging3.caroma.com.my/api/active_account.php?active_code=" . $active_code . "&active_mail=" . $user_email;
-                                    } else {
-                                        $path_active = "http://staging3.caroma.com.my/api/active_account.php?active_code=" . $active_code . "&active_mail=" . $user_email;
-                                    }
+
+                                    $path_active =  $server_path . "api/active_account.php?active_code=" . $active_code . "&active_mail=" . $user_email;
 
                                     $active_detail = array("path" => $path_active, "user_name" => $name);
 
@@ -211,8 +208,12 @@ if (!empty($postedToken)) {
 
         } // table admin
     } else {
-        echo "Token Expired. Please Try Again";
+        // echo "Token Expired. Please Try Again";
+        echo "<script>alert(\" Token Expired. Please Try Again\");
+                        window.location.href='$pagefail.php';</script>";
     }
 } else {
-    echo "Token Is Required.";
+    // echo "Token Is Required.";
+    echo "<script>alert(\" Token Is Required\");
+                        window.location.href='$pagefail.php';</script>";
 }
