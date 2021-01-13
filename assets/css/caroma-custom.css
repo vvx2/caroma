@@ -290,3 +290,11 @@
 .reg-height{
 	height : 110px;
 }
+
+.modal-backdrop{
+	position: inherit !important;
+}
+.modal-open{
+	padding-right : 0px !important ;
+	overflow: inherit !important ;
+}

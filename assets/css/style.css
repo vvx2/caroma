@@ -5421,8 +5421,8 @@ body.open-overlay #overlay{
     padding: 40px 0 38px;
 }
 .checkout-progress-wrap .steps li+li{
-    border-top: 2px solid #e6e6e6;
-    margin-top: 2px;
+    /*border-top: 2px solid #e6e6e6;*/
+    /*margin-top: 2px;*/
 }
 .checkout-progress-wrap .checkout-act{
     display: block;
@@ -12846,6 +12846,7 @@ body.open-quickview-block .biolife-quickview-block{
         background-position: center top;
         margin-top: 0;
         border-top: 1px solid #eeeeee;
+        background-image: none !important;
     }
     .biolife-banner__promotion2 .text-content{
         margin: 70px 0;
