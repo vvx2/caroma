@@ -371,11 +371,17 @@ if (!empty($postedToken)) {
 
         } // table admin
         else {
-            echo "You are not admin";
+            // echo "You are not admin";
+            echo "<script>alert(\" You are not admin. \");
+            window.location.href='coupon.php';</script>";
         }
     } else {
-        echo "Token Expired. Please Try Again";
+        // echo "Token Expired. Please Try Again";
+        echo "<script>alert(\" Token Expired. Please Try Again\");
+            window.location.href='coupon.php';</script>";
     }
 } else {
-    echo "Token Is Required.";
+    // echo "Token Is Required.";
+    echo "<script>alert(\" Token Is Required\");
+            window.location.href='coupon.php';</script>";
 }
