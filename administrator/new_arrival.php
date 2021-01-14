@@ -1,6 +1,6 @@
 <?php
 require_once('inc/init.php');
-$PageName = "promotion";
+$PageName = "new_arrival";
 ?>
 <!DOCTYPE html>
 <html>

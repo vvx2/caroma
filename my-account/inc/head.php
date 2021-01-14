@@ -7,7 +7,7 @@
 
 	<!-- Favicon -->
 	<link rel="shortcut icon" href="favicon.ico">
-	<link rel="icon" href="favicon.ico" type="image/x-icon">
+	<link rel="icon" href="favicon2.ico" type="image/x-icon">
 
 	<!-- Morris Charts CSS -->
 	<link href="vendors/bower_components/morris.js/morris.css" rel="stylesheet" type="text/css" />

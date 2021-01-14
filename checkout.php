@@ -427,13 +427,35 @@ if (count($get_cart) != 0) {
                                                             </p>
 
 
-                                                            <button type="submit" name="btn-sbmt" class="btn custombtn btn-submit">Continue To Purchase</button>
+                                                            
+                                                            <button type="button" class="btn custombtn" data-toggle="modal" data-target="#exampleModalCenter">Continue To Purchase</button>
 
                                                         </div>
                                                     </div>
                                                 </div>
                                             </li>
                                         </ul>
+                                    </div>
+                                </div>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModalCenter" style="z-index:2000" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h3>Order Confirmation</h3>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div>Kindly Make sure your shipping information & your order item is correctly.<br>
+                                            <span style="font-weight : bold ; color:red;">DO YOU WANT TO CONTINUE YOUR ORDER?</span>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer" style="text-align : center ;">
+                                            <button type="button" class="btn custombtn" data-dismiss="modal">Close</button>
+                                            <button type="submit" name="btn-sbmt" class="btn custombtn btn-submit">Continue To Purchase</button>
+                                        </div>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -605,6 +627,11 @@ if (count($get_cart) != 0) {
             <script src="assets/js/biolife.framework.js"></script>
             <script src="assets/js/functions.js"></script>
             <script src="cart.js"></script>
+            <script>
+            $('#myModal').on('shown.bs.modal', function () {
+            $('#myInput').trigger('focus')
+            })
+            </script>
             <script>
                 $(document).ready(function() {
                     LoadCart();

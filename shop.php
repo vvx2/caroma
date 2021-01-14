@@ -184,7 +184,7 @@
                                         </div>
                                         <div class="info">
                                             <b class="categories"><?php echo $hot['ct_name']; ?></b>
-                                            <h4 class="product-title"><a href="products-detail.php" class="pr-name"><?php echo $hot['pt_name']; ?></a></h4>
+                                            <h4 class="product-title"><a href="products-detail.php?p=<?php echo $hot['p_id']; ?>" class="pr-name"><?php echo $hot['pt_name']; ?></a></h4>
                                             <div class="price">
                                                 <ins><span class="price-amount"><span class="currencySymbol">RM</span><?php echo number_format($hot['price'], 2); ?></span></ins>
                                                 <del><span class="price-amount"><span class="currencySymbol">RM</span><?php echo number_format($hot['price'], 2); ?></span></del>
@@ -386,8 +386,8 @@
                                                     </a>
                                                 </div>
                                                 <div class="info">
-                                                    <b class="categories">Fresh Fruit</b>
-                                                    <h4 class="product-title"><a href="products=detail.php?p=<?php echo $latest_product["p_id"] ?>" class="pr-name" tabindex="0"><?php echo $latest_product["pt_name"] ?></a></h4>
+                                                    <b class="categories"><?php echo $latest_product["ct_name"] ?></b>
+                                                    <h4 class="product-title"><a href="products-detail.php?p=<?php echo $latest_product["p_id"] ?>" class="pr-name" tabindex="0"><?php echo $latest_product["pt_name"] ?></a></h4>
                                                     <div class="price">
                                                         <ins><span class="price-amount"><span class="currencySymbol">RM</span><?php echo number_format($latest_product["price"], 2, '.', '') ?></span></ins>
                                                         <del><span class="price-amount"><span class="currencySymbol">RM</span><?php echo number_format($latest_product["price"], 2, '.', '') ?></span></del>
