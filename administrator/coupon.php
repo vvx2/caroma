@@ -80,6 +80,20 @@ $PageName = "coupon";
                                         </div>
                                     </div>
                                     <hr>
+                                    <label class="font-normal">Free Delivery</label>
+                                    <div class="radio">
+                                        <input type="radio" name="free_delivery" id="delivery_1" value="1">
+                                        <label for="delivery_1">
+                                            Free Delivery
+                                        </label>
+                                    </div>
+                                    <div class="radio">
+                                        <input type="radio" name="free_delivery" id="delivery_2" value="0" checked="">
+                                        <label for="delivery_2">
+                                            No
+                                        </label>
+                                    </div>
+                                    <hr>
                                     <label class="font-normal">Coupon Type</label>
                                     <div class="radio">
                                         <input type="radio" name="coupon_type" id="coupon_type_1" value="1" checked="">
@@ -94,40 +108,27 @@ $PageName = "coupon";
                                         </label>
                                     </div>
                                     <hr>
-                                    <label class="font-normal">Free Delivery</label>
-                                    <div class="radio">
-                                        <input type="radio" name="free_delivery" id="delivery_1" value="1" >
-                                        <label for="delivery_1">
-                                            Free Delivery
-                                        </label>
+                                    <div class="amount_part">
+                                        <div class="form-group">
+                                            <label class="font-normal">Amount Discount</label>
+                                            <input class="amount" type="text" value="0" name="amount">
+                                        </div>
                                     </div>
-                                    <div class="radio">
-                                        <input type="radio" name="free_delivery" id="delivery_2" value="0" checked="">
-                                        <label for="delivery_2">
-                                            No
-                                        </label>
+                                    <div class="percentage_part" style='display:none;'>
+                                        <div class="form-group">
+                                            <label class="font-normal">Percentage Discount</label>
+                                            <input class="percentage" type="text" value="0" name="percentage">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="font-normal">Discount Capped - <span class="text-success">Maximum amount to discount (When type is percentage, leave it 0 if type = Amount)</span></label>
+                                            <input class="dis_capped" type="text" value="0" name="dis_capped">
+                                        </div>
                                     </div>
+
                                     <hr>
-                                    <div class="form-group">
-                                        <label class="font-normal">Amount Discount</label>
-                                        <input class="amount" type="text" value="0" name="amount">
-
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="font-normal">Percentage Discount</label>
-                                        <input class="percentage" type="text" value="0" name="percentage">
-
-                                    </div>
-                                    <hr>
-
                                     <div class="form-group">
                                         <label class="font-normal">Minimum Spend</label>
                                         <input class="min_spend" type="text" value="0" name="min_spend">
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="font-normal">Discount Capped - <span class="text-success">Maximum amount to discount (When type is percentage, leave it 0 if type = Amount)</span></label>
-                                        <input class="dis_capped" type="text" value="0" name="dis_capped">
-
                                     </div>
                                     <hr>
                                     <div class="form-group" hidden>
@@ -328,6 +329,18 @@ $PageName = "coupon";
         $.validator.setDefaults({
             ignore: ":hidden:not(.dual_select)"
         }) //for all select having class .dual_select
+
+        $('[name="coupon_type"]').change(function() {
+            var coupon_type = $('[name="coupon_type"]:checked').val()
+
+            if (coupon_type == 1) {
+                $('.amount_part').show();
+                $('.percentage_part').hide();
+            } else if (coupon_type == 2) {
+                $('.amount_part').hide();
+                $('.percentage_part').show();
+            }
+        });
         $(document).ready(function() {
 
             $('.dataTables-example').DataTable({

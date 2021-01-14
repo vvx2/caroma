@@ -100,54 +100,56 @@ $coupon_description_my = $coupon_name[0]['description'];
             </div>
         </div>
         <hr>
-        <label class="font-normal">Coupon Type</label>
-        <div class="">
-            <input type="radio" name="coupon_type" id="coupon_type_1" value="1" <?php echo ($type == 1) ? 'checked="" ' : ''; ?>>
-            <label for="coupon_type_1">
-                Amount
-            </label>
-        </div>
-        <div class="">
-            <input type="radio" name="coupon_type" id="coupon_type_2" value="2" <?php echo ($type == 2) ? 'checked="" ' : ''; ?>>
-            <label for="coupon_type_2">
-                Percentange
-            </label>
-        </div>
-        <hr>
         <label class="font-normal">Free Delivery</label>
-        <div class="radio">
+        <div class="">
             <input type="radio" name="free_delivery" id="delivery_1" value="1" <?php echo ($delivery_type == 1) ? 'checked="" ' : ''; ?>>
             <label for="delivery_1">
                 Free Delivery
             </label>
         </div>
-        <div class="radio">
+        <div class="">
             <input type="radio" name="free_delivery" id="delivery_2" value="0" <?php echo ($delivery_type == 0) ? 'checked="" ' : ''; ?>>
             <label for="delivery_2">
                 No
             </label>
         </div>
         <hr>
-        <div class="form-group">
-            <label class="font-normal">Amount Discount</label>
-            <input class="amount" type="text" value="<?php echo $amt ?>" name="amount">
-
+        <label class="font-normal">Coupon Type</label>
+        <div class="">
+            <input type="radio" name="coupon_type" class="coupon_type" id="coupon_type_1" value="1" <?php echo ($type == 1) ? 'checked="" ' : ''; ?>>
+            <label for="coupon_type_1">
+                Amount
+            </label>
         </div>
-        <div class="form-group">
-            <label class="font-normal">Percentage Discount</label>
-            <input class="percentage" type="text" value="<?php echo $percentage ?>" name="percentage">
-
+        <div class="">
+            <input type="radio" name="coupon_type" class="coupon_type" id="coupon_type_2" value="2" <?php echo ($type == 2) ? 'checked="" ' : ''; ?>>
+            <label for="coupon_type_2">
+                Percentange
+            </label>
         </div>
         <hr>
+        <div class="amount_part_edit" <?php echo ($type == 1) ? '' : 'style="display:none;"'; ?>>
+            <div class="form-group">
+                <label class="font-normal">Amount Discount</label>
+                <input class="amount" type="text" value="<?php echo $amt ?>" name="amount">
+            </div>
+        </div>
+        <div class="percentage_part_edit" <?php echo ($type == 2) ? '' : 'style="display:none;"'; ?>>
+            <div class="form-group">
+                <label class="font-normal">Percentage Discount</label>
+                <input class="percentage" type="text" value="<?php echo $percentage ?>" name="percentage">
+            </div>
+            <div class="form-group">
+                <label class="font-normal">Discount Capped - <span class="text-success">Maximum amount to discount (When type is percentage, leave it 0 if type = Amount)</span></label>
+                <input class="dis_capped" type="text" value="<?php echo $capped ?>" name="dis_capped">
 
+            </div>
+        </div>
+
+        <hr>
         <div class="form-group">
             <label class="font-normal">Minimum Spend</label>
             <input class="min_spend" type="text" value="<?php echo $min_spend ?>" name="min_spend">
-
-        </div>
-        <div class="form-group">
-            <label class="font-normal">Discount Capped - <span class="text-success">Maximum amount to discount (When type is percentage, leave it 0 if type = Amount)</span></label>
-            <input class="dis_capped" type="text" value="<?php echo $capped ?>" name="dis_capped">
 
         </div>
         <hr>
@@ -210,6 +212,18 @@ $coupon_description_my = $coupon_name[0]['description'];
         checkboxClass: 'icheckbox_square-green',
         radioClass: 'iradio_square-green',
     });
+
+    $('[class="coupon_type"]').change(function() {
+            var coupon_type = $('[class="coupon_type"]:checked').val()
+
+            if (coupon_type == 1) {
+                $('.amount_part_edit').show();
+                $('.percentage_part_edit').hide();
+            } else if (coupon_type == 2) {
+                $('.amount_part_edit').hide();
+                $('.percentage_part_edit').show();
+            }
+        });
 
     $(document).ready(function() {
 
