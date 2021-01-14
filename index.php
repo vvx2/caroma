@@ -445,20 +445,6 @@
 
 
                                     foreach ($promotion_product_result as $promo) {
-                                        $normal_price = $promo['price'];
-                                        if ($promotion_result["type"] == 1) {
-
-                                            $promo_price = $normal_price - $promotion_result["amt"];
-                                            echo "- RM" . number_format($promotion_result["amt"], 2);
-                                        } else {
-
-                                            $promo_price = $normal_price - ($normal_price * $promotion_result["percentage"] / 100);
-                                            echo $promotion_result["percentage"] . "%";
-                                        }
-
-                                        if ($promo_price <= 0) {
-                                            $promo_price = 0;
-                                        }
 
                                     ?>
 
@@ -469,12 +455,33 @@
                                                         <img src="img/product/<?php echo $promo['image']; ?>" alt="<?php echo $promo['pt_name']; ?>" width="270" height="270" class="product-thumnail">
                                                     </a>
                                                     <a class="lookup btn_call_quickview" href="products-detail.php?p=<?php echo $promo['p_id']; ?>"><i class="biolife-icon icon-search"></i></a>
+                                                    <div class="labels">
+                                                        <span class="sale-label">
+                                                            <?php
+                                                            $normal_price = $promo['price'];
+                                                            if ($promotion_result["type"] == 1) {
+
+                                                                $promo_price = $normal_price - $promotion_result["amt"];
+                                                                echo "- RM" . number_format($promotion_result["amt"], 2);
+                                                            } else {
+
+                                                                $promo_price = $normal_price - ($normal_price * $promotion_result["percentage"] / 100);
+                                                                echo $promotion_result["percentage"] . "%";
+                                                            }
+
+
+                                                            if ($promo_price <= 0) {
+                                                                $promo_price = 0;
+                                                            }
+                                                            ?>
+                                                        </span>
+                                                    </div>
                                                 </div>
                                                 <div class="info">
                                                     <b class="categories"><?php echo $promo['ct_name']; ?></b>
                                                     <h4 class="product-title"><a href="products-detail.php?p=<?php echo $promo['p_id']; ?>" class="pr-name"><?php echo $promo['pt_name']; ?></a></h4>
                                                     <div class="price ">
-                                                        <ins><span class="price-amount"><span class="currencySymbol">RM</span><?php echo number_format($price_display, 2); ?></span></ins>
+                                                        <ins><span class="price-amount"><span class="currencySymbol">RM</span><?php echo number_format($promo_price, 2); ?></span></ins>
                                                         <del class="<?php echo $hidden_promo; ?>"><span class="price-amount"><span class="currencySymbol">RM</span><?php echo number_format($normal_price, 2); ?></span></del>
                                                     </div>
                                                     <div class="slide-down-box">
