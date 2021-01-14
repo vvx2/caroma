@@ -7,18 +7,22 @@ $hide_cosignment = "hidden";
 if (isset($_REQUEST['from'])) {
     $from = $_REQUEST['from'];
 } else {
-    echo "<script>alert(\" No Date From. Please select your date. Thank You.\");
-               window.location.href='index.php';</script>";
-    exit();
+    $from = date('Y-m-d H:i:s');
+    // echo "<script>alert(\" No Date From. Please select your date. Thank You.\");
+    //            window.location.href='index.php';</script>";
+    // exit();
 }
 
 if (isset($_REQUEST['to'])) {
     $to = $_REQUEST['to'];
 } else {
-    echo "<script>alert(\" No Date To. Please select your date. Thank You.\");
-               window.location.href='index.php';</script>";
-    exit();
+    $to = date('Y-m-d H:i:s');
+    // echo "<script>alert(\" No Date To. Please select your date. Thank You.\");
+    //            window.location.href='index.php';</script>";
+    // exit();
 }
+
+
 
 if (isset($_REQUEST['status'])) {
     $status = $_REQUEST['status'];
@@ -40,43 +44,90 @@ $to_display = date('Y-m-d', $to);
 $to = date('Y-m-d H:i:s', $to);
 
 $admin_id = 0;
-
-switch ($status) {
-    case "1":
-        $status_summary_display = "Failed / Canceled";
-        break;
-    case "2":
-        $status_summary_display = "To Ship";
-        break;
-    case "3":
-        $status_summary_display = "Shipping";
-        break;
-    case "4":
-        $status_summary_display = "Completed";
-        break;
-    case "5":
-        $status_summary_display = "To Cancel";
-}
-
 ?>
 <!DOCTYPE html>
 <html>
 
 <head>
-    <?php include_once('inc/header.php'); ?>
-    <link href="css/plugins/dataTables/datatables.min.css" rel="stylesheet">
-    <link href="css/plugins/chosen/bootstrap-chosen.css" rel="stylesheet">
-    <link href="css/plugins/datapicker/datepicker3.css" rel="stylesheet">
-    <link href="css/plugins/daterangepicker/daterangepicker-bs3.css" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Caroma Malaysia | Member Center</title>
+    <meta name="description" content="Kenny is a Dashboard & Admin Site Responsive Template by hencework." />
+    <meta name="keywords" content="admin, admin dashboard, admin template, cms, crm, Kenny Admin, kennyadmin, premium admin templates, responsive admin, sass, panel, software, ui, visualization, web app, application" />
+    <meta name="author" content="hencework" />
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="icon" href="../administrator/favicon.ico" type="image/x-icon">
+
+    <!-- Morris Charts CSS -->
+    <link href="../administrator/vendors/bower_components/morris.js/morris.css" rel="stylesheet" type="text/css" />
+
+    <!-- vector map CSS -->
+    <link href="../administrator/vendors/vectormap/jquery-jvectormap-2.0.2.css" rel="stylesheet" type="text/css" />
+
+    <!-- Custom Fonts -->
+    <link href="../administrator/dist/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- Data table CSS -->
+    <link href="../administrator/vendors/bower_components/datatables/media/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+    <link href="../administrator/vendors/bower_components/jquery-toast-plugin/dist/jquery.toast.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Custom CSS -->
+    <link href="../administrator/dist/css/style.css" rel="stylesheet" type="text/css">
+
+    <!-- Custom CSS -->
+    <link href="../administrator/dist/css/custom.css" rel="stylesheet" type="text/css">
+    <link href="../administrator/css/plugins/dataTables/datatables.min.css" rel="stylesheet">
+    <link href="../administrator/css/plugins/chosen/bootstrap-chosen.css" rel="stylesheet">
+    <link href="../administrator/css/plugins/datapicker/datepicker3.css" rel="stylesheet">
+    <link href="../administrator/css/plugins/daterangepicker/daterangepicker-bs3.css" rel="stylesheet">
 </head>
 
 <body>
     <div id="wrapper">
-        <?php require_once('inc/admin_nav.php'); ?>
+        <?php
+
+        $user = $db->where('*', 'users', 'id', $_SESSION['user_id']);
+        $user = $user[0];
+
+        ?>
+
+        <nav class="navbar-default navbar-static-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav metismenu" id="side-menu">
+                    <li class="nav-header">
+                        <div class="dropdown profile-element">
+                            <img alt="image" class="rounded-circle" src="../administrator/img/userprofile/admin.svg" style="width:48px;height:48px;" />
+
+                            <span class="block m-t-xs font-bold"></span>
+                            <span class="text-muted text-xs block h6"><?php echo $user['name']; ?></span>
+                        </div>
+                        <div class="logo-element">
+                            Caroma
+                        </div>
+                    </li>
+
+                </ul>
+
+            </div>
+        </nav>
         <div id="page-wrapper" class="gray-bg dashbard-1">
             <!-- top nav -->
-            <?php include_once('inc/top_nav.php'); ?>
-            <!-- top nav -->
+            <nav class="navbar navbar-inverse navbar-fixed-top">
+                <a id="toggle_nav_btn" class="toggle-left-nav-btn inline-block mr-20 pull-left" href="javascript:void(0);"><i class="fa fa-bars"></i></a>
+                <a href="index.php"><img width="100px" class="brand-img pull-left" src="dist/img/caroma-logo.png" alt="brand" /></a>
+                <ul class="nav navbar-right top-nav pull-right">
+                    <li>
+                    </li>
+                    <li class="dropdown">
+                    </li>
+                    <li class="dropdown">
+                    </li>
+                    <li class="dropdown">
+                        
+                    </li>
+                </ul>
+            </nav> 
 
             <div class="row wrapper border-bottom white-bg page-heading">
                 <div class="col-lg-10">
@@ -228,15 +279,7 @@ switch ($status) {
                                 <div class="ibox-content">
                                     <div class="col-lg-12">
                                         <div class="contact-box ">
-                                            <h2 class="m-b-xs">
-                                                <strong>Order <?php echo $status_summary_display; ?>:</strong>
-                                                <h3>Order Ranged
-                                                    <?php
-                                                    echo '  from: ' . $from_display;
-                                                    echo ' to: ' . $to_display;
-                                                    ?>
-                                                </h3>
-                                            </h2>
+                                            <h2 class="m-b-xs"><strong>Total Item</strong></h2>
                                             <br>
                                             <table class="table">
 
@@ -283,6 +326,7 @@ switch ($status) {
                                                             <th>Item List</th>
                                                             <th>Quantity</th>
                                                             <th>Sales</th>
+
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -363,6 +407,7 @@ switch ($status) {
                                                 <th>User</th>
                                                 <th>Date Settle</th>
                                                 <th>Action</th>
+
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -377,12 +422,12 @@ switch ($status) {
                                             foreach ($product as $row) {
 
                                                 $id = $row['id'];
-                                                $order_status = $row['status'];
+                                                $status = $row['status'];
 
                                                 //view order
                                                 $btn_view = '<a data-remote="ajax/order_view.php?p=' . $id . '" class="btn btn-white btn-xs" data-toggle="modal" data-target="#myModal">View</a>';
 
-                                                switch ($order_status) {
+                                                switch ($status) {
                                                     case "1":
                                                         $status_color = "text-danger";
                                                         $status_display = "Failed / Canceled";
@@ -450,57 +495,15 @@ switch ($status) {
                                         </tbody>
                                     </table>
                                 </div>
+
                             </div>
                         </div>
+
+
                     </div>
-                </div>
 
-                <div class="row">
-                    <div class="col-lg-12">
 
-                        <div class="ibox ">
-                            <div class="ibox-title">
-                                <h5>Order Ranged
-                                    <?php
-                                    echo '  from: ' . $from_display;
-                                    echo ' to: ' . $to_display;
-                                    ?>
-                                </h5>
-                            </div>
-                            <div class="ibox-content">
 
-                                <div class="table-responsive">
-                                    <table class="table table-striped table-bordered table-hover dataTables-example">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Item List</th>
-                                                <th>Quantity</th>
-                                                <th>Sales</th>
-                                        </thead>
-                                        <tbody>
-                                            <?php
-
-                                            $i = 1;
-
-                                            foreach ($result_item as $row) {
-
-                                            ?>
-                                                <tr>
-                                                    <td><?php echo $i; ?></td>
-                                                    <td><strong><?php echo $row["product_name"]; ?></strong></td>
-                                                    <td><?php echo $row["product_qty"]; ?></td>
-                                                    <td>RM <?php echo number_format($row["product_price"], 2); ?></td>
-
-                                                </tr>
-                                            <?php $i++;
-                                            } ?>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
 
@@ -523,23 +526,23 @@ switch ($status) {
 
 
     <!-- Mainly scripts -->
-    <script src="js/jquery-3.1.1.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.js"></script>
-    <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
-    <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="../administrator/js/jquery-3.1.1.min.js"></script>
+    <script src="../administrator/js/popper.min.js"></script>
+    <script src="../administrator/js/bootstrap.js"></script>
+    <script src="../administrator/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="../administrator/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
     <!-- Custom and plugin javascript -->
-    <script src="js/inspinia.js"></script>
-    <script src="js/plugins/pace/pace.min.js"></script>
+    <script src="../administrator/js/inspinia.js"></script>
+    <script src="../administrator/js/plugins/pace/pace.min.js"></script>
 
     <!-- jQuery UI -->
-    <script src="js/plugins/jquery-ui/jquery-ui.min.js"></script>
+    <script src="../administrator/js/plugins/jquery-ui/jquery-ui.min.js"></script>
 
-    <script src="js/plugins/dataTables/datatables.min.js"></script>
-    <script src="js/plugins/dataTables/dataTables.bootstrap4.min.js"></script>
+    <script src="../administrator/js/plugins/dataTables/datatables.min.js"></script>
+    <script src="../administrator/js/plugins/dataTables/dataTables.bootstrap4.min.js"></script>
     <!-- Data picker -->
-    <script src="js/plugins/datapicker/bootstrap-datepicker.js"></script>
+    <script src="../administrator/js/plugins/datapicker/bootstrap-datepicker.js"></script>
 
     <!-- Page-Level Scripts -->
     <script>

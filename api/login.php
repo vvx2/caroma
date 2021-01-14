@@ -18,26 +18,31 @@ if (!empty($username) && !empty($password)) {
 
     $col = "*";
     $tablename = "users";
-    $opt = "email = ? AND status = ?";
-    $arr = array($username, 1);
+    $opt = "email = ?";
+    $arr = array($username);
     $result = $db->advwhere($col, $tablename, $opt, $arr);
     if (!empty($result)) {
         foreach ($result as $row) {
             $encpass = $row['password'];
+            $status = $row['status'];
             $password = encrypt_decrypt('encrypt', $password);
 
-            if ($password == $encpass) {
-                $log = true;
-                $uid = $row['id'];
-                $key = 'enc_uid';
+            if ($status == 1) {
+                if ($password == $encpass) {
+                    $log = true;
+                    $uid = $row['id'];
+                    $key = 'enc_uid';
 
+                    $uid = $uid . ' ' . hash('sha256', $key, false);
 
-                $uid = $uid . ' ' . hash('sha256', $key, false);
-
-                $uid = str_replace('+', '_', $uid);
+                    $uid = str_replace('+', '_', $uid);
+                } else {
+                    $log = false;
+                    $uid = "2";
+                }
             } else {
                 $log = false;
-                $uid = "2";
+                $uid = "5";
             }
         }
     } else {

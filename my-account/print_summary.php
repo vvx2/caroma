@@ -39,29 +39,12 @@ $to_display = date('Y-m-d', $to);
 $to = date('Y-m-d H:i:s', $to);
 
 $admin_id = 0;
-
-switch ($status) {
-    case "1":
-        $status_summary_display = "Failed / Canceled";
-        break;
-    case "2":
-        $status_summary_display = "To Ship";
-        break;
-    case "3":
-        $status_summary_display = "Shipping";
-        break;
-    case "4":
-        $status_summary_display = "Completed";
-        break;
-    case "5":
-        $status_summary_display = "To Cancel";
-}
 ?>
 
 <head>
     <?php include_once('inc/header.php'); ?>
-    <link href="css/plugins/dataTables/datatables.min.css" rel="stylesheet">
-    <link href="css/plugins/chosen/bootstrap-chosen.css" rel="stylesheet">
+    <link href="../administrator/css/plugins/dataTables/datatables.min.css" rel="stylesheet">
+    <link href="../administrator/css/plugins/chosen/bootstrap-chosen.css" rel="stylesheet">
 </head>
 
 <body class="white-bg">
@@ -108,15 +91,7 @@ switch ($status) {
             <div class="col-lg-12">
                 <div class="contact-box ">
 
-                    <h2 class="m-b-xs">
-                        <strong>Order <?php echo $status_summary_display; ?>:</strong>
-                        <h3>Order Ranged
-                            <?php
-                            echo '  from: ' . $from_display;
-                            echo ' to: ' . $to_display;
-                            ?>
-                        </h3>
-                    </h2>
+                    <h2 class="m-b-xs"><strong>Total Item</strong></h2>
                     <br>
                     <table class="table">
 
@@ -196,13 +171,13 @@ switch ($status) {
 
 
         <!-- Mainly scripts -->
-        <script src="js/jquery-3.1.1.min.js"></script>
-        <script src="js/popper.min.js"></script>
-        <script src="js/bootstrap.js"></script>
-        <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
+        <script src="../administrator/js/jquery-3.1.1.min.js"></script>
+        <script src="../administrator/js/popper.min.js"></script>
+        <script src="../administrator/js/bootstrap.js"></script>
+        <script src="../administrator/js/plugins/metisMenu/jquery.metisMenu.js"></script>
 
         <!-- Custom and plugin javascript -->
-        <script src="js/inspinia.js"></script>
+        <script src="../administrator/js/inspinia.js"></script>
         <script type="text/javascript">
             window.print();
         </script>
