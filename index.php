@@ -269,8 +269,8 @@
                                             if ($user_type == 1) {
                                                 $col = "*, DATE_ADD(end, INTERVAL 1 DAY) as new_end_date";
                                                 $tb = "promotion pr left join promotion_product prp on pr.id = prp.promotion_id";
-                                                $opt = 'prp.product_id = ? && start <= ? && DATE_ADD(end, INTERVAL 1 DAY) >= ? ORDER BY date_modified';
-                                                $arr = array($hot['p_id'], $time, $time);
+                                                $opt = 'pr.stataus =? && prp.product_id = ? && start <= ? && DATE_ADD(end, INTERVAL 1 DAY) >= ? ORDER BY date_modified';
+                                                $arr = array(1, $hot['p_id'], $time, $time);
                                                 $check_promotion_prodcut = $db->advwhere($col, $tb, $opt, $arr);
 
                                                 if (count($check_promotion_prodcut) != 0) {
@@ -365,8 +365,8 @@
                                         if ($user_type == 1) {
                                             $col = "*, DATE_ADD(end, INTERVAL 1 DAY) as new_end_date";
                                             $tb = "promotion pr left join promotion_product prp on pr.id = prp.promotion_id";
-                                            $opt = 'prp.product_id = ? && start <= ? && DATE_ADD(end, INTERVAL 1 DAY) >= ? ORDER BY date_modified';
-                                            $arr = array($new['p_id'], $time, $time);
+                                            $opt = 'pr.stataus =? && prp.product_id = ? && start <= ? && DATE_ADD(end, INTERVAL 1 DAY) >= ? ORDER BY date_modified';
+                                            $arr = array(1, $new['p_id'], $time, $time);
                                             $check_promotion_prodcut = $db->advwhere($col, $tb, $opt, $arr);
 
                                             if (count($check_promotion_prodcut) != 0) {
@@ -637,8 +637,8 @@
                                         if ($user_type == 1) {
                                             $col = "*, DATE_ADD(end, INTERVAL 1 DAY) as new_end_date";
                                             $tb = "promotion pr left join promotion_product prp on pr.id = prp.promotion_id";
-                                            $opt = 'prp.product_id = ? && start <= ? && DATE_ADD(end, INTERVAL 1 DAY) >= ? ORDER BY date_modified';
-                                            $arr = array($top['p_id'], $time, $time);
+                                            $opt = 'pr.stataus =? && prp.product_id = ? && start <= ? && DATE_ADD(end, INTERVAL 1 DAY) >= ? ORDER BY date_modified';
+                                            $arr = array(1, $top['p_id'], $time, $time);
                                             $check_promotion_prodcut = $db->advwhere($col, $tb, $opt, $arr);
 
                                             if (count($check_promotion_prodcut) != 0) {

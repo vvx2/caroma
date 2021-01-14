@@ -142,8 +142,8 @@
                                                     if ($user_type == 1) {
                                                         $col = "*, DATE_ADD(end, INTERVAL 1 DAY) as new_end_date";
                                                         $tb = "promotion pr left join promotion_product prp on pr.id = prp.promotion_id";
-                                                        $opt = 'prp.product_id = ? && start <= ? && DATE_ADD(end, INTERVAL 1 DAY) >= ? ORDER BY date_modified';
-                                                        $arr = array($cart['p_id'], $time, $time);
+                                                        $opt = 'pr.status =? && prp.product_id = ? && start <= ? && DATE_ADD(end, INTERVAL 1 DAY) >= ? ORDER BY date_modified';
+                                                        $arr = array(1, $cart['p_id'], $time, $time);
                                                         $check_promotion_prodcut = $db->advwhere($col, $tb, $opt, $arr);
 
                                                         if (count($check_promotion_prodcut) != 0) {
@@ -184,8 +184,8 @@
                                                     if ($user_type == 1) {
                                                         $col = "*, DATE_ADD(end, INTERVAL 1 DAY) as new_end_date";
                                                         $tb = "promotion pr left join promotion_product prp on pr.id = prp.promotion_id";
-                                                        $opt = 'prp.product_id = ? && start <= ? && DATE_ADD(end, INTERVAL 1 DAY) >= ? ORDER BY date_modified';
-                                                        $arr = array($get_cart['p_id'], $time, $time);
+                                                        $opt = 'pr.status =? && prp.product_id = ? && start <= ? && DATE_ADD(end, INTERVAL 1 DAY) >= ? ORDER BY date_modified';
+                                                        $arr = array(1, $get_cart['p_id'], $time, $time);
                                                         $check_promotion_prodcut = $db->advwhere($col, $tb, $opt, $arr);
 
                                                         if (count($check_promotion_prodcut) != 0) {

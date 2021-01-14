@@ -375,7 +375,7 @@ if (count($get_cart) != 0) {
                                                                         <label class="control-label mb-10">Point Can Be Discount : <strong><?php echo $total_point; ?> Points</strong></label>
                                                                         <br>
                                                                         <label class="control-label mb-10">Use Point <strong>(1 Point = RM <?php echo number_format($point_value / 100, 2) ?>)</strong></label>
-                                                                        
+
                                                                         <div class="radio-list">
                                                                             <div class="radio-inline pl-0">
                                                                                 <div class="radio radio-info">
@@ -427,7 +427,7 @@ if (count($get_cart) != 0) {
                                                             </p>
 
 
-                                                            
+
                                                             <button type="button" class="btn custombtn" data-toggle="modal" data-target="#exampleModalCenter">Continue To Purchase</button>
 
                                                         </div>
@@ -442,19 +442,19 @@ if (count($get_cart) != 0) {
                                 <div class="modal fade" id="exampleModalCenter" style="z-index:2000" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h3>Order Confirmation</h3>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div>Kindly Make sure your shipping information & your order item is correctly.<br>
-                                            <span style="font-weight : bold ; color:red;">DO YOU WANT TO CONTINUE YOUR ORDER?</span>
+                                            <div class="modal-header">
+                                                <h3>Order Confirmation</h3>
+                                                </button>
                                             </div>
-                                        </div>
-                                        <div class="modal-footer" style="text-align : center ;">
-                                            <button type="button" class="btn custombtn" data-dismiss="modal">Close</button>
-                                            <button type="submit" name="btn-sbmt" class="btn custombtn btn-submit">Continue To Purchase</button>
-                                        </div>
+                                            <div class="modal-body">
+                                                <div>Kindly Make sure your shipping information & your order item is correctly.<br>
+                                                    <span style="font-weight : bold ; color:red;">DO YOU WANT TO CONTINUE YOUR ORDER?</span>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer" style="text-align : center ;">
+                                                <button type="button" class="btn custombtn" data-dismiss="modal">Close</button>
+                                                <button type="submit" name="btn-sbmt" class="btn custombtn btn-submit">Continue To Purchase</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -478,8 +478,8 @@ if (count($get_cart) != 0) {
                                                     if ($user_type == 1) {
                                                         $col = "*, DATE_ADD(end, INTERVAL 1 DAY) as new_end_date";
                                                         $tb = "promotion pr left join promotion_product prp on pr.id = prp.promotion_id";
-                                                        $opt = 'prp.product_id = ? && start <= ? && DATE_ADD(end, INTERVAL 1 DAY) >= ? ORDER BY date_modified';
-                                                        $arr = array($cart['p_id'], $time, $time);
+                                                        $opt = 'pr.stataus =? && prp.product_id = ? && start <= ? && DATE_ADD(end, INTERVAL 1 DAY) >= ? ORDER BY date_modified';
+                                                        $arr = array(1, $cart['p_id'], $time, $time);
                                                         $check_promotion_prodcut = $db->advwhere($col, $tb, $opt, $arr);
 
                                                         if (count($check_promotion_prodcut) != 0) {
@@ -628,9 +628,9 @@ if (count($get_cart) != 0) {
             <script src="assets/js/functions.js"></script>
             <script src="cart.js"></script>
             <script>
-            $('#myModal').on('shown.bs.modal', function () {
-            $('#myInput').trigger('focus')
-            })
+                $('#myModal').on('shown.bs.modal', function() {
+                    $('#myInput').trigger('focus')
+                })
             </script>
             <script>
                 $(document).ready(function() {
