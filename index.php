@@ -430,8 +430,8 @@
 
                                     $col = "*, DATE_ADD(end, INTERVAL 1 DAY) as new_end_date";
                                     $tb = "promotion";
-                                    $opt = 'start <= ? && DATE_ADD(end, INTERVAL 1 DAY) >= ? ORDER BY date_modified';
-                                    $arr = array($time, $time);
+                                    $opt = 'status = ? && start <= ? && DATE_ADD(end, INTERVAL 1 DAY) >= ? ORDER BY date_modified';
+                                    $arr = array(1, $time, $time);
                                     $promotion_result = $db->advwhere($col, $tb, $opt, $arr);
 
 
@@ -445,6 +445,20 @@
 
 
                                     foreach ($promotion_product_result as $promo) {
+                                        $normal_price = $promo['price'];
+                                        if ($promotion_result["type"] == 1) {
+
+                                            $promo_price = $normal_price - $promotion_result["amt"];
+                                            echo "- RM" . number_format($promotion_result["amt"], 2);
+                                        } else {
+
+                                            $promo_price = $normal_price - ($normal_price * $promotion_result["percentage"] / 100);
+                                            echo $promotion_result["percentage"] . "%";
+                                        }
+
+                                        if ($promo_price <= 0) {
+                                            $promo_price = 0;
+                                        }
 
                                     ?>
 
