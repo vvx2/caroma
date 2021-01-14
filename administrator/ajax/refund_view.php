@@ -77,10 +77,6 @@ switch ($status) {
                             <td>RM <?php echo number_format($refund['distributor_wallet'], 2) ?></td>
                         </tr>
                         <tr>
-                            <td>Date Create</td>
-                            <td><?php echo $refund['date_created']; ?></td>
-                        </tr>
-                        <tr>
                             <td>Bank Name</td>
                             <td><?php echo $refund["bank_name"]; ?></td>
                         </tr>
@@ -88,6 +84,7 @@ switch ($status) {
                             <td>Bank Account</td>
                             <td><?php echo $refund["bank_account"]; ?></td>
                         </tr>
+
                         <?php if ($status == 2) { ?>
                             <tr>
                                 <td>Proof</td>
@@ -99,6 +96,24 @@ switch ($status) {
                                 </td>
                             </tr>
                         <?php  } ?>
+                        <tr>
+                            <td>Date Create</td>
+                            <td><?php echo $refund['date_created']; ?></td>
+                        </tr>
+                        <tr>
+                            <td>Date Approve</td>
+                            <td><?php echo $refund['date_modified']; ?></td>
+                        </tr>
+                        <tr>
+                            <td>Approve By</td>
+                            <td>
+                                <?php
+                                $admin = $db->where('user_nickname', 'admin', 'user_id', $refund['admin_id']);
+                                $admin = $admin[0];
+                                echo $admin['user_nickname'];
+                                ?>
+                            </td>
+                        </tr>
                     </tbody>
 
                 </table>
