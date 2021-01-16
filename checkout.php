@@ -31,15 +31,18 @@ if (count($get_cart) != 0) {
      * Make sure that in senangPay Dashboard you have key in the return URL referring to this file for example http://myserver.com/senangpay_sample.php
      */
 
-    if ($server == 3) {
+    if ($server == 3) { //3=live
         $senangpay_path = "https://app.senangpay.my/payment/";
+        # please fill in the required info as below
+        $merchant_id = '859160498101260';
+        $secretkey = '3037-583';
     } else {
         $senangpay_path = "https://sandbox.senangpay.my/payment/";
+        # please fill in the required info as below
+        $merchant_id = '859160498101260';
+        $secretkey = '3037-583';
     }
 
-    # please fill in the required info as below
-    $merchant_id = '859160498101260';
-    $secretkey = '3037-583';
 
 
     # this part is to process data from the form that user key in, make sure that all of the info is passed so that we can process the payment
