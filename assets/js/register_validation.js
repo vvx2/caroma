@@ -45,7 +45,7 @@ $(function () {
    $("#city").focusout(function () {
       check_city();
    });
-   $("#state").focusout(function () {
+   $("#state").change(function () {
       check_state();
    });
 
@@ -173,6 +173,7 @@ $(function () {
    function check_state() {
       var pattern = /.{1,}/;;
       var state = $('#state option:selected').val();
+      // console.log("state value:" + state);
       if (pattern.test(state) && state !== '') {
          $("#state_error_message").hide();
          $("#state").css("border-bottom", "2px solid #34F458");
@@ -219,7 +220,7 @@ $(function () {
 
    });
 
-   form_reset_password_api
+
    $("#form_reset_password").submit(function () {
       error_email = false;
 

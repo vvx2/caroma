@@ -47,7 +47,7 @@ $(function() {
     $("#city").focusout(function() {
        check_city();
     });
-    $("#state").focusout(function() {
+    $("#state").change(function() {
        check_state();
     });
     $("#distributor_code").focusout(function() {
