@@ -156,7 +156,11 @@
                                 if ($user_point[0]["day_continue"] == 1) {
                                     $day_continue = $user_point[0]["day_continue"] + 1;
                                 } else {
-                                    $day_continue = $user_point[0]["day_continue"];
+                                    if ($user_point[0]["day_continue"] >= 8) {
+                                        $day_continue = 1;
+                                    } else {
+                                        $day_continue = $user_point[0]["day_continue"];
+                                    }
                                 }
                             } else {
                                 $icon_check = "timeline-icon";
@@ -172,19 +176,25 @@
                             </div>
 
                             <?php
+                            $y = 1;
                             for ($i = 1; $i <= 6; $i++) {
+                                if ($day_continue + $y >= 8) {
+                                    $day_continue = 1;
+                                    $y = 0;
+                                }
                             ?>
                                 <div class="timeline-item">
                                     <div class="timeline-icon"></div>
                                     <div class="timeline-content right">
                                         <p class="timeline-content-date">Day
                                             <?php
-                                            echo $day_continue + $i;
+                                            echo $day_continue + $y;
                                             ?>
                                             (+
                                             <?php
-                                            echo $day_continue + $i;
+                                            echo $day_continue + $y;
                                             $i++;
+                                            $y++;
                                             ?> Points)
                                         </p>
                                     </div>
@@ -192,11 +202,12 @@
                                 <div class="timeline-item">
                                     <div class="timeline-icon"></div>
                                     <div class="timeline-content">
-                                        <p class="timeline-content-date">Day <?php echo $day_continue + $i; ?> (+<?php echo $day_continue + $i; ?> Points)</p>
+                                        <p class="timeline-content-date">Day <?php echo $day_continue + $y; ?> (+<?php echo $day_continue + $y; ?> Points)</p>
                                     </div>
                                 </div>
 
                             <?php
+                                $y++;
                             }
                             ?>
 

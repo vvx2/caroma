@@ -82,7 +82,11 @@ if (($check_date == NULL || $check_date == "") || $yesterday != $check_date) {
         if ($user_point["day_continue"] == 1) {
             $day_continue = $user_point["day_continue"] + 1;
         } else {
-            $day_continue = $user_point["day_continue"];
+            if ($user_point["day_continue"] >= 8) {
+                $day_continue = 1;
+            } else {
+                $day_continue = $user_point["day_continue"];
+            }
         }
     }
     $point_add = $day_continue;
