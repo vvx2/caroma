@@ -92,7 +92,7 @@ switch ($status) {
                 <table class="table-widths">
                     <tr>
                         <th class="spacing-titles"><i class="fa fa-truck"></i></th>
-                        <th class="spacing-titles1">Shipping Information<br><span>Poslaju: <?php echo ($order['consignment_number'] == "") ? "-" : $order['consignment_number'];; ?><span><br><a style="color : #1a0dab" class="a-links" target="_blank" href="https://www.tracking.my/">Check Now</a></th>
+                        <th class="spacing-titles1">Shipping Information<br><span>Citylink: <?php echo ($order['consignment_number'] == "") ? "-" : $order['consignment_number'];; ?><span><br><a style="color : #1a0dab" class="a-links" target="_blank" href="https://www.tracking.my/">Check Now</a></th>
                     </tr>
                 </table>
 

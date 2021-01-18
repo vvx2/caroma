@@ -502,7 +502,36 @@ switch ($status) {
                         </div>
                     </div>
                 </div>
+                
 
+                <div class="row">
+                    <div class="col-lg-6" style="display: none;">
+                        <div class="ibox ">
+                            <div class="ibox-title">
+                                <h5>Line Chart Example
+                                    <small>With custom colors.</small>
+                                </h5>
+                            </div>
+                            <div class="ibox-content">
+                                <div>
+                                    <canvas id="lineChart" height="140"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="ibox ">
+                            <div class="ibox-title">
+                                <h5>Top Selling Product Bar Chart</h5>
+                            </div>
+                            <div class="ibox-content">
+                                <div>
+                                    <canvas id="barChart" height="140"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
 
             </div>
@@ -540,6 +569,11 @@ switch ($status) {
     <script src="js/plugins/dataTables/dataTables.bootstrap4.min.js"></script>
     <!-- Data picker -->
     <script src="js/plugins/datapicker/bootstrap-datepicker.js"></script>
+
+    <!-- ChartJS-->
+    <script src="js/plugins/chartJs/Chart.min.js"></script>
+    <script src="js/demo/chartjs-demo.js"></script>
+
 
     <!-- Page-Level Scripts -->
     <script>

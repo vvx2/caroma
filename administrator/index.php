@@ -309,7 +309,7 @@ $count_reject = count($count_reject);
             <div class="ibox-content">
 
                 <div class="form-group" id="data_5">
-                    <label class="font-normal">Range select</label>
+                    <label class="font-normal">Report Range Select</label>
                     <form role="form" id="form_get_order" method="post">
 
                         <div class="input-daterange input-group" id="datepicker">

@@ -2259,16 +2259,17 @@ a.toggle-left-nav-btn i {
 
 /* Top Navigation */
 .navbar .brand-img {
-  margin: 19px 0 0 0;
+  margin: 22px 0 0 0;
 }
 .navbar.navbar-inverse {
   background: #fff;
 }
 .navbar.navbar-inverse.navbar-fixed-top {
-  border-bottom: 1px solid #e5e5e5;
+  /*border-bottom: 1px solid #e5e5e5;*/
   margin-bottom: 0;
   min-height: 59px;
   padding: 0 15px;
+  background : #005f2a ;
 }
 .navbar.navbar-inverse.navbar-fixed-top .nav > li.dropdown {
   position: relative;
