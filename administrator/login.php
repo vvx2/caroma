@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Lenovo | Administrator Login</title>
+    <title>Caroma | Administrator Login</title>
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
@@ -23,7 +23,7 @@
             <div>
                 <h2 class="logo-name">CMS</h2>
             </div>
-            <h3>Content Management System OF LENOVO</h3>
+            <h3>Content Management System OF CAROMA</h3>
             <p>Administrator Login in</p>
             <form class="m-t" role="form" action="index.php">
                 <div class="form-group">
@@ -39,7 +39,7 @@
 
 
             </form>
-            <p class="m-t"> <small>© Copyright Lenovo 2020. All rights reserved</small> </p>
+            <p class="m-t"> <small>© Copyright Caroma 2020. All rights reserved</small> </p>
         </div>
     </div>
 
