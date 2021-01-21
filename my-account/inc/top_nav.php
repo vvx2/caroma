@@ -43,14 +43,11 @@ $count_cart = count($user_cart);
 ?>
 
 <nav class="navbar navbar-inverse navbar-fixed-top">
-    <a id="toggle_nav_btn" class="toggle-left-nav-btn inline-block mr-20 pull-left" href="javascript:void(0);"><i class="fa fa-bars"></i></a>
+    <a id="toggle_nav_btn" class="toggle-left-nav-btn inline-block mr-20 pull-left" href="javascript:void(0);"><i class="fa fa-bars" style="color : white;"></i></a>
     <a href="index.php"><img width="100px" class="brand-img pull-left" src="dist/img/caroma-logo.png" alt="brand" /></a>
     <ul class="nav navbar-right top-nav pull-right">
-        <li>
-        </li>
-        <li class="dropdown">
-        </li>
-        <li class="dropdown">
+        <li style="padding-top:20%;">
+            <small style="color : white ;">Hi, <?php echo $result_user['name']; ?></small>
         </li>
         <li class="dropdown">
             <a href="#" class="dropdown-toggle pr-0" data-toggle="dropdown"><img src="<?php echo $image_path; ?>" alt="user" class="user-auth-img img-circle" /><span class="user-online-status"></span></a>

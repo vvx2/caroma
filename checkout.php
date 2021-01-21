@@ -572,6 +572,12 @@ if (count($get_cart) != 0) {
                                                         </div>
                                                     </li>
                                                     <li>
+                                                        <div class="subtotal-line">
+                                                            <b class="stt-name">GST Tax</b>
+                                                            <span class="stt-price" id="get_point_discount">+ RM 0.00</span>
+                                                        </div>
+                                                    </li>
+                                                    <li>
                                                         <div class="col-sm-12 col-12 no-padding-left">
                                                             <label class="label-width" for="coupon">Coupon Code <span class="text-danger" id="get_coupon_msg"> </span></label>
                                                             <input class="input-width" type="text" name="coupon" id="coupon" value="" placeholder="Enter Coupon Code">

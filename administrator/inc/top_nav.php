@@ -5,11 +5,11 @@
 		</div>
 		<ul class="nav navbar-top-links navbar-right">
 			<li>
-				<span class="m-r-sm text-muted welcome-message">Welcome To Administrator Dashboard.</span>
+				<span class="m-r-sm white-color welcome-message">Welcome To Administrator Dashboard.</span>
 			</li>
 			<li>
-				<a href="api/logout.php">
-					<i class="fa fa-sign-out"></i> Log out
+				<a class="white-color" href="api/logout.php">
+					<i class="fa fa-sign-out white-color"></i> Log out
 				</a>
 			</li>
 		</ul>

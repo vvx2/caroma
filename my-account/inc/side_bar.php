@@ -33,6 +33,9 @@ if ($onpage == "1") {
                 <a href="../index.php"><i class="fa fa-leaf mr-10"></i>Shop Home <span class="pull-right"></span></a>
             </li>
             <li>
+                <a href="https://staging2.caroma.com.my"><i class="fa fa-leaf mr-10"></i>Caroma Home <span class="pull-right"></span></a>
+            </li>
+            <li>
                 <a href="../api/logout.php"><i class="fa fa-sign-out mr-10"></i>Logout <span class="pull-right"></span></a>
             </li>
         </ul>

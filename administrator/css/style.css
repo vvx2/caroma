@@ -1069,6 +1069,7 @@ ul.nav-second-level {
   padding: 0;
   width: 100%;
   align-items: inherit;
+  background : #005f2a
 }
 .navbar-static-top .dropdown-menu {
   right: 0;

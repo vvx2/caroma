@@ -94,7 +94,7 @@ switch ($status) {
                         </tr>
                         <tr>
                             <td>Shipping Information</td>
-                            <td><span>Poslaju: <strong><?php echo ($order['consignment_number'] == "") ? "-" : $order['consignment_number'];; ?></strong><span><br><a style="color : #1a0dab" class="a-links" target="_blank" href="https://www.tracking.my/">Check Now</a></td>
+                            <td><span>Citilink: <strong><?php echo ($order['consignment_number'] == "") ? "-" : $order['consignment_number'];; ?></strong><span><br><a style="color : #1a0dab" class="a-links" target="_blank" href="https://www.tracking.my/">Check Now</a></td>
                         </tr>
                         <tr>
                             <td>Order ID</td>
@@ -171,15 +171,19 @@ switch ($status) {
 
                         <tr>
                             <td><strong>Delivery Fee</strong></td>
-                            <td class="total-details-titles">RM <?php echo number_format($order["shipping_fee"], 2); ?></td>
+                            <td class="total-details-titles">+ RM <?php echo number_format($order["shipping_fee"], 2); ?></td>
                         </tr>
                         <tr>
                             <td><strong>Coupon</strong></td>
                             <td class="total-details-titles">- RM <?php echo number_format($order["discount_amount"], 2); ?></td>
                         </tr>
                         <tr>
-                            <td><strong>Caroma Credit</strong></td>
+                            <td><strong>Caroma Coin</strong></td>
                             <td class="total-details-titles">- RM <?php echo number_format($order["discount_reward"], 2); ?></td>
+                        </tr>
+                        <tr>
+                            <td><strong>GST Tax</strong></td>
+                            <td class="total-details-titles">+ RM 0.00</td>
                         </tr>
                         <tr>
                             <td><strong>Payment Price :</strong></td>

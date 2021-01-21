@@ -173,7 +173,7 @@ if ($pagetype == 2) {
                                                 <?php
 
                                                 $i = 1;
-                                                $col = "o.*, st.name as state_name, u.name as user_name";
+                                                $col = "o.*, st.name as state_name, u.name as user_name , u.type as user_type";
                                                 $tb = "orders o left join state st on o.customer_state = st.id left join users u on u.id = o.users_id";
                                                 $opt = 'o.status = ? && o.admin_id = ? ORDER BY o.date_modified DESC';
                                                 $arr = array($pagetype, 0);

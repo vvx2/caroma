@@ -92,7 +92,7 @@ switch ($status) {
                 <table class="table-widths">
                     <tr>
                         <th class="spacing-titles"><i class="fa fa-truck"></i></th>
-                        <th class="spacing-titles1">Shipping Information<br><span>Poslaju: <?php echo ($order['consignment_number'] == "") ? "-" : $order['consignment_number'];; ?><span><br><a style="color : #1a0dab" class="a-links" target="_blank" href="https://www.tracking.my/">Check Now</a></th>
+                        <th class="spacing-titles1">Shipping Information<br><span>Citilink: <?php echo ($order['consignment_number'] == "") ? "-" : $order['consignment_number'];; ?><span><br><a style="color : #1a0dab" class="a-links" target="_blank" href="https://www.tracking.my/">Check Now</a></th>
                     </tr>
                 </table>
 
@@ -160,15 +160,19 @@ switch ($status) {
                         </tr>
                         <tr>
                             <td class="total-details-title">Shipping</td>
-                            <td class="total-details-titles">RM <?php echo number_format($order["shipping_fee"], 2); ?></td>
+                            <td class="total-details-titles">+RM <?php echo number_format($order["shipping_fee"], 2); ?></td>
                         </tr>
                         <tr>
                             <td class="total-details-title">Coupon</td>
                             <td class="total-details-titles">-RM <?php echo number_format($order["discount_amount"], 2); ?></td>
                         </tr>
                         <tr>
-                            <td class="total-details-title">Caroma Credit</td>
+                            <td class="total-details-title">Caroma Coin</td>
                             <td class="total-details-titles">-RM <?php echo number_format($order["discount_reward"], 2); ?></td>
+                        </tr>
+                        <tr>
+                            <td class="total-details-title">GST Tax</td>
+                            <td class="total-details-titles">+RM <?php echo number_format($order["discount_reward"], 2); ?></td>
                         </tr>
                         <tr>
                             <td class="total-details-title total-details-title-last">Total</td>
