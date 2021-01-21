@@ -140,6 +140,13 @@ if (isset($_REQUEST['type'])) {
                 $cart = $_POST["qty_product"];
                 // var_dump($cart);
                 foreach ($cart as $key_product_id => $qty) {
+                    $qty = intval($qty);
+                    if (is_int($qty)) {
+                        $qty = $qty;
+                    } else {
+                        $qty = 1;
+                    }
+
                     if ($login == 1) {
 
                         //to check product qty
