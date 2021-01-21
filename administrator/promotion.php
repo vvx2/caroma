@@ -52,7 +52,6 @@ $PageName = "promotion";
                                 </div>
                                 <div class="modal-body">
 
-                        
                                     <div class="form-group"><label>Name(English)</label> <input type="text" placeholder="Enter Promotion Name (English)" class="form-control" name="name_en" value=''></div>
                                     <div class="form-group text-left"><label>Description</label>
                                         <textarea type="text" placeholder="Enter Description" class="form-control" name="desc_en" rows="4"></textarea>
@@ -91,23 +90,28 @@ $PageName = "promotion";
                                         </label>
                                     </div>
                                     <hr>
-                                
-                                    <div class="form-group">
-                                        <label class="font-normal">Amount Discount</label>
-                                        <input class="amount" type="text" value="0" name="amount">
 
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="font-normal">Percentage Discount</label>
-                                        <input class="percentage" type="text" value="0" name="percentage">
+                                    <div class="amount_part">
+                                        <div class="form-group">
+                                            <label class="font-normal">Amount Discount</label>
+                                            <input class="amount" type="text" value="0" name="amount">
 
+                                        </div>
                                     </div>
+                                    <div class="percentage_part" style='display:none;'>
+                                        <div class="form-group">
+                                            <label class="font-normal">Percentage Discount</label>
+                                            <input class="percentage" type="text" value="0" name="percentage">
+
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="font-normal">Discount Capped - <span class="text-success">Maximum amount to discount (When type is percentage, leave it 0 if type = Amount)</span></label>
+                                            <input class="dis_capped" type="text" value="0" name="dis_capped">
+                                        </div>
+                                    </div>
+
+
                                     <hr>
-                                    <div class="form-group">
-                                        <label class="font-normal">Discount Capped - <span class="text-success">Maximum amount to discount (When type is percentage, leave it 0 if type = Amount)</span></label>
-                                        <input class="dis_capped" type="text" value="0" name="dis_capped">
-
-                                    </div>
                                     <div class="form-group">
                                         <label class="font-normal">Product Available for this promotion - <span class="text-success">Promotion product</span></label>
                                         <select class="form-control dual_select " name="product[]" multiple required>
@@ -191,7 +195,7 @@ $PageName = "promotion";
 
                                         $btn_edit = '<a data-remote="ajax/promotion_edit.php?p=' . $promotion["id"] . '" class="btn btn-white btn-xs" data-toggle="modal" data-target="#myModal">Edit</a>';
                                         $btn_delete = '<a data-remote="ajax/delete_data.php?p=' . $promotion["id"] . '&table=promotion&page=promotion" class="btn btn-white btn-xs" data-toggle="modal" data-target="#myModal">Delete</a>';
-                                        
+
                                         $btn_action = $btn_edit . $btn_delete;
                                         //-------------------------------
                                         //  get promotion details
@@ -291,6 +295,19 @@ $PageName = "promotion";
         $.validator.setDefaults({
             ignore: ":hidden:not(.dual_select)"
         }) //for all select having class .dual_select
+
+        $('[name="promotion_type"]').change(function() {
+            var promotion_type = $('[name="promotion_type"]:checked').val()
+
+            if (promotion_type == 1) {
+                $('.amount_part').show();
+                $('.percentage_part').hide();
+            } else if (promotion_type == 2) {
+                $('.amount_part').hide();
+                $('.percentage_part').show();
+            }
+        });
+
         $(document).ready(function() {
 
             $('.dataTables-example').DataTable({
@@ -361,7 +378,7 @@ $PageName = "promotion";
                         required: true,
                         min: 0
                     },
-                    
+
 
                 }
             });

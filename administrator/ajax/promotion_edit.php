@@ -90,37 +90,37 @@ $promotion_description_my = $promotion_name[0]['description'];
             </div>
         </div>
         <hr>
-        <label class="font-normal">promotion Type</label>
+        <label class="font-normal">Promotion Type</label>
         <div class="">
-            <input type="radio" name="promotion_type" id="promotion_type_1" value="1" <?php echo ($type == 1) ? 'checked="" ' : ''; ?>>
+            <input type="radio" name="promotion_type" class="promotion_type" id="promotion_type_1" value="1" <?php echo ($type == 1) ? 'checked="" ' : ''; ?>>
             <label for="promotion_type_1">
                 Amount
             </label>
         </div>
         <div class="">
-            <input type="radio" name="promotion_type" id="promotion_type_2" value="2" <?php echo ($type == 2) ? 'checked="" ' : ''; ?>>
+            <input type="radio" name="promotion_type" class="promotion_type" id="promotion_type_2" value="2" <?php echo ($type == 2) ? 'checked="" ' : ''; ?>>
             <label for="promotion_type_2">
                 Percentange
             </label>
         </div>
         <hr>
-        <div class="form-group">
-            <label class="font-normal">Amount Discount</label>
-            <input class="amount" type="text" value="<?php echo $amt ?>" name="amount">
-
+        <div class="amount_part_edit" <?php echo ($type == 1) ? '' : 'style="display:none;"'; ?>>
+            <div class="form-group">
+                <label class="font-normal">Amount Discount</label>
+                <input class="amount" type="text" value="<?php echo $amt ?>" name="amount">
+            </div>
         </div>
-        <div class="form-group">
-            <label class="font-normal">Percentage Discount</label>
-            <input class="percentage" type="text" value="<?php echo $percentage ?>" name="percentage">
-
+        <div class="percentage_part_edit" <?php echo ($type == 2) ? '' : 'style="display:none;"'; ?>>
+            <div class="form-group">
+                <label class="font-normal">Percentage Discount</label>
+                <input class="percentage" type="text" value="<?php echo $percentage ?>" name="percentage">
+            </div>
+            <div class="form-group">
+                <label class="font-normal">Discount Capped - <span class="text-success">Maximum amount to discount (When type is percentage, leave it 0 if type = Amount)</span></label>
+                <input class="dis_capped" type="text" value="<?php echo $capped ?>" name="dis_capped">
+            </div>
         </div>
-        <hr>
 
-        <div class="form-group">
-            <label class="font-normal">Discount Capped - <span class="text-success">Maximum amount to discount (When type is percentage, leave it 0 if type = Amount)</span></label>
-            <input class="dis_capped" type="text" value="<?php echo $capped ?>" name="dis_capped">
-
-        </div>
         <hr>
         <div class="form-group">
             <label class="font-normal">Product Available for this promotion - <span class="text-success">Promotion product</span></label>
@@ -168,6 +168,19 @@ $promotion_description_my = $promotion_name[0]['description'];
         checkboxClass: 'icheckbox_square-green',
         radioClass: 'iradio_square-green',
     });
+
+    $('[class="promotion_type"]').change(function() {
+        var promotion_type = $('[class="promotion_type"]:checked').val()
+
+        if (promotion_type == 1) {
+            $('.amount_part_edit').show();
+            $('.percentage_part_edit').hide();
+        } else if (promotion_type == 2) {
+            $('.amount_part_edit').hide();
+            $('.percentage_part_edit').show();
+        }
+    });
+
 
     $(document).ready(function() {
 
