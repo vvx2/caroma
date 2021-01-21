@@ -84,8 +84,12 @@ if ($user_type == 3) {
     }
 
     $col = "*,dp.stock as dis_stock, p.stock as admin_stock, p.id as p_id, pt.name as pt_name, pt.description as pt_description, ct.name as ct_name, rate.rating as rating";
-    $tb = "distributor_product dp left join product p on dp.product_id = p.id left join product_translation pt on p.id = pt.product_id left join product_role_price pp on p.id = pp.product_id left join category_translation ct on p.category = ct.category_id left join (SELECT product_id, (sum(rate) / count(product_id)) as rating FROM order_items where rate != 0 group by product_id) rate on p.id = rate.product_id " . $filter_table;
-    $opt = 'dp.user_id = ? && pt.language = ? && pp.type =? && ct.language =? && dp.status =?' . $filter_opt . ' ORDER BY ' . $sqlorder . ' LIMIT 20 OFFSET ' . $offset . '';
+    if (isset($_REQUEST["new_arrival"]) && $_REQUEST["new_arrival"] == 1) {
+        $tb = " new_arrival na left join distributor_product dp on na.product_id = dp.product_id  left join product p on dp.product_id = p.id left join product_translation pt on p.id = pt.product_id left join product_role_price pp on p.id = pp.product_id left join category_translation ct on p.category = ct.category_id left join (SELECT product_id, (sum(rate) / count(product_id)) as rating FROM order_items where rate != 0 group by product_id) rate on p.id = rate.product_id " . $filter_table;
+    } else {
+        $tb = "distributor_product dp left join product p on dp.product_id = p.id left join product_translation pt on p.id = pt.product_id left join product_role_price pp on p.id = pp.product_id left join category_translation ct on p.category = ct.category_id left join (SELECT product_id, (sum(rate) / count(product_id)) as rating FROM order_items where rate != 0 group by product_id) rate on p.id = rate.product_id " . $filter_table;
+    }
+    $opt = 'dp.user_id = ? && pt.language = ? && pp.type =? && ct.language =? && dp.status =?' . $filter_opt . ' ORDER BY ' . $sqlorder . ' LIMIT 15 OFFSET ' . $offset . '';
     $arr = $filter_arr;
     $result = $db->advwhere($col, $tb, $opt, $arr);
 } else {
@@ -112,7 +116,7 @@ if ($user_type == 3) {
     } else {
         $tb = " product p left join product_translation pt on p.id = pt.product_id left join product_role_price pp on p.id = pp.product_id left join category_translation ct on p.category = ct.category_id left join (SELECT product_id, (sum(rate) / count(product_id)) as rating FROM order_items where rate != 0 group by product_id) rate on p.id = rate.product_id " . $filter_table;
     }
-    $opt = 'pt.language = ? && pp.type =? && ct.language =? && p.status =?' . $filter_opt . ' ORDER BY ' . $sqlorder . ' LIMIT 20 OFFSET ' . $offset . '';
+    $opt = 'pt.language = ? && pp.type =? && ct.language =? && p.status =?' . $filter_opt . ' ORDER BY ' . $sqlorder . ' LIMIT 15 OFFSET ' . $offset . '';
     $arr = $filter_arr;
     $result = $db->advwhere($col, $tb, $opt, $arr);
 }
@@ -135,8 +139,10 @@ if (count($result) != 0) {
                 $check_promotion_prodcut = $check_promotion_prodcut[0];
                 if ($check_promotion_prodcut["type"] == 1) {
                     $promo_price = $normal_price - $check_promotion_prodcut["amt"];
+                    $discount_type = "- RM" . number_format($check_promotion_prodcut["amt"], 2);
                 } else {
                     $promo_price = $normal_price - ($normal_price * $check_promotion_prodcut["percentage"] / 100);
+                    $discount_type = "Discount " . $check_promotion_prodcut["percentage"] . "%";
                 }
                 if ($promo_price <= 0) {
                     $promo_price = 0;
@@ -145,6 +151,7 @@ if (count($result) != 0) {
                 $price_display = $promo_price;
             } else {
                 $is_promo = 0;
+                $discount_type = "";
                 $price_display = $normal_price;
                 if (isset($_REQUEST["is_promotion"]) && $_REQUEST["is_promotion"] == 1) {
                     continue;
@@ -152,10 +159,11 @@ if (count($result) != 0) {
             }
         } else {
             $is_promo = 0;
+            $discount_type = "";
             $price_display = $normal_price;
         }
         $count_result++;
-        $item[] = array("product_id" => $product['p_id'], "image" => $product['image'], "category_name" => $product['ct_name'], "product_name" => $product['pt_name'], "price" => $price_display, "ori_price" => $normal_price, "is_promo" => $is_promo);
+        $item[] = array("product_id" => $product['p_id'], "discount_type" => $discount_type, "image" => $product['image'], "category_name" => $product['ct_name'], "product_name" => $product['pt_name'], "price" => $price_display, "ori_price" => $normal_price, "is_promo" => $is_promo);
     }
     $json_arr = array('Status' => true, 'product' => $item, 'count_result' => $count_result);
     // $json_arr = array('Status' => true, 'product' => $item, 'count_result' => $count_result, "checksql" => $sqlorder);

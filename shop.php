@@ -141,7 +141,7 @@
 
                     <div class="block-item recently-products-cat md-margin-bottom-39">
                         <h3 class="title-product-content">Hot Sales</h3>
-                        <ul class="products-list biolife-carousel nav-center-02 nav-none-on-mobile" data-slick='{"rows":1,"arrows":true, "autoplaySpeed": 1500, "autoplay": true, "dots":false,"infinite":true,"speed":400,"slidesMargin":0,"slidesToShow":5, "responsive":[{"breakpoint":1200, "settings":{ "slidesToShow": 3}},{"breakpoint":992, "settings":{ "slidesToShow": 3, "slidesMargin":30}},{"breakpoint":768, "settings":{ "slidesToShow": 2, "slidesMargin":10}}]}'>
+                        <ul class="products-list biolife-carousel nav-center-02 nav-none-on-mobile product_display_hot" data-slick='{"rows":1,"arrows":true, "autoplaySpeed": 1500, "autoplay": true, "dots":false,"infinite":true,"speed":400,"slidesMargin":0,"slidesToShow":5, "responsive":[{"breakpoint":1200, "settings":{ "slidesToShow": 3}},{"breakpoint":992, "settings":{ "slidesToShow": 3, "slidesMargin":30}},{"breakpoint":768, "settings":{ "slidesToShow": 2, "slidesMargin":10}}]}'>
 
                             <?php
 
@@ -173,6 +173,41 @@
                             }
                             foreach ($hot_result as $hot) {
 
+                                $normal_price = $hot['price'];
+                                if ($user_type == 1) {
+                                    $col = "*, DATE_ADD(end, INTERVAL 1 DAY) as new_end_date";
+                                    $tb = "promotion pr left join promotion_product prp on pr.id = prp.promotion_id";
+                                    $opt = 'pr.status =? && prp.product_id = ? && start <= ? && DATE_ADD(end, INTERVAL 1 DAY) >= ? ORDER BY date_modified';
+                                    $arr = array(1, $hot['p_id'], $time, $time);
+                                    $check_promotion_prodcut = $db->advwhere($col, $tb, $opt, $arr);
+
+                                    if (count($check_promotion_prodcut) != 0) {
+                                        $check_promotion_prodcut = $check_promotion_prodcut[0];
+                                        if ($check_promotion_prodcut["type"] == 1) {
+                                            $promo_price = $normal_price - $check_promotion_prodcut["amt"];
+                                            $discount_type = "- RM" . number_format($check_promotion_prodcut["amt"], 2);
+                                        } else {
+                                            $promo_price = $normal_price - ($normal_price * $check_promotion_prodcut["percentage"] / 100);
+                                            $discount_type = "Discount " . $check_promotion_prodcut["percentage"] . "%";
+                                        }
+                                        if ($promo_price <= 0) {
+                                            $promo_price = 0;
+                                        }
+                                        $is_promo = 1;
+                                        $price_display = $promo_price;
+                                        $del_hidden = "class=''";
+                                    } else {
+                                        $discount_type = "";
+                                        $is_promo = 0;
+                                        $price_display = $normal_price;
+                                        $del_hidden = "class='hidden'";
+                                    }
+                                } else {
+                                    $discount_type = "";
+                                    $is_promo = 0;
+                                    $price_display = $normal_price;
+                                    $del_hidden = "class='hidden'";
+                                }
 
                             ?>
                                 <li class="product-item">
@@ -181,13 +216,20 @@
                                             <a href="products-detail.php?p=<?php echo $hot['p_id']; ?>" class="link-to-product">
                                                 <img src="img/product/<?php echo $hot['image']; ?>" alt="dd" width="270" height="270" class="product-thumnail">
                                             </a>
+                                            <div class="labels">
+                                                <span class="sale-label">
+                                                    <?php
+                                                    echo $discount_type;
+                                                    ?>
+                                                </span>
+                                            </div>
                                         </div>
                                         <div class="info">
                                             <b class="categories"><?php echo $hot['ct_name']; ?></b>
                                             <h4 class="product-title"><a href="products-detail.php?p=<?php echo $hot['p_id']; ?>" class="pr-name"><?php echo $hot['pt_name']; ?></a></h4>
                                             <div class="price">
-                                                <ins><span class="price-amount"><span class="currencySymbol">RM</span><?php echo number_format($hot['price'], 2); ?></span></ins>
-                                                <del><span class="price-amount"><span class="currencySymbol">RM</span><?php echo number_format($hot['price'], 2); ?></span></del>
+                                                <ins><span class="price-amount"><span class="currencySymbol">RM</span><?php echo number_format($price_display, 2); ?></span></ins>
+                                                <del <?php echo $del_hidden; ?>><span class="price-amount"><span class="currencySymbol">RM</span><?php echo number_format($normal_price, 2); ?></span></del>
                                             </div>
                                         </div>
                                     </div>
@@ -325,22 +367,6 @@
                             </div>
                         </div>
 
-                        <!-- <div class="widget biolife-filter">
-                            <h4 class="wgt-title">Product Tags</h4>
-                            <div class="wgt-content">
-                                <ul class="check-list multiple">
-                                    <li class="check-list-item"><a href="#" class="check-link">Ginger</a></li>
-                                    <li class="check-list-item"><a href="#" class="check-link">Plum Organic</a></li>
-                                    <li class="check-list-item"><a href="#" class="check-link">Drinks</a></li>
-                                    <li class="check-list-item"><a href="#" class="check-link">Coffee</a></li>
-                                    <li class="check-list-item"><a href="#" class="check-link">Tea</a></li>
-                                    <li class="check-list-item"><a href="#" class="check-link">Merdeka Promotion</a></li>
-                                    <li class="check-list-item"><a href="#" class="check-link">September Promotion</a></li>
-                                </ul>
-                            </div>
-                        </div> -->
-
-
                         <div class="widget biolife-filter">
                             <h4 class="wgt-title">Latest Products</h4>
                             <div class="wgt-content">
@@ -377,6 +403,44 @@
 
 
                                     foreach ($result_latest_product as $latest_product) {
+
+
+                                        $normal_price = $latest_product['price'];
+                                        if ($user_type == 1) {
+                                            $col = "*, DATE_ADD(end, INTERVAL 1 DAY) as new_end_date";
+                                            $tb = "promotion pr left join promotion_product prp on pr.id = prp.promotion_id";
+                                            $opt = 'pr.status =? && prp.product_id = ? && start <= ? && DATE_ADD(end, INTERVAL 1 DAY) >= ? ORDER BY date_modified';
+                                            $arr = array(1, $latest_product['p_id'], $time, $time);
+                                            $check_promotion_prodcut = $db->advwhere($col, $tb, $opt, $arr);
+
+                                            if (count($check_promotion_prodcut) != 0) {
+                                                $check_promotion_prodcut = $check_promotion_prodcut[0];
+                                                if ($check_promotion_prodcut["type"] == 1) {
+                                                    $promo_price = $normal_price - $check_promotion_prodcut["amt"];
+                                                    $discount_type = "- RM" . number_format($check_promotion_prodcut["amt"], 2);
+                                                } else {
+                                                    $promo_price = $normal_price - ($normal_price * $check_promotion_prodcut["percentage"] / 100);
+                                                    $discount_type = "Dis " . $check_promotion_prodcut["percentage"] . "%";
+                                                }
+                                                if ($promo_price <= 0) {
+                                                    $promo_price = 0;
+                                                }
+                                                $is_promo = 1;
+                                                $price_display = $promo_price;
+                                                $del_hidden = "class=''";
+                                            } else {
+                                                $discount_type = "";
+                                                $is_promo = 0;
+                                                $price_display = $normal_price;
+                                                $del_hidden = "class='hidden'";
+                                            }
+                                        } else {
+                                            $discount_type = "";
+                                            $is_promo = 0;
+                                            $price_display = $normal_price;
+                                            $del_hidden = "class='hidden'";
+                                        }
+
                                     ?>
                                         <li class="pr-item">
                                             <div class="contain-product style-widget">
@@ -389,14 +453,13 @@
                                                     <b class="categories"><?php echo $latest_product["ct_name"] ?></b>
                                                     <h4 class="product-title"><a href="products-detail.php?p=<?php echo $latest_product["p_id"] ?>" class="pr-name" tabindex="0"><?php echo $latest_product["pt_name"] ?></a></h4>
                                                     <div class="price">
-                                                        <ins><span class="price-amount"><span class="currencySymbol">RM</span><?php echo number_format($latest_product["price"], 2, '.', '') ?></span></ins>
-                                                        <del><span class="price-amount"><span class="currencySymbol">RM</span><?php echo number_format($latest_product["price"], 2, '.', '') ?></span></del>
+                                                        <ins><span class="price-amount"><span class="currencySymbol">RM</span><?php echo number_format($price_display, 2); ?></span></ins>
+                                                        <del <?php echo $del_hidden; ?>><span class="price-amount"><span class="currencySymbol">RM</span><?php echo number_format($normal_price, 2); ?></span></del>
                                                     </div>
                                                 </div>
                                             </div>
                                         </li>
                                     <?php } ?>
-
                                 </ul>
                             </div>
                         </div>
@@ -458,7 +521,7 @@
             console.log('ourpage:' + count_result);
             $('#pagination').twbsPagination('destroy');
             $('#pagination').twbsPagination({
-                totalPages: Math.ceil(count_result / 20),
+                totalPages: Math.ceil(count_result / 15),
                 visiblePages: 5,
                 onPageClick: function(event, page) {
                     console.info(page + ' (from options paging())');
@@ -510,7 +573,7 @@
                         if (product.is_promo == 1) {
                             display_ori_price = '                   <del ><span class="price-amount"><span class="currencySymbol">RM</span>' + parseFloat(product.ori_price).toFixed(2) + '</span></del>\n'
                         } else {
-                            display_ori_price = '                   <del ><span class="price-amount"><span class="currencySymbol">&nbsp;</span></span></del>\n'
+                            display_ori_price = '                   '
                         }
                         product_item = product_item +
                             '<li class="product-item col-lg-4 col-md-4 col-sm-4 col-xs-6" id="product_' + product.product_id + '">\n' +
@@ -519,6 +582,11 @@
                             '               <a href="products-detail.php?p=' + product.product_id + '" class="link-to-product">\n' +
                             '                   <img src="img/product/' + product.image + '" alt="dd" width="270" height="270" class="product-thumnail">\n' +
                             '               </a>\n' +
+                            '<div class="labels">\n' +
+                            '<span class="sale-label">\n' +
+                            product.discount_type +
+                            '</span>\n' +
+                            '</div>\n' +
                             '           </div>\n' +
                             '           <div class="info">\n' +
                             '               <b class="categories">' + product.category_name + '</b>\n' +
