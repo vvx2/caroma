@@ -148,6 +148,7 @@ if ($pagetype == 2) {
                                                 <tr>
                                                     <th>#</th>
                                                     <th>Status</th>
+                                                    <th>User Type</th>
                                                     <th>Name</th>
                                                     <th>Email</th>
                                                     <th>Address</th>
@@ -159,7 +160,10 @@ if ($pagetype == 2) {
                                                     <th>Coupon</th>
                                                     <th>Discount Percentage</th>
                                                     <th>Discount Amount</th>
+                                                    <th>Discount Caroma Coin</th>
                                                     <th>Shipping Fee</th>
+                                                    <th>Gst Rate</th>
+                                                    <th>Gst Tax</th>
                                                     <th>Total Payment</th>
                                                     <th <?php echo $hide_cosignment; ?>>Consignment Number</th>
                                                     <th>Order Id</th>
@@ -226,11 +230,20 @@ if ($pagetype == 2) {
                                                             $btn_action =  $btn_view . $btn_cancel;
                                                     }
 
+                                                    if ($row['user_type'] == 1) {
+                                                        $order_user_type = "Normal User";
+                                                    } else if ($row['user_type'] == 2) {
+                                                        $order_user_type = "Distributor";
+                                                    } else {
+                                                        $order_user_type = "Dealer";
+                                                    }
+
                                                 ?>
                                                     <tr>
                                                         <td><?php echo $i; ?></td>
                                                         <td><span class="<?php echo $status_color; ?> font-weight-bold"><?php echo $status_display; ?></span>
                                                         </td>
+                                                        <td><?php echo $order_user_type; ?></td>
                                                         <td><?php echo $row['customer_name']; ?></td>
                                                         <td><?php echo $row['customer_email']; ?></td>
                                                         <td><?php echo $row['customer_address']; ?></td>
@@ -243,7 +256,10 @@ if ($pagetype == 2) {
                                                         </td>
                                                         <td><?php echo intval($row['discount_percent']); ?>%</td>
                                                         <td><?php echo number_format($row['discount_amount'], 2); ?></td>
+                                                        <td><?php echo number_format($row['discount_reward'], 2); ?></td>
                                                         <td><?php echo number_format($row['shipping_fee'], 2); ?></td>
+                                                        <td><?php echo intval($row['gst_rate']); ?>%</td>
+                                                        <td><?php echo number_format($row['gst_fee'], 2); ?></td>
                                                         <td><?php echo number_format($row['total_payment'], 2); ?></td>
                                                         <td <?php echo $hide_cosignment; ?>>
                                                             <?php echo $row['consignment_number']; ?></td>
