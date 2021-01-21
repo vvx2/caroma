@@ -94,8 +94,8 @@ if ($login == 0) {
                             //check user limit of the coupon
                             $table = 'orders';
                             $col = "*";
-                            $opt = 'users_id =? && coupon_code = ? && status = ?';
-                            $arr = array($user_id, $coupon_code, 2);
+                            $opt = 'users_id =? && coupon_code = ? && status != ?';
+                            $arr = array($user_id, $coupon_code, 1);
                             $check_user_coupon_used = $db->advwhere($col, $table, $opt, $arr);
 
                             if (count($check_user_coupon_used) < $usage_limit) {
