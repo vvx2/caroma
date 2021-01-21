@@ -73,7 +73,7 @@ if ($login == 0) {
                 $arr = array($user_id, $id, $user_type);
                 $get_coupon_product = $db->advwhere($col, $table, $opt, $arr);
 
-                if ($get_coupon_product != 0) {
+                if (count($get_coupon_product) != 0) {
                     //check minimum spend
                     // if want count only the product in the coupon, change sub_total to 0 and remove comment
                     $total_spend = $sub_total;
