@@ -1245,6 +1245,20 @@ if (!empty($postedToken)) {
         window.location.href='geo_zone.php';</script>";
           }
         }
+      } else if ($type == "geo_zone_delete") {
+        if (isset($_POST['btnAction'])) {
+
+          $geozone_id = $_POST['btnAction'];
+
+          $result_geo_zone_delete = $db->del("geo_zone", 'id', $geozone_id);
+          if ($result_geo_zone_delete) {
+            echo "<script>alert(\" Delete GeoZone Successful.\");
+                          window.location.href='geo_zone.php';</script>";
+          } else {
+            echo "<script>alert(\" Delete GeoZone Fail. Please try again.\");
+                      window.location.href='geo_zone.php';</script>";
+          }
+        }
       }
       //--------------------------------------------------
       //              Admin Geo Zone
