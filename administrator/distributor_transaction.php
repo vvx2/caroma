@@ -64,7 +64,7 @@ $distributor = $db->advwhere($col, $tb, $opt, $arr);
                 <div class="col-lg-12">
                     <div class="ibox ">
                         <div class="ibox-title">
-                            <h5>Distributor Transaction History</h5>
+                            <h5>Distributor Refund Transaction History</h5>
 
                             <div class="ibox-tools">
                                 <a class="collapse-link">

@@ -754,8 +754,8 @@ if (!empty($postedToken)) {
 
               //update refund request status
               $table = "distributor_wallet_transaction";
-              $data = "status = ?, image =?, date_modified = ? WHERE id = ?";
-              $array = array(2, $newfilename, $time, $refund_id);
+              $data = "admin_id =?, status = ?, image =?, date_modified = ? WHERE id = ?";
+              $array = array($uid, 2, $newfilename, $time, $refund_id);
               $result_distributor_wallet_transaction = $db->update($table, $data, $array);
 
               if (!$result_distributor_wallet_transaction) {

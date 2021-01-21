@@ -104,16 +104,26 @@ switch ($status) {
                             <td>Date Approve</td>
                             <td><?php echo $refund['date_modified']; ?></td>
                         </tr>
-                        <tr>
-                            <td>Approve By</td>
-                            <td>
-                                <?php
-                                $admin = $db->where('user_nickname', 'admin', 'user_id', $refund['admin_id']);
-                                $admin = $admin[0];
-                                echo $admin['user_nickname'];
-                                ?>
-                            </td>
-                        </tr>
+                        <?php if ($status != 1) { ?>
+                            <tr>
+                                <td>
+                                    <?php
+                                    if ($status == 2) {
+                                        echo "Approved By";
+                                    } else {
+                                        echo "Rejected By";
+                                    }
+                                    ?>
+                                </td>
+                                <td>
+                                    <?php
+                                    $admin = $db->where('user_nickname', 'admin', 'user_id', $refund['admin_id']);
+                                    $admin = $admin[0];
+                                    echo $admin['user_nickname'];
+                                    ?>
+                                </td>
+                            </tr>
+                        <?php  } ?>
                     </tbody>
 
                 </table>
