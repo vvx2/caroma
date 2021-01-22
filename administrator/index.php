@@ -15,7 +15,7 @@ $result_gst_value = $db->get("*", "gst_value", 1);
 if (count($result_gst_value) != 0) {
     $gst_value = $result_gst_value[0]['value'];
 } else {
-    $gst_value = 1;
+    $gst_value = 0;
 }
 
 $result_coupon_email = $db->get("*", "coupon_email", 1);
