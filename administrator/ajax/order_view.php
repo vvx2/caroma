@@ -183,7 +183,7 @@ switch ($status) {
                         </tr>
                         <tr>
                             <td><strong>GST Tax (<?php echo $order["gst_rate"]; ?>%)</strong></td>
-                            <td class="total-details-titles">+ RM <?php echo number_format($order["get_fee"], 2); ?></td>
+                            <td class="total-details-titles">+ RM <?php echo number_format($order["gst_fee"], 2); ?></td>
                         </tr>
                         <tr>
                             <td><strong>Payment Price :</strong></td>
