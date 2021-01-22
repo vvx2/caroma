@@ -1376,7 +1376,7 @@ if (!empty($postedToken)) {
           $point_id = $_POST['btnAction'];
           $point_value = $_POST['point_value'];
 
-          $table = "reward_point_value";
+          $table = "point_value";
           $data = "value = ? WHERE id = ?";
           $array = array($point_value, $point_id);
           $result_point_value = $db->update($table, $data, $array);
@@ -1393,6 +1393,64 @@ if (!empty($postedToken)) {
 
       //--------------------------------------------------
       //               POINT VALUE
+      //--------------------------------------------------
+
+      //--------------------------------------------------
+      //                 GST VALUE
+      //--------------------------------------------------
+
+      else if ($type == "gst_value_edit") {
+        if (isset($_POST['btnAction'])) {
+
+          $gst_id = $_POST['btnAction'];
+          $gst_value = $_POST['gst_value'];
+
+          $table = "gst_value";
+          $data = "value = ? WHERE id = ?";
+          $array = array($gst_value, $gst_id);
+          $result_gst_value = $db->update($table, $data, $array);
+
+          if ($result_gst_value) {
+            echo "<script>alert(\" Edit GST Value Successful\");
+              window.location.href='index.php';</script>";
+          } else {
+            echo "<script>alert(\" Edit GST Value Fail, PLease Try Again. \");
+              window.location.href='index.php';</script>";
+          }
+        }
+      }
+
+      //--------------------------------------------------
+      //               GST VALUE
+      //--------------------------------------------------
+
+      //--------------------------------------------------
+      //                 Coupon Email VALUE
+      //--------------------------------------------------
+
+      else if ($type == "coupon_email_edit") {
+        if (isset($_POST['btnAction'])) {
+
+          $coupon_email_id = $_POST['btnAction'];
+          $coupon_id = $_POST['coupon_email'];
+
+          $table = "coupon_email";
+          $data = "coupon_id = ? WHERE id = ?";
+          $array = array($coupon_id, $coupon_email_id);
+          $result_coupon_email = $db->update($table, $data, $array);
+
+          if ($result_coupon_email) {
+            echo "<script>alert(\" Edit Coupon Email Successful\");
+              window.location.href='index.php';</script>";
+          } else {
+            echo "<script>alert(\" Edit Coupon Email Fail, PLease Try Again. \");
+              window.location.href='index.php';</script>";
+          }
+        }
+      }
+
+      //--------------------------------------------------
+      //               Coupon Email VALUE
       //--------------------------------------------------
 
     } // table admin

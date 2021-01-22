@@ -508,6 +508,16 @@ if (count($get_cart) != 0) {
 
                                                     $total_point = $total_point + ($cart["point"] * $cart["qty"]);
                                                     $sub_total = $sub_total + ($price_display * $cart["qty"]);
+
+                                                    $result_gst_value = $db->get("*", "gst_value", 1);
+                                                    if (count($result_gst_value) != 0) {
+                                                        $gst_value = $result_gst_value[0]['value'];
+                                                    } else {
+                                                        $gst_value = 0;
+                                                    }
+
+                                                    $gst_tax = ($sub_total * ($gst_value / 100));
+
                                                     $item[$cart['p_id']] = array("qty" => $cart['qty'], "image" => $cart['image'], "name" => $cart['name'], "price" => $price_display, "ori_price" => $normal_price, "hidden_promo" => $hidden_promo, "stock" => $cart['stock'], "product_total_price" => $cart['qty'] * $cart['price']);
 
                                                 ?>
@@ -533,7 +543,7 @@ if (count($get_cart) != 0) {
                                                 <?php
 
                                                 }
-                                                $total_pay = $sub_total + $shipping - $discount - $point_discount;
+                                                $total_pay = $sub_total + $shipping - $discount - $point_discount + $gst_tax;
                                                 $order_detail = "Caromaca Purchase"
                                                 ?>
 
@@ -567,14 +577,14 @@ if (count($get_cart) != 0) {
                                                     </li>
                                                     <li>
                                                         <div class="subtotal-line">
-                                                            <b class="stt-name">Point Discount</b>
+                                                            <b class="stt-name">Caroma Coin</b>
                                                             <span class="stt-price" id="get_point_discount">- RM <?php echo number_format(0, 2, '.', ''); ?></span>
                                                         </div>
                                                     </li>
                                                     <li>
                                                         <div class="subtotal-line">
-                                                            <b class="stt-name">GST Tax</b>
-                                                            <span class="stt-price" id="get_point_discount">+ RM 0.00</span>
+                                                            <b class="stt-name">GST Tax (<?php echo $gst_value; ?>%)</b>
+                                                            <span class="stt-price" id="get_gst">+ RM <?php echo number_format($gst_tax, 2, '.', ''); ?></span>
                                                         </div>
                                                     </li>
                                                     <li>
@@ -585,7 +595,7 @@ if (count($get_cart) != 0) {
                                                     </li>
                                                     <li>
                                                         <div class="subtotal-line">
-                                                            <b class="stt-name">Point Earn:</b>
+                                                            <b class="stt-name">Coin Earn:</b>
                                                             <span class="stt-price" style="color:green;"><?php echo $total_point; ?> Points</span>
                                                         </div>
                                                     </li>
@@ -750,6 +760,8 @@ if (count($get_cart) != 0) {
                     load_shipping(state, delivery_type, point_use, true);
                 });
 
+                var gst_tax = <?php echo $gst_tax ?>;
+
                 function load_shipping(state, delivery_type, point_use, status) {
                     $('#loadDiv').show();
                     var coupon = $('[name="coupon"]').val()
@@ -765,8 +777,8 @@ if (count($get_cart) != 0) {
                         $("#total_shipping").val(0);
                         $("#get_point_discount").html('- RM ' + "<?php echo number_format(0, 2, '.', ''); ?>");
                         $("#total_point_discount").val(0);
-                        $("#get_totalpay").html('RM ' + "<?php echo number_format($total_pay, 2, '.', ''); ?>");
-                        $("#total_payment").val(<?php echo $sub_total; ?>);
+                        $("#get_totalpay").html('RM ' + "<?php echo number_format($total_pay + $gst_tax, 2, '.', ''); ?>");
+                        $("#total_payment").val(<?php echo $total_pay + $gst_tax; ?>);
 
                         $('#loadDiv').hide();
                         //status is for run load coupon when the coupon input is empty or coupon invalid
@@ -784,12 +796,13 @@ if (count($get_cart) != 0) {
                             setTimeout(function() {
                                 data = JSON.parse(data);
                                 if (data["Status"]) {
+
                                     $(".btn-submit").attr('disabled', false);
                                     $(".get_shipping_error").html("");
                                     $("#get_shipping").html('+ RM ' + parseFloat(data["Shipping_fee"]).toFixed(2));
                                     $("#get_point_discount").html('- RM ' + parseFloat(data["Point_discount"]).toFixed(2));
-                                    $("#get_totalpay").html('RM ' + parseFloat(data["Total_pay"]).toFixed(2));
-                                    $("#total_payment").val(data["Total_pay"]);
+                                    $("#get_totalpay").html('RM ' + parseFloat(data["Total_pay"] + gst_tax).toFixed(2));
+                                    $("#total_payment").val(data["Total_pay"] + gst_tax);
                                     $("#total_shipping").val(data["Shipping_fee"]);
                                     $("#total_point_discount").val(data["Point_discount"]);
                                 } else {
@@ -797,10 +810,10 @@ if (count($get_cart) != 0) {
                                     $(".get_shipping_error").html(data["Msg"]);
                                     $("#get_shipping").html('+ RM ' + "<?php echo number_format($shipping, 2, '.', ''); ?>");
                                     $("#get_point_discount").html('- RM ' + "<?php echo number_format($point_discount, 2, '.', ''); ?>");
-                                    $("#get_totalpay").html('RM ' + "<?php echo number_format($total_pay, 2, '.', ''); ?>");
+                                    $("#get_totalpay").html('RM ' + "<?php echo number_format($total_pay + $gst_tax, 2, '.', ''); ?>");
                                     $("#total_shipping").val(0);
                                     $("#total_point_discount").val(0);
-                                    $("#total_payment").val(<?php echo $sub_total; ?>);
+                                    $("#total_payment").val(<?php echo $total_pay + $gst_tax; ?>);
                                 }
                                 $('#loadDiv').hide();
                                 if (coupon != "" && status) {
@@ -845,8 +858,8 @@ if (count($get_cart) != 0) {
                                     $("#get_discount").html('- RM ' + parseFloat(data["Amount"]).toFixed(2));
                                     $("#get_shipping").html('+ RM ' + parseFloat(data["Shipping_fee"]).toFixed(2));
                                     $("#get_point_discount").html('- RM ' + parseFloat(data["Point_discount"]).toFixed(2));
-                                    $("#get_totalpay").html('RM ' + parseFloat(data["Total_pay"]).toFixed(2));
-                                    $("#total_payment").val(data["Total_pay"]);
+                                    $("#get_totalpay").html('RM ' + parseFloat(data["Total_pay"] + gst_tax).toFixed(2));
+                                    $("#total_payment").val(data["Total_pay"] + gst_tax);
                                     $("#total_shipping").val(data["Shipping_fee"]);
                                     $("#total_point_discount").val(data["Point_discount"]);
                                 } else {
@@ -854,8 +867,8 @@ if (count($get_cart) != 0) {
                                     $("#get_discount").html('- RM ' + "<?php echo number_format($discount, 2, '.', ''); ?>");
                                     $("#get_shipping").html('+ RM ' + parseFloat(shipping).toFixed(2));
                                     $("#get_point_discount").html('- RM ' + parseFloat(point_discount).toFixed(2));
-                                    $("#get_totalpay").html('RM ' + parseFloat(sub_total).toFixed(2));
-                                    $("#total_payment").val(sub_total);
+                                    $("#get_totalpay").html('RM ' + parseFloat(sub_total + gst_tax).toFixed(2));
+                                    $("#total_payment").val(<?php echo $total_pay + $gst_tax; ?>);
                                     $("#total_shipping").val(shipping);
                                     $("#total_point_discount").val(point_discount);
                                     load_shipping(state, delivery_type, point_use, false);
@@ -869,8 +882,8 @@ if (count($get_cart) != 0) {
                         $("#get_discount").html('- RM ' + "<?php echo number_format($discount, 2, '.', ''); ?>");
                         $("#get_shipping").html('+ RM ' + parseFloat(shipping).toFixed(2));
                         $("#get_point_discount").html('- RM ' + parseFloat(point_discount).toFixed(2));
-                        $("#get_totalpay").html('RM ' + parseFloat(sub_total).toFixed(2));
-                        $("#total_payment").val(sub_total);
+                        $("#get_totalpay").html('RM ' + parseFloat(sub_total + gst_tax).toFixed(2));
+                        $("#total_payment").val(<?php echo $total_pay + $gst_tax; ?>);
                         $("#total_shipping").val(shipping);
                         $("#total_point_discount").val(point_discount);
 

@@ -325,12 +325,19 @@
                               <tr style="border-collapse:collapse">
                                 <td align="left" style="padding:0;Margin:0;padding-top:15px">
                                   <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:14px;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#999999">
-                                  <strong>Hello <?php echo $user_name;?>, </strong>
-                                  <br><br>Welcome to join as a Caroma member, you can active your account in the below active link. Keep your account and the secure code safely all the time.
-                                  <br><br><strong>Active Link</strong> : <?php echo $path;?>
-                                  <br><br>Thank you for your purchase, 
-                                  <br><br><strong>Best Regards, 
-                                    <br>Caroma Malaysia Support Team</strong></p>
+                                    <strong>Hello <?php echo $user_name; ?>, </strong>
+                                    <br><br>Welcome to join as a Caroma member, you can active your account in the below active link. Keep your account and the secure code safely all the time.
+                                    <br><br><strong>Active Link</strong> : <?php echo $path; ?>
+
+                                    <?php
+                                    if ($coupon_id != 0) {
+                                      echo "<br><strong>" . $coupon_code_msg . "</strong>";
+                                    }
+                                    ?>
+                                    <br><br>Thank you for your purchase,
+                                    <br><br><strong>Best Regards,
+                                      <br>Caroma Malaysia Support Team</strong>
+                                  </p>
                                 </td>
                               </tr>
                             </table>

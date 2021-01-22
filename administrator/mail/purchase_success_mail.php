@@ -293,6 +293,8 @@ $address = $order['customer_address'];
 $postcode = $order['customer_postcode'];
 $city = $order['customer_city'];
 $state = $order['state_name'];
+$gst_tax = $order['gst_fee'];
+$gst_rate = $order['gst_rate'];
 ?>
 
 
@@ -673,6 +675,12 @@ $state = $order['state_name'];
                                         Caroma Coin:</td>
                                       <td style="padding:0;Margin:0;text-align:right;font-size:16px;line-height:24px;color:#000000">
                                         RM <?php echo number_format($point_discount, 2) ?></td>
+                                    </tr>
+                                    <tr style="border-collapse:collapse">
+                                      <td style="padding:0;Margin:0;text-align:right;font-size:16px;line-height:24px">
+                                        Gst (<?php echo $gst_rate ?>%):</td>
+                                      <td style="padding:0;Margin:0;text-align:right;font-size:16px;line-height:24px;color:#000000">
+                                        RM <?php echo number_format($gst_tax, 2) ?></td>
                                     </tr>
                                     <tr style="border-collapse:collapse">
                                       <td style="padding:0;Margin:0;text-align:right;font-size:16px;line-height:24px">

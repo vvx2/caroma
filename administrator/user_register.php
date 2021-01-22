@@ -139,6 +139,27 @@ if (!empty($postedToken)) {
 
                                 if ($result_user_address && $result_user_point) {
 
+                                    $result_coupon_email = $db->get("*", "coupon_email", 1);
+                                    if (count($result_coupon_email) != 0) {
+                                        $coupon_id = $result_coupon_email[0]['coupon_id'];
+                                        $tb = "coupon left join coupon_translation on coupon.id = coupon_translation.coupon_id";
+                                        $col = "coupon.id as id, coupon.code as code, coupon_translation.name as name, coupon_translation.description as description";
+                                        $opt = 'coupon.id = ? && coupon_translation.language = ?';
+                                        $arr = array($coupon_id, "en");
+                                        $result_coupon = $db->advwhere($col, $tb, $opt, $arr);
+                                        if (count($result_coupon) != 0) {
+                                            $coupon_name = $result_coupon[0]['name'];
+                                            $coupon_id = $result_coupon[0]['id'];
+                                            $coupon_code_msg = "<br> *Gift - For New User Only* <br> Coupon Code: " . $result_coupon[0]['code'] . " <br> Description: " . $result_coupon[0]['description'];
+                                        } else {
+                                            $coupon_id = 0;
+                                            $coupon_code_msg = "";
+                                        }
+                                    } else {
+                                        $coupon_id = 0;
+                                        $coupon_code_msg = "";
+                                    }
+
                                     //--------------------------
                                     //       for email
                                     //--------------------------
@@ -166,7 +187,8 @@ if (!empty($postedToken)) {
 
                                     $path_active =  $server_path . "api/active_account.php?active_code=" . $active_code . "&active_mail=" . $user_email;
 
-                                    $active_detail = array("path" => $path_active, "user_name" => $name);
+
+                                    $active_detail = array("path" => $path_active, "user_name" => $name, "coupon_id" => $coupon_id, "coupon_code_msg" => $coupon_code_msg);
 
                                     //To address and name
                                     $mail->addAddress($user_email);

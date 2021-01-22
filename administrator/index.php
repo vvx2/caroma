@@ -10,11 +10,37 @@ if (count($result_point_value) != 0) {
 } else {
     $point_value = 1;
 }
+
+$result_gst_value = $db->get("*", "gst_value", 1);
+if (count($result_gst_value) != 0) {
+    $gst_value = $result_gst_value[0]['value'];
+} else {
+    $gst_value = 0;
+}
+
+$result_coupon_email = $db->get("*", "coupon_email", 1);
+if (count($result_coupon_email) != 0) {
+    $coupon_id = $result_coupon_email[0]['coupon_id'];
+    $tb = "coupon left join coupon_translation on coupon.id = coupon_translation.coupon_id";
+    $col = "coupon.id as id, coupon.code as code, coupon_translation.name as name";
+    $opt = 'coupon.id = ? && coupon_translation.language = ?';
+    $arr = array($coupon_id, "en");
+    $result_coupon = $db->advwhere($col, $tb, $opt, $arr);
+    if (count($result_coupon) != 0) {
+        $coupon_name = $result_coupon[0]['name'];
+        $coupon_id = $result_coupon[0]['id'];
+        $coupon_code = "- Code: " . $result_coupon[0]['code'];
+    } else {
+        $coupon_id = 0;
+        $coupon_name = "no coupon";
+        $coupon_code = "";
+    }
+} else {
+    $coupon_id = 0;
+    $coupon_name = "no coupon";
+    $coupon_code = "";
+}
 //-----------------------
-?>
-
-
-<?php
 
 $table = "orders";
 $col = "id";
@@ -110,6 +136,7 @@ $count_reject = count($count_reject);
 
     <link href="css/plugins/datapicker/datepicker3.css" rel="stylesheet">
     <link href="css/plugins/daterangepicker/daterangepicker-bs3.css" rel="stylesheet">
+    <link href="css/plugins/chosen/bootstrap-chosen.css" rel="stylesheet">
 </head>
 
 <body>
@@ -125,19 +152,48 @@ $count_reject = count($count_reject);
 
                 <div class="row">
                     <div class="col-lg-4">
-                        <div class="widget style1 yellow-bg">
+                        <div class="widget style1 navy-bg">
                             <div class="row">
                                 <div class="col-4">
                                     <a data-toggle="modal" data-target="#point_value_edit" style="color:white;"><i class="fa fa-cog fa-5x"></i></a>
                                 </div>
                                 <div class="col-8 text-right">
-                                    <span> Reward Point Value (per) </span>
+                                    <strong><span> Reward Point Value (per) </span></strong>
                                     <h2 class="font-bold"><?php echo $point_value; ?> Sen</h2>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-3">
+                        <div class="widget style1 navy-bg">
+                            <div class="row">
+                                <div class="col-4">
+                                    <a data-toggle="modal" data-target="#gst_value_edit" style="color:white;"><i class="fa fa-cog fa-5x"></i></a>
+                                </div>
+                                <div class="col-8 text-right">
+                                    <strong><span> GST Value % </span></strong>
+                                    <h2 class="font-bold"><?php echo $gst_value; ?> %</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-5">
+                        <div class="widget style1 navy-bg">
+                            <div class="row">
+                                <div class="col-4">
+                                    <a data-toggle="modal" data-target="#coupon_email_edit" style="color:white;"><i class="fa fa-cog fa-5x"></i></a>
+                                </div>
+                                <div class="col-8 text-right">
+                                    <strong><span> Coupon for new user <?php echo $coupon_code; ?></span></strong>
+                                    <h2 class="font-bold"><?php echo $coupon_name; ?> </h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
                         <div class="widget style1 blue-bg">
                             <div class="row">
                                 <div class="col-4">
@@ -150,7 +206,7 @@ $count_reject = count($count_reject);
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-6">
                         <div class="widget style1 blue-bg">
                             <div class="row">
                                 <div class="col-4">
@@ -347,7 +403,7 @@ $count_reject = count($count_reject);
     <div class="modal inmodal" id="point_value_edit" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content animated fadeIn">
-                <form role="form" id="form_ref" action="admin_sql.php?type=point_value_edit&tb=admin" method="post" enctype="multipart/form-data">
+                <form role="form" id="form_point" action="admin_sql.php?type=point_value_edit&tb=admin" method="post" enctype="multipart/form-data">
                     <input type="hidden" name="token" value="<?php echo $token; ?>" />
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
@@ -357,8 +413,75 @@ $count_reject = count($count_reject);
                     <div class="modal-body text-center">
 
                         <h4><strong>Enter Point Value ( 1 point to (?) sen )</strong></h4>
-                        <div class="form-group"><label>Point Value</label> <input type="number" placeholder="Enter Point Value" class="form-control" name="point_value" value="<?php echo $point_value; ?>"></div>
+                        <div class="form-group"><label>Point Value</label> <input type="number" placeholder="Enter Point Value" class="form-control" name="point_value" value="<?php echo $point_value; ?>" required></div>
 
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary  btn-lg-dim" value="<?php echo $result_point_value[0]['id'] ?>" name="btnAction">Confirm</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal inmodal" id="gst_value_edit" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content animated fadeIn">
+                <form role="form" id="form_gst" action="admin_sql.php?type=gst_value_edit&tb=admin" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="token" value="<?php echo $token; ?>" />
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <i class="fa fa-laptop modal-icon"></i>
+                        <h4 class="modal-title">Edit GST Value</h4>
+                    </div>
+                    <div class="modal-body text-center">
+
+                        <h4><strong>Enter GST Value ( % )</strong></h4>
+                        <div class="form-group"><label>GST Value</label> <input type="number" placeholder="Enter Point Value" class="form-control" name="gst_value" value="<?php echo $result_gst_value[0]['value']; ?>" required></div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary  btn-lg-dim" value="<?php echo $result_gst_value[0]['id'] ?>" name="btnAction">Confirm</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal inmodal" id="coupon_email_edit" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content animated fadeIn">
+                <form role="form" id="form_coupon_email" action="admin_sql.php?type=coupon_email_edit&tb=admin" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="token" value="<?php echo $token; ?>" />
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <i class="fa fa-laptop modal-icon"></i>
+                        <h4 class="modal-title">Coupon For New User</h4>
+                    </div>
+                    <div class="modal-body text-center">
+
+                        <div class="form-group">
+                            <label class="font-normal">Select Coupon For New User<span class="text-danger"></span></label>
+                            <div>
+                                <select class="chosen-select" name="coupon_email" tabindex="2">
+
+                                    <option data-option="" value="">Select Coupon</option>
+                                    <?php
+
+                                    $tb = "coupon left join coupon_translation on coupon.id = coupon_translation.coupon_id";
+                                    $col = "coupon.id as id, coupon.code as code, coupon_translation.name as name";
+                                    $opt = 'status = ? && coupon_translation.language = ?';
+                                    $arr = array(1, "en");
+                                    $result = $db->advwhere($col, $tb, $opt, $arr);
+                                    foreach ($result as $coupon) {
+                                    ?>
+                                        <option value="<?php echo $coupon['id']; ?>" <?php echo ($coupon_id == $coupon['id']) ? "selected" : "" ?>><?php echo $coupon['name'] . " - " . $coupon['code']; ?></option>
+
+                                    <?php
+                                    } ?>
+                                </select>
+                            </div>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
@@ -387,6 +510,10 @@ $count_reject = count($count_reject);
     <script src="js/plugins/dataTables/dataTables.bootstrap4.min.js"></script>
     <!-- Data picker -->
     <script src="js/plugins/datapicker/bootstrap-datepicker.js"></script>
+    <!-- Jquery Validate -->
+    <script src="js/plugins/validate/jquery.validate.min.js"></script>
+    <!-- Chosen -->
+    <script src="js/plugins/chosen/chosen.jquery.js"></script>
 
     <!-- Page-Level Scripts -->
     <script>
@@ -395,8 +522,25 @@ $count_reject = count($count_reject);
             forceParse: false,
             autoclose: true
         });
-    </script>
 
+        $('.chosen-select').chosen({
+            width: "100%"
+        });
+        $.validator.setDefaults({
+            ignore: ":hidden:not(.chosen-select)"
+        }) //for all select having class .chosen-select
+
+        $(document).ready(function() {
+            $("#form_coupon_email").validate({
+                rules: {
+                    coupon: {
+                        required: true,
+                    },
+                }
+            });
+
+        });
+    </script>
 </body>
 
 </html>
