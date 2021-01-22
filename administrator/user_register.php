@@ -166,7 +166,7 @@ if (!empty($postedToken)) {
                                     require_once "vendor/autoload.php";
                                     //PHPMailer Object
                                     $mail = new PHPMailer;
-                                    $mail->SMTPDebug = 3;
+                                    // $mail->SMTPDebug = 3;
                                     $mail->isSMTP();
                                     $mail->Host = $email_host;
                                     $mail->SMTPAuth = true;
@@ -195,22 +195,22 @@ if (!empty($postedToken)) {
                                     $mail->Subject = "REGISTER SUCCESSFUL";
                                     // $mail->Body = "Congratulations on successful registration";
                                     $mail->Body = get_include_contents('mail/register_active.php', $active_detail);
-                                    // $mail->send();
-                                    if (!$mail->send()) {
-                                        echo "Mailer Error: " . $mail->ErrorInfo;
-                                    } else {
-                                        echo "Message has been sent successfully2";
-                                    }
+                                    $mail->send();
+                                    // if (!$mail->send()) {
+                                    //     echo "Mailer Error: " . $mail->ErrorInfo;
+                                    // } else {
+                                    //     echo "Message has been sent successfully2";
+                                    // }
                                     //----------------------------
                                     //		Email code here(end)
                                     //----------------------------
-                                    // if ($mail) {
-                                    //     echo "<script>alert(\" Register Successful\");
-                                    //   window.location.href='$page.php';</script>";
-                                    // } else {
-                                    //     echo "<script>alert(\" Register Successful! But Send Mail Fail.\");
-                                    //   window.location.href='$page.php';</script>";
-                                    // }
+                                    if ($mail) {
+                                        echo "<script>alert(\" Register Successful\");
+                                      window.location.href='$page.php';</script>";
+                                    } else {
+                                        echo "<script>alert(\" Register Successful! But Send Mail Fail.\");
+                                      window.location.href='$page.php';</script>";
+                                    }
                                 } else {
                                     echo "<script>alert(\" Register Fail, PLease Try Again. \");
                                       window.location.href='$page.php';</script>";
