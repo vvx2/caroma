@@ -77,8 +77,19 @@ switch ($status) {
                     <tbody>
                         <?php if ($status == 1 || $status == 5) { ?>
                             <tr>
-                                <td>Cancel Reason</td>
-                                <td><?php echo $order["reason"]; ?></td>
+                                <td>
+                                    Cancel Reason
+                                    <?php
+                                    if ($order["proof_image"] != NULL || $order["proof_image"] != "") {
+                                    ?>
+                                        - <a href="../img/refund/<?php echo $order['proof_image']; ?>" target="_blank">Proof</a>
+                                    <?php
+                                    }
+                                    ?>
+                                </td>
+                                <td>
+                                    <?php echo $order["reason"]; ?>
+                                </td>
                             </tr>
 
                         <?php } ?>
@@ -94,7 +105,21 @@ switch ($status) {
                         </tr>
                         <tr>
                             <td>Shipping Information</td>
-                            <td><span>Citilink: <strong><?php echo ($order['consignment_number'] == "") ? "-" : $order['consignment_number'];; ?></strong><span><br><a style="color : #1a0dab" class="a-links" target="_blank" href="https://www.tracking.my/">Check Now</a></td>
+                            <?php
+                            if ($order['delivery_type'] == 1) {
+                            ?>
+                                <td><span>Citilink: <strong><?php echo ($order['consignment_number'] == "") ? "-" : $order['consignment_number'];; ?></strong><span>
+                                            <br><a style="color : #1a0dab" class="a-links" target="_blank" href="https://www.tracking.my/">Check Now</a></td>
+                            <?php
+                            } else {
+                            ?>
+                                <span>
+                                    <td> Self Taking</td>
+                                </span>
+                            <?php
+                            }
+                            ?>
+
                         </tr>
                         <tr>
                             <td>Order ID</td>

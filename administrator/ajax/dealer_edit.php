@@ -97,6 +97,11 @@ $city = $dealer['city'];
         ignore: ":hidden:not(.chosen-select)"
     }) //for all select having class .chosen-select
 
+    $.validator.addMethod("accept", function(value, element, param) {
+        return value.match(new RegExp("." + param + "$"));
+    });
+
+
     $('.i-checks').iCheck({
         checkboxClass: 'icheckbox_square-green',
         radioClass: 'iradio_square-green',
@@ -112,6 +117,7 @@ $city = $dealer['city'];
                 },
                 name: {
                     required: true,
+                    accept: "[a-zA-Z\s]+"
 
                 },
                 email: {
@@ -146,6 +152,12 @@ $city = $dealer['city'];
 
                 }
 
+            },
+            messages: {
+                name: {
+                    required: "Please enter name",
+                    accept: "Only Letter Please"
+                }
             }
         });
 

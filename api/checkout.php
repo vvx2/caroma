@@ -114,7 +114,7 @@ if (isset($_REQUEST['type'])) {
                     $discount_amount = 0;
                     $discount_reward = 0;
                     $shipping = 0;
-                    $total_point = 0;
+                    $total_point_earn = 0;
 
                     $table = "cart c left join product_role_price pp on c.product_id = pp.product_id left join product p on c.product_id = p.id";
                     $col = "c.product_id as product_id, c.qty as qty, pp.price as price, p.point as point";
@@ -150,7 +150,7 @@ if (isset($_REQUEST['type'])) {
                                 $price_display = $normal_price;
                             }
                             $total_price = $total_price + ($cart['qty'] * $price_display);
-                            $total_point = $total_point + ($cart['qty'] * $cart['point']);
+                            $total_point_earn = $total_point_earn + ($cart['qty'] * $cart['point']);
                         }
                         $total_payment = $total_price;
 
@@ -254,7 +254,7 @@ if (isset($_REQUEST['type'])) {
                         $reason = "UnPaid";
                         $table = "orders";
                         $colname = array("status", "customer_name", "customer_email", "customer_address", "customer_postcode", "customer_city", "customer_state", "customer_contact", "total_price", "coupon_code", "discount_percent", "discount_amount", "discount_reward", "shipping_fee", "gst_rate", "gst_fee", "total_payment", "track_code", "gateway_order_id", "payment_type", "reason", "users_id", "admin_id", "reward_point", "date_created", "date_modified");
-                        $array = array($status_order, $customer_name, $customer_email, $customer_address, $customer_postcode, $customer_city, $customer_state, $customer_contact, $total_price, $coupon_code, $discount_percent, $discount_amount, $discount_reward, $shipping, $gst_value, $gst_tax, $total_payment, $track_code, $order_id, $payment_type, $reason, $user_id, $admin_id, $total_point, $time, $time);
+                        $array = array($status_order, $customer_name, $customer_email, $customer_address, $customer_postcode, $customer_city, $customer_state, $customer_contact, $total_price, $coupon_code, $discount_percent, $discount_amount, $discount_reward, $shipping, $gst_value, $gst_tax, $total_payment, $track_code, $order_id, $payment_type, $reason, $user_id, $admin_id, $total_point_earn, $time, $time);
                         $result_order = $db->insert($table, $colname, $array);
 
                         if ($result_order) {

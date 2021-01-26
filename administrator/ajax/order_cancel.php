@@ -40,6 +40,11 @@ if ($status == 5) {
         <div class="form-group text-left"><label>Reason</label>
             <textarea type="text" placeholder="Please Enter Cancel Reason" class="form-control" name="reason" required><?php echo ($status == 5) ? $order['reason'] : ""; ?></textarea>
         </div>
+        <div class="form-group text-left">
+            <label>Proof Image</label>
+            <input class="form-control" type="file" name="img" accept=".jpg,.png,.jpeg,.pdf">
+            </span>
+        </div>
 
     </div>
     <div class="modal-footer">
