@@ -171,8 +171,8 @@ switch ($status) {
                             <td class="total-details-titles">-RM <?php echo number_format($order["discount_reward"], 2); ?></td>
                         </tr>
                         <tr>
-                            <td class="total-details-title">GST Tax</td>
-                            <td class="total-details-titles">+RM <?php echo number_format($order["discount_reward"], 2); ?></td>
+                            <td class="total-details-title">GST Tax (<?php echo $order["gst_rate"];?>%)</td>
+                            <td class="total-details-titles">+RM <?php echo number_format($order["gst_fee"], 2); ?></td>
                         </tr>
                         <tr>
                             <td class="total-details-title total-details-title-last">Total</td>

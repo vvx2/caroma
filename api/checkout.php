@@ -236,14 +236,25 @@ if (isset($_REQUEST['type'])) {
                         } else {
                             $discount_reward = 0;
                         }
-                        $total_payment = $total_payment - $discount_reward + $shipping;
+
+
+                        $result_gst_value = $db->get("*", "gst_value", 1);
+                        if (count($result_gst_value) != 0) {
+                            $gst_value = $result_gst_value[0]['value'];
+                        } else {
+                            $gst_value = 0;
+                        }
+
+                        $gst_tax = ($total_price * ($gst_value / 100));
+
+                        $total_payment = $total_payment - $discount_reward + $shipping + $gst_tax;
                         //------------------------------------------
 
 
                         $reason = "UnPaid";
                         $table = "orders";
-                        $colname = array("status", "customer_name", "customer_email", "customer_address", "customer_postcode", "customer_city", "customer_state", "customer_contact", "total_price", "coupon_code", "discount_percent", "discount_amount", "discount_reward", "shipping_fee", "total_payment", "track_code", "gateway_order_id", "payment_type", "reason", "users_id", "admin_id", "reward_point", "date_created", "date_modified");
-                        $array = array($status_order, $customer_name, $customer_email, $customer_address, $customer_postcode, $customer_city, $customer_state, $customer_contact, $total_price, $coupon_code, $discount_percent, $discount_amount, $discount_reward, $shipping, $total_payment, $track_code, $order_id, $payment_type, $reason, $user_id, $admin_id, $total_point, $time, $time);
+                        $colname = array("status", "customer_name", "customer_email", "customer_address", "customer_postcode", "customer_city", "customer_state", "customer_contact", "total_price", "coupon_code", "discount_percent", "discount_amount", "discount_reward", "shipping_fee", "gst_rate", "gst_fee", "total_payment", "track_code", "gateway_order_id", "payment_type", "reason", "users_id", "admin_id", "reward_point", "date_created", "date_modified");
+                        $array = array($status_order, $customer_name, $customer_email, $customer_address, $customer_postcode, $customer_city, $customer_state, $customer_contact, $total_price, $coupon_code, $discount_percent, $discount_amount, $discount_reward, $shipping, $gst_value, $gst_tax, $total_payment, $track_code, $order_id, $payment_type, $reason, $user_id, $admin_id, $total_point, $time, $time);
                         $result_order = $db->insert($table, $colname, $array);
 
                         if ($result_order) {
