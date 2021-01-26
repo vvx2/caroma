@@ -94,7 +94,21 @@ switch ($status) {
                         </tr>
                         <tr>
                             <td>Shipping Information</td>
-                            <td><span>Citilink: <strong><?php echo ($order['consignment_number'] == "") ? "-" : $order['consignment_number'];; ?></strong><span><br><a style="color : #1a0dab" class="a-links" target="_blank" href="https://www.tracking.my/">Check Now</a></td>
+                            <?php
+                            if ($order['delivery_type'] == 1) {
+                            ?>
+                                <td><span>Citilink: <strong><?php echo ($order['consignment_number'] == "") ? "-" : $order['consignment_number'];; ?></strong><span>
+                                            <br><a style="color : #1a0dab" class="a-links" target="_blank" href="https://www.tracking.my/">Check Now</a></td>
+                            <?php
+                            } else {
+                            ?>
+                                <span>
+                                    <td> Self Taking</td>
+                                </span>
+                            <?php
+                            }
+                            ?>
+
                         </tr>
                         <tr>
                             <td>Order ID</td>
