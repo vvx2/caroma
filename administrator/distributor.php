@@ -233,6 +233,10 @@ $PageName = "distributor";
             ignore: ":hidden:not(.chosen-select)"
         }) //for all select having class .chosen-select
 
+        $.validator.addMethod("accept", function(value, element, param) {
+            return value.match(new RegExp("." + param + "$"));
+        });
+
         $(document).ready(function() {
 
             $('.dataTables-example').DataTable({
@@ -256,6 +260,7 @@ $PageName = "distributor";
                 rules: {
                     name: {
                         required: true,
+                        accept: "[a-zA-Z\s]+"
 
                     },
                     email: {
@@ -290,6 +295,12 @@ $PageName = "distributor";
 
                     }
 
+                },
+                messages: {
+                    name: {
+                        required: "Please enter name",
+                        accept: "Only Letter Please"
+                    }
                 }
             });
 
