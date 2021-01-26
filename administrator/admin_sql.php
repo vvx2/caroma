@@ -1376,7 +1376,7 @@ if (!empty($postedToken)) {
           $point_id = $_POST['btnAction'];
           $point_value = $_POST['point_value'];
 
-          $table = "point_value";
+          $table = "reward_point_value";
           $data = "value = ? WHERE id = ?";
           $array = array($point_value, $point_id);
           $result_point_value = $db->update($table, $data, $array);
