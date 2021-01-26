@@ -50,6 +50,10 @@ if ($status == 5) {
 
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label for="proofimage" class="control-label mb-10">Proof Image</label>
+                        <input type="file" class="form-control" id="proofimage" name="img" accept="image/x-png,image/gif,image/jpeg" data-error="Only for .jpg .jpeg .png">
+                    </div>
 
                     <div class="form-group mb-0">
                         <button type="submit" class="btn btn-success btn-anim" name="btnAction" value="<?php echo $id ?>"><i class="icon-rocket"></i><span class="btn-text">Yes! Cancel</span></button>

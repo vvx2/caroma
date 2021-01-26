@@ -75,7 +75,16 @@ switch ($status) {
                     <table class="table-widths">
                         <tr>
                             <th class="spacing-titles"><i class="fa fa-info-circle"></i></th>
-                            <th class="spacing-titles1">Reason<br><span><?php echo $order['reason']; ?><span></th>
+                            <th class="spacing-titles1">Reason
+                                <?php
+                                if ($order["proof_image"] != NULL || $order["proof_image"] != "") {
+                                ?>
+                                    - <a href="../img/refund/<?php echo $order['proof_image']; ?>" target="_blank"  style="color:blue;">Proof</a> <- click for view
+                                <?php
+                                }
+                                ?>
+                                <br><span><?php echo $order['reason']; ?><span>
+                            </th>
                         </tr>
                     </table>
                 </blockquote>

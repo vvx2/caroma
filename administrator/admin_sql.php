@@ -1076,10 +1076,37 @@ if (!empty($postedToken)) {
           $order_id = $_POST['btnAction'];
           $reason = $_POST['reason'];
 
-          $tablename = "orders";
-          $data = "status =?,reason =?, date_modified = ? WHERE id = ?";
-          $array = array(1, $reason, $time, $order_id);
-          $result_order = $db->update($tablename, $data, $array);
+          if (!file_exists($_FILES['img']['tmp_name']) || !is_uploaded_file($_FILES['img']['tmp_name'])) { // no upload file will not update img name
+
+            $tablename = "orders";
+            $data = "status =?,reason =?, date_modified = ? WHERE id = ?";
+            $array = array(1, $reason, $time, $order_id);
+            $result_order = $db->update($tablename, $data, $array);
+          } else {
+            //------------------------------------------
+            //			Image Upload Start - img
+            //------------------------------------------
+            if ($_FILES["img"]["error"] > 0) {
+              echo "<script>alert('error');</script>";
+            } else {
+              if (file_exists("../img/refund/" . $_FILES["img"]["name"])) {
+                echo "<script>alert('exist');</script>";
+              } else {
+                $temp = explode(".", $_FILES["img"]["name"]);
+                $newfilename = 'CANCEL_PROOF' . round(microtime(true)) . '.' . end($temp);
+                move_uploaded_file($_FILES["img"]["tmp_name"], "../img/refund/" . $newfilename);
+              }
+            }
+
+            $tablename = "orders";
+            $data = "status =?,reason =?, proof_image=?, date_modified = ? WHERE id = ?";
+            $array = array(1, $reason, $newfilename, $time, $order_id);
+            $result_order = $db->update($tablename, $data, $array);
+
+            //------------------------------------------
+            //			Image Upload End - img
+            //------------------------------------------
+          }
 
           if ($result_order) {
             echo "<script>alert(\" Update Status Successful\");

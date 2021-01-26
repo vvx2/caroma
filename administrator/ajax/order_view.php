@@ -77,8 +77,19 @@ switch ($status) {
                     <tbody>
                         <?php if ($status == 1 || $status == 5) { ?>
                             <tr>
-                                <td>Cancel Reason</td>
-                                <td><?php echo $order["reason"]; ?></td>
+                                <td>
+                                    Cancel Reason
+                                    <?php
+                                    if ($order["proof_image"] != NULL || $order["proof_image"] != "") {
+                                    ?>
+                                        - <a href="../img/refund/<?php echo $order['proof_image']; ?>" target="_blank">Proof</a>
+                                    <?php
+                                    }
+                                    ?>
+                                </td>
+                                <td>
+                                    <?php echo $order["reason"]; ?>
+                                </td>
                             </tr>
 
                         <?php } ?>
