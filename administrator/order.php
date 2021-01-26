@@ -148,6 +148,7 @@ if ($pagetype == 2) {
                                                 <tr>
                                                     <th>#</th>
                                                     <th>Status</th>
+                                                    <th>Action</th>
                                                     <th>User Type</th>
                                                     <th>Name</th>
                                                     <th>Email</th>
@@ -169,7 +170,7 @@ if ($pagetype == 2) {
                                                     <th>Order Id</th>
                                                     <th>User</th>
                                                     <th>Date Create</th>
-                                                    <th>Action</th>
+                                                    
 
                                                 </tr>
                                             </thead>
@@ -243,6 +244,11 @@ if ($pagetype == 2) {
                                                         <td><?php echo $i; ?></td>
                                                         <td><span class="<?php echo $status_color; ?> font-weight-bold"><?php echo $status_display; ?></span>
                                                         </td>
+                                                        <td>
+                                                            <div class="btn-group">
+                                                                <?php echo $btn_action; ?>
+                                                            </div>
+                                                        </td>
                                                         <td><?php echo $order_user_type; ?></td>
                                                         <td><?php echo $row['customer_name']; ?></td>
                                                         <td><?php echo $row['customer_email']; ?></td>
@@ -266,11 +272,7 @@ if ($pagetype == 2) {
                                                         <td><?php echo $row['gateway_order_id']; ?></td>
                                                         <td><?php echo $row['user_name']; ?></td>
                                                         <td><?php echo $row['date_created']; ?></td>
-                                                        <td>
-                                                            <div class="btn-group">
-                                                                <?php echo $btn_action; ?>
-                                                            </div>
-                                                        </td>
+                                                       
 
                                                     </tr>
                                                 <?php $i++;
@@ -346,9 +348,9 @@ if ($pagetype == 2) {
         $(document).ready(function() {
 
             $('.dataTables-example').DataTable({
-                pageLength: 25,
+                pageLength: 10,
                 responsive: true,
-                dom: '<"html5buttons"B>lTfgitp',
+                dom: '<"top"<"clear">>p<"html5buttons"B>lTfgitp',
                 buttons: [
 
                     {

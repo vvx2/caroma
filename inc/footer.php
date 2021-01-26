@@ -13,7 +13,7 @@
                                  <span class="number">+603 6272 5229</span>
                              </p>
                          </div> --->
-                         <div class="contact-info-block footer-layout simple-info">
+                         <a href="https://staging2.caroma.com.my"><div class="contact-info-block footer-layout simple-info">
                              <h4 class="section-title footer-title-color">CONTACT US</h4>
                              <div class="info-item">
                                  <div style="line-height: 1.7 ; color: white;">
@@ -24,7 +24,7 @@
                                     <i class="fa fa-envelope-o" style="width: 15px; text-align: center; margin-right: 4px;"></i> Email: info@caroma.com.my
                                 </div>
                              </div>
-                         </div>
+                         </div></a>
                          <!--- <div class="biolife-social inline circle-hover">
                              <ul class="socials">
                                  <li><a href="#" title="twitter" class="socail-btn"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>

@@ -105,7 +105,7 @@
             </div>
 
             <!--Block 05: Banner promotion 02-->
-            <div class="banner-promotion-02 z-index-20">
+            <!--- <div class="banner-promotion-02 z-index-20">
                 <div class="biolife-banner promotion2 biolife-banner__promotion2 advance">
                     <div class="banner-contain">
                         <div class="container">
@@ -121,40 +121,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <!--Block 02: Banner-->
-            <div class="special-slide fresh-content">
-                <div class="container">
-                    <div class="biolife-service type01 biolife-service__type01 sm-margin-top-0 xs-margin-top-45px">
-                        <b class="txt-show-01">100%Nature</b>
-                        <i class="txt-show-02">Fresh & Healthy</i>
-                        <ul class="services-list">
-                            <li>
-                                <div class="service-inner">
-                                    <span class="biolife-icon biolife-icon-types icon-leaf2"></span>
-                                    <span class="srv-name" href="#">100% Natural</span>
-                                    <p class="srv-details">We only use the freshest home-grown Bentong ginger from our plantation for <br>our beverages.</p>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="service-inner">
-                                    <span class="biolife-icon biolife-icon-types icon-shield"></span>
-                                    <span class="srv-name" href="#">Best Quality</span>
-                                    <p class="srv-details">Our products are filtered carefully before going with clients. Best quality is a must at Caroma for any categories.</p>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="service-inner">
-                                    <span class="biolife-icon biolife-icon-types icon-heathly"></span>
-                                    <span class="srv-name" href="#">Healthy</span>
-                                    <p class="srv-details">Our ingredient is ginger, which is contains high levels of vitamin C, magnesium and other minerals that are beneficial to your overall health.</p>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+            </div> --->
 
 
             <!-- Block 02: Product Tab-->
@@ -751,8 +718,42 @@
                 </div>
             </div>
 
+            <!--Block 02: Banner-->
+            <div class="special-slide fresh-content">
+                <div class="container">
+                    <div class="biolife-service type01 biolife-service__type01 sm-margin-top-0 xs-margin-top-45px">
+                        <b class="txt-show-01">100%Nature</b>
+                        <i class="txt-show-02">Fresh & Healthy</i>
+                        <ul class="services-list">
+                            <li>
+                                <div class="service-inner">
+                                    <span class="biolife-icon biolife-icon-types icon-leaf2"></span>
+                                    <span class="srv-name" href="#">100% Natural</span>
+                                    <p class="srv-details">We only use the freshest home-grown Bentong ginger from our plantation for <br>our beverages.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="service-inner">
+                                    <span class="biolife-icon biolife-icon-types icon-shield"></span>
+                                    <span class="srv-name" href="#">Best Quality</span>
+                                    <p class="srv-details">Our products are filtered carefully before going with clients. Best quality is a must at Caroma for any categories.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="service-inner">
+                                    <span class="biolife-icon biolife-icon-types icon-heathly"></span>
+                                    <span class="srv-name" href="#">Healthy</span>
+                                    <p class="srv-details">Our ingredient is ginger, which is contains high levels of vitamin C, magnesium and other minerals that are beneficial to your overall health.</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+
             <!-- Block 05: Banner Promotion-->
-            <div class="banner-promotion xs-margin-top-0 sm-margin-top-60px xs-margin-top-100">
+            <!---- <div class="banner-promotion xs-margin-top-0 sm-margin-top-60px xs-margin-top-100">
                 <div class="biolife-banner promotion6 biolife-banner__promotion6">
                     <div class="banner-contain">
                         <div class="media">
@@ -771,9 +772,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
-
-
+            </div> ---->
 
 
             <!-- Block 10: Brands-->
