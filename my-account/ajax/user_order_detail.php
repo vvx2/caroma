@@ -79,11 +79,10 @@ switch ($status) {
                                 <?php
                                 if ($order["proof_image"] != NULL || $order["proof_image"] != "") {
                                 ?>
-                                    - <a href="../img/refund/<?php echo $order['proof_image']; ?>" target="_blank"  style="color:blue;">Proof</a> <- click for view
-                                <?php
-                                }
-                                ?>
-                                <br><span><?php echo $order['reason']; ?><span>
+                                    - <a href="../img/refund/<?php echo $order['proof_image']; ?>" target="_blank" style="color:blue;">Proof</a>
+                                    <- click for view <?php
+                                                    }
+                                                        ?> <br><span><?php echo $order['reason']; ?><span>
                             </th>
                         </tr>
                     </table>
@@ -213,11 +212,20 @@ switch ($status) {
                         </tr>
                         <?php
                         if ($_SESSION['type'] == "1") {
-
+                            $user_point = $db->where("point", "user_point", "user_id", $_SESSION['user_id']);
+                            if (count($user_point) != 0) {
+                                $point = $user_point[0]['point'];
+                            } else {
+                                $point = 0;
+                            }
                         ?>
                             <tr>
                                 <td class="total-details-title total-details-title-last">Point Earn</td>
                                 <td class="total-details-titles total-details-title-last" style="color:green;"><?php echo $order["reward_point"]; ?> Points</td>
+                            </tr>
+                            <tr>
+                                <td class="total-details-title total-details-title-last">Balance</td>
+                                <td class="total-details-titles total-details-title-last" style="color:green;"><?php echo $point; ?> Points</td>
                             </tr>
                         <?php
                         }
