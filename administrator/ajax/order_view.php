@@ -94,8 +94,8 @@ switch ($status) {
 
                         <?php } ?>
                         <tr>
-                            <td>Order User</td>
-                            <td><?php echo $order["user_name"]; ?></td>
+                            <td>Customer Name</td>
+                            <td><?php echo $order["customer_name"]; ?></td>
                         </tr>
                         <tr>
                             <td>Delivery Address</td>
