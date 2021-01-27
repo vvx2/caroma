@@ -110,7 +110,19 @@ $user_point = $db->advwhere($col, $tb, $opt, $arr);
                                         <tr class="gradeX">
                                             <td><?php echo $i; ?></td>
                                             <td class="<?php echo $text_color; ?>"><strong><?php echo $amount; ?> Points</strong></td>
-                                            <td><?php echo $desc; ?></td>
+                                            <td>
+
+                                                <?php
+                                                echo $desc;
+
+                                                if (strpos($desc, 'Sale.') !== false) {
+                                                    $gateway_order_id = substr($desc, strpos($desc, "Id:") + 4);
+                                                    $btn_view_point = '&nbsp <a data-remote="ajax/point_detail.php?p=' . $gateway_order_id . '" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal" style="color:white;"><strong>View Point Details</strong></a>';
+                                                    echo $btn_view_point;
+                                                }
+                                                ?>
+
+                                            </td>
                                             <td><strong><?php echo $point['current_point']; ?> point</strong></td>
                                             <td><?php echo $point['date_modified']; ?></td>
                                         </tr>
@@ -141,6 +153,14 @@ $user_point = $db->advwhere($col, $tb, $opt, $arr);
 
     </div>
 
+    <!-- this is for display modal by ajax -->
+    <div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content animated fadeIn">
+
+            </div>
+        </div>
+    </div>
 
 
     <!-- Mainly scripts -->
@@ -166,7 +186,11 @@ $user_point = $db->advwhere($col, $tb, $opt, $arr);
     <script src="js/plugins/chosen/chosen.jquery.js"></script>
     <!-- iCheck -->
     <script src="js/plugins/iCheck/icheck.min.js"></script>
-
+    <script>
+        $('body').on('click', '[data-toggle="modal"]', function() {
+            $($(this).data("target") + ' .modal-content').load($(this).data("remote"));
+        });
+    </script>
 
 
 </body>

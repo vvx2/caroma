@@ -5,10 +5,10 @@ if ($login != 1) {
     echo "<script>window.location.replace('../login.php')</script>";
     exit();
 }
-if($user_type != 1){
-	echo "<script>alert(\" Your are not Normal User\");
+if ($user_type != 1) {
+    echo "<script>alert(\" Your are not Normal User\");
 	window.location.href='index.php';</script>";
-	exit();
+    exit();
 }
 
 ?>
@@ -155,11 +155,21 @@ if($user_type != 1){
                                                                                     <tr>
                                                                                         <td><?php echo $i; ?></td>
                                                                                         <td class="<?php echo $text_color; ?>"><strong><?php echo $amount; ?></strong></td>
-                                                                                        <td><?php echo $desc; ?></td>
+                                                                                        <td>
+                                                                                            <?php
+                                                                                            echo $desc;
+                                                                                            if (strpos($desc, 'Sale.') !== false) {
+                                                                                                $gateway_order_id = substr($desc, strpos($desc, "Id:") + 4);
+                                                                                                $btn_view_point = '&nbsp <a data-remote="ajax/point_detail.php?p=' . $gateway_order_id . '" class="btn btn-primary btn-xs" data-toggle="modal" data-target=".bs-example-modal-lg" style="color:white;"><strong>View Point Details</strong></a>';
+                                                                                                echo $btn_view_point;
+                                                                                            }
+                                                                                            ?>
+                                                                                        </td>
                                                                                         <td><strong><?php echo $wallet['current_point']; ?></strong></td>
                                                                                         <td><?php echo $wallet['date_modified']; ?></td>
                                                                                     </tr>
-                                                                                <?php $i++;} ?>
+                                                                                <?php $i++;
+                                                                                } ?>
                                                                             </tbody>
                                                                         </table>
                                                                     </div>
