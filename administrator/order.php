@@ -168,9 +168,10 @@ if ($pagetype == 2) {
                                                     <th>Total Payment</th>
                                                     <th <?php echo $hide_cosignment; ?>>Consignment Number</th>
                                                     <th>Order Id</th>
+                                                    <th>Order Item</th>
                                                     <th>User</th>
                                                     <th>Date Create</th>
-                                                    
+
 
                                                 </tr>
                                             </thead>
@@ -270,12 +271,42 @@ if ($pagetype == 2) {
                                                         <td <?php echo $hide_cosignment; ?>>
                                                             <?php echo $row['consignment_number']; ?></td>
                                                         <td><?php echo $row['gateway_order_id']; ?></td>
+                                                        <td>
+
+                                                            <table width="350">
+
+                                                                <tr>
+                                                                    <th>Product</th>
+                                                                    <th>Qty</th>
+                                                                </tr>
+                                                                <?php
+
+                                                                $table = "order_items o left join product p on o.product_id = p.id left join product_translation pt on o.product_id = pt.product_id";
+                                                                $col = "o.id as id, o.qty as qty, p.id as p_id, p.stock as stock, p.image as image, pt.name as name, o.price as price";
+                                                                $opt = 'o.order_id = ? AND pt.language = ? ';
+                                                                $arr = array($id, $_SESSION['language']);
+                                                                $order_item = $db->advwhere($col, $table, $opt, $arr);
+
+                                                                foreach ($order_item as $item) {
+                                                                ?>
+                                                                    <tr>
+                                                                        <td> <?php echo $item['name']; ?> </td>
+                                                                        <td><?php echo $item['qty']; ?></td>
+
+
+                                                                    </tr>
+
+                                                                <?php } ?>
+
+                                                            </table>
+
+                                                        </td>
                                                         <td><?php echo $row['user_name']; ?></td>
                                                         <td><?php echo $row['date_created']; ?></td>
-                                                       
+
 
                                                     </tr>
-                                                <?php $i++;
+                                                <?php $i;
                                                 } ?>
                                             </tbody>
                                         </table>
