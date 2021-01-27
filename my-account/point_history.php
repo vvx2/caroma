@@ -116,6 +116,7 @@ if ($user_type != 1) {
                                                                             <thead>
                                                                                 <tr>
                                                                                     <th>#</th>
+                                                                                    <th>Name</th>
                                                                                     <th>Amount</th>
                                                                                     <th>Description</th>
                                                                                     <th>Balance</th>
@@ -125,6 +126,7 @@ if ($user_type != 1) {
                                                                             <tfoot>
                                                                                 <tr>
                                                                                     <th>#</th>
+                                                                                    <th>Name</th>
                                                                                     <th>Amount</th>
                                                                                     <th>Description</th>
                                                                                     <th>Balance</th>
@@ -135,8 +137,8 @@ if ($user_type != 1) {
                                                                                 <?php
 
                                                                                 $i = 1;
-                                                                                $col = "*";
-                                                                                $tb = "user_point_transaction_history";
+                                                                                $col = "p.*, u.name as user_name";
+                                                                                $tb = "user_point_transaction_history p left join users u on p.user_id = u.id";
                                                                                 $opt = 'user_id = ? ORDER BY date_modified DESC';
                                                                                 $arr = array($user_id);
                                                                                 $user_point_transaction_history = $db->advwhere($col, $tb, $opt, $arr);
@@ -154,6 +156,7 @@ if ($user_type != 1) {
 
                                                                                     <tr>
                                                                                         <td><?php echo $i; ?></td>
+                                                                                        <td><?php echo $wallet['user_name']; ?></td>
                                                                                         <td class="<?php echo $text_color; ?>"><strong><?php echo $amount; ?></strong></td>
                                                                                         <td>
                                                                                             <?php
