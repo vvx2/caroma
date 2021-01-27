@@ -1,5 +1,21 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en">
+<style>
+    .label-discount {
+        display: inline-block;
+        clear: left;
+        min-width: 54px;
+        border-radius: 3px;
+        text-align: center;
+        font-size: 14px;
+        color: #ffffff;
+        margin-bottom: 5px;
+        background-color: #fa3535;
+        line-height: 22px;
+        padding: 0 5px;
+        font-weight: 700;
+    }
+</style>
 
 <head>
     <?php
@@ -68,7 +84,7 @@
     if ($user_type == 1) {
         $col = "*, DATE_ADD(end, INTERVAL 1 DAY) as new_end_date";
         $tb = "promotion pr left join promotion_product prp on pr.id = prp.promotion_id";
-        $opt = 'pr.status =? && prp.product_id = ? && start <= ? && DATE_ADD(end, INTERVAL 1 DAY) >= ? ORDER BY date_modified';
+        $opt = 'pr.status =? && prp.product_id = ? && start <= ? && DATE_ADD(end, INTERVAL 1 DAY) >= ? ORDER BY date_modified DESC';
         $arr = array(1, $result['p_id'], $time, $time);
         $check_promotion_prodcut = $db->advwhere($col, $tb, $opt, $arr);
 
@@ -178,7 +194,7 @@
                             <?php } ?>
                         </ul>
                         <ul class="biolife-carousel slider-nav" data-slick='{"arrows":false,"dots":false,"centerMode":false,"focusOnSelect":true,"slidesMargin":10,"slidesToShow":4,"slidesToScroll":1,"asNavFor":".slider-for"}'>
-                            
+
                             <li><img src="img/product/<?php echo $product_main_image['image']; ?>" alt="" width="400" height="400"></li>
                             <?php
                             foreach ($product_image as $img) {
@@ -207,6 +223,19 @@
                         <?php
                         if ($user_type == 1 && count($check_promotion_prodcut) != 0) {
                         ?>
+                            <span class="label-discount">
+                                <?php
+                                if ($check_promotion_prodcut["type"] == 1) {
+
+                                    $promo_price = $normal_price - $check_promotion_prodcut["amt"];
+                                    echo "- RM" . number_format($check_promotion_prodcut["amt"], 2);
+                                } else {
+
+                                    $promo_price = $normal_price - ($normal_price * $check_promotion_prodcut["percentage"] / 100);
+                                    echo "Discount " . $check_promotion_prodcut["percentage"] . "%";
+                                }
+                                ?>
+                            </span>
                             <div class="biolife-countdown" data-datetime="<?php echo $check_promotion_prodcut['new_end_date']; ?>"></div>
                         <?php
                         }
@@ -402,8 +431,8 @@
                             if ($user_type == 1) {
                                 $col = "*, DATE_ADD(end, INTERVAL 1 DAY) as new_end_date";
                                 $tb = "promotion pr left join promotion_product prp on pr.id = prp.promotion_id";
-                                $opt = 'pr.status =? && prp.product_id = ? && start <= ? && DATE_ADD(end, INTERVAL 1 DAY) >= ? ORDER BY date_modified';
-                                $arr = array(1,$hot['p_id'], $time, $time);
+                                $opt = 'pr.status =? && prp.product_id = ? && start <= ? && DATE_ADD(end, INTERVAL 1 DAY) >= ? ORDER BY date_modified DESC';
+                                $arr = array(1, $hot['p_id'], $time, $time);
                                 $check_promotion_prodcut = $db->advwhere($col, $tb, $opt, $arr);
 
                                 if (count($check_promotion_prodcut) != 0) {
