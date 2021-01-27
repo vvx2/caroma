@@ -668,19 +668,19 @@ function validate_coupon($coupon_code, $user_id, $user_type, $sub_total, $shippi
             if ($get_coupon_product != 0) {
                 //check minimum spend
                 // if want count only the product in the coupon, change sub_total to 0 and remove comment
-                $total_spend = $sub_total;
+                $total_spend = 0; // the product spend available in this coupon
 
                 //------------------------------------------
                 // This only count the product in the coupon
                 //------------------------------------------
-                // foreach ($get_coupon_product as $product) {
-                //     $total_spend += $product['qty'] * $product['price'];
-                // }
+                foreach ($get_coupon_product as $product) {
+                    $total_spend += $product['qty'] * $product['price'];
+                }
                 //------------------------------------------
                 // This only count the product in the coupon
                 //------------------------------------------
 
-                if ($total_spend > $min_spend) {
+                if ($sub_total > $min_spend) {
                     //check total limit of the coupon
                     if ($total_times_used < $total_usage_limit) {
                         //check user limit of the coupon
@@ -711,7 +711,7 @@ function validate_coupon($coupon_code, $user_id, $user_type, $sub_total, $shippi
                             //--------------------------------------------
                             //      All true will return this
                             //--------------------------------------------
-                            $total_pay = $total_spend - $reduce_amt;
+                            $total_pay = $sub_total - $reduce_amt;
                             $json_arr = array('Status' => true, 'Amount' => $reduce_amt, 'Percentage' => $percentage, "Total" => $total_spend, "Total_pay" => $total_pay, "Shipping" => $shipping);
 
                             //--------------------------------------------
