@@ -35,47 +35,44 @@ $geo_zone = $geo_zone[0];
         <div class="form-group"><label>Description</label> <input type="text" placeholder="Enter Description" class="form-control" name="description" value='<?php echo $geo_zone['description']; ?>' required></div>
         <hr>
         <div class="add_product col-12">
-            <?php
-            $i = 1;
-            $col = "*";
-            $tb = "geo_zone_list";
-            $opt = 'geo_zone_id = ?';
-            $arr = array($geo_zone['id']);
-            $geo_zone_list = $db->advwhere($col, $tb, $opt, $arr);
-            foreach ($geo_zone_list as $geo_zone_list) {
+            <div class="product col-12">
+                <div class="form-group">
+                    <label class="font-normal">Geo Zone<span class="text-danger"></span></label>
+                    <div>
+                        <select class="dual_select" name="zone[]" tabindex="2" multiple required>
+                            <?php
+                            $col = "geo_zone_id";
+                            $table = "geo_zone_list";
+                            $opt = 'geo_zone_id =? && state_id = ?';
+                            $arr = array($id, 0);
+                            $geo_zone_list_all = $db->advwhere($col, $table, $opt, $arr);
 
-                if ($i == 1) {
-                    $remove = "";
-                } else {
-                    $remove = '<div class="pull-right text-danger btn-remove-product">**Remove**</div>';
-                }
-            ?>
-                <div class="product col-12"><?php echo $remove; ?>
-                    <div class="form-group">
-                        <label class="font-normal">Geo Zone<span class="text-danger"></span></label>
-                        <div>
-                            <select class="chosen-select" name="zone[]" tabindex="2" required>
+                            ?>
+                            <option data-option="" value="0" <?php echo (count($geo_zone_list_all) != 0) ? "selected" : "" ?>>All Zones</option>
+                            <?php
+                            $col = "*";
+                            $tb = "state";
+                            $opt = 'state_status = ? ORDER BY name ASC';
+                            $arr = array(1);
+                            $result = $db->advwhere($col, $tb, $opt, $arr);
+                            foreach ($result as $state) {
+                                $col = "geo_zone_id";
+                                $table = "geo_zone_list";
+                                $opt = 'geo_zone_id =? && state_id = ?';
+                                $arr = array($id, $state['id']);
+                                $geo_zone_list = $db->advwhere($col, $table, $opt, $arr);
 
-                                <option data-option="" value="">Select State</option>
-                                <option data-option="" value="0" <?php echo ($geo_zone_list["state_id"] == 0) ? "selected" : "" ?>>All Zones</option>
-                                <?php
-                                $col = "*";
-                                $tb = "state";
-                                $opt = 'state_status = ? ORDER BY name ASC';
-                                $arr = array(1);
-                                $result = $db->advwhere($col, $tb, $opt, $arr);
-                                foreach ($result as $state) {
-                                ?>
-                                    <option value="<?php echo $state['id']; ?>" <?php echo ($geo_zone_list["state_id"] == $state['id']) ? "selected" : "" ?>><?php echo $state['name']; ?></option>
-                                <?php
-                                } ?>
-                            </select>
-                        </div>
+                            ?>
+                                <option value="<?php echo $state['id']; ?>" <?php echo (count($geo_zone_list) != 0) ? "selected" : ""; ?>><?php echo $state['name']; ?></option>
+                            <?php
+                            } ?>
+                        </select>
                     </div>
                 </div>
-            <?php $i++;
-            } ?>
+            </div>
         </div>
+
+
         <!-- Add more product -->
         <div class="col-sm-12 text-right">
             <a class="btn-add-more-product mb-3"></i> Add More Geo Zone</a>
@@ -93,8 +90,9 @@ $geo_zone = $geo_zone[0];
     $('.chosen-select').chosen({
         width: "100%"
     });
+
     $.validator.setDefaults({
-        ignore: ":hidden:not(.chosen-select)"
+        ignore: ":hidden:not(.dual_select)"
     }) //for all select having class .chosen-select
 
     $('.i-checks').iCheck({
@@ -103,6 +101,9 @@ $geo_zone = $geo_zone[0];
     });
 
     $(document).ready(function() {
+        $('.dual_select').bootstrapDualListbox({
+            selectorMinimalHeight: 160
+        });
 
 
     });

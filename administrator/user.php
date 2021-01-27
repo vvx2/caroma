@@ -229,12 +229,16 @@ $PageName = "user";
             ignore: ":hidden:not(.chosen-select)"
         }) //for all select having class .chosen-select
 
+        $.validator.addMethod("accept", function(value, element, param) {
+            return value.match(new RegExp("." + param + "$"));
+        });
+
         $(document).ready(function() {
 
             $('.dataTables-example').DataTable({
-                pageLength: 25,
+                pageLength: 10,
                 responsive: true,
-                dom: '<"html5buttons"B>lTfgitp',
+                dom: '<"top"<"clear">>p<"html5buttons"B>lTfgitp',
                 buttons: [
 
                     {
@@ -248,10 +252,11 @@ $PageName = "user";
 
             });
 
-            $("#form_distributor").validate({
+            $("#form_user").validate({
                 rules: {
                     name: {
                         required: true,
+                        accept: "[a-zA-Z\s]+"
 
                     },
                     email: {
@@ -286,11 +291,15 @@ $PageName = "user";
 
                     }
 
+                },
+                messages: {
+                    name: {
+                        required: "Please enter name",
+                        accept: "Only Letter Please"
+                    }
                 }
+
             });
-
-
-
         });
     </script>
 

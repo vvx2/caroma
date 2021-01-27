@@ -6,7 +6,7 @@ $id = $_REQUEST['p'];
 
 $col = "o.*, o.id as order_id, st.name as state_name";
 $tb = "orders o left join state st on o.customer_state = st.id";
-$opt = 'o.id = ?';
+$opt = 'o.gateway_order_id = ?';
 $arr = array($id);
 $order = $db->advwhere($col, $tb, $opt, $arr);
 $order = $order[0];
@@ -143,9 +143,9 @@ switch ($status) {
                 <?php
 
                 $table = "order_items o left join product p on o.product_id = p.id left join product_translation pt on o.product_id = pt.product_id";
-                $col = "o.id as id, o.qty as qty, p.id as p_id, p.stock as stock, p.image as image, pt.name as name, o.price as price";
+                $col = "o.id as id, o.qty as qty, p.id as p_id, p.stock as stock, p.image as image, pt.name as name, o.price as price, o.point as point";
                 $opt = 'o.order_id = ? AND pt.language = ? ';
-                $arr = array($id, $_SESSION['language']);
+                $arr = array($order['order_id'], $_SESSION['language']);
                 $order_item = $db->advwhere($col, $table, $opt, $arr);
 
                 foreach ($order_item as $item) {
@@ -156,7 +156,7 @@ switch ($status) {
                         <a href="../products-detail.php?p=<?php echo $item['p_id'] ?>" target="_blank">
                             <table class="table-widths">
                                 <tr>
-                                    <td class="product-imgsx" rowspan="3">
+                                    <td class="product-imgsx" rowspan="5">
                                         <image width="100px" height="100px" src="../img/product/<?php echo $item['image']; ?>">
                                     </td>
                                     <td class="product-detailsx title-bold"><?php echo $item['name']; ?></td>
@@ -166,6 +166,12 @@ switch ($status) {
                                 </tr>
                                 <tr>
                                     <td class="product-detailsx">RM <?php echo number_format($item["price"], 2); ?></td>
+                                </tr>
+                                <tr>
+                                    <td class="product-detailsx"><strong>Points </strong> <?php echo number_format($item["point"], 0); ?> </td>
+                                </tr>
+                                <tr>
+                                    <td class="product-detailsx"><strong>Total Points </strong><?php echo number_format($item["point"] * $item['qty'], 0); ?> </td>
                                 </tr>
                             </table>
                         </a>
@@ -212,20 +218,11 @@ switch ($status) {
                         </tr>
                         <?php
                         if ($_SESSION['type'] == "1") {
-                            $user_point = $db->where("point", "user_point", "user_id", $_SESSION['user_id']);
-                            if (count($user_point) != 0) {
-                                $point = $user_point[0]['point'];
-                            } else {
-                                $point = 0;
-                            }
+
                         ?>
                             <tr>
                                 <td class="total-details-title total-details-title-last">Point Earn</td>
                                 <td class="total-details-titles total-details-title-last" style="color:green;"><?php echo $order["reward_point"]; ?> Points</td>
-                            </tr>
-                            <tr>
-                                <td class="total-details-title total-details-title-last">Balance</td>
-                                <td class="total-details-titles total-details-title-last" style="color:green;"><?php echo $point; ?> Points</td>
                             </tr>
                         <?php
                         }

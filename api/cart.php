@@ -216,7 +216,7 @@ if (isset($_REQUEST['type'])) {
                             if ($user_type == 1) {
                                 $col = "*, DATE_ADD(end, INTERVAL 1 DAY) as new_end_date";
                                 $tb = "promotion pr left join promotion_product prp on pr.id = prp.promotion_id";
-                                $opt = 'pr.status =? && prp.product_id = ? && start <= ? && DATE_ADD(end, INTERVAL 1 DAY) >= ? ORDER BY date_modified';
+                                $opt = 'pr.status =? && prp.product_id = ? && start <= ? && DATE_ADD(end, INTERVAL 1 DAY) >= ? ORDER BY date_modified DESC';
                                 $arr = array(1, $cart['p_id'], $time, $time);
                                 $check_promotion_prodcut = $db->advwhere($col, $tb, $opt, $arr);
 
@@ -261,7 +261,7 @@ if (isset($_REQUEST['type'])) {
                             if ($user_type == 1) {
                                 $col = "*, DATE_ADD(end, INTERVAL 1 DAY) as new_end_date";
                                 $tb = "promotion pr left join promotion_product prp on pr.id = prp.promotion_id";
-                                $opt = 'pr.status =? && prp.product_id = ? && start <= ? && DATE_ADD(end, INTERVAL 1 DAY) >= ? ORDER BY date_modified';
+                                $opt = 'pr.status =? && prp.product_id = ? && start <= ? && DATE_ADD(end, INTERVAL 1 DAY) >= ? ORDER BY date_modified DESC';
                                 $arr = array(1, $key_product_id, $time, $time);
                                 $check_promotion_prodcut = $db->advwhere($col, $tb, $opt, $arr);
 

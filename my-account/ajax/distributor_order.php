@@ -75,7 +75,16 @@ switch ($status) {
                     <table class="table-widths">
                         <tr>
                             <th class="spacing-titles"><i class="fa fa-info-circle"></i></th>
-                            <th class="spacing-titles1">Reason<br><span><?php echo $order['reason']; ?><span></th>
+                            <th class="spacing-titles1">Reason
+                                <?php
+                                if ($order["proof_image"] != NULL || $order["proof_image"] != "") {
+                                ?>
+                                    - <a href="../img/refund/<?php echo $order['proof_image']; ?>" target="_blank" style="color:blue;">Proof</a> <- click for view
+                                <?php
+                                }
+                                ?>
+                                <br><span><?php echo $order['reason']; ?><span>
+                            </th>
                         </tr>
                     </table>
                 </blockquote>
@@ -92,7 +101,22 @@ switch ($status) {
                 <table class="table-widths">
                     <tr>
                         <th class="spacing-titles"><i class="fa fa-truck"></i></th>
-                        <th class="spacing-titles1">Shipping Information<br><span>Citylink: <?php echo ($order['consignment_number'] == "") ? "-" : $order['consignment_number'];; ?><span><br><a style="color : #1a0dab" class="a-links" target="_blank" href="https://www.tracking.my/">Check Now</a></th>
+                        <th class="spacing-titles1">Shipping Information<br>
+                            <?php
+                            if ($order['delivery_type'] == 1) {
+                            ?>
+                                <span>Citylink: <?php echo ($order['consignment_number'] == "") ? "-" : $order['consignment_number'];; ?><span>
+                                        <br><a style="color : #1a0dab" class="a-links" target="_blank" href="https://www.tracking.my/">Check Now</a>
+                                    <?php
+                                } else {
+                                    ?>
+                                        <span>
+                                            Self Taking
+                                        </span>
+                                    <?php
+                                }
+                                    ?>
+                        </th>
                     </tr>
                 </table>
 

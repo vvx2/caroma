@@ -17,6 +17,7 @@ $discount = 0;
 $shipping = 0;
 $total_pay = 0;
 $total_point = 0;
+$total_point_earn = 0;
 $point_discount = 0;
 
 $table = "cart c left join product p on c.product_id = p.id left join product_translation pt on c.product_id = pt.product_id left join product_role_price pp on c.product_id = pp.product_id";
@@ -481,7 +482,7 @@ if (count($get_cart) != 0) {
                                                     if ($user_type == 1) {
                                                         $col = "*, DATE_ADD(end, INTERVAL 1 DAY) as new_end_date";
                                                         $tb = "promotion pr left join promotion_product prp on pr.id = prp.promotion_id";
-                                                        $opt = 'pr.status =? && prp.product_id = ? && start <= ? && DATE_ADD(end, INTERVAL 1 DAY) >= ? ORDER BY date_modified';
+                                                        $opt = 'pr.status =? && prp.product_id = ? && start <= ? && DATE_ADD(end, INTERVAL 1 DAY) >= ? ORDER BY date_modified DESC';
                                                         $arr = array(1, $cart['p_id'], $time, $time);
                                                         $check_promotion_prodcut = $db->advwhere($col, $tb, $opt, $arr);
 
@@ -506,7 +507,7 @@ if (count($get_cart) != 0) {
                                                         $price_display = $normal_price;
                                                     }
 
-                                                    $total_point = $total_point + ($cart["point"] * $cart["qty"]);
+                                                    $total_point_earn = $total_point_earn + ($cart["point"] * $cart["qty"]);
                                                     $sub_total = $sub_total + ($price_display * $cart["qty"]);
 
                                                     $result_gst_value = $db->get("*", "gst_value", 1);
@@ -596,7 +597,7 @@ if (count($get_cart) != 0) {
                                                     <li>
                                                         <div class="subtotal-line">
                                                             <b class="stt-name">Coin Earn:</b>
-                                                            <span class="stt-price" style="color:green;"><?php echo $total_point; ?> Points</span>
+                                                            <span class="stt-price" style="color:green;"><?php echo $total_point_earn; ?> Points</span>
                                                         </div>
                                                     </li>
                                                 <?php

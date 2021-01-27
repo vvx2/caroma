@@ -105,7 +105,7 @@
             </div>
 
             <!--Block 05: Banner promotion 02-->
-            <div class="banner-promotion-02 z-index-20">
+            <!--- <div class="banner-promotion-02 z-index-20">
                 <div class="biolife-banner promotion2 biolife-banner__promotion2 advance">
                     <div class="banner-contain">
                         <div class="container">
@@ -121,40 +121,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <!--Block 02: Banner-->
-            <div class="special-slide fresh-content">
-                <div class="container">
-                    <div class="biolife-service type01 biolife-service__type01 sm-margin-top-0 xs-margin-top-45px">
-                        <b class="txt-show-01">100%Nature</b>
-                        <i class="txt-show-02">Fresh & Healthy</i>
-                        <ul class="services-list">
-                            <li>
-                                <div class="service-inner">
-                                    <span class="biolife-icon biolife-icon-types icon-leaf2"></span>
-                                    <span class="srv-name" href="#">100% Natural</span>
-                                    <p class="srv-details">We only use the freshest home-grown Bentong ginger from our plantation for <br>our beverages.</p>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="service-inner">
-                                    <span class="biolife-icon biolife-icon-types icon-shield"></span>
-                                    <span class="srv-name" href="#">Best Quality</span>
-                                    <p class="srv-details">Our products are filtered carefully before going with clients. Best quality is a must at Caroma for any categories.</p>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="service-inner">
-                                    <span class="biolife-icon biolife-icon-types icon-heathly"></span>
-                                    <span class="srv-name" href="#">Healthy</span>
-                                    <p class="srv-details">Our ingredient is ginger, which is contains high levels of vitamin C, magnesium and other minerals that are beneficial to your overall health.</p>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+            </div> --->
 
 
             <!-- Block 02: Product Tab-->
@@ -269,7 +236,7 @@
                                             if ($user_type == 1) {
                                                 $col = "*, DATE_ADD(end, INTERVAL 1 DAY) as new_end_date";
                                                 $tb = "promotion pr left join promotion_product prp on pr.id = prp.promotion_id";
-                                                $opt = 'pr.status =? && prp.product_id = ? && start <= ? && DATE_ADD(end, INTERVAL 1 DAY) >= ? ORDER BY date_modified';
+                                                $opt = 'pr.status =? && prp.product_id = ? && start <= ? && DATE_ADD(end, INTERVAL 1 DAY) >= ? ORDER BY date_modified DESC';
                                                 $arr = array(1, $hot['p_id'], $time, $time);
                                                 $check_promotion_prodcut = $db->advwhere($col, $tb, $opt, $arr);
 
@@ -379,7 +346,7 @@
                                         if ($user_type == 1) {
                                             $col = "*, DATE_ADD(end, INTERVAL 1 DAY) as new_end_date";
                                             $tb = "promotion pr left join promotion_product prp on pr.id = prp.promotion_id";
-                                            $opt = 'pr.status =? && prp.product_id = ? && start <= ? && DATE_ADD(end, INTERVAL 1 DAY) >= ? ORDER BY date_modified';
+                                            $opt = 'pr.status =? && prp.product_id = ? && start <= ? && DATE_ADD(end, INTERVAL 1 DAY) >= ? ORDER BY date_modified DESC';
                                             $arr = array(1, $new['p_id'], $time, $time);
                                             $check_promotion_prodcut = $db->advwhere($col, $tb, $opt, $arr);
 
@@ -456,22 +423,29 @@
                                 <ul class="products-list biolife-carousel nav-center-02 nav-none-on-mobile eq-height-contain" data-slick='{"rows":1 ,"arrows":true,"dots":false,"infinite":true,"speed":400,"slidesMargin":10,"slidesToShow":4, "responsive":[{"breakpoint":1200, "settings":{ "slidesToShow": 4}},{"breakpoint":992, "settings":{ "slidesToShow": 3, "rows":2, "slidesMargin":20}},{"breakpoint":768, "settings":{ "slidesToShow": 2, "rows":2 ,"slidesMargin":15}}]}'>
                                     <?php
 
-                                    $col = "*, DATE_ADD(end, INTERVAL 1 DAY) as new_end_date";
-                                    $tb = "promotion";
-                                    $opt = 'status = ? && start <= ? && DATE_ADD(end, INTERVAL 1 DAY) >= ? ORDER BY date_modified';
-                                    $arr = array(1, $time, $time);
-                                    $promotion_result = $db->advwhere($col, $tb, $opt, $arr);
+                                    // $col = "*, DATE_ADD(end, INTERVAL 1 DAY) as new_end_date";
+                                    // $tb = "promotion";
+                                    // $opt = 'status = ? && start <= ? && DATE_ADD(end, INTERVAL 1 DAY) >= ? ORDER BY date_modified DESC';
+                                    // $arr = array(1, $time, $time);
+                                    // $promotion_result = $db->advwhere($col, $tb, $opt, $arr);
 
-                                    if (count($promotion_result) == 0) {
+
+                                    $col = "*, p.id as p_id, pt.name as pt_name, pt.description as pt_description, ct.name as ct_name, rate.rating as rating";
+                                    $tb = "(select *, DATE_ADD(end, INTERVAL 1 DAY) as new_end_date from promotion where status = 1 && start <= \"$time\" && DATE_ADD(end, INTERVAL 1 DAY) >= \"$time\") pr left join promotion_product prp on pr.id = prp.promotion_id left join product p on prp.product_id = p.id left join product_translation pt on p.id = pt.product_id left join product_role_price pp on p.id = pp.product_id left join category_translation ct on p.category = ct.category_id left join (SELECT product_id, (sum(qty) / count(product_id)) as rating FROM order_items where rate != 0 group by product_id) rate on p.id = rate.product_id ";
+                                    $opt = 'pt.language = ? && pp.type =? && ct.language =? && p.status =? order by prp.product_id, pr.date_modified DESC';
+                                    $arr = array($language, $user_type, $language, 1);
+                                    $promotion_product_result = $db->advwhere($col, $tb, $opt, $arr);
+                                    if (count($promotion_product_result) == 0) {
                                         echo "<h1 class='title text-info'>PROMOTION IS COMMING SOON</h1>";
                                     } else {
-                                        $promotion_result = $promotion_result[0];
-                                        $col = "*, p.id as p_id, pt.name as pt_name, pt.description as pt_description, ct.name as ct_name, rate.rating as rating";
-                                        $tb = " promotion_product prp left join product p on prp.product_id = p.id left join product_translation pt on p.id = pt.product_id left join product_role_price pp on p.id = pp.product_id left join category_translation ct on p.category = ct.category_id left join (SELECT product_id, (sum(qty) / count(product_id)) as rating FROM order_items where rate != 0 group by product_id) rate on p.id = rate.product_id ";
-                                        $opt = 'prp.promotion_id = ? && pt.language = ? && pp.type =? && ct.language =? && p.status =? ORDER BY rating DESC LIMIT 6';
-                                        $arr = array($promotion_result['id'], $language, $user_type, $language, 1);
-                                        $promotion_product_result = $db->advwhere($col, $tb, $opt, $arr);
+                                        $product_id = 0;
                                         foreach ($promotion_product_result as $promo) {
+                                            if ($product_id == $promo['p_id']) {
+                                                $product_id = $promo['p_id'];
+                                                continue;
+                                            } else {
+                                                $product_id = $promo['p_id'];
+                                            }
 
                                     ?>
                                             <li class="product-item">
@@ -485,14 +459,14 @@
                                                             <span class="sale-label">
                                                                 <?php
                                                                 $normal_price = $promo['price'];
-                                                                if ($promotion_result["type"] == 1) {
+                                                                if ($promo["type"] == 1) {
 
-                                                                    $promo_price = $normal_price - $promotion_result["amt"];
-                                                                    echo "- RM" . number_format($promotion_result["amt"], 2);
+                                                                    $promo_price = $normal_price - $promo["amt"];
+                                                                    echo "- RM" . number_format($promo["amt"], 2);
                                                                 } else {
 
-                                                                    $promo_price = $normal_price - ($normal_price * $promotion_result["percentage"] / 100);
-                                                                    echo "Discount " . $promotion_result["percentage"] . "%";
+                                                                    $promo_price = $normal_price - ($normal_price * $promo["percentage"] / 100);
+                                                                    echo "Discount " . $promo["percentage"] . "%";
                                                                 }
 
 
@@ -549,12 +523,17 @@
                                     if ($user_type == 1) {
 
 
-                                        if (count($promotion_result) == 0) {
+                                        if (count($promotion_product_result) == 0) {
                                             echo "<p class='title text-info'>PROMOTION IS COMMING SOON</p>";
                                         } else {
-
+                                            $product_id = 0;
                                             foreach ($promotion_product_result as $promo) {
-
+                                                if ($product_id == $promo['p_id']) {
+                                                    $product_id = $promo['p_id'];
+                                                    continue;
+                                                } else {
+                                                    $product_id = $promo['p_id'];
+                                                }
 
                                     ?>
 
@@ -568,14 +547,14 @@
                                                                 <span class="sale-label">
                                                                     <?php
                                                                     $normal_price = $promo['price'];
-                                                                    if ($promotion_result["type"] == 1) {
+                                                                    if ($promo["type"] == 1) {
 
-                                                                        $promo_price = $normal_price - $promotion_result["amt"];
-                                                                        echo "- RM" . number_format($promotion_result["amt"], 2);
+                                                                        $promo_price = $normal_price - $promo["amt"];
+                                                                        echo "- RM" . number_format($promo["amt"], 2);
                                                                     } else {
 
-                                                                        $promo_price = $normal_price - ($normal_price * $promotion_result["percentage"] / 100);
-                                                                        echo "Discount " . $promotion_result["percentage"] . "%";
+                                                                        $promo_price = $normal_price - ($normal_price * $promo["percentage"] / 100);
+                                                                        echo "Discount " . $promo["percentage"] . "%";
                                                                     }
 
 
@@ -587,7 +566,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="info">
-                                                            <div class="biolife-countdown" data-datetime="<?php echo $promotion_result['new_end_date']; ?>"></div>
+                                                            <div class="biolife-countdown" data-datetime="<?php echo $promo['new_end_date']; ?>"></div>
                                                             <b class="categories"><?php echo $promo['ct_name']; ?></b>
                                                             <h4 class="product-title"><a href="products-detail.php?p=<?php echo $promo['p_id']; ?>" class="pr-name"><?php echo $promo['pt_name']; ?></a></h4>
                                                             <div class="price ">
@@ -664,7 +643,7 @@
                                         if ($user_type == 1) {
                                             $col = "*, DATE_ADD(end, INTERVAL 1 DAY) as new_end_date";
                                             $tb = "promotion pr left join promotion_product prp on pr.id = prp.promotion_id";
-                                            $opt = 'pr.status =? && prp.product_id = ? && start <= ? && DATE_ADD(end, INTERVAL 1 DAY) >= ? ORDER BY date_modified';
+                                            $opt = 'pr.status =? && prp.product_id = ? && start <= ? && DATE_ADD(end, INTERVAL 1 DAY) >= ? ORDER BY date_modified DESC';
                                             $arr = array(1, $top['p_id'], $time, $time);
                                             $check_promotion_prodcut = $db->advwhere($col, $tb, $opt, $arr);
 
@@ -751,8 +730,42 @@
                 </div>
             </div>
 
+            <!--Block 02: Banner-->
+            <div class="special-slide fresh-content">
+                <div class="container">
+                    <div class="biolife-service type01 biolife-service__type01 sm-margin-top-0 xs-margin-top-45px">
+                        <b class="txt-show-01">100%Nature</b>
+                        <i class="txt-show-02">Fresh & Healthy</i>
+                        <ul class="services-list">
+                            <li>
+                                <div class="service-inner">
+                                    <span class="biolife-icon biolife-icon-types icon-leaf2"></span>
+                                    <span class="srv-name" href="#">100% Natural</span>
+                                    <p class="srv-details">We only use the freshest home-grown Bentong ginger from our plantation for <br>our beverages.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="service-inner">
+                                    <span class="biolife-icon biolife-icon-types icon-shield"></span>
+                                    <span class="srv-name" href="#">Best Quality</span>
+                                    <p class="srv-details">Our products are filtered carefully before going with clients. Best quality is a must at Caroma for any categories.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="service-inner">
+                                    <span class="biolife-icon biolife-icon-types icon-heathly"></span>
+                                    <span class="srv-name" href="#">Healthy</span>
+                                    <p class="srv-details">Our ingredient is ginger, which is contains high levels of vitamin C, magnesium and other minerals that are beneficial to your overall health.</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+
             <!-- Block 05: Banner Promotion-->
-            <div class="banner-promotion xs-margin-top-0 sm-margin-top-60px xs-margin-top-100">
+            <!---- <div class="banner-promotion xs-margin-top-0 sm-margin-top-60px xs-margin-top-100">
                 <div class="biolife-banner promotion6 biolife-banner__promotion6">
                     <div class="banner-contain">
                         <div class="media">
@@ -771,9 +784,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
-
-
+            </div> ---->
 
 
             <!-- Block 10: Brands-->

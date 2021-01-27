@@ -367,7 +367,7 @@
                 '       <i></i>' +
                 '     </button>' +
                 '   </div>' +
-                '   <select multiple="multiple"></select>' +
+                '   <select multiple="multiple" style="overflow-x: scroll;"></select>' +
                 ' </div>' +
                 ' <div class="box2">' +
                 '   <label></label>' +
@@ -385,7 +385,7 @@
                 '       <i></i>' +
                 '     </button>' +
                 '   </div>' +
-                '   <select multiple="multiple"></select>' +
+                '   <select multiple="multiple" style="overflow-x: scroll;"></select>' +
                 ' </div>' +
                 '</div>')
                 .insertBefore(this.element);

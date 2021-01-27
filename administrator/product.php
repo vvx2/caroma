@@ -163,6 +163,7 @@ $PageName = "product";
                                                 <tr>
                                                     <th>#</th>
                                                     <th>Status</th>
+                                                    <th>Action</th>
                                                     <th>Name</th>
                                                     <!-- <th>Description</th> -->
                                                     <th>Stock</th>
@@ -173,7 +174,7 @@ $PageName = "product";
                                                     <th>Category</th>
                                                     <th>Date Modified</th>
                                                     <th>Image</th>
-                                                    <th>Action</th>
+                                                    
 
                                                 </tr>
                                             </thead>
@@ -224,6 +225,11 @@ $PageName = "product";
                                                     <tr>
                                                         <td><?php echo $i; ?></td>
                                                         <td><span class="<?php echo $status_color; ?> font-weight-bold"><?php echo $status_display; ?></span></td>
+                                                        <td>
+                                                            <div class="btn-group">
+                                                                <?php echo $btn_action; ?>
+                                                            </div>
+                                                        </td>
                                                         <td><?php echo $row['product_name']; ?></td>
                                                         <!--- <td><?php echo $row['product_description']; ?></td> --->
                                                         <td><?php echo $row['stock']; ?></td>
@@ -238,11 +244,6 @@ $PageName = "product";
                                                                 <span hidden></span>
                                                                 <i style="color:blue" class="fa fa-chevron-circle-right fa-lg"></i>
                                                             </a>
-                                                        </td>
-                                                        <td>
-                                                            <div class="btn-group">
-                                                                <?php echo $btn_action; ?>
-                                                            </div>
                                                         </td>
 
 
@@ -337,9 +338,9 @@ $PageName = "product";
         $(document).ready(function() {
 
             $('.dataTables-example').DataTable({
-                pageLength: 25,
+                pageLength: 10,
                 responsive: true,
-                dom: '<"html5buttons"B>lTfgitp',
+                dom: '<"top"<"clear">>p<"html5buttons"B>lTfgitp',
                 buttons: [
 
                     {

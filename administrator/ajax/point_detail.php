@@ -5,7 +5,7 @@ $id = $_REQUEST['p'];
 
 $col = "o.*, o.id as order_id, st.name as state_name, u.name as user_name, o.reason as reason";
 $tb = "orders o left join state st on o.customer_state = st.id left join users u on u.id = o.users_id";
-$opt = 'o.id = ?';
+$opt = 'o.gateway_order_id = ?';
 $arr = array($id);
 $order = $db->advwhere($col, $tb, $opt, $arr);
 $order = $order[0];
@@ -19,43 +19,11 @@ if ($payment_type == 1) {
     $payment_display = "Cash";
 }
 
-switch ($status) {
-    case "1":
-        $status_color = "bg-red";
-        $status_show = "Failed / Canceled";
-        $status_desc = "This order was rejected, or your order payment was failed.";
-        break;
-    case "2":
-        $status_color = "bg-yellow";
-        $status_show = "To Ship";
-        $status_desc = "Waiting for the Caroma Malaysia to ship out the products.";
-        break;
-    case "3":
-        $status_color = "bg-success";
-        $status_show = "Shipping";
-        $status_desc = "This order had been shipped.";
-        break;
-    case "4":
-        $status_color = "bg-green";
-        $status_show = "Completed";
-        $status_desc = "The order was delivered.";
-        break;
-    case "5":
-        $status_color = "bg-black";
-        $status_show = "To Cancel";
-        $status_desc = "The order is pending to cancel. You have to refund back the money or Contact your client";
-        break;
-    default:
-        $status_color = "";
-        $status_show = "";
-        $status_desc = "";
-}
-
 
 ?>
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-    <h4 class="modal-title">Order Details</h4>
+    <h4 class="modal-title">Point Details</h4>
 
 </div>
 <div class="modal-body">
@@ -65,34 +33,12 @@ switch ($status) {
         <div class="col-lg-12">
             <div class="contact-box ">
 
-                <h2 class="m-b-xs"><strong><?php echo $status_show; ?></strong><br><span class=""><?php echo $status_desc; ?><span></h2>
-
-
-                <br>
                 <table class="table">
 
                     <thead>
                     </thead>
 
                     <tbody>
-                        <?php if ($status == 1 || $status == 5) { ?>
-                            <tr>
-                                <td>
-                                    Cancel Reason
-                                    <?php
-                                    if ($order["proof_image"] != NULL || $order["proof_image"] != "") {
-                                    ?>
-                                        - <a href="../img/refund/<?php echo $order['proof_image']; ?>" target="_blank">Proof</a>
-                                    <?php
-                                    }
-                                    ?>
-                                </td>
-                                <td>
-                                    <?php echo $order["reason"]; ?>
-                                </td>
-                            </tr>
-
-                        <?php } ?>
                         <tr>
                             <td>Customer Name</td>
                             <td><?php echo $order["customer_name"]; ?></td>
@@ -152,6 +98,8 @@ switch ($status) {
                                 <th>Quantity</th>
                                 <th>Price</th>
                                 <th>Total Price</th>
+                                <th>Point</th>
+                                <th>Total Point</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -160,9 +108,9 @@ switch ($status) {
 
 
                             $table = "order_items o left join product p on o.product_id = p.id left join product_translation pt on o.product_id = pt.product_id";
-                            $col = "o.id as id, o.qty as qty, p.id as p_id, p.stock as stock, p.image as image, pt.name as name, o.price as price";
+                            $col = "o.id as id, o.qty as qty, p.id as p_id, p.stock as stock, p.image as image, pt.name as name, o.price as price, o.point as point";
                             $opt = 'o.order_id = ? AND pt.language = ? ';
-                            $arr = array($id, $_SESSION['language']);
+                            $arr = array($order["order_id"], $_SESSION['language']);
                             $order_item = $db->advwhere($col, $table, $opt, $arr);
 
                             foreach ($order_item as $item) {
@@ -175,8 +123,11 @@ switch ($status) {
                                     <td><?php echo number_format($item["price"], 2); ?></td>
                                     <?php
                                     $total =  $item["qty"] * $item["price"];
+                                    $total_point =  $item["qty"] * $item["point"];
                                     ?>
                                     <td><?php echo number_format($total, 2); ?></td>
+                                    <td><?php echo number_format($item["point"], 0); ?></td>
+                                    <td><?php echo number_format($total_point, 0); ?></td>
                                 </tr>
                             <?php
 

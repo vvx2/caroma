@@ -95,6 +95,11 @@ $city = $distributor['city'];
         ignore: ":hidden:not(.chosen-select)"
     }) //for all select having class .chosen-select
 
+    $.validator.addMethod("accept", function(value, element, param) {
+        return value.match(new RegExp("." + param + "$"));
+    });
+
+
     $('.i-checks').iCheck({
         checkboxClass: 'icheckbox_square-green',
         radioClass: 'iradio_square-green',
@@ -104,43 +109,50 @@ $city = $distributor['city'];
 
         $("#form_distributor_edit").validate({
             rules: {
-                    name: {
-                        required: true,
+                name: {
+                    required: true,
+                    accept: "[a-zA-Z\s]+"
 
-                    },
-                    email: {
-                        required: true,
+                },
+                email: {
+                    required: true,
 
-                    },
-                    contact: {
-                        required: true,
+                },
+                contact: {
+                    required: true,
 
-                    },
-                    password: {
-                        required: true,
+                },
+                password: {
+                    required: true,
 
-                    },
-                    address: {
-                        required: true,
+                },
+                address: {
+                    required: true,
 
-                    },
-                    postcode: {
-                        required: true,
-                        minlength: 5,
-                        maxlength: 5,
-                        digits: true
+                },
+                postcode: {
+                    required: true,
+                    minlength: 5,
+                    maxlength: 5,
+                    digits: true
 
-                    },
-                    city: {
-                        required: true,
+                },
+                city: {
+                    required: true,
 
-                    },
-                    state: {
-                        required: true,
-
-                    }
+                },
+                state: {
+                    required: true,
 
                 }
+
+            },
+            messages: {
+                name: {
+                    required: "Please enter name",
+                    accept: "Only Letter Please"
+                }
+            }
         });
 
 

@@ -114,7 +114,7 @@ if (isset($_REQUEST['type'])) {
                     $discount_amount = 0;
                     $discount_reward = 0;
                     $shipping = 0;
-                    $total_point = 0;
+                    $total_point_earn = 0;
 
                     $table = "cart c left join product_role_price pp on c.product_id = pp.product_id left join product p on c.product_id = p.id";
                     $col = "c.product_id as product_id, c.qty as qty, pp.price as price, p.point as point";
@@ -128,7 +128,7 @@ if (isset($_REQUEST['type'])) {
                             if ($user_type == 1) {
                                 $col = "*, DATE_ADD(end, INTERVAL 1 DAY) as new_end_date";
                                 $tb = "promotion pr left join promotion_product prp on pr.id = prp.promotion_id";
-                                $opt = 'pr.status =? && prp.product_id = ? && start <= ? && DATE_ADD(end, INTERVAL 1 DAY) >= ? ORDER BY date_modified';
+                                $opt = 'pr.status =? && prp.product_id = ? && start <= ? && DATE_ADD(end, INTERVAL 1 DAY) >= ? ORDER BY date_modified DESC';
                                 $arr = array(1, $cart['product_id'], $time, $time);
                                 $check_promotion_prodcut = $db->advwhere($col, $tb, $opt, $arr);
 
@@ -150,7 +150,7 @@ if (isset($_REQUEST['type'])) {
                                 $price_display = $normal_price;
                             }
                             $total_price = $total_price + ($cart['qty'] * $price_display);
-                            $total_point = $total_point + ($cart['qty'] * $cart['point']);
+                            $total_point_earn = $total_point_earn + ($cart['qty'] * $cart['point']);
                         }
                         $total_payment = $total_price;
 
@@ -254,7 +254,7 @@ if (isset($_REQUEST['type'])) {
                         $reason = "UnPaid";
                         $table = "orders";
                         $colname = array("status", "customer_name", "customer_email", "customer_address", "customer_postcode", "customer_city", "customer_state", "customer_contact", "total_price", "coupon_code", "discount_percent", "discount_amount", "discount_reward", "shipping_fee", "gst_rate", "gst_fee", "total_payment", "track_code", "gateway_order_id", "payment_type", "reason", "users_id", "admin_id", "reward_point", "date_created", "date_modified");
-                        $array = array($status_order, $customer_name, $customer_email, $customer_address, $customer_postcode, $customer_city, $customer_state, $customer_contact, $total_price, $coupon_code, $discount_percent, $discount_amount, $discount_reward, $shipping, $gst_value, $gst_tax, $total_payment, $track_code, $order_id, $payment_type, $reason, $user_id, $admin_id, $total_point, $time, $time);
+                        $array = array($status_order, $customer_name, $customer_email, $customer_address, $customer_postcode, $customer_city, $customer_state, $customer_contact, $total_price, $coupon_code, $discount_percent, $discount_amount, $discount_reward, $shipping, $gst_value, $gst_tax, $total_payment, $track_code, $order_id, $payment_type, $reason, $user_id, $admin_id, $total_point_earn, $time, $time);
                         $result_order = $db->insert($table, $colname, $array);
 
                         if ($result_order) {
@@ -280,7 +280,7 @@ if (isset($_REQUEST['type'])) {
                                 if ($user_type == 1) {
                                     $col = "*, DATE_ADD(end, INTERVAL 1 DAY) as new_end_date";
                                     $tb = "promotion pr left join promotion_product prp on pr.id = prp.promotion_id";
-                                    $opt = 'pr.status =? && prp.product_id = ? && start <= ? && DATE_ADD(end, INTERVAL 1 DAY) >= ? ORDER BY date_modified';
+                                    $opt = 'pr.status =? && prp.product_id = ? && start <= ? && DATE_ADD(end, INTERVAL 1 DAY) >= ? ORDER BY date_modified DESC';
                                     $arr = array(1, $cart['product_id'], $time, $time);
                                     $check_promotion_prodcut = $db->advwhere($col, $tb, $opt, $arr);
 
@@ -668,19 +668,19 @@ function validate_coupon($coupon_code, $user_id, $user_type, $sub_total, $shippi
             if ($get_coupon_product != 0) {
                 //check minimum spend
                 // if want count only the product in the coupon, change sub_total to 0 and remove comment
-                $total_spend = $sub_total;
+                $total_spend = 0; // the product spend available in this coupon
 
                 //------------------------------------------
                 // This only count the product in the coupon
                 //------------------------------------------
-                // foreach ($get_coupon_product as $product) {
-                //     $total_spend += $product['qty'] * $product['price'];
-                // }
+                foreach ($get_coupon_product as $product) {
+                    $total_spend += $product['qty'] * $product['price'];
+                }
                 //------------------------------------------
                 // This only count the product in the coupon
                 //------------------------------------------
 
-                if ($total_spend > $min_spend) {
+                if ($sub_total > $min_spend) {
                     //check total limit of the coupon
                     if ($total_times_used < $total_usage_limit) {
                         //check user limit of the coupon
@@ -711,7 +711,7 @@ function validate_coupon($coupon_code, $user_id, $user_type, $sub_total, $shippi
                             //--------------------------------------------
                             //      All true will return this
                             //--------------------------------------------
-                            $total_pay = $total_spend - $reduce_amt;
+                            $total_pay = $sub_total - $reduce_amt;
                             $json_arr = array('Status' => true, 'Amount' => $reduce_amt, 'Percentage' => $percentage, "Total" => $total_spend, "Total_pay" => $total_pay, "Shipping" => $shipping);
 
                             //--------------------------------------------
