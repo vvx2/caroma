@@ -11,6 +11,7 @@ $PageName = "geo_zone";
     <link href="css/plugins/iCheck/custom.css" rel="stylesheet">
     <link href="css/plugins/touchspin/jquery.bootstrap-touchspin.min.css" rel="stylesheet">
     <link href="css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet">
+    <link href="css/plugins/dualListbox/bootstrap-duallistbox.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -61,9 +62,8 @@ $PageName = "geo_zone";
                                             <div class="form-group">
                                                 <label class="font-normal">Geo Zone<span class="text-danger"></span></label>
                                                 <div>
-                                                    <select class="chosen-select" name="zone[]" tabindex="2" required>
+                                                    <select class="dual_select" name="zone[]" tabindex="2" multiple required>
 
-                                                        <option data-option="" value="">Select State</option>
                                                         <option data-option="" value="0">All Zones</option>
                                                         <?php
                                                         $col = "*";
@@ -83,9 +83,9 @@ $PageName = "geo_zone";
 
                                     </div>
                                     <!-- Add more product -->
-                                    <div class="col-sm-12 text-right">
+                                    <!-- <div class="col-sm-12 text-right">
                                         <a class="btn-add-more-product mb-3"></i> Add More Geo Zone</a>
-                                    </div>
+                                    </div> -->
 
                                 </div>
                                 <div class="modal-footer">
@@ -230,6 +230,8 @@ $PageName = "geo_zone";
     <script src="js/plugins/iCheck/icheck.min.js"></script>
     <!-- TouchSpin -->
     <script src="js/plugins/touchspin/jquery.bootstrap-touchspin.min.js"></script>
+    <!-- Dual Listbox -->
+    <script src="js/plugins/dualListbox/jquery.bootstrap-duallistbox.js"></script>
 
     <!-- Page-Level Scripts -->
     <script>
@@ -237,12 +239,10 @@ $PageName = "geo_zone";
         $('body').on('click', '[data-toggle="modal"]', function() {
             $($(this).data("target") + ' .modal-content').load($(this).data("remote"));
         });
-        $('.chosen-select').chosen({
-            width: "100%"
-        });
+
         $.validator.setDefaults({
-            ignore: ":hidden:not(.chosen-select)"
-        }) //for all select having class .chosen-select
+            ignore: ":hidden:not(.dual_select)"
+        }) //for all select having class .dual_select
 
 
         $('.i-checks').iCheck({
@@ -269,15 +269,12 @@ $PageName = "geo_zone";
 
             });
 
+            $('.dual_select').bootstrapDualListbox({
+                selectorMinimalHeight: 160
+            });
+
         });
 
-        <?php
-        $col = "*";
-        $tb = "state";
-        $opt = 'state_status = ? ORDER BY name ASC';
-        $arr = array(1);
-        $result = $db->advwhere($col, $tb, $opt, $arr);
-        ?>
         $(document).on('click', '.btn-add-more-product', function() {
             let product_clone =
                 '<div class="product col-12">' +
@@ -301,6 +298,7 @@ $PageName = "geo_zone";
                 width: "100%"
             });
         });
+
 
         $(document).on('click', '.btn-remove-product', function() {
             $(this).parent().remove();
