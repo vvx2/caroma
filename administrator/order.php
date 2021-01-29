@@ -190,9 +190,9 @@ if ($pagetype == 2) {
                                                     $status = $row['status'];
 
                                                     //approve order when order is status "Failed / Canceled", maybe some reason cause order failed, can approve again with this button
-                                                    $btn_approve = '<a data-remote="ajax/order_approve.php?p=' . $id . '" class="btn btn-white btn-xs" data-toggle="modal" data-target="#myModal">Approve</a>';
+                                                    $btn_approve = '<a data-remote="ajax/order_approve.php?p=' . $id . '" class="btn btn-white btn-xs" data-toggle="modal" data-target="#myModal">Re-Approve</a>';
                                                     //to assign consignment number, status -> shipping
-                                                    $btn_assign_cosignment = '<a data-remote="ajax/order_assign.php?p=' . $id . '" class="btn btn-white btn-xs" data-toggle="modal" data-target="#myModal">Assign Consignment number</a>';
+                                                    $btn_assign_cosignment = '<a data-remote="ajax/order_assign.php?p=' . $id . '" class="btn btn-white btn-xs" data-toggle="modal" data-target="#myModal">Tracking Number</a>';
                                                     //to reject order, status -> failed/rejected
                                                     $btn_cancel = '<a data-remote="ajax/order_cancel.php?p=' . $id . '" class="btn btn-white btn-xs" data-toggle="modal" data-target="#myModal">Cancel</a>';
                                                     //order deliverd, status -> completed

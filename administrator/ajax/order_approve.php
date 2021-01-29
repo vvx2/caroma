@@ -6,8 +6,8 @@ $id = $_REQUEST['p'];
 
 //echo 'ID:'.$id;
 
-$title = "Approve Order";
-$message = "Are you sure you want to <strong>APPROVE</strong> this Order?";
+$title = "Re-Approve Order";
+$message = "Are you sure you want to <strong>RE-APPROVE</strong> this Order?";
 $button = "Yes! Approve It!";
 
 

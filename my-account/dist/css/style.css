@@ -101,7 +101,7 @@ strong {
 }
 
 body {
-  color: #adadad;
+  color: black;
   font-family: "Varela Round", sans-serif;
   font-size: 14px;
   font-style: normal;
@@ -2259,7 +2259,8 @@ a.toggle-left-nav-btn i {
 
 /* Top Navigation */
 .navbar .brand-img {
-  margin: 22px 0 0 0;
+  /*margin: 22px 0 0 0;*/
+  margin: 13px 0 0 0 ;
 }
 .navbar.navbar-inverse {
   background: #fff;

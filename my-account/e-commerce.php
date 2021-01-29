@@ -226,7 +226,7 @@ if($user_type != 2){
 															<td>FPX</td>
 															<td><?php echo $order['total_payment']; ?></td>
 															<td>Pending</td>
-															<td><i data-remote="ajax/distributor_order.php?p=<?php echo $order['id']; ?>" data-toggle="modal" data-target=".bs-example-modal-lg" class="fa fa-cogs toolsx"></i></td>
+															<td><i data-remote="ajax/distributor_order.php?p=<?php echo $order['id']; ?>" data-toggle="modal" data-target=".bs-example-modal-lg" class="fa fa-eye toolsx"></i></td>
 															<td><i data-remote="ajax/distributor_order_assign.php?p=<?php echo $order['id']; ?>" data-toggle="modal" data-target=".bs-example-modal-lg" class="btn btn-success">Confirm</i></td>
 														</tr>
 													<?php $i++;} ?>

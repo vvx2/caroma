@@ -433,6 +433,8 @@ if (count($get_cart) != 0) {
 
 
                                                             <button type="button" class="btn custombtn" data-toggle="modal" data-target="#exampleModalCenter">Continue To Purchase</button>
+                                                            <a href="./shop.php"><button type="button" class="btn custombtn">Cancel</button></a>
+                                                            <a href="./shopping-cart.php"><button type="button" class="btn custombtn">Back</button></a>
 
                                                         </div>
                                                     </div>
@@ -457,7 +459,7 @@ if (count($get_cart) != 0) {
                                             </div>
                                             <div class="modal-footer" style="text-align : center ;">
                                                 <button type="button" class="btn custombtn" data-dismiss="modal">Close</button>
-                                                <button type="submit" name="btn-sbmt" class="btn custombtn btn-submit">Continue To Purchase</button>
+                                                <button type="submit" name="btn-sbmt" class="btn custombtn btn-submit">Purchase</button>
                                             </div>
                                         </div>
                                     </div>

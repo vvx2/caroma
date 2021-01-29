@@ -295,7 +295,7 @@ if ($user_type == "2") {
 																						<td><?php echo $order['customer_name']; ?></td>
 																						<td><?php echo $order['date_created']; ?></td>
 																						<td><?php echo $order['total_payment']; ?></td>
-																						<td><i data-remote="ajax/user_order_detail.php?p=<?php echo $order['id']; ?>" data-toggle="modal" data-target=".bs-example-modal-lg" class="fa fa-cogs toolsx"></i></td>
+																						<td><i data-remote="ajax/user_order_detail.php?p=<?php echo $order['id']; ?>" data-toggle="modal" data-target=".bs-example-modal-lg" class="fa fa-eye toolsx"></i></td>
 																						<td><?php echo $btn_action; ?></td>
 																					</tr>
 																				<?php $i++;

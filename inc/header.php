@@ -1,7 +1,7 @@
 <div class="container">
     <div class="top-bar left">
         <ul class="horizontal-menu">
-            <li><a href="mailto:info@caromacafe.com"><i class="fa fa-envelope" aria-hidden="true"></i>info@caromacafe.com</a></li>
+            <li><a href="mailto:info@caroma.com.my"><i class="fa fa-envelope" aria-hidden="true"></i>info@caroma.com.my</a></li>
             <li><a href="#"><i class="fa fa-phone" aria-hidden="true"></i>+603 6272 5229</a></li></a></li>
             <li><a href="#"><i class="fa fa-fax" aria-hidden="true"></i>+603 6273 5229</a></li></a></li>
         </ul>
