@@ -473,6 +473,7 @@
                                                                 if ($promo_price <= 0) {
                                                                     $promo_price = 0;
                                                                 }
+
                                                                 ?>
                                                             </span>
                                                         </div>
@@ -482,7 +483,7 @@
                                                         <h4 class="product-title"><a href="products-detail.php?p=<?php echo $promo['p_id']; ?>" class="pr-name"><?php echo $promo['pt_name']; ?></a></h4>
                                                         <div class="price ">
                                                             <ins><span class="price-amount"><span class="currencySymbol">RM</span><?php echo number_format($promo_price, 2); ?></span></ins>
-                                                            <del class="<?php echo $hidden_promo; ?>"><span class="price-amount"><span class="currencySymbol">RM</span><?php echo number_format($normal_price, 2); ?></span></del>
+                                                            <del><span class="price-amount"><span class="currencySymbol">RM</span><?php echo number_format($normal_price, 2); ?></span></del>
                                                         </div>
                                                         <div class="slide-down-box">
                                                             <p class="message">All products are carefully selected to ensure food safety.</p>
