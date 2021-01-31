@@ -41,7 +41,7 @@ if($user_type != 2){
 				<!-- Title -->
 				<div class="row heading-bg  bg-yellow">
 					<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-						<h5 class="txt-light">Dashboard</h5>
+						<h5 class="txt-light">Distributor Dashboard</h5>
 					</div>
 				</div>
 				<!-- /Title -->
@@ -313,8 +313,6 @@ if($user_type != 2){
 	<script src="vendors/bower_components/raphael/raphael.min.js"></script>
 	<script src="vendors/bower_components/morris.js/morris.min.js"></script>
 	<script src="dist/js/morris-data.js"></script>
-
-	<script src="vendors/bower_components/jquery-toast-plugin/dist/jquery.toast.min.js"></script>
 
 	<!-- Init JavaScript -->
 	<script src="dist/js/init.js"></script>

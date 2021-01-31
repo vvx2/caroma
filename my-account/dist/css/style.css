@@ -4097,7 +4097,7 @@ button.btn-small.btn-select.fc-agendaWeek-button, .btn-small.btn-select.fc-prev-
 
 .ct-chart-bar .ct-label.ct-horizontal.ct-end {
   font-family: "Varela Round", sans-serif;
-  color: #black;
+  color: black;
 }
 
 /*Easy pie chart*/
@@ -6556,3 +6556,27 @@ ul.inbox-nav li a:hover, ul.inbox-nav li.active a, ul.inbox-nav li a:focus {
 }
 
 /*# sourceMappingURL=style.css.map */
+
+
+/* Custom */
+.center-div{
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  padding-top: 0px !important;
+  line-height : 1.2 ;
+
+}
+
+.btn-textt::before{
+  font-family: FontAwesome;
+  content: " \f044";
+}
+
+@media screen and (max-width: 764px) {
+  .mobile-hide{
+    display : none;
+  }
+}

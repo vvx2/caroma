@@ -90,7 +90,7 @@ if (isset($_REQUEST['p'])) { // refund request status (distributor_wallet_transa
                     <div class="col-sm-6 col-12">
                         <div class="sm-data-box bg-blue">
                             <div class="col-xs-5 text-center pa-0 icon-wrap-left">
-                                <h4><i class="txt-light">BANK NAME</i></h4>
+                                <h4><i class="txt-light center-div">BANK NAME</i></h4>
                             </div>
                             <div class="col-xs-7 text-center pa-0 icon-wrap-left">
                                 <i class="txt-light"><?php echo ($distributor[0]['bank_name'] != NULL) ? $distributor[0]['bank_name'] : "NO BANK NAME"; ?></i>
@@ -100,7 +100,7 @@ if (isset($_REQUEST['p'])) { // refund request status (distributor_wallet_transa
                     <div class="col-sm-6 col-12">
                         <div class="sm-data-box bg-blue">
                             <div class="col-xs-5 text-center pa-0 icon-wrap-left">
-                                <h4><i class="txt-light">BANK ACCOUNT</i></h4>
+                                <h4><i class="txt-light center-div">BANK ACCOUNT</i></h4>
                             </div>
                             <div class="col-xs-7 text-center pa-0 icon-wrap-left">
                                 <i class="txt-light"><?php echo ($distributor[0]['bank_account'] != NULL) ? $distributor[0]['bank_account'] : "NO ACCOUNT"; ?></i>
@@ -121,7 +121,7 @@ if (isset($_REQUEST['p'])) { // refund request status (distributor_wallet_transa
                                 <div class="pull-right">
                                     <h6 class="panel-title txt-light">
                                         <i data-remote="ajax/distributor_bank.php" data-toggle="modal" data-target=".bs-example-modal-lg" class="btn btn-primary"><strong>Edit Bank Detail</strong></i>
-                                        <i data-toggle="modal" data-target=".bs-example-modal-lg" class="btn btn-success" <?php echo (($distributor[0]['bank_account'] == NULL) || ($distributor[0]['bank_name'] == NULL)) ? "disabled" : 'data-remote="ajax/distributor_refund.php"'; ?>><strong>Refund Request</strong></i>
+                                        <i data-toggle="modal" data-target=".bs-example-modal-lg" class="btn btn-success" <?php echo (($distributor[0]['bank_account'] == NULL) || ($distributor[0]['bank_name'] == NULL)) ? "disabled" : 'data-remote="ajax/distributor_refund.php"'; ?>><strong>Withdrawal Request</strong></i>
                                         <a href="wallet_history.php"><i class="btn btn-success"><strong>View Trasaction History</strong></i></a>
                                     </h6>
                                 </div>
