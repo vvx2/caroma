@@ -134,7 +134,7 @@ if ($login == 0) {
                             $json_arr = array('Status' => false, 'Msg' => 'This coupon has reached the maximum number of uses!');
                         }
                     } else {
-                        $json_arr = array('Status' => false, 'Msg' => 'Your consumption has not reached the minimum consumption! Minimum spend is RM' . $min_spend);
+                        $json_arr = array('Status' => false, 'Msg' => 'Your consumption has not reached the minimum consumption! Minimum spend is RM' . number_format($min_spend, 2));
                     }
                 } else {
                     $json_arr = array('Status' => false, 'Msg' => 'The products in cart do not exist in the scope of the coupon!');
