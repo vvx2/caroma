@@ -605,24 +605,24 @@ if (count($get_cart) != 0) {
                                                 <?php
                                                 } else {
                                                 ?>
-                                                    <li>
+                                                    <!-- <li>
                                                         <div class="subtotal-line">
                                                             <b class="stt-name">Discount</b>
                                                             <span class="stt-price" id="get_discount">- RM <?php echo number_format($discount, 2, '.', ''); ?></span>
                                                         </div>
-                                                    </li>
+                                                    </li> -->
                                                     <li>
                                                         <div class="subtotal-line">
                                                             <b class="stt-name">GST Tax (<?php echo $gst_value; ?>%)</b>
                                                             <span class="stt-price" id="get_gst">+ RM <?php echo number_format($gst_tax, 2, '.', ''); ?></span>
                                                         </div>
                                                     </li>
-                                                    <li>
+                                                    <!-- <li>
                                                         <div class="col-sm-12 col-12 no-padding-left">
                                                             <label class="label-width" for="coupon">Coupon Code <span class="text-danger" id="get_coupon_msg"> </span></label>
                                                             <input class="input-width" type="text" name="coupon" id="coupon" value="" placeholder="Enter Coupon Code">
                                                         </div>
-                                                    </li>
+                                                    </li> -->
                                                 <?php
                                                 }
                                                 ?>

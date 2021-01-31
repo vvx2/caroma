@@ -94,26 +94,28 @@ $PageName = "coupon";
                                         </label>
                                     </div>
                                     <hr>
-                                    <label class="font-normal">User type</label>
-                                    <div class="">
-                                        <input type="radio" name="coupon_user" id="coupon_user1" value="1" checked="">
-                                        <label for="coupon_user1">
-                                            Normal User
-                                        </label>
+                                    <div hidden>
+                                        <label class="font-normal">User type</label>
+                                        <div class="">
+                                            <input type="radio" name="coupon_user" id="coupon_user1" value="1" checked="">
+                                            <label for="coupon_user1">
+                                                Normal User
+                                            </label>
+                                        </div>
+                                        <div class="">
+                                            <input type="radio" name="coupon_user" id="coupon_user2" value="2">
+                                            <label for="coupon_user2">
+                                                Distributor
+                                            </label>
+                                        </div>
+                                        <div class="">
+                                            <input type="radio" name="coupon_user" id="coupon_user3" value="3">
+                                            <label for="coupon_user3">
+                                                Dealer
+                                            </label>
+                                        </div>
+                                        <hr>
                                     </div>
-                                    <div class="">
-                                        <input type="radio" name="coupon_user" id="coupon_user2" value="2">
-                                        <label for="coupon_user2">
-                                            Distributor
-                                        </label>
-                                    </div>
-                                    <div class="">
-                                        <input type="radio" name="coupon_user" id="coupon_user3" value="3">
-                                        <label for="coupon_user3">
-                                            Dealer
-                                        </label>
-                                    </div>
-                                    <hr>
                                     <label class="font-normal">Coupon Type</label>
                                     <div class="radio">
                                         <input type="radio" name="coupon_type" id="coupon_type_1" value="1" checked="">
