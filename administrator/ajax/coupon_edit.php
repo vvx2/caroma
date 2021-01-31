@@ -30,6 +30,7 @@ $total_usage_limit = $coupon['total_usage_limit'];
 $status = $coupon['status'];
 $coupon_code = $coupon['code'];
 $delivery_type = $coupon['free_delivery'];
+$coupon_user = $coupon['coupon_user'];
 
 $col = "*";
 $table = "coupon_translation";
@@ -111,6 +112,26 @@ $coupon_description_my = $coupon_name[0]['description'];
             <input type="radio" name="free_delivery" id="delivery_2" value="0" <?php echo ($delivery_type == 0) ? 'checked="" ' : ''; ?>>
             <label for="delivery_2">
                 No
+            </label>
+        </div>
+        <hr>
+        <label class="font-normal">User type</label>
+        <div class="">
+            <input type="radio" name="coupon_user" id="coupon_user1" value="1" <?php echo ($coupon_user == 1) ? 'checked="" ' : ''; ?>>
+            <label for="coupon_user1">
+                Normal User
+            </label>
+        </div>
+        <div class="">
+            <input type="radio" name="coupon_user" id="coupon_user2" value="2" <?php echo ($coupon_user == 2) ? 'checked="" ' : ''; ?>>
+            <label for="coupon_user2">
+                Distributor
+            </label>
+        </div>
+        <div class="">
+            <input type="radio" name="coupon_user" id="coupon_user3" value="3" <?php echo ($coupon_user == 3) ? 'checked="" ' : ''; ?>>
+            <label for="coupon_user3">
+                Dealer
             </label>
         </div>
         <hr>
@@ -214,16 +235,16 @@ $coupon_description_my = $coupon_name[0]['description'];
     });
 
     $('[class="coupon_type"]').change(function() {
-            var coupon_type = $('[class="coupon_type"]:checked').val()
+        var coupon_type = $('[class="coupon_type"]:checked').val()
 
-            if (coupon_type == 1) {
-                $('.amount_part_edit').show();
-                $('.percentage_part_edit').hide();
-            } else if (coupon_type == 2) {
-                $('.amount_part_edit').hide();
-                $('.percentage_part_edit').show();
-            }
-        });
+        if (coupon_type == 1) {
+            $('.amount_part_edit').show();
+            $('.percentage_part_edit').hide();
+        } else if (coupon_type == 2) {
+            $('.amount_part_edit').hide();
+            $('.percentage_part_edit').show();
+        }
+    });
 
     $(document).ready(function() {
 

@@ -51,6 +51,7 @@ if ($login == 0) {
         $total_usage_limit = $coupon['total_usage_limit'];
         $total_times_used = $coupon['total_times_used'];
         $coupon_delivery = $coupon['free_delivery'];
+        $coupon_user = $coupon['coupon_user'];
 
         $start =  $coupon['start'];
         $end =  $coupon['end'];
@@ -58,92 +59,95 @@ if ($login == 0) {
         $date = new DateTime($end);
         $date->add(new DateInterval('P1D'));
         $new_end = $date->format('Y-m-d H:i:s');
+        if ($coupon_user == $user_type) {
+            if (($time >= $start) && ($time < $new_end)) {
 
-        if (($time >= $start) && ($time < $new_end)) {
+                //check status of coupon
+                if ($status == 1) {
 
-            //check status of coupon
-            if ($status == 1) {
+                    //check cart is it exists available product
+                    $count_product = 0;
 
-                //check cart is it exists available product
-                $count_product = 0;
+                    $table = "cart c left join coupon_product cp on c.product_id = cp.product_id left join product_role_price pp on c.product_id = pp.product_id";
+                    $col = "c.qty as qty, pp.price as price";
+                    $opt = 'c.customer_id = ? && cp.coupon_id = ? && pp.type = ?';
+                    $arr = array($user_id, $id, $user_type);
+                    $get_coupon_product = $db->advwhere($col, $table, $opt, $arr);
 
-                $table = "cart c left join coupon_product cp on c.product_id = cp.product_id left join product_role_price pp on c.product_id = pp.product_id";
-                $col = "c.qty as qty, pp.price as price";
-                $opt = 'c.customer_id = ? && cp.coupon_id = ? && pp.type = ?';
-                $arr = array($user_id, $id, $user_type);
-                $get_coupon_product = $db->advwhere($col, $table, $opt, $arr);
+                    if (count($get_coupon_product) != 0) {
+                        //check minimum spend
+                        // if want count only the product in the coupon, change sub_total to 0 and remove comment
+                        $total_product_spend = 0; // the product spend available in this coupon
 
-                if (count($get_coupon_product) != 0) {
-                    //check minimum spend
-                    // if want count only the product in the coupon, change sub_total to 0 and remove comment
-                    $total_product_spend = 0; // the product spend available in this coupon
+                        //------------------------------------------
+                        // This only count the product in the coupon
+                        //------------------------------------------
+                        foreach ($get_coupon_product as $product) {
+                            $total_product_spend += $product['qty'] * $product['price'];
+                        }
+                        //------------------------------------------
+                        // This only count the product in the coupon
+                        //------------------------------------------
 
-                    //------------------------------------------
-                    // This only count the product in the coupon
-                    //------------------------------------------
-                    foreach ($get_coupon_product as $product) {
-                        $total_product_spend += $product['qty'] * $product['price'];
-                    }
-                    //------------------------------------------
-                    // This only count the product in the coupon
-                    //------------------------------------------
+                        if ($sub_total > $min_spend) {
+                            //check total limit of the coupon
+                            if ($total_times_used < $total_usage_limit) {
+                                //check user limit of the coupon
+                                $table = 'orders';
+                                $col = "*";
+                                $opt = 'users_id =? && coupon_code = ? && status != ?';
+                                $arr = array($user_id, $coupon_code, 1);
+                                $check_user_coupon_used = $db->advwhere($col, $table, $opt, $arr);
 
-                    if ($sub_total > $min_spend) {
-                        //check total limit of the coupon
-                        if ($total_times_used < $total_usage_limit) {
-                            //check user limit of the coupon
-                            $table = 'orders';
-                            $col = "*";
-                            $opt = 'users_id =? && coupon_code = ? && status != ?';
-                            $arr = array($user_id, $coupon_code, 1);
-                            $check_user_coupon_used = $db->advwhere($col, $table, $opt, $arr);
+                                if (count($check_user_coupon_used) < $usage_limit) {
+                                    //check type
 
-                            if (count($check_user_coupon_used) < $usage_limit) {
-                                //check type
-
-                                if ($type == 1) {
-                                    //if amount return amount reduce
-                                    $reduce_amt = $amt;
-                                } else if ($type == 2) {
-                                    //if percentage, count amount to reduce with no more than capped 
-                                    $reduce_amt = $total_product_spend * ($percentage / 100);
-                                    if ($reduce_amt > $capped) {
-                                        $reduce_amt = $capped;
+                                    if ($type == 1) {
+                                        //if amount return amount reduce
+                                        $reduce_amt = $amt;
+                                    } else if ($type == 2) {
+                                        //if percentage, count amount to reduce with no more than capped 
+                                        $reduce_amt = $total_product_spend * ($percentage / 100);
+                                        if ($reduce_amt > $capped) {
+                                            $reduce_amt = $capped;
+                                        }
                                     }
+
+                                    //check delivery fee
+                                    if ($coupon_delivery == 1) {
+                                        $shipping = 0;
+                                    }
+
+                                    //--------------------------------------------
+                                    //      All true will return this
+                                    //--------------------------------------------
+                                    $total_pay = $sub_total - $reduce_amt + $shipping - $reduce_point_fee;
+                                    $json_arr = array('Status' => true, 'Amount' => $reduce_amt, "Total" => $total_product_spend, "Total_pay" => $total_pay, "Shipping_fee" => $shipping, "Point_discount" => $reduce_point_fee);
+
+                                    //--------------------------------------------
+                                    //      All true will return this
+                                    //--------------------------------------------
+
+                                } else {
+                                    $json_arr = array('Status' => false, 'Msg' => 'You have reached the maximum number of uses of this coupon!');
                                 }
-
-                                //check delivery fee
-                                if ($coupon_delivery == 1) {
-                                    $shipping = 0;
-                                }
-
-                                //--------------------------------------------
-                                //      All true will return this
-                                //--------------------------------------------
-                                $total_pay = $sub_total - $reduce_amt + $shipping - $reduce_point_fee;
-                                $json_arr = array('Status' => true, 'Amount' => $reduce_amt, "Total" => $total_product_spend, "Total_pay" => $total_pay, "Shipping_fee" => $shipping, "Point_discount" => $reduce_point_fee);
-
-                                //--------------------------------------------
-                                //      All true will return this
-                                //--------------------------------------------
-
                             } else {
-                                $json_arr = array('Status' => false, 'Msg' => 'You have reached the maximum number of uses of this coupon!');
+                                $json_arr = array('Status' => false, 'Msg' => 'This coupon has reached the maximum number of uses!');
                             }
                         } else {
-                            $json_arr = array('Status' => false, 'Msg' => 'This coupon has reached the maximum number of uses!');
+                            $json_arr = array('Status' => false, 'Msg' => 'Your consumption has not reached the minimum consumption! Minimum spend is RM' . number_format($min_spend, 2));
                         }
                     } else {
-                        $json_arr = array('Status' => false, 'Msg' => 'Your consumption has not reached the minimum consumption! Minimum spend is RM' . number_format($min_spend, 2));
+                        $json_arr = array('Status' => false, 'Msg' => 'The products in cart do not exist in the scope of the coupon!');
                     }
                 } else {
-                    $json_arr = array('Status' => false, 'Msg' => 'The products in cart do not exist in the scope of the coupon!');
+                    $json_arr = array('Status' => false, 'Msg' => 'Coupon Code Is Not Available!');
                 }
             } else {
-                $json_arr = array('Status' => false, 'Msg' => 'Coupon Code Is Not Available!');
+                $json_arr = array('Status' => false, 'Msg' => 'Not in date range!');
             }
         } else {
-            $json_arr = array('Status' => false, 'Msg' => 'Not in date range!');
+            $json_arr = array('Status' => false, 'Msg' => 'This coupon is not suitable for your user type!');
         }
     }
 }
