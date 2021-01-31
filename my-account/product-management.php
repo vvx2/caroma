@@ -109,7 +109,7 @@ if ($user_type != 2) {
 
 															$col = "*, p.id as p_id, pt.name as pt_name, pt.description as pt_description, ct.name as ct_name";
 															$tb = "product p left join product_translation pt on p.id = pt.product_id left join product_role_price pp on p.id = pp.product_id left join category_translation ct on p.category = ct.category_id ";
-															$opt = 'pt.language = ? && pp.type =? && ct.language =? && p.status =? ORDER BY p.date_modified DESC';
+															$opt = 'pt.language = ? && pp.type =? && ct.language =? && p.status =? ORDER BY pt.name ASC';
 															$arr = array($language, 3, $language, 1);
 															$result = $db->advwhere($col, $tb, $opt, $arr);
 															if (count($result) != 0) {
@@ -254,7 +254,7 @@ if ($user_type != 2) {
 											<hr>
 											<div class="row" id="image_display">
 												<?php
-												echo $product['p_id'];
+												// echo $product['p_id'];
 												$col = "*";
 												$tb = "product_image";
 												$opt = 'product_id = ?';

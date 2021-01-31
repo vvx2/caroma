@@ -111,7 +111,7 @@ if($user_type != 2){
 												<a href="product-edit.php?p=<?php echo $product['p_id']; ?>"> <img src="../img/product/<?php echo $product['image']; ?>" class="img-responsive" alt="Product Image" /> </a>
 											</div>
 											<div class="info text-center">
-												<h5>National Fresh Fruit</h5>
+												<h5><?php echo $product['pt_name']; ?></h5>
 												<span class="product-spec capitalize-font block mt-5 mb-5"><?php echo $product['ct_name']; ?></span>
 												<span class="product-spec capitalize-font block mt-5 mb-5 <?php echo ($product['dp_status'] == 1) ? "text-success" : "text-danger"; ?>"><strong><?php echo ($product['dp_status'] == 1) ? "Activate" : "Deactivate"; ?></strong></span>
 												<span class="head-font block text-warning "><strong>RM<?php echo number_format($product['price'], 2); ?></strong></span>
