@@ -351,26 +351,51 @@ if (isset($_REQUEST['type'])) {
                                     // loop all product in cart
                                     foreach ($result_cart as $cart) {
 
-                                        // get product detail.
-                                        $col = "id, stock";
-                                        $table = "product";
-                                        $opt = 'id = ?';
-                                        $arr = array($cart['product_id']);
-                                        $product = $db->advwhere($col, $table, $opt, $arr);
 
-                                        //if product exists then execute
-                                        if ($product) {
+                                        if ($user_type == 3) {
+                                            // get product detail.
+                                            $col = "product_id, stock";
+                                            $table = "distributor_product";
+                                            $opt = 'product_id = ? && user_id = ?';
+                                            $arr = array($cart['product_id'], $admin_id);
+                                            $product = $db->advwhere($col, $table, $opt, $arr);
 
-                                            $product_id = $product[0]["id"];
-                                            $product_stock = $product[0]["stock"];
-                                            $reduced_prodcut_stock = $product_stock - $cart['qty'];
+                                            //if product exists then execute
+                                            if ($product) {
 
-                                            $tablename = "product";
-                                            $data = "stock = ?, date_modified = ? WHERE id = ?";
-                                            $array = array($reduced_prodcut_stock, $time, $product_id);
-                                            $result_reduce_stock = $db->update($tablename, $data, $array);
+                                                $product_id = $product[0]["product_id"];
+                                                $product_stock = $product[0]["stock"];
+                                                $reduced_prodcut_stock = $product_stock - $cart['qty'];
+
+                                                $tablename = "distributor_product";
+                                                $data = "stock = ?, date_modified = ? WHERE product_id = ? && user_id = ?";
+                                                $array = array($reduced_prodcut_stock, $time, $product_id, $admin_id);
+                                                $result_reduce_stock = $db->update($tablename, $data, $array);
+                                            } else {
+                                                continue;
+                                            }
                                         } else {
-                                            continue;
+                                            // get product detail.
+                                            $col = "id, stock";
+                                            $table = "product";
+                                            $opt = 'id = ?';
+                                            $arr = array($cart['product_id']);
+                                            $product = $db->advwhere($col, $table, $opt, $arr);
+
+                                            //if product exists then execute
+                                            if ($product) {
+
+                                                $product_id = $product[0]["id"];
+                                                $product_stock = $product[0]["stock"];
+                                                $reduced_prodcut_stock = $product_stock - $cart['qty'];
+
+                                                $tablename = "product";
+                                                $data = "stock = ?, date_modified = ? WHERE id = ?";
+                                                $array = array($reduced_prodcut_stock, $time, $product_id);
+                                                $result_reduce_stock = $db->update($tablename, $data, $array);
+                                            } else {
+                                                continue;
+                                            }
                                         }
                                     }
 
