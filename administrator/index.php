@@ -263,7 +263,7 @@ $count_reject = count($count_reject);
                         <div class="widget style1 blue-bg">
                             <div class="row">
                                 <div class="col-4">
-                                    <a href="promotion.php" style="color:white;"><i class="fa fa-exclamation-circle fa-5x"></i></a>
+                                    <a href="stock.php" style="color:white;"><i class="fa fa-exclamation-circle fa-5x"></i></a>
                                 </div>
                                 <div class="col-8 text-right">
                                     <span> Replenish Stock (less than 10)</span>
