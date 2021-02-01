@@ -362,7 +362,7 @@ if ($user_type != 2) {
 
 	<script>
 		//for check coupon
-		$('[name="product"]').blur(function() {
+		$('[name="product"]').change(function() {
 			var product_id = $(this).val()
 			$('#loadDiv').show();
 			$.post('api/get_product_details.php', {
