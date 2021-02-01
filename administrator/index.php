@@ -105,6 +105,12 @@ $arr = array(1);
 $count_promotion = $db->advwhere($col, $table, $opt, $arr);
 $count_promotion = count($count_promotion);
 
+$table = "product";
+$col = "id";
+$opt = 'stock <= ? ';
+$arr = array(10);
+$count_stock = $db->advwhere($col, $table, $opt, $arr);
+$count_stock = count($count_stock);
 
 $table = "distributor_wallet_transaction";
 $col = "id";
@@ -227,7 +233,7 @@ $count_reject = count($count_reject);
 
                 </div>
                 <div class="row">
-                    <div class="col-lg-6">
+                    <div class="col-lg-4">
                         <div class="widget style1 blue-bg">
                             <div class="row">
                                 <div class="col-4">
@@ -240,7 +246,7 @@ $count_reject = count($count_reject);
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-6">
+                    <div class="col-lg-4">
                         <div class="widget style1 blue-bg">
                             <div class="row">
                                 <div class="col-4">
@@ -249,6 +255,19 @@ $count_reject = count($count_reject);
                                 <div class="col-8 text-right">
                                     <span> Promotion </span>
                                     <h2 class="font-bold"><?php echo $count_promotion; ?></h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="widget style1 blue-bg">
+                            <div class="row">
+                                <div class="col-4">
+                                    <a href="promotion.php" style="color:white;"><i class="fa fa-exclamation-circle fa-5x"></i></a>
+                                </div>
+                                <div class="col-8 text-right">
+                                    <span> Replenish Stock (less than 10)</span>
+                                    <h2 class="font-bold"><?php echo $count_stock; ?></h2>
                                 </div>
                             </div>
                         </div>

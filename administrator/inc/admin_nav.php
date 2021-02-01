@@ -56,6 +56,9 @@ if (isset($refund_type)) {
 			<li class="<?php echo ($PageName == 'product') ? 'active' : ''; ?>">
 				<a href="product.php"><i class="fa fa-th-large"></i> <span class="nav-label">Product</span></a>
 			</li>
+			<li class="<?php echo ($PageName == 'stock') ? 'active' : ''; ?>">
+				<a href="stock.php"><i class="fa fa-th-large"></i> <span class="nav-label">Replenish Stock</span></a>
+			</li>
 
 			<li class="<?php echo ($PageName == 'category') ? 'active' : ''; ?>">
 				<a href="category.php"><i class="fa fa-th-large"></i> <span class="nav-label">Category</span></a>
