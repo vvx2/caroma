@@ -5,10 +5,10 @@ if ($login != 1) {
     echo "<script>window.location.replace('../login.php')</script>";
     exit();
 }
-if($user_type != 2){
-	echo "<script>alert(\" Your are not Distributor\");
+if ($user_type != 2) {
+    echo "<script>alert(\" Your are not Distributor\");
 	window.location.href='index.php';</script>";
-	exit();
+    exit();
 }
 // page 1: pending, 2: success, 3: rejecteed
 if (isset($_REQUEST['p'])) { // refund request status (distributor_wallet_transaction)
@@ -156,8 +156,7 @@ if (isset($_REQUEST['p'])) { // refund request status (distributor_wallet_transa
                                                                                     <th>#</th>
                                                                                     <th>Status</th>
                                                                                     <th>Amount</th>
-                                                                                    <th>Refer</th>
-                                                                                    <th>Action</th>
+                                                                                    <th>Refer/Reason</th>
                                                                                 </tr>
                                                                             </thead>
                                                                             <tfoot>
@@ -165,8 +164,7 @@ if (isset($_REQUEST['p'])) { // refund request status (distributor_wallet_transa
                                                                                     <th>#</th>
                                                                                     <th>Status</th>
                                                                                     <th>Amount</th>
-                                                                                    <th>Refer</th>
-                                                                                    <th>Action</th>
+                                                                                    <th>Refer/Reason</th>
                                                                                 </tr>
                                                                             </tfoot>
                                                                             <tbody>
@@ -180,18 +178,24 @@ if (isset($_REQUEST['p'])) { // refund request status (distributor_wallet_transa
                                                                                 $distributor_wallet = $db->advwhere($col, $tb, $opt, $arr);
                                                                                 foreach ($distributor_wallet as $wallet) {
                                                                                     $status = $wallet['status'];
+                                                                                    $reason = $wallet['reason'];
+                                                                                    $image = $wallet['image'];
                                                                                     switch ($status) {
                                                                                         case "1":
                                                                                             $status_color = "text-warning";
                                                                                             $status_display = "Pending";
+                                                                                            $reaon_refer = "-";
                                                                                             break;
                                                                                         case "2":
                                                                                             $status_color = "text-success";
                                                                                             $status_display = "Success";
+                                                                                            $reaon_refer = '<a href="../img/refund/' . $wallet['image'] . '" target="_blank"> <span hidden></span> <i style="color:blue" class="fa fa-chevron-circle-right fa-lg"> View</i> </a>';
+
                                                                                             break;
                                                                                         case "3":
                                                                                             $status_color = "text-warning";
                                                                                             $status_display = "Reject";
+                                                                                            $reaon_refer = $reason;
                                                                                     }
                                                                                 ?>
 
@@ -199,8 +203,7 @@ if (isset($_REQUEST['p'])) { // refund request status (distributor_wallet_transa
                                                                                         <td><?php echo $i; ?></td>
                                                                                         <td class="<?php echo $status_color; ?>"><strong><?php echo $status_display; ?></strong></td>
                                                                                         <td><?php echo $wallet['amount']; ?></td>
-                                                                                        <td><?php echo "-"; ?></td>
-                                                                                        <td><?php echo "-"; ?></td>
+                                                                                        <td><?php echo $reaon_refer; ?></td>
                                                                                     </tr>
                                                                                 <?php $i++;
                                                                                 } ?>
@@ -256,57 +259,57 @@ if (isset($_REQUEST['p'])) { // refund request status (distributor_wallet_transa
 
     <!-- Bootstrap Core JavaScript -->
     <script src="vendors/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-    
-	<!-- Vector Maps JavaScript -->
+
+    <!-- Vector Maps JavaScript -->
     <script src="vendors/vectormap/jquery-jvectormap-2.0.2.min.js"></script>
     <script src="vendors/vectormap/jquery-jvectormap-world-mill-en.js"></script>
-	<script src="dist/js/vectormap-data.js"></script>
-	
-	<!-- Calender JavaScripts -->
-	<script src="vendors/bower_components/moment/min/moment.min.js"></script>
-	<script src="vendors/jquery-ui.min.js"></script>
-	<script src="vendors/bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
-	<script src="dist/js/fullcalendar-data.js"></script>
-	
-	<!-- Progressbar Animation JavaScript -->
-	<script src="vendors/bower_components/waypoints/lib/jquery.waypoints.min.js"></script>
-	<script src="vendors/bower_components/Counter-Up/jquery.counterup.min.js"></script>
-	
-	<!-- Data table JavaScript -->
-	<script src="vendors/bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
-	<script src="vendors/bower_components/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
-	<script src="vendors/bower_components/datatables.net-buttons/js/buttons.flash.min.js"></script>
-	<script src="vendors/bower_components/jszip/dist/jszip.min.js"></script>
-	<script src="vendors/bower_components/pdfmake/build/pdfmake.min.js"></script>
-	<script src="vendors/bower_components/pdfmake/build/vfs_fonts.js"></script>
-	
-	<script src="vendors/bower_components/datatables.net-buttons/js/buttons.html5.min.js"></script>
-	<script src="vendors/bower_components/datatables.net-buttons/js/buttons.print.min.js"></script>
-	<script src="dist/js/export-table-data.js"></script>
-	
-	<!-- Slimscroll JavaScript -->
-	<script src="dist/js/jquery.slimscroll.js"></script>
-	
-	<!-- Fancy Dropdown JS -->
-	<script src="dist/js/dropdown-bootstrap-extended.js"></script>
-	
-	<!-- Sparkline JavaScript -->
-	<script src="vendors/jquery.sparkline/dist/jquery.sparkline.min.js"></script>
-	
-	<script src="vendors/bower_components/jquery.easy-pie-chart/dist/jquery.easypiechart.min.js"></script>
-	<script src="dist/js/skills-counter-data.js"></script>
-	
-	<script src="vendors/bower_components/bootstrap-validator/dist/validator.min.js"></script>
-	
-	
-	<!-- Morris Charts JavaScript -->
+    <script src="dist/js/vectormap-data.js"></script>
+
+    <!-- Calender JavaScripts -->
+    <script src="vendors/bower_components/moment/min/moment.min.js"></script>
+    <script src="vendors/jquery-ui.min.js"></script>
+    <script src="vendors/bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
+    <script src="dist/js/fullcalendar-data.js"></script>
+
+    <!-- Progressbar Animation JavaScript -->
+    <script src="vendors/bower_components/waypoints/lib/jquery.waypoints.min.js"></script>
+    <script src="vendors/bower_components/Counter-Up/jquery.counterup.min.js"></script>
+
+    <!-- Data table JavaScript -->
+    <script src="vendors/bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script src="vendors/bower_components/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="vendors/bower_components/datatables.net-buttons/js/buttons.flash.min.js"></script>
+    <script src="vendors/bower_components/jszip/dist/jszip.min.js"></script>
+    <script src="vendors/bower_components/pdfmake/build/pdfmake.min.js"></script>
+    <script src="vendors/bower_components/pdfmake/build/vfs_fonts.js"></script>
+
+    <script src="vendors/bower_components/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="vendors/bower_components/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="dist/js/export-table-data.js"></script>
+
+    <!-- Slimscroll JavaScript -->
+    <script src="dist/js/jquery.slimscroll.js"></script>
+
+    <!-- Fancy Dropdown JS -->
+    <script src="dist/js/dropdown-bootstrap-extended.js"></script>
+
+    <!-- Sparkline JavaScript -->
+    <script src="vendors/jquery.sparkline/dist/jquery.sparkline.min.js"></script>
+
+    <script src="vendors/bower_components/jquery.easy-pie-chart/dist/jquery.easypiechart.min.js"></script>
+    <script src="dist/js/skills-counter-data.js"></script>
+
+    <script src="vendors/bower_components/bootstrap-validator/dist/validator.min.js"></script>
+
+
+    <!-- Morris Charts JavaScript -->
     <script src="vendors/bower_components/raphael/raphael.min.js"></script>
     <script src="vendors/bower_components/morris.js/morris.min.js"></script>
     <script src="dist/js/morris-data.js"></script>
-	
-	<!-- Init JavaScript -->
-	<script src="dist/js/init.js"></script>
-	<script src="dist/js/widgets-data.js"></script>
+
+    <!-- Init JavaScript -->
+    <script src="dist/js/init.js"></script>
+    <script src="dist/js/widgets-data.js"></script>
     <script>
         //this script for modal 
         $('body').on('click', '[data-toggle="modal"]', function() {
