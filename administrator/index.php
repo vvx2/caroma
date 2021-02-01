@@ -150,40 +150,40 @@ $count_reject = count($count_reject);
             <!-- top nav -->
             <div class="wrapper wrapper-content wrapperes">
 
-            <div class="ibox-content">
+                <div class="ibox-content" style="background-color: #f8d7da; border-color: #f8d7da;">
 
-                <div class="form-group" id="data_5">
-                    <label class="font-normal">Reporting Management</label>
-                    <form role="form" id="form_get_order" method="post">
+                    <div class="form-group" id="data_5">
+                        <label class="font-bold">Reporting Management</label>
+                        <form role="form" id="form_get_order" method="post">
 
-                        <div class="input-daterange input-group" id="datepicker">
+                            <div class="input-daterange input-group" id="datepicker">
+                                <span class="input-group-addon">&nbsp; Date From &nbsp;</span>
+                                <input type="text" class="form-control-sm form-control" placeholder="Please Select Date Period" name="min" id="min" value="" />
+                                <span class="input-group-addon">&nbsp;&nbsp; Date To &nbsp;</span>
+                                <input type="text" class="form-control-sm form-control" placeholder="Please Select Date Period" name="max" id="max" value="" />
+                                &nbsp;
 
-                            <input type="text" class="form-control-sm form-control" placeholder="Please Select Date Period" name="min" id="min" value="" />
-                            <span class="input-group-addon">to</span>
-                            <input type="text" class="form-control-sm form-control" placeholder="Please Select Date Period" name="max" id="max" value="" />
-                            &nbsp;
+
+                                <a id="get_order" class="btn btn-white btn-xs" onclick="get_order();"><i class="fa fa-search"></i> Search </a>
+
+                            </div>
+                        </form>
+                    </div>
+
+                    <script type="text/javascript">
+                        var from;
+                        var to;
 
 
-                            <a id="get_order" class="btn btn-white btn-xs" onclick="get_order();"><i class="fa fa-search"></i> Search </a>
+                        function get_order() {
+                            from = document.getElementById("min");
+                            to = document.getElementById("max");
+                            window.open("report.php?from=" + from.value + "&to=" + to.value, '_blank');
+                        }
+                    </script>
 
-                        </div>
-                    </form>
                 </div>
-
-                <script type="text/javascript">
-                    var from;
-                    var to;
-
-
-                    function get_order() {
-                        from = document.getElementById("min");
-                        to = document.getElementById("max");
-                        window.open("report.php?from=" + from.value + "&to=" + to.value, '_blank');
-                    }
-                </script>
-
-                </div>
-
+                <br>
                 <div class="row">
                     <div class="col-lg-3">
                         <div class="widget style1 navy-bg">
@@ -396,14 +396,14 @@ $count_reject = count($count_reject);
 
             </div>
 
-            <div class="ibox-content" style="background-color: #f8d7da; border-color: #f8d7da;">
+            <!-- <div class="ibox-content" style="background-color: #f8d7da; border-color: #f8d7da;">
 
                 <div class="form-group" id="data_5">
                     <label class="font-bold">Date From to Date To </label>
                     <form role="form" id="form_get_order" method="post">
 
                         <div class="input-daterange input-group" id="datepicker">
-
+                            <span class="input-group-addon">to</span>
                             <input type="text" class="form-control-sm form-control" name="min" id="min" value="" />
                             <span class="input-group-addon">to</span>
                             <input type="text" class="form-control-sm form-control" name="max" id="max" value="" />
@@ -428,9 +428,7 @@ $count_reject = count($count_reject);
                     }
                 </script>
 
-
-
-            </div>
+            </div> -->
 
         </div>
     </div>
