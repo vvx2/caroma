@@ -69,14 +69,14 @@ if($user_type != 2){
 		<div class="page-wrapper">
 			<div class="container-fluid">
 				<!-- Title -->
-				<div class="row heading-bg bg-pink">
+				<div class="row heading-bg bg-grey">
 					<div class="col-lg-10 col-md-4 col-sm-4 col-xs-6">
 						<h5 class="txt-light">products List</h5>
 					</div>
 					<!-- Breadcrumb -->
 					<div class="col-lg-2 col-sm-8 col-md-8 col-xs-6">
 						<div class="row">
-							<a href="product-management.php"><button class="btn btn-success btn-anim"><i class="fa fa-pencil-square-o"></i><span class="btn-text">Add New Products</span></button></a>
+							<a href="product-management.php"><button class="btn btn-success btn-anim"><i class="fa fa-pencil-square-o"></i><span class="btn-text btn-textt">Add New Products</span></button></a>
 						</div>
 					</div>
 					<!-- /Breadcrumb -->

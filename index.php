@@ -735,8 +735,8 @@
             <div class="special-slide fresh-content">
                 <div class="container">
                     <div class="biolife-service type01 biolife-service__type01 sm-margin-top-0 xs-margin-top-45px">
-                        <b class="txt-show-01">100%Nature</b>
-                        <i class="txt-show-02">Fresh & Healthy</i>
+                        <!--<b class="txt-show-01">100%Nature</b>
+                        <i class="txt-show-02">Fresh & Healthy</i> -->
                         <ul class="services-list">
                             <li>
                                 <div class="service-inner">
@@ -865,11 +865,6 @@
                         <li>
                             <a href="#" class="link-brand-item">
                                 <img src="assets/images/partner/shopee-01.png" width="234" height="121" alt="">
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="link-brand-item">
-                                <img src="assets/images/partner/sogo-kl-01.png" width="234" height="121" alt="">
                             </a>
                         </li>
                         <li>

@@ -92,7 +92,7 @@ if($user_type != 2){
                                 </div>
                                 <div class="pull-right">
                                     <h6 class="panel-title txt-light">
-                                        <i data-remote="ajax/distributor_refund.php" data-toggle="modal" data-target=".bs-example-modal-lg" class="btn btn-success"><strong>Refund Request</strong></i>
+                                        <i data-remote="ajax/distributor_refund.php" data-toggle="modal" data-target=".bs-example-modal-lg" class="btn btn-success"><strong>Withdrawal Request</strong></i>
                                     </h6>
                                 </div>
                                 <div class="clearfix"></div>
@@ -217,28 +217,57 @@ if($user_type != 2){
 
     <!-- Bootstrap Core JavaScript -->
     <script src="vendors/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-
-    <!-- Calender JavaScripts -->
-    <script src="vendors/bower_components/moment/min/moment.min.js"></script>
-    <script src="vendors/jquery-ui.min.js"></script>
-    <script src="vendors/bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
-    <script src="dist/js/fullcalendar-data.js"></script>
-
-    <!-- Data table JavaScript -->
-    <script src="vendors/bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
-    <script src="vendors/bower_components/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
-    <script src="vendors/bower_components/datatables.net-buttons/js/buttons.flash.min.js"></script>
-    <script src="vendors/bower_components/jszip/dist/jszip.min.js"></script>
-    <script src="vendors/bower_components/pdfmake/build/pdfmake.min.js"></script>
-    <script src="vendors/bower_components/pdfmake/build/vfs_fonts.js"></script>
-
-    <script src="vendors/bower_components/datatables.net-buttons/js/buttons.html5.min.js"></script>
-    <script src="vendors/bower_components/datatables.net-buttons/js/buttons.print.min.js"></script>
-    <script src="dist/js/export-table-data.js"></script>
-
-    <!-- Init JavaScript -->
-    <script src="dist/js/init.js"></script>
-    <script src="dist/js/widgets-data.js"></script>
+    
+	<!-- Vector Maps JavaScript -->
+    <script src="vendors/vectormap/jquery-jvectormap-2.0.2.min.js"></script>
+    <script src="vendors/vectormap/jquery-jvectormap-world-mill-en.js"></script>
+	<script src="dist/js/vectormap-data.js"></script>
+	
+	<!-- Calender JavaScripts -->
+	<script src="vendors/bower_components/moment/min/moment.min.js"></script>
+	<script src="vendors/jquery-ui.min.js"></script>
+	<script src="vendors/bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
+	<script src="dist/js/fullcalendar-data.js"></script>
+	
+	<!-- Progressbar Animation JavaScript -->
+	<script src="vendors/bower_components/waypoints/lib/jquery.waypoints.min.js"></script>
+	<script src="vendors/bower_components/Counter-Up/jquery.counterup.min.js"></script>
+	
+	<!-- Data table JavaScript -->
+	<script src="vendors/bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
+	<script src="vendors/bower_components/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+	<script src="vendors/bower_components/datatables.net-buttons/js/buttons.flash.min.js"></script>
+	<script src="vendors/bower_components/jszip/dist/jszip.min.js"></script>
+	<script src="vendors/bower_components/pdfmake/build/pdfmake.min.js"></script>
+	<script src="vendors/bower_components/pdfmake/build/vfs_fonts.js"></script>
+	
+	<script src="vendors/bower_components/datatables.net-buttons/js/buttons.html5.min.js"></script>
+	<script src="vendors/bower_components/datatables.net-buttons/js/buttons.print.min.js"></script>
+	<script src="dist/js/export-table-data.js"></script>
+	
+	<!-- Slimscroll JavaScript -->
+	<script src="dist/js/jquery.slimscroll.js"></script>
+	
+	<!-- Fancy Dropdown JS -->
+	<script src="dist/js/dropdown-bootstrap-extended.js"></script>
+	
+	<!-- Sparkline JavaScript -->
+	<script src="vendors/jquery.sparkline/dist/jquery.sparkline.min.js"></script>
+	
+	<script src="vendors/bower_components/jquery.easy-pie-chart/dist/jquery.easypiechart.min.js"></script>
+	<script src="dist/js/skills-counter-data.js"></script>
+	
+	<script src="vendors/bower_components/bootstrap-validator/dist/validator.min.js"></script>
+	
+	
+	<!-- Morris Charts JavaScript -->
+    <script src="vendors/bower_components/raphael/raphael.min.js"></script>
+    <script src="vendors/bower_components/morris.js/morris.min.js"></script>
+    <script src="dist/js/morris-data.js"></script>
+	
+	<!-- Init JavaScript -->
+	<script src="dist/js/init.js"></script>
+	<script src="dist/js/widgets-data.js"></script>
     <script>
         //this script for modal 
         $('body').on('click', '[data-toggle="modal"]', function() {

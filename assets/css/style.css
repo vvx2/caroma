@@ -6921,14 +6921,15 @@ body.open-overlay #overlay{
     color: #ffffff !important;
 }
 .slider-opt03__layout01.mode-02 .media{
-    background-image: url('../images/bg.jpg');
-    height: 955px;
+    background-image: url('../images/caroma_bg.jpg');
+    /*height: 955px;*/
+    height: 500px;
 }
 .slider-opt03__layout01.mode-02.slide-bgr-02 .media{
-    background-image: url('../images/bg_3.jpg');
+    background-image: url('../images/caroma_bg.jpg');
 }
 .slider-opt03__layout01.mode-02.slide-bgr-03 .media{
-    background-image: url('../images/bg_4.jpg');
+    background-image: url('../images/caroma_bg.jpg');
 }
 .slider-opt03__layout01.mode-02 .buttons .btn-thin{
     color: #ffffff;
@@ -13693,8 +13694,8 @@ body.open-quickview-block .biolife-quickview-block{
     }
 
     .slider-opt03__layout01.mode-02 .text-content{
-        top: 39%;
-        right: 19%;
+        top: 15%;
+        right: 60%;
         margin: 0 12px 0 0;
     }
     .tab-head__icon-top-layout.type-02 a{

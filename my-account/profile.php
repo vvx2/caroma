@@ -207,7 +207,7 @@ $count_cart = count($user_cart);
 						<div class="panel panel-default card-view">
 							<div class="panel-wrapper collapse in">
 								<div class="panel-body">
-									<div class="tab-struct custom-tab-1 mt-40">
+									<div class="tab-struct custom-tab-1">
 										<ul role="tablist" class="nav nav-tabs" id="myTabs_8">
 											<li class="active" role="presentation" class=""><a data-toggle="tab" role="tab" href="#profile" aria-expanded="false">Profile</a></li>
 											<li role="presentation"><a aria-expanded="true" data-toggle="tab" role="tab" href="#change_email">Change Email</a></li>
