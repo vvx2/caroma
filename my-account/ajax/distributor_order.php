@@ -79,11 +79,10 @@ switch ($status) {
                                 <?php
                                 if ($order["proof_image"] != NULL || $order["proof_image"] != "") {
                                 ?>
-                                    - <a href="../img/refund/<?php echo $order['proof_image']; ?>" target="_blank" style="color:blue;">Proof</a> <- click for view
-                                <?php
-                                }
-                                ?>
-                                <br><span><?php echo $order['reason']; ?><span>
+                                    - <a href="../img/refund/<?php echo $order['proof_image']; ?>" target="_blank" style="color:blue;">Proof</a>
+                                    <- click for view <?php
+                                                    }
+                                                        ?> <br><span><?php echo $order['reason']; ?><span>
                             </th>
                         </tr>
                     </table>
@@ -183,7 +182,7 @@ switch ($status) {
                             <td class="total-details-titles">RM <?php echo number_format($order["total_price"], 2); ?></td>
                         </tr>
                         <tr>
-                            <td class="total-details-title">Shipping</td>
+                            <td class="total-details-title">Shipping <?php echo ($order['delivery_type'] == 1) ? "" : "- <strong>(Self Taking)</strong>"; ?></td>
                             <td class="total-details-titles">RM <?php echo number_format($order["shipping_fee"], 2); ?></td>
                         </tr>
                         <tr>
@@ -191,8 +190,12 @@ switch ($status) {
                             <td class="total-details-titles">-RM <?php echo number_format($order["discount_amount"], 2); ?></td>
                         </tr>
                         <tr>
-                            <td class="total-details-title">Caroma Credit</td>
+                            <td class="total-details-title">Caroma Coin</td>
                             <td class="total-details-titles">-RM <?php echo number_format($order["discount_reward"], 2); ?></td>
+                        </tr>
+                        <tr>
+                            <td class="total-details-title">GST Tax (<?php echo $order["gst_rate"]; ?>%)</td>
+                            <td class="total-details-titles">+RM <?php echo number_format($order["gst_fee"], 2); ?></td>
                         </tr>
                         <tr>
                             <td class="total-details-title total-details-title-last">Total</td>

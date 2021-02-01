@@ -165,7 +165,6 @@ $PageName = "product";
                                                     <th>Status</th>
                                                     <th>Action</th>
                                                     <th>Name</th>
-                                                    <!-- <th>Description</th> -->
                                                     <th>Stock</th>
                                                     <th>Point</th>
                                                     <th>User Price</th>
@@ -174,7 +173,7 @@ $PageName = "product";
                                                     <th>Category</th>
                                                     <th>Date Modified</th>
                                                     <th>Image</th>
-                                                    
+
 
                                                 </tr>
                                             </thead>
@@ -231,8 +230,7 @@ $PageName = "product";
                                                             </div>
                                                         </td>
                                                         <td><?php echo $row['product_name']; ?></td>
-                                                        <!--- <td><?php echo $row['product_description']; ?></td> --->
-                                                        <td><?php echo $row['stock']; ?></td>
+                                                        <td class="font-bold <?php echo ($row['stock'] <= 10) ? "text-danger" : "text-success" ?>"><?php echo $row['stock']; ?></td>
                                                         <td><?php echo $row['point']; ?></td>
                                                         <td><?php echo number_format($user_price, 2); ?></td>
                                                         <td><?php echo number_format($distributor_price, 2); ?></td>

@@ -124,7 +124,7 @@ $promotion_description_my = $promotion_name[0]['description'];
         <hr>
         <div class="form-group">
             <label class="font-normal">Product Available for this promotion - <span class="text-success">Promotion product</span></label>
-            <select class="form-control dual_select " name="product[]" multiple required>
+            <select class="form-control dual_select" name="product[]" multiple required>
                 <?php
 
                 $tb = "product left join product_translation on product.id = product_translation.product_id";

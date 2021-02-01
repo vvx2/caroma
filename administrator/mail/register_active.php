@@ -300,7 +300,7 @@
                           <td valign="top" align="center" style="padding:0;Margin:0;width:560px">
                             <table width="100%" cellspacing="0" cellpadding="0" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                               <tr style="border-collapse:collapse">
-                                <td align="center" style="padding:0;Margin:0;font-size:0px"><a href="https://shop.caroma.com.my" target="_blank" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-size:14px;text-decoration:none;color:#677D9E"><img src="https://hbninj.stripocdn.email/content/guids/CABINET_4520fc0058e9b663bbc4cf7d4ea81ad5/images/64761610220460531.png" alt="Caroma Logo" title="Caroma Logo" width="134" style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic"></a></td>
+                                <td align="center" style="padding:0;Margin:0;font-size:0px"><a href="https://shop.caroma.com.my" target="_blank" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-size:14px;text-decoration:none;color:#677D9E"><img src="https://staging2.caroma.com.my/wp-content/uploads/2021/01/logo.svg" alt="Caroma Logo" title="Caroma Logo" width="200" style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic"></a></td>
                               </tr>
                             </table>
                           </td>
@@ -334,7 +334,7 @@
                                       echo "<br><strong>" . $coupon_code_msg . "</strong>";
                                     }
                                     ?>
-                                    <br><br>Thank you for your purchase,
+                                    <br><br>Thank You be CAROMA Member. 
                                     <br><br><strong>Best Regards,
                                       <br>Caroma Malaysia Support Team</strong>
                                   </p>
@@ -362,7 +362,7 @@
                             <table width="100%" cellspacing="0" cellpadding="0" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                               <tr style="border-collapse:collapse">
                                 <td align="center" style="padding:0;Margin:0;padding-top:10px;padding-left:15px;padding-right:15px">
-                                  <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:18px;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:27px;color:#FFFFFF">CAROMA MALAYSIA SDN BHD</p>
+                                  <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:18px;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:27px;color:#FFFFFF">Caroma Cafe Food(M)Sdn.Bhd.</p>
                                 </td>
                               </tr>
                               <tr style="border-collapse:collapse">

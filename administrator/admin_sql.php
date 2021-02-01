@@ -457,10 +457,10 @@ if (!empty($postedToken)) {
           $result_set_product_image = $db->update($table, $data, $array);
 
           if ($result_set_product_image) {
-            echo "<script>alert(\" Delete Product Image Successful.\");
+            echo "<script>alert(\" Setting Product Image Successful.\");
                             window.location.href='product_image.php?p=$product_id';</script>";
           } else {
-            echo "<script>alert(\" Delete Product Image Fail. Please try again.\");
+            echo "<script>alert(\" Setting Product Image Fail. Please try again.\");
                         window.location.href='product_image.php?p=$product_id';</script>";
           }
         }

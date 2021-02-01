@@ -146,7 +146,7 @@ $PageName = "distributor";
 
                                             $btn_edit = '<a data-remote="ajax/distributor_edit.php?p=' . $distributor["id"] . '" class="btn btn-white btn-xs" data-toggle="modal" data-target="#myModal">Edit</a>';
                                             $btn_delete = '<a data-remote="ajax/delete_data.php?p=' . $distributor["id"] . '&table=users&page=distributor" class="btn btn-white btn-xs" data-toggle="modal" data-target="#myModal">Delete</a>';
-                                            $btn_history = '<a href="distributor_transaction.php?p=' . $distributor["id"] . '" class="btn btn-white btn-xs" target="_blank">Refund History</a>';
+                                            $btn_history = '<a href="distributor_transaction.php?p=' . $distributor["id"] . '" class="btn btn-white btn-xs" target="_blank">Withdraw History</a>';
                                             $btn_action = $btn_edit . $btn_delete . $btn_history;
 
                                         ?>

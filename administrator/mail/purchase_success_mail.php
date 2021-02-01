@@ -357,8 +357,8 @@ $gst_rate = $order['gst_rate'];
                           <td class="es-m-p0r" valign="top" align="center" style="padding:0;Margin:0;width:570px">
                             <table width="100%" cellspacing="0" cellpadding="0" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                               <tr style="border-collapse:collapse">
-                                <td class="es-m-p0l es-m-txt-c" align="left" style="padding:0;Margin:0;padding-left:15px;font-size:0px"><a href="https://viewstripo.email/" target="_blank" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-size:14px;text-decoration:underline;color:#999999">
-                                    <img src="https://ityfyc.stripocdn.email/content/guids/CABINET_e8eb2c4af16f2bda4b8ee2ceb02e400f/images/94931609737672437.png" alt="Petshop logo" title="Petshop logo" width="200" style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic"></a>
+                                <td class="es-m-p0l es-m-txt-c" align="left" style="padding:0;Margin:0;padding-left:15px;font-size:0px"><a href="https://staging3.caroma.com.my" target="_blank" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-size:14px;text-decoration:underline;color:#999999">
+                                    <img src="https://staging2.caroma.com.my/wp-content/uploads/2021/01/logo.svg" width="200" style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic"></a>
                                 </td>
                               </tr>
                             </table>
@@ -427,7 +427,7 @@ $gst_rate = $order['gst_rate'];
                               <tr style="border-collapse:collapse">
                                 <td align="left" style="Margin:0;padding-bottom:10px;padding-top:20px;padding-left:20px;padding-right:20px">
                                   <h4 style="Margin:0;line-height:120%;mso-line-height-rule:exactly;font-family:'trebuchet ms', helvetica, sans-serif;color:#FFFFFF">
-                                    SUMMARY:</h4>
+                                    SUMMARY RECEIPT:</h4>
                                 </td>
                               </tr>
                               <tr style="border-collapse:collapse">

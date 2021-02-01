@@ -182,7 +182,7 @@ switch ($status) {
                             <td class="total-details-titles">RM <?php echo number_format($order["total_price"], 2); ?></td>
                         </tr>
                         <tr>
-                            <td class="total-details-title">Shipping</td>
+                            <td class="total-details-title">Shipping <?php echo ($order['delivery_type'] == 1) ? "" : "- <strong>(Self Taking)</strong>"; ?></td>
                             <td class="total-details-titles">+RM <?php echo number_format($order["shipping_fee"], 2); ?></td>
                         </tr>
                         <tr>

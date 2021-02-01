@@ -41,7 +41,7 @@ if($user_type != 2){
 				<!-- Title -->
 				<div class="row heading-bg  bg-yellow">
 					<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-						<h5 class="txt-light">Dashboard</h5>
+						<h5 class="txt-light">Distributor Dashboard</h5>
 					</div>
 				</div>
 				<!-- /Title -->
@@ -226,7 +226,7 @@ if($user_type != 2){
 															<td>FPX</td>
 															<td><?php echo $order['total_payment']; ?></td>
 															<td>Pending</td>
-															<td><i data-remote="ajax/distributor_order.php?p=<?php echo $order['id']; ?>" data-toggle="modal" data-target=".bs-example-modal-lg" class="fa fa-cogs toolsx"></i></td>
+															<td><i data-remote="ajax/distributor_order.php?p=<?php echo $order['id']; ?>" data-toggle="modal" data-target=".bs-example-modal-lg" class="fa fa-eye toolsx"></i></td>
 															<td><i data-remote="ajax/distributor_order_assign.php?p=<?php echo $order['id']; ?>" data-toggle="modal" data-target=".bs-example-modal-lg" class="btn btn-success">Confirm</i></td>
 														</tr>
 													<?php $i++;} ?>
@@ -313,8 +313,6 @@ if($user_type != 2){
 	<script src="vendors/bower_components/raphael/raphael.min.js"></script>
 	<script src="vendors/bower_components/morris.js/morris.min.js"></script>
 	<script src="dist/js/morris-data.js"></script>
-
-	<script src="vendors/bower_components/jquery-toast-plugin/dist/jquery.toast.min.js"></script>
 
 	<!-- Init JavaScript -->
 	<script src="dist/js/init.js"></script>

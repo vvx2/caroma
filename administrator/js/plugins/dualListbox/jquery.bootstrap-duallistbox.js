@@ -360,7 +360,7 @@
                 '   <input class="filter" type="text">' +
                 '   <div class="btn-group buttons">' +
                 '     <button type="button" class="btn moveall">' +
-                '       <i></i>' +
+                '       <span>Move All</span>&nbsp;<i></i>' +
                 '       <i></i>' +
                 '     </button>' +
                 '     <button type="button" class="btn move">' +
@@ -382,7 +382,7 @@
                 '     </button>' +
                 '     <button type="button" class="btn removeall">' +
                 '       <i></i>' +
-                '       <i></i>' +
+                '       <i></i>&nbsp;<span>Remove All</span>' +
                 '     </button>' +
                 '   </div>' +
                 '   <select multiple="multiple" style="overflow-x: scroll;"></select>' +

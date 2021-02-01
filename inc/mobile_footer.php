@@ -39,8 +39,10 @@
             <ul class="list">
                 <?php
                 if ($login == 1) {
+                    $user_name = $db->where("name", "users", "id", $user_id);
+                    $user_name = $user_name[0]['name'];
                 ?>
-                    <li class="list-item"><a href="login.php">User's Name</a></li>
+                    <li class="list-item"><a href="my-account/index.php"><?php echo $user_name ?></a></li>
                 <?php
                 } else {
                 ?>

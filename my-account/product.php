@@ -69,14 +69,14 @@ if($user_type != 2){
 		<div class="page-wrapper">
 			<div class="container-fluid">
 				<!-- Title -->
-				<div class="row heading-bg bg-pink">
+				<div class="row heading-bg bg-grey">
 					<div class="col-lg-10 col-md-4 col-sm-4 col-xs-6">
 						<h5 class="txt-light">products List</h5>
 					</div>
 					<!-- Breadcrumb -->
 					<div class="col-lg-2 col-sm-8 col-md-8 col-xs-6">
 						<div class="row">
-							<a href="product-management.php"><button class="btn btn-success btn-anim"><i class="fa fa-pencil-square-o"></i><span class="btn-text">Add New Products</span></button></a>
+							<a href="product-management.php"><button class="btn btn-success btn-anim"><i class="fa fa-pencil-square-o"></i><span class="btn-text btn-textt">Add New Products</span></button></a>
 						</div>
 					</div>
 					<!-- /Breadcrumb -->
@@ -111,7 +111,7 @@ if($user_type != 2){
 												<a href="product-edit.php?p=<?php echo $product['p_id']; ?>"> <img src="../img/product/<?php echo $product['image']; ?>" class="img-responsive" alt="Product Image" /> </a>
 											</div>
 											<div class="info text-center">
-												<h5>National Fresh Fruit</h5>
+												<h5><?php echo $product['pt_name']; ?></h5>
 												<span class="product-spec capitalize-font block mt-5 mb-5"><?php echo $product['ct_name']; ?></span>
 												<span class="product-spec capitalize-font block mt-5 mb-5 <?php echo ($product['dp_status'] == 1) ? "text-success" : "text-danger"; ?>"><strong><?php echo ($product['dp_status'] == 1) ? "Activate" : "Deactivate"; ?></strong></span>
 												<span class="head-font block text-warning "><strong>RM<?php echo number_format($product['price'], 2); ?></strong></span>

@@ -5,10 +5,10 @@ if ($login != 1) {
     echo "<script>window.location.replace('../login.php')</script>";
     exit();
 }
-if($user_type != 2){
-	echo "<script>alert(\" Your are not Distributor\");
+if ($user_type != 2) {
+    echo "<script>alert(\" Your are not Distributor\");
 	window.location.href='index.php';</script>";
-	exit();
+    exit();
 }
 
 ?>
@@ -92,7 +92,7 @@ if($user_type != 2){
                                 </div>
                                 <div class="pull-right">
                                     <h6 class="panel-title txt-light">
-                                        <i data-remote="ajax/distributor_refund.php" data-toggle="modal" data-target=".bs-example-modal-lg" class="btn btn-success"><strong>Refund Request</strong></i>
+                                        <i data-remote="ajax/distributor_refund.php" data-toggle="modal" data-target=".bs-example-modal-lg" class="btn btn-success"><strong>Withdrawal Request</strong></i>
                                     </h6>
                                 </div>
                                 <div class="clearfix"></div>
@@ -121,6 +121,7 @@ if($user_type != 2){
                                                                             <thead>
                                                                                 <tr>
                                                                                     <th>#</th>
+                                                                                    <th>Name</th>
                                                                                     <th>Amount</th>
                                                                                     <th>Description</th>
                                                                                     <th>Balance</th>
@@ -130,6 +131,7 @@ if($user_type != 2){
                                                                             <tfoot>
                                                                                 <tr>
                                                                                     <th>#</th>
+                                                                                    <th>Name</th>
                                                                                     <th>Amount</th>
                                                                                     <th>Description</th>
                                                                                     <th>Balance</th>
@@ -140,8 +142,8 @@ if($user_type != 2){
                                                                                 <?php
 
                                                                                 $i = 1;
-                                                                                $col = "*";
-                                                                                $tb = "distributor_wallet_transaction_history";
+                                                                                $col = "d.*, u.name as user_name";
+                                                                                $tb = "distributor_wallet_transaction_history d left join users u on d.distributor_id = u.id";
                                                                                 $opt = 'distributor_id = ? ORDER BY date_modified';
                                                                                 $arr = array($user_id);
                                                                                 $distributor_wallet_history = $db->advwhere($col, $tb, $opt, $arr);
@@ -159,12 +161,14 @@ if($user_type != 2){
 
                                                                                     <tr>
                                                                                         <td><?php echo $i; ?></td>
+                                                                                        <td><?php echo $wallet['user_name']; ?></td>
                                                                                         <td class="<?php echo $text_color; ?>"><strong><?php echo $amount; ?></strong></td>
                                                                                         <td><?php echo $desc; ?></td>
                                                                                         <td><strong><?php echo $wallet['current_amount']; ?></strong></td>
                                                                                         <td><?php echo $wallet['date_modified']; ?></td>
                                                                                     </tr>
-                                                                                <?php $i++;} ?>
+                                                                                <?php $i++;
+                                                                                } ?>
                                                                             </tbody>
                                                                         </table>
                                                                     </div>
@@ -218,11 +222,20 @@ if($user_type != 2){
     <!-- Bootstrap Core JavaScript -->
     <script src="vendors/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
+    <!-- Vector Maps JavaScript -->
+    <script src="vendors/vectormap/jquery-jvectormap-2.0.2.min.js"></script>
+    <script src="vendors/vectormap/jquery-jvectormap-world-mill-en.js"></script>
+    <script src="dist/js/vectormap-data.js"></script>
+
     <!-- Calender JavaScripts -->
     <script src="vendors/bower_components/moment/min/moment.min.js"></script>
     <script src="vendors/jquery-ui.min.js"></script>
     <script src="vendors/bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
     <script src="dist/js/fullcalendar-data.js"></script>
+
+    <!-- Progressbar Animation JavaScript -->
+    <script src="vendors/bower_components/waypoints/lib/jquery.waypoints.min.js"></script>
+    <script src="vendors/bower_components/Counter-Up/jquery.counterup.min.js"></script>
 
     <!-- Data table JavaScript -->
     <script src="vendors/bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
@@ -235,6 +248,26 @@ if($user_type != 2){
     <script src="vendors/bower_components/datatables.net-buttons/js/buttons.html5.min.js"></script>
     <script src="vendors/bower_components/datatables.net-buttons/js/buttons.print.min.js"></script>
     <script src="dist/js/export-table-data.js"></script>
+
+    <!-- Slimscroll JavaScript -->
+    <script src="dist/js/jquery.slimscroll.js"></script>
+
+    <!-- Fancy Dropdown JS -->
+    <script src="dist/js/dropdown-bootstrap-extended.js"></script>
+
+    <!-- Sparkline JavaScript -->
+    <script src="vendors/jquery.sparkline/dist/jquery.sparkline.min.js"></script>
+
+    <script src="vendors/bower_components/jquery.easy-pie-chart/dist/jquery.easypiechart.min.js"></script>
+    <script src="dist/js/skills-counter-data.js"></script>
+
+    <script src="vendors/bower_components/bootstrap-validator/dist/validator.min.js"></script>
+
+
+    <!-- Morris Charts JavaScript -->
+    <script src="vendors/bower_components/raphael/raphael.min.js"></script>
+    <script src="vendors/bower_components/morris.js/morris.min.js"></script>
+    <script src="dist/js/morris-data.js"></script>
 
     <!-- Init JavaScript -->
     <script src="dist/js/init.js"></script>

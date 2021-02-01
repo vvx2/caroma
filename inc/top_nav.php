@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 des-logo">
-        <a href="index.php" class="biolife-logo bio-2-des"><img class="logo-center" src="assets/images/caroma-logo.png" alt="biolife logo" ></a>
+        <a href="index.php" class="biolife-logo bio-2-des"><img class="logo-center" src="assets/images/logo.svg" width="100%" alt="biolife logo" ></a>
     </div>
     <!--- <div class="col-lg-5 col-md-6 hidden-lg hidden-md hidden-sm hidden-xs">
         <div class="primary-menu">

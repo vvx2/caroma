@@ -314,7 +314,7 @@ if (isset($_REQUEST['p'])) { // order status
 																						<td><?php echo $order['date_created']; ?></td>
 																						<td><?php echo $order['total_payment']; ?></td>
 																						<td><?php echo $payment_display; ?></td>
-																						<td><i data-remote="ajax/distributor_order.php?p=<?php echo $order['id']; ?>" data-toggle="modal" data-target=".bs-example-modal-lg" class="fa fa-cogs toolsx"></i></td>
+																						<td><i data-remote="ajax/distributor_order.php?p=<?php echo $order['id']; ?>" data-toggle="modal" data-target=".bs-example-modal-lg" class="fa fa-eye"></i></td>
 																						<td><?php echo $btn_action; ?></td>
 																					</tr>
 																				<?php $i++;} ?>

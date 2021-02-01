@@ -78,7 +78,7 @@
     </header>
     <!--Hero Section-->
     <div class="hero-section hero-background">
-        <h1 class="page-title">Daily Check-In</h1>
+        <h1 class="page-title">Coins Reward Page</h1>
     </div>
 
     <!--Navigation section-->

@@ -38,6 +38,8 @@ if (!empty($postedToken)) {
                     $start = $_POST['start'];
                     $end = $_POST['end'];
 
+                    $coupon_user = $_POST['coupon_user'];
+                    $free_delivery = $_POST['free_delivery'];
                     $coupon_type = $_POST['coupon_type']; //1=amount , 2=percantage
 
                     $amount = $_POST['amount'];
@@ -68,8 +70,8 @@ if (!empty($postedToken)) {
                         } else {
 
                             $table = "coupon";
-                            $colname = array("start", "end", "type", "amt", "percentage", "min_spend", "capped", "user_per_coupon", "usage_limit", "total_usage_limit", "total_times_used", "code", "status", "date_created", "date_modified");
-                            $array = array($start, $end, $coupon_type, $amount, $percentage, $min_spend, $dis_capped, $user_per_coupon, $usage_limit, $total_usage_limit, 0, $coupon_code, 1, $time, $time);
+                            $colname = array("start", "end", "type", "amt", "percentage", "min_spend", "capped", "user_per_coupon", "usage_limit", "total_usage_limit", "total_times_used", "free_delivery", "coupon_user", "code", "status", "date_created", "date_modified");
+                            $array = array($start, $end, $coupon_type, $amount, $percentage, $min_spend, $dis_capped, $user_per_coupon, $usage_limit, $total_usage_limit, 0, $free_delivery, $coupon_user, $coupon_code, 1, $time, $time);
                             $result_coupon = $db->insert($table, $colname, $array);
 
                             if ($result_coupon) {
@@ -207,6 +209,8 @@ if (!empty($postedToken)) {
                     $start = $_POST['start'];
                     $end = $_POST['end'];
 
+                    $coupon_user = $_POST['coupon_user'];
+                    $free_delivery = $_POST['free_delivery'];
                     $coupon_type = $_POST['coupon_type']; //1=amount , 2=percantage
 
                     $amount = $_POST['amount'];
@@ -247,8 +251,8 @@ if (!empty($postedToken)) {
                         } else {
 
                             $table = "coupon";
-                            $data = "code =?, start=?, end=?, type=?, amt=?, percentage=?, min_spend=?, capped=?, user_per_coupon=?, usage_limit=?, total_usage_limit=?, status =?, date_modified = ? WHERE id = ?";
-                            $array = array($coupon_code, $start, $end, $coupon_type, $amount, $percentage, $min_spend, $dis_capped, $user_per_coupon, $usage_limit, $total_usage_limit, $status, $time, $coupon_id);
+                            $data = "code =?, start=?, end=?, type=?, amt=?, percentage=?, min_spend=?, capped=?, user_per_coupon=?, usage_limit=?, total_usage_limit=?, free_delivery=?, coupon_user=?, status =?, date_modified = ? WHERE id = ?";
+                            $array = array($coupon_code, $start, $end, $coupon_type, $amount, $percentage, $min_spend, $dis_capped, $user_per_coupon, $usage_limit, $total_usage_limit, $free_delivery, $coupon_user, $status, $time, $coupon_id);
                             $result_coupon = $db->update($table, $data, $array);
 
                             if ($result_coupon) {

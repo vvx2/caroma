@@ -43,7 +43,7 @@ if (isset($refund_type)) {
 					<span class="text-muted text-xs block h6"><?php echo $user['user_nickname']; ?></span>
 				</div>
 				<div class="logo-element">
-					Caroma
+					Admin
 				</div>
 			</li>
 
@@ -55,6 +55,9 @@ if (isset($refund_type)) {
 
 			<li class="<?php echo ($PageName == 'product') ? 'active' : ''; ?>">
 				<a href="product.php"><i class="fa fa-th-large"></i> <span class="nav-label">Product</span></a>
+			</li>
+			<li class="<?php echo ($PageName == 'stock') ? 'active' : ''; ?>">
+				<a href="stock.php"><i class="fa fa-th-large"></i> <span class="nav-label">Replenish Stock</span></a>
 			</li>
 
 			<li class="<?php echo ($PageName == 'category') ? 'active' : ''; ?>">
@@ -88,11 +91,11 @@ if (isset($refund_type)) {
 				</ul>
 			</li>
 			<li class="<?php echo ($PageName == 'refund') ? 'active' : ''; ?>">
-				<a href=""><i class="fa fa-th-large"></i> <span class="nav-label">Refund</span> <span class="fa arrow"></span></a>
+				<a href=""><i class="fa fa-th-large"></i> <span class="nav-label">Withdrawal</span> <span class="fa arrow"></span></a>
 				<ul class="nav nav-second-level">
-					<li class="<?php echo ($refund_type == '1') ? 'active' : ''; ?>"><a href="refund.php?page=1">Pending Refund</a></li>
-					<li class="<?php echo ($refund_type == '2') ? 'active' : ''; ?>"><a href="refund.php?page=2">Success Refund</a></li>
-					<li class="<?php echo ($refund_type == '3') ? 'active' : ''; ?>"><a href="refund.php?page=3">Rejected Refund</a></li>
+					<li class="<?php echo ($refund_type == '1') ? 'active' : ''; ?>"><a href="refund.php?page=1">Pending Withdraw</a></li>
+					<li class="<?php echo ($refund_type == '2') ? 'active' : ''; ?>"><a href="refund.php?page=2">Success Withdraw</a></li>
+					<li class="<?php echo ($refund_type == '3') ? 'active' : ''; ?>"><a href="refund.php?page=3">Rejected Withdraw</a></li>
 				</ul>
 			</li>
 			<li class="<?php echo ($PageName == 'shipping' || $PageName == 'geo_zone') ? 'active' : ''; ?>">

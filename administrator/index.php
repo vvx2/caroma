@@ -105,6 +105,12 @@ $arr = array(1);
 $count_promotion = $db->advwhere($col, $table, $opt, $arr);
 $count_promotion = count($count_promotion);
 
+$table = "product";
+$col = "id";
+$opt = 'stock <= ? ';
+$arr = array(10);
+$count_stock = $db->advwhere($col, $table, $opt, $arr);
+$count_stock = count($count_stock);
 
 $table = "distributor_wallet_transaction";
 $col = "id";
@@ -150,20 +156,41 @@ $count_reject = count($count_reject);
             <!-- top nav -->
             <div class="wrapper wrapper-content wrapperes">
 
-                <div class="row">
-                    <div class="col-lg-4">
-                        <div class="widget style1 navy-bg">
-                            <div class="row">
-                                <div class="col-4">
-                                    <a data-toggle="modal" data-target="#point_value_edit" style="color:white;"><i class="fa fa-cog fa-5x"></i></a>
-                                </div>
-                                <div class="col-8 text-right">
-                                    <strong><span> Reward Point Value (per) </span></strong>
-                                    <h2 class="font-bold"><?php echo $point_value; ?> Sen</h2>
-                                </div>
+                <div class="ibox-content" style="background-color: #f8d7da; border-color: #f8d7da;">
+
+                    <div class="form-group" id="data_5">
+                        <label class="font-bold">Reporting Management</label>
+                        <form role="form" id="form_get_order" method="post">
+
+                            <div class="input-daterange input-group" id="datepicker">
+                                <span class="input-group-addon">&nbsp; Date From &nbsp;</span>
+                                <input type="text" class="form-control-sm form-control" placeholder="Please Select Date Period" name="min" id="min" value="" />
+                                <span class="input-group-addon">&nbsp;&nbsp; Date To &nbsp;</span>
+                                <input type="text" class="form-control-sm form-control" placeholder="Please Select Date Period" name="max" id="max" value="" />
+                                &nbsp;
+
+
+                                <a id="get_order" class="btn btn-white btn-xs" onclick="get_order();"><i class="fa fa-search"></i> Search </a>
+
                             </div>
-                        </div>
+                        </form>
                     </div>
+
+                    <script type="text/javascript">
+                        var from;
+                        var to;
+
+
+                        function get_order() {
+                            from = document.getElementById("min");
+                            to = document.getElementById("max");
+                            window.open("report.php?from=" + from.value + "&to=" + to.value, '_blank');
+                        }
+                    </script>
+
+                </div>
+                <br>
+                <div class="row">
                     <div class="col-lg-3">
                         <div class="widget style1 navy-bg">
                             <div class="row">
@@ -173,6 +200,19 @@ $count_reject = count($count_reject);
                                 <div class="col-8 text-right">
                                     <strong><span> GST Value % </span></strong>
                                     <h2 class="font-bold"><?php echo $gst_value; ?> %</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="widget style1 navy-bg">
+                            <div class="row">
+                                <div class="col-4">
+                                    <a data-toggle="modal" data-target="#point_value_edit" style="color:white;"><i class="fa fa-cog fa-5x"></i></a>
+                                </div>
+                                <div class="col-8 text-right">
+                                    <strong><span> Reward Point Value (per) </span></strong>
+                                    <h2 class="font-bold"><?php echo $point_value; ?> Sen</h2>
                                 </div>
                             </div>
                         </div>
@@ -193,7 +233,7 @@ $count_reject = count($count_reject);
 
                 </div>
                 <div class="row">
-                    <div class="col-lg-6">
+                    <div class="col-lg-4">
                         <div class="widget style1 blue-bg">
                             <div class="row">
                                 <div class="col-4">
@@ -206,7 +246,7 @@ $count_reject = count($count_reject);
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-6">
+                    <div class="col-lg-4">
                         <div class="widget style1 blue-bg">
                             <div class="row">
                                 <div class="col-4">
@@ -215,6 +255,19 @@ $count_reject = count($count_reject);
                                 <div class="col-8 text-right">
                                     <span> Promotion </span>
                                     <h2 class="font-bold"><?php echo $count_promotion; ?></h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="widget style1 blue-bg">
+                            <div class="row">
+                                <div class="col-4">
+                                    <a href="promotion.php" style="color:white;"><i class="fa fa-exclamation-circle fa-5x"></i></a>
+                                </div>
+                                <div class="col-8 text-right">
+                                    <span> Replenish Stock (less than 10)</span>
+                                    <h2 class="font-bold"><?php echo $count_stock; ?></h2>
                                 </div>
                             </div>
                         </div>
@@ -362,14 +415,14 @@ $count_reject = count($count_reject);
 
             </div>
 
-            <div class="ibox-content">
+            <!-- <div class="ibox-content" style="background-color: #f8d7da; border-color: #f8d7da;">
 
                 <div class="form-group" id="data_5">
-                    <label class="font-normal">Report Range Select</label>
+                    <label class="font-bold">Date From to Date To </label>
                     <form role="form" id="form_get_order" method="post">
 
                         <div class="input-daterange input-group" id="datepicker">
-
+                            <span class="input-group-addon">to</span>
                             <input type="text" class="form-control-sm form-control" name="min" id="min" value="" />
                             <span class="input-group-addon">to</span>
                             <input type="text" class="form-control-sm form-control" name="max" id="max" value="" />
@@ -394,9 +447,7 @@ $count_reject = count($count_reject);
                     }
                 </script>
 
-
-
-            </div>
+            </div> -->
 
         </div>
     </div>

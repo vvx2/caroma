@@ -190,9 +190,9 @@ if ($pagetype == 2) {
                                                     $status = $row['status'];
 
                                                     //approve order when order is status "Failed / Canceled", maybe some reason cause order failed, can approve again with this button
-                                                    $btn_approve = '<a data-remote="ajax/order_approve.php?p=' . $id . '" class="btn btn-white btn-xs" data-toggle="modal" data-target="#myModal">Approve</a>';
+                                                    $btn_approve = '<a data-remote="ajax/order_approve.php?p=' . $id . '" class="btn btn-white btn-xs" data-toggle="modal" data-target="#myModal">Re-Approve</a>';
                                                     //to assign consignment number, status -> shipping
-                                                    $btn_assign_cosignment = '<a data-remote="ajax/order_assign.php?p=' . $id . '" class="btn btn-white btn-xs" data-toggle="modal" data-target="#myModal">Assign Consignment number</a>';
+                                                    $btn_assign_cosignment = '<a data-remote="ajax/order_assign.php?p=' . $id . '" class="btn btn-white btn-xs" data-toggle="modal" data-target="#myModal">Tracking Number</a>';
                                                     //to reject order, status -> failed/rejected
                                                     $btn_cancel = '<a data-remote="ajax/order_cancel.php?p=' . $id . '" class="btn btn-white btn-xs" data-toggle="modal" data-target="#myModal">Cancel</a>';
                                                     //order deliverd, status -> completed
@@ -303,39 +303,6 @@ if ($pagetype == 2) {
                                                         </td>
                                                         <td><?php echo $row['user_name']; ?></td>
                                                         <td><?php echo $row['date_created']; ?></td>
-                                                        <td>
-
-                                                            <table width="350">
-
-                                                                <tr>
-                                                                    <th>Product</th>
-                                                                    <th>Qty</th>
-                                                                </tr>
-                                                                <?php
-
-                                                                $table = "order_items o left join product p on o.product_id = p.id left join product_translation pt on o.product_id = pt.product_id";
-                                                                $col = "o.id as id, o.qty as qty, p.id as p_id, p.stock as stock, p.image as image, pt.name as name, o.price as price";
-                                                                $opt = 'o.order_id = ? AND pt.language = ? ';
-                                                                $arr = array($id, $_SESSION['language']);
-                                                                $order_item = $db->advwhere($col, $table, $opt, $arr);
-
-                                                                foreach ($order_item as $item) {
-                                                                ?>
-                                                                    <tr>
-                                                                        <td> <?php echo $item['name']; ?> </td>
-                                                                        <td><?php echo $item['qty']; ?></td>
-
-
-                                                                    </tr>
-
-                                                                <?php } ?>
-
-                                                            </table>
-
-                                                        </td>
-                                                        <td><?php echo $row['user_name']; ?></td>
-                                                        <td><?php echo $row['date_created']; ?></td>
-
 
                                                     </tr>
                                                 <?php $i;
