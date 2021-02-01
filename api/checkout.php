@@ -444,18 +444,13 @@ if (isset($_REQUEST['type'])) {
                         $opt = 'code = ?';
                         $arr = array($coupon_code);
                         $coupon = $db->advwhere($col, $table, $opt, $arr);
-                        var_dump($coupon);
                         if (count($coupon) != 0) {
                             $total_times_used = $coupon[0]["total_times_used"];
                             $added_total_times_used = $total_times_used + 1;
                             $tablename = "coupon";
                             $data = "total_times_used = ? WHERE code = ?";
                             $array = array($added_total_times_used, $coupon_code);
-                            $updatecoupon = $db->update($tablename, $data, $array);
-                            echo "<br>";
-                            var_dump($updatecoupon);
-                        }else{
-                            echo "no count coupon";
+                            $db->update($tablename, $data, $array);
                         }
 
 
@@ -612,10 +607,10 @@ if (isset($_REQUEST['type'])) {
                         //----------------------------
 
                         // if something done, run this
-                        // echo "<script> window.location.href='../my-account/index.php';</script>";
+                        echo "<script> window.location.href='../my-account/index.php';</script>";
                     } else { //end result
-                        // echo "<script>alert(\" Update Status Fail. Please Contact admin. Your order number: $gateway_order_id\");
-                        //          window.location.href='../my-account/index.php?p=1';</script>";
+                        echo "<script>alert(\" Update Status Fail. Please Contact admin. Your order number: $gateway_order_id\");
+                                 window.location.href='../my-account/index.php?p=1';</script>";
                     }
                 } //end $success==1
             } // end else if
