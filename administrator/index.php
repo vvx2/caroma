@@ -116,8 +116,8 @@ $table = "distributor_wallet_transaction";
 $col = "id";
 $opt = 'status = ?';
 $arr = array(1);
-$count_pending = $db->advwhere($col, $table, $opt, $arr);
-$count_pending = count($count_pending);
+$count_refund_pending = $db->advwhere($col, $table, $opt, $arr);
+$count_refund_pending = count($count_refund_pending);
 
 $table = "distributor_wallet_transaction";
 $col = "id";
@@ -324,7 +324,7 @@ $count_reject = count($count_reject);
                                     <h5>Refund Pending</h5>
                                 </div>
                                 <div class="ibox-content">
-                                    <h1 class="no-margins"><?php echo $count_pending; ?></h1>
+                                    <h1 class="no-margins"><?php echo $count_refund_pending; ?></h1>
                                     <small>Total</small>
                                 </div>
                             </div>
