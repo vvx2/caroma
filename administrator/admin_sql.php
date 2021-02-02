@@ -1148,11 +1148,11 @@ if (!empty($postedToken)) {
 
                 $product_id = $product[0]["id"];
                 $product_stock = $product[0]["stock"];
-                $reduced_prodcut_stock = $product_stock + $item['qty'];
+                $added_prodcut_stock = $product_stock + $item['qty'];
 
                 $tablename = "product";
                 $data = "stock = ?, date_modified = ? WHERE id = ?";
-                $array = array($reduced_prodcut_stock, $time, $product_id);
+                $array = array($added_prodcut_stock, $time, $product_id);
                 $result_add_stock = $db->update($tablename, $data, $array);
               } else {
                 continue;
