@@ -1170,7 +1170,7 @@ if (!empty($postedToken)) {
             require_once "vendor/autoload.php";
             //PHPMailer Object
             $mail = new PHPMailer;
-            $mail->SMTPDebug = 3;
+            // $mail->SMTPDebug = 3;
             $mail->isSMTP();
             $mail->Host = $email_host;
             $mail->SMTPAuth = true;
@@ -1197,17 +1197,22 @@ if (!empty($postedToken)) {
             // $mail->Body = "Congratulations on successful registration";
             $mail->Body = get_include_contents('mail/order_cancel_mail.php', $cancel_detail);
             // $mail->send();
-            if (!$mail->send()) {
-              echo "Mailer Error: " . $mail->ErrorInfo;
-            } else {
-              echo "Message has been sent successfully2";
-            }
+            // if (!$mail->send()) {
+            //   echo "Mailer Error: " . $mail->ErrorInfo;
+            // } else {
+            //   echo "Message has been sent successfully2";
+            // }
             //----------------------------
             //		Email code here(end)
             //----------------------------
 
-            // echo "<script>alert(\" Update Status Successful\");
-            //           window.location.href='order.php?page=1';</script>";
+            if (!$mail->send()) {
+              echo "<script>alert(\" Update Status Successful, But Send Mail Fail\");
+                      window.location.href='order.php?page=1';</script>";
+            } else {
+              echo "<script>alert(\" Update Status Successful\");
+                      window.location.href='order.php?page=1';</script>";
+            }
           } else {
             echo "<script>alert(\" Update Status Fail. Please Try Again\");
                       window.location.href='order.php?page=1';</script>";
