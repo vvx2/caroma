@@ -416,6 +416,21 @@ if (isset($_REQUEST['type'])) {
                                     //--------------------------
                                     //       for email
                                     //--------------------------
+                                    //when user type is dealer, admin id will be distributor id - to identify the order belong who
+                                    if ($user_type == 3) {
+                                        //get distributor id that dealer under with
+                                        $table = 'user_dealer ud left join users u on ud.under_distributor = u.id';
+                                        $col = "ud.under_distributor as under_distributor, u.email as admin_email, u.name as admin_name";
+                                        $opt = 'user_id =?';
+                                        $arr = array($user_id);
+                                        $dealer = $db->advwhere($col, $table, $opt, $arr);
+                                        $under_distributor = $dealer[0]['under_distributor'];
+                                        $admin_email = $dealer[0]['admin_email'];
+                                        $admin_id = $under_distributor;
+                                        $admin_name = $dealer[0]['admin_name'];
+                                    } else {
+                                        $admin_name = "Caroma Administrator";
+                                    }
 
                                     $col = "o.*, o.id as order_id, st.name as state_name, u.name as user_name, o.reason as reason";
                                     $tb = "orders o left join state st on o.customer_state = st.id left join users u on u.id = o.users_id";
@@ -431,9 +446,42 @@ if (isset($_REQUEST['type'])) {
                                     $arr = array($order_id, "en");
                                     $order_item = $db->advwhere($col, $table, $opt, $arr);
 
-                                    $order_detail = array("order" => $order, "order_item" => $order_item, "server_path" => $server_path);
+                                    $order_detail = array("admin_name" => $admin_name, "order" => $order, "order_item" => $order_item, "server_path" => $server_path);
 
                                     require_once "../administrator/vendor/autoload.php";
+
+
+                                    //----------------------------
+                                    //		Admin Email code here
+                                    //----------------------------
+                                    $admin_mail = new PHPMailer;
+                                    // $admin_mail->SMTPDebug = 3;
+                                    $admin_mail->isSMTP();
+                                    $admin_mail->Host = $email_host;
+                                    $admin_mail->SMTPAuth = true;
+                                    $admin_mail->Username = $email_username;
+                                    $admin_mail->Password = $email_password;
+                                    $admin_mail->SMTPSecure = "tls";
+                                    $admin_mail->Port = "587";
+                                    //Send HTML or Plain Text email
+                                    $admin_mail->isHTML(true);
+                                    //From email address and name
+                                    $admin_mail->From = $email_from;
+                                    $admin_mail->FromName = $email_from_name;
+                                    //--------------------------
+                                    //       for email
+                                    //--------------------------
+
+                                    //To address and name
+                                    $admin_mail->addAddress($admin_email);
+                                    $admin_mail->Subject = "New Order";
+                                    $admin_mail->Body = get_include_contents('../administrator/mail/order_new_mail.php', $order_detail);
+                                    $admin_mail->send();
+
+                                    //----------------------------
+                                    //		Admin Email code here(end)
+                                    //----------------------------
+
                                     //PHPMailer Object
                                     $mail = new PHPMailer;
                                     // $mail->SMTPDebug = 3;
@@ -634,6 +682,21 @@ if (isset($_REQUEST['type'])) {
                         //--------------------------
                         //       for email
                         //--------------------------
+                        //when user type is dealer, admin id will be distributor id - to identify the order belong who
+                        if ($user_type == 3) {
+                            //get distributor id that dealer under with
+                            $table = 'user_dealer ud left join users u on ud.under_distributor = u.id';
+                            $col = "ud.under_distributor as under_distributor, u.email as admin_email, u.name as admin_name";
+                            $opt = 'user_id =?';
+                            $arr = array($user_id);
+                            $dealer = $db->advwhere($col, $table, $opt, $arr);
+                            $under_distributor = $dealer[0]['under_distributor'];
+                            $admin_email = $dealer[0]['admin_email'];
+                            $admin_id = $under_distributor;
+                            $admin_name = $dealer[0]['admin_name'];
+                        } else {
+                            $admin_name = "Caroma Administrator";
+                        }
 
                         $col = "o.*, o.id as order_id, st.name as state_name, u.name as user_name, o.reason as reason";
                         $tb = "orders o left join state st on o.customer_state = st.id left join users u on u.id = o.users_id";
@@ -649,7 +712,7 @@ if (isset($_REQUEST['type'])) {
                         $arr = array($order_id, "en");
                         $order_item = $db->advwhere($col, $table, $opt, $arr);
 
-                        $order_detail = array("order" => $order, "order_item" => $order_item, "server_path" => $server_path);
+                        $order_detail = array("admin_name" => $admin_name, "order" => $order, "order_item" => $order_item, "server_path" => $server_path);
 
                         require_once "../administrator/vendor/autoload.php";
                         //PHPMailer Object
@@ -688,8 +751,40 @@ if (isset($_REQUEST['type'])) {
                         //		Email code here(end)
                         //----------------------------
 
+                        //----------------------------
+                        //		Admin Email code here
+                        //----------------------------
+                        $admin_mail = new PHPMailer;
+                        // $admin_mail->SMTPDebug = 3;
+                        $admin_mail->isSMTP();
+                        $admin_mail->Host = $email_host;
+                        $admin_mail->SMTPAuth = true;
+                        $admin_mail->Username = $email_username;
+                        $admin_mail->Password = $email_password;
+                        $admin_mail->SMTPSecure = "tls";
+                        $admin_mail->Port = "587";
+                        //Send HTML or Plain Text email
+                        $admin_mail->isHTML(true);
+                        //From email address and name
+                        $admin_mail->From = $email_from;
+                        $admin_mail->FromName = $email_from_name;
+                        //--------------------------
+                        //       for email
+                        //--------------------------
+
+                        //To address and name
+                        $admin_mail->addAddress($admin_email);
+                        $admin_mail->Subject = "New Order";
+                        $admin_mail->Body = get_include_contents('../administrator/mail/order_new_mail.php', $order_detail);
+                        $admin_mail->send();
+
+                        //----------------------------
+                        //		Admin Email code here(end)
+                        //----------------------------
+
                         // if something done, run this
-                        echo "<script> window.location.href='../my-account/index.php';</script>";
+                        echo "<script>alert(\" Purchase SuccessFul. Your order number: $gateway_order_id\");
+                                 window.location.href='../my-account/index.php';</script>";
                     } else { //end result
                         echo "<script>alert(\" Update Status Fail. Please Contact admin. Your order number: $gateway_order_id\");
                                  window.location.href='../my-account/index.php?p=1';</script>";
