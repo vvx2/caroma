@@ -98,6 +98,14 @@ switch ($status) {
                             <td><?php echo $order["customer_name"]; ?></td>
                         </tr>
                         <tr>
+                            <td>Customer Email</td>
+                            <td><?php echo $order["customer_email"]; ?></td>
+                        </tr>
+                        <tr>
+                            <td>Customer Contact</td>
+                            <td><?php echo $order["customer_contact"]; ?></td>
+                        </tr>
+                        <tr>
                             <td>Delivery Address</td>
                             <td>
                                 <span><?php echo $order['customer_address']; ?>, <?php echo $order['customer_postcode']; ?>, <?php echo $order['customer_city']; ?>, <?php echo $order['state_name']; ?>.<br><span>

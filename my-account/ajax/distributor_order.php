@@ -91,8 +91,16 @@ switch ($status) {
             <blockquote>
                 <table class="table-widths">
                     <tr>
+                        <th class="spacing-titles"><i class="fa fa-info"></i></th>
+                        <th class="spacing-titles1">Email<br><span><?php echo $order['customer_email']; ?><span></th>
+                    </tr>
+                </table>
+            </blockquote>
+            <blockquote>
+                <table class="table-widths">
+                    <tr>
                         <th class="spacing-titles"><i class="fa fa-map-marker"></i></th>
-                        <th class="spacing-titles1">Delivery Address<br><span><?php echo $order['customer_name']; ?><br><?php echo $order['customer_contact']; ?><br><?php echo $order['customer_address']; ?>, <?php echo $order['customer_postcode']; ?>, <?php echo $order['customer_city']; ?>, <?php echo $order['state_name']; ?>.<br><span></th>
+                        <th class="spacing-titles1">Delivery Information<br><span>Name : <?php echo $order['customer_name']; ?><br>Contact: <?php echo $order['customer_contact']; ?><br>Address: <?php echo $order['customer_address']; ?>, <?php echo $order['customer_postcode']; ?>, <?php echo $order['customer_city']; ?>, <?php echo $order['state_name']; ?>.<br><span></th>
                     </tr>
                 </table>
             </blockquote>
