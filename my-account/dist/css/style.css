@@ -6217,6 +6217,7 @@ ul.inbox-nav li a:hover, ul.inbox-nav li.active a, ul.inbox-nav li a:focus {
 .col-item .info {
   background: #f7f7f9 none repeat scroll 0 0;
   padding: 30px 0 20px;
+  height: 270px;
 }
 
 /*Cropperjs*/

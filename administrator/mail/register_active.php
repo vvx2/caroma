@@ -300,7 +300,7 @@
                           <td valign="top" align="center" style="padding:0;Margin:0;width:560px">
                             <table width="100%" cellspacing="0" cellpadding="0" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                               <tr style="border-collapse:collapse">
-                                <td align="center" style="padding:0;Margin:0;font-size:0px"><a href="https://shop.caroma.com.my" target="_blank" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-size:14px;text-decoration:none;color:#677D9E"><img src="https://staging2.caroma.com.my/wp-content/uploads/2021/01/logo.svg" alt="Caroma Logo" title="Caroma Logo" width="200" style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic"></a></td>
+                                <td align="center" style="padding:0;Margin:0;font-size:0px"><a href="https://shop.caroma.com.my" target="_blank" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-size:14px;text-decoration:none;color:#677D9E"><img src="https://staging2.caroma.com.my/wp-content/uploads/2020/12/Group-55@2x.png" alt="Caroma Logo" title="Caroma Logo" width="200" style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic"></a></td>
                               </tr>
                             </table>
                           </td>

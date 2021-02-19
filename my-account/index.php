@@ -217,22 +217,22 @@ if ($user_type == "2") {
 																			<thead>
 																				<tr>
 																					<th>#</th>
+																					<th>Detail</th>
 																					<th>Order ID</th>
 																					<th>Name</th>
 																					<th>DateTime</th>
 																					<th>Total Amount</th>
-																					<th>More Detail</th>
 																					<th>Action</th>
 																				</tr>
 																			</thead>
 																			<tfoot>
 																				<tr>
 																					<th>#</th>
+																					<th>Detail</th>
 																					<th>Order ID</th>
 																					<th>Name</th>
 																					<th>DateTime</th>
 																					<th>Total Amount</th>
-																					<th>More Detail</th>
 																					<th>Action</th>
 																				</tr>
 																			</tfoot>
@@ -291,11 +291,11 @@ if ($user_type == "2") {
 
 																					<tr>
 																						<td><?php echo $i; ?></td>
+																						<td><i data-remote="ajax/user_order_detail.php?p=<?php echo $order['id']; ?>" data-toggle="modal" data-target=".bs-example-modal-lg" class="fa fa-eye toolsx"></i></td>
 																						<td><?php echo $order['gateway_order_id']; ?></td>
 																						<td><?php echo $order['customer_name']; ?></td>
 																						<td><?php echo $order['date_created']; ?></td>
 																						<td><?php echo $order['total_payment']; ?></td>
-																						<td><i data-remote="ajax/user_order_detail.php?p=<?php echo $order['id']; ?>" data-toggle="modal" data-target=".bs-example-modal-lg" class="fa fa-eye toolsx"></i></td>
 																						<td><?php echo $btn_action; ?></td>
 																					</tr>
 																				<?php $i++;

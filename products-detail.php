@@ -267,12 +267,10 @@
                             </ul>
                         </div>
                         <div class="acepted-payment-methods">
-                            <ul class="payment-methods">
-                                <li><img src="assets/images/card1.jpg" alt="" width="51" height="36"></li>
-                                <li><img src="assets/images/card2.jpg" alt="" width="51" height="36"></li>
-                                <li><img src="assets/images/card3.jpg" alt="" width="51" height="36"></li>
-                                <li><img src="assets/images/card4.jpg" alt="" width="51" height="36"></li>
-                            </ul>
+                            <div class="payment-methods">
+                                <img src="assets/images/footer-imgs.png" alt="" width="100%">
+                                <small>By proceeding, you agree to authorise senangPay (Simplepay Gateway Sdn Bhd) to debit the above net charges to your credit/debit card or online banking account.</small>
+                             </div>
                         </div>
                     </div>
                 </div>

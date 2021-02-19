@@ -6854,7 +6854,7 @@ body.open-overlay #overlay{
     -ms-transform: scale(0);
     -o-transform: scale(0);
     transform: scale(0);
-    background-color: rgba(255, 255, 255, 0.8);
+    /*background-color: rgba(255, 255, 255, 0.8);*/
     color: rgb(255, 255, 255);
     border-color: rgb(102, 102, 102);
     padding: 20px 50px 40px;
@@ -6876,8 +6876,8 @@ body.open-overlay #overlay{
     margin: 0;
 }
 .slider-opt03__layout01 .text-content .second-line{
-    font-size: 60px;
-    line-height: 60px;
+    font-size: 38px;
+    line-height: 38px;
     color: #333333;
     font-weight: 700;
     display: block;
@@ -6895,7 +6895,8 @@ body.open-overlay #overlay{
     font-size: 0;
     display: block;
     line-height: 0;
-    margin: 36px 0 0;
+    /*margin: 36px 0 0;*/
+    margin: 15px 0 0;
 }
 .slider-opt03__layout01 .buttons .btn{
     font-size: 14px;
@@ -6904,6 +6905,7 @@ body.open-overlay #overlay{
     line-height: 1;
     min-width: 147px;
     text-align: center;
+    padding: 17px 10px 16px;
     padding: 17px 10px 16px;
     outline: none;
     box-shadow: none;
@@ -13694,8 +13696,9 @@ body.open-quickview-block .biolife-quickview-block{
     }
 
     .slider-opt03__layout01.mode-02 .text-content{
-        top: 15%;
-        right: 60%;
+        /*top: 15%;*/
+        top: 0%;
+        left : 0%;
         margin: 0 12px 0 0;
     }
     .tab-head__icon-top-layout.type-02 a{
@@ -14166,8 +14169,8 @@ body.open-quickview-block .biolife-quickview-block{
         padding: 10px 0;
     }
     /*.biolife-sticky-object.pre-sticky.is-sticky{
-        top: 0;*/
-    }
+        top: 0;
+    }*/
     .header-area.layout-01 .biolife-sticky-object.pre-sticky .primary-menu{
         margin-top: 15px;
     }
