@@ -457,6 +457,9 @@ $city = $order['customer_city'];
 $state = $order['state_name'];
 $gst_tax = $order['gst_fee'];
 $gst_rate = $order['gst_rate'];
+
+$payment_type = $order['payment_type'];
+$delivery_type = $order['delivery_type'];
 ?>
 
 
@@ -782,6 +785,12 @@ $gst_rate = $order['gst_rate'];
                                                                         </tr>
                                                                         <tr style="border-collapse:collapse">
                                                                             <td style="padding:0;Margin:0;font-size:14px;line-height:21px" colspan="3">Shipping Address : <strong><?php echo $address . "," . $postcode . ", " . $city . "," . $state; ?></p></strong></td>
+                                                                        </tr>
+                                                                        <tr style="border-collapse:collapse">
+                                                                            <td style="padding:0;Margin:0;font-size:14px;line-height:21px" colspan="3">Delivery Type : <strong><?php echo ($delivery_type == 1) ? "Delivery" : "Self Collect"; ?></p></strong></td>
+                                                                        </tr>
+                                                                        <tr style="border-collapse:collapse">
+                                                                            <td style="padding:0;Margin:0;font-size:14px;line-height:21px" colspan="3">Payment Type : <strong><?php echo ($payment_type == 1) ? "Online Banking" : "Pay By Cash"; ?></p></strong></td>
                                                                         </tr>
                                                                     </table>
                                                                     <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:14px;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#333333"><br></p>
