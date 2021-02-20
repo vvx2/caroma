@@ -7,6 +7,7 @@
     require_once('inc/init.php');
     require_once('inc/head.php');
     ?>
+<link rel="stylesheet" href="assets/css/delivery.css">
 </head>
 
 <body class="biolife-body">
