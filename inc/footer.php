@@ -45,9 +45,9 @@
                                      <ul class="menu">
                                          <li><a href="">News</a></li>
                                          <li><a href="">About Our Shop</a></li>
-                                         <li><a href="">Secure Shopping</a></li>
-                                         <li><a href="">Delivery infomation</a></li>
-                                         <li><a href="">Privacy Policy</a></li>
+                                         <li><a href="refunds-return-policy.php">Refund & Return Policy</a></li>
+                                         <li><a href="shipping-delivery.php">Shipping Delivery</a></li>
+                                         <li><a href="privacy-policy.php">Privacy Policy</a></li>
                                      </ul>
                                  </div>
                              </section>
