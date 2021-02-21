@@ -499,7 +499,7 @@
             LoadProduct(1)
 
             window.pagObj = $('#pagination').twbsPagination({
-                totalPages: Math.ceil(<?php echo $count_product_result / 20 ?>),
+                totalPages: Math.ceil(<?php echo $count_product_result / 15 ?>),
                 visiblePages: 5,
                 onPageClick: function(event, page) {
                     console.info(page + ' (from options)');

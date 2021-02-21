@@ -3,7 +3,7 @@ include_once('../connection/PDO_db_function.php');
 $db = new DB_Functions();
 $id = $_REQUEST['p'];
 
-$col = "o.*, o.id as order_id, st.name as state_name, u.name as user_name, o.reason as reason";
+$col = "o.*, o.id as order_id, st.name as state_name, u.name as user_name, u.type as user_type, o.reason as reason";
 $tb = "orders o left join state st on o.customer_state = st.id left join users u on u.id = o.users_id";
 $opt = 'o.id = ?';
 $arr = array($id);
@@ -141,10 +141,13 @@ switch ($status) {
                             <td>Coupon Code</td>
                             <td><?php echo ($order["coupon_code"] == "") ? "-" : $order["coupon_code"]; ?></td>
                         </tr>
-                        <tr>
-                            <td>Point Earn</td>
-                            <td><strong style="color:green;"><?php echo $order["reward_point"]; ?> Points</strong></td>
-                        </tr>
+                        <?php if ($order["user_type"] == 1) {
+                        ?>
+                            <tr>
+                                <td>Coin Earn</td>
+                                <td><strong style="color:green;"><?php echo $order["reward_point"]; ?> Coins</strong></td>
+                            </tr>
+                        <?php } ?>
                         <tr>
                             <td></td>
                             <td></td>
