@@ -116,8 +116,8 @@ $table = "distributor_wallet_transaction";
 $col = "id";
 $opt = 'status = ?';
 $arr = array(1);
-$count_pending = $db->advwhere($col, $table, $opt, $arr);
-$count_pending = count($count_pending);
+$count_refund_pending = $db->advwhere($col, $table, $opt, $arr);
+$count_refund_pending = count($count_refund_pending);
 
 $table = "distributor_wallet_transaction";
 $col = "id";
@@ -263,10 +263,10 @@ $count_reject = count($count_reject);
                         <div class="widget style1 blue-bg">
                             <div class="row">
                                 <div class="col-4">
-                                    <a href="promotion.php" style="color:white;"><i class="fa fa-exclamation-circle fa-5x"></i></a>
+                                    <a href="stock.php" style="color:white;"><i class="fa fa-exclamation-circle fa-5x"></i></a>
                                 </div>
                                 <div class="col-8 text-right">
-                                    <span> Replenish Stock (less than 10)</span>
+                                    <span> Replenish Stock (stock balance less than 10)</span>
                                     <h2 class="font-bold"><?php echo $count_stock; ?></h2>
                                 </div>
                             </div>
@@ -321,10 +321,10 @@ $count_reject = count($count_reject);
                         <a href="refund.php?page=1">
                             <div class="ibox ">
                                 <div class="ibox-title">
-                                    <h5>Refund Pending</h5>
+                                    <h5>Withdrawal Pending</h5>
                                 </div>
                                 <div class="ibox-content">
-                                    <h1 class="no-margins"><?php echo $count_pending; ?></h1>
+                                    <h1 class="no-margins"><?php echo $count_refund_pending; ?></h1>
                                     <small>Total</small>
                                 </div>
                             </div>
@@ -334,7 +334,7 @@ $count_reject = count($count_reject);
                         <a href="refund.php?page=2">
                             <div class="ibox ">
                                 <div class="ibox-title">
-                                    <h5>Refund Success</h5>
+                                    <h5>Withdrawal Success</h5>
                                 </div>
                                 <div class="ibox-content">
                                     <h1 class="no-margins"><?php echo $count_success; ?></h1>
@@ -347,7 +347,7 @@ $count_reject = count($count_reject);
                         <a href="refund.php?page=3">
                             <div class="ibox ">
                                 <div class="ibox-title">
-                                    <h5>Refund Rejected</h5>
+                                    <h5>Withdrawal Rejected</h5>
                                 </div>
                                 <div class="ibox-content">
                                     <h1 class="no-margins"><?php echo $count_reject; ?></h1>

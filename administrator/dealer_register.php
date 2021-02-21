@@ -179,7 +179,7 @@ if (!empty($postedToken)) {
                   //--------------------------
                   //       for email
                   //--------------------------
-                  $active_code = encrypt_decrypt('encrypt', $user_id);
+                  $active_code = encrypt_decrypt('encrypt', $dealer_id);
 
                   $path_active = $server_path . "api/active_account.php?active_code=" . $active_code . "&active_mail=" . $user_email;
 

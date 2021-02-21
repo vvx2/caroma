@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en">
-testing about us
 <head>
     <?php
     // require_once('administrator/connection/PDO_db_function.php');

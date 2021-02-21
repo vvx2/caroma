@@ -1,28 +1,34 @@
 <!--Footer For Mobile-->
 <div class="mobile-footer">
     <div class="mobile-footer-inner">
-        <div class="mobile-block block-menu-main">
+        <div class="mobile-block block-menu-main" style="width: 25%;">
             <a class="menu-bar menu-toggle btn-toggle" data-object="open-mobile-menu" href="javascript:void(0)">
                 <span class="fa fa-bars"></span>
                 <span class="text">Menu</span>
             </a>
         </div>
-        <div class="mobile-block block-sidebar">
+        <div class="mobile-block block-sidebar" style="width: 25%;">
             <a class="menu-bar filter-toggle btn-toggle" data-object="open-mobile-filter" href="javascript:void(0)">
                 <i class="fa fa-sliders" aria-hidden="true"></i>
                 <span class="text">Sidebar</span>
             </a>
         </div>
-        <div class="mobile-block block-minicart">
+        <div class="mobile-block block-minicart" style="width: 25%;">
             <a class="link-to-cart" href="shopping-cart.php">
                 <span class="fa fa-shopping-bag" aria-hidden="true"></span>
                 <span class="text">Cart</span>
             </a>
         </div>
-        <div class="mobile-block block-global">
+        <div class="mobile-block block-minicart" style="width: 25%;">
+            <a class="link-to-cart" href="">
+                <span class="fa fa-heart" aria-hidden="true"></span>
+                <span class="text">Wishlist</span>
+            </a>
+        </div>
+        <div class="mobile-block block-global" style="width: 25%;">
             <a class="menu-bar myaccount-toggle btn-toggle" data-object="global-panel-opened" href="javascript:void(0)">
-                <span class="fa fa-globe"></span>
-                <span class="text">Global</span>
+                <span class="fa fa-user-circle"></span>
+                <span class="text">My-account</span>
             </a>
         </div>
     </div>

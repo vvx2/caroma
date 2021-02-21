@@ -171,7 +171,7 @@ $count_cart = count($user_cart);
 														} else {
 															$register_link =  $actual_link . "/caroma/register_dealer.php?code=" . $result_user['distributor_code'];
 														}
-														echo "<a href='" . $register_link . "' target='_blank'>" . $register_link . "</a>";
+														echo "<input type='text' value='" . $register_link . "' id='myInput' style='color:black;width: 250px;'><br><button style='color:black;margin-top:5px' onclick='myFunction()'>Copy Link</button>";
 
 														?>
 
@@ -396,6 +396,23 @@ $count_cart = count($user_cart);
 	<!-- Init JavaScript -->
 	<script src="dist/js/init.js"></script>
 	<script src="dist/js/widgets-data.js"></script>
+
+	<script>
+		function myFunction() {
+	/* Get the text field */
+	var copyText = document.getElementById("myInput");
+
+	/* Select the text field */
+	copyText.select();
+	copyText.setSelectionRange(0, 99999); /* For mobile devices */
+
+	/* Copy the text inside the text field */
+	document.execCommand("copy");
+
+	/* Alert the copied text */
+	alert("Copied the text: " + copyText.value);
+	}
+	</script>
 
 
 </body>

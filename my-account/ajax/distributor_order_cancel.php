@@ -46,7 +46,7 @@ if ($status == 5) {
                     <div class="form-group">
                         <div class="form-group col-sm-12 no-padding">
                             <label for="order_cancel" class="control-label mb-10">Are you sure to cancel this order? Write the Reasons</label>
-                            <textarea data-match-error="consignment_number Is Required" rows="5" type="text" class="form-control" id="order_cancel" name="reason" placeholder="Wirte the reason" required><?php echo $order['reason']; ?></textarea>
+                            <textarea data-match-error="consignment_number Is Required" rows="5" type="text" class="form-control" id="order_cancel" name="reason" placeholder="Wirte the reason" required><?php echo ($status == 5) ? $order['reason'] : ""; ?></textarea>
 
                         </div>
                     </div>

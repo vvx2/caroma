@@ -1,4 +1,9 @@
 <?php
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\SMTP;
+
 require_once('../../administrator/connection/PDO_db_function.php');
 $db = new DB_Functions();
 // require_once('inc/init.php');
@@ -203,8 +208,131 @@ if (!empty($postedToken)) {
                     $result_order = $db->update($tablename, $data, $array);
 
                     if ($result_order) {
-                        echo "<script>alert(\" Update Status Successful\");
-                              window.location.href='../index.php?p=5';</script>";
+                        //--------------------------
+                        //  get order details
+                        //--------------------------
+                        $table = "orders";
+                        $col = "id, customer_email, customer_name, gateway_order_id, reason";
+                        $opt = 'id = ?';
+                        $arr = array($order_id);
+                        $order = $db->advwhere($col, $table, $opt, $arr);
+                        $customer_email = $order[0]['customer_email'];
+                        $customer_name = $order[0]['customer_name'];
+                        $gateway_order_id = $order[0]['gateway_order_id'];
+                        $reason = $order[0]['reason'];
+                        //--------------------------
+
+
+
+                        if ($user_type == 3) {
+
+                            //get distributor id that dealer under with
+                            $table = 'user_dealer ud left join users u on ud.under_distributor = u.id';
+                            $col = "ud.under_distributor as under_distributor, u.email as admin_email, u.name as admin_name";
+                            $opt = 'user_id =?';
+                            $arr = array($user_id);
+                            $dealer = $db->advwhere($col, $table, $opt, $arr);
+                            $under_distributor = $dealer[0]['under_distributor'];
+                            $admin_email = $dealer[0]['admin_email'];
+                            $admin_id = $under_distributor;
+                            $admin_name = $dealer[0]['admin_name'];
+
+                            // // get product detail.
+                            // $col = "id, stock, product_id";
+                            // $table = "distributor_product";
+                            // $opt = 'product_id = ? AND user_id =? ';
+                            // $arr = array($item['product_id'], $admin_id);
+                            // $product = $db->advwhere($col, $table, $opt, $arr);
+
+                            // //if product exists then execute
+                            // if ($product) {
+
+                            //     $product_id = $product[0]["product_id"];
+                            //     $product_stock = $product[0]["stock"];
+                            //     $reduced_prodcut_stock = $product_stock - $item['qty'];
+
+                            //     $tablename = "distributor_product";
+                            //     $data = "stock = ?, date_modified = ? WHERE product_id = ? AND user_id =?";
+                            //     $array = array($reduced_prodcut_stock, $time, $product_id, $user_id);
+                            //     $result_reduce_stock = $db->update($tablename, $data, $array);
+                            // } else {
+                            //     continue;
+                            // }
+                        } else {
+                            $admin_name = "Admin";
+                            // // get product detail.
+                            // $col = "id, stock";
+                            // $table = "product";
+                            // $opt = 'id = ?';
+                            // $arr = array($item['product_id']);
+                            // $product = $db->advwhere($col, $table, $opt, $arr);
+
+                            // //if product exists then execute
+                            // if ($product) {
+
+                            //     $product_id = $product[0]["id"];
+                            //     $product_stock = $product[0]["stock"];
+                            //     $reduced_prodcut_stock = $product_stock - $item['qty'];
+
+                            //     $tablename = "product";
+                            //     $data = "stock = ?, date_modified = ? WHERE id = ?";
+                            //     $array = array($reduced_prodcut_stock, $time, $product_id);
+                            //     $result_reduce_stock = $db->update($tablename, $data, $array);
+                            // } else {
+                            //     continue;
+                            // }
+                        }
+
+
+                        //--------------------------
+                        //       for email
+                        //--------------------------
+
+                        require_once "../../administrator/vendor/autoload.php";
+                        //PHPMailer Object
+                        $mail = new PHPMailer;
+                        // $mail->SMTPDebug = 3;
+                        $mail->isSMTP();
+                        $mail->Host = $email_host;
+                        $mail->SMTPAuth = true;
+                        $mail->Username = $email_username;
+                        $mail->Password = $email_password;
+                        $mail->SMTPSecure = "tls";
+                        $mail->Port = "587";
+                        //Send HTML or Plain Text email
+                        $mail->isHTML(true);
+                        //From email address and name
+                        $mail->From = $email_from;
+                        $mail->FromName = $email_from_name;
+
+                        //--------------------------
+                        //       for email
+                        //--------------------------
+                        $path_login =  $server_path . "login.php";
+
+                        $cancel_detail = array("path_login" => $path_login, "user_name" => $admin_name, "order_id" => $gateway_order_id, "reason" => $reason);
+
+                        //To address and name
+                        $mail->addAddress($admin_email);
+                        $mail->Subject = "ORDER TO CANCEL";
+                        // $mail->Body = "Congratulations on successful registration";
+                        $mail->Body = get_include_contents('../../administrator/mail/order_user_to_cancel.php', $cancel_detail);
+                        // $mail->send();
+                        // if (!$mail->send()) {
+                        //     echo "Mailer Error: " . $mail->ErrorInfo;
+                        // } else {
+                        //     echo "Message has been sent successfully2";
+                        // }
+                        //----------------------------
+                        //		Email code here(end)
+                        // ----------------------------
+                        if (!$mail->send()) {
+                            echo "<script>alert(\" Update Status Successful, But Send Mail Fail\");
+                                  window.location.href='../index.php?p=5';</script>";
+                        } else {
+                            echo "<script>alert(\" Update Status Successful\");
+                                  window.location.href='../index.php?p=5';</script>";
+                        }
                     } else {
                         echo "<script>alert(\" Update Status Fail. Please Try Again\");
                               window.location.href='../index.php?p=5';</script>";

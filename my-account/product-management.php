@@ -81,9 +81,9 @@ if ($user_type != 2) {
 		<div class="page-wrapper">
 			<div class="container-fluid">
 				<!-- Title -->
-				<div class="row heading-bg bg-pink">
+				<div class="row heading-bg bg-grey">
 					<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-						<h5 class="txt-light">Product Management</h5>
+						<h5 class="txt-light">Product Management - Add New</h5>
 					</div>
 				</div>
 				<!-- /Title -->
@@ -273,6 +273,7 @@ if ($user_type != 2) {
 											<div class="seprator-block"></div>
 											<div class="form-actions">
 												<button class="btn btn-success btn-icon left-icon mr-10" name="btnAction"> <i class="fa fa-check"></i> <span>save</span></button>
+												<a class="btn btn-success btn-icon left-icon mr-10" href="product.php"> <i class="fa fa-times"></i> <span>cancel</span></a>
 											</div>
 										</form>
 									</div>

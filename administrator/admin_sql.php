@@ -1108,9 +1108,111 @@ if (!empty($postedToken)) {
             //------------------------------------------
           }
 
+
           if ($result_order) {
-            echo "<script>alert(\" Update Status Successful\");
+            //--------------------------
+            //  get order details
+            //--------------------------
+            $table = "orders";
+            $col = "id, customer_email, customer_name, gateway_order_id, reason";
+            $opt = 'id = ?';
+            $arr = array($order_id);
+            $order = $db->advwhere($col, $table, $opt, $arr);
+            $customer_email = $order[0]['customer_email'];
+            $customer_name = $order[0]['customer_name'];
+            $gateway_order_id = $order[0]['gateway_order_id'];
+            $reason = $order[0]['reason'];
+            //--------------------------
+
+            //------------------------------
+            // add product stock
+            //------------------------------
+            $table = "order_items";
+            $col = "product_id, qty";
+            $opt = 'order_id = ?';
+            $arr = array($order_id);
+            $result_order_items = $db->advwhere($col, $table, $opt, $arr);
+
+            // loop all product in item
+            foreach ($result_order_items as $item) {
+
+              // get product detail.
+              $col = "id, stock";
+              $table = "product";
+              $opt = 'id = ?';
+              $arr = array($item['product_id']);
+              $product = $db->advwhere($col, $table, $opt, $arr);
+
+              //if product exists then execute
+              if ($product) {
+
+                $product_id = $product[0]["id"];
+                $product_stock = $product[0]["stock"];
+                $added_prodcut_stock = $product_stock + $item['qty'];
+
+                $tablename = "product";
+                $data = "stock = ?, date_modified = ? WHERE id = ?";
+                $array = array($added_prodcut_stock, $time, $product_id);
+                $result_add_stock = $db->update($tablename, $data, $array);
+              } else {
+                continue;
+              }
+            }
+
+            //------------------------------
+            // Add product stock
+            //------------------------------
+
+            //--------------------------
+            //       for email
+            //--------------------------
+
+            require_once "vendor/autoload.php";
+            //PHPMailer Object
+            $mail = new PHPMailer;
+            // $mail->SMTPDebug = 3;
+            $mail->isSMTP();
+            $mail->Host = $email_host;
+            $mail->SMTPAuth = true;
+            $mail->Username = $email_username;
+            $mail->Password = $email_password;
+            $mail->SMTPSecure = "tls";
+            $mail->Port = "587";
+            //Send HTML or Plain Text email
+            $mail->isHTML(true);
+            //From email address and name
+            $mail->From = $email_from;
+            $mail->FromName = $email_from_name;
+
+            //--------------------------
+            //       for email
+            //--------------------------
+            $path_login =  $server_path . "login.php";
+
+            $cancel_detail = array("path_login" => $path_login, "user_name" => $customer_name, "order_id" => $gateway_order_id, "reason" => $reason);
+
+            //To address and name
+            $mail->addAddress($customer_email);
+            $mail->Subject = "ORDER CANCEL";
+            // $mail->Body = "Congratulations on successful registration";
+            $mail->Body = get_include_contents('mail/order_cancel_mail.php', $cancel_detail);
+            // $mail->send();
+            // if (!$mail->send()) {
+            //   echo "Mailer Error: " . $mail->ErrorInfo;
+            // } else {
+            //   echo "Message has been sent successfully2";
+            // }
+            //----------------------------
+            //		Email code here(end)
+            //----------------------------
+
+            if (!$mail->send()) {
+              echo "<script>alert(\" Update Status Successful, But Send Mail Fail\");
                       window.location.href='order.php?page=1';</script>";
+            } else {
+              echo "<script>alert(\" Update Status Successful\");
+                      window.location.href='order.php?page=1';</script>";
+            }
           } else {
             echo "<script>alert(\" Update Status Fail. Please Try Again\");
                       window.location.href='order.php?page=1';</script>";

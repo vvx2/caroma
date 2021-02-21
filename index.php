@@ -63,9 +63,9 @@
                         <div class="slide-contain slider-opt03__layout01 mode-02 slide-bgr-01">
                             <div class="media slidersz"></div>
                             <div class="text-content">
-                                <i class="first-line">Health & Natural</i>
-                                <h3 class="second-line">Caroma Malaysia</h3>
-                                <p class="third-line">Drink life to the fullest with caroma</p>
+                               <!-- <i class="first-line">Health & Natural</i> --->
+                                <h3 class="second-line" style="color:rgb(227, 255, 89);">Our Soilless Bentong<br>Ginger Series Product</h3>
+                                <p class="third-line" style="color:rgb(227, 255, 89);">Since 1976</p>
                                 <p class="buttons">
                                     <a href="shop.php" class="btn btn-bold">Shop now</a>
                                     <a href="shop.php?is_promotion=1" class="btn btn-thin">Promotion</a>
@@ -77,9 +77,9 @@
                         <div class="slide-contain slider-opt03__layout01 mode-02 slide-bgr-02">
                             <div class="media slidersz"></div>
                             <div class="text-content">
-                                <i class="first-line">Health & Natural</i>
-                                <h3 class="second-line">Caroma Malaysia</h3>
-                                <p class="third-line">Drink life to the fullest with caroma</p>
+                               <!-- <i class="first-line">Health & Natural</i> --->
+                                <h3 class="second-line" style="color:rgb(227, 255, 89);">Our Soilless Bentong<br>Ginger Series Product</h3>
+                                <p class="third-line" style="color:rgb(227, 255, 89);">Since 1976</p>
                                 <p class="buttons">
                                     <a href="shop.php" class="btn btn-bold">Shop now</a>
                                     <a href="shop.php?is_promotion=1" class="btn btn-thin">Promotion</a>
@@ -91,9 +91,9 @@
                         <div class="slide-contain slider-opt03__layout01 mode-02 slide-bgr-03">
                             <div class="media slidersz"></div>
                             <div class="text-content">
-                                <i class="first-line">Health & Natural</i>
-                                <h3 class="second-line">Caroma Malaysia</h3>
-                                <p class="third-line">Drink life to the fullest with caroma</p>
+                               <!-- <i class="first-line">Health & Natural</i> --->
+                                <h3 class="second-line" style="color:rgb(227, 255, 89);">Our Soilless Bentong<br>Ginger Series Product</h3>
+                                <p class="third-line" style="color:rgb(227, 255, 89);">Since 1976</p>
                                 <p class="buttons">
                                     <a href="shop.php" class="btn btn-bold">Shop now</a>
                                     <a href="shop.php?is_promotion=1" class="btn btn-thin">Promotion</a>
@@ -420,7 +420,7 @@
                             </div>
 
                             <div id="promotion" class="tab-contain">
-                                <ul class="products-list biolife-carousel nav-center-02 nav-none-on-mobile eq-height-contain" data-slick='{"rows":1 ,"arrows":true,"dots":false,"infinite":true,"speed":400,"slidesMargin":10,"slidesToShow":4, "responsive":[{"breakpoint":1200, "settings":{ "slidesToShow": 4}},{"breakpoint":992, "settings":{ "slidesToShow": 3, "rows":2, "slidesMargin":20}},{"breakpoint":768, "settings":{ "slidesToShow": 2, "rows":2 ,"slidesMargin":15}}]}'>
+                                <ul class="products-list biolife-carousel nav-center-02 nav-none-on-mobile eq-height-contain" data-slick='{"rows":1 ,"arrows":true,"autoplaySpeed": 5000, "autoplay": true,"dots":false,"infinite":true,"speed":400,"slidesMargin":10,"slidesToShow":4, "responsive":[{"breakpoint":1200, "settings":{ "slidesToShow": 4}},{"breakpoint":992, "settings":{ "slidesToShow": 3, "rows":2, "slidesMargin":20}},{"breakpoint":768, "settings":{ "slidesToShow": 2, "rows":2 ,"slidesMargin":15}}]}'>
                                     <?php
 
                                     // $col = "*, DATE_ADD(end, INTERVAL 1 DAY) as new_end_date";
@@ -602,7 +602,7 @@
                                 <div class="biolife-title-box bold-style biolife-title-box__bold-style">
                                     <h3 class="title">Top Rated Products</h3>
                                 </div>
-                                <ul class="products biolife-carousel eq-height-contain nav-center-03 nav-none-on-mobile row-space-29px" data-slick='{"rows":2,"arrows":true,"dots":false,"infinite":false,"speed":400,"slidesMargin":30,"slidesToShow":2,"responsive":[{"breakpoint":1200,"settings":{ "rows":2, "slidesToShow": 2}},{"breakpoint":992, "settings":{ "rows":2, "slidesToShow": 1}},{"breakpoint":768, "settings":{ "rows":2, "slidesToShow": 2}},{"breakpoint":500, "settings":{ "rows":2, "slidesToShow": 1}}]}'>
+                                <ul class="products biolife-carousel eq-height-contain nav-center-03 nav-none-on-mobile row-space-29px" data-slick='{"rows":3,"arrows":true,"dots":false,"autoplaySpeed": 5000, "autoplay": true,"infinite":false,"speed":400,"slidesMargin":30,"slidesToShow":2,"responsive":[{"breakpoint":1200,"settings":{ "rows":2, "slidesToShow": 2}},{"breakpoint":992, "settings":{ "rows":2, "slidesToShow": 1}},{"breakpoint":768, "settings":{ "rows":2, "slidesToShow": 2}},{"breakpoint":500, "settings":{ "rows":2, "slidesToShow": 1}}]}'>
 
                                     <?php
 
@@ -715,7 +715,7 @@
 
 
                                 </ul>
-                                <div class="biolife-banner style-01 biolife-banner__style-01 xs-margin-top-80px-im sm-margin-top-30px-im">
+                                <!--- <div class="biolife-banner style-01 biolife-banner__style-01 xs-margin-top-80px-im sm-margin-top-30px-im">
                                     <div class="banner-contain">
                                         <div class="text-content">
                                             <span class="first-line color-whites">Daily Fresh</span>
@@ -724,7 +724,7 @@
                                             <span class="fourth-line color-whites">Premium Quality</span>
                                         </div>
                                     </div>
-                                </div>
+                                </div> --->
                             </div>
                         </div>
                     </div>
