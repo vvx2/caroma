@@ -90,7 +90,7 @@ if (isset($_REQUEST['p'])) {
                 <!-- Title -->
                 <div class="row heading-bg bg-pink">
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                        <h5 class="txt-light">Product Management</h5>
+                        <h5 class="txt-light">Product Management - Edit</h5>
                     </div>
                 </div>
                 <!-- /Title -->
