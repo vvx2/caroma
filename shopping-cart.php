@@ -358,6 +358,7 @@
                                 <div class="btn-checkout">
                                     <input type="hidden" name="count change" value="0" />
                                     <button class="btn checkout btn_checkout" style="width:100%" <?php echo ($login == 1) ? '' : 'disabled="disabled"' ?> onclick="location.href='checkout.php';">Check out</button>
+                                    <button type="button" class="btn custombtn" style="width:100%" data-toggle="modal" data-target="#exampleModalCenter">Check out</button>
                                     <p>click</p>
                                 </div>
                             </div>
@@ -365,6 +366,27 @@
                     </div>
                 </div>
 
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter" style="z-index:2000" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Member Registration</h3>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div>A member account is a must before you proceed to your payment .<br>
+                        <span style="font-weight : bold ; color:red;">DO YOU WANT TO REGISTER AS A MEMBER?</span>
+                    </div>
+                </div>
+                <div class="modal-footer" style="text-align : center ;">
+                    <button type="button" class="btn custombtn" data-dismiss="modal">Close</button>
+                    <a class="btn custombtn" href="register.php">Yes</a>
+                </div>
             </div>
         </div>
     </div>
