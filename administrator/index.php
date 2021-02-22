@@ -266,7 +266,7 @@ $count_reject = count($count_reject);
                                     <a href="stock.php" style="color:white;"><i class="fa fa-exclamation-circle fa-5x"></i></a>
                                 </div>
                                 <div class="col-8 text-right">
-                                    <span> Replenish Stock (less than 10)</span>
+                                    <span> Replenish Stock (stock balance less than 10)</span>
                                     <h2 class="font-bold"><?php echo $count_stock; ?></h2>
                                 </div>
                             </div>

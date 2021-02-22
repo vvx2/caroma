@@ -106,7 +106,7 @@ if($user_type != 2){
 										<article class="col-item">
 											<div class="photo">
 												<div class="options">
-													<button class="btn btn-default btn-icon-anim btn-circle mr-5" type="submit"><a href="product-management.php"><i class="icon-pencil"></i></a></button>
+													<button class="btn btn-default btn-icon-anim btn-circle mr-5" type="submit"><a href="product-edit.php?p=<?php echo $product['p_id']; ?>"><i class="icon-pencil"></i></a></button>
 												</div>
 												<a href="product-edit.php?p=<?php echo $product['p_id']; ?>"> <img src="../img/product/<?php echo $product['image']; ?>" class="img-responsive" alt="Product Image" /> </a>
 											</div>
