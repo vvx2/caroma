@@ -357,8 +357,13 @@
                                 </div>
                                 <div class="btn-checkout">
                                     <input type="hidden" name="count change" value="0" />
-                                    <button class="btn checkout btn_checkout" style="width:100%" <?php echo ($login == 1) ? '' : 'disabled="disabled"' ?> onclick="location.href='checkout.php';">Check out</button>
-                                    <button type="button" class="btn custombtn" style="width:100%" data-toggle="modal" data-target="#exampleModalCenter">Check out</button>
+                                    <?php if ($login == 1) { ?>
+                                        <button class="btn checkout btn_checkout" style="width:100%" onclick="location.href='checkout.php';">Check out</button>
+
+                                    <?php } else { ?>
+                                        <button type="button" class="btn custombtn" style="width:100%" data-toggle="modal" data-target="#exampleModalCenter">Check out</button>
+
+                                    <?php }  ?>
                                     <p>click</p>
                                 </div>
                             </div>
