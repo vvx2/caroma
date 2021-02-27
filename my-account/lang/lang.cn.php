@@ -87,7 +87,19 @@ $lang['lang-high_price'] = '价格:高 至 低';
 //---------------------------
 
 //---------------------------
-//      product_detail.php
+//      reward.php
+//---------------------------
+$lang['lang-product_detail'] = '产品详情';
+$lang['lang-member_center'] = '会员中心';
+$lang['lang-checkin']  = '签到';
+$lang['lang-total_order'] = '订单';
+$lang['lang-total_point'] = '奖励点';
+$lang['lang-cart_item'] = '购物车';
+//---------------------------
+
+
+//---------------------------
+//      reward.php
 //---------------------------
 $lang['lang-normal_user'] = '普通会员';
 $lang['lang-member_center'] = '会员中心';

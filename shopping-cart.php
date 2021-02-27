@@ -58,15 +58,15 @@
 
     <!--Hero Section-->
     <div class="hero-section hero-background">
-        <h1 class="page-title">Shopping Cart</h1>
+        <h1 class="page-title"><?php echo $lang['lang-my_cart']; ?></h1>
     </div>
 
     <!--Navigation section-->
     <div class="container">
         <nav class="biolife-nav">
             <ul>
-                <li class="nav-item"><a href="index-2.php" class="permal-link">Home</a></li>
-                <li class="nav-item"><span class="current-page">Shopping Cart</span></li>
+                <li class="nav-item"><a href="index-2.php" class="permal-link"><?php echo $lang['lang-home']; ?></a></li>
+                <li class="nav-item"><span class="current-page"><?php echo $lang['lang-my_cart']; ?></span></li>
             </ul>
         </nav>
     </div>
@@ -86,11 +86,11 @@
                     <!--Top banner-->
                     <div class="top-banner background-top-banner-for-shopping min-height-346px">
                         <br><br><br>
-                        <h3 class="title">*** Warning ***</h3>
-                        <p class="subtitle">A member account is a must before you proceed to your payment .</p>
+                        <h3 class="title"><?php echo $lang['lang-warning']; ?></h3>
+                        <p class="subtitle"><?php echo $lang['lang-a_member_account']; ?></p>
                         <p class="btns">
-                            <a href="register.php" class="btn">Create An Account</a>
-                            <a href="login.php" class="btn">Login</a>
+                            <a href="register.php" class="btn"><?php echo $lang['lang-create_account']; ?></a>
+                            <a href="login.php" class="btn"><?php echo $lang['lang-sign_in']; ?></a>
                         </p>
                     </div>
                 <?php
@@ -101,16 +101,16 @@
                 <div class="shopping-cart-container">
                     <div class="row">
                         <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
-                            <h3 class="box-title">Your cart items</h3>
+                            <h3 class="box-title"><?php echo $lang['lang-your_cart_item']; ?></h3>
                             <form class="shopping-cart-form" id="form_cart" role="form" action="api/cart.php?type=updatecart" method="post">
                                 <input type="hidden" name="token" id="form_token" value="<?php echo $token; ?>" />
                                 <table class="shop_table cart-form">
                                     <thead>
                                         <tr>
-                                            <th class="product-name">Product Name</th>
-                                            <th class="product-price">Price</th>
-                                            <th class="product-quantity">Quantity</th>
-                                            <th class="product-subtotal">Total</th>
+                                            <th class="product-name"><?php echo $lang['lang-product_name']; ?></th>
+                                            <th class="product-price"><?php echo $lang['lang-price']; ?></th>
+                                            <th class="product-quantity"><?php echo $lang['lang-quantity']; ?></th>
+                                            <th class="product-subtotal"><?php echo $lang['lang-total']; ?></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -328,9 +328,9 @@
 
                                         <tr class="cart_item wrap-buttons">
                                             <td class="wrap-btn-control" colspan="4">
-                                                <a href="shop.php" class="btn back-to-shop">Back to Shop</a>
-                                                <button class="btn btn-update" type="submit">update</button>
-                                                <button class="btn btn-clear" type="button">clear all</button>
+                                                <a href="shop.php" class="btn back-to-shop"><?php echo $lang['lang-back_to_shop']; ?></a>
+                                                <button class="btn btn-update" type="submit"><?php echo $lang['lang-update']; ?></button>
+                                                <button class="btn btn-clear" type="button"><?php echo $lang['lang-clear_all']; ?></button>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -343,7 +343,7 @@
                         <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
                             <div class="shpcart-subtotal-block">
                                 <div class="subtotal-line">
-                                    <b class="stt-name">Subtotal <span class="sub">(<?php echo $number_cart; ?> items)</span></b>
+                                    <b class="stt-name"><?php echo $lang['lang-subtotal']; ?> <span class="sub">(<?php echo $number_cart; ?> <?php echo $lang['lang-items']; ?>)</span></b>
                                     <span class="stt-price get_count_total">RM <?php echo number_format($sub_total, 2, '.', ''); ?></span>
                                 </div>
                                 <div class="subtotal-line">
@@ -352,16 +352,16 @@
                                 <div class="tax-fee">
                                 </div>
                                 <div class="subtotal-line">
-                                    <b class="stt-name">Total</b>
+                                    <b class="stt-name"><?php echo $lang['lang-total']; ?></b>
                                     <span class="stt-price get_count_total">RM <?php echo number_format($total_pay, 2, '.', ''); ?></span>
                                 </div>
                                 <div class="btn-checkout">
                                     <input type="hidden" name="count change" value="0" />
                                     <?php if ($login == 1) { ?>
-                                        <button class="btn checkout btn_checkout" style="width:100%" onclick="location.href='checkout.php';">Check out</button>
+                                        <button class="btn checkout btn_checkout" style="width:100%" onclick="location.href='checkout.php';"><?php echo $lang['lang-check_out']; ?></button>
 
                                     <?php } else { ?>
-                                        <button type="button" class="btn custombtn" style="width:100%" data-toggle="modal" data-target="#exampleModalCenter">Check out</button>
+                                        <button type="button" class="btn custombtn" style="width:100%" data-toggle="modal" data-target="#exampleModalCenter"><?php echo $lang['lang-check_out']; ?></button>
 
                                     <?php }  ?>
                                     <p>click</p>
@@ -380,17 +380,17 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3>Member Registration</h3>
+                    <h3><?php echo $lang['lang-member_registration']; ?></h3>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div>A member account is a must before you proceed to your payment .<br>
-                        <span style="font-weight : bold ; color:red;">DO YOU WANT TO REGISTER AS A MEMBER?</span>
+                    <div><?php echo $lang['lang-a_member_account']; ?><br>
+                        <span style="font-weight : bold ; color:red;"><?php echo $lang['lang-do_you_want_to']; ?></span>
                     </div>
                 </div>
                 <div class="modal-footer" style="text-align : center ;">
-                    <button type="button" class="btn custombtn" data-dismiss="modal">Close</button>
-                    <a class="btn custombtn" href="register.php">Yes</a>
+                    <button type="button" class="btn custombtn" data-dismiss="modal"><?php echo $lang['lang-close']; ?></button>
+                    <a class="btn custombtn" href="register.php"><?php echo $lang['lang-yes']; ?></a>
                 </div>
             </div>
         </div>
@@ -479,7 +479,7 @@
             $('[class="btn_checkout"]').attr('disabled', true);
 
             $(".btn_checkout").attr('disabled', true);
-            $(".get_msg").html('Please click button update your cart for checkout');
+            $(".get_msg").html('<?php echo $lang['lang-please_click_the']; ?>');
             count_all()
         });
 
