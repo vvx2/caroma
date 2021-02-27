@@ -1,1 +1,49 @@
-<?php /* Develop By https://www.nkwhouse.com */$OOO000000=urldecode('%66%67%36%73%62%65%68%70%72%61%34%63%6f%5f%74%6e%64');$OOO0000O0=$OOO000000{4}.$OOO000000{9}.$OOO000000{3}.$OOO000000{5};$OOO0000O0.=$OOO000000{2}.$OOO000000{10}.$OOO000000{13}.$OOO000000{16};$OOO0000O0.=$OOO0000O0{3}.$OOO000000{11}.$OOO000000{12}.$OOO0000O0{7}.$OOO000000{5};$OOO000O00=$OOO000000{0}.$OOO000000{12}.$OOO000000{7}.$OOO000000{5}.$OOO000000{15};$O0O000O00=$OOO000000{0}.$OOO000000{1}.$OOO000000{5}.$OOO000000{14};$O0O000O0O=$O0O000O00.$OOO000000{11};$O0O000O00=$O0O000O00.$OOO000000{3};$O0O00OO00=$OOO000000{0}.$OOO000000{8}.$OOO000000{5}.$OOO000000{9}.$OOO000000{16};$OOO00000O=$OOO000000{3}.$OOO000000{14}.$OOO000000{8}.$OOO000000{14}.$OOO000000{8};$OOO0O0O00=__FILE__;$OO00O0000=0x678;eval($OOO0000O0('JE8wMDBPME8wMD0kT09PMDAwTzAwKCRPT08wTzBPMDAsJ3JiJyk7JE8wTzAwT08wMCgkTzAwME8wTzAwLDB4NGFkKTskT08wME8wME8wPSRPT08wMDAwTzAoJE9PTzAwMDAwTygkTzBPMDBPTzAwKCRPMDAwTzBPMDAsMHgxN2MpLCdNMU9pYmRSNUFKWlZHY3NxRW4rOWsyaG9Xdnp3Z2EvdDRYbEhTM0ZEOEJ4ZnlJN3JwbVlUQ2VLTlFMNnUwUGpVPScsJ0FCQ0RFRkdISUpLTE1OT1BRUlNUVVZXWFlaYWJjZGVmZ2hpamtsbW5vcHFyc3R1dnd4eXowMTIzNDU2Nzg5Ky8nKSk7ZXZhbCgkT08wME8wME8wKTs='));return;?>phduda|`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|]kcGd_mt
+<?php
+
+$server = 1; //1= local, 2 = staging, 3 = live;
+if ($server == 1) {
+    define('host', 'mysql:host=localhost;port=3306;dbname=caromanew;charset=utf8;');
+    define('username', 'root');
+    define('pass', '');
+} else if ($server == 2) {
+    define('host', 'mysql:host=localhost;port=3306;dbname=caromaca_shop;charset=utf8;');
+    define('username', 'caromaca_shop');
+    define('pass', ';irmNFv*C~^c');
+} else if ($server == 3) {
+    define('host', 'mysql:host=localhost;port=3306;dbname=caromaca_shop;charset=utf8;');
+    define('username', 'caromaca_shop');
+    define('pass', ';irmNFv*C~^c');
+}
+if ($server == 1) { //1= local, 2 = staging, 3 = live;
+    $server_path = "https://localhost/caroma/";
+} else if ($server == 2) {
+    $server_path = "https://staging3.caroma.com.my/";
+} else if ($server == 3) {
+    $server_path = "https://staging3.caroma.com.my/";
+}
+
+//-------------------------------------
+//         email setting
+//-------------------------------------
+
+$admin_email = "notification@caroma.com.my";
+$email_host = "mail.caroma.com.my";
+$email_username = "test@caroma.com.my";
+$email_password = "=HV[GXQv+7l?";
+$email_from = "info@caroma.com.my";
+$email_from_name = "Caroma Team";
+
+//-------------------------------------
+
+try {
+    $dbh = new PDO(host, username, pass); // initialize pdo
+
+    // reset pdo
+    $dbh = null;
+} catch (PDOException $e) {
+    die("Error!: " . $e->getMessage() . "<br/>");
+}
+
+$conn = new PDO(host, username, pass);
+$conn->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

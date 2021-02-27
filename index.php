@@ -130,18 +130,18 @@
 
                     <div class="biolife-title-box biolife-title-box__icon-at-top-style">
                         <span class="icon-at-top biolife-icon icon-capacity-about"></span>
-                        <span class="subtitle">All the best item for You</span>
-                        <h3 class="main-title">Bestseller Products</h3>
+                        <span class="subtitle"><?php echo $lang['lang-all_the_best']; ?></span>
+                        <h3 class="main-title"><?php echo $lang['lang-best_seller']; ?></h3>
                     </div>
 
                     <div class="biolife-tab biolife-tab-contain sm-margin-top-34px">
                         <div class="tab-head tab-head__icon-top-layout icon-top-layout type-02">
                             <ul class="tabs md-margin-bottom-35-im sm-margin-bottom-57-im">
                                 <li class="tab-element">
-                                    <a href="#promotion" class="tab-link"><span class="biolife-icon icon-schedule"></span>Promotion</a>
+                                    <a href="#promotion" class="tab-link"><span class="biolife-icon icon-schedule"></span><?php echo $lang['lang-promotion']; ?></a>
                                 </li>
                                 <li class="tab-element">
-                                    <a href="#new_arrival" class="tab-link"><span class="biolife-icon icon-title"></span>New</a>
+                                    <a href="#new_arrival" class="tab-link"><span class="biolife-icon icon-title"></span><?php echo $lang['lang-new']; ?></a>
                                 </li>
                                 <?php
                                 $col = "c.id as c_id, ct.name as ct_name";
@@ -516,7 +516,7 @@
                         <div class="col-lg-4 col-md-5 col-sm-6">
                             <div class="advance-product-box">
                                 <div class="biolife-title-box bold-style biolife-title-box__bold-style">
-                                    <h3 class="title">Deals of the day</h3>
+                                    <h3 class="title"><?php echo $lang['lang-deal_of_the_day']; ?></h3>
                                 </div>
                                 <ul class="products biolife-carousel nav-top-right nav-none-on-mobile" data-slick='{"arrows":true, "autoplaySpeed": 5000, "autoplay": true, "dots":false, "infinite":false, "speed":400, "slidesMargin":30, "slidesToShow":1}'>
                                     <?php
@@ -600,7 +600,7 @@
                         <div class="col-lg-8 col-md-7 col-sm-6">
                             <div class="advance-product-box">
                                 <div class="biolife-title-box bold-style biolife-title-box__bold-style">
-                                    <h3 class="title">Top Rated Products</h3>
+                                    <h3 class="title"><?php echo $lang['lang-top_related']; ?></h3>
                                 </div>
                                 <ul class="products biolife-carousel eq-height-contain nav-center-03 nav-none-on-mobile row-space-29px" data-slick='{"rows":3,"arrows":true,"dots":false,"autoplaySpeed": 5000, "autoplay": true,"infinite":false,"speed":400,"slidesMargin":30,"slidesToShow":2,"responsive":[{"breakpoint":1200,"settings":{ "rows":2, "slidesToShow": 2}},{"breakpoint":992, "settings":{ "rows":2, "slidesToShow": 1}},{"breakpoint":768, "settings":{ "rows":2, "slidesToShow": 2}},{"breakpoint":500, "settings":{ "rows":2, "slidesToShow": 1}}]}'>
 
@@ -741,22 +741,22 @@
                             <li>
                                 <div class="service-inner">
                                     <span class="biolife-icon biolife-icon-types icon-leaf2"></span>
-                                    <span class="srv-name" href="#">100% Natural</span>
-                                    <p class="srv-details">We only use the freshest home-grown Bentong ginger from our plantation for <br>our beverages.</p>
+                                    <span class="srv-name" href="#"><?php echo $lang['lang-100_natural']; ?></span>
+                                    <p class="srv-details"><?php echo $lang['lang-100_sub']; ?></p>
                                 </div>
                             </li>
                             <li>
                                 <div class="service-inner">
                                     <span class="biolife-icon biolife-icon-types icon-shield"></span>
-                                    <span class="srv-name" href="#">Best Quality</span>
-                                    <p class="srv-details">Our products are filtered carefully before going with clients. Best quality is a must at Caroma for any categories.</p>
+                                    <span class="srv-name" href="#"><?php echo $lang['lang-best_quality']; ?></span>
+                                    <p class="srv-details"><?php echo $lang['lang-best_sub']; ?></p>
                                 </div>
                             </li>
                             <li>
                                 <div class="service-inner">
                                     <span class="biolife-icon biolife-icon-types icon-heathly"></span>
-                                    <span class="srv-name" href="#">Healthy</span>
-                                    <p class="srv-details">Our ingredient is ginger, which is contains high levels of vitamin C, magnesium and other minerals that are beneficial to your overall health.</p>
+                                    <span class="srv-name" href="#"><?php echo $lang['lang-healthy']; ?></span>
+                                    <p class="srv-details"><?php echo $lang['lang-healthy_sub']; ?></p>
                                 </div>
                             </li>
                         </ul>

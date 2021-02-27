@@ -78,15 +78,15 @@
     </header>
     <!--Hero Section-->
     <div class="hero-section hero-background">
-        <h1 class="page-title">Coins Reward Page</h1>
+        <h1 class="page-title"><?php echo $lang['lang-reward']; ?></h1>
     </div>
 
     <!--Navigation section-->
     <div class="container">
         <nav class="biolife-nav">
             <ul>
-                <li class="nav-item"><a href="index.php" class="permal-link">Home</a></li>
-                <li class="nav-item"><span class="current-page">Rewards</span></li>
+                <li class="nav-item"><a href="index.php" class="permal-link"><?php echo $lang['lang-home']; ?></a></li>
+                <li class="nav-item"><span class="current-page"><?php echo $lang['lang-reward']; ?></span></li>
             </ul>
         </nav>
     </div>
@@ -109,25 +109,25 @@
                                 </div>
 
                                 <div class="name"><?php echo $result_user['name']; ?></div>
-                                <div class="job">NORMAL USER</div>
+                                <div class="job"><?php echo $lang['lang-normal_user']; ?></div>
 
                                 <div class="actions">
-                                    <a class="btn" href="my-account/profile.php">Member Center</a>
-                                    <a class="btn" href="api/checkin.php">Check In</a>
+                                    <a class="btn" href="my-account/profile.php"><?php echo $lang['lang-member_center']; ?></a>
+                                    <a class="btn" href="api/checkin.php"><?php echo $lang['lang-checkin']; ?></a>
                                 </div>
                             </div>
 
                             <div class="stats">
                                 <div class="box">
-                                    <span class="value">Total Order</span>
+                                    <span class="value"><?php echo $lang['lang-total_order']; ?></span>
                                     <span class="parameter"><?php echo $count_order; ?></span>
                                 </div>
                                 <div class="box">
-                                    <span class="value">Total Point</span>
+                                    <span class="value"><?php echo $lang['lang-total_point']; ?></span>
                                     <span class="parameter"><?php echo $point; ?></span>
                                 </div>
                                 <div class="box">
-                                    <span class="value">Cart Item</span>
+                                    <span class="value"><?php echo $lang['lang-cart_item']; ?></span>
                                     <span class="parameter"><?php echo $count_cart; ?></span>
                                 </div>
                             </div>
