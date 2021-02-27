@@ -9,3 +9,12 @@ if (isset($_SESSION['language'])) {
     $_SESSION['language'] = "en";
     $language = $_SESSION['language'];
 }
+
+
+if ($language == "en") {
+    require_once('lang/lang.en.php');
+} else if ($language == "cn") {
+    require_once('lang/lang.cn.php');
+} else if ($language == "my") {
+    require_once('lang/lang.my.php');
+}

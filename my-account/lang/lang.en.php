@@ -16,6 +16,9 @@ $lang['lang-track_new_orders'] = 'Track new orders';
 $lang['lang-save_items'] = 'Save items to your Wishlist';
 $lang['lang-craete_account'] = 'Create an account';
 $lang['lang-join_dealer'] = 'Join with Dealer';
+//      index.php
+//---------------------------
+$lang['lang-dashboard'] = 'Dashboard';
 //---------------------------
 
 //---------------------------

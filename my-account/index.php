@@ -48,7 +48,7 @@ if ($user_type == "2") {
 				<!-- Title -->
 				<div class="row heading-bg bg-yellow">
 					<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-						<h5 class="txt-light">Dashboard</h5>
+						<h5 class="txt-light"><?php echo $lang['lang-dashboard']; ?></h5>
 					</div>
 				</div>
 				<!-- /Title -->
