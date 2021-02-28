@@ -83,7 +83,7 @@ if ($user_type != 2) {
 				<!-- Title -->
 				<div class="row heading-bg bg-grey">
 					<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-						<h5 class="txt-light">Product Management - Add New</h5>
+						<h5 class="txt-light"><?php echo $lang['lang-product_management']; ?></h5>
 					</div>
 				</div>
 				<!-- /Title -->
@@ -97,12 +97,12 @@ if ($user_type != 2) {
 									<div class="form-wrap">
 										<form data-toggle="validator" role="form" id="form_approve" action="api/distributor_sql.php?type=product_add&tb=distributor" method="post" enctype="multipart/form-data">
 											<input type="hidden" name="token" value="<?php echo $token; ?>" />
-											<h6 class="txt-dark capitalize-font"><i class="icon-list mr-10"></i>Product Stock Availability</h6>
+											<h6 class="txt-dark capitalize-font"><i class="icon-list mr-10"></i><?php echo $lang['lang-product_stock_availability']; ?></h6>
 											<hr>
 											<div class="row">
 												<div class="col-md-6">
 													<div class="form-group">
-														<label class="control-label mb-10">Product Name</label>
+														<label class="control-label mb-10"><?php echo $lang['lang-product_name']; ?></label>
 														<select class="form-control" data-placeholder="Choose a Product" tabindex="1" name="product">
 															<?php
 
@@ -135,7 +135,7 @@ if ($user_type != 2) {
 												<!--/span-->
 												<div class="col-md-6">
 													<div class="form-group">
-														<label class="control-label mb-10">Stock </label><!-- <span>[Stock Available : 38]</span> -->
+														<label class="control-label mb-10"><?php echo $lang['lang-stock']; ?> </label><!-- <span>[Stock Available : 38]</span> -->
 														<input id="tch3" type="text" value="1" name="stock" data-bts-button-down-class="btn btn-default" data-bts-button-up-class="btn btn-default">
 													</div>
 												</div>
@@ -145,13 +145,13 @@ if ($user_type != 2) {
 											<div class="row">
 												<div class="col-md-6">
 													<div class="form-group">
-														<label class="control-label mb-10">Product Categories</label>
+														<label class="control-label mb-10"><?php echo $lang['lang-product_categories']; ?></label>
 														<input type="text" id="get_category" disabled value="<?php echo $product_category; ?>" class="form-control">
 													</div>
 												</div>
 												<div class="col-md-6">
 													<div class="form-group">
-														<label class="control-label mb-10">Product Price (Dealer View)</label>
+														<label class="control-label mb-10"><?php echo $lang['lang-product_price']; ?></label>
 														<div class="input-group">
 															<div class="input-group-addon">RM</div>
 															<input type="text" class="form-control" id="get_price" disabled value="<?php echo number_format($product_price, 2); ?>" placeholder="188">
@@ -163,7 +163,7 @@ if ($user_type != 2) {
 											<div class="row">
 												<div class="col-md-6">
 													<div class="form-group">
-														<label class="control-label mb-10">Product Length</label>
+														<label class="control-label mb-10"><?php echo $lang['lang-product_length']; ?></label>
 														<div class="input-group">
 															<div class="input-group-addon">CM</div>
 															<input type="text" class="form-control" id="get_length" disabled value="<?php echo number_format($product_length, 3); ?>" placeholder="188">
@@ -172,7 +172,7 @@ if ($user_type != 2) {
 												</div>
 												<div class="col-md-6">
 													<div class="form-group">
-														<label class="control-label mb-10">Product Width</label>
+														<label class="control-label mb-10"><?php echo $lang['lang-product_width']; ?></label>
 														<div class="input-group">
 															<div class="input-group-addon">CM</div>
 															<input type="text" class="form-control" id="get_width" disabled value="<?php echo number_format($product_width, 3); ?>" placeholder="188">
@@ -184,7 +184,7 @@ if ($user_type != 2) {
 											<div class="row">
 												<div class="col-md-6">
 													<div class="form-group">
-														<label class="control-label mb-10">Product Height</label>
+														<label class="control-label mb-10"><?php echo $lang['lang-product_height']; ?></label>
 														<div class="input-group">
 															<div class="input-group-addon">CM</div>
 															<input type="text" class="form-control" id="get_height" disabled value="<?php echo number_format($product_height, 3); ?>" placeholder="188">
@@ -193,7 +193,7 @@ if ($user_type != 2) {
 												</div>
 												<div class="col-md-6">
 													<div class="form-group">
-														<label class="control-label mb-10">Product Weight</label>
+														<label class="control-label mb-10"><?php echo $lang['lang-product_weight']; ?></label>
 														<div class="input-group">
 															<div class="input-group-addon">KG</div>
 															<input type="text" class="form-control" id="get_weight" disabled value="<?php echo number_format($product_weight, 3); ?>" placeholder="188">
@@ -204,7 +204,7 @@ if ($user_type != 2) {
 											<div class="row" hidden>
 												<div class="col-md-6">
 													<div class="form-group">
-														<label class="control-label mb-10">Logistic Company</label>
+														<label class="control-label mb-10"><?php echo $lang['lang-logistic_company']; ?></label>
 														<select class="form-control" data-placeholder="Choose a Category" tabindex="1">
 															<option value="Product 1">DHL</option>
 															<option value="Product 2">POS LAJU</option>
@@ -217,7 +217,7 @@ if ($user_type != 2) {
 												<!--/span-->
 												<div class="col-md-6">
 													<div class="form-group">
-														<label class="control-label mb-10">Delivery Price</label> <span>[**Per kg**]</span>
+														<label class="control-label mb-10"><?php echo $lang['lang-delivery_price']; ?></label> <span>[**Per kg**]</span>
 														<div class="input-group">
 															<div class="input-group-addon"><i class="fa fa-truck"></i></div>
 															<div class="input-group-addon">RM</div>
@@ -230,7 +230,7 @@ if ($user_type != 2) {
 											<div class="row">
 												<div class="col-md-6">
 													<div class="form-group">
-														<label class="control-label mb-10">Status</label>
+														<label class="control-label mb-10"><?php echo $lang['lang-status']; ?></label>
 														<div class="radio-list">
 															<div class="radio-inline pl-0">
 																<div class="radio radio-info">
@@ -250,7 +250,7 @@ if ($user_type != 2) {
 											</div>
 											<!--/span-->
 											<div class="seprator-block"></div>
-											<h6 class="txt-dark capitalize-font"><i class="icon-picture mr-10"></i>Product Images</h6>
+											<h6 class="txt-dark capitalize-font"><i class="icon-picture mr-10"></i><?php echo $lang['lang-product_images']; ?></h6>
 											<hr>
 											<div class="row" id="image_display">
 												<?php
@@ -272,8 +272,8 @@ if ($user_type != 2) {
 											</div>
 											<div class="seprator-block"></div>
 											<div class="form-actions">
-												<button class="btn btn-success btn-icon left-icon mr-10" name="btnAction"> <i class="fa fa-check"></i> <span>save</span></button>
-												<a class="btn btn-success btn-icon left-icon mr-10" href="product.php"> <i class="fa fa-times"></i> <span>cancel</span></a>
+												<button class="btn btn-success btn-icon left-icon mr-10" name="btnAction"> <i class="fa fa-check"></i> <span><?php echo $lang['lang-save']; ?></span></button>
+												<a class="btn btn-success btn-icon left-icon mr-10" href="product.php"> <i class="fa fa-times"></i> <span><?php echo $lang['lang-cancel']; ?></span></a>
 											</div>
 										</form>
 									</div>

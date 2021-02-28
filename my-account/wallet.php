@@ -48,7 +48,7 @@ if (isset($_REQUEST['p'])) { // refund request status (distributor_wallet_transa
                 <!-- Title -->
                 <div class="row heading-bg  bg-blue">
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                        <h5 class="txt-light">Wallet Management</h5>
+                        <h5 class="txt-light"><?php echo $lang['lang-e_wallet']; ?></h5>
                     </div>
                 </div>
                 <!-- /Title -->
@@ -90,7 +90,7 @@ if (isset($_REQUEST['p'])) { // refund request status (distributor_wallet_transa
                     <div class="col-sm-6 col-12">
                         <div class="sm-data-box bg-blue">
                             <div class="col-xs-5 text-center pa-0 icon-wrap-left">
-                                <h4><i class="txt-light center-div">BANK NAME</i></h4>
+                                <h4><i class="txt-light center-div"><?php echo $lang['lang-bank_name']; ?></i></h4>
                             </div>
                             <div class="col-xs-7 text-center pa-0 icon-wrap-left">
                                 <i class="txt-light"><?php echo ($distributor[0]['bank_name'] != NULL) ? $distributor[0]['bank_name'] : "NO BANK NAME"; ?></i>
@@ -100,7 +100,7 @@ if (isset($_REQUEST['p'])) { // refund request status (distributor_wallet_transa
                     <div class="col-sm-6 col-12">
                         <div class="sm-data-box bg-blue">
                             <div class="col-xs-5 text-center pa-0 icon-wrap-left">
-                                <h4><i class="txt-light center-div">BANK ACCOUNT</i></h4>
+                                <h4><i class="txt-light center-div"><?php echo $lang['lang-bank_account']; ?></i></h4>
                             </div>
                             <div class="col-xs-7 text-center pa-0 icon-wrap-left">
                                 <i class="txt-light"><?php echo ($distributor[0]['bank_account'] != NULL) ? $distributor[0]['bank_account'] : "NO ACCOUNT"; ?></i>
@@ -116,25 +116,25 @@ if (isset($_REQUEST['p'])) { // refund request status (distributor_wallet_transa
                         <div class="panel panel-default card-view">
                             <div class="panel-heading">
                                 <div class="pull-left">
-                                    <h6 class="panel-title txt-dark">Wallet Transaction</h6>
+                                    <h6 class="panel-title txt-dark"><?php echo $lang['lang-wallet_transcation']; ?></h6>
                                 </div>
                                 <div class="pull-right">
                                     <h6 class="panel-title txt-light">
-                                        <i data-remote="ajax/distributor_bank.php" data-toggle="modal" data-target=".bs-example-modal-lg" class="btn btn-primary"><strong>Edit Bank Detail</strong></i>
-                                        <i data-toggle="modal" data-target=".bs-example-modal-lg" class="btn btn-success" <?php echo (($distributor[0]['bank_account'] == NULL) || ($distributor[0]['bank_name'] == NULL)) ? "disabled" : 'data-remote="ajax/distributor_refund.php"'; ?>><strong>Withdrawal Request</strong></i>
-                                        <a href="wallet_history.php"><i class="btn btn-success"><strong>View Trasaction History</strong></i></a>
+                                        <i data-remote="ajax/distributor_bank.php" data-toggle="modal" data-target=".bs-example-modal-lg" class="btn btn-primary"><strong><?php echo $lang['lang-edit_bank_detail']; ?></strong></i>
+                                        <i data-toggle="modal" data-target=".bs-example-modal-lg" class="btn btn-success" <?php echo (($distributor[0]['bank_account'] == NULL) || ($distributor[0]['bank_name'] == NULL)) ? "disabled" : 'data-remote="ajax/distributor_refund.php"'; ?>><strong><?php echo $lang['lang-withdrawal_request']; ?></strong></i>
+                                        <a href="wallet_history.php"><i class="btn btn-success"><strong><?php echo $lang['lang-view_transcation_history']; ?></strong></i></a>
                                     </h6>
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
                             <div class="panel-wrapper collapse in">
                                 <div class="panel-body">
-                                    <p class="text-muted">Please check your<code> Wallet Transaction </code> in this list.</p> <?php echo (($distributor[0]['bank_account'] == NULL) || ($distributor[0]['bank_name'] == NULL)) ? "**To request refund, you need to fill up your bank details **" : ''; ?>
+                                    <p class="text-muted"><?php echo $lang['lang-ple_check_your_wallet']; ?></p> <?php echo (($distributor[0]['bank_account'] == NULL) || ($distributor[0]['bank_name'] == NULL)) ? "**To request refund, you need to fill up your bank details **" : ''; ?>
                                     <div class="pills-struct mt-40">
                                         <ul role="tablist" class="nav nav-pills nav-pills-rounded" id="myTabs_11">
-                                            <li role="presentation" class="<?php echo ($wallet_page == "1") ? "active" : "" ?>"><a href="wallet.php?p=1">Pending</a></li>
-                                            <li role="presentation" class="<?php echo ($wallet_page == "2") ? "active" : "" ?>"><a href="wallet.php?p=2">Success</a></li>
-                                            <li role="presentation" class="<?php echo ($wallet_page == "3") ? "active" : "" ?>"><a href="wallet.php?p=3">Rejected</a></li>
+                                            <li role="presentation" class="<?php echo ($wallet_page == "1") ? "active" : "" ?>"><a href="wallet.php?p=1"><?php echo $lang['lang-pending']; ?></a></li>
+                                            <li role="presentation" class="<?php echo ($wallet_page == "2") ? "active" : "" ?>"><a href="wallet.php?p=2"><?php echo $lang['lang-success']; ?></a></li>
+                                            <li role="presentation" class="<?php echo ($wallet_page == "3") ? "active" : "" ?>"><a href="wallet.php?p=3"><?php echo $lang['lang-rejected']; ?></a></li>
                                         </ul>
                                         <div class="tab-content" id="myTabContent_11">
                                             <div id="home_11" class="tab-pane fade active in" role="tabpanel">
@@ -154,17 +154,17 @@ if (isset($_REQUEST['p'])) { // refund request status (distributor_wallet_transa
                                                                             <thead>
                                                                                 <tr>
                                                                                     <th>#</th>
-                                                                                    <th>Status</th>
-                                                                                    <th>Amount</th>
-                                                                                    <th>Refer/Reason</th>
+                                                                                    <th><?php echo $lang['lang-status']; ?></th>
+                                                                                    <th><?php echo $lang['lang-amount']; ?></th>
+                                                                                    <th><?php echo $lang['lang-refer_reason']; ?></th>
                                                                                 </tr>
                                                                             </thead>
                                                                             <tfoot>
                                                                                 <tr>
                                                                                     <th>#</th>
-                                                                                    <th>Status</th>
-                                                                                    <th>Amount</th>
-                                                                                    <th>Refer/Reason</th>
+                                                                                    <th><?php echo $lang['lang-status']; ?></th>
+                                                                                    <th><?php echo $lang['lang-amount']; ?></th>
+                                                                                    <th><?php echo $lang['lang-refer_reason']; ?></th>
                                                                                 </tr>
                                                                             </tfoot>
                                                                             <tbody>

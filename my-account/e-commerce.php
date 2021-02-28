@@ -41,7 +41,7 @@ if($user_type != 2){
 				<!-- Title -->
 				<div class="row heading-bg  bg-yellow">
 					<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-						<h5 class="txt-light">Distributor Dashboard</h5>
+						<h5 class="txt-light"><?php echo $lang['lang-distributor_dashboard']; ?></h5>
 					</div>
 				</div>
 				<!-- /Title -->
@@ -58,7 +58,7 @@ if($user_type != 2){
 													<i class="icon-briefcase txt-light"></i>
 												</div>
 												<div class="col-xs-7 text-center data-wrap-right">
-													<h6 class="txt-light">Order Pending</h6>
+													<h6 class="txt-light"><?php echo $lang['lang-order_pending']; ?></h6>
 													<span class="txt-light counter counter-anim">
 														<?php
 														$col = "id";
@@ -88,7 +88,7 @@ if($user_type != 2){
 													<i class="icon-briefcase txt-light"></i>
 												</div>
 												<div class="col-xs-7 text-center data-wrap-right">
-													<h6 class="txt-light">Order Rejected</h6>
+													<h6 class="txt-light"><?php echo $lang['lang-order_reject']; ?></h6>
 													<span class="txt-light counter">
 														<?php
 														$col = "id";
@@ -118,7 +118,7 @@ if($user_type != 2){
 													<i class="icon-briefcase txt-light"></i>
 												</div>
 												<div class="col-xs-7 text-center data-wrap-right">
-													<h6 class="txt-light">Order Successful</h6>
+													<h6 class="txt-light"><?php echo $lang['lang-order_successful']; ?></h6>
 													<span class="txt-light counter">
 														<?php
 														$col = "id";
@@ -167,7 +167,7 @@ if($user_type != 2){
 						<div class="panel panel-default card-view">
 							<div class="panel-heading">
 								<div class="pull-left">
-									<h6 class="panel-title txt-dark">Pending Order </h6>
+									<h6 class="panel-title txt-dark"><?php echo $lang['lang-order_pending']; ?> </h6>
 								</div>
 								<div class="clearfix"></div>
 							</div>
@@ -179,31 +179,31 @@ if($user_type != 2){
 												<thead>
 													<tr>
 														<th>#</th>
-														<th>Order ID</th>
-														<th>DateTime</th>
-														<th>Dealer's Name</th>
-														<th>Dealer's Contact Number</th>
-														<th>Dealer's Address</th>
-														<th>Payment Method</th>
-														<th>Total Amount</th>
-														<th>Status</th>
-														<th>More Detail</th>
-														<th>Action</th>
+														<th><?php echo $lang['lang-order_id']; ?></th>
+														<th><?php echo $lang['lang-date_time']; ?></th>
+														<th><?php echo $lang['lang-dealer_name']; ?></th>
+														<th><?php echo $lang['lang-dealer_contact_number']; ?></th>
+														<th><?php echo $lang['lang-dealer_address']; ?></th>
+														<th><?php echo $lang['lang-payment_method']; ?></th>
+														<th><?php echo $lang['lang-total_amount']; ?></th>
+														<th><?php echo $lang['lang-status']; ?></th>
+														<th><?php echo $lang['lang-detail']; ?></th>
+														<th><?php echo $lang['lang-action']; ?></th>
 													</tr>
 												</thead>
 												<tfoot>
 													<tr>
 														<th>#</th>
-														<th>Order ID</th>
-														<th>DateTime</th>
-														<th>Dealer's Name</th>
-														<th>Dealer's Contact Number</th>
-														<th>Dealer's Address</th>
-														<th>Payment Method</th>
-														<th>Total Amount</th>
-														<th>Status</th>
-														<th>More Detail</th>
-														<th>Action</th>
+														<th><?php echo $lang['lang-order_id']; ?></th>
+														<th><?php echo $lang['lang-date_time']; ?></th>
+														<th><?php echo $lang['lang-dealer_name']; ?></th>
+														<th><?php echo $lang['lang-dealer_contact_number']; ?></th>
+														<th><?php echo $lang['lang-dealer_address']; ?></th>
+														<th><?php echo $lang['lang-payment_method']; ?></th>
+														<th><?php echo $lang['lang-total_amount']; ?></th>
+														<th><?php echo $lang['lang-status']; ?></th>
+														<th><?php echo $lang['lang-detail']; ?></th>
+														<th><?php echo $lang['lang-action']; ?></th>
 													</tr>
 												</tfoot>
 												<tbody>

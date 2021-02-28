@@ -90,6 +90,48 @@
                     <li>
                         <div class="slide-contain slider-opt03__layout01 mode-02 slide-bgr-03">
                             <div class="media slidersz"></div>
+                            <div class="text-content text-content02">
+                               <!-- <i class="first-line">Health & Natural</i> --->
+                                <h3 class="second-line" style="color:rgb(227, 255, 89);">Our Soilless Bentong<br>Ginger Series Product</h3>
+                                <p class="third-line" style="color:rgb(227, 255, 89);">Since 1976</p>
+                                <p class="buttons">
+                                    <a href="shop.php" class="btn btn-bold">Shop now</a>
+                                    <a href="shop.php?is_promotion=1" class="btn btn-thin">Promotion</a>
+                                </p>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="slide-contain slider-opt03__layout01 mode-02 slide-bgr-04">
+                            <div class="media slidersz"></div>
+                            <div class="text-content text-content02">
+                               <!-- <i class="first-line">Health & Natural</i> --->
+                                <h3 class="second-line" style="color:rgb(227, 255, 89);">Our Soilless Bentong<br>Ginger Series Product</h3>
+                                <p class="third-line" style="color:rgb(227, 255, 89);">Since 1976</p>
+                                <p class="buttons">
+                                    <a href="shop.php" class="btn btn-bold">Shop now</a>
+                                    <a href="shop.php?is_promotion=1" class="btn btn-thin">Promotion</a>
+                                </p>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="slide-contain slider-opt03__layout01 mode-02 slide-bgr-05">
+                            <div class="media slidersz"></div>
+                            <div class="text-content">
+                               <!-- <i class="first-line">Health & Natural</i> --->
+                                <h3 class="second-line" style="color:rgb(227, 255, 89);">Our Soilless Bentong<br>Ginger Series Product</h3>
+                                <p class="third-line" style="color:rgb(227, 255, 89);">Since 1976</p>
+                                <p class="buttons">
+                                    <a href="shop.php" class="btn btn-bold">Shop now</a>
+                                    <a href="shop.php?is_promotion=1" class="btn btn-thin">Promotion</a>
+                                </p>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="slide-contain slider-opt03__layout01 mode-02 slide-bgr-06">
+                            <div class="media slidersz"></div>
                             <div class="text-content">
                                <!-- <i class="first-line">Health & Natural</i> --->
                                 <h3 class="second-line" style="color:rgb(227, 255, 89);">Our Soilless Bentong<br>Ginger Series Product</h3>

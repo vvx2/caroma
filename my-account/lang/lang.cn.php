@@ -1,112 +1,158 @@
 <?php
 
-//---------------------------
-//      login.php
-//---------------------------
-$lang['lang-home'] = '首页';
-$lang['lang-authentication'] = '会员登入';
-$lang['lang-email_address']  = '电子邮件';
-$lang['lang-sign_in'] = '登入';
-$lang['lang-password'] = '密码';
-$lang['lang-forgot_password'] = '忘记密码？';
-$lang['lang-new_customer'] = '新会员';
-$lang['lang-create_account'] = '创建一个Caroma帐户，你将能够';
-$lang['lang-check_out_faser'] = '快速结账';
-$lang['lang-access_history'] = '查寻您的消费记录';
-$lang['lang-track_new_orders'] = '追着您的订单';
-$lang['lang-save_items'] = '保存物品到您的愿望清单';
-$lang['lang-craete_account'] = '创建账户';
-$lang['lang-join_dealer'] = '加入成为经销商';
-//---------------------------
-
-//---------------------------
-//      Footer.php
-//---------------------------
-$lang['lang-contact'] = '与我们联系';
-$lang['lang-additional_info'] = '附加信息';
-$lang['lang-refund_policy']  = '退款和退货政策';
-$lang['lang-shipping_delivery'] = '送货方式';
-$lang['lang-privacy_policy'] = '隐私政策';
-$lang['lang-our_product'] = '我们的产品';
-$lang['lang-gingery_series'] = '姜茶系列';
-$lang['lang-chocolate_series'] = '巧克力系列';
-$lang['lang-matcha_series'] = '抹茶系列';
-$lang['lang-coconut_series'] = '糖品系列';
-$lang['lang-soy_series'] = '豆类系列';
-$lang['lang-coffee_series'] = '咖啡系列';
-//---------------------------
-
-//---------------------------
-//      header.php
-//---------------------------
-$lang['lang-caroma_home'] = 'CAROMA首页';
-$lang['lang-shop_home'] = '商店首页';
-$lang['lang-shop']  = '商店';
-$lang['lang-promotion'] = '促销';
-$lang['lang-reward'] = '每日签到';
-$lang['lang-login_register'] = '登入/注册账户';
-$lang['lang-my_cart'] = '购物车';
-$lang['lang-view_cart'] = '查看购物车';
-$lang['lang-check_out'] = '结账';
-//---------------------------
-
-//---------------------------
 //      index.php
 //---------------------------
-$lang['lang-all_the_best'] = '最棒的产品献给您';
-$lang['lang-best_seller'] = '我们的畅销产品';
-$lang['lang-new']  = '新品';
-$lang['lang-deal_of_the_day'] = '今日最佳产品';
-$lang['lang-top_related'] = '最受好评的产品';
-$lang['lang-100_natural'] = '100%天然产品';
-$lang['lang-best_quality'] = '最佳品质';
-$lang['lang-healthy'] = '益于健康';
-$lang['lang-100_sub'] = '我们只用最新鲜的自家种植的文冬姜做饮料。';
-$lang['lang-best_sub'] = '我们的产品在与客户接触前都会经过仔细筛选。我们将把最佳的品质建立在CAROMA的任何一个产品里';
-$lang['lang-healthy_sub'] = '我们的原料是生姜，它含有大量的维生素C、镁和其他矿物质，对你的整体健康有益。';
-//---------------------------
+$lang['lang-dashboard'] = '主页';
+$lang['lang-to_ship'] = '待出货';
+$lang['lang-shipping_2'] = '待收货';
+$lang['lang-completed'] = '已完成订单';
+$lang['lang-to_cancel'] = '取消订单';
+$lang['lang-reject_failed'] = '拒绝/失败';
+$lang['lang-order_list'] = '您的订单';
+$lang['lang-pls_check_your_order'] = '请查看您的<code>订单</code>';
+$lang['lang-detail'] = '订单信息';
+$lang['lang-order_id'] = '订单ID';
+$lang['lang-name'] = '名字';
+$lang['lang-date_time'] = '日期时间';
+$lang['lang-total_amount'] = '总价';
+$lang['lang-action'] = '功能';
+$lang['lang-setting'] = '设定';
+
+//------------------------------
 
 //---------------------------
-//      shop.php
+//      sidebar.php
 //---------------------------
-$lang['lang-our_store'] = '我们的商店';
-$lang['lang-category'] = '产品种类';
-$lang['lang-side_bar']  = '侧边栏';
-$lang['lang-new_arrival'] = '新产品';
-$lang['lang-price'] = '价格';
-$lang['lang-latest_product'] = '最新产品';
-$lang['lang-hot_sales'] = '热销产品';
-$lang['lang-all'] = '所有产品';
-$lang['lang-refine'] = '自定义';
-$lang['lang-sort'] = '排序';
-$lang['lang-popularity'] = '最受欢迎产品';
-$lang['lang-average'] = '最高评价';
-$lang['lang-newness'] = '最新的产品';
-$lang['lang-low_price'] = '价格:低 至 高';
-$lang['lang-high_price'] = '价格:高 至 低';
-//---------------------------
+$lang['lang-my_purchase'] = '我的订单';
+$lang['lang-profile'] = '我的档案';
+$lang['lang-shopping']  = '立即购物';
+$lang['lang-caroma_home'] = 'CAROMA首页';
+$lang['lang-shop_home'] = '商店首页';
+$lang['lang-my_caroma_coin'] = '每日签到';
+$lang['lang-logout'] = '注销';
+$lang['lang-your_cart'] = '购物车';
+$lang['lang-my_store'] = '我的店铺';
+$lang['lang-distributor_dashboard'] = '经销商主页';
+$lang['lang-order_management'] = '账单管理';
+$lang['lang-product_management'] = '产品管理';
+$lang['lang-e_wallet'] = '我的钱包';
+$lang['lang-shipping'] = '待收货';
+$lang['lang-geo_zone'] = '地区管理';
 
-//---------------------------
-//      reward.php
-//---------------------------
-$lang['lang-product_detail'] = '产品详情';
-$lang['lang-member_center'] = '会员中心';
-$lang['lang-checkin']  = '签到';
-$lang['lang-total_order'] = '订单';
-$lang['lang-total_point'] = '奖励点';
-$lang['lang-cart_item'] = '购物车';
 //---------------------------
 
 
 //---------------------------
-//      reward.php
+//      profile.php
 //---------------------------
-$lang['lang-normal_user'] = '普通会员';
-$lang['lang-member_center'] = '会员中心';
-$lang['lang-checkin']  = '签到';
-$lang['lang-total_order'] = '订单';
-$lang['lang-total_point'] = '奖励点';
-$lang['lang-cart_item'] = '购物车';
+$lang['lang-distributor_code'] = '经销商号';
+$lang['lang-total_order'] = '总订单';
+$lang['lang-cart_item']  = '您的购物车';
+$lang['lang-url_register'] = '经销商注册网址';
+$lang['lang-your_distributor'] = '您的经销商';
+$lang['lang-distributor_name'] = '经销商名字';
+$lang['lang-distributor_contact'] = '经销商联络号码';
+$lang['lang-change_email'] = '更换电子邮件';
+$lang['lang-reset_password'] = '更换密码';
+$lang['lang-contact_number'] = '联络号码';
+$lang['lang-email'] = '电子邮件';
+$lang['lang-address'] = '地址';
+$lang['lang-state'] = '州属';
+$lang['lang-select_state'] = '请选择您的州属';
+$lang['lang-city'] = '城市';
+$lang['lang-zip_code'] = '邮政编号';
+$lang['lang-profile_picture'] = '会员照片';
+$lang['lang-submit'] = '提交';
+$lang['lang-new_password'] = '新密码';
+$lang['lang-confirm_password'] = '确认密码';
+$lang['lang-old_password'] = '旧密码';
+$lang['lang-uppercase'] = '大写字母,小写字母,数字,特别符号,八位数';
+$lang['lang-point'] = '奖励点';
+
+//---------------------------
+
+//---------------------------
+//      ecommerce.php
+//---------------------------
+$lang['lang-order_pending'] = '待批准订单';
+$lang['lang-order_reject'] = '已拒绝订单';
+$lang['lang-order_successful']  = '已成功订单';
+$lang['lang-dealer_name'] = '商家名字';
+$lang['lang-dealer_contact_number'] = '商家联络号码';
+$lang['lang-dealer_address'] = '商家地址';
+$lang['lang-status'] = '状态';
+$lang['lang-payment_method'] = '付款方式';
+$lang['lang-payment_type'] = '付款方式';
+
+
+//---------------------------
+//      order_list.php
+//---------------------------
+$lang['lang-add_self_order'] = '添加商家自取订单';
+$lang['lang-store_order']  = '您的店铺订单';
+$lang['lang-pls_check_your_store'] = '请查看您店铺的<code>订单</code>';
+
+//---------------------------
+
+//---------------------------
+//     product.php
+//---------------------------
+$lang['lang-add_new_product'] = '添加产品';
+$lang['lang-product_list'] = '产品列表';
+$lang['lang-product_stock_availability']  = '产品库存可用性';
+$lang['lang-stock'] = '库存';
+$lang['lang-product_name'] = '产品名称';
+$lang['lang-product_categories'] = '产品分类';
+$lang['lang-product_price'] = '产品价格 (给商家的价格)';
+$lang['lang-product_length'] = '产品长度';
+$lang['lang-product_width'] = '产品宽度';
+$lang['lang-product_height'] = '产品高度';
+$lang['lang-product_weight'] = '产品重量';
+$lang['lang-status'] = '状态';
+$lang['lang-product_images'] = '产品照片';
+$lang['lang-save'] = '添加';
+$lang['lang-cancel'] = '取消';
+//---------------------------
+
+//---------------------------
+//      wallet.php
+//---------------------------
+$lang['lang-bank_name'] = '银行密码';
+$lang['lang-bank_account'] = '银行号码';
+$lang['lang-wallet_transcation']  = '您的钱包记录';
+$lang['lang-edit_bank_detail'] = '编辑银行资料';
+$lang['lang-withdrawal_request'] = '提现请求';
+$lang['lang-view_transcation_history'] = '交易记录';
+$lang['lang-ple_check_your_wallet'] = '请查看您<code>钱包的记录</code>';
+$lang['lang-pending'] = '等待';
+$lang['lang-success'] = '成功';
+$lang['lang-refer_reason'] = '失败的原因';
+$lang['lang-rejected'] = '失败';
+$lang['lang-amount'] = '数额';
+$lang['lang-transcation_history'] = '交易历史记录';
+$lang['lang-transcation_description'] = '交易信息';
+$lang['lang-balance'] = '余额';
+$lang['lang-wallet_transcation_history']  = '钱包交易记录';
+//---------------------------
+
+//---------------------------
+//      shipping.php
+//---------------------------
+$lang['lang-shipping_3'] = '寄件管理';
+$lang['lang-your_shipping'] = '您的寄件管理';
+$lang['lang-add_shipping']  = '添加寄件区域';
+$lang['lang-pls_check_your_shipping'] = '请查看您<code>寄件</code>';
+$lang['lang-title'] = '标题';
+//---------------------------
+
+
+//---------------------------
+//      geo zone.php
+//---------------------------
+$lang['lang-your_geo_zone'] = '您的区域管理';
+$lang['lang-add_geo_zone'] = '添加区域管理';
+$lang['lang-description']  = '信息';
+$lang['lang-pls_check_your_geo']  = '请查看您<code>区域</code>';
 //---------------------------
 
 

@@ -74,7 +74,7 @@ $count_cart = count($user_cart);
 				<!-- Title -->
 				<div class="row heading-bg  bg-blue">
 					<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-						<h5 class="txt-light">profile</h5>
+						<h5 class="txt-light"><?php echo $lang['lang-profile']; ?></h5>
 					</div>
 				</div>
 				<!-- /Title -->
@@ -94,7 +94,7 @@ $count_cart = count($user_cart);
 												<?php
 												if ($user_type == 2) {
 												?>
-													<h6 class="txt-light block uppercase-font"><strong>Code: </strong><?php echo $result_user['distributor_code']; ?></h6>
+													<h6 class="txt-light block uppercase-font"><strong><?php echo $lang['lang-distributor_code']; ?>: </strong><?php echo $result_user['distributor_code']; ?></h6>
 												<?php
 												}
 												?>
@@ -119,19 +119,19 @@ $count_cart = count($user_cart);
 													<div class="col-sm-4 text-center">
 														<i class="fa fa-truck block mb-10"></i>
 														<span class="counts block head-font mb-5"><?php echo $count_user_order; ?></span>
-														<span class="counts-text block">Total Order</span>
+														<span class="counts-text block"><?php echo $lang['lang-total_order']; ?></span>
 													</div>
 													<div class="col-sm-4 text-center">
 														<a href="point_history.php" target="_blank">
 														<i class="fa fa-money block mb-10"></i>
 														<span class="counts block head-font mb-5"><?php echo $point; ?></span>
-														<span class="counts-text block">Point</span>
+														<span class="counts-text block"><?php echo $lang['lang-point']; ?></span>
 														</a>
 													</div>
 													<div class="col-sm-4 text-center">
 														<i class="fa fa-shopping-cart block mb-10"></i>
 														<span class="counts block head-font mb-5"><?php echo $count_cart; ?></span>
-														<span class="counts-text block">Cart Items</span>
+														<span class="counts-text block"><?php echo $lang['lang-cart_item']; ?></span>
 													</div>
 
 												<?php
@@ -140,13 +140,13 @@ $count_cart = count($user_cart);
 													<div class="col-sm-6 text-center">
 														<i class="fa fa-truck block mb-10"></i>
 														<span class="counts block head-font mb-5"><?php echo $count_user_order; ?></span>
-														<span class="counts-text block">Total Order</span>
+														<span class="counts-text block"><?php echo $lang['lang-total_order']; ?></span>
 													</div>
 
 													<div class="col-sm-6 text-center">
 														<i class="fa fa-shopping-cart block mb-10"></i>
 														<span class="counts block head-font mb-5"><?php echo $count_cart; ?></span>
-														<span class="counts-text block">Cart Items</span>
+														<span class="counts-text block"><?php echo $lang['lang-cart_item']; ?></span>
 													</div>
 												<?php
 												}
@@ -162,7 +162,7 @@ $count_cart = count($user_cart);
 											<div class="social-info txt-light">
 												<div class="row">
 													<div class="col-sm-12 text-center">
-														<i class="fa fa-link block mb-10"> URL For Dealer Register</i>
+														<i class="fa fa-link block mb-10"> <?php echo $lang['lang-url_register']; ?></i>
 														<?php
 														$actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
 
@@ -171,7 +171,7 @@ $count_cart = count($user_cart);
 														} else {
 															$register_link =  $actual_link . "/caroma/register_dealer.php?code=" . $result_user['distributor_code'];
 														}
-														echo "<input type='text' value='" . $register_link . "' id='myInput' style='color:black;width: 250px;'><br><button style='color:black;margin-top:5px' onclick='myFunction()'>Copy Link</button>";
+														echo "<input type='text' value='" . $register_link . "' id='myInput' style='color:black;width: 250px;'><br><button style='color:black;margin-top:5px' onclick='myFunction()'> Copy</button>";
 
 														?>
 
@@ -184,12 +184,12 @@ $count_cart = count($user_cart);
 											<div class="social-info txt-light">
 												<div class="row">
 													<div class="col-sm-12 text-center">
-														<i class="fa fa-link block mb-10"> Your Distributor</i>
+														<i class="fa fa-link block mb-10"> <?php echo $lang['lang-your_distributor']; ?></i>
 
 														<h5>
-															<strong>Name:</strong> <?php echo $result_user['distributor_name']; ?><br>
-															<strong>Code:</strong> <?php echo $result_user['distributor_code']; ?> <br>
-															<strong>Contact:</strong> <?php echo $result_user['distributor_contact']; ?><br>
+															<strong><?php echo $lang['lang-name']; ?>:</strong> <?php echo $result_user['distributor_name']; ?><br>
+															<strong><?php echo $lang['lang-distributor_code']; ?>:</strong> <?php echo $result_user['distributor_code']; ?> <br>
+															<strong><?php echo $lang['lang-contact']; ?>:</strong> <?php echo $result_user['distributor_contact']; ?><br>
 														</h5>
 													</div>
 												</div>
@@ -209,9 +209,9 @@ $count_cart = count($user_cart);
 								<div class="panel-body">
 									<div class="tab-struct custom-tab-1">
 										<ul role="tablist" class="nav nav-tabs" id="myTabs_8">
-											<li class="active" role="presentation" class=""><a data-toggle="tab" role="tab" href="#profile" aria-expanded="false">Profile</a></li>
-											<li role="presentation"><a aria-expanded="true" data-toggle="tab" role="tab" href="#change_email">Change Email</a></li>
-											<li role="presentation"><a aria-expanded="true" data-toggle="tab" role="tab" href="#reset_password">Reset Password</a></li>
+											<li class="active" role="presentation" class=""><a data-toggle="tab" role="tab" href="#profile" aria-expanded="false"><?php echo $lang['lang-profile']; ?></a></li>
+											<li role="presentation"><a aria-expanded="true" data-toggle="tab" role="tab" href="#change_email"><?php echo $lang['lang-change_email']; ?></a></li>
+											<li role="presentation"><a aria-expanded="true" data-toggle="tab" role="tab" href="#reset_password"><?php echo $lang['lang-reset_password']; ?></a></li>
 										</ul>
 										<div class="tab-content" id="myTabContent_8">
 											<div id="profile" class="tab-pane fade active in" role="tabpanel">
@@ -221,12 +221,12 @@ $count_cart = count($user_cart);
 															<form data-toggle="validator" role="form" id="form_profile" action="api/user_sql.php?type=profile_edit&tb=user" method="post" enctype="multipart/form-data">
 																<input type="hidden" name="token" value="<?php echo $token; ?>" />
 																<div class="form-group">
-																	<label for="inputName" class="control-label mb-10">Full Name</label>
+																	<label for="inputName" class="control-label mb-10"><?php echo $lang['lang-name']; ?></label>
 																	<input type="text" class="form-control" id="inputName" placeholder="Cina Saffary" data-error="Name Is Required" name="name" value="<?php echo $result_user['name']; ?>" required>
 																	<div class="help-block with-errors"></div>
 																</div>
 																<div class="form-group has-feedback">
-																	<label for="inputPhone" class="control-label mb-10">Contact Number</label>
+																	<label for="inputPhone" class="control-label mb-10"><?php echo $lang['lang-contact_number']; ?>r</label>
 																	<div class="input-group">
 																		<span class="input-group-addon">+6</span>
 																		<input type="text" pattern="^(\+?6?01)[0|1|2|3|4|6|7|8|9]-*[0-9]{7,8}$" maxlength="11" class="form-control" name="contact" value="<?php echo $result_user['contact']; ?>" id="inputPhone" placeholder="012 3456 789" data-error="Eg : 016 2345 678" required>
@@ -236,7 +236,7 @@ $count_cart = count($user_cart);
 																	<div class="help-block with-errors">Contact Number Correctly!</div>
 																</div>
 																<div class="form-group">
-																	<label for="inputAddress" class="control-label mb-10">Address</label>
+																	<label for="inputAddress" class="control-label mb-10"><?php echo $lang['lang-address']; ?></label>
 																	<input type="text" class="form-control" id="inputAddress" placeholder="No 321, Lorong Sentosa, Tmn Lgd 15, 81100 Johor Bahru, Johor" name="address" value="<?php echo $result_user['address']; ?>" data-error="Address Is Required" required>
 																	<div class="help-block with-errors"></div>
 																</div>
@@ -244,7 +244,7 @@ $count_cart = count($user_cart);
 																<div class="form-group">
 																	<div class="row">
 																		<div class="col-sm-4 col-12">
-																			<label for="inputStates" class="control-label mb-10">States</label>
+																			<label for="inputStates" class="control-label mb-10"><?php echo $lang['lang-state']; ?></label>
 																			<select class="input-width state_select form-control" name="state" tabindex="2" id="inputStates" data-error="States Is Required" required>
 																				<option data-option="" value="">Select State</option>
 																				<?php
@@ -266,13 +266,13 @@ $count_cart = count($user_cart);
 																		</div>
 
 																		<div class="col-sm-4 col-12">
-																			<label for="inputCity" class="control-label mb-10">City</label>
+																			<label for="inputCity" class="control-label mb-10"><?php echo $lang['lang-city']; ?></label>
 																			<input type="text" class="form-control" id="inputCity" placeholder="Johor Bahru" name="city" value="<?php echo $result_user['city']; ?>" data-error="City Is Required" required>
 																			<div class="help-block with-errors"></div>
 																		</div>
 
 																		<div class="col-sm-4 col-12">
-																			<label for="inputZip" class="control-label mb-10">Zip Code</label>
+																			<label for="inputZip" class="control-label mb-10"><?php echo $lang['lang-zip_code']; ?></label>
 																			<input type="text" class="form-control" id="inputZip" placeholder="81100" name="postcode" value="<?php echo $result_user['postcode']; ?>" data-error="Zip Code Is Required" required>
 																			<div class="help-block with-errors"></div>
 																		</div>
@@ -280,13 +280,13 @@ $count_cart = count($user_cart);
 																</div>
 
 																<div class="form-group">
-																	<label for="profileimage" class="control-label mb-10">Profile Picture</label>
+																	<label for="profileimage" class="control-label mb-10"><?php echo $lang['lang-profile_picture']; ?></label>
 																	<input type="file" class="form-control" id="profileimage" name="img" accept="image/x-png,image/gif,image/jpeg" data-error="Only for .jpg .jpeg .png">
 																	<div class="help-block with-errors"></div>
 																</div>
 
 																<div class="form-group mb-0">
-																	<button type="submit" class="btn btn-success btn-anim" name="btnAction"><i class="icon-rocket"></i><span class="btn-text">Submit</span></button>
+																	<button type="submit" class="btn btn-success btn-anim" name="btnAction"><i class="icon-rocket"></i><span class="btn-text"><?php echo $lang['lang-submit']; ?></span></button>
 																</div>
 															</form>
 														</div>
@@ -302,7 +302,7 @@ $count_cart = count($user_cart);
 																<input type="hidden" name="token" value="<?php echo $token; ?>" />
 																<div class="form-group">
 																	<div class="form-group col-sm-12 no-padding">
-																		<label for="inputPassword" class="control-label mb-10">Old Password</label>
+																		<label for="inputPassword" class="control-label mb-10"><?php echo $lang['lang-old_password']; ?></label>
 																		<input data-match-error="Old Password Is Required" name="old_password" type="password" class="form-control" id="inputPassword" placeholder="Password" required>
 																	</div>
 																</div>
@@ -310,12 +310,12 @@ $count_cart = count($user_cart);
 																<div class="form-group">
 																	<div class="row">
 																		<div class="form-group col-sm-12">
-																			<label for="inputnewPassword" class="control-label mb-10">New Password</label>
+																			<label for="inputnewPassword" class="control-label mb-10"><?php echo $lang['lang-new_password']; ?></label>
 																			<input type="password" data-minlength="8" name="new_password" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" class="form-control" id="inputnewPassword" placeholder="Password" required>
-																			<div class="help-block">UpperCase, LowerCase, Number, SpecialChar and min 8 Chars</div>
+																			<div class="help-block"><?php echo $lang['lang-uppercase']; ?></div>
 																		</div>
 																		<div class="form-group col-sm-12">
-																			<label for="inputPasswordConfirm" class="control-label mb-10">Confirm Password</label>
+																			<label for="inputPasswordConfirm" class="control-label mb-10"><?php echo $lang['lang-confirm_password']; ?></label>
 																			<input type="password" class="form-control" name="confirm_password" id="inputPasswordConfirm" data-match="#inputnewPassword" data-match-error="Whoops, these don't match" placeholder="Confirm" required>
 																			<div class="help-block with-errors"></div>
 																		</div>
@@ -323,7 +323,7 @@ $count_cart = count($user_cart);
 																</div>
 
 																<div class="form-group mb-0">
-																	<button type="submit" class="btn btn-success btn-anim" name="btnAction"><i class="icon-rocket"></i><span class="btn-text">Submit</span></button>
+																	<button type="submit" class="btn btn-success btn-anim" name="btnAction"><i class="icon-rocket"></i><span class="btn-text"><?php echo $lang['lang-submit']; ?></span></button>
 																</div>
 															</form>
 														</div>
@@ -340,13 +340,13 @@ $count_cart = count($user_cart);
 																<input type="hidden" name="token" value="<?php echo $token; ?>" />
 																<div class="form-group">
 																	<div class="form-group col-sm-12 no-padding">
-																		<label for="inputEmail" class="control-label mb-10">Email</label>
+																		<label for="inputEmail" class="control-label mb-10"><?php echo $lang['lang-email']; ?></label>
 																		<input data-match-error="Email Is Required" type="email" class="form-control" id="inputEmail" name="email" value="<?php echo $result_user['email']; ?>" placeholder="Email" required>
 																	</div>
 																</div>
 
 																<div class="form-group mb-0">
-																	<button type="submit" class="btn btn-success btn-anim" name="btnAction"><i class="icon-rocket"></i><span class="btn-text">Submit</span></button>
+																	<button type="submit" class="btn btn-success btn-anim" name="btnAction"><i class="icon-rocket"></i><span class="btn-text"><?php echo $lang['lang-submit']; ?></span></button>
 																</div>
 															</form>
 														</div>

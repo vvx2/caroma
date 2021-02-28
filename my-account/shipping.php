@@ -43,7 +43,7 @@ if($user_type != 2){
                 <!-- Title -->
                 <div class="row heading-bg  bg-blue">
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                        <h5 class="txt-light">Shipping</h5>
+                        <h5 class="txt-light"><?php echo $lang['lang-shipping_3']; ?></h5>
                     </div>
                 </div>
                 <!-- /Title -->
@@ -54,18 +54,18 @@ if($user_type != 2){
                         <div class="panel panel-default card-view">
                             <div class="panel-heading">
                                 <div class="pull-left">
-                                    <h6 class="panel-title txt-dark">Your Shipping</h6>
+                                    <h6 class="panel-title txt-dark"><?php echo $lang['lang-your_shipping']; ?></h6>
                                 </div>
                                 <div class="pull-right">
                                     <h6 class="panel-title txt-light">
-                                        <i data-remote="ajax/shipping_add.php" data-toggle="modal" data-target=".bs-example-modal-lg" class="btn btn-success"><strong>Add Shipping</strong></i>
+                                        <i data-remote="ajax/shipping_add.php" data-toggle="modal" data-target=".bs-example-modal-lg" class="btn btn-success"><strong><?php echo $lang['lang-add_shipping']; ?></strong></i>
                                     </h6>
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
                             <div class="panel-wrapper collapse in">
                                 <div class="panel-body">
-                                    <p class="text-muted">Please check your<code> Shipping</code> in this list.</p>
+                                    <p class="text-muted"><?php echo $lang['lang-pls_check_your_shipping']; ?></p>
                                     <div class="pills-struct mt-40">
                                         <ul role="tablist" class="nav nav-pills nav-pills-rounded" id="myTabs_11">
                                         </ul>
@@ -87,19 +87,19 @@ if($user_type != 2){
                                                                             <thead>
                                                                                 <tr>
                                                                                     <th>#</th>
-                                                                                    <th>Status</th>
-                                                                                    <th>Title</th>
-                                                                                    <th>Geo Zone</th>
-                                                                                    <th>Action</th>
+                                                                                    <th><?php echo $lang['lang-status']; ?></th>
+                                                                                    <th><?php echo $lang['lang-title']; ?></th>
+                                                                                    <th><?php echo $lang['lang-geo_zone']; ?></th>
+                                                                                    <th><?php echo $lang['lang-action']; ?></th>
                                                                                 </tr>
                                                                             </thead>
                                                                             <tfoot>
                                                                                 <tr>
                                                                                     <th>#</th>
-                                                                                    <th>Status</th>
-                                                                                    <th>Title</th>
-                                                                                    <th>Geo Zone</th>
-                                                                                    <th>Action</th>
+                                                                                    <th><?php echo $lang['lang-status']; ?></th>
+                                                                                    <th><?php echo $lang['lang-title']; ?></th>
+                                                                                    <th><?php echo $lang['lang-geo_zone']; ?></th>
+                                                                                    <th><?php echo $lang['lang-action']; ?></th>
                                                                                 </tr>
                                                                             </tfoot>
                                                                             <tbody>

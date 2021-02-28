@@ -43,7 +43,7 @@ if ($user_type != 2) {
                 <!-- Title -->
                 <div class="row heading-bg  bg-blue">
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                        <h5 class="txt-light">Transaction History</h5>
+                        <h5 class="txt-light"><?php echo $lang['lang-transcation_history']; ?></h5>
                     </div>
                 </div>
                 <!-- /Title -->
@@ -88,18 +88,18 @@ if ($user_type != 2) {
                         <div class="panel panel-default card-view">
                             <div class="panel-heading">
                                 <div class="pull-left">
-                                    <h6 class="panel-title txt-dark">Wallet Transaction History</h6>
+                                    <h6 class="panel-title txt-dark"><?php echo $lang['lang-wallet_transcation_history']; ?></h6>
                                 </div>
                                 <div class="pull-right">
                                     <h6 class="panel-title txt-light">
-                                        <i data-remote="ajax/distributor_refund.php" data-toggle="modal" data-target=".bs-example-modal-lg" class="btn btn-success"><strong>Withdrawal Request</strong></i>
+                                        <i data-remote="ajax/distributor_refund.php" data-toggle="modal" data-target=".bs-example-modal-lg" class="btn btn-success"><strong><?php echo $lang['lang-withdrawal_request']; ?></strong></i>
                                     </h6>
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
                             <div class="panel-wrapper collapse in">
                                 <div class="panel-body">
-                                    <p class="text-muted">Please check your<code> Wallet Transaction History</code> in this list.</p>
+                                    <p class="text-muted"><?php echo $lang['lang-ple_check_your_wallet']; ?></p>
                                     <div class="pills-struct mt-40">
                                         <ul role="tablist" class="nav nav-pills nav-pills-rounded" id="myTabs_11">
                                         </ul>
@@ -121,21 +121,21 @@ if ($user_type != 2) {
                                                                             <thead>
                                                                                 <tr>
                                                                                     <th>#</th>
-                                                                                    <th>Name</th>
-                                                                                    <th>Amount</th>
-                                                                                    <th>Description</th>
-                                                                                    <th>Balance</th>
-                                                                                    <th>Date Time</th>
+                                                                                    <th><?php echo $lang['lang-name']; ?></th>
+                                                                                    <th><?php echo $lang['lang-amount']; ?></th>
+                                                                                    <th><?php echo $lang['lang-transcation_description']; ?></th>
+                                                                                    <th><?php echo $lang['lang-balance']; ?></th>
+                                                                                    <th><?php echo $lang['lang-date_time']; ?></th>
                                                                                 </tr>
                                                                             </thead>
                                                                             <tfoot>
                                                                                 <tr>
                                                                                     <th>#</th>
-                                                                                    <th>Name</th>
-                                                                                    <th>Amount</th>
-                                                                                    <th>Description</th>
-                                                                                    <th>Balance</th>
-                                                                                    <th>Date Time</th>
+                                                                                    <th><?php echo $lang['lang-name']; ?></th>
+                                                                                    <th><?php echo $lang['lang-amount']; ?></th>
+                                                                                    <th><?php echo $lang['lang-transcation_description']; ?></th>
+                                                                                    <th><?php echo $lang['lang-balance']; ?></th>
+                                                                                    <th><?php echo $lang['lang-date_time']; ?></th>
                                                                                 </tr>
                                                                             </tfoot>
                                                                             <tbody>

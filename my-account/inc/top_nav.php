@@ -53,11 +53,11 @@ $count_cart = count($user_cart);
             <a href="#" class="dropdown-toggle pr-0" data-toggle="dropdown"><img src="<?php echo $image_path; ?>" alt="user" class="user-auth-img img-circle" /><span class="user-online-status"></span></a>
             <ul class="dropdown-menu user-auth-dropdown" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
                 <li>
-                    <a href="profile.php"><i class="fa fa-fw fa-gear"></i> Settings</a>
+                    <a href="profile.php"><i class="fa fa-fw fa-gear"></i> <?php echo $lang['lang-setting']; ?></a>
                 </li>
                 <li class="divider"></li>
                 <li>
-                    <a href="../api/logout.php"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                    <a href="../api/logout.php"><i class="fa fa-fw fa-power-off"></i> <?php echo $lang['lang-logout']; ?></a>
                 </li>
             </ul>
         </li>

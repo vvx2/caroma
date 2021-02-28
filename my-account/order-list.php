@@ -49,7 +49,7 @@ if (isset($_REQUEST['p'])) { // order status
 				<!-- Title -->
 				<div class="row heading-bg  bg-blue">
 					<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-						<h5 class="txt-light">Order Management</h5>
+						<h5 class="txt-light"><?php echo $lang['lang-order_management']; ?></h5>
 					</div>
 				</div>
 				<!-- /Title -->
@@ -67,7 +67,7 @@ if (isset($_REQUEST['p'])) { // order status
 													<i class="icon-briefcase txt-light"></i>
 												</div>
 												<div class="col-xs-7 text-center data-wrap-right">
-													<h6 class="txt-light">To Ship</h6>
+													<h6 class="txt-light"><?php echo $lang['lang-to_ship']; ?></h6>
 													<span class="txt-light counter counter-anim">
 														<?php
 														$col = "id";
@@ -97,7 +97,7 @@ if (isset($_REQUEST['p'])) { // order status
 													<i class="icon-briefcase txt-light"></i>
 												</div>
 												<div class="col-xs-7 text-center data-wrap-right">
-													<h6 class="txt-light">Shipping</h6>
+													<h6 class="txt-light"><?php echo $lang['lang-shipping']; ?></h6>
 													<span class="txt-light counter">
 														<?php
 														$col = "id";
@@ -127,7 +127,7 @@ if (isset($_REQUEST['p'])) { // order status
 													<i class="icon-briefcase txt-light"></i>
 												</div>
 												<div class="col-xs-7 text-center data-wrap-right">
-													<h6 class="txt-light">Completed</h6>
+													<h6 class="txt-light"><?php echo $lang['lang-completed']; ?></h6>
 													<span class="txt-light counter">
 														<?php
 														$col = "id";
@@ -157,7 +157,7 @@ if (isset($_REQUEST['p'])) { // order status
 													<i class="icon-briefcase txt-light"></i>
 												</div>
 												<div class="col-xs-7 text-center data-wrap-right">
-													<h6 class="txt-light">Canceled / Failed</h6>
+													<h6 class="txt-light"><?php echo $lang['lang-reject_failed']; ?></h6>
 													<span class="txt-light counter">
 														<?php
 														$col = "id";
@@ -185,25 +185,25 @@ if (isset($_REQUEST['p'])) { // order status
 						<div class="panel panel-default card-view">
 							<div class="panel-heading">
 								<div class="pull-left">
-									<h6 class="panel-title txt-dark">STORE ORDERS</h6>
+									<h6 class="panel-title txt-dark"><?php echo $lang['lang-store_order']; ?></h6>
 								</div>
 								<div class="pull-right">
 									<h6 class="panel-title txt-light">
-										<i data-remote="ajax/distributor_self_order.php" data-toggle="modal" data-target=".bs-example-modal-lg" class="btn btn-success"><strong>Add Self Order</strong></i>
+										<i data-remote="ajax/distributor_self_order.php" data-toggle="modal" data-target=".bs-example-modal-lg" class="btn btn-success"><strong><?php echo $lang['lang-add_self_order']; ?></strong></i>
 									</h6>
 								</div>
 								<div class="clearfix"></div>
 							</div>
 							<div class="panel-wrapper collapse in">
 								<div class="panel-body">
-									<p class="text-muted">Please check your<code> STORE ORDERS </code> in this list.</p>
+									<p class="text-muted"><?php echo $lang['lang-pls_check_your_store']; ?></p>
 									<div class="pills-struct mt-40">
 										<ul role="tablist" class="nav nav-pills nav-pills-rounded" id="myTabs_11">
-											<li role="presentation" class="<?php echo ($order_page == "2") ? "active" : "" ?>"><a href="order-list.php?p=2">Pending</a></li>
-											<li role="presentation" class="<?php echo ($order_page == "3") ? "active" : "" ?>"><a href="order-list.php?p=3">Shipping</a></li>
-											<li role="presentation" class="<?php echo ($order_page == "4") ? "active" : "" ?>"><a href="order-list.php?p=4">Completed</a></li>
-											<li role="presentation" class="<?php echo ($order_page == "1") ? "active" : "" ?>"><a href="order-list.php?p=1">Canceled / Failed</a></li>
-											<li role="presentation" class="<?php echo ($order_page == "5") ? "active" : "" ?>"><a href="order-list.php?p=5">To Cancel</a></li>
+											<li role="presentation" class="<?php echo ($order_page == "2") ? "active" : "" ?>"><a href="order-list.php?p=2"><?php echo $lang['lang-to_ship']; ?></a></li>
+											<li role="presentation" class="<?php echo ($order_page == "3") ? "active" : "" ?>"><a href="order-list.php?p=3"><?php echo $lang['lang-shipping']; ?></a></li>
+											<li role="presentation" class="<?php echo ($order_page == "4") ? "active" : "" ?>"><a href="order-list.php?p=4"><?php echo $lang['lang-completed']; ?></a></li>
+											<li role="presentation" class="<?php echo ($order_page == "1") ? "active" : "" ?>"><a href="order-list.php?p=1"><?php echo $lang['lang-reject_failed']; ?></a></li>
+											<li role="presentation" class="<?php echo ($order_page == "5") ? "active" : "" ?>"><a href="order-list.php?p=5"><?php echo $lang['lang-to_cancel']; ?></a></li>
 										</ul>
 										<div class="tab-content" id="myTabContent_11">
 											<div id="home_11" class="tab-pane fade active in" role="tabpanel">
@@ -223,25 +223,25 @@ if (isset($_REQUEST['p'])) { // order status
 																			<thead>
 																				<tr>
 																					<th>#</th>
-																					<th>Order ID</th>
-																					<th>Name</th>
-																					<th>DateTime</th>
-																					<th>Total Amount</th>
-																					<th>Payment Type</th>
-																					<th>More Detail</th>
-																					<th>Action</th>
+																					<th><?php echo $lang['lang-order_id']; ?></th>
+																					<th><?php echo $lang['lang-name']; ?></th>
+																					<th><?php echo $lang['lang-date_time']; ?></th>
+																					<th><?php echo $lang['lang-total_amount']; ?></th>
+																					<th><?php echo $lang['lang-payment_method']; ?></th>
+																					<th><?php echo $lang['lang-detail']; ?></th>
+																					<th><?php echo $lang['lang-action']; ?></th>
 																				</tr>
 																			</thead>
 																			<tfoot>
 																				<tr>
 																					<th>#</th>
-																					<th>Order ID</th>
-																					<th>Name</th>
-																					<th>DateTime</th>
-																					<th>Total Amount</th>
-																					<th>Payment Type</th>
-																					<th>More Detail</th>
-																					<th>Action</th>
+																					<th><?php echo $lang['lang-order_id']; ?></th>
+																					<th><?php echo $lang['lang-name']; ?></th>
+																					<th><?php echo $lang['lang-date_time']; ?></th>
+																					<th><?php echo $lang['lang-total_amount']; ?></th>
+																					<th><?php echo $lang['lang-payment_method']; ?></th>
+																					<th><?php echo $lang['lang-detail']; ?></th>
+																					<th><?php echo $lang['lang-action']; ?></th>
 																				</tr>
 																			</tfoot>
 																			<tbody>

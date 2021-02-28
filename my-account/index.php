@@ -66,7 +66,7 @@ if ($user_type == "2") {
 													<i class="icon-briefcase txt-light"></i>
 												</div>
 												<div class="col-xs-7 text-center data-wrap-right">
-													<h6 class="txt-light">To Ship</h6>
+													<h6 class="txt-light"><?php echo $lang['lang-to_ship']; ?></h6>
 													<span class="txt-light counter counter-anim">
 														<?php
 														$col = "id";
@@ -96,7 +96,7 @@ if ($user_type == "2") {
 													<i class="icon-briefcase txt-light"></i>
 												</div>
 												<div class="col-xs-7 text-center data-wrap-right">
-													<h6 class="txt-light">Shipping</h6>
+													<h6 class="txt-light"><?php echo $lang['lang-shipping_2']; ?></h6>
 													<span class="txt-light counter">
 														<?php
 														$col = "id";
@@ -126,7 +126,7 @@ if ($user_type == "2") {
 													<i class="icon-briefcase txt-light"></i>
 												</div>
 												<div class="col-xs-7 text-center data-wrap-right">
-													<h6 class="txt-light">Completed</h6>
+													<h6 class="txt-light"><?php echo $lang['lang-completed']; ?></h6>
 													<span class="txt-light counter">
 														<?php
 														$col = "id";
@@ -156,7 +156,7 @@ if ($user_type == "2") {
 													<i class="icon-briefcase txt-light"></i>
 												</div>
 												<div class="col-xs-7 text-center data-wrap-right">
-													<h6 class="txt-light">Rejected / Failed</h6>
+													<h6 class="txt-light"><?php echo $lang['lang-reject_failed']; ?></h6>
 													<span class="txt-light counter">
 														<?php
 														$col = "id";
@@ -184,20 +184,20 @@ if ($user_type == "2") {
 						<div class="panel panel-default card-view">
 							<div class="panel-heading">
 								<div class="pull-left">
-									<h6 class="panel-title txt-dark">Order List</h6>
+									<h6 class="panel-title txt-dark"><?php echo $lang['lang-order_list']; ?></h6>
 								</div>
 								<div class="clearfix"></div>
 							</div>
 							<div class="panel-wrapper collapse in">
 								<div class="panel-body">
-									<p class="text-muted">Please check your<code> ORDERS </code> in this list.</p>
+									<p class="text-muted"><?php echo $lang['lang-pls_check_your_order']; ?></p>
 									<div class="pills-struct mt-40">
 										<ul role="tablist" class="nav nav-pills nav-pills-rounded" id="myTabs_11">
-											<li role="presentation" class="<?php echo ($order_page == "2") ? "active" : "" ?>"><a href="index.php?p=2">To Ship</a></li>
-											<li role="presentation" class="<?php echo ($order_page == "3") ? "active" : "" ?>"><a href="index.php?p=3">Shipping</a></li>
-											<li role="presentation" class="<?php echo ($order_page == "4") ? "active" : "" ?>"><a href="index.php?p=4">Completed</a></li>
-											<li role="presentation" class="<?php echo ($order_page == "1") ? "active" : "" ?>"><a href="index.php?p=1">Rejected / Failed</a></li>
-											<li role="presentation" class="<?php echo ($order_page == "5") ? "active" : "" ?>"><a href="index.php?p=5">To Cancel</a></li>
+											<li role="presentation" class="<?php echo ($order_page == "2") ? "active" : "" ?>"><a href="index.php?p=2"><?php echo $lang['lang-to_ship']; ?></a></li>
+											<li role="presentation" class="<?php echo ($order_page == "3") ? "active" : "" ?>"><a href="index.php?p=3"><?php echo $lang['lang-shipping']; ?></a></li>
+											<li role="presentation" class="<?php echo ($order_page == "4") ? "active" : "" ?>"><a href="index.php?p=4"><?php echo $lang['lang-completed']; ?></a></li>
+											<li role="presentation" class="<?php echo ($order_page == "1") ? "active" : "" ?>"><a href="index.php?p=1"><?php echo $lang['lang-reject_failed']; ?></a></li>
+											<li role="presentation" class="<?php echo ($order_page == "5") ? "active" : "" ?>"><a href="index.php?p=5"><?php echo $lang['lang-to_cancel']; ?></a></li>
 										</ul>
 										<div class="tab-content" id="myTabContent_11">
 											<div id="home_11" class="tab-pane fade active in" role="tabpanel">
@@ -217,23 +217,23 @@ if ($user_type == "2") {
 																			<thead>
 																				<tr>
 																					<th>#</th>
-																					<th>Detail</th>
-																					<th>Order ID</th>
-																					<th>Name</th>
-																					<th>DateTime</th>
-																					<th>Total Amount</th>
-																					<th>Action</th>
+																					<th><?php echo $lang['lang-detail']; ?></th>
+																					<th><?php echo $lang['lang-order_id']; ?></th>
+																					<th><?php echo $lang['lang-name']; ?></th>
+																					<th><?php echo $lang['lang-date_time']; ?></th>
+																					<th><?php echo $lang['lang-total_amount']; ?></th>
+																					<th><?php echo $lang['lang-action']; ?></th>
 																				</tr>
 																			</thead>
 																			<tfoot>
 																				<tr>
 																					<th>#</th>
-																					<th>Detail</th>
-																					<th>Order ID</th>
-																					<th>Name</th>
-																					<th>DateTime</th>
-																					<th>Total Amount</th>
-																					<th>Action</th>
+																					<th><?php echo $lang['lang-detail']; ?></th>
+																					<th><?php echo $lang['lang-order_id']; ?></th>
+																					<th><?php echo $lang['lang-name']; ?></th>
+																					<th><?php echo $lang['lang-date_time']; ?></th>
+																					<th><?php echo $lang['lang-total_amount']; ?></th>
+																					<th><?php echo $lang['lang-action']; ?></th>
 																				</tr>
 																			</tfoot>
 																			<tbody>
