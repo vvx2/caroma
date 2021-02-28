@@ -18,14 +18,14 @@
         <div class="biolife-cart-info">
         <div class="primary-menu hidden-sm hidden-xs">
             <ul class="menu biolife-menu clone-main-menu clone-primary-menu">
-            <li class="menu-item"><a href="https://staging2.caroma.com.my">Caroma Home</a></li>
-                <li class="menu-item"><a href="index.php">Shop Home</a></li>
-                <li class="menu-item"><a href="shop.php" class="menu-name" data-title="Shop">Shop</a></li>
-                <li class="menu-item"><a href="shop.php?is_promotion=1">Promotion</a></li>
+            <li class="menu-item"><a href="https://staging2.caroma.com.my"><?php echo $lang['lang-caroma_home']; ?></a></li>
+                <li class="menu-item"><a href="index.php"><?php echo $lang['lang-shop_home']; ?></a></li>
+                <li class="menu-item"><a href="shop.php" class="menu-name" data-title="Shop"><?php echo $lang['lang-shop']; ?></a></li>
+                <li class="menu-item"><a href="shop.php?is_promotion=1"><?php echo $lang['lang-promotion']; ?></a></li>
             </ul>
         </div>
             <div class="login-item">
-                <a href="rewards.php" class="login-link"><i class="biolife-icon icon-title"></i>Rewards</a>
+                <a href="rewards.php" class="login-link"><i class="biolife-icon icon-title"></i><?php echo $lang['lang-reward']; ?></a>
             </div>
             <div class="login-item">
                 <?php
@@ -37,7 +37,7 @@
                 <?php
                 } else {
                 ?>
-                    <a href="login.php" class="login-link"><i class="biolife-icon icon-login"></i>Login/Register</a>
+                    <a href="login.php" class="login-link"><i class="biolife-icon icon-login"></i><?php echo $lang['lang-login_register']; ?></a>
                 <?php
                 }
                 ?>
@@ -49,7 +49,7 @@
                             <i class="icon-cart-mini biolife-icon"></i>
                             <span class="qty number_cart">8</span>
                         </span>
-                        <span class="title">My Cart -</span>
+                        <span class="title"><?php echo $lang['lang-my_cart']; ?> - </span>
                         <span class="sub-total">RM 0.00</span>
                     </a>
                     <div class="cart-content">
@@ -58,8 +58,8 @@
 
                             </ul>
                             <p class="btn-control cart_button">
-                                <button class="btn view-cart" onclick="location.href='shopping-cart.php';">view cart</button>
-                                <button class="btn cart_checkout" onclick="location.href='checkout.php';">checkout</button>
+                                <button class="btn view-cart" onclick="location.href='shopping-cart.php';"><?php echo $lang['lang-view_cart']; ?></button>
+                                <button class="btn cart_checkout" onclick="location.href='checkout.php';"><?php echo $lang['lang-check_out']; ?></button>
                             </p>
                         </div>
                     </div>

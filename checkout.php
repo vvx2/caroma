@@ -196,15 +196,15 @@ else {
 
             <!--Hero Section-->
             <div class="hero-section hero-background">
-                <h1 class="page-title">Make A Payment</h1>
+                <h1 class="page-title"><?php echo $lang['lang-make_a_payment']; ?></h1>
             </div>
 
             <!--Navigation section-->
             <div class="container">
                 <nav class="biolife-nav">
                     <ul>
-                        <li class="nav-item"><a href="index.php" class="permal-link">Home</a></li>
-                        <li class="nav-item"><span class="current-page">Check Out</span></li>
+                        <li class="nav-item"><a href="index.php" class="permal-link"><?php echo $lang['lang-home']; ?></a></li>
+                        <li class="nav-item"><span class="current-page"><?php echo $lang['lang-check_out']; ?></span></li>
                     </ul>
                 </nav>
             </div>
@@ -224,30 +224,30 @@ else {
                                         <ul class="steps">
                                             <li class="step 1st">
                                                 <div class="checkout-act active">
-                                                    <h3 class="title-box"><span class="number">1</span>Shipping Detail</h3>
+                                                    <h3 class="title-box"><span class="number">1</span><?php echo $lang['lang-shipping_detail']; ?></h3>
                                                     <div class="box-content">
                                                         <div class="login-on-checkout">
 
                                                             <p class="form-row">
 
                                                             <div class="col-sm-6 col-12 no-padding-left">
-                                                                <label class="label-width" for="name">Full Name</label>
+                                                                <label class="label-width" for="name"><?php echo $lang['lang-full_name']; ?></label>
                                                                 <input class="input-width" type="text" name="name" id="name" value="<?php echo $customer_name; ?>" placeholder="Your Full Name">
                                                             </div>
                                                             <div class="col-sm-6 col-12 no-padding-left">
-                                                                <label class="label-width" for="contact">Contact Number</label>
+                                                                <label class="label-width" for="contact"><?php echo $lang['lang-contact_number']; ?></label>
                                                                 <input class="input-width" type="text" name="phone" id="contact" value="<?php echo $customer_contact; ?>" placeholder="Your Contact Number">
                                                             </div>
                                                             <div class="col-sm-12 col-12 no-padding-left">
-                                                                <label class="label-width" for="email">Email Address</label>
+                                                                <label class="label-width" for="email"><?php echo $lang['lang-email']; ?></label>
                                                                 <input class="input-width" type="email" name="email" id="email" value="<?php echo $customer_email; ?>" placeholder="Your Email">
                                                             </div>
                                                             <div class="col-sm-12 col-12 no-padding-left">
-                                                                <label class="label-width" for="address">Address</label>
+                                                                <label class="label-width" for="address"><?php echo $lang['lang-address']; ?></label>
                                                                 <input class="input-width" type="text" name="address" id="address" value="<?php echo $customer_address; ?>" placeholder="Your Address">
                                                             </div>
                                                             <div class="col-sm-4 col-12 no-padding-left">
-                                                                <label class="label-width" for="state">States</label>
+                                                                <label class="label-width" for="state"><?php echo $lang['lang-state']; ?></label>
                                                                 <select class="input-width state_select" name="state" tabindex="2" required>
                                                                     <option data-option="" value="">Select State</option>
                                                                     <?php
@@ -267,11 +267,11 @@ else {
                                                                 </select>
                                                             </div>
                                                             <div class="col-sm-4 col-12 no-padding-left">
-                                                                <label class="label-width" for="city">City</label>
+                                                                <label class="label-width" for="city"><?php echo $lang['lang-city']; ?></label>
                                                                 <input class="input-width" type="text" name="city" id="city" value="<?php echo $customer_city; ?>" placeholder="Your City">
                                                             </div>
                                                             <div class="col-sm-4 col-12 no-padding-left">
-                                                                <label class="label-width" for="postcode">Zip Code</label>
+                                                                <label class="label-width" for="postcode"><?php echo $lang['lang-zip_code']; ?></label>
                                                                 <input class="input-width" type="text" name="postcode" id="postcode" value="<?php echo $customer_postcode; ?>" maxlength="5" onkeypress=" return isNumber(event)" placeholder="Your Zipcode">
                                                             </div>
 
@@ -281,18 +281,18 @@ else {
 
                                                                 <div class="col-sm-12 col-12 no-padding-left">
                                                                     <div class="form-group">
-                                                                        <label class="control-label mb-10">Delivery Type</label>
+                                                                        <label class="control-label mb-10"><?php echo $lang['lang-delivery_type']; ?></label>
                                                                         <div class="radio-list">
                                                                             <div class="radio-inline pl-0">
                                                                                 <div class="radio radio-info">
                                                                                     <input checked type="radio" name="delivery_type" id="delivery" value="1">
-                                                                                    <label for="delivery">Delivery</label>
+                                                                                    <label for="delivery"><?php echo $lang['lang-delivery']; ?></label>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="radio-inline">
                                                                                 <div class="radio radio-info">
                                                                                     <input type="radio" name="delivery_type" id="self_collect" value="2">
-                                                                                    <label for="self_collect">Self Collect</label>
+                                                                                    <label for="self_collect"><?php echo $lang['lang-self_collect']; ?></label>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -300,18 +300,18 @@ else {
                                                                 </div>
                                                                 <div class="col-sm-12 col-12 no-padding-left">
                                                                     <div class="form-group">
-                                                                        <label class="control-label mb-10">Payment Type</label>
+                                                                        <label class="control-label mb-10"><?php echo $lang['lang-payment_type']; ?></label>
                                                                         <div class="radio-list">
                                                                             <div class="radio-inline pl-0">
                                                                                 <div class="radio radio-info">
                                                                                     <input checked type="radio" name="payment_type" id="online_pay" value="1">
-                                                                                    <label for="online_pay">Online Payment</label>
+                                                                                    <label for="online_pay"><?php echo $lang['lang-online_paymentl']; ?></label>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="radio-inline">
                                                                                 <div class="radio radio-info">
                                                                                     <input type="radio" name="payment_type" id="cash" value="2">
-                                                                                    <label for="cash">Cash</label>
+                                                                                    <label for="cash"><?php echo $lang['lang-cash']; ?></label>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -320,12 +320,12 @@ else {
                                                                 <div hidden>
                                                                     <div class="col-sm-12 col-12 no-padding-left">
                                                                         <div class="form-group">
-                                                                            <label class="control-label mb-10">Use Point</label>
+                                                                            <label class="control-label mb-10"><?php echo $lang['lang-use_point']; ?></label>
                                                                             <div class="radio-list">
                                                                                 <div class="radio-inline pl-0">
                                                                                     <div class="radio radio-info">
                                                                                         <input checked type="radio" name="reward_point" id="is_point" value="0">
-                                                                                        <label for="is_point">No</label>
+                                                                                        <label for="is_point"><?php echo $lang['lang-no']; ?></label>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -373,11 +373,11 @@ else {
                                                             ?>
                                                                 <div class="col-sm-12 col-12 no-padding-left">
                                                                     <div class="form-group">
-                                                                        <label class="control-label mb-10">Your Point : <strong><?php echo $current_point; ?> Points</strong></label>
+                                                                        <label class="control-label mb-10"><?php echo $lang['lang-your_point']; ?> : <strong><?php echo $current_point; ?> <?php echo $lang['lang-point']; ?></strong></label>
                                                                         <br>
-                                                                        <label class="control-label mb-10">Point Can Be Discount : <strong><?php echo $total_point; ?> Points</strong></label>
+                                                                        <label class="control-label mb-10"><?php echo $lang['lang-point_can_be_discout']; ?> : <strong><?php echo $total_point; ?> <?php echo $lang['lang-point']; ?></strong></label>
                                                                         <br>
-                                                                        <label class="control-label mb-10">Use Point <strong>(1 Point = RM <?php echo number_format($point_value / 100, 2) ?>)</strong></label>
+                                                                        <label class="control-label mb-10"><?php echo $lang['lang-use_point']; ?> <strong>(1 <?php echo $lang['lang-point']; ?> = RM <?php echo number_format($point_value / 100, 2) ?>)</strong></label>
 
                                                                         <div class="radio-list">
                                                                             <div class="radio-inline pl-0">
@@ -398,12 +398,12 @@ else {
                                                                 <div hidden>
                                                                     <div class="col-sm-12 col-12 no-padding-left">
                                                                         <div class="form-group">
-                                                                            <label class="control-label mb-10">Delivery Type</label>
+                                                                            <label class="control-label mb-10"><?php echo $lang['lang-delivery_type']; ?></label>
                                                                             <div class="radio-list">
                                                                                 <div class="radio-inline pl-0">
                                                                                     <div class="radio radio-info">
                                                                                         <input checked type="radio" name="delivery_type" id="delivery" value="1">
-                                                                                        <label for="delivery">Delivery</label>
+                                                                                        <label for="delivery"><?php echo $lang['lang-delivery']; ?></label>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -411,12 +411,12 @@ else {
                                                                     </div>
                                                                     <div class="col-sm-12 col-12 no-padding-left">
                                                                         <div class="form-group">
-                                                                            <label class="control-label mb-10">Payment Type</label>
+                                                                            <label class="control-label mb-10"><?php echo $lang['lang-payment_type']; ?></label>
                                                                             <div class="radio-list">
                                                                                 <div class="radio-inline pl-0">
                                                                                     <div class="radio radio-info">
                                                                                         <input checked type="radio" name="payment_type" id="online_pay" value="1">
-                                                                                        <label for="online_pay">Online Payment</label>
+                                                                                        <label for="online_pay"><?php echo $lang['lang-online_payment']; ?></label>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -431,9 +431,9 @@ else {
 
 
 
-                                                            <button type="button" class="btn custombtn" data-toggle="modal" data-target="#exampleModalCenter">Continue To Purchase</button>
-                                                            <a href="./shop.php"><button type="button" class="btn custombtn">Cancel</button></a>
-                                                            <a href="./shopping-cart.php"><button type="button" class="btn custombtn">Back</button></a>
+                                                            <button type="button" class="btn custombtn" data-toggle="modal" data-target="#exampleModalCenter"><?php echo $lang['lang-continue_to_purchase']; ?></button>
+                                                            <a href="./shop.php"><button type="button" class="btn custombtn"><?php echo $lang['lang-cancel']; ?></button></a>
+                                                            <a href="./shopping-cart.php"><button type="button" class="btn custombtn"><?php echo $lang['lang-back']; ?></button></a>
 
                                                         </div>
                                                     </div>
@@ -448,17 +448,17 @@ else {
                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h3>Order Confirmation</h3>
+                                                <h3><?php echo $lang['lang-order_confirmation']; ?></h3>
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                                <div>Kindly Make sure your shipping information & your order item is correctly.<br>
-                                                    <span style="font-weight : bold ; color:red;">DO YOU WANT TO CONTINUE YOUR ORDER?</span>
+                                                <div><?php echo $lang['lang-kindly_make_sure_your_shipping']; ?><br>
+                                                    <span style="font-weight : bold ; color:red;"><?php echo $lang['lang-do_you_want_to_continue']; ?></span>
                                                 </div>
                                             </div>
                                             <div class="modal-footer" style="text-align : center ;">
-                                                <button type="button" class="btn custombtn" data-dismiss="modal">Close</button>
-                                                <button type="submit" name="btn-sbmt" class="btn custombtn btn-submit">Purchase</button>
+                                                <button type="button" class="btn custombtn" data-dismiss="modal"><?php echo $lang['lang-close']; ?></button>
+                                                <button type="submit" name="btn-sbmt" class="btn custombtn btn-submit"><?php echo $lang['lang-yes']; ?></button>
                                             </div>
                                         </div>
                                     </div>
@@ -468,13 +468,13 @@ else {
                                 <div class="col-lg-5 col-md-5 col-sm-6 col-xs-12 sm-padding-top-48px sm-margin-bottom-0 xs-margin-bottom-15px">
                                     <div class="order-summary sm-margin-bottom-80px">
                                         <div class="title-block">
-                                            <h3 class="title">Order Summary</h3>
-                                            <a href="shopping-cart.php" class="link-forward">Edit cart</a>
+                                            <h3 class="title"><?php echo $lang['lang-order_summary']; ?></h3>
+                                            <a href="shopping-cart.php" class="link-forward"><?php echo $lang['lang-edit_cart']; ?></a>
                                         </div>
 
                                         <div class="cart-list-box short-type">
 
-                                            <span class="number"><?php echo count($get_cart); ?> items</span>
+                                            <span class="number"><?php echo count($get_cart); ?> <?php echo $lang['lang-items']; ?></span>
                                             <ul class="cart-list">
 
                                                 <?php
@@ -554,13 +554,13 @@ else {
                                             <ul class="subtotal">
                                                 <li>
                                                     <div class="subtotal-line">
-                                                        <b class="stt-name">Subtotal</b>
+                                                        <b class="stt-name"><?php echo $lang['lang-subtotal']; ?></b>
                                                         <span class="stt-price" id="get_subtotal">RM <?php echo number_format($sub_total, 2, '.', ''); ?></span>
                                                     </div>
                                                 </li>
                                                 <li>
                                                     <div class="subtotal-line">
-                                                        <b class="stt-name">Shipping</b>
+                                                        <b class="stt-name"><?php echo $lang['lang-shipping']; ?></b>
                                                         <span class="stt-price" id="get_shipping">+ RM <?php echo number_format($shipping, 2, '.', ''); ?></span>
                                                     </div>
                                                 </li>
@@ -573,32 +573,32 @@ else {
                                                 ?>
                                                     <li>
                                                         <div class="subtotal-line">
-                                                            <b class="stt-name">Discount</b>
+                                                            <b class="stt-name"><?php echo $lang['lang-discount']; ?></b>
                                                             <span class="stt-price" id="get_discount">- RM <?php echo number_format($discount, 2, '.', ''); ?></span>
                                                         </div>
                                                     </li>
                                                     <li>
                                                         <div class="subtotal-line">
-                                                            <b class="stt-name">Caroma Coin</b>
+                                                            <b class="stt-name"><?php echo $lang['lang-caorma_coin']; ?></b>
                                                             <span class="stt-price" id="get_point_discount">- RM <?php echo number_format(0, 2, '.', ''); ?></span>
                                                         </div>
                                                     </li>
                                                     <li>
                                                         <div class="subtotal-line">
-                                                            <b class="stt-name">GST Tax (<?php echo $gst_value; ?>%)</b>
+                                                            <b class="stt-name"><?php echo $lang['lang-gst_tax']; ?> (<?php echo $gst_value; ?>%)</b>
                                                             <span class="stt-price" id="get_gst">+ RM <?php echo number_format($gst_tax, 2, '.', ''); ?></span>
                                                         </div>
                                                     </li>
                                                     <li>
                                                         <div class="col-sm-12 col-12 no-padding-left">
-                                                            <label class="label-width" for="coupon">Coupon Code <span class="text-danger" id="get_coupon_msg"> </span></label>
+                                                            <label class="label-width" for="coupon"><?php echo $lang['lang-coupon_code']; ?> <span class="text-danger" id="get_coupon_msg"> </span></label>
                                                             <input class="input-width" type="text" name="coupon" id="coupon" value="" placeholder="Enter Coupon Code">
                                                         </div>
                                                     </li>
                                                     <li>
                                                         <div class="subtotal-line">
-                                                            <b class="stt-name">Coin Earn:</b>
-                                                            <span class="stt-price" style="color:green;"><?php echo $total_point_earn; ?> Points</span>
+                                                            <b class="stt-name"><?php echo $lang['lang-coin_earn']; ?>:</b>
+                                                            <span class="stt-price" style="color:green;"><?php echo $total_point_earn; ?> <?php echo $lang['lang-point']; ?></span>
                                                         </div>
                                                     </li>
                                                 <?php
@@ -612,7 +612,7 @@ else {
                                                     </li> -->
                                                     <li>
                                                         <div class="subtotal-line">
-                                                            <b class="stt-name">GST Tax (<?php echo $gst_value; ?>%)</b>
+                                                            <b class="stt-name"><?php echo $lang['lang-gst_tax']; ?> (<?php echo $gst_value; ?>%)</b>
                                                             <span class="stt-price" id="get_gst">+ RM <?php echo number_format($gst_tax, 2, '.', ''); ?></span>
                                                         </div>
                                                     </li>
@@ -628,7 +628,7 @@ else {
 
                                                 <li>
                                                     <div class="subtotal-line">
-                                                        <b class="stt-name">total:</b>
+                                                        <b class="stt-name"><?php echo $lang['lang-total']; ?>:</b>
                                                         <span class="stt-price" id="get_totalpay">RM <?php echo number_format($total_pay, 2, '.', ''); ?></span>
                                                     </div>
                                                 </li>

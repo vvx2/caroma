@@ -49,15 +49,15 @@
 
     <!--Hero Section-->
     <div class="hero-section hero-background">
-        <h1 class="page-title">Forgot Password</h1>
+        <h1 class="page-title"><?php echo $lang['lang-forgot_password']; ?></h1>
     </div>
 
     <!--Navigation section-->
     <div class="container">
         <nav class="biolife-nav">
             <ul>
-                <li class="nav-item"><a href="index.php" class="permal-link">Home</a></li>
-                <li class="nav-item"><span class="current-page">Forgot Password</span></li>
+                <li class="nav-item"><a href="index.php" class="permal-link"><?php echo $lang['lang-home']; ?></a></li>
+                <li class="nav-item"><span class="current-page"><?php echo $lang['lang-forgot_password']; ?></span></li>
             </ul>
         </nav>
     </div>
@@ -77,7 +77,7 @@
                                         <div class="panel-body">
                                             <div class="text-center">
                                                 <h3><i class="glyphicon glyphicon-envelope color-blue" style="font-size:300%;"></i></h3>
-                                                <h2 class="text-center">Password Reset</h2>
+                                                <h2 class="text-center"><?php echo $lang['lang-reset_password']; ?></h2>
                                                 <div class="panel-body">
 
                                                     <form class="form" role="form" id="form_reset_password_api" action="api/mail_reset_password.php?type=reset_password_api&tb=user" method="post" enctype="multipart/form-data">
@@ -89,13 +89,13 @@
                                                                 <div class="hidden">
                                                                     <input name="reset_code" type="password" value="<?php echo $reset_code ?>" class="form-control" placeholder="New Password">
                                                                 </div>
-                                                                <label>New Password</label>
+                                                                <label><?php echo $lang['lang-new_password']; ?></label>
                                                                 <div class="form-group pass_show">
                                                                     <input id="password" name="password" type="password" value="" class="form-control" placeholder="New Password">
 
                                                                 </div>
                                                                 <span class="error_form" id="password_error_message"></span>
-                                                                <label>Confirm Password</label>
+                                                                <label><?php echo $lang['lang-confirm_password']; ?></label>
                                                                 <div class="form-group pass_show">
                                                                     <input id="c_password" name="c_password" type="password" value="" class="form-control" placeholder="Confirm Password">
 
@@ -104,7 +104,7 @@
                                                             </div>
 
                                                             <div class="form-group">
-                                                                <input name="btnAction" class="btn btn-lg btn-primary btn-block" value="Reset Password" type="submit">
+                                                                <input name="btnAction" class="btn btn-lg btn-primary btn-block" value="<?php echo $lang['lang-reset_password']; ?>" type="submit">
                                                             </div>
                                                         </fieldset>
                                                     </form>

@@ -145,16 +145,16 @@
 
     <!--Hero Section-->
     <div class="hero-section hero-background">
-        <h1 class="page-title">Product Detail</h1>
+        <h1 class="page-title"><?php echo $lang['lang-product_detail']; ?></h1>
     </div>
 
     <!--Navigation section-->
     <div class="container">
         <nav class="biolife-nav">
             <ul>
-                <li class="nav-item"><a href="index.php" class="permal-link">Home</a></li>
-                <li class="nav-item"><span class="current-page">Shop</span></li>
-                <li class="nav-item"><span class="current-page">Product Details</span></li>
+                <li class="nav-item"><a href="index.php" class="permal-link"><?php echo $lang['lang-home']; ?></a></li>
+                <li class="nav-item"><span class="current-page"><?php echo $lang['lang-shop']; ?></span></li>
+                <li class="nav-item"><span class="current-page"><?php echo $lang['lang-product_detail']; ?></span></li>
             </ul>
         </nav>
     </div>
@@ -215,7 +215,7 @@
                             <span class="qa-text">Q&A</span>
                             <b class="category">By: <?php echo $result['ct_name']; ?></b>
                         </div>
-                        <span class="sku">Stock: <?php echo $stock; ?></span>
+                        <span class="sku"><?php echo $lang['lang-stock']; ?>: <?php echo $stock; ?></span>
                         <div class="price">
                             <ins><span class="price-amount"><span class="currencySymbol">RM</span><?php echo number_format($price_display, 2); ?></span></ins>
                             <del class="<?php echo $hidden_promo; ?>"><span class="price-amount"><span class="currencySymbol">RM</span><?php echo number_format($normal_price, 2); ?></span></del>
@@ -241,13 +241,13 @@
                         }
                         ?>
                         <div class="shipping-info">
-                            <p class="shipping-day">3-Day Shipping</p>
-                            <p class="for-today">Shipping with CITYLINK</p>
+                            <p class="shipping-day"><?php echo $lang['lang-3_day_shipping']; ?></p>
+                            <p class="for-today"><?php echo $lang['lang-ship_with_citilink']; ?></p>
                         </div>
                     </div>
                     <div class="action-form">
                         <div class="quantity-box">
-                            <span class="title">Quantity:</span>
+                            <span class="title"><?php echo $lang['lang-quantity']; ?>:</span>
                             <div class="qty-input">
                                 <input type="text" name="qty_product" value="1" data-max_value="<?php echo $stock; ?>" data-min_value="1" data-step="1">
                                 <a href="#" class="qty-btn btn-up"><i class="fa fa-caret-up" aria-hidden="true"></i></a>
@@ -279,8 +279,8 @@
                 <div class="product-tabs single-layout biolife-tab-contain">
                     <div class="tab-head">
                         <ul class="tabs">
-                            <li class="tab-element active"><a href="#tab_1st" class="tab-link">Products Descriptions</a></li>
-                            <li class="tab-element"><a href="#tab_4th" class="tab-link">Customer Reviews</a></li>
+                            <li class="tab-element active"><a href="#tab_1st" class="tab-link"><?php echo $lang['lang-product_description']; ?></a></li>
+                            <li class="tab-element"><a href="#tab_4th" class="tab-link"><?php echo $lang['lang-customer_review']; ?></a></li>
                         </ul>
                     </div>
                     <div class="tab-content">
@@ -388,8 +388,8 @@
                 <div class="product-related-box single-layout">
                     <div class="biolife-title-box lg-margin-bottom-26px-im">
                         <span class="biolife-icon icon-capacity-about"></span>
-                        <span class="subtitle">All the best item for You</span>
-                        <h3 class="main-title">Hot Products</h3>
+                        <span class="subtitle"><?php echo $lang['lang-all_the_best']; ?></span>
+                        <h3 class="main-title"><?php echo $lang['lang-hot_sales']; ?></h3>
                     </div>
                     <ul class="products-list biolife-carousel nav-center-02 nav-none-on-mobile" data-slick='{"rows":1,"arrows":true,"dots":false,"infinite":false,"speed":400,"slidesMargin":0,"slidesToShow":5, "responsive":[{"breakpoint":1200, "settings":{ "slidesToShow": 4}},{"breakpoint":992, "settings":{ "slidesToShow": 3, "slidesMargin":20 }},{"breakpoint":768, "settings":{ "slidesToShow": 2, "slidesMargin":10}}]}'>
 

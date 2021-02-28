@@ -14,7 +14,7 @@
                              </p>
                          </div> --->
                          <a href="https://staging2.caroma.com.my"><div class="contact-info-block footer-layout simple-info">
-                             <h4 class="section-title footer-title-color">CONTACT US</h4>
+                             <h4 class="section-title footer-title-color"><?php echo $lang['lang-contact']; ?></h4>
                              <div class="info-item">
                                  <div style="line-height: 1.7 ; color: white;">
                                     <i class="fa fa-location-arrow" style="width: 15px; text-align: center; margin-right: 4px;"></i> No. 1&amp;3, Jalan Tembaga SD 5/2D,
@@ -40,29 +40,27 @@
                      <div class="row">
                          <div class="col-lg-6 col-sm-4 col-xs-6 sm-margin-top-0 xs-margin-top-40px">
                              <section class="footer-item">
-                                 <h3 class="section-title footer-title-color">ADDITIONAL INFO</h3>
+                                 <h3 class="section-title footer-title-color"><?php echo $lang['lang-additional_info']; ?></h3>
                                  <div class="wrap-custom-menu vertical-menu-2 bigger">
                                      <ul class="menu">
-                                         <li><a href="">News</a></li>
-                                         <li><a href="">About Our Shop</a></li>
-                                         <li><a href="refunds-return-policy.php">Refund & Return Policy</a></li>
-                                         <li><a href="shipping-delivery.php">Shipping Delivery</a></li>
-                                         <li><a href="privacy-policy.php">Privacy Policy</a></li>
+                                         <li><a href="refunds-return-policy.php"><?php echo $lang['lang-refund_policy']; ?></a></li>
+                                         <li><a href="shipping-delivery.php"><?php echo $lang['lang-shipping_delivery']; ?></a></li>
+                                         <li><a href="privacy-policy.php"><?php echo $lang['lang-privacy_policy']; ?></a></li>
                                      </ul>
                                  </div>
                              </section>
                          </div>
                          <div class="col-lg-6 col-sm-4 col-xs-6 sm-margin-top-0 xs-margin-top-40px">
                              <section class="footer-item">
-                                 <h3 class="section-title footer-title-color">OUR PRODUCT</h3>
+                                 <h3 class="section-title footer-title-color"><?php echo $lang['lang-our_product']; ?></h3>
                                  <div class="wrap-custom-menu vertical-menu-2 bigger">
                                      <ul class="menu">
-                                         <li><a href="shop.php?category=4">Ginger Series</a></li>
-                                         <li><a href="shop.php?category=5">Chocolate Series</a></li>
-                                         <li><a href="shop.php?category=6">Matcha Series</a></li>
-                                         <li><a href="shop.php?category=8">Coconut Series</a></li>
-                                         <li><a href="shop.php?category=7">Soy Series</a></li>
-                                         <li><a href="shop.php?category=9">Coffee Series</a></li>
+                                         <li><a href="shop.php?category=4"><?php echo $lang['lang-gingery_series']; ?></a></li>
+                                         <li><a href="shop.php?category=5"><?php echo $lang['lang-chocolate_series']; ?></a></li>
+                                         <li><a href="shop.php?category=6"><?php echo $lang['lang-matcha_series']; ?></a></li>
+                                         <li><a href="shop.php?category=8"><?php echo $lang['lang-coconut_series']; ?></a></li>
+                                         <li><a href="shop.php?category=7"><?php echo $lang['lang-soy_series']; ?></a></li>
+                                         <li><a href="shop.php?category=9"><?php echo $lang['lang-coffee_series']; ?></a></li>
                                      </ul>
                                  </div>
                              </section>

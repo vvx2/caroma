@@ -41,15 +41,15 @@
 
   <!--Hero Section-->
   <div class="hero-section hero-background">
-    <h1 class="page-title">Forgot Password</h1>
+    <h1 class="page-title"><?php echo $lang['lang-forgot_password']; ?></h1>
   </div>
 
   <!--Navigation section-->
   <div class="container">
     <nav class="biolife-nav">
       <ul>
-        <li class="nav-item"><a href="index.php" class="permal-link">Home</a></li>
-        <li class="nav-item"><span class="current-page">Forgot Password</span></li>
+        <li class="nav-item"><a href="index.php" class="permal-link"><?php echo $lang['lang-home']; ?></a></li>
+        <li class="nav-item"><span class="current-page"><?php echo $lang['lang-forgot_password']; ?></span></li>
       </ul>
     </nav>
   </div>
@@ -66,8 +66,8 @@
                 <div class="panel-body">
                   <div class="text-center">
                     <h3><i class="fa fa-lock fa-4x"></i></h3>
-                    <h2 class="text-center">Forgot Password?</h2>
-                    <p>You can reset your password here.</p>
+                    <h2 class="text-center"><?php echo $lang['lang-forgot_password']; ?>?</h2>
+                    <p><?php echo $lang['lang-you_can_reset_password']; ?></p>
                     <div class="panel-body">
 
                       <form role="form" id="form_reset_password" action="api/mail_reset_password.php?type=reset_password&tb=user" method="post" enctype="multipart/form-data">
@@ -79,7 +79,7 @@
                           </div>
                         </div>
                         <div class="form-group">
-                          <input name="btnAction" class="btn btn-lg btn-primary btn-block" value="Reset Password" type="submit">
+                          <input name="btnAction" class="btn btn-lg btn-primary btn-block" value="<?php echo $lang['lang-reset_password']; ?>" type="submit">
                         </div>
                       </form>
 

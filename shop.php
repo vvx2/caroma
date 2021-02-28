@@ -120,15 +120,15 @@
 
     <!--Hero Section-->
     <div class="hero-section hero-background">
-        <h1 class="page-title">Our Store</h1>
+        <h1 class="page-title"><?php echo $lang['lang-our_store']; ?></h1>
     </div>
 
     <!--Navigation section-->
     <div class="container">
         <nav class="biolife-nav">
             <ul>
-                <li class="nav-item"><a href="index.php" class="permal-link">Home</a></li>
-                <li class="nav-item"><span class="current-page">Shop</span></li>
+                <li class="nav-item"><a href="index.php" class="permal-link"><?php echo $lang['lang-home']; ?></a></li>
+                <li class="nav-item"><span class="current-page"><?php echo $lang['lang-shop']; ?></span></li>
             </ul>
         </nav>
     </div>
@@ -140,7 +140,7 @@
                 <div id="main-content" class="main-content col-lg-9 col-md-8 col-sm-12 col-xs-12">
 
                     <div class="block-item recently-products-cat md-margin-bottom-39">
-                        <h3 class="title-product-content">Hot Sales</h3>
+                        <h3 class="title-product-content"><?php echo $lang['lang-hot_sales']; ?></h3>
                         <ul class="products-list biolife-carousel nav-center-02 nav-none-on-mobile product_display_hot" data-slick='{"rows":1,"arrows":true, "autoplaySpeed": 1500, "autoplay": true, "dots":false,"infinite":true,"speed":400,"slidesMargin":0,"slidesToShow":5, "responsive":[{"breakpoint":1200, "settings":{ "slidesToShow": 3}},{"breakpoint":992, "settings":{ "slidesToShow": 3, "slidesMargin":30}},{"breakpoint":768, "settings":{ "slidesToShow": 2, "slidesMargin":10}}]}'>
 
                             <?php
@@ -246,18 +246,18 @@
 
                         <div id="top-functions-area" class="top-functions-area">
                             <div class="flt-item to-left group-on-mobile">
-                                <span class="flt-title">Refine</span>
+                                <span class="flt-title"><?php echo $lang['lang-refine']; ?></span>
                             </div>
                             <div class="flt-item to-right">
-                                <span class="flt-title">Sort</span>
+                                <span class="flt-title"><?php echo $lang['lang-sort']; ?></span>
                                 <div class="wrap-selectors">
                                     <div class="selector-item orderby-selector">
                                         <select name="orderby" class="orderby" aria-label="Shop order">
-                                            <option value="popularity" selected="selected">popularity</option>
-                                            <option value="rating">average rating</option>
-                                            <option value="date">newness</option>
-                                            <option value="price">price: low to high</option>
-                                            <option value="price-desc">price: high to low</option>
+                                            <option value="popularity" selected="selected"><?php echo $lang['lang-popularity']; ?></option>
+                                            <option value="rating"><?php echo $lang['lang-average']; ?></option>
+                                            <option value="date"><?php echo $lang['lang-newness']; ?></option>
+                                            <option value="price"><?php echo $lang['lang-low_price']; ?></option>
+                                            <option value="price-desc"><?php echo $lang['lang-high_price']; ?></option>
                                         </select>
                                     </div>
                                 </div>
@@ -315,20 +315,20 @@
                 <!-- Sidebar -->
                 <aside id="sidebar" class="sidebar col-lg-3 col-md-4 col-sm-12 col-xs-12">
                     <div class="biolife-mobile-panels">
-                        <span class="biolife-current-panel-title">Sidebar</span>
+                        <span class="biolife-current-panel-title"><?php echo $lang['lang-side_bar']; ?></span>
                         <a class="biolife-close-btn" href="#" data-object="open-mobile-filter">&times;</a>
                     </div>
                     <div class="sidebar-contain">
                         <div class="widget biolife-filter">
-                            <h4 class="wgt-title">Categories</h4>
+                            <h4 class="wgt-title"><?php echo $lang['lang-category']; ?></h4>
                             <div class="wgt-content">
 
                                 <ul class="cat-list">
 
-                                    <li class="cat-list-item"><a href="shop.php" class="cat-link">ALL</a></li>
-                                    <li class="cat-list-item"><a href="shop.php?new_arrival=1" class="cat-link">NEW ARRIVAL</a></li>
+                                    <li class="cat-list-item"><a href="shop.php" class="cat-link"><?php echo $lang['lang-all']; ?></a></li>
+                                    <li class="cat-list-item"><a href="shop.php?new_arrival=1" class="cat-link"><?php echo $lang['lang-new_arrival']; ?></a></li>
                                     <?php if ($user_type == 1) { ?>
-                                        <li class="cat-list-item"><a href="shop.php?is_promotion=1" class="cat-link">PROMOTION</a></li>
+                                        <li class="cat-list-item"><a href="shop.php?is_promotion=1" class="cat-link"><?php echo $lang['lang-promotion']; ?></a></li>
                                     <?php } ?>
                                     <?php
                                     $col = "c.id as c_id, ct.name as ct_name";
@@ -349,7 +349,7 @@
                         </div>
 
                         <div class="widget price-filter biolife-filter">
-                            <h4 class="wgt-title">Price</h4>
+                            <h4 class="wgt-title"><?php echo $lang['lang-price']; ?></h4>
                             <div class="wgt-content">
                                 <div class="frm-contain">
                                     <form action="" name="price-filter" id="price-filter" method="get">
@@ -368,7 +368,7 @@
                         </div>
 
                         <div class="widget biolife-filter">
-                            <h4 class="wgt-title">Latest Products</h4>
+                            <h4 class="wgt-title"><?php echo $lang['lang-latest_product']; ?></h4>
                             <div class="wgt-content">
                                 <ul class="products">
 

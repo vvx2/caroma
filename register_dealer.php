@@ -46,15 +46,15 @@
 
     <!--Hero Section-->
     <div class="hero-section hero-background">
-        <h1 class="page-title">Registration</h1>
+        <h1 class="page-title"><?php echo $lang['lang-member_registration']; ?></h1>
     </div>
 
     <!--Navigation section-->
     <div class="container">
         <nav class="biolife-nav">
             <ul>
-                <li class="nav-item"><a href="index.php" class="permal-link">Home</a></li>
-                <li class="nav-item"><span class="current-page">Registration</span></li>
+                <li class="nav-item"><a href="index.php" class="permal-link"><?php echo $lang['lang-home']; ?></a></li>
+                <li class="nav-item"><span class="current-page"><?php echo $lang['lang-member_registration']; ?></span></li>
             </ul>
         </nav>
     </div>
@@ -74,42 +74,42 @@
                                 <input type="hidden" name="token" id="form_token" value="<?php echo $token; ?>" />
                                 <p class="form-row">
                                     <div class="col-sm-12 col-12 no-padding-left reg-height">
-                                        <label class="label-width" for="distributor_code">Distributor Code</label>
+                                        <label class="label-width" for="distributor_code"><?php echo $lang['lang-distributor_code']; ?></label>
                                         <input class="input-width" type="text" name="distributor_code" id="distributor_code" value="<?php echo $distrinbutor_code; ?>" placeholder="Enter Distributor Code" >
                                         <span class="error_form" id="distributor_code_error_message"></span>
                                     </div>
                                     <div class="col-sm-6 col-12 no-padding-left reg-height">
-                                        <label class="label-width" for="name">Full Name</label>
+                                        <label class="label-width" for="name"><?php echo $lang['lang-full_name']; ?></label>
                                         <input class="input-width" type="text" name="name" id="name" value="" placeholder="Your Name">
                                         <span class="error_form" id="name_error_message"></span>
                                     </div>
                                     <div class="col-sm-6 col-12 no-padding-left reg-height">
-                                        <label class="label-width" for="email">Email Address</label>
+                                        <label class="label-width" for="email"><?php echo $lang['lang-email']; ?></label>
                                         <input class="input-width" type="email" name="email" id="email" value="" placeholder="Your email">
                                         <span class="error_form" id="email_error_message"></span>
                                     </div>
                                     <div class="col-sm-6 col-12 no-padding-left reg-height">
-                                        <label class="label-width" for="password">Password</label>
+                                        <label class="label-width" for="password"><?php echo $lang['lang-password']; ?></label>
                                         <input class="input-width" type="password" name="password" id="password" value="" placeholder="Your Password">
                                         <span class="error_form" id="password_error_message"></span>
                                     </div>
                                     <div class="col-sm-6 col-12 no-padding-left reg-height">
-                                        <label class="label-width" for="c_password">Confirm Password</label>
+                                        <label class="label-width" for="c_password"><?php echo $lang['lang-confirm_password']; ?></label>
                                         <input class="input-width" type="password" name="c_password" id="c_password" value="" placeholder="Confirm Password">
                                         <span class="error_form" id="retype_password_error_message"></span>
                                     </div>
                                     <div class="col-sm-12 col-12 no-padding-left reg-height">
-                                        <label class="label-width" for="contact">Contact Number</label>
+                                        <label class="label-width" for="contact"><?php echo $lang['lang-contact_number']; ?></label>
                                         <input class="input-width" type="tel" name="contact" id="contact" value="" placeholder="Your Contact">
                                         <span class="error_form" id="phone_error_message"></span>
                                     </div>
                                     <div class="col-sm-12 col-12 no-padding-left reg-height">
-                                        <label class="label-width" for="address">Address</label>
+                                        <label class="label-width" for="address"><?php echo $lang['lang-address']; ?></label>
                                         <input class="input-width" type="text" name="address" id="address" value="" placeholder="Your Address">
                                         <span class="error_form" id="address_error_message"></span>
                                     </div>
                                     <div class="col-sm-4 col-12 no-padding-left reg-height">
-                                        <label class="label-width" for="state">States</label>
+                                        <label class="label-width" for="state"><?php echo $lang['lang-state']; ?></label>
                                         <select class="input-width error-select" style="border: 1px solid #e6e6e6;" name="state"  id="state" tabindex="2">
                                             <option data-option="" selected value="">Select State</option>
                                             <?php
@@ -130,18 +130,18 @@
                                         <span class="error_form" id="state_error_message"></span>
                                     </div>
                                     <div class="col-sm-4 col-12 no-padding-left reg-height">
-                                        <label class="label-width" for="city">City</label>
+                                        <label class="label-width" for="city"><?php echo $lang['lang-city']; ?></label>
                                         <input class="input-width" type="text" name="city" id="city" value="" placeholder="Your City">
                                         <span class="error_form" id="city_error_message"></span>
                                     </div>
                                     <div class="col-sm-4 col-12 no-padding-left reg-height">
-                                        <label class="label-width" for="postcode">Zip Code</label>
+                                        <label class="label-width" for="postcode"><?php echo $lang['lang-zip_code']; ?></label>
                                         <input class="input-width" type="text" name="postcode" id="postcode" maxlength="5" onkeypress=" return isNumber(event)" value="" placeholder="Your Zip Code">
                                         <span class="error_form" id="zip_error_message"></span>
                                     </div>
                                 </p>
                                 <div class="col-sm-12 col-12 no-padding-left reg-height reg-style wrap-btn reg-button">
-                                    <button class="btn btn-submit btn-bold reg-but" type="submit" name="btnAction">Register Now</button>
+                                    <button class="btn btn-submit btn-bold reg-but" type="submit" name="btnAction"><?php echo $lang['lang-register_now']; ?></button>
                                 </div>
                             </form>
                         </div>

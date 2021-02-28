@@ -71,15 +71,15 @@
                                     <input type="email" id="uname" name="email" value="" class="txt-input" required>
                                 </p>
                                 <p class="form-row">
-                                    <label for="pword">Password:<span class="requite">*</span></label>
+                                    <label for="pword"><?php echo $lang['lang-password']; ?>:<span class="requite">*</span></label>
                                     <input type="password" id="pword" name="password" value="" class="txt-input" required>
                                 </p>
                                 <div class="form-group">
                                     <span class="text-danger" id="error_msg"></span>
                                 </div>
                                 <p class="form-row wrap-btn">
-                                    <button class="btn btn-submit btn-bold" type="submit" id="btnsubmit">sign in</button>
-                                    <a href="reset-password.php" class="link-to-help">Forgot your password</a>
+                                    <button class="btn btn-submit btn-bold" type="submit" id="btnsubmit"><?php echo $lang['lang-sign_in']; ?></button>
+                                    <a href="reset-password.php" class="link-to-help"><?php echo $lang['lang-forgot_password']; ?></a>
                                 </p>
                             </form>
                         </div>
@@ -89,16 +89,16 @@
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                         <div class="register-in-container">
                             <div class="intro">
-                                <h4 class="box-title">New Customer?</h4>
-                                <p class="sub-title">Create an account with us and you’ll be able to:</p>
+                                <h4 class="box-title"><?php echo $lang['lang-new_customer']; ?></h4>
+                                <p class="sub-title"><?php echo $lang['lang-create_account']; ?>:</p>
                                 <ul class="lis">
-                                    <li>Check out faster</li>
-                                    <li>Access your order history</li>
-                                    <li>Track new orders</li>
-                                    <li>Save items to your Wishlist</li>
+                                    <li><?php echo $lang['lang-check_out_faser']; ?></li>
+                                    <li><?php echo $lang['lang-access_history']; ?></li>
+                                    <li><?php echo $lang['lang-track_new_orders']; ?></li>
+                                    <li><?php echo $lang['lang-save_items']; ?></li>
                                 </ul>
-                                <a href="register.php" class="btn btn-bold">Create an account</a>
-                                <a href="register_dealer.php" class="btn btn-bold">Join with Dealer</a>
+                                <a href="register.php" class="btn btn-bold"><?php echo $lang['lang-craete_account']; ?></a>
+                                <a href="register_dealer.php" class="btn btn-bold"><?php echo $lang['lang-join_dealer']; ?></a>
                             </div>
                         </div>
                     </div>
