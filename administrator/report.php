@@ -522,7 +522,7 @@ switch ($status) {
                     <div class="col-lg-12">
                         <div class="ibox ">
                             <div class="ibox-title">
-                                <h5>Top Selling Product Bar Chart (Top 5 Between <?php echo $from_display . " to " . $to_display ?>)</h5>
+                                <h5>Top Selling Product Bar Chart ( Top 5 Between <?php echo $from_display . " to " . $to_display ?> ) **Order Completed**</h5>
                             </div>
                             <div class="ibox-content">
                                 <div>
