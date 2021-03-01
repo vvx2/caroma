@@ -502,7 +502,7 @@ switch ($status) {
                         </div>
                     </div>
                 </div>
-                
+
 
                 <div class="row">
                     <div class="col-lg-6" style="display: none;">
@@ -522,11 +522,11 @@ switch ($status) {
                     <div class="col-lg-12">
                         <div class="ibox ">
                             <div class="ibox-title">
-                                <h5>Top Selling Product Bar Chart</h5>
+                                <h5>Top Selling Product Bar Chart ( Top 5 Between <?php echo $from_display . " to " . $to_display ?> ) **Order Completed**</h5>
                             </div>
                             <div class="ibox-content">
                                 <div>
-                                    <canvas id="barChart" height="140"></canvas>
+                                    <canvas id="TopSellBarChart" height="140"></canvas>
                                 </div>
                             </div>
                         </div>
@@ -614,6 +614,141 @@ switch ($status) {
 
             });
 
+
+        });
+
+
+        $(function() {
+
+            <?php
+            function getmonth($i)
+            {
+                switch ($i) {
+                    case 1:
+                        $month = "January";
+                        break;
+                    case 2:
+                        $month = "February";
+                        break;
+                    case 3:
+                        $month = "March";
+                        break;
+                    case 4:
+                        $month = "April";
+                        break;
+                    case 5:
+                        $month = "May";
+                        break;
+                    case 6:
+                        $month = "June";
+                        break;
+                    case 7:
+                        $month = "July";
+                        break;
+                    case 8:
+                        $month = "August";
+                        break;
+                    case 9:
+                        $month = "Setemper";
+                        break;
+                    case 10:
+                        $month = "October";
+                        break;
+                    case 11:
+                        $month = "November";
+                        break;
+                    case 12:
+                        $month = "December";
+                        break;
+                    default:
+                        $month = "MonthError";
+                }
+                return $month;
+            }
+
+            ?>
+            var barData = {
+                labels: [
+                    <?php
+                    $begin = new DateTime($from_display);
+                    $end = new DateTime($to_display);
+
+                    $interval = DateInterval::createFromDateString('1 month');
+                    $period = new DatePeriod($begin, $interval, $end);
+
+
+                    $x = 1;
+                    $length = iterator_count($period);
+                    foreach ($period as $dt) {
+                        $month_string = $dt->format("m\n");
+                        $month_int = (int)$month_string;
+                        $month_display = getmonth($month_int);
+                        if ($x === $length) {
+                            echo '"' . $month_display . '"';
+                        } else {
+                            echo '"' . $month_display . '",';
+                        }
+                        $x++;
+                    }
+                    ?>
+                ],
+                datasets: [
+                    <?php
+                    $col = "sum(oi.qty) as total , pt.name as product_name, pt.product_id as product_id";
+                    $table = "orders o left join order_items oi on o.id = oi.order_id left join product_translation pt on oi.product_id = pt.product_id";
+                    $opt = 'pt.language = ? AND o.status = ? AND o.date_created BETWEEN ? AND ? group by pt.name order by total DESC limit 5';
+                    $arr = array("en", 4, $from, $to);
+                    $product_top_sell = $db->advwhere($col, $table, $opt, $arr);
+
+                    foreach ($product_top_sell as $product_top) {
+                        $color = 'rgba(' . rand(0, 255) . ', ' . rand(0, 255) . ', ' . rand(0, 255) . ', 0.5)';
+                    ?> {
+                            label: "<?php echo $product_top['product_name']; ?>",
+                            backgroundColor: "<?php echo $color; ?>",
+                            borderColor: "<?php echo $color; ?>",
+                            pointBackgroundColor: "<?php echo $color; ?>",
+                            pointBorderColor: "#fff",
+                            data: [
+                                <?php
+                                foreach ($period as $dt) {
+
+                                    // First day of the month.
+                                    $month_first_day =  date('Y-m-01 H:i:s', strtotime($dt->format("Y-m-d H:i:s\n")));
+                                    // Last day of the month.
+                                    $month_last_day = date('Y-m-t', strtotime($dt->format("Y-m-d H:i:s\n"))) . " 23:59:59";
+
+                                    $col = "sum(oi.qty) as total ";
+                                    $table = "orders o left join order_items oi on o.id = oi.order_id";
+                                    $opt = 'oi.product_id = ? AND o.status = ? AND o.date_created BETWEEN ? AND ?';
+                                    $arr = array($product_top['product_id'], 4, $month_first_day, $month_last_day);
+                                    $product_of_month = $db->advwhere($col, $table, $opt, $arr);
+                                    if ($product_of_month[0]['total'] == null || "") {
+                                        $product_total = 0;
+                                    } else {
+                                        $product_total = $product_of_month[0]['total'];
+                                    }
+                                    echo $product_total . ",";
+                                }
+                                ?>
+                            ]
+                        },
+                    <?php } ?>
+
+
+                ]
+            };
+
+            var barOptions = {
+                responsive: true
+            };
+
+
+            var ctx2 = document.getElementById("TopSellBarChart").getContext("2d");
+            new Chart(ctx2, {
+                type: 'bar',
+                data: barData,
+                options: barOptions
+            });
 
         });
     </script>
