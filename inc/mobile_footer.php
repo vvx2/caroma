@@ -69,10 +69,19 @@
         <div class="glb-item languages">
             <b class="title">Language</b>
             <ul class="list inline">
-                <li class="list-item"><a href="#"><img class="flag-imgs" src="assets/images/languages/malaysia-flag-icon-32.png" alt="flag"></a></li>
-                <li class="list-item"><a href="#"><img class="flag-imgs" src="assets/images/languages/united-states-of-america-flag-icon-32.png" alt="flag"></a></li>
-                <li class="list-item"><a href="#"><img class="flag-imgs" src="assets/images/languages/china-flag-icon-32.png" alt="flag"></a></li>
+                <select name="change_language">
+                    <option value="en" style="width: 100%;" <?php echo ($_SESSION['language'] == "en") ? "selected" : "" ?>>EN</option>
+                    <option value="my" style="width: 100%;" <?php echo ($_SESSION['language'] == "my") ? "selected" : "" ?>>MY</option>
+                    <option value="cn" style="width: 100%;" <?php echo ($_SESSION['language'] == "cn") ? "selected" : "" ?>>CN</option>
+                </select>
             </ul>
         </div>
     </div>
 </div>
+
+<style>
+li.option {
+    width : 100%;
+    padding-left: 15px !important;
+}
+</style>
