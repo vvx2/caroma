@@ -46,6 +46,7 @@
                                          <li><a href="refunds-return-policy.php"><?php echo $lang['lang-refund_policy']; ?></a></li>
                                          <li><a href="shipping-delivery.php"><?php echo $lang['lang-shipping_delivery']; ?></a></li>
                                          <li><a href="privacy-policy.php"><?php echo $lang['lang-privacy_policy']; ?></a></li>
+                                         <li><a href="https://caroma-store.com"><?php echo $lang['lang-caroma_mart']; ?></a></li>
                                      </ul>
                                  </div>
                              </section>

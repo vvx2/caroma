@@ -21,7 +21,8 @@
             <li class="menu-item"><a href="https://staging2.caroma.com.my"><?php echo $lang['lang-caroma_home']; ?></a></li>
                 <li class="menu-item"><a href="index.php"><?php echo $lang['lang-shop_home']; ?></a></li>
                 <li class="menu-item"><a href="shop.php" class="menu-name" data-title="Shop"><?php echo $lang['lang-shop']; ?></a></li>
-                <li class="menu-item"><a href="shop.php?is_promotion=1"><?php echo $lang['lang-promotion']; ?></a></li>
+                <li class="menu-item"><a href="https://caroma-store.com"><?php echo $lang['lang-caroma_mart']; ?></a></li>
+                <!-- <li class="menu-item"><a href="shop.php?is_promotion=1"><?php echo $lang['lang-promotion']; ?></a></li> -->
             </ul>
         </div>
             <div class="login-item">
