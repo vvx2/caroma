@@ -29,8 +29,8 @@ $point_discount = 0;
 if ($server == 3) { //3=live
     $senangpay_path = "https://app.senangpay.my/payment/";
     # please fill in the required info as below
-    $merchant_id = '859160498101260';
-    $secretkey = '3037-583';
+    $merchant_id = '269160188695246';
+    $secretkey = '23291-493';
 } else {
     $senangpay_path = "https://sandbox.senangpay.my/payment/";
     # please fill in the required info as below
