@@ -19,7 +19,7 @@ if ($server == 1) { //1= local, 2 = staging, 3 = live;
 } else if ($server == 2) {
     $server_path = "https://staging3.caroma.com.my/";
 } else if ($server == 3) {
-    $server_path = "https://staging3.caroma.com.my/";
+    $server_path = "https://shop.caroma.com.my/";
 }
 
 //-------------------------------------
