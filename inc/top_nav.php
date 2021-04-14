@@ -18,7 +18,7 @@
         <div class="biolife-cart-info">
         <div class="primary-menu hidden-sm hidden-xs">
             <ul class="menu biolife-menu clone-main-menu clone-primary-menu">
-            <li class="menu-item"><a href="https://staging2.caroma.com.my"><?php echo $lang['lang-caroma_home']; ?></a></li>
+            <li class="menu-item"><a href="https://caroma.com.my"><?php echo $lang['lang-caroma_home']; ?></a></li>
                 <li class="menu-item"><a href="index.php"><?php echo $lang['lang-shop_home']; ?></a></li>
                 <li class="menu-item"><a href="shop.php" class="menu-name" data-title="Shop"><?php echo $lang['lang-shop']; ?></a></li>
                 <li class="menu-item"><a href="https://caroma-store.com"><?php echo $lang['lang-caroma_mart']; ?></a></li>

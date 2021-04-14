@@ -33,7 +33,7 @@ if ($onpage == "1") {
                 <a href="../index.php"><i class="fa fa-leaf mr-10"></i><?php echo $lang['lang-shop_home']; ?> <span class="pull-right"></span></a>
             </li>
             <li>
-                <a href="https://staging2.caroma.com.my"><i class="fa fa-home mr-10"></i><?php echo $lang['lang-caroma_home']; ?> <span class="pull-right"></span></a>
+                <a href="https://caroma.com.my"><i class="fa fa-home mr-10"></i><?php echo $lang['lang-caroma_home']; ?> <span class="pull-right"></span></a>
             </li>
             <li>
                 <a href="../rewards.php"><i class="fa fa-money mr-10"></i><?php echo $lang['lang-my_caroma_coin']; ?> <span class="pull-right"></span></a>
@@ -99,7 +99,7 @@ if ($onpage == "1") {
                 <a href="../index.php"><i class="fa fa-leaf mr-10"></i><?php echo $lang['lang-shop_home']; ?> <span class="pull-right"></span></a>
             </li>
             <li>
-                <a href="https://staging2.caroma.com.my"><i class="fa fa-home mr-10"></i><?php echo $lang['lang-caroma_home']; ?> <span class="pull-right"></span></a>
+                <a href="https://caroma.com.my"><i class="fa fa-home mr-10"></i><?php echo $lang['lang-caroma_home']; ?> <span class="pull-right"></span></a>
             </li>
             <li>
                 <a href="../rewards.php"><i class="fa fa-money mr-10"></i><?php echo $lang['lang-my_caroma_coin']; ?> <span class="pull-right"></span></a>
@@ -136,7 +136,7 @@ if ($onpage == "1") {
                 <a href="../index.php"><i class="fa fa-leaf mr-10"></i><?php echo $lang['lang-shop_home']; ?> <span class="pull-right"></span></a>
             </li>
             <li>
-                <a href="https://staging2.caroma.com.my" ><i class="fa fa-home mr-10"></i><?php echo $lang['lang-caroma_home']; ?> <span class="pull-right"></span></a>
+                <a href="https://caroma.com.my" ><i class="fa fa-home mr-10"></i><?php echo $lang['lang-caroma_home']; ?> <span class="pull-right"></span></a>
             </li>
             <li>
                 <a href="../rewards.php"><i class="fa fa-money mr-10"></i><?php echo $lang['lang-my_caroma_coin']; ?> <span class="pull-right"></span></a>
