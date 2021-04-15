@@ -1,6 +1,6 @@
 <?php
 
-$server = 3; //1= local, 2 = staging, 3 = live;
+$server = 3; //1= local, 2 = staging, 3 = live 4 = Nicky Local;
 if ($server == 1) {
     define('host', 'mysql:host=localhost;port=3306;dbname=caromanew;charset=utf8;');
     define('username', 'root');
@@ -13,8 +13,12 @@ if ($server == 1) {
     define('host', 'mysql:host=localhost;port=3306;dbname=caromaca_shop;charset=utf8;');
     define('username', 'caromaca_shop');
     define('pass', ';irmNFv*C~^c');
+} else if ($server == 4) {
+    define('host', 'mysql:host=localhost;port=3306;dbname=caromaca_shop;charset=utf8;');
+    define('username', 'root');
+    define('pass', '');
 }
-if ($server == 1) { //1= local, 2 = staging, 3 = live;
+if ($server == 3) { //1= local, 2 = staging, 3 = live;
     $server_path = "https://localhost/caroma/";
 } else if ($server == 2) {
     $server_path = "https://staging3.caroma.com.my/";
@@ -26,10 +30,10 @@ if ($server == 1) { //1= local, 2 = staging, 3 = live;
 //         email setting
 //-------------------------------------
 
-$admin_email = "notification@caroma.com.my";
+$admin_email = "sales@caroma.com.my";
 $email_host = "mail.caroma.com.my";
-$email_username = "test@caroma.com.my";
-$email_password = "=HV[GXQv+7l?";
+$email_username = "no-reply@caroma.com.my";
+$email_password = "mlH~E+dnBD{7";
 $email_from = "info@caroma.com.my";
 $email_from_name = "Caroma Team";
 
