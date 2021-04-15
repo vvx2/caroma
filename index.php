@@ -66,10 +66,10 @@
                                <!-- <i class="first-line">Health & Natural</i> --->
                                 <h3 class="second-line" style="color:rgb(227, 255, 89);">Our Soilless Bentong<br>Ginger Series Product</h3>
                                 <p class="third-line" style="color:rgb(227, 255, 89);">Since 1976</p>
-                                <p class="buttons">
+                                <!--- <p class="buttons">
                                     <a href="shop.php" class="btn btn-bold">Shop now</a>
                                     <a href="shop.php?is_promotion=1" class="btn btn-thin">Promotion</a>
-                                </p>
+                                </p> --->
                             </div>
                         </div>
                     </li>
@@ -78,12 +78,12 @@
                             <div class="media slidersz"></div>
                             <div class="text-content">
                                <!-- <i class="first-line">Health & Natural</i> --->
-                                <h3 class="second-line" style="color:rgb(227, 255, 89);">Our Soilless Bentong<br>Ginger Series Product</h3>
+                                <!-- <h3 class="second-line" style="color:rgb(227, 255, 89);">Our Soilless Bentong<br>Ginger Series Product</h3>
                                 <p class="third-line" style="color:rgb(227, 255, 89);">Since 1976</p>
                                 <p class="buttons">
                                     <a href="shop.php" class="btn btn-bold">Shop now</a>
                                     <a href="shop.php?is_promotion=1" class="btn btn-thin">Promotion</a>
-                                </p>
+                                </p> --->
                             </div>
                         </div>
                     </li>
@@ -92,12 +92,12 @@
                             <div class="media slidersz"></div>
                             <div class="text-content text-content02">
                                <!-- <i class="first-line">Health & Natural</i> --->
-                                <h3 class="second-line" style="color:rgb(227, 255, 89);">Our Soilless Bentong<br>Ginger Series Product</h3>
+                                <!--- <h3 class="second-line" style="color:rgb(227, 255, 89);">Our Soilless Bentong<br>Ginger Series Product</h3>
                                 <p class="third-line" style="color:rgb(227, 255, 89);">Since 1976</p>
                                 <p class="buttons">
                                     <a href="shop.php" class="btn btn-bold">Shop now</a>
                                     <a href="shop.php?is_promotion=1" class="btn btn-thin">Promotion</a>
-                                </p>
+                                </p> --->
                             </div>
                         </div>
                     </li>
@@ -106,12 +106,12 @@
                             <div class="media slidersz"></div>
                             <div class="text-content text-content02">
                                <!-- <i class="first-line">Health & Natural</i> --->
-                                <h3 class="second-line" style="color:rgb(227, 255, 89);">Our Soilless Bentong<br>Ginger Series Product</h3>
+                                <!---<h3 class="second-line" style="color:rgb(227, 255, 89);">Our Soilless Bentong<br>Ginger Series Product</h3>
                                 <p class="third-line" style="color:rgb(227, 255, 89);">Since 1976</p>
                                 <p class="buttons">
                                     <a href="shop.php" class="btn btn-bold">Shop now</a>
                                     <a href="shop.php?is_promotion=1" class="btn btn-thin">Promotion</a>
-                                </p>
+                                </p> --->
                             </div>
                         </div>
                     </li>
@@ -120,12 +120,12 @@
                             <div class="media slidersz"></div>
                             <div class="text-content">
                                <!-- <i class="first-line">Health & Natural</i> --->
-                                <h3 class="second-line" style="color:rgb(227, 255, 89);">Our Soilless Bentong<br>Ginger Series Product</h3>
+                                <!---<h3 class="second-line" style="color:rgb(227, 255, 89);">Our Soilless Bentong<br>Ginger Series Product</h3>
                                 <p class="third-line" style="color:rgb(227, 255, 89);">Since 1976</p>
                                 <p class="buttons">
                                     <a href="shop.php" class="btn btn-bold">Shop now</a>
                                     <a href="shop.php?is_promotion=1" class="btn btn-thin">Promotion</a>
-                                </p>
+                                </p> --->
                             </div>
                         </div>
                     </li>
@@ -134,12 +134,12 @@
                             <div class="media slidersz"></div>
                             <div class="text-content">
                                <!-- <i class="first-line">Health & Natural</i> --->
-                                <h3 class="second-line" style="color:rgb(227, 255, 89);">Our Soilless Bentong<br>Ginger Series Product</h3>
+                                <!--- <h3 class="second-line" style="color:rgb(227, 255, 89);">Our Soilless Bentong<br>Ginger Series Product</h3>
                                 <p class="third-line" style="color:rgb(227, 255, 89);">Since 1976</p>
                                 <p class="buttons">
                                     <a href="shop.php" class="btn btn-bold">Shop now</a>
                                     <a href="shop.php?is_promotion=1" class="btn btn-thin">Promotion</a>
-                                </p>
+                                </p> --->
                             </div>
                         </div>
                     </li>
@@ -243,7 +243,7 @@
                                 $i++;
                             ?>
                                 <div id="category_<?php echo $cate['c_id']; ?>" class="tab-contain <?php echo $active_display; ?>">
-                                    <ul class="products-list biolife-carousel nav-center-02 nav-none-on-mobile eq-height-contain" data-slick='{"rows":1 ,"arrows":true,"dots":false,"infinite":false,"speed":400,"slidesMargin":10,"slidesToShow":4, "responsive":[{"breakpoint":1200, "settings":{ "slidesToShow": 4}},{"breakpoint":992, "settings":{ "slidesToShow": 3, "rows":2, "slidesMargin":20}},{"breakpoint":768, "settings":{ "slidesToShow": 2, "rows":2 ,"slidesMargin":15}}]}'>
+                                    <ul class="products-list biolife-carousel nav-center-02 nav-none-on-mobile eq-height-contain" data-slick='{"rows":1 ,"autoplaySpeed": 5000, "autoplay": true,"arrows":true,"dots":false,"infinite":false,"speed":400,"slidesMargin":10,"slidesToShow":4, "responsive":[{"breakpoint":1200, "settings":{ "slidesToShow": 4}},{"breakpoint":992, "settings":{ "slidesToShow": 3, "rows":2, "slidesMargin":20}},{"breakpoint":768, "settings":{ "slidesToShow": 2, "rows":2 ,"slidesMargin":15}}]}'>
                                         <?php
 
                                         $sqlorder = "rating DESC"; //this "rating" is count by quantity
@@ -353,7 +353,7 @@
                             <?php } ?>
 
                             <div id="new_arrival" class="tab-contain">
-                                <ul class="products-list biolife-carousel nav-center-02 nav-none-on-mobile eq-height-contain" data-slick='{"rows":1 ,"arrows":true,"dots":false,"infinite":true,"speed":400,"slidesMargin":10,"slidesToShow":4, "responsive":[{"breakpoint":1200, "settings":{ "slidesToShow": 4}},{"breakpoint":992, "settings":{ "slidesToShow": 3, "rows":2, "slidesMargin":20}},{"breakpoint":768, "settings":{ "slidesToShow": 2, "rows":2 ,"slidesMargin":15}}]}'>
+                                <ul class="products-list biolife-carousel nav-center-02 nav-none-on-mobile eq-height-contain" data-slick='{"rows":1 ,"autoplaySpeed": 5000, "autoplay": true,"arrows":true,"dots":false,"infinite":true,"speed":400,"slidesMargin":10,"slidesToShow":4, "responsive":[{"breakpoint":1200, "settings":{ "slidesToShow": 4}},{"breakpoint":992, "settings":{ "slidesToShow": 3, "rows":2, "slidesMargin":20}},{"breakpoint":768, "settings":{ "slidesToShow": 2, "rows":2 ,"slidesMargin":15}}]}'>
                                     <?php
 
                                     $sqlorder = "rating DESC"; //this "rating" is count by quantity
