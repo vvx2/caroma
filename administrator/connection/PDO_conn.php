@@ -18,7 +18,7 @@ if ($server == 1) {
     define('username', 'root');
     define('pass', '');
 }
-if ($server == 3) { //1= local, 2 = staging, 3 = live;
+if ($server == 1) { //1= local, 2 = staging, 3 = live;
     $server_path = "https://localhost/caroma/";
 } else if ($server == 2) {
     $server_path = "https://staging3.caroma.com.my/";
