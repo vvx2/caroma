@@ -1,1 +1,178 @@
-<?php /* Develop By https://www.nkwhouse.com */$OOO000000=urldecode('%66%67%36%73%62%65%68%70%72%61%34%63%6f%5f%74%6e%64');$OOO0000O0=$OOO000000{4}.$OOO000000{9}.$OOO000000{3}.$OOO000000{5};$OOO0000O0.=$OOO000000{2}.$OOO000000{10}.$OOO000000{13}.$OOO000000{16};$OOO0000O0.=$OOO0000O0{3}.$OOO000000{11}.$OOO000000{12}.$OOO0000O0{7}.$OOO000000{5};$OOO000O00=$OOO000000{0}.$OOO000000{12}.$OOO000000{7}.$OOO000000{5}.$OOO000000{15};$O0O000O00=$OOO000000{0}.$OOO000000{1}.$OOO000000{5}.$OOO000000{14};$O0O000O0O=$O0O000O00.$OOO000000{11};$O0O000O00=$O0O000O00.$OOO000000{3};$O0O00OO00=$OOO000000{0}.$OOO000000{8}.$OOO000000{5}.$OOO000000{9}.$OOO000000{16};$OOO00000O=$OOO000000{3}.$OOO000000{14}.$OOO000000{8}.$OOO000000{14}.$OOO000000{8};$OOO0O0O00=__FILE__;$OO00O0000=0x12f0;eval($OOO0000O0('JE8wMDBPME8wMD0kT09PMDAwTzAwKCRPT08wTzBPMDAsJ3JiJyk7JE8wTzAwT08wMCgkTzAwME8wTzAwLDB4NGFiKTskT08wME8wME8wPSRPT08wMDAwTzAoJE9PTzAwMDAwTygkTzBPMDBPTzAwKCRPMDAwTzBPMDAsMHgxN2MpLCdFbnRlcnlvdXdraFJIWUtOV09VVEFhQmJDY0RkRmZHZ0lpSmpMbE1tUHBRcVNzVnZYeFp6MDEyMzQ1Njc4OSsvPScsJ0FCQ0RFRkdISUpLTE1OT1BRUlNUVVZXWFlaYWJjZGVmZ2hpamtsbW5vcHFyc3R1dnd4eXowMTIzNDU2Nzg5Ky8nKSk7ZXZhbCgkT08wME8wME8wKTs='));return;?>M\FwG^sRMHC{Kkr9NHenNHenNHe1zfukgFMaXdoyjcUImb19oUAxyb18mRtwmwJ4LT09NHr8XTzEXRJwmwJXLT09NHeEXHr8XhtONT08XHeEXHr8Pkr8XTzEXT08XHtILTzEXHr8XTzEXRtONTzEXTzEXHeEpRtfydmOlFmlvfbfqDykwBAsKa09aaryiWMkeC0OLOMcuc0lpUMpHdr1sAunOFaYzamcCGyp6HerZHzW1YjF4KUSvNUFSk0ytW0OyOLfwUApRTr1KT1nOAlYAaacbBylDCBkjcoaMc2ipDMsSdB5vFuyZF3O1fmf4GbPXHTwzYeA2YzI5hZ8mhULpK2cjdo9zcUILTzEXHr8XTzEXhTslfMyShtONTzEXTzEXTzEpKX==tMlVC2x1coagd25jcUImArONb2YvdM4VFoiXkZL7tMlMwtIiDbYzcbWPky9TOaYTUA9KhULIGXpzcbYzDB9Vb3Y0Cbk0htL7tm0hcoy0ca9LcBcifBx0b3OpdBa6d25lb3YlftImA2lVc2yXd3klkZL7tJOLCbOlwe0Icoy0cUImBU1sRBWIUeppKmHmhTShcmaVC3Opd24IFMyVco9sb3Y0FMlVcZILdoaVc3OPhWp7tJOqcbLINUEmkzShkoslGbHINUniFmkiGa9scbkmcUiZCB5mcUIXReLpRukidMflhtfnkZXmBJFphTShcM9ZwtILDUE9weE7koLINtOScB5mfoI7koLqhZLIGXPLD2a5wt49wtOqcblzB2yZFMy5b3kidMWPkoslGbHpbTShgWpZcbO1FM4IkoslGTShgWpMfB5jfolvdJnmcbOAd2sldJIptmShkuOvD2aVwe0IF2iiHUisfy9ZCB5LhtLpKXppcJEPwBlzF2a0htOgA0aTA0lNTlSmfo9qcB5zk10phUn7tJOgA0aTA0lNTlSmfo9qcB5zk10INUniFmkiGUILfo9qcB4INT4xhTShgBaSF2AIGXPLb1YyA1YkT05dk3OvD2aVFZffBZO0d2sldl0INUExKXp9tmklfuaZdJELfo9qcB47tm0hcmaVC3Opd24IDbYAd2sldlcidolLhtO0d2sldJLhGXppcJEPwBasFuO5htOgA0aTA0lNTlSmfo9qcB5zk11dkuOvD2aVbULpwuShfB5zcbWPky9TOaYTUA9KBZf0d2sldmHmbaSLfo9qcB5fhTShFMa0fbkVwuOZfBA7tm0hFMa0fbkVwociduYlKXp9tMc1dMY0DB9VwoaVC3k5FuOgcoajFmlXftILCBY0DB9VRtOzfukpdMFptmShko91fun1ftE9wociduYlKXPLcB5jFmlXfy9scbOPd2WINUEJWAaTRTw1YJ1eWLHJKXPLF2ajFMa0b2slGUE9wtfqcbLmKXPLF2ajFMa0b2l2we0Ik2l2kzShkoslGUE9woiiF2IPk3YPCTw1YJFSkuYlC3klfy9qcbLpKXPLDbCINUnzfBkzfuwPDoyzDtImF2iiHjA2kZXLF2ajFMa0b2l2hUXXRer2hTShDBCIhtOiC3Opd24INT0Ik2aVC3k5FuWmhUn7tJOvfbOXfbWINUnvFoaVF3YSb2aVC3k5FuWPkuY0FMlVcZXLcB5jFmlXfy9scbOPd2WSkoslGUXXRtOpfJL7tJOvfbOXfbWINUnJCbYlYjOgcB5jd2OlhtOvfbOXfbWpKXp9cBxzcUnpcJEPkoyjfolvdJE9NUEmcoajFmlXftFpwuShko91fun1ftE9wo9XcB5zF2xgcoajFmlXftiJCbYlYjOgcoajd2OlhtOzfukpdMFpRtOldMYZGbn0b21lfoivctXLD2a5ReESkol2hTShgWpZcbO1FM4Iko91fun1feShgWpMfB5jfolvdJnmcbOgDB5jduaLca9jd250cB50FZILcMlScB5idBASkuciFMliCMxlF1OvTByqcAxvC2yShWp7tMa4fukiC3WPkuciFMliCMxlF1OvTByqcAxvC2yShTShDBCIholzb2cpdoAPkocpdoaVCB1lhULIGXpvCl9zfoyZftIpKXppdMYSfBOlwtOMDBxldMyscTShFMa0fbkVwo9Jb2flfy9jdoaidJIpKXp9tmklfuaZdJnMCBxzcTShgWPLfo9qcB4INUnmcbOAd2sldJIpKXpjdoyzFZnrWl9oaA5earlNTlHhGXpXFM90cBY0cBWIkoYvdM47tMc1dMY0DB9VwufPcbklhtOjd2XSkuOiCMxldMyscUXLcoy0CUXLd3n0hWp7tMfSd2kidtELC29VdjShkuY0dbWINUELC29VdJ0+FuklFoyZcUIJA0aHOAYAwtOjd2XIOlkNTUELfoyJdoaVCB1lwyfwOakywtOLCbOiNUE6d3n0wJL7tJOzfo10RT5JDB5LaMySfBAPwjpvFuWJRtOvFuWSArONKjpWWaknTa9TaywpKXPLF3Osft0+cbilC3a0cUIpKXPLFMazfBx0we0IkuY0dbWsNMclfoYPWBxShtL7tmklfuaZdJELFMazfBx0KXp9tMc1dMY0DB9VwoyLfmfPcbklhtOjd2XSkuOiCMxldMyscUXLd3n0RtOiFmwptmShc2xvCMySwtOjd25VKXPLF3OsftE9wtOjd25VRT5XFMaXCbklhtkTOAxyW1WIkoYvdtnoAL9YwtO0CBkScB5idBAIa0iyALAIko9XftwpKXPLF3Osft0+cbilC3a0cUILCbkZhTShkuklF3aSftE9wtOzfo10RT5McbOjDrySdtIpKXpZcbO1FM4IkuklF3aSfeShgWpMfB5jfolvdJnmcbWPkoYvdtXLfoyJdoaVCB1lRtOvFuWptmShc2xvCMySwtOjd25VKXPLF3OsftE9wtOjd25VRT5XFMaXCbklhtkTOAxyW1WIkoYvdtnoAL9YwtO0CBkScB5idBAIa0iyALAIKM9XftwpKXPLF3Osft0+CMlVcycidualhtw6d3n0wJXLd3n0RynrTzP6AryUWA1gA1OUhTShkuY0dbWsNMa4cBY1foAPhTShkuklF3aSftE9wtOzfo10RT5McbOjDrySdtIpKXpZcbO1FM4IkuklF3aSfeShgWpMfB5jfolvdJn1FoOifoAPkuOiCMxldMyscUXLcoy0CUXLCbkZCbLptmShc2xvCMySwtOjd25VKXPLF3OsftE9wtOjd25VRT5XFMaXCbklhtkaArOnarAICtO0CBkScB5idBaIwyYyatELcoy0CUwpKXPLCbkZCbLINUniFmkiGa9sCbEPk3OZDB0mRtOiFmkiGUL7tJOZcbY1duWINUELF3Osft0+cbilC3a0cUILCbkZCbLpKXpZcbO1FM4IkuklF3aSfeShgWpMfB5jfolvdJnpdmYlFmWPkuOiCMxldMyscUXLC29SdMyscUXLCbkZCbLptmShc2xvCMySwtOjd25VKXPLcoy0CBYvfB50we0IC291dmWPkoYvdo5idBApKXppcJEPkoOifoyjd3aVftEiNUEXwtCMDbYgCbkZCbLPkoYvdo5idBAphUn7tJOLCbOidByZDZE9woyZFMy5htL7tMcvFJEPkoLINUEXKZOpweXLcoy0CBYvfB50KZOphZSpwuShkoOifoysCbkqB10INUEmNZF7tm0hkoYvdo5idBAINUnpdbnSd2OlhtFSkZXLC29SdMyscUL7tJOLCbOidByZDZE9wolsFoxvcoAPkZXmRtOLCbOidByZDZL7tJOzfo10we0IkoYvdM4sNmnZcbniFMAPwLlKA0aUatnkTlONwtO0CBkScB5idBAIhtOjd2xVCB1lhUnBWAxaOaHIhtOLCbOidByZDZLJhTShkoyZFMy5we0ICbkZCblgdByXhtf0FMlskZXLCbkZCbLpKXPLFMazfBx0we0IkuY0dbWsNMa4cBY1foAPkoyZFMy5hTShFMa0fbkVwtOZcbY1duW7tm1lduYlwuShcbipftImOoy0CUnWCbkzcUnyFmkvFJFpKXp9tm0hcmaVC3Opd24IcoaShtO0CBkScB5idBASkoOiforSkoyZFMy5hWp7tMfSd2kidtELC29VdjShkuY0dbWINUELC29VdJ0+FuklFoyZcUIJOraHOaOywrcUT00ICtO0CBkScB5idBaIwyfwOakywtOLCbOiwe0IkoyZFMy5wJL7tJOZcbY1duWINUELF3Osft0+cbilC3a0cUIpKXpZcbO1FM4IkuklF3aSfeShgWpMfB5jfolvdJnLcBxidoXPkuOiCMxldMyscUXLcoy0CUXLCbkZCbLptmShc2xvCMySwtOjd25VKXPLF3OsftE9wtOjd25VRT5XFMaXCbklhtkrOAxyarAIOlkNTUnIkuOiCMxldMyscBEIa0iyALAIkoOiforIwT0IkoyZFMy5wJL7tJOZcbY1duWINUELF3Osft0+cbilC3a0cUIpKXpZcbO1FM4IkuklF3aSfeShgWpMfB5jfolvdJnicucLcBXPkuOiCMxldMyscUXLd3n0RtOiFmwptmShc2xvCMySwtOjd25VKXPLF3OsftE9wtOjd25VRT5XFMaXCbklhtkrOAxyarAIOlkNTUnIkuOiCMxldMyscBEIa0iyALAIko9XftwpKXPLF3Osft0+cbilC3a0cUILCbkZhTShkuklF3aSftE9wtOzfo10RT5McbOjDrySdtIpKXpZcbO1FM4IkuklF3aSfeShgWpMfB5jfolvdJnmcbO1F2aZhtOjd2XSkuOiCMxldMyscULhGXpmdo9JCBXIkoYvdM47tJOzfo10we0IkoYvdM4sNmnZcbniFMAPwlYyTraeatELC29SwrcUT00IkuOiCMxldMyscUwpKXPLF3Osft0+cbilC3a0cUIpKXPLFMazfBx0we0IkuY0dbWsNMclfoYPWBxShtL7tmklfuaZdJELFMazfBx0KXp9tMc1dMY0DB9VwuYldoajftILC29SRtO0CBkScB5idBASko9XftLhGXpmdo9JCBXIkoYvdM47tJOzfo10we0IkoYvdM4sNmnZcbniFMAPwlYyTraeatELC29SwrcUT00IkuOiCMxldMyscUnNALOyAJntBUELd3n0wrOyA0HITrlYUaWIHUwpKXPLF3Osft0+cbilC3a0cUIpKXPLFMazfBx0we0IkuY0dbWsNMclfoYPWBxShtL7tmklfuaZdJELFMazfBx0KXp9tm0hKX==f_C
+<?php
+include_once('PDO_conn.php');
+if (!isset($_SESSION)) {
+	session_start();
+}
+
+
+date_default_timezone_set('Singapore');
+$date = date('Y-m-d H:i:s');
+function random_string($length)
+{
+	$key = '';
+	$keys = array_merge(range(0, 9), range('A', 'Z'));
+
+	for ($i = 0; $i < $length; $i++) {
+		$key .= $keys[array_rand($keys)];
+	}
+
+	return $key;
+}
+//token
+function getToken()
+{
+	$token = sha1(mt_rand());
+	if (!isset($_SESSION['tokens'])) {
+		$_SESSION['tokens'] = array($token => 1);
+	} else {
+		$_SESSION['tokens'][$token] = 1;
+	}
+	return $token;
+}
+function isTokenValid($token)
+{
+	if (!empty($_SESSION['tokens'][$token])) {
+		unset($_SESSION['tokens'][$token]);
+		return true;
+	}
+	return false;
+}
+
+function encrypt_decrypt($action, $string)
+{
+	$output = false;
+
+	$encrypt_method = "AES-256-CBC";
+	$secret_key = 'key';
+	$secret_iv = 'iv';
+
+	// hash
+	$key = hash('sha256', $secret_key);
+
+	// iv - encrypt method AES-256-CBC expects 16 bytes - else you will get a warning
+	$iv = substr(hash('sha256', $secret_iv), 0, 16);
+
+	if ($action == 'encrypt') {
+		$output = openssl_encrypt($string, $encrypt_method, $key, 0, $iv);
+		$output = base64_encode($output);
+	} else if ($action == 'decrypt') {
+		$output = openssl_decrypt(base64_decode($string), $encrypt_method, $key, 0, $iv);
+	}
+
+	return $output;
+}
+
+function get_include_contents($filename, $variablesToMakeLocal)
+{
+	extract($variablesToMakeLocal);
+	if (is_file($filename)) {
+		ob_start();
+		include $filename;
+		return ob_get_clean();
+	}
+	return false;
+}
+
+$token = getToken();
+
+class DB_FUNCTIONS
+{
+	protected $conn;
+	function where($col, $tablename, $data, $opt)
+	{
+		global $conn;
+		$stmt = $conn->prepare("SELECT $col FROM $tablename WHERE $data= :opt");
+		$stmt->bindValue(":opt", $opt, PDO::PARAM_STR);
+		$stmt->execute();
+		$result = $stmt->fetchAll();
+		return $result;
+	}
+	function advwhere($col, $tablename, $opt, $arr)
+	{
+		global $conn;
+		$stmt = $conn->prepare("SELECT $col FROM $tablename WHERE $opt");
+		$stmt->execute($arr);
+		$result = $stmt->fetchAll();
+		return $result;
+	}
+	function get($col, $tablename, $opt)
+	{
+		global $conn;
+		$stmt = $conn->prepare("SELECT $col FROM $tablename WHERE :opt");
+		$stmt->bindValue(":opt", $opt, PDO::PARAM_STR);
+		$stmt->execute();
+		$result = $stmt->fetchAll();
+		return $result;
+	}
+	function update($tablename, $data, $array)
+	{
+		global $conn;
+		$stmt = $conn->prepare("UPDATE `$tablename` SET $data");
+		$array = array_map('trim', $array);
+		$result = $stmt->execute($array);
+		return $result;
+	}
+	function insert($tablename, $colname, $array)
+	{
+		global $conn;
+		$datacount = count($colname);
+		if ($datacount != 0 && is_array($colname)) {
+			$datamark = array();
+			for ($i = 0; $i < $datacount; $i++) {
+				$datamark[] = '?';
+			}
+			$colname = implode(',', $colname);
+			$datamark = implode(',', $datamark);
+			$stmt = $conn->prepare("INSERT INTO $tablename ($colname) VALUES ($datamark)");
+			$array = array_map('trim', $array);
+			$result = $stmt->execute($array);
+			return $result;
+		} else {
+			exit('Data Parse Error');
+		}
+	}
+
+	function del($tablename, $data, $array)
+	{
+		global $conn;
+		$stmt = $conn->prepare("DELETE FROM `$tablename` WHERE $data = $array");
+		$result = $stmt->execute();
+		return $result;
+	}
+
+	function delall($tablename, $data, $array)
+	{
+		global $conn;
+		$stmt = $conn->prepare("DELETE FROM `$tablename` WHERE $data != $array");
+		$result = $stmt->execute();
+		return $result;
+	}
+
+
+	function advdel($tablename, $opt, $arr)
+	{
+		global $conn;
+		$stmt = $conn->prepare("DELETE FROM `$tablename` WHERE $opt");
+		$stmt->execute($arr);
+		$result = $stmt->fetchAll();
+		return $result;
+	}
+	function getuser($col, $tablename)
+	{
+		global $conn;
+		$stmt = $conn->prepare("SELECT $col FROM $tablename");
+		//$stmt->bindValue(":opt", $opt, PDO::PARAM_STR);
+		$stmt->execute();
+		$result = $stmt->fetchAll();
+		return $result;
+	}
+
+	function select($col, $tablename, $opt)
+	{
+		global $conn;
+		$stmt = $conn->prepare("SELECT $col FROM $tablename ORDER BY $opt DESC LIMIT 1");
+		$stmt->execute();
+		$result = $stmt->fetchAll();
+		return $result;
+	}
+}

@@ -10,9 +10,9 @@ if ($server == 1) {
     define('username', 'caromaca_shop');
     define('pass', ';irmNFv*C~^c');
 } else if ($server == 3) {
-    define('host', 'mysql:host=localhost;port=3306;dbname=caromaca_shop;charset=utf8;');
-    define('username', 'caromaca_shop');
-    define('pass', ';irmNFv*C~^c');
+    define('host', 'mysql:host=localhost;port=3306;dbname=caromaca_shop_live;charset=utf8;');
+    define('username', 'caromaca_shop_live');
+    define('pass', '7$..njjkG_il');
 } else if ($server == 4) {
     define('host', 'mysql:host=localhost;port=3306;dbname=caromaca_shop;charset=utf8;');
     define('username', 'root');

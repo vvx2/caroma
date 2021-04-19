@@ -2086,7 +2086,7 @@ body.open-mobile-search .header-area.layout-02{
     right: -44px;
 }
 .biolife-carousel.nav-center-02 .slick-arrow{
-    font-size: 30px
+    font-size: 40px
 }
 .biolife-carousel.nav-center-02 .slick-arrow.prev{
     left: -9px;
@@ -6170,7 +6170,7 @@ body.open-overlay #overlay{
     font-style: italic;
 }
 .biolife-carousel .slick-dots{
-    padding: 0;
+    padding: 20px 0;
     display: block;
     font-size: 0;
     line-height: 0;
@@ -11433,6 +11433,10 @@ body.open-quickview-block .biolife-quickview-block{
     }
     .contain-product.layout-default .info .product-title a{
         color: #444444;
+        width: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
     .contain-product.layout-default{
         position: relative;
@@ -14682,3 +14686,8 @@ ol.p {list-style-type: upper-latin;}
 ol.q {list-style-type: upper-roman;}
 ol.r {list-style-type: none;}
 ol.s {list-style-type: inherit;}
+
+
+@media only screen and (min-width: 992px) {
+    .slick-dots{ display : none !important; }
+}
