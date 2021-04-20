@@ -37,6 +37,7 @@ $lang['lang-matcha_series'] = 'Matcha Seri';
 $lang['lang-coconut_series'] = 'Kelapa Seri';
 $lang['lang-soy_series'] = 'Soy Seri';
 $lang['lang-coffee_series'] = 'Kopi Seri';
+$lang['lang-coffee_tea'] = 'Teh Seri';
 // ---------------------------
 
 

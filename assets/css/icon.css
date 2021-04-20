@@ -1,45 +1,38 @@
-/**
- * @file icon.css
- */
-
-
- @font-face {
+@font-face {
   font-family: 'icomoon';
-  src:  url('icomoon.eot?xxerwu');
-  src:  url('icomoon.eot?xxerwu#iefix') format('embedded-opentype'),
-    url('icomoon.ttf?xxerwu') format('truetype'),
-    url('icomoon.woff?xxerwu') format('woff'),
-    url('icomoon.svg?xxerwu#icomoon') format('svg');
+  src:  url('../fonts/icomoon.eot?dyq8a9');
+  src:  url('../fonts/icomoon.eot?dyq8a9#iefix') format('embedded-opentype'),
+    url('../fonts/icomoon.ttf?dyq8a9') format('truetype'),
+    url('../fonts/icomoon.woff?dyq8a9') format('woff'),
+    url('../fonts/icomoon.svg?dyq8a9#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
 }
 
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
 
-.icon {
-    font-family: 'icomoon' !important;
-    speak: none;
-    font-style: normal;
-    font-weight: normal;
-    font-variant: normal;
-    text-transform: none;
-    line-height: 1;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-
-.icon-chocolate:before {
-  content: "\e941";
-}
-.icon-coffee:before {
-  content: "\e947";
+.icon-space:before {
+  content: "\20";
 }
 .icon-null:before {
   content: "\e902";
 }
 .icon-null1:before {
   content: "\e903";
-}
-.icon-space:before {
-  content: "\20";
 }
 .icon-arrow-right:before {
   content: "\e904";
@@ -119,12 +112,6 @@
 .icon-fast-food:before {
   content: "\e91d";
 }
-.icon-soy:before {
-  content: "\e934";
-}
-.icon-coconut:before {
-  content: "\e933";
-}
 .icon-honey:before {
   content: "\e91e";
 }
@@ -188,6 +175,12 @@
 .icon-lemon:before {
   content: "\e932";
 }
+.icon-coconut:before {
+  content: "\e933";
+}
+.icon-soy:before {
+  content: "\e934";
+}
 .icon-orange:before {
   content: "\e935";
 }
@@ -209,6 +202,12 @@
 .icon-ginger:before {
   content: "\e93b";
 }
-
-
-
+.icon-chocolate:before {
+  content: "\e941";
+}
+.icon-coffee:before {
+  content: "\e947";
+}
+.icon-tea:before {
+  content: "\e948";
+}

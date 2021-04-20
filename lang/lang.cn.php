@@ -35,6 +35,7 @@ $lang['lang-matcha_series'] = '抹茶系列';
 $lang['lang-coconut_series'] = '糖品系列';
 $lang['lang-soy_series'] = '豆类系列';
 $lang['lang-coffee_series'] = '咖啡系列';
+$lang['lang-coffee_tea'] = '茶叶系列';
 //---------------------------
 
 //---------------------------

@@ -434,6 +434,10 @@ select option{
 .icon-ginger:before {
   content: "\e93b";
 }
+.icon-tea:before {
+    content: "\e948";
+  }
+  
 
 /******************************************
 * Animation Effects                       *
@@ -5083,13 +5087,13 @@ body.open-overlay #overlay{
     color: #ffbc53;
 }
 .background-top-banner-for-shopping{
-    background: url(../images/top_banner_shopping_cart.png);
+    background: url(../images/warning.png);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
 }
 .top-banner{
-    color: #ffffff;
+    color: black;
     text-align: center;
     margin-top: -9px;
     padding-top: 57px;
@@ -5098,7 +5102,8 @@ body.open-overlay #overlay{
 }
 .top-banner .title{
     font-size: 18px;
-    color: #ffffff;
+    color : black;
+    font-weight : bold ;
     font-weight: 700;
     display: block;
     margin: 0;
@@ -5107,6 +5112,8 @@ body.open-overlay #overlay{
     font-size: 15px;
     display: block;
     margin: 7px 0 0;
+    color : black;
+    font-weight : bold ;
 }
 .top-banner ul{
     padding: 0;
@@ -5137,8 +5144,8 @@ body.open-overlay #overlay{
     line-height: 0;
 }
 .top-banner .btns .btn{
-    background-color: #ffffff;
-    color: #444444;
+    background-color: #005f2a;
+    color: white;
     display: inline-block;
     font-size: 14px;
     font-weight: 700;
@@ -12495,6 +12502,9 @@ body.open-quickview-block .biolife-quickview-block{
     .top-banner{
         padding: 57px 10px 35px;
     }
+    .min-height-446px{
+        min-height : 446px !important;
+    }
     .shopping-cart-container th{
         display: none;
     }
@@ -13760,7 +13770,7 @@ body.open-quickview-block .biolife-quickview-block{
     }
 
     .tab-head__icon-top-layout.type-02 a{
-        font-size: 16px;
+        font-size: 13px;
         text-transform: uppercase;
         font-weight: 700;
         padding-bottom: 6px;

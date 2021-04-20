@@ -35,6 +35,7 @@ $lang['lang-matcha_series'] = 'Matcha Series';
 $lang['lang-coconut_series'] = 'Coconut Series';
 $lang['lang-soy_series'] = 'Soy Series';
 $lang['lang-coffee_series'] = 'Coffee Series';
+$lang['lang-coffee_tea'] = 'Tea Series';
 //---------------------------
 
 //---------------------------

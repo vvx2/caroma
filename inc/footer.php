@@ -62,6 +62,7 @@
                                          <li><a href="shop.php?category=8"><?php echo $lang['lang-coconut_series']; ?></a></li>
                                          <li><a href="shop.php?category=7"><?php echo $lang['lang-soy_series']; ?></a></li>
                                          <li><a href="shop.php?category=9"><?php echo $lang['lang-coffee_series']; ?></a></li>
+                                         <li><a href="shop.php?category=10"><?php echo $lang['lang-coffee_tea']; ?></a></li>
                                      </ul>
                                  </div>
                              </section>

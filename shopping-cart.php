@@ -84,7 +84,7 @@
                 } else {
                 ?>
                     <!--Top banner-->
-                    <div class="top-banner background-top-banner-for-shopping min-height-346px">
+                    <div class="top-banner background-top-banner-for-shopping min-height-346px min-height-446px">
                         <br><br><br>
                         <h3 class="title"><?php echo $lang['lang-warning']; ?></h3>
                         <p class="subtitle"><?php echo $lang['lang-a_member_account']; ?></p>
