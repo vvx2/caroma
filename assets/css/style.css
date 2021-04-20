@@ -2086,7 +2086,7 @@ body.open-mobile-search .header-area.layout-02{
     right: -44px;
 }
 .biolife-carousel.nav-center-02 .slick-arrow{
-    font-size: 30px
+    font-size: 40px
 }
 .biolife-carousel.nav-center-02 .slick-arrow.prev{
     left: -9px;
@@ -2096,6 +2096,9 @@ body.open-mobile-search .header-area.layout-02{
     -ms-transform: translateX(10px);
     -o-transform: translateX(10px);
     transform: translateX(10px);
+    visibility: initial;
+    opacity: 1;
+    transform: translateY(73px);
 }
 .biolife-carousel.nav-center-02 .slick-arrow.next{
     right: -9px;
@@ -2105,6 +2108,9 @@ body.open-mobile-search .header-area.layout-02{
     -ms-transform: translateX(-10px);
     -o-transform: translateX(-10px);
     transform: translateX(-10px);
+    visibility: initial;
+    opacity: 1;
+    transform: translateY(73px);
 }
 .biolife-carousel.nav-center-02 .slick-arrow::before{
     content: "\f104";
@@ -6164,7 +6170,7 @@ body.open-overlay #overlay{
     font-style: italic;
 }
 .biolife-carousel .slick-dots{
-    padding: 0;
+    padding: 20px 0;
     display: block;
     font-size: 0;
     line-height: 0;
@@ -8493,38 +8499,40 @@ li.slick-current .slider-opt04__layout01 .buttons .btn{
     margin-top: -17px;
     right: 0;
     left: auto;
-    -webkit-transform: translateX(-20px);
-    -moz-transform: translateX(-20px);
-    -ms-transform: translateX(-20px);
-    -o-transform: translateX(-20px);
-    transform: translateX(-20px);
-    opacity: 0;
+    -webkit-transform: translateX(40px);
+    -moz-transform: translateX(40px);
+    -ms-transform: translateX(40px);
+    -o-transform: translateX(40px);
+    transform: translateX(40px);
     filter: alpha(opacity=0);
     visibility: hidden;
     -webkit-transition: all 350ms ease;
     -moz-transition: all 350ms ease;
     -o-transition: all 350ms ease;
     transition: all 350ms ease;
+    opacity: 1;
+    filter: alpha(opacity=100);
+    visibility: visible;
 }
 .biolife-carousel.nav-center-03 .slick-arrow.prev{
     right: auto;
     left: 0;
-    -webkit-transform: translateX(20px);
-    -moz-transform: translateX(20px);
-    -ms-transform: translateX(20px);
-    -o-transform: translateX(20px);
-    transform: translateX(20px);
+    -webkit-transform: translateX(40px);
+    -moz-transform: translateX(40px);
+    -ms-transform: translateX(40px);
+    -o-transform: translateX(40px);
+    transform: translateX(-40px);
 }
 .biolife-carousel.nav-center-03:hover .slick-arrow.prev,
 .biolife-carousel.nav-center-03:hover .slick-arrow{
     opacity: 1;
     filter: alpha(opacity=100);
     visibility: visible;
-    -webkit-transform: translateX(0);
-    -moz-transform: translateX(0);
-    -ms-transform: translateX(0);
-    -o-transform: translateX(0);
-    transform: translateX(0);
+    -webkit-transform: translateX(40);
+    -moz-transform: translateX(40);
+    -ms-transform: translateX(40);
+    -o-transform: translateX(40);
+    transform: translateX(-40);
 }
 .biolife-carousel.nav-top-right-02{
     position: relative;
@@ -11425,6 +11433,10 @@ body.open-quickview-block .biolife-quickview-block{
     }
     .contain-product.layout-default .info .product-title a{
         color: #444444;
+        width: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
     .contain-product.layout-default{
         position: relative;
@@ -14674,3 +14686,8 @@ ol.p {list-style-type: upper-latin;}
 ol.q {list-style-type: upper-roman;}
 ol.r {list-style-type: none;}
 ol.s {list-style-type: inherit;}
+
+
+@media only screen and (min-width: 992px) {
+    .slick-dots{ display : none !important; }
+}

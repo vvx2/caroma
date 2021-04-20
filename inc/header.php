@@ -8,8 +8,8 @@
     </div>
     <div class="top-bar right">
         <ul class="social-list">
-            <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-            <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+            <li><a href="https://www.instagram.com/drinkcaroma/"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+            <li><a href="https://www.facebook.com/caromamalaysia"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
         </ul>
         <ul class="horizontal-menu">
             <li class="horz-menu-item lang">
