@@ -305,7 +305,7 @@ else {
                                                                             <div class="radio-inline pl-0">
                                                                                 <div class="radio radio-info">
                                                                                     <input checked type="radio" name="payment_type" id="online_pay" value="1">
-                                                                                    <label for="online_pay"><?php echo $lang['lang-online_paymentl']; ?></label>
+                                                                                    <label for="online_pay"><?php echo $lang['lang-online_payment']; ?></label>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="radio-inline">
