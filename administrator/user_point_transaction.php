@@ -114,8 +114,7 @@ $user_point = $db->advwhere($col, $tb, $opt, $arr);
 
                                                 <?php
                                                 echo $desc;
-
-                                                if (strpos($desc, 'Sale.') !== false) {
+                                                if ((strpos($desc, 'Sale.') !== false) || (strpos($desc, 'Earn.') !== false)) {
                                                     $gateway_order_id = substr($desc, strpos($desc, "Id:") + 4);
                                                     $btn_view_point = '&nbsp <a data-remote="ajax/point_detail.php?p=' . $gateway_order_id . '" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal" style="color:white;"><strong>View Point Details</strong></a>';
                                                     echo $btn_view_point;
