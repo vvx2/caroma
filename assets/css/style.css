@@ -5317,6 +5317,9 @@ body.open-overlay #overlay{
     display: inline-block;
     float: right;
 }
+.total-red{
+    color : red !important ;
+}
 .shpcart-subtotal-block .tax-fee{
     border-bottom: 1px solid #e6e6e6;
     margin-top: 29px;

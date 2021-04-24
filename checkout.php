@@ -214,18 +214,20 @@ else {
                 <!-- Main content -->
                 <div id="main-content" class="main-content">
                     <div class="container sm-margin-top-37px">
-                        <div class="row mobile-revers">
-
+                        <div class="row">
+                            <div class="mobile-revers">
                             <!--checkout progress box-->
                             <form role="form" id="form_checkout" action="api/checkout.php?type=checkout&tb=user" method="post" enctype="multipart/form-data">
                                 <input type="hidden" name="token" id="form_token" value="<?php echo $token; ?>" />
+                                <div class="row mobile-revers">
                                 <div class="col-lg-7 col-md-7 col-sm-6 col-xs-12">
                                     <div class="checkout-progress-wrap">
                                         <ul class="steps">
                                             <li class="step 1st">
                                                 <div class="checkout-act active">
-                                                    <h3 class="title-box"><span class="number">1</span><?php echo $lang['lang-shipping_detail']; ?></h3>
+                                                    
                                                     <div class="box-content">
+                                                    <h3 class="title-box"><!--- <span class="number">*</span> ---><?php echo $lang['lang-shipping_detail']; ?></h3>
                                                         <div class="login-on-checkout">
 
                                                             <p class="form-row">
@@ -443,27 +445,6 @@ else {
                                     </div>
                                 </div>
 
-                                <!-- Modal -->
-                                <div class="modal fade" id="exampleModalCenter" style="z-index:2000" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h3><?php echo $lang['lang-order_confirmation']; ?></h3>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div><?php echo $lang['lang-kindly_make_sure_your_shipping']; ?><br>
-                                                    <span style="font-weight : bold ; color:red;"><?php echo $lang['lang-do_you_want_to_continue']; ?></span>
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer" style="text-align : center ;">
-                                                <button type="button" class="btn custombtn" data-dismiss="modal"><?php echo $lang['lang-close']; ?></button>
-                                                <button type="submit" name="btn-sbmt" class="btn custombtn btn-submit"><?php echo $lang['lang-yes']; ?></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
                                 <!--Order Summary-->
                                 <div class="col-lg-5 col-md-5 col-sm-6 col-xs-12 sm-padding-top-48px sm-margin-bottom-0 xs-margin-bottom-15px">
                                     <div class="order-summary sm-margin-bottom-80px">
@@ -628,8 +609,8 @@ else {
 
                                                 <li>
                                                     <div class="subtotal-line">
-                                                        <b class="stt-name"><?php echo $lang['lang-total']; ?>:</b>
-                                                        <span class="stt-price" id="get_totalpay">RM <?php echo number_format($total_pay, 2, '.', ''); ?></span>
+                                                        <b class="stt-name total-red"><?php echo $lang['lang-total']; ?>:</b>
+                                                        <span class="stt-price total-red" id="get_totalpay">RM <?php echo number_format($total_pay, 2, '.', ''); ?></span>
                                                     </div>
                                                 </li>
                                             </ul>
@@ -643,7 +624,9 @@ else {
                                         </div>
                                     </div>
                                 </div>
+                                </div>
                             </form>
+                            </div>
 
 
                         </div>
@@ -655,6 +638,27 @@ else {
             require_once('inc/footer.php');
             require_once('inc/mobile_footer.php');
             ?>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModalCenter" style="z-index:2000" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3><?php echo $lang['lang-order_confirmation']; ?></h3>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div><?php echo $lang['lang-kindly_make_sure_your_shipping']; ?><br>
+                                <span style="font-weight : bold ; color:red;"><?php echo $lang['lang-do_you_want_to_continue']; ?></span>
+                            </div>
+                        </div>
+                        <div class="modal-footer" style="text-align : center ;">
+                            <button type="submit" name="btn-sbmt" class="btn custombtn btn-submit"><?php echo $lang['lang-yes']; ?></button>
+                            <button type="button" class="btn custombtn" data-dismiss="modal"><?php echo $lang['lang-close']; ?></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <!-- Scroll Top Button -->
             <a class="btn-scroll-top"><i class="biolife-icon icon-left-arrow"></i></a>

@@ -153,7 +153,7 @@ $lang['lang-zip_code'] = 'Poskod';
 $lang['lang-delivery_type'] = 'Jenis Penghantaran';
 $lang['lang-delivery'] = 'Penghantaran';
 $lang['lang-self_collect'] = 'Mengumpul Diri';
-$lang['lang-Payment_type'] = 'Jenis Pembayaran';
+$lang['lang-payment_type'] = 'Jenis Pembayaran';
 $lang['lang-online_payment'] = 'Pembayaran Dalam Talian';
 $lang['lang-cash'] = 'Tunai';
 $lang['lang-use_point'] = 'point';
@@ -161,7 +161,7 @@ $lang['lang-no'] = 'Tidak';
 $lang['lang-your_point'] = 'point Anda';
 $lang['lang-point_can_be_discout'] = 'Point Dapat Diskaun';
 $lang['lang-use_point'] = 'Gunakan Point';
-$lang['lang-terus_to_purchase'] = 'Terus Membeli';
+$lang['lang-continue_to_purchase'] = 'Terus Membeli';
 $lang['lang-cancel'] = 'Batal';
 $lang['lang-back'] = 'Kembali';
 $lang['lang-order_confirmation'] = 'Pengesahan Pesanan';
@@ -174,8 +174,9 @@ $lang['lang-gst_tax'] = 'Cukai GST';
 $lang['lang-coupon_code'] = 'Kod Kupon';
 $lang['lang-coin_earn'] = 'Coin Earn';
 $lang['lang-point'] = 'point';
-$lang['lang-delivery'] = 'Penghantaran';
+$lang['lang-shipping'] = 'Penghantaran';
 $lang['lang-do_you_want_to_continue'] = 'ADAKAH ANDA INGIN MENERUSKAN PESANAN ANDA?';
+$lang['lang-items'] = 'items';
 // --------------------------
 
 // ---------------------------
