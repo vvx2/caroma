@@ -1031,7 +1031,7 @@ if (!empty($postedToken)) {
             $current_point = $user_point['point'];
             $order_point = $order['reward_point'];
             $gateway_order_id = $order["gateway_order_id"]; // order to record in description
-            $description = "Sale. Order Id: " . $gateway_order_id;
+            $description = "Caroma Coin Earn. Order Id: " . $gateway_order_id;
             $added_point = $current_point + $order_point;
 
             $tablename = "user_point";
