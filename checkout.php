@@ -625,6 +625,27 @@ else {
                                     </div>
                                 </div>
                                 </div>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModalCenter" style="z-index:2000" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h3><?php echo $lang['lang-order_confirmation']; ?></h3>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div><?php echo $lang['lang-kindly_make_sure_your_shipping']; ?><br>
+                                                    <span style="font-weight : bold ; color:red;"><?php echo $lang['lang-do_you_want_to_continue']; ?></span>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer" style="text-align : center ;">
+                                                <button type="submit" name="btn-sbmt" class="btn custombtn btn-submit"><?php echo $lang['lang-yes']; ?></button>
+                                                <button type="button" class="btn custombtn" data-dismiss="modal"><?php echo $lang['lang-close']; ?></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </form>
                             </div>
 
@@ -638,27 +659,6 @@ else {
             require_once('inc/footer.php');
             require_once('inc/mobile_footer.php');
             ?>
-
-            <!-- Modal -->
-            <div class="modal fade" id="exampleModalCenter" style="z-index:2000" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h3><?php echo $lang['lang-order_confirmation']; ?></h3>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <div><?php echo $lang['lang-kindly_make_sure_your_shipping']; ?><br>
-                                <span style="font-weight : bold ; color:red;"><?php echo $lang['lang-do_you_want_to_continue']; ?></span>
-                            </div>
-                        </div>
-                        <div class="modal-footer" style="text-align : center ;">
-                            <button type="submit" name="btn-sbmt" class="btn custombtn btn-submit"><?php echo $lang['lang-yes']; ?></button>
-                            <button type="button" class="btn custombtn" data-dismiss="modal"><?php echo $lang['lang-close']; ?></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
             <!-- Scroll Top Button -->
             <a class="btn-scroll-top"><i class="biolife-icon icon-left-arrow"></i></a>
