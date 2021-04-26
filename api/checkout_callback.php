@@ -68,6 +68,11 @@ if (isset($_GET['status_id']) && isset($_GET['order_id']) && isset($_GET['msg'])
 
             // normally is variable set at routing.php, this is api, so have to set again
             $user_id = $order[0]['users_id'];
+            $order_status = $order[0]['status'];
+            if ($order_status == 2) {
+                echo "OK";
+                exit();
+            }
 
             $col = "*";
             $tb = "users";

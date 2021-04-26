@@ -558,6 +558,13 @@ if (isset($_REQUEST['type'])) {
                     $email = $order[0]['customer_email'];
                     $coupon_code = $order[0]['coupon_code'];
                     $gateway_order_id = $order[0]['gateway_order_id'];
+                    $order_status = $order[0]['status'];
+
+                    if ($order_status == 2) {
+                        echo "<script>alert(\" Purchase SuccessFul. Your order number: $gateway_order_id\");
+                                 window.location.href='../my-account/index.php';</script>";
+                        exit();
+                    }
 
                     $tablename = "orders";
                     $data = "status = ?, date_modified = ? WHERE id = ?";
