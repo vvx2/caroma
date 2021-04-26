@@ -305,7 +305,7 @@ if (isset($_GET['status_id']) && isset($_GET['order_id']) && isset($_GET['msg'])
                 // if something done, run this
                 echo "OK";
             } else { //end result
-                echo "FAIL";
+                echo "OK";
             }
 
             //--------------------------------------------------
@@ -314,12 +314,12 @@ if (isset($_GET['status_id']) && isset($_GET['order_id']) && isset($_GET['msg'])
 
             exit();
         } else {
-            echo 'Payment failed with message: ' . urldecode($_GET['msg']);
+            echo 'OK';
         }
     } else
-        echo 'Hashed value is not correct. Please Try Again.';
+        echo 'OK';
 }
 # this part is to show the form where customer can key in their information
 else {
-    echo "ERROR";
+    echo "OK";
 }
