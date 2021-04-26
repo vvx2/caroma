@@ -15,11 +15,6 @@ $time = date('Y-m-d H:i:s');
  */
 // $actual_link = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 
-// print_r($_SERVER);
-// print_r($_POST);
-// print_r($_GET);
-// print_r($_FILES);
-
 $string_server = implode("|", $_SERVER);
 $string_post = implode("|", $_POST);
 $string_get = implode("|", $_GET);
@@ -43,21 +38,21 @@ if ($server == 3) { //3=live
 }
 
 # this part is to process the response received from senangPay, make sure we receive all required info
-if (isset($_GET['status_id']) && isset($_GET['order_id']) && isset($_GET['msg']) && isset($_GET['transaction_id']) && isset($_GET['hash'])) {
+if (isset($_POST['status_id']) && isset($_POST['order_id']) && isset($_POST['msg']) && isset($_POST['transaction_id']) && isset($_POST['hash'])) {
     # verify that the data was not tempered, verify the hash
-    $hashed_string = hash_hmac('sha256', $secretkey . urldecode($_GET['status_id']) . urldecode($_GET['order_id']) . urldecode($_GET['transaction_id']) . urldecode($_GET['msg']), $secretkey);
+    $hashed_string = hash_hmac('sha256', $secretkey . urldecode($_POST['status_id']) . urldecode($_POST['order_id']) . urldecode($_POST['transaction_id']) . urldecode($_POST['msg']), $secretkey);
 
     # if hash is the same then we know the data is valid
-    if ($hashed_string == urldecode($_GET['hash'])) {
+    if ($hashed_string == urldecode($_POST['hash'])) {
         # this is a simple result page showing either the payment was successful or failed. In real life you will need to process the order made by the customer
-        if (urldecode($_GET['status_id']) == '1') {
+        if (urldecode($_POST['status_id']) == '1') {
 
             //--------------------------------------------------
             //                PAYMENT SUCCESS 
             //--------------------------------------------------
 
 
-            $gateway_order_id = $_GET['order_id'];
+            $gateway_order_id = $_POST['order_id'];
 
             //get order id
             $col = "*";
