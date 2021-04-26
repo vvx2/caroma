@@ -1,7 +1,9 @@
 <?php
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\SMTP;
+
 require_once('../administrator/connection/PDO_db_function.php');
 $db = new DB_FUNCTIONS();
 
@@ -11,6 +13,22 @@ $time = date('Y-m-d H:i:s');
  * It is so simple that you can do it in a single file
  * Make sure that in senangPay Dashboard you have key in the return URL referring to this file for example http://myserver.com/senangpay_sample.php
  */
+// $actual_link = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+
+// print_r($_SERVER);
+// print_r($_POST);
+// print_r($_GET);
+// print_r($_FILES);
+
+$string_server = implode("|", $_SERVER);
+$string_post = implode("|", $_POST);
+$string_get = implode("|", $_GET);
+
+$table = "callback_log";
+$colname = array("string_server", "string_post", "string_get", "date_created");
+$array = array($string_server, $string_post, $string_get, $time);
+$result_callback = $db->insert($table, $colname, $array);
+
 
 if ($server == 3) { //3=live
     $senangpay_path = "https://app.senangpay.my/payment/";
