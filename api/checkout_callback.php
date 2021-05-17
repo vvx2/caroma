@@ -1,7 +1,9 @@
 <?php
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\SMTP;
+
 require_once('../administrator/connection/PDO_db_function.php');
 $db = new DB_FUNCTIONS();
 
@@ -11,6 +13,17 @@ $time = date('Y-m-d H:i:s');
  * It is so simple that you can do it in a single file
  * Make sure that in senangPay Dashboard you have key in the return URL referring to this file for example http://myserver.com/senangpay_sample.php
  */
+// $actual_link = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+
+$string_server = implode("|", $_SERVER);
+$string_post = implode("|", $_POST);
+$string_get = implode("|", $_GET);
+
+$table = "callback_log";
+$colname = array("string_server", "string_post", "string_get", "date_created");
+$array = array($string_server, $string_post, $string_get, $time);
+$result_callback = $db->insert($table, $colname, $array);
+
 
 if ($server == 3) { //3=live
     $senangpay_path = "https://app.senangpay.my/payment/";
@@ -25,21 +38,21 @@ if ($server == 3) { //3=live
 }
 
 # this part is to process the response received from senangPay, make sure we receive all required info
-if (isset($_GET['status_id']) && isset($_GET['order_id']) && isset($_GET['msg']) && isset($_GET['transaction_id']) && isset($_GET['hash'])) {
+if (isset($_POST['status_id']) && isset($_POST['order_id']) && isset($_POST['msg']) && isset($_POST['transaction_id']) && isset($_POST['hash'])) {
     # verify that the data was not tempered, verify the hash
-    $hashed_string = hash_hmac('sha256', $secretkey . urldecode($_GET['status_id']) . urldecode($_GET['order_id']) . urldecode($_GET['transaction_id']) . urldecode($_GET['msg']), $secretkey);
+    $hashed_string = hash_hmac('sha256', $secretkey . urldecode($_POST['status_id']) . urldecode($_POST['order_id']) . urldecode($_POST['transaction_id']) . urldecode($_POST['msg']), $secretkey);
 
     # if hash is the same then we know the data is valid
-    if ($hashed_string == urldecode($_GET['hash'])) {
+    if ($hashed_string == urldecode($_POST['hash'])) {
         # this is a simple result page showing either the payment was successful or failed. In real life you will need to process the order made by the customer
-        if (urldecode($_GET['status_id']) == '1') {
+        if (urldecode($_POST['status_id']) == '1') {
 
             //--------------------------------------------------
             //                PAYMENT SUCCESS 
             //--------------------------------------------------
 
 
-            $gateway_order_id = $_GET['order_id'];
+            $gateway_order_id = $_POST['order_id'];
 
             //get order id
             $col = "*";
@@ -50,6 +63,11 @@ if (isset($_GET['status_id']) && isset($_GET['order_id']) && isset($_GET['msg'])
 
             // normally is variable set at routing.php, this is api, so have to set again
             $user_id = $order[0]['users_id'];
+            $order_status = $order[0]['status'];
+            if ($order_status == 2) {
+                echo "OK";
+                exit();
+            }
 
             $col = "*";
             $tb = "users";
@@ -287,7 +305,7 @@ if (isset($_GET['status_id']) && isset($_GET['order_id']) && isset($_GET['msg'])
                 // if something done, run this
                 echo "OK";
             } else { //end result
-                echo "FAIL";
+                echo "OK";
             }
 
             //--------------------------------------------------
@@ -296,12 +314,12 @@ if (isset($_GET['status_id']) && isset($_GET['order_id']) && isset($_GET['msg'])
 
             exit();
         } else {
-            echo 'Payment failed with message: ' . urldecode($_GET['msg']);
+            echo 'OK';
         }
     } else
-        echo 'Hashed value is not correct. Please Try Again.';
+        echo 'OK';
 }
 # this part is to show the form where customer can key in their information
 else {
-    echo "ERROR";
+    echo "OK";
 }
