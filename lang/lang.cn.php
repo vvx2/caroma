@@ -174,6 +174,7 @@ $lang['lang-coin_earn'] = '获得货币';
 $lang['lang-point'] = '点数';
 $lang['lang-shipping'] = '邮寄费';
 $lang['lang-do_you_want_to_continue'] = '您确定要继续结账吗？';
+$lang['lang-tooltip'] = '添加购物商品';
 //---------------------------
 
 //---------------------------

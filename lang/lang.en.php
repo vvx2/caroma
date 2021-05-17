@@ -71,7 +71,7 @@ $lang['lang-healthy_sub'] = 'Our ingredient is ginger, which is contains high le
 //---------------------------
 //      shop.php
 //---------------------------
-$lang['lang-our_store'] = 'Out Store';
+$lang['lang-our_store'] = 'Our Store';
 $lang['lang-category'] = 'Categories';
 $lang['lang-side_bar']  = 'Side Bar';
 $lang['lang-new_arrival'] = 'New Arrival';
@@ -174,6 +174,7 @@ $lang['lang-coin_earn'] = 'Coin Earn';
 $lang['lang-point'] = 'Point';
 $lang['lang-shipping'] = 'Shipping';
 $lang['lang-do_you_want_to_continue'] = 'DO YOU WANT TO CONTINUE YOUR ORDER?';
+$lang['lang-tooltip'] = 'EDIT YOUR PRODUCT HERE';
 //---------------------------
 
 //---------------------------

@@ -1,6 +1,6 @@
 <?php
 
-$server = 3; //1= local, 2 = staging, 3 = live 4 = Nicky Local;
+$server = 2; //1= local, 2 = staging, 3 = live 4 = Nicky Local;
 if ($server == 1) {
     define('host', 'mysql:host=localhost;port=3306;dbname=caromanew;charset=utf8;');
     define('username', 'root');
@@ -30,10 +30,10 @@ if ($server == 1) { //1= local, 2 = staging, 3 = live;
 //         email setting
 //-------------------------------------
 
-$admin_email = "sales@caroma.com.my";
+$admin_email = "sales@caroma.com.my"; // email receive notification
 $email_host = "mail.caroma.com.my";
-$email_username = "no-reply@caroma.com.my";
-$email_password = "mlH~E+dnBD{7";
+$email_username = "no-reply@caroma.com.my"; //email send mail
+$email_password = "Caroma@9223";    //email send mail
 $email_from = "info@caroma.com.my";
 $email_from_name = "Caroma Team";
 

@@ -494,8 +494,9 @@
                     </div>
                 </div>
                 <div class="modal-footer" style="text-align : center ;">
-                    <button type="button" class="btn custombtn" data-dismiss="modal"><?php echo $lang['lang-close']; ?></button>
-                    <a class="btn custombtn" href="register.php"><?php echo $lang['lang-yes']; ?></a>
+                    <!--- <button type="button" class="btn custombtn" data-dismiss="modal"><?php echo $lang['lang-close']; ?></button> --->
+                    <a class="btn custombtn" href="login.php"><?php echo $lang['lang-sign_in']; ?></a>
+                    <a class="btn custombtn" href="register.php"><?php echo $lang['lang-register_now']; ?></a>
                 </div>
             </div>
         </div>

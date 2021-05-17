@@ -450,7 +450,7 @@ else {
                                     <div class="order-summary sm-margin-bottom-80px">
                                         <div class="title-block">
                                             <h3 class="title"><?php echo $lang['lang-order_summary']; ?></h3>
-                                            <a href="shopping-cart.php" class="link-forward"><?php echo $lang['lang-edit_cart']; ?></a>
+                                            <a href="shopping-cart.php" class="link-forward" data-toggle="tooltip" title="<?php echo $lang['lang-tooltip']; ?>"><?php echo $lang['lang-edit_cart']; ?></a>
                                         </div>
 
                                         <div class="cart-list-box short-type">
@@ -917,6 +917,12 @@ else {
                         $('#loadDiv').hide();
                     }
                 }
+            </script>
+
+            <script>
+            $(document).ready(function(){
+            $('[data-toggle="tooltip"]').tooltip();   
+            });
             </script>
         </body>
 

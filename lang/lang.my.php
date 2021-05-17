@@ -177,6 +177,7 @@ $lang['lang-point'] = 'point';
 $lang['lang-shipping'] = 'Penghantaran';
 $lang['lang-do_you_want_to_continue'] = 'ADAKAH ANDA INGIN MENERUSKAN PESANAN ANDA?';
 $lang['lang-items'] = 'items';
+$lang['lang-tooltip'] = 'EDIT PRODUK ANDA DI SINI';
 // --------------------------
 
 // ---------------------------

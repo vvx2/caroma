@@ -256,6 +256,8 @@
                         </div>
                         <div class="buttons">
                             <button class="btn add-to-cart-btn btnAddCart" style="width: 100%;" data-value="<?php echo $result['p_id']; ?>"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i> add to cart</button>
+                            <a style="width : 100%" class="btn custombtn" href="./shopping-cart.php">View Cart</a>
+                            <a style="width : 100%" class="btn custombtn" href="./checkout.php">Check out</a>
                         </div>
                         <div class="social-media">
                             <ul class="social-list">

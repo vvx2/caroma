@@ -64,10 +64,10 @@ if (isset($refund_type)) {
 				<a href="category.php"><i class="fa fa-th-large-no">Ctg</i> <span class="nav-label">Category</span></a>
 			</li>
 			<li class="<?php echo ($PageName == 'coupon') ? 'active' : ''; ?>">
-				<a href="coupon.php"><i class="fa fa-th-large-no">Cpn</i> <span class="nav-label">Coupon</span></a>
+				<a href="coupon.php"><i class="fa fa-th-large-no">Cpn</i> <span class="nav-label">Coupon / Voucher</span></a>
 			</li>
 			<li class="<?php echo ($PageName == 'promotion') ? 'active' : ''; ?>">
-				<a href="promotion.php"><i class="fa fa-th-large-no">Prm</i> <span class="nav-label">Promotion</span></a>
+				<a href="promotion.php"><i class="fa fa-th-large-no">Prm</i> <span class="nav-label">Product Promotion</span></a>
 			</li>
 			<li class="<?php echo ($PageName == 'new_arrival') ? 'active' : ''; ?>">
 				<a href="new_arrival.php"><i class="fa fa-th-large-no">New</i> <span class="nav-label">New Arrival</span></a>
