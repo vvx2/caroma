@@ -48,6 +48,17 @@
                                          <li><a href="privacy-policy.php"><?php echo $lang['lang-privacy_policy']; ?></a></li>
                                          <li><a href="https://caroma-store.com"><?php echo $lang['lang-caroma_mart']; ?></a></li>
                                      </ul>
+                                     <div class="row">
+                                        <div class="col-sm-4">
+                                            <a target="_blank" href="https://www.facebook.com/caromamalaysia"><img src="assets/images/facebook.png"></a>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <a target="_blank" href="https://www.instagram.com/drinkcaroma/"><img src="assets/images/instagram.png"></a>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <a target="_blank" href="https://www.youtube.com/channel/UCuaAeBrIDYdR4ed2u21D6Pw"><img src="assets/images/youtube.png"></a>
+                                        </div>
+                                     </div>
                                  </div>
                              </section>
                          </div>
