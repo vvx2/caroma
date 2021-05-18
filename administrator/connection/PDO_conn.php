@@ -1,6 +1,6 @@
 <?php
 
-$server = 2; //1= local, 2 = staging, 3 = live 4 = Nicky Local;
+$server = 3; //1= local, 2 = staging, 3 = live 4 = Nicky Local;
 if ($server == 1) {
     define('host', 'mysql:host=localhost;port=3306;dbname=caromanew;charset=utf8;');
     define('username', 'root');
