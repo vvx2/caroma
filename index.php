@@ -472,7 +472,7 @@
                                     // $promotion_result = $db->advwhere($col, $tb, $opt, $arr);
 
 
-                                    $col = "*, p.id as p_id, pt.name as pt_name, pt.description as pt_description, ct.name as ct_name, rate.rating as rating";
+                                    $col = "*, pr.type as promo_type, p.id as p_id, pt.name as pt_name, pt.description as pt_description, ct.name as ct_name, rate.rating as rating";
                                     $tb = "(select *, DATE_ADD(end, INTERVAL 1 DAY) as new_end_date from promotion where status = 1 && start <= \"$time\" && DATE_ADD(end, INTERVAL 1 DAY) >= \"$time\") pr left join promotion_product prp on pr.id = prp.promotion_id left join product p on prp.product_id = p.id left join product_translation pt on p.id = pt.product_id left join product_role_price pp on p.id = pp.product_id left join category_translation ct on p.category = ct.category_id left join (SELECT product_id, (sum(qty) / count(product_id)) as rating FROM order_items where rate != 0 group by product_id) rate on p.id = rate.product_id ";
                                     $opt = 'pt.language = ? && pp.type =? && ct.language =? && p.status =? order by prp.product_id, pr.date_modified DESC';
                                     $arr = array($language, $user_type, $language, 1);
@@ -501,7 +501,7 @@
                                                             <span class="sale-label">
                                                                 <?php
                                                                 $normal_price = $promo['price'];
-                                                                if ($promo["type"] == 1) {
+                                                                if ($promo["promo_type"] == 1) {
 
                                                                     $promo_price = $normal_price - $promo["amt"];
                                                                     echo "- RM" . number_format($promo["amt"], 2);
@@ -590,7 +590,7 @@
                                                                 <span class="sale-label">
                                                                     <?php
                                                                     $normal_price = $promo['price'];
-                                                                    if ($promo["type"] == 1) {
+                                                                    if ($promo["promo_type"] == 1) {
 
                                                                         $promo_price = $normal_price - $promo["amt"];
                                                                         echo "- RM" . number_format($promo["amt"], 2);
