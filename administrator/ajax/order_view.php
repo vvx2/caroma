@@ -24,31 +24,37 @@ switch ($status) {
         $status_color = "bg-red";
         $status_show = "Failed / Canceled";
         $status_desc = "This order was rejected, or your order payment was failed.";
+        $update_date_label = "Order Update DateTime";
         break;
     case "2":
         $status_color = "bg-yellow";
         $status_show = "To Ship";
         $status_desc = "Waiting for the Caroma Malaysia to ship out the products.";
+        $update_date_label = "Order Update DateTime";
         break;
     case "3":
         $status_color = "bg-success";
         $status_show = "Shipping";
         $status_desc = "This order had been shipped.";
+        $update_date_label = "Order Update DateTime";
         break;
     case "4":
         $status_color = "bg-green";
         $status_show = "Completed";
         $status_desc = "The order was delivered.";
+        $update_date_label = "Complete DateTime";
         break;
     case "5":
         $status_color = "bg-black";
         $status_show = "To Cancel";
         $status_desc = "The order is pending to cancel. You have to refund back the money or Contact your client";
+        $update_date_label = "Cancel DateTime";
         break;
     default:
         $status_color = "";
         $status_show = "";
         $status_desc = "";
+        $update_date_label = "";
 }
 
 
@@ -148,6 +154,16 @@ switch ($status) {
                                 <td><strong style="color:green;"><?php echo $order["reward_point"]; ?> Coins</strong></td>
                             </tr>
                         <?php } ?>
+                        
+                        <tr>
+                            <td>Order Create DateTime</td>
+                            <td><?php echo $order["date_created"]; ?></td>
+                        </tr>
+                        
+                        <tr>
+                            <td><?php echo $update_date_label;?></td>
+                            <td><?php echo $order["date_modified"]; ?></td>
+                        </tr>
                         <tr>
                             <td></td>
                             <td></td>
