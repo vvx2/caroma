@@ -72,7 +72,7 @@
 
                         <button class="accordion">4. What can i do if I have placed an order with the wrong shipping address?</button>
                         <div class="panel">
-                        <p>You need to inform our customer service or call our support number:  016-2184993 Or email us: <a href="mailto:sales.caroma@gmail.com">sales.caroma@gmail.com</a></p>
+                        <p>You need to inform our customer service or call our support number:  016-2184993 Or email us: <a href="mailto:info@caroma.com.my">info@caroma.com.my</a></p>
                         </div>
 
                         <button class="accordion">5. Can I schedule the delivery based on my availability to receive the item?</button>
