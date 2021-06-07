@@ -14,9 +14,9 @@
         <ul class="horizontal-menu">
             <li class="horz-menu-item lang">
                 <select name="change_language">
-                    <option value="en" <?php echo ($_SESSION['language'] == "en") ? "selected" : "" ?>>EN</option>
-                    <option value="my" <?php echo ($_SESSION['language'] == "my") ? "selected" : "" ?>>MY</option>
-                    <option value="cn" <?php echo ($_SESSION['language'] == "cn") ? "selected" : "" ?>>CN</option>
+                    <option value="en" <?php echo ($_SESSION['language'] == "en") ? "selected" : "" ?>>&nbsp;</option>
+                    <option value="my" <?php echo ($_SESSION['language'] == "my") ? "selected" : "" ?>>&nbsp;</option>
+                    <option value="cn" <?php echo ($_SESSION['language'] == "cn") ? "selected" : "" ?>>&nbsp;</option>
                 </select>
             </li>
         </ul>

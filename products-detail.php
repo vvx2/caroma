@@ -263,7 +263,7 @@
                             <ul class="social-list">
                                 <li><a href="https://www.facebook.com/caromamalaysia" class="social-link"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
                                 <li><a href="https://www.youtube.com/channel/UCuaAeBrIDYdR4ed2u21D6Pw" class="social-link"><i class="fa fa-youtube" aria-hidden="true"></i></a></li>
-                                <li><a href="https://www.instagram.com/drinkcaroma/" class="social-link"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                                <li><a href="https://www.instagram.com/caromamalaysia/?utm_medium=copy_link" class="social-link"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
                                 <li><a href="https://api.whatsapp.com/send?phone=60162184993&text=" class="social-link"><i class="fa fa-whatsapp" aria-hidden="true"></i></a></li>
                             </ul>
                         </div>

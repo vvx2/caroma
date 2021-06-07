@@ -14704,3 +14704,17 @@ ol.s {list-style-type: inherit;}
 @media only screen and (min-width: 992px) {
     .slick-dots{ display : none !important; }
 }
+
+
+.icon-flag1{
+    background : url("../images/en_US.png") no-repeat center center ;
+    width: 18px;
+}
+.icon-flag2{
+    background : url("../images/ms_MY.png") no-repeat center center ;
+    width: 18px;
+}
+.icon-flag3{
+    background : url("../images/zh_CN.png") no-repeat center center ;
+    width: 18px;
+}
