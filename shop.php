@@ -263,6 +263,18 @@
                                 </div>
                             </div>
                         </div>
+                        <div style="margin:15px 5px;display:none"> <!--- Search Box --->
+                            <form class="form-search" method="get" action="#">
+                                <div class="row">
+                                    <div class="col-sm-10 col-xs-8">
+                                        <input type="search" name="search" placeholder="search your items here for..">
+                                    </div>
+                                    <div class="col-sm-2 col-xs-2">
+                                        <button type="submit">Search</button>
+                                    </div> 
+                                </div>  
+                            </form>
+                        </div>
                         <input value='0' id='get_total_product' hidden>
                         <div class="row">
                             <ul class="products-list product_display">
