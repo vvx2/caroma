@@ -68,13 +68,40 @@
         </div>
         <div class="glb-item languages">
             <b class="title"><?php echo $lang['lang-mobile_language']; ?></b>
-            <ul class="list inline">
+            <ul class="t1 horizontal-menu t11">
+            <li class="t2">
+                <?php
+                if ($language == "en") {
+                    $lang_img = "en_US.png";
+                    $lang_name = "English";
+                } else if ($language == "cn") {
+                    $lang_img = "zh_CN.png";
+                    $lang_name = "Chinese";
+                } else if ($language == "my") {
+                    $lang_img = "ms_MY.png";
+                    $lang_name = "Malayu";
+                }
+
+                ?>
+                <div class="btn-group"> <a data-toggle="dropdown" type="button" class="btn btn-default" href="#"><img src="assets/images/<?php echo $lang_img ?>"></img> <?php echo $lang_name ?></a>
+                    <ul class="dropdown-menu dml t1" role="menu">
+                        <li class="t2"><a class="change_language" data-value="en"><img src="assets/images/en_US.png"></img> English</a>
+                        </li>
+                        <li class="t2"><a class="change_language" data-value="my"><img src="assets/images/ms_MY.png"> Malayu</a>
+                        </li>
+                        <li class="t2"><a class="change_language" data-value="cn"><img src="assets/images/zh_CN.png"> Chinese</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        <ul>
+            <!---- <ul class="list inline">
                 <select name="change_language">
                     <option value="en" style="width: 100%;" <?php echo ($_SESSION['language'] == "en") ? "selected" : "" ?>>&nbsp;</option>
                     <option value="my" style="width: 100%;" <?php echo ($_SESSION['language'] == "my") ? "selected" : "" ?>>&nbsp;</option>
                     <option value="cn" style="width: 100%;" <?php echo ($_SESSION['language'] == "cn") ? "selected" : "" ?>>&nbsp;</option>
                 </select>
-            </ul>
+            </ul> --->
         </div>
     </div>
 </div>

@@ -4132,7 +4132,7 @@ body.open-overlay #overlay{
 .mobile-block-global .glb-item ul{
     padding: 0;
     margin: 0 0 20px;
-    display: block;
+    /*display: block;*/
 }
 .mobile-block-global .glb-item ul:not(.inline) li{
     list-style: none;
@@ -14796,4 +14796,8 @@ ul.t1 li.t2 {
 
 .dml{
     min-width : 110px !important;
+}
+
+.change_language{
+    cursor: pointer;
 }
