@@ -192,9 +192,9 @@ $(document).on('click', '.remove_cart', function () {
     RemoveFromCart(product_id, thisbtn, token);
 });
 
-$('[name="change_language"]').change(function () {
-    var language = $(this).val();
-
+$('[class="change_language"]').click(function () {
+    var language = $(this).data('value');
+    console.log("lang:" + language);
     $.post('api/change_language.php', {
         language: language
     }, function (data) {
