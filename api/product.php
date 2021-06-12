@@ -56,6 +56,15 @@ if (isset($_REQUEST['orderby'])) {
     $sqlorder = "p.date_modified ASC";
 }
 
+if (isset($_REQUEST['search_value'])) {
+    $search_value = $_REQUEST['search_value'];
+    if (ctype_space($search_value)) {
+        $search_value = "";
+    } 
+} else {
+    $search_value = "";
+}
+
 $item = array();
 
 //when user type is dealer, admin id will be distributor id - to identify the order belong who
@@ -89,7 +98,7 @@ if ($user_type == 3) {
     } else {
         $tb = "distributor_product dp left join product p on dp.product_id = p.id left join product_translation pt on p.id = pt.product_id left join product_role_price pp on p.id = pp.product_id left join category_translation ct on p.category = ct.category_id left join (SELECT product_id, (sum(rate) / count(product_id)) as rating FROM order_items where rate != 0 group by product_id) rate on p.id = rate.product_id " . $filter_table;
     }
-    $opt = 'dp.user_id = ? && pt.language = ? && pp.type =? && ct.language =? && dp.status =?' . $filter_opt . ' ORDER BY ' . $sqlorder . ' LIMIT 15 OFFSET ' . $offset . '';
+    $opt = 'pt.name like "%' . $search_value . '%" && dp.user_id = ? && pt.language = ? && pp.type =? && ct.language =? && dp.status =?' . $filter_opt . ' ORDER BY ' . $sqlorder . ' LIMIT 15 OFFSET ' . $offset . '';
     $arr = $filter_arr;
     $result = $db->advwhere($col, $tb, $opt, $arr);
 } else {
@@ -116,7 +125,7 @@ if ($user_type == 3) {
     } else {
         $tb = " product p left join product_translation pt on p.id = pt.product_id left join product_role_price pp on p.id = pp.product_id left join category_translation ct on p.category = ct.category_id left join (SELECT product_id, (sum(rate) / count(product_id)) as rating FROM order_items where rate != 0 group by product_id) rate on p.id = rate.product_id " . $filter_table;
     }
-    $opt = 'pt.language = ? && pp.type =? && ct.language =? && p.status =?' . $filter_opt . ' ORDER BY ' . $sqlorder . ' LIMIT 15 OFFSET ' . $offset . '';
+    $opt = 'pt.name like "%' . $search_value . '%" && pt.language = ? && pp.type =? && ct.language =? && p.status =?' . $filter_opt . ' ORDER BY ' . $sqlorder . ' LIMIT 15 OFFSET ' . $offset . '';
     $arr = $filter_arr;
     $result = $db->advwhere($col, $tb, $opt, $arr);
 }
@@ -124,7 +133,7 @@ if ($user_type == 3) {
 
 
 if (count($result) != 0) {
-    $count_result = 1;
+    $count_result = 0;
     foreach ($result as $product) {
 
         $normal_price = $product['price'];
@@ -165,10 +174,15 @@ if (count($result) != 0) {
         $count_result++;
         $item[] = array("product_id" => $product['p_id'], "discount_type" => $discount_type, "image" => $product['image'], "category_name" => $product['ct_name'], "product_name" => $product['pt_name'], "price" => $price_display, "ori_price" => $normal_price, "is_promo" => $is_promo);
     }
-    $json_arr = array('Status' => true, 'product' => $item, 'count_result' => $count_result);
+    if ($count_result == 0) {
+        $json_arr = array('Status' => false, 'msg' => '<h1>No Result</h1>', "failresult" => $result, 'count_result' => 0);
+    } else {
+        $json_arr = array('Status' => true, 'product' => $item, 'count_result' => $count_result);
+    }
+
     // $json_arr = array('Status' => true, 'product' => $item, 'count_result' => $count_result, "checksql" => $sqlorder);
 } else {
-    $json_arr = array('Status' => false, 'msg' => '<h1>No Result</h1>', "failresult" => $result);
+    $json_arr = array('Status' => false, 'msg' => '<h1>No Result</h1>', "failresult" => $result, 'count_result' => 0);
 }
 // echo '<pre>';
 // var_dump($json_arr) ;
