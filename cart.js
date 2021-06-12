@@ -5,8 +5,8 @@ function LoadCart() {
         token: token
     }, function (data) {
         data = JSON.parse(data)
-        console.log("getcart:");
-        console.log(data);
+        // console.log("getcart:");
+        // console.log(data);
         $('#token').val(data["Token"]);
         $('#form_token').val(data["Token"]);
         if (data["Status"]) {
