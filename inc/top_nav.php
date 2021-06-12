@@ -60,7 +60,11 @@
                             </ul>
                             <p class="btn-control cart_button">
                                 <button class="btn view-cart" onclick="location.href='shopping-cart.php';"><?php echo $lang['lang-view_cart']; ?></button>
+                                <?php if ($login == 1) { ?>
                                 <button class="btn cart_checkout" onclick="location.href='checkout.php';"><?php echo $lang['lang-check_out']; ?></button>
+                                <?php } else { ?>
+                                <button class="btn" data-toggle="modal" data-target="#exampleModalCenter"><?php echo $lang['lang-check_out']; ?></button>
+                                <?php }  ?>
                             </p>
                         </div>
                     </div>
@@ -76,4 +80,27 @@
         </div>
     </div>
 </div>
+
+ <!-- Modal -->
+ <div class="modal fade" id="exampleModalCenter" style="z-index:2000" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3><?php echo $lang['lang-member_registration']; ?></h3>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div><?php echo $lang['lang-a_member_account']; ?><br>
+                        <span style="font-weight : bold ; color:red;"><?php echo $lang['lang-do_you_want_to']; ?></span>
+                    </div>
+                </div>
+                <div class="modal-footer" style="text-align : center ;">
+                    <!--- <button type="button" class="btn custombtn" data-dismiss="modal"><?php echo $lang['lang-close']; ?></button> --->
+                    <a class="btn custombtn" href="login.php"><?php echo $lang['lang-sign_in']; ?></a>
+                    <a class="btn custombtn" href="register.php"><?php echo $lang['lang-register_now']; ?></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
 <input type="hidden" id="token" value="<?php echo $token; ?>" />

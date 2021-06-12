@@ -27,7 +27,7 @@ $lang['lang-additional_info'] = '附加信息';
 $lang['lang-refund_policy']  = '退款和退货政策';
 $lang['lang-shipping_delivery'] = '送货方式';
 $lang['lang-privacy_policy'] = '隐私政策';
-$lang['lang-caroma_mart'] = '市场';
+$lang['lang-caroma_mart'] = 'Caroma市场';
 $lang['lang-our_product'] = '我们的产品';
 $lang['lang-gingery_series'] = '姜茶系列';
 $lang['lang-chocolate_series'] = '巧克力系列';
@@ -187,4 +187,17 @@ $lang['lang-new_password'] = '新密码';
 $lang['lang-confirm_password'] = '确认密码';
 //---------------------------
 
-
+//---------------------------
+//      Mobile Fotter
+//---------------------------
+$lang['lang-menu'] = '目录';
+$lang['lang-sidebar'] = '侧边栏';
+$lang['lang-mobile_cart'] = '购物车';
+$lang['lang-wishlist'] = '愿望单';
+$lang['lang-mobile_my_account'] = '我的账号';
+$lang['lang-mobile_login_register'] = '登入 / 注册';
+$lang['lang-mobile_checkout'] = '结账';
+$lang['lang-mobile_reward'] = '每日奖励';
+$lang['lang-mobile_logout'] = '登出';
+$lang['lang-mobile_caroma'] = 'Caroma Malaysia';
+$lang['lang-mobile_language'] = '语音';

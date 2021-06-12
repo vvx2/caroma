@@ -29,7 +29,7 @@ $lang['lang-additional_info'] = 'Maklumat Tambahan';
 $lang['lang-refund_policy'] = 'Polisi Pengembalian & Pengembalian Wang';
 $lang['lang-shipping_delivery'] = 'Penghantaran Penghantaran';
 $lang['lang-privacy_policy'] = 'Dasar Privasi';
-$lang['lang-caroma_mart'] = 'Mart';
+$lang['lang-caroma_mart'] = 'Caroma Mart';
 $lang['lang-our_product'] = 'Produk Kami';
 $lang['lang-gingery_series'] = 'Halia Seri';
 $lang['lang-chocolate_series'] = 'Chocolate Seri';
@@ -189,3 +189,18 @@ $lang['lang-reset_password'] = 'Tetapkan Semula Kata Laluan';
 $lang['lang-new_password'] = 'Kata Laluan Baru';
 $lang['lang-confirm_password'] = 'Sahkan Kata Laluan';
 // ---------------------------
+
+//---------------------------
+//      Mobile Fotter
+//---------------------------
+$lang['lang-menu'] = 'Menu';
+$lang['lang-sidebar'] = 'Bar Sisi';
+$lang['lang-mobile_cart'] = 'Troli';
+$lang['lang-wishlist'] = 'Wishlist';
+$lang['lang-mobile_my_account'] = 'Akaun';
+$lang['lang-mobile_login_register'] = 'Log masuk / Mendaftar';
+$lang['lang-mobile_checkout'] = 'Bayar';
+$lang['lang-mobile_reward'] = 'Ganjaran';
+$lang['lang-mobile_logout'] = 'Log keluar';
+$lang['lang-mobile_caroma'] = 'Caroma Malaysia';
+$lang['lang-mobile_language'] = 'Bahasa';

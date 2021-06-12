@@ -334,6 +334,7 @@
                                       echo "<br><strong>" . $coupon_code_msg . "</strong>";
                                     }
                                     ?>
+                                    <br><a href="https://shop.caroma.com.my/">https://shop.caroma.com.my/</a>
                                     <br><br>Thank You be CAROMA Member. 
                                     <br><br><strong>Best Regards,
                                       <br>Caroma Malaysia Support Team</strong>

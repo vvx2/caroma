@@ -27,7 +27,7 @@ $lang['lang-additional_info'] = 'Additional Info';
 $lang['lang-refund_policy']  = 'Refund & Return Policy';
 $lang['lang-shipping_delivery'] = 'Shipping Delivery';
 $lang['lang-privacy_policy'] = 'Privacy Policy';
-$lang['lang-caroma_mart'] = 'Mart';
+$lang['lang-caroma_mart'] = 'Caroma Mart';
 $lang['lang-our_product'] = 'Our Product';
 $lang['lang-gingery_series'] = 'Ginger Series';
 $lang['lang-chocolate_series'] = 'Chocolate Series';
@@ -186,5 +186,20 @@ $lang['lang-reset_password'] = 'Reset Password';
 $lang['lang-new_password'] = 'New Password';
 $lang['lang-confirm_password'] = 'Confirm Password';
 //---------------------------
+
+//---------------------------
+//      Mobile Fotter
+//---------------------------
+$lang['lang-menu'] = 'Menu';
+$lang['lang-sidebar'] = 'Sidebar';
+$lang['lang-mobile_cart'] = 'Cart';
+$lang['lang-wishlist'] = 'Wishlist';
+$lang['lang-mobile_my_account'] = 'My-account';
+$lang['lang-mobile_login_register'] = 'Login / Register';
+$lang['lang-mobile_checkout'] = 'Checkout';
+$lang['lang-mobile_reward'] = 'Rewards';
+$lang['lang-mobile_logout'] = 'Logout';
+$lang['lang-mobile_caroma'] = 'Caroma Malaysia';
+$lang['lang-mobile_language'] = 'Language';
 
 
