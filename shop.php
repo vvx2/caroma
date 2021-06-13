@@ -272,14 +272,9 @@
                                 </div>
                             </div>
                         </div>
-<<<<<<< HEAD
-                        <div style="margin:15px 5px;"> <!--- Search Box --->
-                            <form class="form-search" method="get" action="#">
-=======
                         <div style="margin:15px 5px;">
                             <!--- Search Box --->
                             <form class="form-search" name="form-search" method="get" action="#">
->>>>>>> origin/vv_branch
                                 <div class="row">
                                     <div class="col-sm-10 col-xs-8">
                                         <input type="search" name="search_product" placeholder="search your items here for..">
