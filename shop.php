@@ -9,6 +9,15 @@
     require_once('inc/head.php');
     $time = date('Y-m-d H:i:s');
 
+    if (isset($_REQUEST['search_product'])) {
+        $search_value = $_REQUEST['search_product'];
+        if (ctype_space($search_value)) {
+            $search_value = "";
+        } 
+    } else {
+        $search_value = "";
+    }
+    
 
     //when user type is dealer, admin id will be distributor id - to identify the order belong who
     if ($user_type == 3) {
@@ -38,7 +47,7 @@
 
         $col = "*,dp.stock as dis_stock, p.stock as admin_stock, p.id as p_id, pt.name as pt_name, pt.description as pt_description, ct.name as ct_name, rate.rating as rating";
         $tb = "distributor_product dp left join product p on dp.product_id = p.id left join product_translation pt on p.id = pt.product_id left join product_role_price pp on p.id = pp.product_id left join category_translation ct on p.category = ct.category_id left join (SELECT product_id, (sum(rate) / count(product_id)) as rating FROM order_items where rate != 0 group by product_id) rate on p.id = rate.product_id " . $filter_table;
-        $opt = 'dp.user_id = ? && pt.language = ? && pp.type =? && ct.language =? && dp.status =?' . $filter_opt;
+        $opt = 'pt.name like "%' . $search_value . '%" && dp.user_id = ? && pt.language = ? && pp.type =? && ct.language =? && dp.status =?' . $filter_opt;
         $arr = $filter_arr;
         $count_product_result = $db->advwhere($col, $tb, $opt, $arr);
     } else {
@@ -66,7 +75,7 @@
         } else {
             $tb = " product p left join product_translation pt on p.id = pt.product_id left join product_role_price pp on p.id = pp.product_id left join category_translation ct on p.category = ct.category_id left join (SELECT product_id, (sum(rate) / count(product_id)) as rating FROM order_items where rate != 0 group by product_id) rate on p.id = rate.product_id " . $filter_table;
         }
-        $opt = 'pt.language = ? && pp.type =? && ct.language =? && p.status =?' . $filter_opt;
+        $opt = 'pt.name like "%' . $search_value . '%" && pt.language = ? && pp.type =? && ct.language =? && p.status =?' . $filter_opt;
         $arr = $filter_arr;
         $count_product_result = $db->advwhere($col, $tb, $opt, $arr);
     }
@@ -263,16 +272,22 @@
                                 </div>
                             </div>
                         </div>
+<<<<<<< HEAD
                         <div style="margin:15px 5px;"> <!--- Search Box --->
                             <form class="form-search" method="get" action="#">
+=======
+                        <div style="margin:15px 5px;">
+                            <!--- Search Box --->
+                            <form class="form-search" name="form-search" method="get" action="#">
+>>>>>>> origin/vv_branch
                                 <div class="row">
                                     <div class="col-sm-10 col-xs-8">
-                                        <input type="search" name="search" placeholder="search your items here for..">
+                                        <input type="search" name="search_product" placeholder="search your items here for..">
                                     </div>
                                     <div class="col-sm-2 col-xs-2">
-                                        <button type="submit">Search</button>
-                                    </div> 
-                                </div>  
+                                        <button type="submit" class="btn_search">Search</button>
+                                    </div>
+                                </div>
                             </form>
                         </div>
                         <input value='0' id='get_total_product' hidden>
@@ -508,17 +523,17 @@
     <script>
         $(document).ready(function() {
             LoadCart();
-            LoadProduct(1)
+            LoadProduct(1, false)
 
             window.pagObj = $('#pagination').twbsPagination({
                 totalPages: Math.ceil(<?php echo $count_product_result / 15 ?>),
                 visiblePages: 5,
                 onPageClick: function(event, page) {
-                    console.info(page + ' (from options)');
+                    // console.info(page + ' (from options)');
                     $('#loadDiv').show();
 
                     setTimeout(function() {
-                        LoadProduct(page)
+                        LoadProduct(page, false)
                         $('#loadDiv').hide();
                     }, 300);
                     // document.documentElement.scrollTop = 0;
@@ -528,9 +543,14 @@
         });
 
         //for onclick
-        function paging() {
-            var count_result = $('[id="get_total_product"]').val();
-            console.log('ourpage:' + count_result);
+        function paging(get_count_result, reload) {
+            if (reload) {
+                var count_result = get_count_result
+            } else {
+                var count_result = $('[id="get_total_product"]').val();
+            }
+
+            // console.log('ourpage:' + count_result);
             $('#pagination').twbsPagination('destroy');
             $('#pagination').twbsPagination({
                 totalPages: Math.ceil(count_result / 15),
@@ -541,8 +561,8 @@
 
                     setTimeout(function() {
                         var count_result = $('[id="get_total_product"]').val();
-                        console.log('inpage:' + count_result);
-                        LoadProduct(page)
+                        // console.log('inpage:' + count_result);
+                        LoadProduct(page, false)
                         $('#loadDiv').hide();
                     }, 300);
                     // document.documentElement.scrollTop = 0;
@@ -551,11 +571,16 @@
         }
 
         $('[name="orderby"]').change(function() {
-            LoadProduct(1);
+            LoadProduct(1, false);
         });
 
+        // $('.form-search').submit(function(e) {
+        //     // Stop the form submitting
+        //     e.preventDefault();
+        //     LoadProduct(1, false);
+        // });
 
-        function LoadProduct(page) {
+        function LoadProduct(page, reload) {
 
             var page = page;
             var orderby = $('[name="orderby"]').children("option:selected").val();
@@ -564,6 +589,8 @@
             var category = <?php echo (isset($_REQUEST["category"]) && $_REQUEST["category"] != 0) ? $_REQUEST["category"] : 0 ?>;
             var price_from = <?php echo (isset($_REQUEST["price-from"])) ? $_REQUEST["price-from"] : 0 ?>;
             var price_to = <?php echo (isset($_REQUEST["price-to"])) ? $_REQUEST["price-to"] : 0 ?>;
+            var search_value = <?php echo (isset($_REQUEST["search_product"])) ? "'" . $_REQUEST["search_product"] . "'" : "''" ?>;
+            // var search_value = $('[name="search_product"]').val();
             $.post('api/product.php', {
                 page: page,
                 orderby: orderby,
@@ -571,7 +598,8 @@
                 is_promotion: is_promotion,
                 category: category,
                 price_from: price_from,
-                price_to: price_to
+                price_to: price_to,
+                search_value: search_value
             }, function(data) {
 
                 // console.log(data);
@@ -622,6 +650,10 @@
                 } else {
                     $(".product_display").html(data["msg"]);
                     $("#get_total_product").val(0);
+                }
+
+                if (reload) {
+                    paging(data["count_result"], reload);
                 }
             });
         }
