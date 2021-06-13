@@ -263,7 +263,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div style="margin:15px 5px;display:none"> <!--- Search Box --->
+                        <div style="margin:15px 5px;"> <!--- Search Box --->
                             <form class="form-search" method="get" action="#">
                                 <div class="row">
                                     <div class="col-sm-10 col-xs-8">
