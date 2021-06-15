@@ -29,7 +29,7 @@
                                             <a target="_blank" href="https://www.facebook.com/caromamalaysia"><img src="assets/images/facebook.png"></a>
                                         </div>
                                         <div class="col-sm-4">
-                                            <a target="_blank" href="https://www.instagram.com/caromamalaysia/"><img src="assets/images/instagram.png"></a>
+                                            <a target="_blank" href="https://www.instagram.com/caromamalaysia/?utm_medium=copy_link"><img src="assets/images/instagram.png"></a>
                                         </div>
                                         <div class="col-sm-4">
                                             <a target="_blank" href="https://www.youtube.com/channel/UCuaAeBrIDYdR4ed2u21D6Pw"><img src="assets/images/youtube.png"></a>
