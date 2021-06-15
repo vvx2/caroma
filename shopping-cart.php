@@ -361,7 +361,7 @@
                                         <button class="btn checkout btn_checkout" style="width:100%" onclick="location.href='checkout.php';"><?php echo $lang['lang-check_out']; ?></button>
 
                                     <?php } else { ?>
-                                        <button type="button" class="btn custombtn" style="width:100%" data-toggle="modal" data-target="#exampleModalCenter"><?php echo $lang['lang-check_out']; ?></button>
+                                        <button type="button" class="btn custombtn" style="width:100%" data-toggle="modal" data-target="#exampleModalCenter2"><?php echo $lang['lang-check_out']; ?></button>
 
                                     <?php }  ?>
                                     <p>click</p>
@@ -481,7 +481,7 @@
     </div>
 
     <!-- Modal -->
-    <div class="modal fade" id="exampleModalCenter" style="z-index:2000" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal fade" id="exampleModalCenter2" style="z-index:2000" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">

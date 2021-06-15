@@ -433,7 +433,7 @@ else {
 
 
 
-                                                            <button type="button" class="btn custombtn" data-toggle="modal" data-target="#exampleModalCenter"><?php echo $lang['lang-continue_to_purchase']; ?></button>
+                                                            <button type="button" class="btn custombtn" data-toggle="modal" data-target="#exampleModalCenter1"><?php echo $lang['lang-continue_to_purchase']; ?></button>
                                                             <a href="./shop.php"><button type="button" class="btn custombtn"><?php echo $lang['lang-cancel']; ?></button></a>
                                                             <a href="./shopping-cart.php"><button type="button" class="btn custombtn"><?php echo $lang['lang-back']; ?></button></a>
 
@@ -627,7 +627,7 @@ else {
                                 </div>
 
                                 <!-- Modal -->
-                                <div class="modal fade" id="exampleModalCenter" style="z-index:2000" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal fade" id="exampleModalCenter1" style="z-index:2000" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">

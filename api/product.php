@@ -28,7 +28,7 @@ if (isset($_REQUEST['page'])) {
     if ($page == 1) {
         $offset = 0;
     } else {
-        $offset =  ($page - 1) * 20;
+        $offset =  ($page - 1) * 15;
     }
 } else {
     $offset = 0;

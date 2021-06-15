@@ -11,6 +11,16 @@
             <li><a href="https://www.instagram.com/drinkcaroma/"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
             <li><a href="https://www.facebook.com/caromamalaysia"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
         </ul>
+        <?php
+                if ($login == 1) {
+                ?>
+                    <ul class="social-list">
+                        <li><a href="api/logout.php"><i class="" aria-hidden="true">Logout</i></a></li>
+
+                    </ul>
+                <?php
+                }
+                ?>
         <ul class="t1 horizontal-menu t11">
             <li class="t2">
                 <?php
@@ -47,16 +57,6 @@
                 </select>
             </li>
         </ul> --->
-                <?php
-                if ($login == 1) {
-                ?>
-                    <ul class="social-list">
-                        <li><a href="api/logout.php"><i class="" aria-hidden="true">Logout</i></a></li>
-
-                    </ul>
-                <?php
-                }
-                ?>
     </div>
 </div>
 
