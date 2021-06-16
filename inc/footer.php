@@ -13,7 +13,7 @@
                                  <span class="number">+603 6272 5229</span>
                              </p>
                          </div> --->
-                         <a href="https://staging2.caroma.com.my"><div class="contact-info-block footer-layout simple-info">
+                         <div class="contact-info-block footer-layout simple-info">
                              <h4 class="section-title footer-title-color"><?php echo $lang['lang-contact']; ?></h4>
                              <div class="info-item">
                                  <div style="line-height: 1.7 ; color: white;">
@@ -35,7 +35,7 @@
                                             <a target="_blank" href="https://www.youtube.com/channel/UCuaAeBrIDYdR4ed2u21D6Pw"><img src="assets/images/youtube.png"></a>
                                         </div>
                                      </div>
-                         </div></a>
+                         </div>
                          <!--- <div class="biolife-social inline circle-hover">
                              <ul class="socials">
                                  <li><a href="#" title="twitter" class="socail-btn"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
